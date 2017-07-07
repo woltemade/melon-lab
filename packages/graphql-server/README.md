@@ -1,18 +1,16 @@
-# apollo-tutorial-kit (formerly apollo-starter-kit)
+# Melon GraphQL Server
+Deployed at: https://melon-graphql-server.now.sh/graphiql
 
-Starting point for the Apollo GraphQL Server tutorial.
+Based on the great [apollo-starter-kit](https://github.com/apollostack/apollo-starter-kit)
 
-See also [Tutorial: How to build a GraphQL server](https://medium.com/apollo-stack/tutorial-building-a-graphql-server-cddaa023c035#.wy5h1htxs) and the solution in the `server-tutorial-solution` branch of this repo.
-
-Up-to-date documentation and explanations for Apollo Server can be found on [docs.apollostack.com](http://dev.apollodata.com/tools/apollo-server/index.html)
 
 ## Getting started
 
 ```sh
-git clone https://github.com/apollostack/apollo-starter-kit
-cd apollo-starter-kit
+git clone https://github.com/melonproject/graphql-server/
+cd graphql-server
 npm install
-npm run start
+npm start
 ```
 
 Then open [http://localhost:3000/graphiql](http://localhost:3000/graphql)
@@ -21,7 +19,13 @@ When you paste this on the left side of the page:
 
 ```
 {
-  testString
+  getVaults(ids: [34, 45 ,1 ,2, 3]) {
+    id
+    name
+    address
+    symbol
+    nav
+  }
 }
 ```
 
@@ -30,7 +34,16 @@ and hit the play button (cmd-return), then you should get this on the right side
 ```json
 {
   "data": {
-    "testString": "It works!"
+    "getVaults": [
+      {
+        "id": 34,
+        "name": "MEME CAPITAL",
+        "address": "0x85d1e14a23ec0e2cac5fafeb13b0a69738c7bae6",
+        "symbol": "MLN-P",
+        "nav": "10000000000000000000"
+      },
+      // ...
+    ]
   }
 }
 ```  

@@ -1,30 +1,33 @@
 {
-  "name": "melon-graphql-server",
-  "version": "0.1.0",
-  "description": "Minimal set of code to write a GraphQL server with Apollo graphql-tools",
+  "name": "@melonproject/graphql-server",
+  "version": "0.0.1",
+  "description": "Readonly GraphQL interface to the Melon protocol",
   "scripts": {
     "start": "nodemon ./server.js --exec babel-node",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "deploy": "now && now alias"
+  },
+  "now": {
+    "alias": "https://melon-graphql-server.now.sh"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/apollostack/apollo-starter-kit.git"
+    "url": "git+https://github.com/melonproject/graphql-server.git"
   },
   "keywords": [
-    "Node.js",
-    "Javascript",
-    "GraphQL",
-    "Express",
-    "Apollo",
-    "Meteor"
+    "Melon",
+    "Melon Project",
+    "Ethereum",
+    "Blockchain",
+    "Smart Contracts",
+    "GraphQL"
   ],
-  "author": "Jonas Helfer <jonas@helfer.email>",
+  "author": "Simon Emanuel Schmid <simon@melonport.com≥",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/apollostack/apollo-starter-kit/issues"
+    "url": "https://github.com/melonproject/graphql-server/issues"
   },
-  "homepage": "https://github.com/apollostack/apollo-starter-kit#readme",
+  "homepage": "https://github.com/melonproject/graphql-server#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "4.13.4",
