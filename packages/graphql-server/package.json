@@ -1,5 +1,5 @@
 {
-  "name": "apollo-starter-kit",
+  "name": "melon-graphql-server",
   "version": "0.1.0",
   "description": "Minimal set of code to write a GraphQL server with Apollo graphql-tools",
   "scripts": {
@@ -20,16 +20,20 @@
     "Meteor"
   ],
   "author": "Jonas Helfer <jonas@helfer.email>",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/apollostack/apollo-starter-kit/issues"
   },
   "homepage": "https://github.com/apollostack/apollo-starter-kit#readme",
   "dependencies": {
+    "@melonproject/protocol": "0.1.2",
     "body-parser": "^1.17.2",
     "express": "4.13.4",
     "graphql-server-express": "^0.9.0",
-    "graphql-tools": "^1.0.0"
+    "graphql-tools": "^1.0.0",
+    "ramda": "^0.24.1",
+    "truffle-contract": "^2.0.1",
+    "web3": "^0.19.1"
   },
   "devDependencies": {
     "babel-cli": "6.5.1",
@@ -51,10 +55,7 @@
   },
   "eslintConfig": {
     "parser": "babel-eslint",
-    "extends": [
-      "airbnb/base",
-      "plugin:import/errors"
-    ],
+    "extends": ["airbnb/base", "plugin:import/errors"],
     "rules": {
       "no-use-before-define": 0,
       "arrow-body-style": 0,

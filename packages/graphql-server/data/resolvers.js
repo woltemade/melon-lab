@@ -1,8 +1,15 @@
+import R from 'ramda';
+
+import { Vault } from './connectors';
+
 const resolvers = {
   Query: {
-    vault(root, args) {
-      console.log(root, args);
-      return { id: 1, address: '0xADDR', owner: 'OxOWNER', name: 'GraphQL Capital', symbol: 'GQC' };
+    async getVaults(root, { ids }) {
+      // const vault = await Vault.getById(id);
+      const result = await Promise.all(ids.map(async id => await Vault.getById(id)));
+      return result;
+
+      // { id: 1, ...R.pick(['address', 'owner', 'name', 'symbol'], vault) };
     },
   },
   /* Author: {

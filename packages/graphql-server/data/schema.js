@@ -20,31 +20,10 @@ type Order {
 }
 
 type Query {
-  vault(id: Int): Vault
-  getFortuneCookie: String # we'll use this later
+  getVaults(ids: [Int]): [Vault]
 }
 `;
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 export default schema;
-
-const typeDefs2 = `
-type Author {
-  id: Int
-  firstName: String
-  lastName: String
-  posts: [Post]
-}
-type Post {
-  id: Int
-  title: String
-  text: String
-  views: Int
-  author: Author
-}
-type Query {
-  author(firstName: String, lastName: String): Author
-  getFortuneCookie: String
-}
-`;
