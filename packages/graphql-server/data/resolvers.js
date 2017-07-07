@@ -6,11 +6,14 @@ const resolvers = {
   Query: {
     async getVaults(root, { ids }) {
       const lastId = await Vault.getLastId();
-      const queryIds = ids || Array(lastId.toNumber()).fill().map((item, index) => index + 1);
+      const queryIds = ids || R.range(1, lastId.toNumber());
+
+      if (queryIds.length > 5) throw new Error('Query limited to 5 items at the moment');
+
       const result = await Promise.all(
         queryIds.map(async id => ({
           id,
-          ...R.pick(['address', 'owner', 'name', 'symbol'], await Vault.getById(id)),
+          ...(await Vault.getById(id)),
         }))
       );
 
