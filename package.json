@@ -10,13 +10,26 @@
     "test": "jest",
     "lint": "eslint .",
     "pretest": "npm run lint --silent",
-    "format": "prettier --write \"lib/**/*.js\""
+    "format": "prettier --write \"lib/**/*.js\"",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm format",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/melonproject/melon.js.git"
   },
-  "keywords": ["melon", "melonproject", "javascript", "ethereum", "api"],
+  "keywords": [
+    "melon",
+    "melonproject",
+    "javascript",
+    "ethereum",
+    "api"
+  ],
   "author": "Simon Emanuel Schmid <simon@melonport.com>",
   "license": "GPL-3.0",
   "bugs": {
@@ -28,7 +41,9 @@
     "eslint-config-airbnb-base": "^11.3.1",
     "eslint-config-prettier": "^2.3.0",
     "eslint-plugin-import": "^2.7.0",
+    "husky": "^0.14.3",
     "jest": "^20.0.4",
+    "lint-staged": "^4.0.2",
     "prettier-eslint": "^6.4.2"
   },
   "dependencies": {
