@@ -1,7 +1,6 @@
 import contract from "truffle-contract";
 import BigNumber from "bignumber.js";
 
-import addressList from "../../../../lib/assets/utils/addressList";
 import takeOrder from "../../../../lib/exchange/transactions/takeOrder";
 
 // eslint-disable-next-line global-require
@@ -19,7 +18,7 @@ test("without quantity (-> max) & basic calling testing", async () => {
   expect(
     contract.mockInspect.instance.takeOrder,
   ).toHaveBeenCalledWith(
-    addressList.exchange,
+    undefined,
     6870,
     new BigNumber("8555051760000000000"),
     {
@@ -41,7 +40,7 @@ test("with higher quantity -> take max", async () => {
   expect(
     contract.mockInspect.instance.takeOrder,
   ).toHaveBeenCalledWith(
-    addressList.exchange,
+    undefined,
     6870,
     new BigNumber("8555051760000000000"),
     {
@@ -63,7 +62,7 @@ test("with lower quantity -> take as specified", async () => {
   expect(
     contract.mockInspect.instance.takeOrder,
   ).toHaveBeenCalledWith(
-    addressList.exchange,
+    undefined,
     6870,
     new BigNumber("1000000000000000000"),
     {

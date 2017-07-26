@@ -15,28 +15,17 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": [
-      "npm run format",
-      "git add"
-    ]
+    "*.js": ["npm run format", "git add"]
   },
   "jest": {
-    "testMatch": [
-      "**/tests/unit/**/*.js?(x)",
-      "**/?(*.)(spec|test).js?(x)"
-    ]
+    "testMatch": ["**/tests/unit/**/*.js?(x)", "**/?(*.)(spec|test).js?(x)"],
+    "setupFiles": ["./tests/utils/setup.js"]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/melonproject/melon.js.git"
   },
-  "keywords": [
-    "melon",
-    "melonproject",
-    "javascript",
-    "ethereum",
-    "api"
-  ],
+  "keywords": ["melon", "melonproject", "javascript", "ethereum", "api"],
   "author": "Simon Emanuel Schmid <simon@melonport.com>",
   "license": "GPL-3.0",
   "bugs": {
@@ -47,6 +36,8 @@
     "babel-eslint": "^7.2.3",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "eslint": "^4.3.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-prettier": "^2.3.0",

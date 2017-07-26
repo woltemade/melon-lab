@@ -56,6 +56,7 @@ const instance = {
 const contract = {
   setProvider: jest.fn(),
   at: jest.fn(() => instance),
+  deployed: jest.fn(() => instance),
 };
 
 const constructor = jest.fn(() => contract);

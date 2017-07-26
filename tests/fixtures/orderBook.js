@@ -5,7 +5,7 @@ const orders = [
   {
     _id: "9omLP8c3uu38NYhW6",
     id: 1,
-    owner: "0x00e0b33cdb3af8b55cd8467d6d13bc0ba8035acf",
+    owner: "0xDAEMON",
     isActive: true,
     buy: {
       symbol: "ETH-T",
@@ -20,7 +20,7 @@ const orders = [
   {
     _id: "XD2jNumheT5wwfqfx",
     id: 2,
-    owner: "0x00e0b33cdb3af8b55cd8467d6d13bc0ba8035acf",
+    owner: "0xDAEMON",
     isActive: true,
     buy: {
       symbol: "ETH-T",
@@ -35,7 +35,7 @@ const orders = [
   {
     _id: "9omLP8c3uu38NYhW6",
     id: 3,
-    owner: "0x00e0b33cdb3af8b55cd8467d6d13bc0ba8035acf",
+    owner: "0xDAEMON",
     isActive: true,
     buy: {
       symbol: "ETH-T",
@@ -52,7 +52,7 @@ const orders = [
   {
     _id: "3HgxC35zXnsfR6vft",
     id: 6870,
-    owner: "0x00e0b33cdb3af8b55cd8467d6d13bc0ba8035acf",
+    owner: "0xDAEMON",
     isActive: true,
     buy: {
       symbol: "REP-T",
@@ -66,7 +66,7 @@ const orders = [
   {
     _id: "uvXqcwkacpvBgJJZP",
     id: 6867,
-    owner: "0x00e0b33cdb3af8b55cd8467d6d13bc0ba8035acf",
+    owner: "0xDAEMON",
     isActive: true,
     buy: {
       symbol: "BTC-T",
@@ -80,7 +80,7 @@ const orders = [
   {
     _id: "y6gYjzKP8mWhdajDF",
     id: 6876,
-    owner: "0x00e0b33cdb3af8b55cd8467d6d13bc0ba8035acf",
+    owner: "0xDAEMON",
     isActive: true,
     buy: {
       symbol: "EUR-T",
@@ -94,7 +94,7 @@ const orders = [
   {
     _id: "7tmGdFyGLuWa5wcYc",
     id: 6882,
-    owner: "0x00e0b33cdb3af8b55cd8467d6d13bc0ba8035acf",
+    owner: "0xDAEMON",
     isActive: true,
     buy: {
       symbol: "BTC-T",
@@ -108,7 +108,7 @@ const orders = [
   {
     _id: "xbnp34skBKp22yzpi",
     id: 6884,
-    owner: "0x00e0b33cdb3af8b55cd8467d6d13bc0ba8035acf",
+    owner: "0xDAEMON",
     isActive: true,
     buy: {
       symbol: "ETH-T",
@@ -122,7 +122,7 @@ const orders = [
   {
     _id: "m4f8MKPqmxkE8Zm8x",
     id: 6885,
-    owner: "0x00e0b33cdb3af8b55cd8467d6d13bc0ba8035acf",
+    owner: "0xDAEMON",
     isActive: true,
     buy: {
       symbol: "EUR-T",
