@@ -1,9 +1,9 @@
 import BigNumber from "bignumber.js";
 
-import matchedOrders from "../__fixtures__/matchedOrders";
+import matchedOrders from "../../../fixtures/matchedOrders";
 
 // MUT (Module under test)
-import averagePrice from "../averagePrice";
+import averagePrice from "../../../../lib/exchange/utils/averagePrice";
 
 test("average price", () => {
   expect(averagePrice("buy", matchedOrders)).toBeInstanceOf(BigNumber);

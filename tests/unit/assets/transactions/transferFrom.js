@@ -1,7 +1,7 @@
 import BigNumber from "bignumber.js";
 import contract from "truffle-contract";
 
-import transferFrom from "../../erc20/transferFrom";
+import transferFrom from "../../../../lib/assets/transactions/transferFrom";
 
 jest.mock("/imports/lib/web3", () => jest.fn(), { virtual: true });
 jest.mock("truffle-contract");

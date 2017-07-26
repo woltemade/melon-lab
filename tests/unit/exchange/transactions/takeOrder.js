@@ -1,8 +1,8 @@
 import contract from "truffle-contract";
 import BigNumber from "bignumber.js";
 
-import addressList from "../addressList";
-import takeOrder from "../takeOrder";
+import addressList from "../../../../lib/assets/utils/addressList";
+import takeOrder from "../../../../lib/exchange/transactions/takeOrder";
 
 jest.mock("/imports/lib/web3", () => jest.fn(() => 42), { virtual: true });
 

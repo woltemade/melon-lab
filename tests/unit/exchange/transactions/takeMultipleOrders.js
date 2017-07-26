@@ -1,8 +1,8 @@
 import BigNumber from "bignumber.js";
 
-import matchedOrders from "../__fixtures__/matchedOrders";
+import matchedOrders from "../../../fixtures/matchedOrders";
 
-import takeMultipleOrders from "../takeMultipleOrders";
+import takeMultipleOrders from "../../../../lib/exchange/transactions/takeMultipleOrders";
 
 jest.mock("/imports/lib/web3", () => jest.fn(() => 42), { virtual: true });
 

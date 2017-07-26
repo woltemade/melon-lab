@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
 
-import orderBook from "../__fixtures__/blockChainOrders";
+import orderBook from "../fixtures/blockChainOrders";
 
 const instance = {
   orders: jest.fn(

@@ -1,5 +1,5 @@
 import contract from "truffle-contract";
-import getBalance from "../../erc20/getBalance";
+import getBalance from "../../../../lib/assets/calls/getBalance";
 
 jest.mock("/imports/lib/web3", () => jest.fn(), { virtual: true });
 jest.mock("truffle-contract");

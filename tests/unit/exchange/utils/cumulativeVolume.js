@@ -1,9 +1,9 @@
 import BigNumber from "bignumber.js";
 
-import matchedOrders from "../__fixtures__/matchedOrders";
+import matchedOrders from "../../../fixtures/matchedOrders";
 
 // MUT (Module under test)
-import cumulativeVolume from "../cumulativeVolume";
+import cumulativeVolume from "../../../../lib/exchange/utils/cumulativeVolume";
 
 test("cumulativeVolume", () => {
   expect(cumulativeVolume("buy", matchedOrders)).toBeInstanceOf(BigNumber);
