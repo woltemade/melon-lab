@@ -4,7 +4,8 @@ import BigNumber from "bignumber.js";
 import addressList from "../../../../lib/assets/utils/addressList";
 import takeOrder from "../../../../lib/exchange/transactions/takeOrder";
 
-jest.mock("/imports/lib/web3", () => jest.fn(() => 42), { virtual: true });
+// eslint-disable-next-line global-require
+jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
 
 test("without quantity (-> max) & basic calling testing", async () => {
   const result = await takeOrder(6870, "0xMANAGER", "0xVAULT");

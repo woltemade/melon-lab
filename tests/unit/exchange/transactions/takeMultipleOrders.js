@@ -4,7 +4,8 @@ import matchedOrders from "../../../fixtures/matchedOrders";
 
 import takeMultipleOrders from "../../../../lib/exchange/transactions/takeMultipleOrders";
 
-jest.mock("/imports/lib/web3", () => jest.fn(() => 42), { virtual: true });
+// eslint-disable-next-line global-require
+jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
 
 test("buy 1.5 MLN from two orders: one full and one partial", async () => {
   const result = await takeMultipleOrders(

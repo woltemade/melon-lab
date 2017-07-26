@@ -3,8 +3,8 @@ import contract from "truffle-contract";
 
 import transferFrom from "../../../../lib/assets/transactions/transferFrom";
 
-jest.mock("/imports/lib/web3", () => jest.fn(), { virtual: true });
-jest.mock("truffle-contract");
+// eslint-disable-next-line global-require
+jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
 
 test("transferFrom", async () => {
   const result = await transferFrom("0xToken", "0x1", "0x2", new BigNumber(5));

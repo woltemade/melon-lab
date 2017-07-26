@@ -2,8 +2,8 @@ import contract from "truffle-contract";
 
 import getOrder from "../../../../lib/exchange/calls/getOrder";
 
-jest.mock("/imports/lib/web3", () => jest.fn(), { virtual: true });
-jest.mock("truffle-contract");
+// eslint-disable-next-line global-require
+jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
 
 test("getOrder", async () => {
   const order = await getOrder(6870);
