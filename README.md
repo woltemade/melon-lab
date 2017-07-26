@@ -3,6 +3,13 @@ Melon.js
 
 JS API for the Melon Protocol
 
+
+## Principles
+
+- Abstract token decimals problem: This library consumes and returns always
+  quantities as a [BigNumber] with decimals included. I.e. "12.23" and not 
+  "1200000000000" (number of 0s depending on the token decimals)
+
 ## Folder structure
 
 The folder structure is based on the structure of the 
@@ -58,6 +65,9 @@ By interacting with the smart contracts, we have 3 levels of testing:
   provide.
 
 
+
+
+[BigNumber]: https://mikemcl.github.io/bignumber.js/
 [protocol contract]: https://github.com/melonproject/protocol/tree/master/contracts
 [hacker noon react lib]: https://hackernoon.com/building-a-react-component-library-part-1-d8a1e248fe6c
 [esdoc]: https://esdoc.org/

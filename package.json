@@ -8,22 +8,35 @@
   },
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch",
     "lint": "eslint .",
     "pretest": "npm run lint --silent",
     "format": "prettier-eslint --write \"lib/**/*.js\"",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": ["npm run format", "git add"]
+    "*.js": [
+      "npm run format",
+      "git add"
+    ]
   },
   "jest": {
-    "testMatch": ["**/tests/unit/**/*.js?(x)", "**/?(*.)(spec|test).js?(x)"]
+    "testMatch": [
+      "**/tests/unit/**/*.js?(x)",
+      "**/?(*.)(spec|test).js?(x)"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/melonproject/melon.js.git"
   },
-  "keywords": ["melon", "melonproject", "javascript", "ethereum", "api"],
+  "keywords": [
+    "melon",
+    "melonproject",
+    "javascript",
+    "ethereum",
+    "api"
+  ],
   "author": "Simon Emanuel Schmid <simon@melonport.com>",
   "license": "GPL-3.0",
   "bugs": {
@@ -49,6 +62,7 @@
   "dependencies": {
     "@melonproject/protocol": "0.2.0-alpha.17",
     "bignumber.js": "^4.0.2",
+    "ramda": "^0.24.1",
     "truffle-contract": "^2.0.3"
   }
 }
