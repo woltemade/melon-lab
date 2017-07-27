@@ -13,25 +13,37 @@
     "jest:watch": "jest --watch",
     "pretest": "npm run lint --silent",
     "babel": "babel lib -d build",
-    "build": "npm run walklib && npm run rollup",
-    "rollup": "rollup -c",
+    "build": "npm run walklib && npm run babel",
     "walklib": "babel-node ./scripts/walkLib.js",
     "lint": "eslint . --ignore-path .gitignore",
     "format": "prettier-eslint --write \"lib/**/*.js\"",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": ["npm run format", "git add"]
+    "*.js": [
+      "npm run format",
+      "git add"
+    ]
   },
   "jest": {
-    "testMatch": ["**/tests/unit/**/*.js?(x)"],
-    "setupFiles": ["./tests/utils/setup.js"]
+    "testMatch": [
+      "**/tests/unit/**/*.js?(x)"
+    ],
+    "setupFiles": [
+      "./tests/utils/setup.js"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/melonproject/melon.js.git"
   },
-  "keywords": ["melon", "melonproject", "javascript", "ethereum", "api"],
+  "keywords": [
+    "melon",
+    "melonproject",
+    "javascript",
+    "ethereum",
+    "api"
+  ],
   "author": "Simon Emanuel Schmid <simon@melonport.com>",
   "license": "GPL-3.0",
   "bugs": {
@@ -41,12 +53,9 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
-    "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
-    "babel-preset-latest": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "eslint": "^4.3.0",
     "eslint-config-airbnb": "^15.1.0",
@@ -59,14 +68,6 @@
     "jest": "^20.0.4",
     "lint-staged": "^4.0.2",
     "prettier-eslint-cli": "^4.1.1",
-    "rollup": "^0.45.2",
-    "rollup-plugin-babel": "^2.7.1",
-    "rollup-plugin-commonjs": "^8.0.2",
-    "rollup-plugin-flow": "^1.1.1",
-    "rollup-plugin-json": "^2.3.0",
-    "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-globals": "^1.1.0",
-    "rollup-plugin-node-resolve": "^3.0.0",
     "walk": "^2.3.9"
   },
   "dependencies": {
