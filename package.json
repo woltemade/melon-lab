@@ -68,6 +68,7 @@
     "prettier-eslint-cli": "^4.1.1",
     "rollup": "^0.45.2",
     "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-flow": "^1.1.1",
     "rollup-plugin-json": "^2.3.0",
     "rollup-plugin-node-resolve": "^3.0.0"
