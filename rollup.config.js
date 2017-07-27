@@ -16,7 +16,18 @@ export default {
     commonjs(),
     json(),
     babel({
-      exclude: "node_modules/**", // only transpile our source code
+      presets: [
+        [
+          "es2015",
+          {
+            modules: false,
+          },
+        ],
+        "stage-0",
+        "react",
+      ],
+      babelrc: false,
+      exclude: "node_modules/**",
     }),
   ],
   dest: "build/bundle.js",
