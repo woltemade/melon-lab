@@ -39,6 +39,7 @@ export default {
         "stage-0",
         "react",
       ],
+      runtimeHelpers: true,
       plugins: ["external-helpers"],
       babelrc: false,
       exclude: "node_modules/**",

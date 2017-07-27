@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/bundle.js",
   "module": "build/bundle.es.js",
@@ -20,17 +20,30 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": ["npm run format", "git add"]
+    "*.js": [
+      "npm run format",
+      "git add"
+    ]
   },
   "jest": {
-    "testMatch": ["**/tests/unit/**/*.js?(x)"],
-    "setupFiles": ["./tests/utils/setup.js"]
+    "testMatch": [
+      "**/tests/unit/**/*.js?(x)"
+    ],
+    "setupFiles": [
+      "./tests/utils/setup.js"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/melonproject/melon.js.git"
   },
-  "keywords": ["melon", "melonproject", "javascript", "ethereum", "api"],
+  "keywords": [
+    "melon",
+    "melonproject",
+    "javascript",
+    "ethereum",
+    "api"
+  ],
   "author": "Simon Emanuel Schmid <simon@melonport.com>",
   "license": "GPL-3.0",
   "bugs": {

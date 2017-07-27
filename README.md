@@ -1,8 +1,9 @@
+![Melon.js Logo](/docs/media/melonjs-500.png?raw=true)
+
 Melon.js
 ========
 
 JS API for the Melon Protocol
-
 
 [![Gitter][gitter-badge]][gitter-url]
 [![License: GPL v3][license-badge]][license-badge-url]
