@@ -29,20 +29,27 @@ export default {
     }),
     json(),
     babel({
+      babelrc: false,
+      exclude: "node_modules/**",
       presets: [
         [
-          "es2015",
+          "latest",
           {
-            modules: false,
+            es2015: {
+              modules: false,
+            },
           },
         ],
         "stage-0",
-        "react",
       ],
-      runtimeHelpers: true,
-      plugins: ["external-helpers"],
-      babelrc: false,
-      exclude: "node_modules/**",
+      plugins: ["external-helpers" /* "transform-runtime" */],
+      externalHelpers: true,
+      // runtimeHelpers: true,
+      /*
+      */
+      /*
+      plugins: [],
+      */
     }),
   ],
   targets: [
