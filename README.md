@@ -11,6 +11,66 @@ JS API for the Melon Protocol
 [![Dev Dependencies][devDependencies-badge]][devDependencies-badge-url]
 [![NSP Status][NSP Status badge]][NSP Status]
 
+## Usage
+
+To use melon.js, you need to setup it with web3 and the daemon address. For now,
+examples are for a Meteor setup. But it's similar on other setups.
+
+### Server
+
+Be sure that the following lines are executed before any other usage of
+melon.js
+
+```javascript
+// /imports/startup/server/index.js
+import Web3 from 'web3';
+import { setup } from '@melonproject/melon.js';
+
+const web3 = new Web3(
+  new Web3.providers.HttpProvider(Meteor.settings.private.JSON_RPC_URL),
+);
+
+// before Meteor.startup
+setup(web3, Meteor.settings.public.DAEMON_ADDRESS);
+```
+
+### Client
+
+On the client, it is a bit more tricky. The setup should be executed after
+web3.js is injected but before other usage of melon.js:
+
+```javascript
+// /imports/startup/client/config.js
+import Web3 from 'web3';
+import { setup } from '@melonproject/melon.js';
+
+Meteor.startup(() => {
+  // as first statement inside Meteor.startup
+  setup(window.web3, Meteor.settings.public.DAEMON_ADDRESS);
+  
+  // ... other setup commands
+});
+```
+
+### Link dev build
+
+To use the latest version of melon.js and to further develop it in place,
+it can be linked:
+
+```bash
+git clone git@github.com:melonproject/melon.js.git
+cd melon.js
+npm link
+cd ../portal
+npm link @melonproject/melon.js
+```
+
+If you make changes to the source files (in `lib/` folder), you need to
+build it before they are usable in the dependent project:
+```bash
+npm run build
+```
+
 
 ## Principles
 
