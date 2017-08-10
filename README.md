@@ -60,13 +60,14 @@ it can be linked:
 ```bash
 git clone git@github.com:melonproject/melon.js.git
 cd melon.js
+npm run build
 npm link
 cd ../portal
 npm link @melonproject/melon.js
 ```
 
 If you make changes to the source files (in `lib/` folder), you need to
-build it before they are usable in the dependent project:
+build it again before they are usable in the dependent project:
 ```bash
 npm run build
 ```
