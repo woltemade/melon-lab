@@ -60,6 +60,7 @@ it can be linked:
 ```bash
 git clone git@github.com:melonproject/melon.js.git
 cd melon.js
+npm install
 npm run build
 npm link
 cd ../portal
