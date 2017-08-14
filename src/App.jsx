@@ -6,8 +6,8 @@ import {
   HashRouter,
   Switch,
 } from "react-router-dom";
-import Welcome from "./components/existingUser/welcome";
-import ManagerView from "./components/managerView";
+import Welcome from "./components/newUser/welcome";
+import ManagerView from "./components/existingUser/managerView";
 
 import "./App.css";
 
