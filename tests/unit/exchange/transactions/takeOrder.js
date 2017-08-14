@@ -3,8 +3,12 @@ import BigNumber from "bignumber.js";
 
 import takeOrder from "../../../../lib/exchange/transactions/takeOrder";
 
-// eslint-disable-next-line global-require
+/* eslint-disable global-require */
 jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
+jest.mock("../../../../lib/universe/calls/getConfig", () =>
+  require("../../../mocks/truffle-contract"),
+);
+/* eslint-enable */
 
 test("without quantity (-> max) & basic calling testing", async () => {
   const result = await takeOrder(6870, "0xMANAGER", "0xVAULT");

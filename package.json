@@ -16,7 +16,7 @@
     "build": "npm run walklib && npm run babel",
     "walklib": "babel-node ./scripts/walkLib.js",
     "lint": "eslint . --ignore-path .gitignore",
-    "format": "prettier-eslint --write \"lib/**/*.js\"",
+    "format": "prettier-eslint --write \"lib/**/*.js\" && prettier-eslint --write \"tests/**/*.js\"",
     "precommit": "lint-staged"
   },
   "lint-staged": {

@@ -51,6 +51,16 @@ const instance = {
         resolve(new BigNumber(6));
       }),
   ),
+  /* universe methods */
+  /* **************** */
+  numAssignedAssets: jest.fn(
+    () => new Promise(resolve => resolve(new BigNumber(10))),
+  ),
+  getMelonAsset: jest.fn(() => new Promise(resolve => resolve("0xMLN"))),
+  getReferenceAsset: jest.fn(() => new Promise(resolve => resolve("0xETH"))),
+  assetAt: jest.fn(i => new Promise(resolve => resolve(`0xTOKEN_${i}`))),
+  exchangeAt: jest.fn(() => new Promise(resolve => resolve("0xEXCHANGE"))),
+  priceFeedAt: jest.fn(() => new Promise(resolve => resolve("0xPRICEFEED"))),
 };
 
 const contract = {

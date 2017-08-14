@@ -13,7 +13,7 @@ JS API for the Melon Protocol
 
 ## Usage
 
-To use melon.js, you need to setup it with web3 and the daemon address. For now,
+To use melon.js, you need to set it up with web3 and the daemon address. For now,
 examples are for a Meteor setup. But it's similar on other setups.
 
 ### Server
@@ -31,7 +31,7 @@ const web3 = new Web3(
 );
 
 // before Meteor.startup
-setup(web3, Meteor.settings.public.DAEMON_ADDRESS);
+setup.init({ web3, daemonAddress: Meteor.settings.public.DAEMON_ADDRESS });
 ```
 
 ### Client
@@ -46,7 +46,7 @@ import { setup } from '@melonproject/melon.js';
 
 Meteor.startup(() => {
   // as first statement inside Meteor.startup
-  setup(window.web3, Meteor.settings.public.DAEMON_ADDRESS);
+  setup.init({ web3, daemonAddress: Meteor.settings.public.DAEMON_ADDRESS });
   
   // ... other setup commands
 });
@@ -114,6 +114,9 @@ Each of these contract folders can have the following subfolders:
   So called constant-methods.
 - `transactions/`: Actual interactions with the blockchain that cost gase. 
   So called non-constant-methods.
+- `events/`: Watch & get events 
+- `contracts/`: Helpers to get instances of the deployed contracts. Meant for 
+  internal use. 
 - `utils/`: Utility functions to interact with the data
 - `queries/`: Sort and filter functions to insert into JS own `.sort(fn)`,
   `.filter(fn)`.
