@@ -13,7 +13,7 @@ JS API for the Melon Protocol
 
 ## Usage
 
-To use melon.js, you need to setup it with web3 and the daemon address. For now,
+To use melon.js, you need to set it up with web3 and the daemon address. For now,
 examples are for a Meteor setup. But it's similar on other setups.
 
 ### Server
