@@ -1,16 +1,19 @@
 import React from "react";
-import { Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import Welcome from "./welcome";
 
-const getStarted = () =>
+import Setup from "./setup";
+import FirstInvest from "./firstInvest";
+import FirstTrade from "./firstTrade";
+
+const GetStarted = () =>
   (<div>
-    <h2>Welcome to the Melon Protocol.</h2>
-    <p className="App-intro">To get started, let's create your Melon fund.</p>
-    <Button>
-      <Link to="/welcome/setup">Get started </Link>
-    </Button>
-    <br />
-    <br />
+    <Switch>
+      <Route exact path="/getstarted" component={Welcome} />
+      <Route path="/getstarted/setup" component={Setup} />
+      <Route path="/getstarted/invest" component={FirstInvest} />
+      <Route path="/getstarted/trade" component={FirstTrade} />
+    </Switch>
   </div>);
 
-export default getStarted;
+export default GetStarted;

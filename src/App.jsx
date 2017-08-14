@@ -6,7 +6,7 @@ import {
   HashRouter,
   Switch,
 } from "react-router-dom";
-import Welcome from "./components/newUser/welcome";
+import GetStarted from "./components/newUser/getStarted";
 import ManagerView from "./components/existingUser/managerView";
 
 import "./App.css";
@@ -18,7 +18,7 @@ const App = () =>
         <h1>MELON</h1>
       </div>
       <div>
-        <Link to="/welcome">WELCOME</Link>
+        <Link to="/getstarted">WELCOME</Link>
       </div>
       <div>
         <Link to="/manager">MANAGER VIEW</Link>
@@ -27,7 +27,7 @@ const App = () =>
 
       {/* <HashRouter basename="/" /> */}
       <Switch>
-        <Route path="/welcome" component={Welcome} />
+        <Route path="/getstarted" component={GetStarted} />
         {/* <Route path="/setup" component={Setup} />
         <Route path="/firstinvest" component={FirstInvest} />
         <Route path="/firsttrade" component={FirstTrade} /> */}

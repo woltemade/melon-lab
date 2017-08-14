@@ -21,7 +21,7 @@ const FirstInvest = () =>
     <div>
       <br />
       <Button>
-        <Link to="/welcome/trade">Invest</Link>
+        <Link to="/getstarted/trade">Invest</Link>
       </Button>
     </div>
   </div>);

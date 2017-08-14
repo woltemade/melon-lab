@@ -1,16 +1,8 @@
 import React from "react";
-import {
-  Table,
-  List,
-  Input,
-  Button,
-  Card,
-  Icon,
-  Divider,
-} from "semantic-ui-react";
+import { Input, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-const Setup = props =>
+const Setup = () =>
   (<div>
     <br />
     <div>
@@ -30,7 +22,7 @@ const Setup = props =>
     <div>
       <br />
       <Button>
-        <Link to="/welcome/invest">Create and deploy my fund </Link>
+        <Link to="/getstarted/invest">Create and deploy my fund </Link>
       </Button>
     </div>
     <br />
