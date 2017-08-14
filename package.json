@@ -16,7 +16,7 @@
     "build": "npm run walklib && npm run babel",
     "walklib": "babel-node ./scripts/walkLib.js",
     "lint": "eslint . --ignore-path .gitignore",
-    "format": "prettier-eslint --write \"lib/**/*.js\"",
+    "format": "prettier-eslint --write \"lib/**/*.js\" && prettier-eslint --write \"tests/**/*.js\"",
     "precommit": "lint-staged"
   },
   "lint-staged": {
@@ -74,7 +74,6 @@
     "@melonproject/protocol": "0.2.0-alpha.17",
     "bignumber.js": "^4.0.2",
     "ramda": "^0.24.1",
-    "truffle-contract": "^2.0.3",
-    "web3": "^0.20.0"
+    "truffle-contract": "^2.0.3"
   }
 }
