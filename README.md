@@ -31,7 +31,7 @@ const web3 = new Web3(
 );
 
 // before Meteor.startup
-setup(web3, Meteor.settings.public.DAEMON_ADDRESS);
+setup.init({ web3, daemonAddress: Meteor.settings.public.DAEMON_ADDRESS });
 ```
 
 ### Client
@@ -46,7 +46,7 @@ import { setup } from '@melonproject/melon.js';
 
 Meteor.startup(() => {
   // as first statement inside Meteor.startup
-  setup(window.web3, Meteor.settings.public.DAEMON_ADDRESS);
+  setup.init({ web3, daemonAddress: Meteor.settings.public.DAEMON_ADDRESS });
   
   // ... other setup commands
 });

@@ -74,6 +74,7 @@
     "@melonproject/protocol": "0.2.0-alpha.17",
     "bignumber.js": "^4.0.2",
     "ramda": "^0.24.1",
-    "truffle-contract": "^2.0.3"
+    "truffle-contract": "^2.0.3",
+    "web3": "^0.20.0"
   }
 }
