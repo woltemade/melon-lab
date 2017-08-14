@@ -6,37 +6,31 @@ import {
   HashRouter,
   Switch,
 } from "react-router-dom";
-import Welcome from "./components/welcome";
-import Setup from "./components/setup";
-import Invest from "./components/invest";
-import FirstTrade from "./components/firstTrade";
+import Welcome from "./components/existingUser/welcome";
 import ManagerView from "./components/managerView";
 
 import "./App.css";
 
 const App = () =>
   (<HashRouter>
-    <div>
-      <div>
-        <Link to="/setup">SETUP</Link>
+    <div className="App">
+      <div className="App-header">
+        <h1>MELON</h1>
       </div>
       <div>
-        <Link to="/invest">INVEST</Link>
+        <Link to="/welcome">WELCOME</Link>
       </div>
       <div>
-        <Link to="/firsttrade">FIRST TRADE</Link>
-      </div>
-      <div>
-        <Link to="/manager">MANAGER</Link>
+        <Link to="/manager">MANAGER VIEW</Link>
       </div>
       <hr />
 
       {/* <HashRouter basename="/" /> */}
       <Switch>
         <Route path="/welcome" component={Welcome} />
-        <Route path="/setup" component={Setup} />
-        <Route path="/invest" component={Invest} />
-        <Route path="/firsttrade" component={FirstTrade} />
+        {/* <Route path="/setup" component={Setup} />
+        <Route path="/firstinvest" component={FirstInvest} />
+        <Route path="/firsttrade" component={FirstTrade} /> */}
         <Route path="/manager" component={ManagerView} />
       </Switch>
     </div>

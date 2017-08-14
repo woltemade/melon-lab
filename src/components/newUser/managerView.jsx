@@ -9,11 +9,8 @@ import {
   Divider,
 } from "semantic-ui-react";
 
-const ManagerView = props =>
+const ManagerView = () =>
   (<div className="App">
-    <div className="App-header">
-      <h1>MELON</h1>
-    </div>
     <br />
     <div>
       <Card.Group>
@@ -490,6 +487,36 @@ const ManagerView = props =>
                 </List.Content>
               </List.Item>
             </List>
+          </Card.Content>
+        </Card>
+        <Card centered>
+          <Card.Content>
+            <Card.Header>Invest / Redeem</Card.Header>
+            <br />
+            <List>
+              <List.Item as="a">
+                <List.Content>
+                  <Input placeholder="Amount" />
+                </List.Content>
+              </List.Item>
+              <List.Item as="a">
+                <List.Content>
+                  <Input placeholder="Price per share" />
+                </List.Content>
+              </List.Item>
+              <List.Item as="a">
+                <List.Content>
+                  <Input placeholder="Total" />
+                </List.Content>
+              </List.Item>
+            </List>
+          </Card.Content>
+          <Card.Content extra>
+            <div className="ui two buttons">
+              <Button basic color="black">
+                Invest / Redeem
+              </Button>
+            </div>
           </Card.Content>
         </Card>
       </Card.Group>

@@ -1,7 +1,8 @@
 import React from "react";
 import { Input, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
-const Setup = props =>
+const FirstInvest = () =>
   (<div>
     <br />
     <p className="App-intro">Now, it's time to invest in your fund.</p>
@@ -19,8 +20,10 @@ const Setup = props =>
     </div>
     <div>
       <br />
-      <Button>Invest</Button>
+      <Button>
+        <Link to="/welcome/trade">Invest</Link>
+      </Button>
     </div>
   </div>);
 
-export default Setup;
+export default FirstInvest;

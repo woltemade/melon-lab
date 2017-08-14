@@ -8,6 +8,7 @@ import {
   Icon,
   Divider,
 } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 const Setup = props =>
   (<div>
@@ -28,7 +29,9 @@ const Setup = props =>
     </div>
     <div>
       <br />
-      <Button>Create and deploy my fund </Button>
+      <Button>
+        <Link to="/welcome/invest">Create and deploy my fund </Link>
+      </Button>
     </div>
     <br />
   </div>);

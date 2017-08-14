@@ -1,15 +1,7 @@
 import React from "react";
-import {
-  Table,
-  List,
-  Input,
-  Button,
-  Card,
-  Icon,
-  Divider,
-} from "semantic-ui-react";
+import { List } from "semantic-ui-react";
 
-const FirstTrade = props =>
+const FirstTrade = () =>
   (<div>
     <p className="App-intro">
       You can now start trading. Choose one of the available asset pairs to
