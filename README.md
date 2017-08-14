@@ -114,6 +114,7 @@ Each of these contract folders can have the following subfolders:
   So called constant-methods.
 - `transactions/`: Actual interactions with the blockchain that cost gase. 
   So called non-constant-methods.
+- `events/`: Watch & get events 
 - `utils/`: Utility functions to interact with the data
 - `queries/`: Sort and filter functions to insert into JS own `.sort(fn)`,
   `.filter(fn)`.
