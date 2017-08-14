@@ -61,6 +61,26 @@ const instance = {
   assetAt: jest.fn(i => new Promise(resolve => resolve(`0xTOKEN_${i}`))),
   exchangeAt: jest.fn(() => new Promise(resolve => resolve("0xEXCHANGE"))),
   priceFeedAt: jest.fn(() => new Promise(resolve => resolve("0xPRICEFEED"))),
+  createVault: jest.fn(
+    () =>
+      new Promise(resolve =>
+        resolve({ logs: [{ event: "VaultAdded", args: { id: 1 } }] }),
+      ),
+  ),
+  getVault: jest.fn(
+    () =>
+      new Promise(resolve =>
+        resolve([
+          "0xVAULT",
+          "0xUSER",
+          "TESTFUND",
+          "MLN-T",
+          new BigNumber(18),
+          true,
+          123,
+        ]),
+      ),
+  ),
 };
 
 const contract = {
