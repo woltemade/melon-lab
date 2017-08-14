@@ -2,8 +2,6 @@ import createVault from "../../../../lib/vault/transactions/createVault";
 
 /* eslint-disable global-require */
 jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
-jest.mock("web3", () => require("../../../mocks/web3"));
-
 jest.mock("../../../../lib/universe/calls/getConfig", () =>
   require("../../../mocks/truffle-contract"),
 );

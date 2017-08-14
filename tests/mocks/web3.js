@@ -2,7 +2,9 @@ const instance = {
   version: {
     network: 42,
   },
-  accounts: ["0xUSER"],
+  eth: {
+    accounts: ["0xUSER"],
+  },
 };
 
 const constructor = jest.fn(() => instance);
