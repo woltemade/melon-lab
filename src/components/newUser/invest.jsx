@@ -3,7 +3,8 @@ import { List, Input, Button, Card } from "semantic-ui-react";
 
 const Invest = () =>
   (<div>
-    <p className="App-intro">Now, time inves in your fund!</p>
+    <br />
+    <p className="App-intro">Now, time to invest in your fund!</p>
     <Card centered>
       <Card.Content>
         <Card.Header>Invest</Card.Header>

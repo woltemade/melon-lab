@@ -1,4 +1,4 @@
-import { setup, createVault } from "@melonproject/melon.js";
+import { createVault } from "@melonproject/melon.js";
 import { types } from "../ducks/setup";
 
 const setupMiddleware = store => next => action => {
@@ -8,8 +8,10 @@ const setupMiddleware = store => next => action => {
 
   switch (type) {
     case types.CREATE: {
-      console.log(window.web3.eth.accounts[0]);
-      createVault(currentState.name, window.web3.eth.accounts[0]);
+      createVault(currentState.name, window.web3.eth.accounts[0]).then(res => {
+        console.log("Vault successfully created: ", res);
+        return res;
+      });
       break;
     }
     default:
