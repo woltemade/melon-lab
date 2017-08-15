@@ -15,6 +15,9 @@ const instance = {
         resolve({ transactionHash: "0xBLUB" });
       }),
   ),
+  make: jest.fn(
+    () => new Promise(resolve => resolve({ logs: [{ args: { id: 1 } }] })),
+  ),
   balanceOf: jest.fn(
     (/* ofAddress */) =>
       new Promise(resolve => {
