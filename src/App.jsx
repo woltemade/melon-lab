@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 
 import ManagerView from "./components/existingUser/managerView";
-import Onboarding from "./components/newUser/onboarding";
+import SetupContainer from "./redux/containers/setup";
+import Invest from "./components/newUser/invest";
 
 import "./App.css";
 
@@ -11,7 +12,8 @@ const App = () =>
       <h1>MELON</h1>
     </div>
     <hr />
-    <Onboarding />
+    <SetupContainer />
+    <Invest />
     <ManagerView />
   </div>);
 
