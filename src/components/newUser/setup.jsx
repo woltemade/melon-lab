@@ -21,12 +21,20 @@ const Setup = props =>
           </List.Item>
           <List.Item as="a">
             <List.Content>
-              <Input placeholder={props.managementFee} />
+              <Input
+                name="managementFee"
+                placeholder={props.managementFee}
+                onChange={props.onChange}
+              />
             </List.Content>
           </List.Item>
           <List.Item as="a">
             <List.Content>
-              <Input placeholder={props.performanceFee} />
+              <Input
+                name="performanceFee"
+                placeholder={props.performanceFee}
+                onChange={props.onChange}
+              />
             </List.Content>
           </List.Item>
         </List>

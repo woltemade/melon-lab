@@ -11,7 +11,6 @@ export const types = {
 
 export const creators = {
   create: () => ({
-    // console.log("Creating fund");
     type: types.CREATE,
   }),
   change: newValues => ({
