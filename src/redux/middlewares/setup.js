@@ -13,9 +13,9 @@ const setupMiddleware = store => next => action => {
           console.log("Vault successfully created: ", response);
           store.dispatch(
             creators.change({
-              dimmerClass: "ui inverted dimmer",
               vaultAddress: response.address,
               vaultOwner: response.owner,
+              loading: false,
             }),
           );
         })

@@ -2,7 +2,7 @@ export const initialState = {
   amount: "Amount",
   price: "Price per share",
   total: "Total",
-  dimmerClass: "ui inverted dimmer",
+  loading: false,
 };
 
 export const types = {
@@ -33,7 +33,7 @@ export const reducer = (state = initialState, action) => {
     case types.INVEST: {
       return {
         ...state,
-        dimmerClass: "ui active inverted dimmer",
+        loading: true,
       };
     }
     default:

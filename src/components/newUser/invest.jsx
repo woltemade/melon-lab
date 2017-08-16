@@ -6,10 +6,8 @@ const Invest = props =>
     <div className="ui segment">
       <br />
       <p className="App-intro">Now, time to invest in your fund!</p>
-      <div className={props.dimmerClass}>
-        <div className="ui text loader">
-          Deploying your fund to the Ethereum blockchain
-        </div>
+      <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
+        <div className="ui text loader">Investing in your fund ...</div>
       </div>
       <Card centered>
         <Card.Content>

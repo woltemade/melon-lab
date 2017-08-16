@@ -2,9 +2,9 @@ export const initialState = {
   name: "Fund Name",
   managementFee: "2%",
   performanceFee: "5%",
-  dimmerClass: "ui inverted dimmer",
   vaultAddress: "",
   vaultOwner: "",
+  loading: false,
 };
 
 export const types = {
@@ -35,7 +35,7 @@ export const reducer = (state = initialState, action) => {
     case types.CREATE: {
       return {
         ...state,
-        dimmerClass: "ui active inverted dimmer",
+        loading: true,
       };
     }
     default:
