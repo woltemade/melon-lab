@@ -21,7 +21,7 @@ const instance = {
   balanceOf: jest.fn(
     (/* ofAddress */) =>
       new Promise(resolve => {
-        resolve({ balanceOf: new BigNumber(10) });
+        resolve({ balanceOf: new BigNumber(10000000000000000000) });
       }),
   ),
   totalSupply: jest.fn(
