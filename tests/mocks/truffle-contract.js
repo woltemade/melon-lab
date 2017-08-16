@@ -21,13 +21,13 @@ const instance = {
   balanceOf: jest.fn(
     (/* ofAddress */) =>
       new Promise(resolve => {
-        resolve({ balanceOf: new BigNumber(10) });
+        resolve({ balanceOf: new BigNumber(10000000000000000000) });
       }),
   ),
   totalSupply: jest.fn(
     () =>
       new Promise(resolve => {
-        resolve(new BigNumber(1000));
+        resolve(new BigNumber(1000000000000000000000));
       }),
   ),
   transfer: jest.fn(
@@ -39,7 +39,7 @@ const instance = {
   approve: jest.fn(
     (/* toAddress, quantity, { from: fromAddress } */) =>
       new Promise(resolve => {
-        resolve(new BigNumber(4));
+        resolve({ logs: [{ event: "Approval", args: { id: 1 } }] });
       }),
   ),
   transferFrom: jest.fn(
@@ -51,7 +51,7 @@ const instance = {
   allowance: jest.fn(
     (/* ownerAddress, spenderAddress */) =>
       new Promise(resolve => {
-        resolve(new BigNumber(6));
+        resolve(new BigNumber(6000000000000000000));
       }),
   ),
   /* universe methods */
