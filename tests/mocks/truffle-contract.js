@@ -39,7 +39,7 @@ const instance = {
   approve: jest.fn(
     (/* toAddress, quantity, { from: fromAddress } */) =>
       new Promise(resolve => {
-        resolve(new BigNumber(4));
+        resolve({ logs: [{ event: "Approval", args: { id: 1 } }] });
       }),
   ),
   transferFrom: jest.fn(
