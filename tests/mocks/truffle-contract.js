@@ -27,7 +27,7 @@ const instance = {
   totalSupply: jest.fn(
     () =>
       new Promise(resolve => {
-        resolve(new BigNumber(1000));
+        resolve(new BigNumber(1000000000000000000000));
       }),
   ),
   transfer: jest.fn(
