@@ -6,15 +6,18 @@ import getAllowance from "../../../../lib/assets/calls/getAllowance";
 jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
 
 test("getAllowance", async () => {
-  const result = await getAllowance("0xToken", "0x1", "0x2");
+  const result = await getAllowance("ETH-T", "0x1", "0x2");
 
   expect(result).toBeTruthy();
   expect(result.owner === "0x1").toBeTruthy();
   expect(result.spender === "0x2").toBeTruthy();
-  expect(result.approvedAmount.eq("6")).toBeTruthy();
+  expect(result.approvedAmount.toNumber()).toBe(6);
   expect(contract).toHaveBeenCalledTimes(1);
   expect(contract().setProvider).toHaveBeenCalledTimes(1);
-  expect(contract().at).toHaveBeenCalledWith("0xToken");
+  // Token Symbol to address resolution transparently handled
+  expect(contract().at).toHaveBeenCalledWith(
+    "0x1a825E9bF3BdC8ef8B975F97c78b5208a947d0EC".toLowerCase(),
+  );
   expect(contract.mockInspect.instance.allowance).toHaveBeenCalledWith(
     "0x1",
     "0x2",

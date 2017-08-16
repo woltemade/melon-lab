@@ -51,7 +51,7 @@ const instance = {
   allowance: jest.fn(
     (/* ownerAddress, spenderAddress */) =>
       new Promise(resolve => {
-        resolve(new BigNumber(6));
+        resolve(new BigNumber(6000000000000000000));
       }),
   ),
   /* universe methods */
