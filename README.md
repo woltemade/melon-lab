@@ -11,6 +11,18 @@ JS API for the Melon Protocol
 [![Dev Dependencies][devDependencies-badge]][devDependencies-badge-url]
 [![NSP Status][NSP Status badge]][NSP Status]
 
+## Principles
+
+- Functional programming:
+  - Types with Flow-Type
+  - Composition over inheritance
+  - TODO: Do not throw exceptions. Use [railways](http://fsharpforfunandprofit.com/rop/) instead.
+- Abstract token decimals problem: This library consumes and returns always
+  quantities as a [BigNumber] with decimals included. I.e. "12.23" and not 
+  "1200000000000" (number of 0s depending on the token decimals)
+- Abstract token address problem: Always consume and return tokens in their 
+  symbol name instead of address.
+
 ## Usage
 
 To use melon.js, you need to set it up with web3 and the daemon address. For now,
@@ -72,13 +84,6 @@ build it again before they are usable in the dependent project:
 ```bash
 npm run build
 ```
-
-
-## Principles
-
-- Abstract token decimals problem: This library consumes and returns always
-  quantities as a [BigNumber] with decimals included. I.e. "12.23" and not 
-  "1200000000000" (number of 0s depending on the token decimals)
 
 ## Folder structure
 
