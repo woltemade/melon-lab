@@ -8,10 +8,7 @@ jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
 test("getAllowance", async () => {
   const result = await getAllowance("ETH-T", "0x1", "0x2");
 
-  expect(result).toBeTruthy();
-  expect(result.owner === "0x1").toBeTruthy();
-  expect(result.spender === "0x2").toBeTruthy();
-  expect(result.approvedAmount.toNumber()).toBe(6);
+  expect(result.toNumber()).toBe(6);
   expect(contract).toHaveBeenCalledTimes(1);
   expect(contract().setProvider).toHaveBeenCalledTimes(1);
   // Token Symbol to address resolution transparently handled
