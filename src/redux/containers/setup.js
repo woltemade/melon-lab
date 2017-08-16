@@ -11,7 +11,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(creators.create());
   },
   onChange: event => {
-    console.log(event.target.value);
     dispatch(creators.change({ [event.target.name]: event.target.value }));
   },
 });

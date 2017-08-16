@@ -4,49 +4,56 @@ import { List, Input, Button, Card } from "semantic-ui-react";
 const Setup = props =>
   (<div>
     <h2>Welcome to the Melon Protocol.</h2>
-    <p className="App-intro">To get started, let's create your Melon fund.</p>
-    <Card centered>
-      <Card.Content>
-        <Card.Header>Setup your fund</Card.Header>
-        <br />
-        <List>
-          <List.Item as="a">
-            <List.Content>
-              <Input
-                name="name"
-                placeholder={props.name}
-                onChange={props.onChange}
-              />
-            </List.Content>
-          </List.Item>
-          <List.Item as="a">
-            <List.Content>
-              <Input
-                name="managementFee"
-                placeholder={props.managementFee}
-                onChange={props.onChange}
-              />
-            </List.Content>
-          </List.Item>
-          <List.Item as="a">
-            <List.Content>
-              <Input
-                name="performanceFee"
-                placeholder={props.performanceFee}
-                onChange={props.onChange}
-              />
-            </List.Content>
-          </List.Item>
-        </List>
-      </Card.Content>
-      <Card.Content extra>
-        <div className="ui two buttons">
-          <Button basic color="black" onClick={props.onCreate}>
-            Create and deploy my fund!
-          </Button>
+    <div className="ui segment">
+      <p className="App-intro">To get started, let's create your Melon fund.</p>
+      <div className={props.dimmerClass}>
+        <div className="ui text loader">
+          Deploying your fund to the Ethereum blockchain
         </div>
-      </Card.Content>
-    </Card>
+      </div>
+      <Card centered>
+        <Card.Content>
+          <Card.Header>Setup your fund</Card.Header>
+          <br />
+          <List>
+            <List.Item as="a">
+              <List.Content>
+                <Input
+                  name="name"
+                  placeholder={props.name}
+                  onChange={props.onChange}
+                />
+              </List.Content>
+            </List.Item>
+            <List.Item as="a">
+              <List.Content>
+                <Input
+                  name="managementFee"
+                  placeholder={props.managementFee}
+                  onChange={props.onChange}
+                />
+              </List.Content>
+            </List.Item>
+            <List.Item as="a">
+              <List.Content>
+                <Input
+                  name="performanceFee"
+                  placeholder={props.performanceFee}
+                  onChange={props.onChange}
+                />
+              </List.Content>
+            </List.Item>
+          </List>
+        </Card.Content>
+        <Card.Content extra>
+          <div className="ui two buttons">
+            <Button basic color="black" onClick={props.onCreate}>
+              Create and deploy my fund!
+            </Button>
+          </div>
+        </Card.Content>
+      </Card>
+    </div>
   </div>);
 
 export default Setup;

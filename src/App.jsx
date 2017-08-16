@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import ManagerView from "./components/existingUser/managerView";
 import SetupContainer from "./redux/containers/setup";
-import Invest from "./components/newUser/invest";
+import InvestContainer from "./redux/containers/invest";
 
 import "./App.css";
 
@@ -13,7 +13,7 @@ const App = () =>
     </div>
     <hr />
     <SetupContainer />
-    <Invest />
+    <InvestContainer />
     <ManagerView />
   </div>);
 

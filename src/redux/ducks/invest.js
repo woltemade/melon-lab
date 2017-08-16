@@ -1,20 +1,18 @@
 export const initialState = {
-  name: "Fund Name",
-  managementFee: "2%",
-  performanceFee: "5%",
+  amount: "Amount",
+  price: "Price per share",
+  total: "Total",
   dimmerClass: "ui inverted dimmer",
-  vaultAddress: "",
-  vaultOwner: "",
 };
 
 export const types = {
-  CREATE: "CREATE:setup:melon.network",
-  CHANGE: "CHANGE:setup:melon.network",
+  INVEST: "INVEST:invest:melon.network",
+  CHANGE: "CHANGE:invest:melon.network",
 };
 
 export const creators = {
-  create: () => ({
-    type: types.CREATE,
+  invest: () => ({
+    type: types.INVEST,
   }),
   change: newValues => ({
     type: types.CHANGE,
@@ -32,7 +30,7 @@ export const reducer = (state = initialState, action) => {
         ...params,
       };
     }
-    case types.CREATE: {
+    case types.INVEST: {
       return {
         ...state,
         dimmerClass: "ui active inverted dimmer",

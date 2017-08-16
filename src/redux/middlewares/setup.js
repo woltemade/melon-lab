@@ -1,5 +1,5 @@
-import { createVault } from "@melonproject/melon.js";
-import { types } from "../ducks/setup";
+import { setup, createVault } from "@melonproject/melon.js";
+import { types, creators } from "../ducks/setup";
 
 const setupMiddleware = store => next => action => {
   const { type, ...params } = action;
@@ -8,10 +8,20 @@ const setupMiddleware = store => next => action => {
 
   switch (type) {
     case types.CREATE: {
-      createVault(currentState.name, window.web3.eth.accounts[0]).then(res => {
-        console.log("Vault successfully created: ", res);
-        return res;
-      });
+      createVault(currentState.name, setup.web3.eth.accounts[0])
+        .then(response => {
+          console.log("Vault successfully created: ", response);
+          store.dispatch(
+            creators.change({
+              dimmerClass: "ui inverted dimmer",
+              vaultAddress: response.address,
+              vaultOwner: response.owner,
+            }),
+          );
+        })
+        .catch(err => {
+          throw err;
+        });
       break;
     }
     default:
