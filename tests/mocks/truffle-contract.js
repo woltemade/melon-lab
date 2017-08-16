@@ -45,7 +45,7 @@ const instance = {
   transferFrom: jest.fn(
     (/* fromAddress, toAddress, quantity */) =>
       new Promise(resolve => {
-        resolve(new BigNumber(5));
+        resolve({ logs: [{ event: "Transfer", args: { id: 1 } }] });
       }),
   ),
   allowance: jest.fn(
