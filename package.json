@@ -1,8 +1,9 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.2.3",
+  "version": "0.2.5",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/main.js",
+  "sign-git-tag": true,
   "publishConfig": {
     "access": "public"
   },
@@ -16,11 +17,16 @@
     "jest:watch": "jest --watch",
     "pretest": "npm run lint --silent",
     "babel": "babel lib -d build",
+    "babel:watch": "babel lib -w -d build",
     "build": "npm run walklib && npm run babel",
     "walklib": "babel-node ./scripts/walkLib.js",
     "lint": "eslint . --ignore-path .gitignore",
     "format": "prettier-eslint --write \"lib/**/*.js\" && prettier-eslint --write \"tests/**/*.js\"",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "preversion": "npm test",
+    "version": "npm run test",
+    "postversion": "git push && git push --tags",
+    "deploy": "npm version patch && npm publish"
   },
   "lint-staged": {
     "*.js": [
