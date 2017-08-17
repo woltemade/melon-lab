@@ -11,7 +11,7 @@ const investMiddleware = store => next => action => {
     case types.INVEST: {
       subscribe(
         // store.getState().setup.vaultAddress,
-        "0xd6bff734e29200669d4b209f0ac01c82df462aca",
+        "0x10d19f7fb1c5df1adf27269c0c01589c76ee3531",
         new BigNumber(currentState.total),
         new BigNumber(currentState.amount),
       )
