@@ -24,35 +24,22 @@
     "format": "prettier-eslint --write \"lib/**/*.js\" && prettier-eslint --write \"tests/**/*.js\"",
     "precommit": "lint-staged",
     "preversion": "npm test",
-    "version": "npm run build",
+    "version": "npm run test",
     "postversion": "git push && git push --tags",
     "deploy": "npm version patch && npm publish"
   },
   "lint-staged": {
-    "*.js": [
-      "npm run format",
-      "git add"
-    ]
+    "*.js": ["npm run format", "git add"]
   },
   "jest": {
-    "testMatch": [
-      "**/tests/unit/**/*.js?(x)"
-    ],
-    "setupFiles": [
-      "./tests/utils/setup.js"
-    ]
+    "testMatch": ["**/tests/unit/**/*.js?(x)"],
+    "setupFiles": ["./tests/utils/setup.js"]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/melonproject/melon.js.git"
   },
-  "keywords": [
-    "melon",
-    "melonproject",
-    "javascript",
-    "ethereum",
-    "api"
-  ],
+  "keywords": ["melon", "melonproject", "javascript", "ethereum", "api"],
   "author": "Simon Emanuel Schmid <simon@melonport.com>",
   "license": "GPL-3.0",
   "bugs": {
