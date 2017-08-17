@@ -6,7 +6,7 @@ const Setup = props =>
     <h2>Welcome to the Melon Protocol.</h2>
     <div className="ui segment">
       <p className="App-intro">To get started, let's create your Melon fund.</p>
-      <div className={props.dimmerClass}>
+      <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
         <div className="ui text loader">
           Deploying your fund to the Ethereum blockchain
         </div>

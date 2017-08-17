@@ -16,9 +16,7 @@ const investMiddleware = store => next => action => {
         new BigNumber(currentState.amount),
       )
         .then(response => {
-          store.dispatch(
-            creators.change({ dimmerClass: "ui inverted dimmer" }),
-          );
+          store.dispatch(creators.change({ loading: false }));
           console.log("Successful subscription ", response);
         })
         .catch(err => {
