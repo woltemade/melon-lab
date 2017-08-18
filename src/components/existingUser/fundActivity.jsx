@@ -12,13 +12,13 @@ const FundActivity = () =>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Recent Investments</List.Header>
+            <List.Header>Recent Subscriptions</List.Header>
           </List.Content>
         </List.Item>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Recent Redeemals</List.Header>
+            <List.Header>Recent Redemptions</List.Header>
           </List.Content>
         </List.Item>
       </List>
@@ -26,7 +26,7 @@ const FundActivity = () =>
     <Card.Content extra>
       <div className="ui two buttons">
         <Button basic color="black">
-          Request full invest/redeem history
+          Request full subscriptions/redeem history
         </Button>
       </div>
       <br />

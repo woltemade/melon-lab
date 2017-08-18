@@ -1,10 +1,13 @@
 import React from "react";
-import { List, Card, Icon, Divider } from "semantic-ui-react";
+import { List, Card, Icon, Divider, Button } from "semantic-ui-react";
 
-const Factsheet = () =>
+const Factsheet = props =>
   (<Card centered>
     <Card.Content>
       <Card.Header>
+        <strong>
+          {props.onRequest()}
+        </strong>
         <strong>μέλλω Capital </strong>
       </Card.Header>
       <br />
@@ -23,33 +26,43 @@ const Factsheet = () =>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>AUM: 700 MLN</List.Header>
+            <List.Header>
+              AUM: {props.aum} MLN
+            </List.Header>
           </List.Content>
         </List.Item>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Share Price: 2,007</List.Header>
-          </List.Content>
-        </List.Item>
-        <Divider />
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header>Management fees: 2%</List.Header>
-          </List.Content>
-        </List.Item>
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header>Performance fees: 5%</List.Header>
+            <List.Header>
+              Share Price: {props.sharePrice}
+            </List.Header>
           </List.Content>
         </List.Item>
         <Divider />
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Unclaimed rewards: 7 MLN</List.Header>
+            <List.Header>
+              Management Reward: {props.managementReward}%
+            </List.Header>
+          </List.Content>
+        </List.Item>
+        <List.Item as="a">
+          <Icon name="right triangle" />
+          <List.Content>
+            <List.Header>
+              Performance Reward: {props.performanceReward}%
+            </List.Header>
+          </List.Content>
+        </List.Item>
+        <Divider />
+        <List.Item as="a">
+          <Icon name="right triangle" />
+          <List.Content>
+            <List.Header>
+              Unclaimed rewards: {props.unclaimedRewards} MLN
+            </List.Header>
           </List.Content>
         </List.Item>
         <List.Item as="a">
