@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import Web3 from "web3";
-import { setup, getConfig } from "@melonproject/melon.js";
+import { setup, getConfig, getBalance } from "@melonproject/melon.js";
 import store from "./redux/store";
 import "./index.css";
 import App from "./App";
@@ -28,6 +28,8 @@ window.addEventListener("load", () => {
   getConfig().then(res => {
     console.log("melon.js config ", res);
   });
+
+  window.getBalance = getBalance;
 
   // Now you can start your app & access web3 freely:
   ReactDOM.render(

@@ -8,7 +8,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onRequest: () => {
-    console.log("Inside onrequest");
     dispatch(creators.requestInformations());
   },
   onUpdate: event => {

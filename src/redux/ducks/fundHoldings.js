@@ -46,10 +46,10 @@ export const types = {
 
 export const creators = {
   requestHoldings: () => ({
-    type: types.REQUEST_INFORMATIONS,
+    type: types.REQUEST_HOLDINGS,
   }),
   updateHoldings: newValues => ({
-    type: types.UPDATE_INFORMATIONS,
+    type: types.UPDATE_HOLDINGS,
     ...newValues,
   }),
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Card, Icon, Divider, Button } from "semantic-ui-react";
+import { List, Card, Icon, Divider } from "semantic-ui-react";
 
 const Factsheet = props =>
   (<Card centered>

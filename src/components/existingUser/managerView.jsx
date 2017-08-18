@@ -1,9 +1,10 @@
 import React from "react";
 import { Card } from "semantic-ui-react";
 import FactsheetContainer from "../../redux/containers/factsheet";
+import FundHoldingsContainer from "../../redux/containers/fundHoldings";
+
 import FundActivity from "./fundActivity";
 import TradingActivity from "./tradingActivity";
-import FundHoldings from "./fundHoldings";
 import Trade from "./trade";
 import TradeHelper from "./tradeHelper";
 import OrderBook from "./orderbook";
@@ -25,7 +26,7 @@ const ManagerView = () =>
     <div>
       <br />
       <br />
-      <FundHoldings />
+      <FundHoldingsContainer />
     </div>
     <br />
     <br />

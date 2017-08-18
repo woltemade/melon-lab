@@ -1,4 +1,4 @@
-import { setup, performCalculations } from "@melonproject/melon.js";
+import { performCalculations } from "@melonproject/melon.js";
 import { types, creators } from "../ducks/factsheet";
 
 const factsheetMiddleware = store => next => action => {
@@ -20,8 +20,6 @@ const factsheetMiddleware = store => next => action => {
               unclaimedRewards: response.unclaimedRewards.toNumber(),
             }),
           );
-
-          // ();
         })
         .catch(err => {
           throw err;
