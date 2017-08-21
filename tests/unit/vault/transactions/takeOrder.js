@@ -1,7 +1,7 @@
 import contract from "truffle-contract";
 import BigNumber from "bignumber.js";
 
-import takeOrder from "../../../../lib/exchange/transactions/takeOrder";
+import takeOrder from "../../../../lib/vault/transactions/takeOrder";
 
 /* eslint-disable global-require */
 jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
