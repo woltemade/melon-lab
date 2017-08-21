@@ -6,7 +6,6 @@ jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
 
 test("getBalance", async () => {
   const result = await getBalance("ETH-T", "0x1");
-
   expect(result).toBeTruthy();
   expect(result.toNumber()).toBe(10);
   expect(contract).toHaveBeenCalledTimes(1);
