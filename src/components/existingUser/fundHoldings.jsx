@@ -18,8 +18,8 @@ const FundHoldings = props =>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {props.assets.map(asset =>
-          (<Table.Row>
+        {props.assets.map((asset, i) =>
+          (<Table.Row key={i}>
             <Table.Cell>
               {asset}
             </Table.Cell>

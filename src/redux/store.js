@@ -1,4 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import general from "./ducks/general";
 import setup from "./ducks/setup";
 import invest from "./ducks/invest";
 import factsheet from "./ducks/factsheet";
@@ -11,6 +12,7 @@ import fundHoldingsMiddleware from "./middlewares/fundHoldings";
 
 export default createStore(
   combineReducers({
+    general,
     setup,
     invest,
     factsheet,
