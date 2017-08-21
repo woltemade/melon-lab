@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import setup from "./ducks/setup";
 import invest from "./ducks/invest";
 import factsheet from "./ducks/factsheet";
-import fundholdings from "./ducks/fundHoldings";
+import fundHoldings from "./ducks/fundHoldings";
 
 import setupMiddleware from "./middlewares/setup";
 import investMiddleware from "./middlewares/invest";
@@ -14,7 +14,7 @@ export default createStore(
     setup,
     invest,
     factsheet,
-    fundholdings,
+    fundHoldings,
   }),
   {
     /* preloadedState */
