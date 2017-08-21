@@ -12,11 +12,6 @@ const mapDispatchToProps = dispatch => ({
     console.log("Inside onRequest for fund holdings");
     dispatch(creators.requestHoldings());
   },
-  // onUpdate: event => {
-  //   dispatch(
-  //     creators.updateHoldings({ [event.target.name]: event.target.value }),
-  //   );
-  // },
 });
 
 const FundHoldingsContainer = connect(mapStateToProps, mapDispatchToProps)(
