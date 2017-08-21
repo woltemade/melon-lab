@@ -1,8 +1,11 @@
 export const initialState = {
+  buyOrders: [],
+  sellOrders: [],
   orders: [],
 };
 
 export const types = {
+  REQUEST_ORDERBOOK: "REQUEST_ORDERBOOK:orderbook:melon.network",
   UPDATE_ORDERBOOK: "UPDATE_ORDERBOOK:orderbook:melon.network",
 };
 

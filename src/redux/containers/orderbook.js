@@ -7,8 +7,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onRequest: () => {
-    dispatch(creators.requestOrderbook());
+  onRequest: assetPair => {
+    dispatch(creators.requestOrderbook(assetPair));
   },
 });
 
