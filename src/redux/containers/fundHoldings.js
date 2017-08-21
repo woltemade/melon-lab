@@ -4,6 +4,7 @@ import { creators } from "../ducks/fundHoldings";
 
 const mapStateToProps = state => ({
   ...state.fundHoldings,
+  ...state.factsheet,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -18,7 +18,7 @@ const FundHoldings = props =>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {props.assets.map((asset, i) =>
+        {props.assets.map(asset =>
           (<Table.Row>
             <Table.Cell>
               {asset}
@@ -26,7 +26,9 @@ const FundHoldings = props =>
             <Table.Cell>
               {props[asset]}
             </Table.Cell>
-            <Table.Cell>29.57</Table.Cell>
+            <Table.Cell>
+              {props[asset] / props.aum * 100}
+            </Table.Cell>
             <Table.Cell>0</Table.Cell>
             <Table.Cell>Buy/Sell</Table.Cell>
           </Table.Row>),
