@@ -12,7 +12,7 @@
     "npm": "^5.0.0"
   },
   "scripts": {
-    "pretest": "npm run lint --silent && npm run build && npm run depcheck",
+    "pretest": "npm run build && npm run lint --silent && npm run depcheck",
     "test": "npm run jest",
     "jest": "jest",
     "jest:watch": "jest --watch",

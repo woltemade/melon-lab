@@ -1,4 +1,3 @@
-import contract from "truffle-contract";
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
 
 /* eslint-disable global-require */
