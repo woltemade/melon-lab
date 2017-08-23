@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/main.js",
   "sign-git-tag": true,
@@ -12,7 +12,7 @@
     "npm": "^5.0.0"
   },
   "scripts": {
-    "pretest": "npm run lint --silent && npm run build && npm run depcheck",
+    "pretest": "npm run build && npm run lint --silent && npm run depcheck",
     "test": "npm run jest",
     "jest": "jest",
     "jest:watch": "jest --watch",
@@ -31,17 +31,30 @@
     "depcheck:json": "depcheck --ignores=husky --json"
   },
   "lint-staged": {
-    "*.js": ["npm run format", "git add"]
+    "*.js": [
+      "npm run format",
+      "git add"
+    ]
   },
   "jest": {
-    "testMatch": ["**/tests/unit/**/*.js?(x)"],
-    "setupFiles": ["./tests/utils/setup.js"]
+    "testMatch": [
+      "**/tests/unit/**/*.js?(x)"
+    ],
+    "setupFiles": [
+      "./tests/utils/setup.js"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/melonproject/melon.js.git"
   },
-  "keywords": ["melon", "melonproject", "javascript", "ethereum", "api"],
+  "keywords": [
+    "melon",
+    "melonproject",
+    "javascript",
+    "ethereum",
+    "api"
+  ],
   "author": "Simon Emanuel Schmid <simon@melonport.com>",
   "license": "GPL-3.0",
   "bugs": {
