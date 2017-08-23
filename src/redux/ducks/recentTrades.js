@@ -1,5 +1,5 @@
 export const initialState = {
-  trades: [],
+  recentTrades: [],
 };
 
 export const types = {
