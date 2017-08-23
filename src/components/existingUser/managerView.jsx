@@ -3,12 +3,12 @@ import { Card } from "semantic-ui-react";
 import FactsheetContainer from "../../redux/containers/factsheet";
 import FundHoldingsContainer from "../../redux/containers/fundHoldings";
 import OrderbookContainer from "../../redux/containers/orderbook";
+import RecentTradesContainer from "../../redux/containers/recentTrades";
 
 import FundActivity from "./fundActivity";
 import TradingActivity from "./tradingActivity";
 import Trade from "./trade";
 import TradeHelper from "./tradeHelper";
-import RecentTrades from "./recentTrades";
 import Settings from "./settings";
 import Statistics from "./statistics";
 import Participation from "./participation";
@@ -45,7 +45,7 @@ const ManagerView = () =>
     <br />
     <br />
     <br />
-    <RecentTrades />
+    <RecentTradesContainer />
     <br />
     <br />
     <br />

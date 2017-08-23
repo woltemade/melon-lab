@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
 
-const RecentTrades = () =>
+const RecentTrades = props =>
   (<div>
     <p className="App-intro">Recent trades for MLN/ETH</p>
     <Table celled>
@@ -9,12 +9,26 @@ const RecentTrades = () =>
         <Table.Row>
           <Table.HeaderCell>Time</Table.HeaderCell>
           <Table.HeaderCell>Type</Table.HeaderCell>
-          <Table.HeaderCell>Price (MLN/XBT)</Table.HeaderCell>
-          <Table.HeaderCell>Amount (XBT)</Table.HeaderCell>
+          <Table.HeaderCell>Price (MLN/ETH)</Table.HeaderCell>
+          <Table.HeaderCell>Amount (ETH)</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        <Table.Row>
+        {props.recentTrades.map((trade, i) =>
+          (<Table.Row key={i}>
+            <Table.Cell>TIME PLACEHOLDER</Table.Cell>
+            <Table.Cell>
+              {trade.type}
+            </Table.Cell>
+            <Table.Cell>
+              {trade.price}
+            </Table.Cell>
+            <Table.Cell>
+              {trade.quantity}
+            </Table.Cell>
+          </Table.Row>),
+        )}
+        {/* <Table.Row>
           <Table.Cell>10.8.2017 15:42:44</Table.Cell>
           <Table.Cell>buy</Table.Cell>
           <Table.Cell>0.1120</Table.Cell>
@@ -31,7 +45,7 @@ const RecentTrades = () =>
           <Table.Cell>sell</Table.Cell>
           <Table.Cell>0.1070</Table.Cell>
           <Table.Cell>0.7007</Table.Cell>
-        </Table.Row>
+        </Table.Row> */}
       </Table.Body>
     </Table>
   </div>);

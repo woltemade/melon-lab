@@ -11,7 +11,15 @@ const recentTradesMiddleware = store => next => action => {
       const baseTokenSymbol = params.assetPair.split("/")[0];
       const quoteTokenSymbol = params.assetPair.split("/")[1];
 
-      getRecentTrades(baseTokenSymbol, quoteTokenSymbol).then(recentTrades => {
+      getRecentTrades(
+        baseTokenSymbol,
+        quoteTokenSymbol,
+        7,
+      ).then(recentTrades => {
+        recentTrades.map(trade => {
+          trade.price = trade.price.toNumber();
+          trade.quantity = trade.quantity.toNumber();
+        });
         store.dispatch(creators.updateRecentTrades({ recentTrades }));
       });
       break;
