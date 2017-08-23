@@ -33,13 +33,13 @@ window.addEventListener("load", () => {
     console.log("melon.js config ", res);
   });
 
-  window.getBalance = getBalance;
+  // Now you can start your app & access web3 freely:
 
-  // dispatching on startup actions to get initial data
-  store.dispatch(orderbookCreators.requestOrderbook("ETH-T/MLN-T"));
+  // Dispatching on startup actions to get initial data
+  store.dispatch(orderbookCreators.requestOrderbook("MLN-T/ETH-T"));
   store.dispatch(factsheetCreators.requestInformations());
   store.dispatch(fundHoldingsCreators.requestHoldings());
-  // Now you can start your app & access web3 freely:
+
   ReactDOM.render(
     <Provider store={store}>
       <App />
