@@ -140,7 +140,7 @@ By interacting with the smart contracts, we have 2 levels of testing:
   directory reflects the structure of the lib directory.
 - `tests/integration/` Integration tests: Interact with real smart contracts.
   Be careful with those: They try to connect to a real node that you need to
-  provide.
+  provide. `parity --chain kovan` is sufficient.
 
 
 [gitter-badge]: https://img.shields.io/gitter/room/melonproject/general.js.svg?style=flat-square
