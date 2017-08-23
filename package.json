@@ -13,8 +13,10 @@
   },
   "scripts": {
     "pretest": "npm run build && npm run lint --silent && npm run depcheck",
-    "test": "npm run jest:unit",
-    "jest:unit": "jest --config tests/unit/jest.config.json --coverage",
+    "test": "npm run jest",
+    "test:unit": "npm run jest",
+    "test:integration": "npm run jasemine",
+    "jest": "jest --config tests/unit/jest.config.json --coverage",
     "jest:watch": "jest --config tests/unit/jest.config.json --watch",
     "jasemine": "babel-node tests/integration/run",
     "babel": "babel lib -d build",

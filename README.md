@@ -134,13 +134,14 @@ to the contracts. But you can be certain: Transactions are free.
 
 By interacting with the smart contracts, we have 2 levels of testing:
 
-- `tests/unit/` Unit-tests: Each function as isolated as possible with mocks.
+- `tests/unit/` Jest Unit-tests: Each function as isolated as possible with mocks.
   We are not super strict here and allow that one unit depends on another as
   long as the interaction with the smart contracts is mocked. The unit test
   directory reflects the structure of the lib directory.
-- `tests/integration/` Integration tests: Interact with real smart contracts.
+- `tests/integration/` Jasemine Integration tests: Interact with real smart contracts.
   Be careful with those: They try to connect to a real node that you need to
   provide. `parity --chain kovan` is sufficient.
+- `tests/shared/` Shared expectations. Since Jest & Jasemine have very similar syntax, some test-expectations (`expect(asdf).to...`) can be isolated in separate functions and shared.
 
 
 [gitter-badge]: https://img.shields.io/gitter/room/melonproject/general.js.svg?style=flat-square

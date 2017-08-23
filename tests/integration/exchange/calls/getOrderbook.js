@@ -1,7 +1,10 @@
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
+import orderbookTest from "../../../shared/exchange/calls/orderbookTest";
 
 it("getOrderbook", async () => {
   const assetPairArray = ["MLN-T", "ETH-T"];
   const orderbook = await getOrderbook(...assetPairArray);
-  console.log(orderbook);
+  expect(orderbook.length).toBeGreaterThan(0);
+
+  orderbookTest(orderbook, assetPairArray);
 });
