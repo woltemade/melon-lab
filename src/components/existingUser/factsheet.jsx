@@ -5,9 +5,6 @@ const Factsheet = props =>
   (<Card centered>
     <Card.Content>
       <Card.Header>
-        <strong>
-          {props.onRequest()}
-        </strong>
         <strong>μέλλω Capital </strong>
       </Card.Header>
       <br />

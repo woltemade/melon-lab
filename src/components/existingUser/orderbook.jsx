@@ -4,9 +4,9 @@ import { Table } from "semantic-ui-react";
 const OrderBook = props =>
   (<div>
     <p className="App-intro">Orderbook for MLN/ETH</p>
-    <strong>
+    {/* <strong>
       {props.onRequest("ETH-T/MLN-T")}
-    </strong>
+    </strong> */}
     <Table celled>
       <Table.Header>
         <Table.Row>

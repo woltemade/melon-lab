@@ -4,9 +4,6 @@ import { Table } from "semantic-ui-react";
 const FundHoldings = props =>
   (<div>
     <p className="App-intro">Fund Holdings</p>
-    <strong>
-      {props.onRequest()}
-    </strong>
     <Table celled size={"small"}>
       <Table.Header>
         <Table.Row>

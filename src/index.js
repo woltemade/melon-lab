@@ -8,6 +8,10 @@ import "./index.css";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 
+import { creators as orderbookCreators } from "./redux/ducks/orderbook";
+import { creators as factsheetCreators } from "./redux/ducks/factsheet";
+import { creators as fundHoldingsCreators } from "./redux/ducks/fundHoldings";
+
 window.addEventListener("load", () => {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== "undefined") {
@@ -31,6 +35,10 @@ window.addEventListener("load", () => {
 
   window.getBalance = getBalance;
 
+  // dispatching on startup actions to get initial data
+  store.dispatch(orderbookCreators.requestOrderbook("ETH-T/MLN-T"));
+  store.dispatch(factsheetCreators.requestInformations());
+  store.dispatch(fundHoldingsCreators.requestHoldings());
   // Now you can start your app & access web3 freely:
   ReactDOM.render(
     <Provider store={store}>
