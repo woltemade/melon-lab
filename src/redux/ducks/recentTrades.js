@@ -3,17 +3,17 @@ export const initialState = {
 };
 
 export const types = {
-  REQUEST_RECENTTRADES: "REQUEST_TRADES:recentTrades:melon.network",
-  UPDATE_RECENTTRADES: "UPDATE_RECENTTRADES:recentTrades:melon.network",
+  REQUEST_RECENT_TRADES: "REQUEST_RECENT_TRADES:recentTrades:melon.network",
+  UPDATE_RECENT_TRADES: "UPDATE_RECENT_TRADES:recentTrades:melon.network",
 };
 
 export const creators = {
   requestRecentTrades: assetPair => ({
-    type: types.REQUEST_TRADES,
+    type: types.REQUEST_RECENT_TRADES,
     assetPair,
   }),
   updateRecentTrades: newValues => ({
-    type: types.UPDATE_TRADES,
+    type: types.UPDATE_RECENT_TRADES,
     ...newValues,
   }),
 };
@@ -22,13 +22,13 @@ export const reducer = (state = initialState, action) => {
   const { type, ...params } = action;
 
   switch (type) {
-    case types.REQUEST_TRADES: {
+    case types.REQUEST_RECENT_TRADES: {
       return {
         ...state,
         ...params,
       };
     }
-    case types.UPDATE_TRADES: {
+    case types.UPDATE_RECENT_TRADES: {
       return {
         ...state,
         ...params,

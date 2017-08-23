@@ -11,6 +11,7 @@ import registerServiceWorker from "./registerServiceWorker";
 import { creators as orderbookCreators } from "./redux/ducks/orderbook";
 import { creators as factsheetCreators } from "./redux/ducks/factsheet";
 import { creators as fundHoldingsCreators } from "./redux/ducks/fundHoldings";
+import { creators as recentTradesCreators } from "./redux/ducks/recentTrades";
 
 window.addEventListener("load", () => {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
@@ -39,6 +40,7 @@ window.addEventListener("load", () => {
   store.dispatch(orderbookCreators.requestOrderbook("MLN-T/ETH-T"));
   store.dispatch(factsheetCreators.requestInformations());
   store.dispatch(fundHoldingsCreators.requestHoldings());
+  store.dispatch(recentTradesCreators.requestRecentTrades("MLN-T/ETH-T"));
 
   ReactDOM.render(
     <Provider store={store}>
