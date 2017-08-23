@@ -132,7 +132,7 @@ to the contracts. But you can be certain: Transactions are free.
 
 ## `testing`
 
-By interacting with the smart contracts, we have 3 levels of testing:
+By interacting with the smart contracts, we have 2 levels of testing:
 
 - `tests/unit/` Unit-tests: Each function as isolated as possible with mocks.
   We are not super strict here and allow that one unit depends on another as

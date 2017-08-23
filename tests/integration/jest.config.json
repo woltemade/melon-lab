@@ -1,0 +1,4 @@
+{
+  "testMatch": ["**/tests/integration/*/**/*.js?(x)"],
+  "setupFiles": ["./jest.setup.js"]
+}
