@@ -15,13 +15,15 @@ const recentTradesMiddleware = store => next => action => {
         baseTokenSymbol,
         quoteTokenSymbol,
         7,
-      ).then(recentTrades => {
-        recentTrades.map(trade => {
+      ).then(rawRecentTrades => {
+        const recentTrades = rawRecentTrades.map(trade => {
           trade.price = trade.price.toNumber();
           trade.quantity = trade.quantity.toNumber();
+          return trade;
         });
         store.dispatch(creators.updateRecentTrades({ recentTrades }));
       });
+
       break;
     }
     default:
