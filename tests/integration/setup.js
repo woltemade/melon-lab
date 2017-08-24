@@ -7,6 +7,7 @@ try {
   setup.init({
     web3,
     daemonAddress: "0x00360d2b7d240ec0643b6d819ba81a09e40e5bcd",
+    defaultAccount: "0x00360d2b7d240ec0643b6d819ba81a09e40e5bcd",
   });
 } catch (e) {
   console.error(

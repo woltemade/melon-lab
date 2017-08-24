@@ -3,5 +3,6 @@
   "spec_files": ["*/**/*.js"],
   "stopSpecOnExpectationFailure": false,
   "helpers": ["setup.js"],
-  "random": false
+  "random": false,
+  "DEFAULT_TIMEOUT_INTERVAL": 30000
 }
