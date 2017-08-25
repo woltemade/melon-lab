@@ -10,6 +10,9 @@ const mapDispatchToProps = dispatch => ({
   prefill: order => {
     dispatch(creators.prefill(order));
   },
+  onChange: event => {
+    dispatch(creators.change({ [event.target.name]: event.target.value }));
+  },
 });
 
 const TradeContainer = connect(mapStateToProps, mapDispatchToProps)(Trade);

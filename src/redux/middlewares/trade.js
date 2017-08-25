@@ -39,8 +39,16 @@ const tradeMiddleware = store => next => action => {
           ? cumulatedVolumes.sell / cumulatedVolumes.buy
           : cumulatedVolumes.buy / cumulatedVolumes.sell;
 
+      const total = averagePrice * params.selectedOrder.cumulativeVolume;
       console.log("Average price ", averagePrice);
-
+      console.log("Total ", total);
+      store.dispatch(
+        creators.change({
+          amount: params.selectedOrder.cumulativeVolume,
+          price: averagePrice,
+          total,
+        }),
+      );
       break;
     }
     default:

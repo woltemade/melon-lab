@@ -1,7 +1,7 @@
 import React from "react";
 import { List, Input, Button, Card } from "semantic-ui-react";
 
-const Trade = () =>
+const Trade = props =>
   (<Card centered>
     <Card.Content>
       <Card.Header>Place an order</Card.Header>
@@ -19,17 +19,17 @@ const Trade = () =>
       <List>
         <List.Item as="a">
           <List.Content>
-            <Input placeholder="Amount" />
+            <Input name="price" placeholder="Price" value={props.price} />
           </List.Content>
         </List.Item>
         <List.Item as="a">
           <List.Content>
-            <Input placeholder="Price" />
+            <Input name="amount" placeholder="Amount" value={props.amount} />
           </List.Content>
         </List.Item>
         <List.Item as="a">
           <List.Content>
-            <Input placeholder="Total" />
+            <Input name="total" placeholder="Total" value={props.total} />
           </List.Content>
         </List.Item>
       </List>
