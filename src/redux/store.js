@@ -6,6 +6,7 @@ import factsheet from "./ducks/factsheet";
 import fundHoldings from "./ducks/fundHoldings";
 import orderbook from "./ducks/orderbook";
 import recentTrades from "./ducks/recentTrades";
+import trade from "./ducks/trade";
 
 import setupMiddleware from "./middlewares/setup";
 import investMiddleware from "./middlewares/invest";
@@ -13,6 +14,7 @@ import factsheetMiddleware from "./middlewares/factsheet";
 import fundHoldingsMiddleware from "./middlewares/fundHoldings";
 import orderbookMiddleware from "./middlewares/orderbook";
 import recentTradesMiddleware from "./middlewares/recentTrades";
+import tradeMiddleware from "./middlewares/trade";
 
 export default createStore(
   combineReducers({
@@ -23,6 +25,7 @@ export default createStore(
     fundHoldings,
     orderbook,
     recentTrades,
+    trade,
   }),
   {
     /* preloadedState */
@@ -35,6 +38,7 @@ export default createStore(
       fundHoldingsMiddleware,
       orderbookMiddleware,
       recentTradesMiddleware,
+      tradeMiddleware,
     ),
     /* eslint-disable no-underscore-dangle */
     window.__REDUX_DEVTOOLS_EXTENSION__

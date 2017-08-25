@@ -14,7 +14,7 @@ const OrderBook = props =>
       </Table.Header>
       <Table.Body>
         {props.buyOrders.map((order, i) =>
-          (<Table.Row key={i}>
+          (<Table.Row key={i} onClick={() => props.onClick(order)}>
             <Table.Cell>
               {order.cumulativeVolume}
             </Table.Cell>
@@ -38,7 +38,7 @@ const OrderBook = props =>
       </Table.Header>
       <Table.Body>
         {props.sellOrders.map((order, i) =>
-          (<Table.Row key={i}>
+          (<Table.Row key={i} onClick={() => props.onClick(order)}>
             <Table.Cell>
               {order.price}
             </Table.Cell>

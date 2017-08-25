@@ -4,10 +4,10 @@ import FactsheetContainer from "../../redux/containers/factsheet";
 import FundHoldingsContainer from "../../redux/containers/fundHoldings";
 import OrderbookContainer from "../../redux/containers/orderbook";
 import RecentTradesContainer from "../../redux/containers/recentTrades";
+import TradeContainer from "../../redux/containers/trade";
 
 import FundActivity from "./fundActivity";
 import TradingActivity from "./tradingActivity";
-import Trade from "./trade";
 import TradeHelper from "./tradeHelper";
 import Settings from "./settings";
 import Statistics from "./statistics";
@@ -33,7 +33,7 @@ const ManagerView = () =>
     <br />
     <div>
       <Card.Group>
-        <Trade />
+        <TradeContainer />
         <TradeHelper />
       </Card.Group>
     </div>
