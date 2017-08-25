@@ -12,8 +12,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(creators.requestOrderbook(assetPair));
   },
   onClick: order => {
-    console.log("Click order: ", order);
-    dispatch(tradeCreators.change({ selectedOrder: order }));
+    dispatch(tradeCreators.prefill({ selectedOrder: order }));
   },
 });
 

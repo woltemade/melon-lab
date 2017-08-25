@@ -9,7 +9,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onRequest: () => {
-    console.log("Inside onRequest for fund holdings");
     dispatch(creators.requestHoldings());
   },
 });
