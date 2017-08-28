@@ -9,6 +9,7 @@ export const initialState = {
 export const types = {
   PREFILL: "PREFILL:trade:melon.network",
   CHANGE: "CHANGE:trade:melon.network",
+  UPDATE: "UPDATE:trade:melon.network",
 };
 
 export const creators = {
@@ -18,6 +19,10 @@ export const creators = {
   }),
   change: newValues => ({
     type: types.CHANGE,
+    ...newValues,
+  }),
+  update: newValues => ({
+    type: types.UPDATE,
     ...newValues,
   }),
 };
@@ -33,6 +38,12 @@ export const reducer = (state = initialState, action) => {
       };
     }
     case types.CHANGE: {
+      return {
+        ...state,
+        ...params,
+      };
+    }
+    case types.UPDATE: {
       return {
         ...state,
         ...params,

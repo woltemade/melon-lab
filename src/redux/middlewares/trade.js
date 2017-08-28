@@ -4,6 +4,7 @@ import { types, creators } from "../ducks/trade";
 
 const tradeMiddleware = store => next => action => {
   const { type, ...params } = action;
+  const currentState = store.getState().trade;
 
   switch (type) {
     case types.PREFILL: {
@@ -37,13 +38,26 @@ const tradeMiddleware = store => next => action => {
       const price = average.toNumber().toFixed(4);
 
       store.dispatch(
-        creators.change({
+        creators.update({
           amount,
           price,
           total,
         }),
       );
 
+      break;
+    }
+    case types.CHANGE: {
+      let amount;
+      let total;
+
+      if (params.amount) {
+        total = params.amount * currentState.price;
+        store.dispatch(creators.update({ amount: params.amount, total }));
+      } else if (params.total) {
+        amount = params.total / currentState.price;
+        store.dispatch(creators.update({ amount, total: params.total }));
+      }
       break;
     }
     default:

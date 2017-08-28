@@ -19,17 +19,33 @@ const Trade = props =>
       <List>
         <List.Item as="a">
           <List.Content>
-            <Input name="price" placeholder="Price" value={props.price} />
+            <Input
+              readOnly
+              name="price"
+              placeholder="Price"
+              value={props.price}
+              onChange={props.onChange}
+            />
           </List.Content>
         </List.Item>
         <List.Item as="a">
           <List.Content>
-            <Input name="amount" placeholder="Amount" value={props.amount} />
+            <Input
+              name="amount"
+              placeholder="Amount"
+              value={props.amount}
+              onChange={props.onChange}
+            />
           </List.Content>
         </List.Item>
         <List.Item as="a">
           <List.Content>
-            <Input name="total" placeholder="Total" value={props.total} />
+            <Input
+              name="total"
+              placeholder="Total"
+              value={props.total}
+              onChange={props.onChange}
+            />
           </List.Content>
         </List.Item>
       </List>
