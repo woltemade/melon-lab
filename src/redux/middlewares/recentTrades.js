@@ -17,8 +17,8 @@ const recentTradesMiddleware = store => next => action => {
         7,
       ).then(rawRecentTrades => {
         const recentTrades = rawRecentTrades.map(trade => {
-          trade.price = trade.price.toNumber();
-          trade.quantity = trade.quantity.toNumber();
+          trade.price = trade.price.toString();
+          trade.quantity = trade.quantity.toString();
           return trade;
         });
         store.dispatch(creators.updateRecentTrades({ recentTrades }));

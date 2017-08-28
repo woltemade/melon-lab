@@ -12,12 +12,13 @@ const orderbookMiddleware = store => next => action => {
       const baseTokenSymbol = params.assetPair.split("/")[0];
       const quoteTokenSymbol = params.assetPair.split("/")[1];
       getOrderbook(baseTokenSymbol, quoteTokenSymbol).then(orderbook => {
+        store.dispatch(creators.updateOrderbook({ orders: orderbook }));
         const formattedOrderbook = orderbook.map(order => {
           const result = order;
-          result.price = order.price.toNumber();
-          result.cumulativeVolume = order.cumulativeVolume.toNumber();
-          result.buy.howMuch = order.buy.howMuch.toNumber();
-          result.sell.howMuch = order.sell.howMuch.toNumber();
+          result.price = order.price.toString();
+          result.cumulativeVolume = order.cumulativeVolume.toString();
+          result.buy.howMuch = order.buy.howMuch.toString();
+          result.sell.howMuch = order.sell.howMuch.toString();
           return result;
         });
         const sellOrders = formattedOrderbook
