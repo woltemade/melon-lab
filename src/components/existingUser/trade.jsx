@@ -52,7 +52,7 @@ const Trade = props =>
     </Card.Content>
     <Card.Content extra>
       <div className="ui two buttons">
-        <Button basic color="black">
+        <Button basic color="black" onClick={props.placeOrder}>
           Buy
         </Button>
       </div>

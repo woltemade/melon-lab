@@ -10,6 +10,7 @@ export const types = {
   PREFILL: "PREFILL:trade:melon.network",
   CHANGE: "CHANGE:trade:melon.network",
   UPDATE: "UPDATE:trade:melon.network",
+  PLACE_ORDER: "PLACE_ORDER:trade:melon.network",
 };
 
 export const creators = {
@@ -24,6 +25,9 @@ export const creators = {
   update: newValues => ({
     type: types.UPDATE,
     ...newValues,
+  }),
+  placeOrder: () => ({
+    type: types.PLACE_ORDER,
   }),
 };
 
@@ -47,6 +51,11 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         ...params,
+      };
+    }
+    case types.PLACE_ORDER: {
+      return {
+        ...state,
       };
     }
     default:

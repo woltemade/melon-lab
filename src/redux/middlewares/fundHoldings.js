@@ -9,7 +9,7 @@ const fundHoldingsMiddleware = store => next => action => {
   switch (type) {
     case types.REQUEST_HOLDINGS: {
       currentState.assets.forEach(asset => {
-        getBalance(asset, "0x10d19f7fb1c5df1adf27269c0c01589c76ee3531")
+        getBalance(asset, "0xac11c203248bb8bb5e49b37cd51b43a82620d9c9")
           .then(balance => {
             store.dispatch(
               creators.updateHoldings({
