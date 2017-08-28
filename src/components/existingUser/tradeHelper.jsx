@@ -1,14 +1,16 @@
 import React from "react";
 import { List, Card, Icon, Divider } from "semantic-ui-react";
 
-const TradeHelper = () =>
+const TradeHelper = props =>
   (<Card centered>
     <Card.Content>
       <Card.Header>Overview</Card.Header>
       <br />
       <br />
       <Card.Meta>
-        <strong>XBT/MLN</strong>
+        <strong>
+          {props.assetPair}
+        </strong>
       </Card.Meta>
       <br />
       <List>
@@ -40,13 +42,17 @@ const TradeHelper = () =>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>XBT Balance: 0</List.Header>
+            <List.Header>
+              {props.baseTokenSymbol} Balance: {props.baseTokenBalance}
+            </List.Header>
           </List.Content>
         </List.Item>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>MLN Balance: 207</List.Header>
+            <List.Header>
+              {props.quoteTokenSymbol} Balance: {props.quoteTokenBalance}
+            </List.Header>
           </List.Content>
         </List.Item>
       </List>

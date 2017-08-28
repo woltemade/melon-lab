@@ -1,19 +1,24 @@
 export const initialState = {
   vaultAddress: "",
   managerAddress: "",
-  assetPair: "ETH-T/MLN-T",
-  baseTokenSymbol: "ETH-T",
-  quoteTokenSymbol: "MLN-T",
+  assetPair: "MLN-T/ETH-T",
+  baseTokenSymbol: "MLN-T",
+  quoteTokenSymbol: "ETH-T",
 };
 
 export const types = {
   UPDATE: "UPDATE:general:melon.network",
+  UPDATE_ASSET_PAIR: "UPDATE_ASSET_PAIR:general:melon.network",
 };
 
 export const creators = {
   update: newValues => ({
     type: types.UPDATE,
     ...newValues,
+  }),
+  updateAssetPair: newAssetPair => ({
+    type: types.UPDATE_ASSET_PAIR,
+    newAssetPair,
   }),
 };
 
@@ -25,6 +30,14 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         ...params,
+      };
+    }
+    case types.UPDATE_ASSET_PAIR: {
+      return {
+        ...state,
+        assetPair: params.newAssetPair,
+        baseTokenSymbol: params.newAssetPair.split("/")[0],
+        quoteTokenSymbol: params.assetPair.split("/")[1],
       };
     }
     default:

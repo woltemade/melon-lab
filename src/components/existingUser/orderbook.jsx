@@ -3,7 +3,9 @@ import { Table } from "semantic-ui-react";
 
 const OrderBook = props =>
   (<div>
-    <p className="App-intro">Orderbook for MLN/ETH</p>
+    <p className="App-intro">
+      Orderbook for {props.assetPair}
+    </p>
     <Table celled>
       <Table.Header>
         <Table.Row>

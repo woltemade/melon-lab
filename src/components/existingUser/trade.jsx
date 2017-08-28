@@ -8,12 +8,12 @@ const Trade = props =>
       <br />
       <br />
       <Card.Meta>
-        Buy <strong>XBT</strong>
+        Buy <strong>{props.baseTokenSymbol}</strong>
       </Card.Meta>
       <i className="shuffle icon" />
 
       <Card.Meta>
-        Sell <strong>MLN</strong>
+        Sell <strong>{props.quoteTokenSymbol}</strong>
       </Card.Meta>
       <br />
       <List>

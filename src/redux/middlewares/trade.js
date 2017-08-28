@@ -36,12 +36,11 @@ const tradeMiddleware = store => next => action => {
 
       const total = average
         .times(new BigNumber(params.selectedOrder.cumulativeVolume))
-        .toNumber()
-        .toFixed(4);
-      const amount = new BigNumber(params.selectedOrder.cumulativeVolume)
-        .toNumber()
-        .toFixed(4);
-      const price = average.toNumber().toFixed(4);
+        .toString();
+      const amount = new BigNumber(
+        params.selectedOrder.cumulativeVolume,
+      ).toString();
+      const price = average.toString();
 
       store.dispatch(
         creators.update({

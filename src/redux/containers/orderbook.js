@@ -4,6 +4,7 @@ import { creators } from "../ducks/orderbook";
 import { creators as tradeCreators } from "../ducks/trade";
 
 const mapStateToProps = state => ({
+  ...state.general,
   ...state.orderbook,
 });
 

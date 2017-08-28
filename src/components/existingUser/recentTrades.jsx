@@ -18,7 +18,7 @@ const RecentTrades = props =>
       <Table.Body>
         {props.recentTrades.map((trade, i) =>
           (<Table.Row key={i}>
-            <Table.Cell>TIME PLACEHOLDER</Table.Cell>
+            <Table.Cell>***Time Placeholder***</Table.Cell>
             <Table.Cell>
               {trade.type}
             </Table.Cell>
