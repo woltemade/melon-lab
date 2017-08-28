@@ -10,8 +10,17 @@ describe("Create fund, invest, take order, redeem", async () => {
     "createVault",
     async () => {
       shared.vault = await createVault(`test-${randomString()}`);
-      console.log(shared);
     },
-    300000,
+    30000,
   );
+
+  /*
+  await it(
+    "invest",
+    async () => {
+      shared;
+    },
+    30000,
+  );
+  */
 });

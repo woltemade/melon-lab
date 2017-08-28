@@ -139,9 +139,11 @@ By interacting with the smart contracts, we have 2 levels of testing:
   long as the interaction with the smart contracts is mocked. The unit test
   directory reflects the structure of the lib directory.
 - `tests/integration/` Jasemine Integration tests: Interact with real smart contracts.
-  Be careful with those: They try to connect to a real node that you need to
-  provide. `parity --chain kovan` is sufficient.
-- `tests/shared/` Shared expectations. Since Jest & Jasemine have very similar syntax, some test-expectations (`expect(asdf).to...`) can be isolated in separate functions and shared.
+  Be careful with those: They connect to a real unlocked node that you need to
+  provide: See [these instructions](https://github.com/melonproject/docs/blob/master/Software%20Architecture/hosting.md)
+- `tests/shared/` Shared expectations. Since Jest & Jasemine have very similar 
+  syntax, some test-expectations (`expect(asdf).to...`) can be isolated in 
+  separate functions and shared.
 
 
 [gitter-badge]: https://img.shields.io/gitter/room/melonproject/general.js.svg?style=flat-square
