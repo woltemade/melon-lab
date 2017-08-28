@@ -2,17 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import Web3 from "web3";
-import { setup, getConfig, getBalance } from "@melonproject/melon.js";
-import store from "./redux/store";
+import { setup, getConfig } from "@melonproject/melon.js";
+import store from "./store";
 import "./index.css";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 
-import { creators as orderbookCreators } from "./redux/ducks/orderbook";
-import { creators as factsheetCreators } from "./redux/ducks/factsheet";
-import { creators as fundHoldingsCreators } from "./redux/ducks/fundHoldings";
-import { creators as recentTradesCreators } from "./redux/ducks/recentTrades";
-import { creators as tradeHelperCreators } from "./redux/ducks/tradeHelper";
+import { creators as orderbookCreators } from "./components/orderbook/duck";
+import { creators as factsheetCreators } from "./components/factsheet/duck";
+import { creators as fundHoldingsCreators } from "./components/fundHoldings/duck";
+import { creators as recentTradesCreators } from "./components/recentTrades/duck";
+import { creators as tradeHelperCreators } from "./components/tradeHelper/duck";
 
 window.addEventListener("load", () => {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)

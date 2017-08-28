@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import TradeHelper from "../../components/existingUser/tradeHelper";
-import { creators } from "../ducks/tradeHelper";
+import TradeHelper from "./tradeHelper";
+import { creators } from "./duck";
 
 const mapStateToProps = state => ({
   ...state.general,

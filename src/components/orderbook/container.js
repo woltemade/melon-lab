@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
-import Orderbook from "../../components/existingUser/orderbook";
-import { creators } from "../ducks/orderbook";
-import { creators as tradeCreators } from "../ducks/trade";
+import Orderbook from "./orderbook";
+import { creators } from "./duck";
+import { creators as tradeCreators } from "../trade/duck";
 
 const mapStateToProps = state => ({
   ...state.general,

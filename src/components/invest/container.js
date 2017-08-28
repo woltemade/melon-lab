@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import Invest from "../../components/newUser/invest";
-import { creators } from "../ducks/invest";
+import Invest from "./invest";
+import { creators } from "./duck";
 
 const mapStateToProps = state => ({
   ...state.invest,

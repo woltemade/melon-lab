@@ -1,5 +1,5 @@
 import { performCalculations } from "@melonproject/melon.js";
-import { types, creators } from "../ducks/factsheet";
+import { types, creators } from "./duck";
 
 const factsheetMiddleware = store => next => action => {
   const { type, ...params } = action;

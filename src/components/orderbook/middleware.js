@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
 import { getOrderbook } from "@melonproject/melon.js";
-import { types, creators } from "../ducks/orderbook";
+import { types, creators } from "./duck";
 
 const orderbookMiddleware = store => next => action => {
   const { type, ...params } = action;

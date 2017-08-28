@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import ManagerView from "./components/existingUser/managerView";
-import SetupContainer from "./redux/containers/setup";
-import InvestContainer from "./redux/containers/invest";
+import ManagerView from "./components/managerView/managerView";
+import SetupContainer from "./components/setup/container";
+import InvestContainer from "./components/invest/container";
 
 import "./App.css";
 

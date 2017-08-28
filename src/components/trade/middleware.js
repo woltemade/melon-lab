@@ -6,7 +6,7 @@ import {
   takeMultipleOrders,
   getPrices,
 } from "@melonproject/melon.js";
-import { types, creators } from "../ducks/trade";
+import { types, creators } from "./duck";
 
 const tradeMiddleware = store => next => action => {
   const { type, ...params } = action;

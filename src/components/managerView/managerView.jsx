@@ -1,18 +1,17 @@
 import React from "react";
 import { Card } from "semantic-ui-react";
-import FactsheetContainer from "../../redux/containers/factsheet";
-import FundHoldingsContainer from "../../redux/containers/fundHoldings";
-import OrderbookContainer from "../../redux/containers/orderbook";
-import RecentTradesContainer from "../../redux/containers/recentTrades";
-import TradeContainer from "../../redux/containers/trade";
-import TradeHelperContainer from "../../redux/containers/tradeHelper";
+import FactsheetContainer from "../factsheet/container";
+import FundHoldingsContainer from "../fundHoldings/container";
+import OrderbookContainer from "../orderbook/container";
+import RecentTradesContainer from "../recentTrades/container";
+import TradeContainer from "../trade/container";
+import TradeHelperContainer from "../tradeHelper/container";
 
-import FundActivity from "./fundActivity";
-import TradingActivity from "./tradingActivity";
-import TradeHelper from "./tradeHelper";
-import Settings from "./settings";
-import Statistics from "./statistics";
-import Participation from "./participation";
+import FundActivity from "../fundActivity/fundActivity";
+import TradingActivity from "../tradingActivity/tradingActivity";
+import Settings from "../settings/settings";
+import Statistics from "../statistics/statistics";
+import Participation from "../participation/participation";
 
 const ManagerView = () =>
   (<div className="App">

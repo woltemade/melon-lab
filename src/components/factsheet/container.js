@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import Factsheet from "../../components/existingUser/factsheet";
-import { creators } from "../ducks/factsheet";
+import Factsheet from "./factsheet";
+import { creators } from "./duck";
 
 const mapStateToProps = state => ({
   ...state.factsheet,

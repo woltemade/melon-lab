@@ -1,5 +1,5 @@
 import { getRecentTrades } from "@melonproject/melon.js";
-import { types, creators } from "../ducks/recentTrades";
+import { types, creators } from "./duck";
 
 const recentTradesMiddleware = store => next => action => {
   const { type, ...params } = action;

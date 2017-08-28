@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import RecentTrades from "../../components/existingUser/recentTrades";
-import { creators } from "../ducks/recentTrades";
+import RecentTrades from "./recentTrades";
+import { creators } from "./duck";
 
 const mapStateToProps = state => ({
   ...state.recentTrades,

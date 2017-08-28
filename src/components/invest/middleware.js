@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
 import { subscribe } from "@melonproject/melon.js";
-import { types, creators } from "../ducks/invest";
+import { types, creators } from "./duck";
 
 const investMiddleware = store => next => action => {
   const { type, ...params } = action;

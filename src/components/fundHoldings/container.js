@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import FundHoldings from "../../components/existingUser/fundHoldings";
-import { creators } from "../ducks/fundHoldings";
+import FundHoldings from "./fundHoldings";
+import { creators } from "./duck";
 
 const mapStateToProps = state => ({
   ...state.fundHoldings,

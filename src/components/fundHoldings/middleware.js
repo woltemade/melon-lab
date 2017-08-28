@@ -1,5 +1,5 @@
 import { getBalance } from "@melonproject/melon.js";
-import { types, creators } from "../ducks/fundHoldings";
+import { types, creators } from "./duck";
 
 const fundHoldingsMiddleware = store => next => action => {
   const { type, ...params } = action;

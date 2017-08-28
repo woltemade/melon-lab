@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import Setup from "../../components/newUser/setup";
-import { creators } from "../ducks/setup";
+import Setup from "./setup";
+import { creators } from "./duck";
 
 const mapStateToProps = state => ({
   ...state.setup,
