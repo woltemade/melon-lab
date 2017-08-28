@@ -88,19 +88,9 @@ const instance = {
   getLastOrderId: jest.fn(
     () => new Promise(resolve => resolve(new BigNumber(8))),
   ),
-  // Trade: jest.fn((filter, options, callback) => {
-  //   recentTrades.forEach(trade => callback(null, trade));
-  // }),
-
-  Trade: jest.fn((filter, options) => {
-    callback => {
-      callback(null, recentTrades);
-    };
-  }),
-  // Trade: jest.fn(() => new Promise(resolve => resolve(recentTrades))),
-  get: jest.fn((filter, options, callback) => {
-    callback(null, recentTrades);
-  }),
+  Trade: jest.fn(() => ({
+    get: jest.fn(callback => callback(null, recentTrades)),
+  })),
 };
 
 const contract = {
