@@ -1,6 +1,7 @@
 import BigNumber from "bignumber.js";
 
 import orderBook from "../fixtures/blockChainOrders";
+import recentTrades from "../fixtures/recentTrades";
 
 const instance = {
   orders: jest.fn(
@@ -87,6 +88,9 @@ const instance = {
   getLastOrderId: jest.fn(
     () => new Promise(resolve => resolve(new BigNumber(8))),
   ),
+  Trade: jest.fn(() => ({
+    get: jest.fn(callback => callback(null, recentTrades)),
+  })),
 };
 
 const contract = {

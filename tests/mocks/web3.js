@@ -4,6 +4,7 @@ const instance = {
   },
   eth: {
     accounts: ["0xUSER"],
+    getBlockNumber: callback => callback(null, 333333333333),
   },
 };
 

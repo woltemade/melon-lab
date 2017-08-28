@@ -86,6 +86,7 @@
   "dependencies": {
     "@melonproject/protocol": "0.2.0-alpha.17",
     "bignumber.js": "^4.0.2",
+    "pify": "^3.0.0",
     "ramda": "^0.24.1",
     "truffle-contract": "^2.0.3"
   }
