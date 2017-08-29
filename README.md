@@ -64,6 +64,21 @@ Meteor.startup(() => {
 });
 ```
 
+### Error logging / Tracing
+It is possible to setup error logging with the tracing functionality. Here is an example for sentry/raven:
+
+```javascript
+import flatten from 'flat';
+import raven from 'raven';
+import { setup } from '@melonproject/melon.js';
+
+Raven.config(SENTRY_DSN).install();
+
+setup.init({ web3, tracer: ({ timestamp, message, category, data }) => {
+  Raven.captureBreadcrumb({ message, category, data: flatten(data)})
+}});
+```
+
 ### Link dev build
 
 To use the latest version of melon.js and to further develop it in place,
