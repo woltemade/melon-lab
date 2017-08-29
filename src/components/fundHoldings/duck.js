@@ -61,7 +61,6 @@ export const reducer = (state = initialState, action) => {
     case types.REQUEST_HOLDINGS: {
       return {
         ...state,
-        loading: true,
       };
     }
     case types.UPDATE_HOLDINGS: {

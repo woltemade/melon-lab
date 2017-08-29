@@ -4,8 +4,8 @@ export const initialState = {
 };
 
 export const types = {
-  REQUEST: "REQUEST:trade:melon.network",
-  UPDATE: "UPDATE:trade:melon.network",
+  REQUEST: "REQUEST:tradeHelper:melon.network",
+  UPDATE: "UPDATE:tradeHelper:melon.network",
 };
 
 export const creators = {

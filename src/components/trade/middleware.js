@@ -8,6 +8,7 @@ import {
   toProcessable,
 } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
+
 import { creators as orderbookCreators } from "../orderbook/duck";
 import { creators as fundHoldingsCreators } from "../fundHoldings/duck";
 import { creators as tradeHelperCreators } from "../tradeHelper/duck";
@@ -139,7 +140,7 @@ const tradeMiddleware = store => next => action => {
           );
           store.dispatch(fundHoldingsCreators.requestHoldings());
           store.dispatch(tradeHelperCreators.request());
-          store.dispatch(orderbookCreators.requestOrderbook("MLN-T/ETH-T"));
+          // store.dispatch(orderbookCreators.requestOrderbook("MLN-T/ETH-T"));
         })
         .catch(error => console.log(error));
       break;
