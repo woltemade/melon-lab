@@ -6,6 +6,7 @@ export const initialState = {
   selectedOrder: {},
   orderType: "Buy",
   theirOrderType: "Sell",
+  loading: false,
 };
 
 export const types = {
@@ -58,6 +59,7 @@ export const reducer = (state = initialState, action) => {
     case types.PLACE_ORDER: {
       return {
         ...state,
+        loading: true,
       };
     }
     default:

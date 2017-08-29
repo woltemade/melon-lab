@@ -134,6 +134,7 @@ const tradeMiddleware = store => next => action => {
               selectedOrder: {},
               orderType: "Buy",
               theirOrderType: "Sell",
+              loading: false,
             }),
           );
           store.dispatch(fundHoldingsCreators.requestHoldings());
