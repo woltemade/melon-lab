@@ -5,7 +5,6 @@ import {
   matchOrders,
   takeMultipleOrders,
   getPrices,
-  toProcessable,
 } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 
@@ -108,17 +107,8 @@ const tradeMiddleware = store => next => action => {
       const matchedOrders = matchOrders(theirOrderType, priceTreshold, orders);
       const quantityAsked =
         ourOrderType === "buy"
-          ? // ? new BigNumber(currentState.amount)
-            // : new BigNumber(currentState.total);
-            toProcessable(
-              currentState.amount,
-              store.getState().general.baseTokenSymbol,
-            )
-          : toProcessable(
-              currentState.total,
-              store.getState().general.quoteTokenSymbol,
-            );
-
+          ? new BigNumber(currentState.amount)
+          : new BigNumber(currentState.total);
       takeMultipleOrders(
         matchedOrders,
         "0xeE2BB8598725445B532BDb14F522A99E04e84B38",
@@ -140,7 +130,7 @@ const tradeMiddleware = store => next => action => {
           );
           store.dispatch(fundHoldingsCreators.requestHoldings());
           store.dispatch(tradeHelperCreators.request());
-          // store.dispatch(orderbookCreators.requestOrderbook("MLN-T/ETH-T"));
+          store.dispatch(orderbookCreators.requestOrderbook("MLN-T/ETH-T"));
         })
         .catch(error => console.log(error));
       break;
