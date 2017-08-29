@@ -5,6 +5,7 @@ import {
   matchOrders,
   takeMultipleOrders,
   getPrices,
+  toProcessable,
 } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 import { creators as orderbookCreators } from "../orderbook/duck";
@@ -70,10 +71,20 @@ const tradeMiddleware = store => next => action => {
 
       if (params.amount) {
         total = params.amount * currentState.price;
-        store.dispatch(creators.update({ amount: params.amount, total }));
+        store.dispatch(
+          creators.update({
+            amount: params.amount.toString(10),
+            total: total.toString(10),
+          }),
+        );
       } else if (params.total) {
         amount = params.total / currentState.price;
-        store.dispatch(creators.update({ amount, total: params.total }));
+        store.dispatch(
+          creators.update({
+            amount: amount.toString(10),
+            total: params.total.toString(10),
+          }),
+        );
       }
       break;
     }
@@ -96,8 +107,16 @@ const tradeMiddleware = store => next => action => {
       const matchedOrders = matchOrders(theirOrderType, priceTreshold, orders);
       const quantityAsked =
         ourOrderType === "buy"
-          ? new BigNumber(currentState.amount)
-          : new BigNumber(currentState.total);
+          ? // ? new BigNumber(currentState.amount)
+            // : new BigNumber(currentState.total);
+            toProcessable(
+              currentState.amount,
+              store.getState().general.baseTokenSymbol,
+            )
+          : toProcessable(
+              currentState.total,
+              store.getState().general.quoteTokenSymbol,
+            );
 
       takeMultipleOrders(
         matchedOrders,
