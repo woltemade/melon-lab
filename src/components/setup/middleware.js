@@ -1,5 +1,5 @@
 import { setup, createVault } from "@melonproject/melon.js";
-import { types, creators } from "../ducks/setup";
+import { types, creators } from "./duck";
 
 const setupMiddleware = store => next => action => {
   const { type, ...params } = action;

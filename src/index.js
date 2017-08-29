@@ -3,10 +3,16 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import Web3 from "web3";
 import { setup, getConfig } from "@melonproject/melon.js";
-import store from "./redux/store";
+import store from "./store";
 import "./index.css";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
+
+import { creators as orderbookCreators } from "./components/orderbook/duck";
+import { creators as factsheetCreators } from "./components/factsheet/duck";
+import { creators as fundHoldingsCreators } from "./components/fundHoldings/duck";
+import { creators as recentTradesCreators } from "./components/recentTrades/duck";
+import { creators as tradeHelperCreators } from "./components/tradeHelper/duck";
 
 window.addEventListener("load", () => {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
@@ -30,6 +36,14 @@ window.addEventListener("load", () => {
   });
 
   // Now you can start your app & access web3 freely:
+
+  // Dispatching on startup actions to get initial data
+  store.dispatch(orderbookCreators.requestOrderbook("MLN-T/ETH-T"));
+  store.dispatch(factsheetCreators.requestInformations());
+  store.dispatch(fundHoldingsCreators.requestHoldings());
+  store.dispatch(recentTradesCreators.requestRecentTrades("MLN-T/ETH-T"));
+  store.dispatch(tradeHelperCreators.request());
+
   ReactDOM.render(
     <Provider store={store}>
       <App />

@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
-import { setup, subscribe } from "@melonproject/melon.js";
-import { types, creators } from "../ducks/invest";
+import { subscribe } from "@melonproject/melon.js";
+import { types, creators } from "./duck";
 
 const investMiddleware = store => next => action => {
   const { type, ...params } = action;
@@ -11,7 +11,7 @@ const investMiddleware = store => next => action => {
     case types.INVEST: {
       subscribe(
         // store.getState().setup.vaultAddress,
-        "0xd6bff734e29200669d4b209f0ac01c82df462aca",
+        "0xac11c203248bb8bb5e49b37cd51b43a82620d9c9",
         new BigNumber(currentState.total),
         new BigNumber(currentState.amount),
       )
