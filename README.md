@@ -3,7 +3,7 @@
 Melon.js
 ========
 
-JS API for the Melon Protocol
+A convenient Javascript interface to the Melon protocol Ethereum smart contracts.
 
 [![Gitter][gitter-badge]][gitter-url]
 [![License: GPL v3][license-badge]][license-badge-url]
