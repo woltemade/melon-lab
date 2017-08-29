@@ -2,7 +2,7 @@ import React from "react";
 import { List, Input, Button, Card } from "semantic-ui-react";
 
 const Participation = props =>
-  (<Card centered>
+  (<Card centered id="investredeem">
     <Card.Content>
       <Card.Header>Invest / Redeem</Card.Header>
       <br />

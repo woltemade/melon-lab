@@ -2,7 +2,7 @@ import React from "react";
 import { List, Card, Icon } from "semantic-ui-react";
 
 const Settings = () =>
-  (<Card centered>
+  (<Card centered id="settings">
     <Card.Content>
       <Card.Header>Settings</Card.Header>
       <br />

@@ -2,7 +2,7 @@ import React from "react";
 import { Table } from "semantic-ui-react";
 
 const FundHoldings = props =>
-  (<div>
+  (<div id="holdings">
     <p className="App-intro">Fund Holdings</p>
     <Table celled size={"small"}>
       <Table.Header>

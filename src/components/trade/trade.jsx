@@ -2,7 +2,7 @@ import React from "react";
 import { List, Input, Button, Card } from "semantic-ui-react";
 
 const Trade = props =>
-  (<Card centered>
+  (<Card centered id="trade">
     <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
       <div className="ui text loader">Executing your order ...</div>
     </div>

@@ -33,10 +33,10 @@ const FundActivity = () =>
       <br />
       <br />
       <div className="ui two buttons">
-        <Button basic color="black">
+        <Button basic color="black" href="#investredeem">
           Invest
         </Button>
-        <Button basic color="black">
+        <Button basic color="black" href="#investredeem">
           Redeem
         </Button>
       </div>
