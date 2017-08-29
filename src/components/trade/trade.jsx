@@ -8,12 +8,12 @@ const Trade = props =>
       <br />
       <br />
       <Card.Meta>
-        Buy <strong>{props.baseTokenSymbol}</strong>
+        {props.orderType} <strong>{props.baseTokenSymbol}</strong>
       </Card.Meta>
       <i className="shuffle icon" />
 
       <Card.Meta>
-        Sell <strong>{props.quoteTokenSymbol}</strong>
+        {props.theirOrderType} <strong>{props.quoteTokenSymbol}</strong>
       </Card.Meta>
       <br />
       <List>
@@ -21,8 +21,9 @@ const Trade = props =>
           <List.Content>
             <Input
               readOnly
+              label="Price"
               name="price"
-              placeholder="Price"
+              placeholder=""
               value={props.price}
               onChange={props.onChange}
             />
@@ -31,8 +32,9 @@ const Trade = props =>
         <List.Item as="a">
           <List.Content>
             <Input
+              label="Quantity"
               name="amount"
-              placeholder="Amount"
+              placeholder=""
               value={props.amount}
               onChange={props.onChange}
             />
@@ -41,8 +43,9 @@ const Trade = props =>
         <List.Item as="a">
           <List.Content>
             <Input
+              label="Total"
               name="total"
-              placeholder="Total"
+              placeholder=""
               value={props.total}
               onChange={props.onChange}
             />
@@ -53,7 +56,7 @@ const Trade = props =>
     <Card.Content extra>
       <div className="ui two buttons">
         <Button basic color="black" onClick={props.placeOrder}>
-          Buy
+          {props.orderType}
         </Button>
       </div>
     </Card.Content>

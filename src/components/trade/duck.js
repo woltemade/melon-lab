@@ -4,6 +4,8 @@ export const initialState = {
   price: "",
   total: "",
   selectedOrder: {},
+  orderType: "Buy",
+  theirOrderType: "Sell",
 };
 
 export const types = {

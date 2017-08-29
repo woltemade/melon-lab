@@ -7,6 +7,9 @@ import {
   getPrices,
 } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
+import { creators as orderbookCreators } from "../orderbook/duck";
+import { creators as fundHoldingsCreators } from "../fundHoldings/duck";
+import { creators as tradeHelperCreators } from "../tradeHelper/duck";
 
 const tradeMiddleware = store => next => action => {
   const { type, ...params } = action;
@@ -17,8 +20,12 @@ const tradeMiddleware = store => next => action => {
       let index;
       let subsetOfOrders;
       let average;
+      let orderType;
+      let theirOrderType;
 
       if (params.selectedOrder.type === "buy") {
+        orderType = "Sell";
+        theirOrderType = "Buy";
         const buyOrders = store
           .getState()
           .orderbook.buyOrders.map(order => deserializeOrder(order));
@@ -26,6 +33,8 @@ const tradeMiddleware = store => next => action => {
         subsetOfOrders = buyOrders.slice(0, index + 1);
         average = averagePrice("buy", subsetOfOrders);
       } else if (params.selectedOrder.type === "sell") {
+        orderType = "Buy";
+        theirOrderType = "Sell";
         const sellOrders = store
           .getState()
           .orderbook.sellOrders.map(order => deserializeOrder(order));
@@ -47,6 +56,8 @@ const tradeMiddleware = store => next => action => {
           amount,
           price,
           total,
+          orderType,
+          theirOrderType,
         }),
       );
 
@@ -93,9 +104,24 @@ const tradeMiddleware = store => next => action => {
         "0xeE2BB8598725445B532BDb14F522A99E04e84B38",
         "0xac11c203248bb8bb5e49b37cd51b43a82620d9c9",
         quantityAsked,
-      ).then(result => {
-        console.log(result);
-      });
+      )
+        .then(result => {
+          console.log("Trade receipt ", result);
+          store.dispatch(
+            creators.update({
+              amount: "",
+              price: "",
+              total: "",
+              selectedOrder: {},
+              orderType: "Buy",
+              theirOrderType: "Sell",
+            }),
+          );
+          store.dispatch(fundHoldingsCreators.requestHoldings());
+          store.dispatch(tradeHelperCreators.request());
+          store.dispatch(orderbookCreators.requestOrderbook("MLN-T/ETH-T"));
+        })
+        .catch(error => console.log(error));
       break;
     }
 
