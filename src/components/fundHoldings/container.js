@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import FundHoldings from "./fundHoldings";
 import { creators } from "./duck";
+import { creators as generalCreators } from "../general";
 
 const mapStateToProps = state => ({
   ...state.fundHoldings,
@@ -10,6 +11,12 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onRequest: () => {
     dispatch(creators.requestHoldings());
+  },
+  onClick: asset => {
+    if (asset !== "ETH-T") {
+      const assetPair = `${asset}/ETH-T`;
+      dispatch(generalCreators.updateAssetPair(assetPair));
+    }
   },
 });
 
