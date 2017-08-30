@@ -14,8 +14,11 @@
   "scripts": {
     "pretest": "npm run build && npm run lint --silent && npm run depcheck",
     "test": "npm run jest",
-    "jest": "jest",
-    "jest:watch": "jest --watch",
+    "test:unit": "npm run jest",
+    "test:integration": "npm run jasemine",
+    "jest": "jest --config tests/unit/jest.config.json --coverage",
+    "jest:watch": "jest --config tests/unit/jest.config.json --watch",
+    "jasemine": "babel-node tests/integration/run",
     "babel": "babel lib -d build",
     "babel:watch": "babel lib -w -d build",
     "build": "npm run walklib && npm run babel",
@@ -31,30 +34,13 @@
     "depcheck:json": "depcheck --ignores=husky --json"
   },
   "lint-staged": {
-    "*.js": [
-      "npm run format",
-      "git add"
-    ]
-  },
-  "jest": {
-    "testMatch": [
-      "**/tests/unit/**/*.js?(x)"
-    ],
-    "setupFiles": [
-      "./tests/utils/setup.js"
-    ]
+    "*.js": ["npm run format", "git add"]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/melonproject/melon.js.git"
   },
-  "keywords": [
-    "melon",
-    "melonproject",
-    "javascript",
-    "ethereum",
-    "api"
-  ],
+  "keywords": ["melon", "melonproject", "javascript", "ethereum", "api"],
   "author": "Simon Emanuel Schmid <simon@melonport.com>",
   "license": "GPL-3.0",
   "bugs": {
@@ -78,6 +64,7 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "husky": "^0.14.3",
+    "jasmine": "^2.7.0",
     "jest": "^20.0.4",
     "lint-staged": "^4.0.2",
     "prettier-eslint-cli": "^4.1.1",
@@ -88,6 +75,7 @@
     "bignumber.js": "^4.0.2",
     "pify": "^3.0.0",
     "ramda": "^0.24.1",
-    "truffle-contract": "^2.0.3"
+    "truffle-contract": "^2.0.3",
+    "web3": "^0.18.0"
   }
 }

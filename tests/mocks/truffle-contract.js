@@ -93,6 +93,8 @@ const instance = {
   })),
 };
 
+instance.createVault.estimateGas = jest.fn(() => 650000);
+
 const contract = {
   setProvider: jest.fn(),
   at: jest.fn(() => instance),

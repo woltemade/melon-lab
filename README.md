@@ -64,6 +64,21 @@ Meteor.startup(() => {
 });
 ```
 
+### Error logging / Tracing
+It is possible to setup error logging with the tracing functionality. Here is an example for sentry/raven:
+
+```javascript
+import flatten from 'flat';
+import raven from 'raven';
+import { setup } from '@melonproject/melon.js';
+
+Raven.config(SENTRY_DSN).install();
+
+setup.init({ web3, tracer: ({ timestamp, message, category, data }) => {
+  Raven.captureBreadcrumb({ message, category, data: flatten(data)})
+}});
+```
+
 ### Link dev build
 
 To use the latest version of melon.js and to further develop it in place,
@@ -132,15 +147,18 @@ to the contracts. But you can be certain: Transactions are free.
 
 ## `testing`
 
-By interacting with the smart contracts, we have 3 levels of testing:
+By interacting with the smart contracts, we have 2 levels of testing:
 
-- `tests/unit/` Unit-tests: Each function as isolated as possible with mocks.
+- `tests/unit/` Jest Unit-tests: Each function as isolated as possible with mocks.
   We are not super strict here and allow that one unit depends on another as
   long as the interaction with the smart contracts is mocked. The unit test
   directory reflects the structure of the lib directory.
-- `tests/integration/` Integration tests: Interact with real smart contracts.
-  Be careful with those: They try to connect to a real node that you need to
-  provide.
+- `tests/integration/` Jasemine Integration tests: Interact with real smart contracts.
+  Be careful with those: They connect to a real unlocked node that you need to
+  provide: See [these instructions](https://github.com/melonproject/docs/blob/master/Software%20Architecture/hosting.md)
+- `tests/shared/` Shared expectations. Since Jest & Jasemine have very similar 
+  syntax, some test-expectations (`expect(asdf).to...`) can be isolated in 
+  separate functions and shared.
 
 
 [gitter-badge]: https://img.shields.io/gitter/room/melonproject/general.js.svg?style=flat-square
