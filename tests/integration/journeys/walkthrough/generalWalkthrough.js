@@ -8,6 +8,7 @@ import createVault from "../../../../lib/vault/transactions/createVault";
 import subscribe from "../../../../lib/participation/transactions/subscribe";
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
 import takeOrder from "../../../../lib/vault/transactions/takeOrder";
+import redeem from "../../../../lib/participation/transactions/redeem";
 
 const shared = { userBalance: {}, participation: {} };
 
@@ -42,14 +43,22 @@ it(
     expect(shared.participation.initial.personalStake.toNumber()).toBe(0);
     expect(shared.participation.initial.totalSupply.toNumber()).toBe(0);
 
-    await subscribe(shared.vault.address, new BigNumber(5), new BigNumber(5));
-    trace({ message: `subscribed`, data: shared });
+    shared.subscription = await subscribe(
+      shared.vault.address,
+      new BigNumber(3),
+      new BigNumber(3),
+    );
+    trace({
+      message: `subscribed. shares: ${shared.subscription.received} @ ${shared
+        .subscription.price} per share`,
+      data: shared,
+    });
     shared.participation.invested = await getParticipation(
       shared.vault.address,
       setup.defaultAccount,
     );
-    expect(shared.participation.invested.personalStake.toNumber()).toBe(5);
-    expect(shared.participation.invested.totalSupply.toNumber()).toBe(5);
+    expect(shared.participation.invested.personalStake.toNumber()).toBe(3);
+    expect(shared.participation.invested.totalSupply.toNumber()).toBe(3);
 
     shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
     trace({
@@ -66,6 +75,12 @@ it(
       setup.defaultAccount,
       shared.vault.address,
       new BigNumber(2),
+    );
+
+    shared.redeem = await redeem(
+      setup.defaultAccount,
+      shared.vault.address,
+      new BigNumber(5),
     );
   },
   10 * 60 * 1000,
