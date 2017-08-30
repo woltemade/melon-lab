@@ -11,7 +11,7 @@ const App = () =>
     <div className="App-header">
       <h1>MELON</h1>
       <Menu secondary>
-        <Menu.Menu position="centered">
+        <Menu.Menu position="right">
           <Menu.Item name="My fund" href="#factsheet" />
           <Menu.Item name="My holdings" href="#holdings" />
           <Menu.Item name="Trade" href="#trade" />

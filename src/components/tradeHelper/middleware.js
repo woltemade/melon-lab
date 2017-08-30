@@ -6,8 +6,8 @@ const tradeHelperMiddleware = store => next => action => {
 
   switch (type) {
     case types.REQUEST: {
-      const baseTokenSymbol = store.getState().general.assetPair.split("/")[0];
-      const quoteTokenSymbol = store.getState().general.assetPair.split("/")[1];
+      const baseTokenSymbol = params.assetPair.split("/")[0];
+      const quoteTokenSymbol = params.assetPair.split("/")[1];
 
       getBalance(baseTokenSymbol, "0xac11c203248bb8bb5e49b37cd51b43a82620d9c9")
         .then(baseTokenBalance => {

@@ -16,9 +16,9 @@ export const creators = {
     type: types.UPDATE,
     ...newValues,
   }),
-  updateAssetPair: newAssetPair => ({
+  updateAssetPair: assetPair => ({
     type: types.UPDATE_ASSET_PAIR,
-    newAssetPair,
+    assetPair,
   }),
 };
 
@@ -35,9 +35,10 @@ export const reducer = (state = initialState, action) => {
     case types.UPDATE_ASSET_PAIR: {
       return {
         ...state,
-        assetPair: params.newAssetPair,
-        baseTokenSymbol: params.newAssetPair.split("/")[0],
-        quoteTokenSymbol: params.newAssetPair.split("/")[1],
+        ...params,
+        // assetPair: params.newAssetPair,
+        // baseTokenSymbol: params.newAssetPair.split("/")[0],
+        // quoteTokenSymbol: params.newAssetPair.split("/")[1],
       };
     }
     default:

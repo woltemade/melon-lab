@@ -11,8 +11,12 @@ const RecentTrades = props =>
         <Table.Row>
           <Table.HeaderCell>Time</Table.HeaderCell>
           <Table.HeaderCell>Type</Table.HeaderCell>
-          <Table.HeaderCell>Price (MLN/ETH)</Table.HeaderCell>
-          <Table.HeaderCell>Amount (ETH)</Table.HeaderCell>
+          <Table.HeaderCell>
+            Price ({props.quoteTokenSymbol}/{props.baseTokenSymbol})
+          </Table.HeaderCell>
+          <Table.HeaderCell>
+            Amount ({props.baseTokenSymbol})
+          </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>

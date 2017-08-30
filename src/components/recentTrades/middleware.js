@@ -8,7 +8,6 @@ const recentTradesMiddleware = store => next => action => {
     case types.REQUEST_RECENT_TRADES: {
       const baseTokenSymbol = params.assetPair.split("/")[0];
       const quoteTokenSymbol = params.assetPair.split("/")[1];
-
       getRecentTrades(
         baseTokenSymbol,
         quoteTokenSymbol,
@@ -19,7 +18,13 @@ const recentTradesMiddleware = store => next => action => {
           trade.quantity = trade.quantity.toString();
           return trade;
         });
-        store.dispatch(creators.updateRecentTrades({ recentTrades }));
+        store.dispatch(
+          creators.updateRecentTrades({
+            recentTrades,
+            baseTokenSymbol,
+            quoteTokenSymbol,
+          }),
+        );
       });
 
       break;

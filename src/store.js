@@ -9,6 +9,7 @@ import recentTrades from "./components/recentTrades/duck";
 import trade from "./components/trade/duck";
 import tradeHelper from "./components/tradeHelper/duck";
 
+import generalMiddleware from "./components/generalMiddleware";
 import setupMiddleware from "./components/setup/middleware";
 import investMiddleware from "./components/invest/middleware";
 import factsheetMiddleware from "./components/factsheet/middleware";
@@ -43,6 +44,7 @@ export default createStore(
       recentTradesMiddleware,
       tradeMiddleware,
       tradeHelperMiddleware,
+      generalMiddleware,
     ),
     /* eslint-disable no-underscore-dangle */
     window.__REDUX_DEVTOOLS_EXTENSION__

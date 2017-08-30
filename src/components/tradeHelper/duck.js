@@ -9,8 +9,9 @@ export const types = {
 };
 
 export const creators = {
-  request: () => ({
+  request: assetPair => ({
     type: types.REQUEST,
+    assetPair,
   }),
   update: newValues => ({
     type: types.UPDATE,
