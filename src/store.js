@@ -32,6 +32,7 @@ export default createStore(
     recentTrades,
     trade,
     tradeHelper,
+    participation,
   }),
   {
     /* preloadedState */
@@ -47,6 +48,7 @@ export default createStore(
       tradeMiddleware,
       tradeHelperMiddleware,
       generalMiddleware,
+      participationMiddleware,
     ),
     /* eslint-disable no-underscore-dangle */
     window.__REDUX_DEVTOOLS_EXTENSION__

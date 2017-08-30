@@ -111,8 +111,8 @@ const tradeMiddleware = store => next => action => {
           : new BigNumber(currentState.total);
       takeMultipleOrders(
         matchedOrders,
-        "0xeE2BB8598725445B532BDb14F522A99E04e84B38",
-        "0xac11c203248bb8bb5e49b37cd51b43a82620d9c9",
+        "0x609eF3E6aCf7DE50F29e0144eD7d0fF735331680",
+        "0x90a765a2ba68f2644dd7b8f6b671128409daab7f",
         quantityAsked,
       )
         .then(result => {
