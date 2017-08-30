@@ -13,9 +13,7 @@ const App = () =>
       <Menu secondary>
         <Menu.Menu position="right">
           <Menu.Item name="My fund" href="#factsheet" />
-          <Menu.Item name="My holdings" href="#holdings" />
           <Menu.Item name="Trade" href="#trade" />
-          <Menu.Item name="Orderbook" href="#orderbook" />
           <Menu.Item name="Settings" href="#settings" />
         </Menu.Menu>
       </Menu>
