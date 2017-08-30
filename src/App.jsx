@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Input, Menu } from "semantic-ui-react";
+import React from "react";
+import { Menu } from "semantic-ui-react";
 import ManagerView from "./components/managerView/managerView";
 import SetupContainer from "./components/setup/container";
 import InvestContainer from "./components/invest/container";
