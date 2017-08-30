@@ -6,12 +6,12 @@ import OrderbookContainer from "../orderbook/container";
 import RecentTradesContainer from "../recentTrades/container";
 import TradeContainer from "../trade/container";
 import TradeHelperContainer from "../tradeHelper/container";
+import ParticipationContainer from "../participation/container";
 
 import FundActivity from "../fundActivity/fundActivity";
 import TradingActivity from "../tradingActivity/tradingActivity";
 import Settings from "../settings/settings";
 import Statistics from "../statistics/statistics";
-import Participation from "../participation/participation";
 
 const ManagerView = () =>
   (<div className="App">
@@ -53,7 +53,7 @@ const ManagerView = () =>
       <Card.Group>
         <Settings />
         <Statistics />
-        <Participation />
+        <ParticipationContainer />
       </Card.Group>
     </div>
     <br />

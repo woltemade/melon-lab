@@ -8,6 +8,7 @@ import orderbook from "./components/orderbook/duck";
 import recentTrades from "./components/recentTrades/duck";
 import trade from "./components/trade/duck";
 import tradeHelper from "./components/tradeHelper/duck";
+import participation from "./components/participation/duck";
 
 import generalMiddleware from "./components/generalMiddleware";
 import setupMiddleware from "./components/setup/middleware";
@@ -18,6 +19,7 @@ import orderbookMiddleware from "./components/orderbook/middleware";
 import recentTradesMiddleware from "./components/recentTrades/middleware";
 import tradeMiddleware from "./components/trade/middleware";
 import tradeHelperMiddleware from "./components/tradeHelper/middleware";
+import participationMiddleware from "./components/participation/middleware";
 
 export default createStore(
   combineReducers({
