@@ -154,12 +154,20 @@ By interacting with the smart contracts, we have 2 levels of testing:
   long as the interaction with the smart contracts is mocked. The unit test
   directory reflects the structure of the lib directory.
 - `tests/integration/` Jasemine Integration tests: Interact with real smart contracts.
-  Be careful with those: They connect to a real unlocked node that you need to
-  provide: See [these instructions](https://github.com/melonproject/docs/blob/master/Software%20Architecture/hosting.md)
+  Be careful with those: They connect to a real unlocked node that you need to set up (see below).
 - `tests/shared/` Shared expectations. Since Jest & Jasemine have very similar 
   syntax, some test-expectations (`expect(asdf).to...`) can be isolated in 
   separate functions and shared.
 
+### `set up unlocked parity account`
+- run `parity account new --chain kovan`
+- Type a password; don't forget to store that password carefully, along with the generated account address.
+- Create a new file called "account" and paste the password in.
+- In the same folder, create a file called "run.sh". Copy and paste the following command in this file, and replace accordingly with your account address.
+
+`parity --chain kovan --author YOURACCOUNTADDRESS --unlock YOURACCOUNTADDRESS --password ./account --auto-update=all --geth --force-ui`
+
+- Back to the terminal, make this new file executable by running: `chmod 755 run.sh`
 
 [gitter-badge]: https://img.shields.io/gitter/room/melonproject/general.js.svg?style=flat-square
 [gitter-url]: https://gitter.im/melonproject/general?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
