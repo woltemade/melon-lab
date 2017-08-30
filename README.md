@@ -159,7 +159,7 @@ By interacting with the smart contracts, we have 2 levels of testing:
   syntax, some test-expectations (`expect(asdf).to...`) can be isolated in 
   separate functions and shared.
 
-### `set up unlocked parity account`
+### Set up unlocked parity account
 - run `parity account new --chain kovan`
 - Type a password; don't forget to store that password carefully, along with the generated account address.
 - Create a new file called "account" and paste the password in.
