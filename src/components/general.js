@@ -36,9 +36,6 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         ...params,
-        // assetPair: params.newAssetPair,
-        // baseTokenSymbol: params.newAssetPair.split("/")[0],
-        // quoteTokenSymbol: params.newAssetPair.split("/")[1],
       };
     }
     default:
