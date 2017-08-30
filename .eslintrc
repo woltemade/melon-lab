@@ -4,5 +4,8 @@
   "extends": ["airbnb", "plugin:flowtype/recommended", "prettier"],
   "env": {
     "jest": true
+  },
+  "rules": {
+    "max-params": ["warn", 3]
   }
 }
