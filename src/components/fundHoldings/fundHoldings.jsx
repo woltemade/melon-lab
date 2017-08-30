@@ -2,7 +2,7 @@ import React from "react";
 import { Table } from "semantic-ui-react";
 
 const FundHoldings = props =>
-  (<div>
+  (<div id="holdings">
     <p className="App-intro">Fund Holdings</p>
     <Table celled size={"small"}>
       <Table.Header>
@@ -27,7 +27,9 @@ const FundHoldings = props =>
               {props[asset] / props.aum * 100}
             </Table.Cell>
             <Table.Cell>0</Table.Cell>
-            <Table.Cell>Buy/Sell</Table.Cell>
+            <Table.Cell onClick={() => props.onClick(asset)}>
+              <a href="#trade">Buy/Sell</a>
+            </Table.Cell>
           </Table.Row>),
         )}
       </Table.Body>

@@ -4,10 +4,10 @@ import { types, creators } from "./duck";
 import { creators as factsheetCreators } from "../factsheet/duck";
 import { creators as fundHoldingsCreators } from "../fundHoldings/duck";
 
-const investMiddleware = store => next => action => {
+const participationMiddleware = store => next => action => {
   const { type, ...params } = action;
 
-  const currentState = store.getState().invest;
+  const currentState = store.getState().participation;
 
   switch (type) {
     case types.INVEST: {
@@ -34,4 +34,4 @@ const investMiddleware = store => next => action => {
   return next(action);
 };
 
-export default investMiddleware;
+export default participationMiddleware;

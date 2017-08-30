@@ -2,18 +2,21 @@ import React from "react";
 import { List, Input, Button, Card } from "semantic-ui-react";
 
 const Trade = props =>
-  (<Card centered>
+  (<Card centered id="trade">
+    <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
+      <div className="ui text loader">Executing your order ...</div>
+    </div>
     <Card.Content>
       <Card.Header>Place an order</Card.Header>
       <br />
       <br />
       <Card.Meta>
-        Buy <strong>{props.baseTokenSymbol}</strong>
+        {props.orderType} <strong>{props.baseTokenSymbol}</strong>
       </Card.Meta>
       <i className="shuffle icon" />
 
       <Card.Meta>
-        Sell <strong>{props.quoteTokenSymbol}</strong>
+        {props.theirOrderType} <strong>{props.quoteTokenSymbol}</strong>
       </Card.Meta>
       <br />
       <List>
@@ -21,8 +24,9 @@ const Trade = props =>
           <List.Content>
             <Input
               readOnly
+              label="Price"
               name="price"
-              placeholder="Price"
+              placeholder=""
               value={props.price}
               onChange={props.onChange}
             />
@@ -31,8 +35,9 @@ const Trade = props =>
         <List.Item as="a">
           <List.Content>
             <Input
+              label="Quantity"
               name="amount"
-              placeholder="Amount"
+              placeholder=""
               value={props.amount}
               onChange={props.onChange}
             />
@@ -41,8 +46,9 @@ const Trade = props =>
         <List.Item as="a">
           <List.Content>
             <Input
+              label="Total"
               name="total"
-              placeholder="Total"
+              placeholder=""
               value={props.total}
               onChange={props.onChange}
             />
@@ -53,7 +59,7 @@ const Trade = props =>
     <Card.Content extra>
       <div className="ui two buttons">
         <Button basic color="black" onClick={props.placeOrder}>
-          Buy
+          {props.orderType}
         </Button>
       </div>
     </Card.Content>

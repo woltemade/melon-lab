@@ -2,7 +2,7 @@ import React from "react";
 import { List, Card, Icon, Divider } from "semantic-ui-react";
 
 const Factsheet = props =>
-  (<Card centered>
+  (<Card centered id="factsheet">
     <Card.Content>
       <Card.Header>
         <strong>μέλλω Capital </strong>
@@ -24,7 +24,7 @@ const Factsheet = props =>
           <Icon name="right triangle" />
           <List.Content>
             <List.Header>
-              AUM: {props.aum} MLN
+              AUM: {props.aum} ETH
             </List.Header>
           </List.Content>
         </List.Item>

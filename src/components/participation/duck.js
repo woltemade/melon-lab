@@ -1,20 +1,21 @@
 export const initialState = {
-  baseTokenBalance: 0,
-  quoteTokenBalance: 0,
+  amount: "Amount",
+  price: "Price per share",
+  total: "Total",
+  loading: false,
 };
 
 export const types = {
-  REQUEST: "REQUEST:tradeHelper:melon.network",
-  UPDATE: "UPDATE:tradeHelper:melon.network",
+  INVEST: "INVEST:participation:melon.network",
+  CHANGE: "CHANGE:participation:melon.network",
 };
 
 export const creators = {
-  request: assetPair => ({
-    type: types.REQUEST,
-    assetPair,
+  invest: () => ({
+    type: types.INVEST,
   }),
-  update: newValues => ({
-    type: types.UPDATE,
+  change: newValues => ({
+    type: types.CHANGE,
     ...newValues,
   }),
 };
@@ -23,16 +24,16 @@ export const reducer = (state = initialState, action) => {
   const { type, ...params } = action;
 
   switch (type) {
-    case types.REQUEST: {
+    case types.CHANGE: {
       return {
         ...state,
         ...params,
       };
     }
-    case types.UPDATE: {
+    case types.INVEST: {
       return {
         ...state,
-        ...params,
+        loading: true,
       };
     }
     default:

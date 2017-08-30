@@ -6,7 +6,6 @@ export const initialState = {
   managementReward: "N/A",
   performanceReward: "N/A",
   unclaimedRewards: "N/A",
-  loading: false,
 };
 
 export const types = {
@@ -31,7 +30,6 @@ export const reducer = (state = initialState, action) => {
     case types.REQUEST_INFORMATION: {
       return {
         ...state,
-        loading: true,
       };
     }
     case types.UPDATE_INFORMATIONS: {

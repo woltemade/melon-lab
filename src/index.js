@@ -36,13 +36,13 @@ window.addEventListener("load", () => {
   });
 
   // Now you can start your app & access web3 freely:
-
+  const defaultAssetPair = "MLN-T/ETH-T";
   // Dispatching on startup actions to get initial data
-  store.dispatch(orderbookCreators.requestOrderbook("MLN-T/ETH-T"));
+  store.dispatch(orderbookCreators.requestOrderbook(defaultAssetPair));
   store.dispatch(factsheetCreators.requestInformations());
   store.dispatch(fundHoldingsCreators.requestHoldings());
-  store.dispatch(recentTradesCreators.requestRecentTrades("MLN-T/ETH-T"));
-  store.dispatch(tradeHelperCreators.request());
+  store.dispatch(recentTradesCreators.requestRecentTrades(defaultAssetPair));
+  store.dispatch(tradeHelperCreators.request(defaultAssetPair));
 
   ReactDOM.render(
     <Provider store={store}>

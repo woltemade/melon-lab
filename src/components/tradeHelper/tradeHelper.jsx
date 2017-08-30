@@ -35,7 +35,9 @@ const TradeHelper = props =>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>24h Volume: 1700 XBT</List.Header>
+            <List.Header>
+              24h Volume: 1700 {props.baseTokenSymbol}
+            </List.Header>
           </List.Content>
         </List.Item>
         <Divider />
