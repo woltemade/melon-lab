@@ -65,10 +65,23 @@ const instance = {
   assetAt: jest.fn(i => new Promise(resolve => resolve(`0xTOKEN_${i}`))),
   exchangeAt: jest.fn(() => new Promise(resolve => resolve("0xEXCHANGE"))),
   priceFeedAt: jest.fn(() => new Promise(resolve => resolve("0xPRICEFEED"))),
-  createVault: jest.fn(
+  setupVault: jest.fn(
     () =>
       new Promise(resolve =>
-        resolve({ logs: [{ event: "VaultAdded", args: { id: 1 } }] }),
+        resolve({
+          logs: [
+            {
+              event: "VaultAdded",
+              args: {
+                id: new BigNumber(1),
+                address: "0xVAULT",
+                sender: "0xUSER",
+                name: "TESTFUND",
+                atTimestamp: new BigNumber(723310098),
+              },
+            },
+          ],
+        }),
       ),
   ),
   getVault: jest.fn(
@@ -93,7 +106,7 @@ const instance = {
   })),
 };
 
-instance.createVault.estimateGas = jest.fn(() => 650000);
+instance.setupVault.estimateGas = jest.fn(() => 650000);
 
 const contract = {
   setProvider: jest.fn(),
