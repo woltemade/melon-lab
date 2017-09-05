@@ -23,6 +23,8 @@ Front-end application of the decentralized Melon portal.
 
 After installation is complete
 
+**Right now, the Melon.js library is injected with a local link, not through npm (see instructions in Melon.js repo).
+
 Go to the above `decentralized-portal` directory, open a terminal and launch the react application:
 
 ```
