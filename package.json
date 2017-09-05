@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/main.js",
   "sign-git-tag": true,
