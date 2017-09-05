@@ -3,13 +3,16 @@ import { findLast, propEq } from "ramda";
 
 import setup from "../../../../lib/utils/setup";
 import trace from "../../../../lib/utils/trace";
+import setupVault from "../../../../lib/version/transactions/setupVault";
+import getVaultsOfManager from "../../../../lib/version/calls/getVaultsOfManager";
+
+/*
 import getParticipation from "../../../../lib/participation/calls/getParticipation";
-import createVault from "../../../../lib/vault/transactions/createVault";
 import subscribe from "../../../../lib/participation/transactions/subscribe";
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
 import takeOrder from "../../../../lib/vault/transactions/takeOrder";
 import redeem from "../../../../lib/participation/transactions/redeem";
-
+*/
 const shared = { userBalance: {}, participation: {} };
 
 const randomString = (length = 4) =>
@@ -31,7 +34,10 @@ it(
       data: setup,
     });
 
-    shared.vault = await createVault(`test-${randomString()}`);
+    shared.vault = await setupVault(`test-${randomString()}`);
+    await getVaultsOfManager(setup.defaultAccount);
+
+    /*
     shared.participation.initial = await getParticipation(
       shared.vault.address,
       setup.defaultAccount,
@@ -82,6 +88,7 @@ it(
       shared.vault.address,
       new BigNumber(5),
     );
+    */
   },
   10 * 60 * 1000,
 );

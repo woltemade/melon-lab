@@ -1,7 +1,7 @@
-import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
-import orderbookTest from "../../../shared/exchange/calls/orderbookTest";
+// import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
+// import orderbookTest from "../../../shared/exchange/calls/orderbookTest";
 
-it("getOrderbook", async () => {
+xit("getOrderbook", async () => {
   const assetPairArray = ["MLN-T", "ETH-T"];
   const orderbook = await getOrderbook(...assetPairArray);
   expect(orderbook.length).toBeGreaterThan(0);
