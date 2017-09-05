@@ -3,6 +3,7 @@ export const initialState = {
   price: "Price per share",
   total: "Total",
   loading: false,
+  participationType: "Invest",
 };
 
 export const types = {
