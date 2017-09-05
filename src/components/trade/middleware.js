@@ -11,6 +11,7 @@ import { types, creators } from "./duck";
 import { creators as orderbookCreators } from "../orderbook/duck";
 import { creators as fundHoldingsCreators } from "../fundHoldings/duck";
 import { creators as tradeHelperCreators } from "../tradeHelper/duck";
+import { creators as recentTradesCreators } from "../recentTrades/duck";
 
 const tradeMiddleware = store => next => action => {
   const { type, ...params } = action;
@@ -46,7 +47,7 @@ const tradeMiddleware = store => next => action => {
 
       const total = average
         .times(new BigNumber(params.selectedOrder.cumulativeVolume))
-        .toString();
+        .toFixed(18);
       const amount = new BigNumber(
         params.selectedOrder.cumulativeVolume,
       ).toString();
@@ -128,9 +129,11 @@ const tradeMiddleware = store => next => action => {
               loading: false,
             }),
           );
+          const assetPair = store.getState().general.assetPair;
           store.dispatch(fundHoldingsCreators.requestHoldings());
-          store.dispatch(tradeHelperCreators.request());
-          store.dispatch(orderbookCreators.requestOrderbook("MLN-T/ETH-T"));
+          store.dispatch(tradeHelperCreators.request(assetPair));
+          store.dispatch(orderbookCreators.requestOrderbook(assetPair));
+          store.dispatch(recentTradesCreators.requestRecentTrades(assetPair));
         })
         .catch(error => console.log(error));
       break;
