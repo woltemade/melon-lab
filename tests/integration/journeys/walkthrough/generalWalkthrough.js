@@ -4,7 +4,7 @@ import { findLast, propEq } from "ramda";
 import setup from "../../../../lib/utils/setup";
 import trace from "../../../../lib/utils/trace";
 import setupVault from "../../../../lib/version/transactions/setupVault";
-import getVaultsOfManager from "../../../../lib/version/calls/getVaultsOfManager";
+import vaultForManager from "../../../../lib/version/calls/vaultForManager";
 
 /*
 import getParticipation from "../../../../lib/participation/calls/getParticipation";
@@ -27,15 +27,26 @@ it(
       setup.web3.eth.getBalance(setup.defaultAccount),
     );
     expect(shared.userBalance.initial.toFixed()).toBeGreaterThan(3);
-
     trace({
       message: `Start walkthrough with defaultAccount: ${setup.defaultAccount}, Ξ${shared
         .userBalance.initial}`,
       data: setup,
     });
 
-    shared.vault = await setupVault(`test-${randomString()}`);
-    await getVaultsOfManager(setup.defaultAccount);
+    shared.vaultName = `test-${randomString()}`;
+    shared.vault = await setupVault(shared.vaultName);
+    expect(shared.vault.name).toBe(shared.vaultName);
+    expect(shared.vault.id).toBeGreaterThan(0);
+    expect(shared.vault.address).toBeTruthy();
+    expect(shared.vault.timestamp instanceof Date).toBeTruthy();
+    trace({
+      message: `Created vault: ${shared.vault.name} (${shared.vault
+        .id}) at ${shared.vault.address}`,
+      data: shared,
+    });
+
+    const vaultAddress = await vaultForManager(setup.defaultAccount);
+    expect(vaultAddress).toBe(shared.vault.address);
 
     /*
     shared.participation.initial = await getParticipation(
