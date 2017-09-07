@@ -5,10 +5,10 @@ import setup from "../../../../lib/utils/setup";
 import trace from "../../../../lib/utils/trace";
 import setupVault from "../../../../lib/version/transactions/setupVault";
 import vaultForManager from "../../../../lib/version/calls/vaultForManager";
-
-/*
 import getParticipation from "../../../../lib/participation/calls/getParticipation";
 import subscribe from "../../../../lib/participation/transactions/subscribe";
+
+/*
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
 import takeOrder from "../../../../lib/vault/transactions/takeOrder";
 import redeem from "../../../../lib/participation/transactions/redeem";
@@ -18,7 +18,7 @@ const shared = { userBalance: {}, participation: {} };
 const randomString = (length = 4) =>
   Math.random().toString(36).substr(2, length);
 
-xit(
+it(
   "Create fund, invest, take order, redeem",
   async () => {
     console.log("\n");
@@ -40,7 +40,7 @@ xit(
     expect(shared.vault.address).toBeTruthy();
     expect(shared.vault.timestamp instanceof Date).toBeTruthy();
     trace({
-      message: `Created vault: ${shared.vault.name} (${shared.vault
+      message: `vaultCreated: ${shared.vault.name} (${shared.vault
         .id}) at ${shared.vault.address}`,
       data: shared,
     });
@@ -48,15 +48,10 @@ xit(
     const vaultAddress = await vaultForManager(setup.defaultAccount);
     expect(vaultAddress).toBe(shared.vault.address);
 
-    /*
     shared.participation.initial = await getParticipation(
       shared.vault.address,
       setup.defaultAccount,
     );
-    trace({
-      message: `vaultCreated: ${shared.vault.address}`,
-      data: shared,
-    });
     expect(shared.participation.initial.personalStake.toNumber()).toBe(0);
     expect(shared.participation.initial.totalSupply.toNumber()).toBe(0);
 
@@ -77,6 +72,7 @@ xit(
     expect(shared.participation.invested.personalStake.toNumber()).toBe(3);
     expect(shared.participation.invested.totalSupply.toNumber()).toBe(3);
 
+    /*
     shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
     trace({
       message: `Got orderbook for MLN-T/ETH-T with length: ${shared.orderBook
