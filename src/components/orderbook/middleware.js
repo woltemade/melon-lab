@@ -10,7 +10,6 @@ const orderbookMiddleware = store => next => action => {
       const quoteTokenSymbol = params.assetPair.split("/")[1];
       getOrderbook(baseTokenSymbol, quoteTokenSymbol)
         .then(orderbook => {
-          store.dispatch(creators.updateOrderbook({ orders: orderbook }));
           const formattedOrderbook = orderbook.map(order => {
             const result = order;
             result.price = order.price.toString();
@@ -20,13 +19,17 @@ const orderbookMiddleware = store => next => action => {
             return result;
           });
           const sellOrders = formattedOrderbook
-            .slice(0, orderbook.length / 2)
+            .filter(o => o.type === "sell")
             .reverse();
-          const buyOrders = formattedOrderbook.slice(
-            orderbook.length / 2,
-            orderbook.length,
+          const buyOrders = formattedOrderbook.filter(o => o.type === "buy");
+
+          store.dispatch(
+            creators.updateOrderbook({
+              orders: orderbook,
+              buyOrders,
+              sellOrders,
+            }),
           );
-          store.dispatch(creators.updateOrderbook({ buyOrders, sellOrders }));
         })
         .catch(error => console.log(error));
       break;
