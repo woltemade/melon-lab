@@ -1,8 +1,9 @@
 import BigNumber from "bignumber.js";
-import { findLast, propEq } from "ramda";
+// import { findLast, propEq } from "ramda";
 
 import setup from "../../../../lib/utils/setup";
 import trace from "../../../../lib/utils/trace";
+import getBalance from "../../../../lib/assets/calls/getBalance";
 import setupVault from "../../../../lib/version/transactions/setupVault";
 import vaultForManager from "../../../../lib/version/calls/vaultForManager";
 import getParticipation from "../../../../lib/participation/calls/getParticipation";
@@ -13,7 +14,10 @@ import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
 import takeOrder from "../../../../lib/vault/transactions/takeOrder";
 import redeem from "../../../../lib/participation/transactions/redeem";
 */
-const shared = { userBalance: {}, participation: {} };
+
+const INITIAL_SUBSCRIBE_QUANTITY = 0.1;
+
+const shared = { etherBalance: {}, participation: {}, melonBalance: {} };
 
 const randomString = (length = 4) =>
   Math.random().toString(36).substr(2, length);
@@ -23,15 +27,21 @@ it(
   async () => {
     console.log("\n");
 
-    shared.userBalance.initial = setup.web3.fromWei(
+    expect(setup.web3.eth.syncing).toBeFalsy();
+
+    shared.etherBalance.initial = setup.web3.fromWei(
       setup.web3.eth.getBalance(setup.defaultAccount),
     );
-    expect(shared.userBalance.initial.toFixed()).toBeGreaterThan(3);
+    expect(shared.etherBalance.initial.toFixed()).toBeGreaterThan(
+      INITIAL_SUBSCRIBE_QUANTITY,
+    );
     trace({
-      message: `Start walkthrough with defaultAccount: ${setup.defaultAccount}, Ξ${shared
-        .userBalance.initial}`,
+      message: `Start walkthrough with defaultAccount: ${setup.defaultAccount}`,
       data: setup,
     });
+    trace({ message: `Etherbalance: Ξ${shared.etherBalance.initial} ` });
+    shared.melonBalance.initial = await getBalance("MLN-T");
+    trace({ message: `Melon Balance: Ⓜ  ${shared.melonBalance.initial} ` });
 
     shared.vaultName = `test-${randomString()}`;
     shared.vault = await setupVault(shared.vaultName);
@@ -55,22 +65,26 @@ it(
     expect(shared.participation.initial.personalStake.toNumber()).toBe(0);
     expect(shared.participation.initial.totalSupply.toNumber()).toBe(0);
 
-    shared.subscription = await subscribe(
+    shared.subscriptionRequest = await subscribe(
       shared.vault.address,
-      new BigNumber(3),
-      new BigNumber(3),
+      new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
+      new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
     );
     trace({
-      message: `subscribed. shares: ${shared.subscription.received} @ ${shared
-        .subscription.price} per share`,
+      message: `Subscribe requested. shares: ${shared.subscriptionRequest
+        .numShares}`,
       data: shared,
     });
     shared.participation.invested = await getParticipation(
       shared.vault.address,
       setup.defaultAccount,
     );
-    expect(shared.participation.invested.personalStake.toNumber()).toBe(3);
-    expect(shared.participation.invested.totalSupply.toNumber()).toBe(3);
+    expect(shared.participation.invested.personalStake.toNumber()).toBe(
+      INITIAL_SUBSCRIBE_QUANTITY,
+    );
+    expect(shared.participation.invested.totalSupply.toNumber()).toBe(
+      INITIAL_SUBSCRIBE_QUANTITY,
+    );
 
     /*
     shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
