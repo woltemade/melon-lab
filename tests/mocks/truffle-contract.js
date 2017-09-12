@@ -98,7 +98,7 @@ const instance = {
         ]),
       ),
   ),
-  getLastOrderId: jest.fn(
+  getLastOfferId: jest.fn(
     () => new Promise(resolve => resolve(new BigNumber(8))),
   ),
   Trade: jest.fn(() => ({
