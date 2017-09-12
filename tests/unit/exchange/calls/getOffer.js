@@ -12,5 +12,5 @@ test("getOffer", async () => {
   expect(order.sell.howMuch.eq("8.55505176")).toBeTruthy();
   expect(contract).toHaveBeenCalledTimes(1);
   expect(contract().setProvider).toHaveBeenCalledTimes(1);
-  expect(contract.mockInspect.instance.offers).toHaveBeenCalledWith(777);
+  expect(contract.mockInspect.instance.offers).toHaveBeenCalledWith(6870);
 });

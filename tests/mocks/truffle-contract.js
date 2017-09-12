@@ -106,7 +106,6 @@ const instance = {
   })),
   isActive: jest.fn(() => new Promise(resolve => resolve(true))),
   getOwner: jest.fn(() => new Promise(resolve => resolve("0xUSER"))),
-  // getOffer
 };
 
 instance.setupVault.estimateGas = jest.fn(() => 650000);
