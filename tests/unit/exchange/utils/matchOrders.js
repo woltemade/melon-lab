@@ -2,11 +2,11 @@ import BigNumber from "bignumber.js";
 
 import orders from "../../../fixtures/orderBook";
 
-import matchOrders from "../../../../lib/exchange/utils/matchOrders";
+import matchOffers from "../../../../lib/exchange/utils/matchOffers";
 
-test("matchOrders", () => {
+test("matchOffers", () => {
   const sellMelonOrders = orders.filter(o => o.sell.symbol === "MLN-T");
-  const matchedOrders = matchOrders(
+  const matchedOrders = matchOffers(
     "sell",
     new BigNumber(0.4),
     sellMelonOrders,

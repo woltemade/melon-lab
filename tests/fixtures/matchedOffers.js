@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
 
-const matchedOrders = [
+const matchedOffers = [
   {
     _id: "9omLP8c3uu38NYhW6",
     id: 1,
@@ -31,4 +31,4 @@ const matchedOrders = [
   },
 ];
 
-export default matchedOrders;
+export default matchedOffers;

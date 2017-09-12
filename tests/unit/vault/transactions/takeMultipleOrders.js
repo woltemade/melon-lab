@@ -1,8 +1,8 @@
 import BigNumber from "bignumber.js";
 
-import matchedOrders from "../../../fixtures/matchedOrders";
+import matchedOffers from "../../../fixtures/matchedOffers";
 
-import takeMultipleOrders from "../../../../lib/vault/transactions/takeMultipleOrders";
+import takeMultipleOffers from "../../../../lib/vault/transactions/takeMultipleOffers";
 
 /* eslint-disable global-require */
 jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
@@ -12,8 +12,8 @@ jest.mock("../../../../lib/universe/calls/getConfig", () =>
 /* eslint-enable */
 
 test("buy 1.5 MLN from two orders: one full and one partial", async () => {
-  const result = await takeMultipleOrders(
-    matchedOrders,
+  const result = await takeMultipleOffers(
+    matchedOffers,
     "0xMANAGER",
     "0xVAULT",
     new BigNumber(1.5),
