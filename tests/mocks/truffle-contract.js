@@ -4,7 +4,7 @@ import orderBook from "../fixtures/blockChainOrders";
 import recentTrades from "../fixtures/recentTrades";
 
 const instance = {
-  orders: jest.fn(
+  offers: jest.fn(
     id =>
       new Promise(resolve => {
         resolve(orderBook.find(o => o.id === id).data);
@@ -16,7 +16,7 @@ const instance = {
         resolve({ transactionHash: "0xBLUB" });
       }),
   ),
-  make: jest.fn(
+  makeOrder: jest.fn(
     () => new Promise(resolve => resolve({ logs: [{ args: { id: 1 } }] })),
   ),
   balanceOf: jest.fn(
@@ -104,6 +104,9 @@ const instance = {
   Trade: jest.fn(() => ({
     get: jest.fn(callback => callback(null, recentTrades)),
   })),
+  isActive: jest.fn(() => new Promise(resolve => resolve(true))),
+  getOwner: jest.fn(() => new Promise(resolve => resolve("0xUSER"))),
+  // getOffer
 };
 
 instance.setupVault.estimateGas = jest.fn(() => 650000);
