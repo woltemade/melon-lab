@@ -74,10 +74,9 @@ const instance = {
               event: "VaultAdded",
               args: {
                 id: new BigNumber(1),
-                address: "0xVAULT",
-                sender: "0xUSER",
+                vaultAddress: "0xVAULT",
                 name: "TESTFUND",
-                atTimestamp: new BigNumber(723310098),
+                atTime: new BigNumber(723310098),
               },
             },
           ],
@@ -106,6 +105,7 @@ const instance = {
   })),
   isActive: jest.fn(() => new Promise(resolve => resolve(true))),
   getOwner: jest.fn(() => new Promise(resolve => resolve("0xUSER"))),
+  avatar: jest.fn(() => new Promise(resolve => resolve(true))),
 };
 
 instance.setupVault.estimateGas = jest.fn(() => 650000);
