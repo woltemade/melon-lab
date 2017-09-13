@@ -6,17 +6,17 @@ import trace from "../../../../lib/utils/trace";
 import getBalance from "../../../../lib/assets/calls/getBalance";
 import setupVault from "../../../../lib/version/transactions/setupVault";
 import getVaultForManager from "../../../../lib/version/calls/getVaultForManager";
-import getVaultInformations from "../../../../lib/vault/calls/getVaultInformations";
 import getParticipation from "../../../../lib/participation/calls/getParticipation";
 import subscribe from "../../../../lib/participation/transactions/subscribe";
-
+import executeRequest from "../../../../lib/participation/transactions/executeRequest";
+import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
 /*
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
 import takeOrder from "../../../../lib/vault/transactions/takeOrder";
 import redeem from "../../../../lib/participation/transactions/redeem";
 */
 
-const INITIAL_SUBSCRIBE_QUANTITY = 0.1;
+const INITIAL_SUBSCRIBE_QUANTITY = 1;
 
 const shared = { etherBalance: {}, participation: {}, melonBalance: {} };
 
@@ -76,6 +76,13 @@ it(
         .numShares}`,
       data: shared,
     });
+    await awaitDataFeedUpdates(3);
+    const requestExecution = await executeRequest(
+      shared.subscriptionRequest.id,
+      shared.vault.address,
+    );
+    console.log("---------", requestExecution);
+
     shared.participation.invested = await getParticipation(
       shared.vault.address,
       setup.defaultAccount,
