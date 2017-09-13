@@ -1,3 +1,4 @@
+import { setup } from "@melonproject/melon.js";
 import { types, creators } from "./general";
 import { creators as orderbookCreators } from "./orderbook/duck";
 import { creators as recentTradesCreators } from "./recentTrades/duck";

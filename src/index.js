@@ -2,12 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import Web3 from "web3";
-import { setup, getConfig } from "@melonproject/melon.js";
+import {
+  setup,
+  getVaultForManager,
+  getVaultInformations,
+} from "@melonproject/melon.js";
 import store from "./store";
 import "./index.css";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 
+import { creators as generalCreators } from "./components/general";
 import { creators as orderbookCreators } from "./components/orderbook/duck";
 import { creators as factsheetCreators } from "./components/factsheet/duck";
 import { creators as fundHoldingsCreators } from "./components/fundHoldings/duck";
@@ -31,9 +36,29 @@ window.addEventListener("load", () => {
     web3: window.web3,
     daemonAddress: "0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd",
   });
-  getConfig().then(res => {
-    console.log("melon.js config ", res);
-  });
+
+  getVaultForManager(setup.web3.eth.accounts[0])
+    .then(vaultAddress => {
+      if (vaultAddress) return getVaultInformations(vaultAddress);
+      store.dispatch(
+        generalCreators.update({
+          mode: "setup",
+        }),
+      );
+    })
+    .then(result => {
+      if (result) {
+        store.dispatch(
+          generalCreators.update({
+            mode: "invest",
+            vaultAddress: result.vaultAddress,
+            managerAddress: result.managerAddress,
+            vaultName: result.name,
+            inceptionDate: result.creationDate,
+          }),
+        );
+      }
+    });
 
   // Now you can start your app & access web3 freely:
   const defaultAssetPair = "MLN-T/ETH-T";

@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@melonproject/melon.js": "^0.2.6",
-    "@melonproject/protocol": "0.2.0-alpha.17",
+    "@melonproject/protocol": "^0.3.2-alpha.9",
     "bignumber.js": "^4.0.2",
     "prop-types": "^15.5.10",
     "ramda": "^0.24.1",

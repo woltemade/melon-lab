@@ -1,6 +1,8 @@
 export const initialState = {
+  mode: "", // 3 existing modes right now: setup / invest / manage
   vaultAddress: "",
   managerAddress: "",
+  inceptionDate: null,
   assetPair: "MLN-T/ETH-T",
   baseTokenSymbol: "MLN-T",
   quoteTokenSymbol: "ETH-T",
