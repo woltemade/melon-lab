@@ -9,7 +9,7 @@ import {
 } from "@melonproject/melon.js";
 import store from "./store";
 import "./index.css";
-import App from "./App";
+import AppContainer from "./components/app/container";
 import registerServiceWorker from "./registerServiceWorker";
 
 import { creators as generalCreators } from "./components/general";
@@ -42,15 +42,16 @@ window.addEventListener("load", () => {
       if (vaultAddress) return getVaultInformations(vaultAddress);
       store.dispatch(
         generalCreators.update({
-          mode: "setup",
+          mode: "Setup",
         }),
       );
     })
     .then(result => {
       if (result) {
+        console.log(result);
         store.dispatch(
           generalCreators.update({
-            mode: "invest",
+            mode: "Invest",
             vaultAddress: result.vaultAddress,
             managerAddress: result.managerAddress,
             vaultName: result.name,
@@ -71,7 +72,7 @@ window.addEventListener("load", () => {
 
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <AppContainer />
     </Provider>,
     document.getElementById("root"),
   );

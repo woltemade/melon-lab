@@ -1,13 +1,12 @@
 import React from "react";
 import { Menu } from "semantic-ui-react";
-import ManagerView from "./components/managerView/managerView";
-import SetupContainer from "./components/setup/container";
-import InvestContainer from "./components/invest/container";
+import ManagerView from "../managerView/managerView";
+import SetupContainer from "../setup/container";
+import InvestContainer from "../invest/container";
+import "../../App.css";
 
-import "./App.css";
-
-const App = () =>
-  (<div className="App">
+const App = props => (
+  <div className="App">
     <div className="App-header">
       <h1>MELON</h1>
       <Menu secondary>
@@ -19,9 +18,14 @@ const App = () =>
       </Menu>
     </div>
     <hr />
-    <SetupContainer />
-    <InvestContainer />
-    <ManagerView />
-  </div>);
+    {props.general.mode === "Manage" ? (
+      <ManagerView />
+    ) : props.general.mode === "Setup" ? (
+      <SetupContainer />
+    ) : (
+      <InvestContainer />
+    )}
+  </div>
+);
 
 export default App;
