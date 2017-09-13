@@ -5,7 +5,8 @@ import setup from "../../../../lib/utils/setup";
 import trace from "../../../../lib/utils/trace";
 import getBalance from "../../../../lib/assets/calls/getBalance";
 import setupVault from "../../../../lib/version/transactions/setupVault";
-import vaultForManager from "../../../../lib/version/calls/vaultForManager";
+import getVaultForManager from "../../../../lib/version/calls/getVaultForManager";
+import getVaultInformations from "../../../../lib/vault/calls/getVaultInformations";
 import getParticipation from "../../../../lib/participation/calls/getParticipation";
 import subscribe from "../../../../lib/participation/transactions/subscribe";
 
@@ -55,7 +56,7 @@ it(
       data: shared,
     });
 
-    const vaultAddress = await vaultForManager(setup.defaultAccount);
+    const vaultAddress = await getVaultForManager(setup.defaultAccount);
     expect(vaultAddress).toBe(shared.vault.address);
 
     shared.participation.initial = await getParticipation(

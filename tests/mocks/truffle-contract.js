@@ -106,6 +106,19 @@ const instance = {
   isActive: jest.fn(() => new Promise(resolve => resolve(true))),
   getOwner: jest.fn(() => new Promise(resolve => resolve("0xUSER"))),
   avatar: jest.fn(() => new Promise(resolve => resolve(true))),
+  info: jest.fn(
+    () =>
+      new Promise(resolve =>
+        resolve([
+          "0xUSER",
+          "Test Fund",
+          "MLN-T",
+          new BigNumber(18),
+          new BigNumber(1505292372),
+          new BigNumber(0),
+        ]),
+      ),
+  ),
 };
 
 instance.setupVault.estimateGas = jest.fn(() => 650000);
