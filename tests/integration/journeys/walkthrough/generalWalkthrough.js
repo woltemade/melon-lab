@@ -11,7 +11,7 @@ import subscribe from "../../../../lib/participation/transactions/subscribe";
 
 /*
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
-import takeOffer from "../../../../lib/vault/transactions/takeOffer";
+import takeOrder from "../../../../lib/vault/transactions/takeOrder";
 import redeem from "../../../../lib/participation/transactions/redeem";
 */
 
@@ -97,7 +97,7 @@ it(
     const orderToTake = findLast(propEq("type", "sell"))(shared.orderBook);
     trace({ message: `orderToTake: ${orderToTake.id}`, data: orderToTake });
 
-    await takeOffer(
+    await takeOrder(
       orderToTake.id,
       setup.defaultAccount,
       shared.vault.address,

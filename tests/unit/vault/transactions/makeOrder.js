@@ -1,5 +1,5 @@
 import BigNumber from "bignumber.js";
-import makeOffer from "../../../../lib/vault/transactions/makeOffer";
+import makeOrder from "../../../../lib/vault/transactions/makeOrder";
 
 /* eslint-disable global-require */
 jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
@@ -9,7 +9,7 @@ jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
 /* eslint-enable */
 
 test("make an offer", async () => {
-  const result = await makeOffer(
+  const result = await makeOrder(
     "0xDAEMON",
     "MLN-T",
     "ETH-T",
