@@ -76,17 +76,19 @@ it(
         .numShares}`,
       data: shared,
     });
-    // await awaitDataFeedUpdates(2);
-    const requestExecution = await executeRequest(
+
+    await awaitDataFeedUpdates(2);
+
+    shared.executedRequest = await executeRequest(
       shared.subscriptionRequest.id,
       shared.vault.address,
     );
-    console.log("---------", requestExecution);
 
     shared.participation.invested = await getParticipation(
       shared.vault.address,
       setup.defaultAccount,
     );
+
     expect(shared.participation.invested.personalStake.toNumber()).toBe(
       INITIAL_SUBSCRIBE_QUANTITY,
     );
