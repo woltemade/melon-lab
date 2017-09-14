@@ -10,6 +10,7 @@ import getParticipation from "../../../../lib/participation/calls/getParticipati
 import subscribe from "../../../../lib/participation/transactions/subscribe";
 import executeRequest from "../../../../lib/participation/transactions/executeRequest";
 import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
+import watchMelon from "../../../../lib/version/events/watchMelon";
 /*
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
 import takeOrder from "../../../../lib/vault/transactions/takeOrder";
@@ -23,12 +24,14 @@ const shared = { etherBalance: {}, participation: {}, melonBalance: {} };
 const randomString = (length = 4) =>
   Math.random().toString(36).substr(2, length);
 
-xit(
+it(
   "Create fund, invest, take order, redeem",
   async () => {
     console.log("\n");
 
     expect(setup.web3.eth.syncing).toBeFalsy();
+
+    watchMelon(console.log);
 
     shared.etherBalance.initial = setup.web3.fromWei(
       setup.web3.eth.getBalance(setup.defaultAccount),
