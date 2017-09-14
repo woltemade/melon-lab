@@ -4,8 +4,8 @@ import BigNumber from "bignumber.js";
 import setup from "../../../../lib/utils/setup";
 import trace from "../../../../lib/utils/trace";
 import getBalance from "../../../../lib/assets/calls/getBalance";
-import setupVault from "../../../../lib/version/transactions/setupVault";
-import getVaultForManager from "../../../../lib/version/calls/getVaultForManager";
+import setupFund from "../../../../lib/version/transactions/setupFund";
+import getFundForManager from "../../../../lib/version/calls/getFundForManager";
 import getParticipation from "../../../../lib/participation/calls/getParticipation";
 import subscribe from "../../../../lib/participation/transactions/subscribe";
 import executeRequest from "../../../../lib/participation/transactions/executeRequest";
@@ -45,7 +45,7 @@ it(
     trace({ message: `Melon Balance: Ⓜ  ${shared.melonBalance.initial} ` });
 
     shared.vaultName = `test-${randomString()}`;
-    shared.vault = await setupVault(shared.vaultName);
+    shared.vault = await setupFund(shared.vaultName);
     expect(shared.vault.name).toBe(shared.vaultName);
     expect(shared.vault.id).toBeGreaterThan(0);
     expect(shared.vault.address).toBeTruthy();
@@ -56,7 +56,7 @@ it(
       data: shared,
     });
 
-    const vaultAddress = await getVaultForManager(setup.defaultAccount);
+    const vaultAddress = await getFundForManager(setup.defaultAccount);
     expect(vaultAddress).toBe(shared.vault.address);
 
     shared.participation.initial = await getParticipation(
@@ -76,7 +76,7 @@ it(
         .numShares}`,
       data: shared,
     });
-    await awaitDataFeedUpdates(3);
+    // await awaitDataFeedUpdates(2);
     const requestExecution = await executeRequest(
       shared.subscriptionRequest.id,
       shared.vault.address,
