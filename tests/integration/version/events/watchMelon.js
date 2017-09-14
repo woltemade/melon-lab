@@ -1,19 +1,36 @@
-import setupVault from "../../../../lib/version/transactions/setupVault";
+import { all } from "ramda";
+
+import setupFund from "../../../../lib/version/transactions/setupFund";
 import watchMelon from "../../../../lib/version/events/watchMelon";
 
 const randomString = (length = 4) =>
   Math.random().toString(36).substr(2, length);
 
-xit(
-  "wathVaultAssociated",
-  async () => {
-    await new Promise(() => {
-      watchMelon("0x55a5108f08954d36560aced719716a5c5bbb9056", console.log);
+const fundName = `test-${randomString()}`;
 
-      console.log("asdf");
-      setupVault(`test-${randomString()}`);
-      console.log("asdf");
-    });
+const eventsSeen = {
+  FundAdded: false,
+  DataUpdated: false,
+};
+
+const eventExpectations = {
+  FundAdded: args => {
+    expect(args.name).toEqual(fundName);
   },
-  10 * 60 * 1000,
+};
+
+it(
+  "watchVaultAssociated",
+  async () =>
+    new Promise(async resolve => {
+      watchMelon((err, eventName, args) => {
+        console.log(eventName, args);
+        eventsSeen[eventName] = args;
+        if (eventExpectations[eventName]) eventExpectations[eventName](args);
+        if (all(i => i)(Object.values(eventsSeen))) resolve();
+      });
+
+      await setupFund(fundName);
+    }),
+  2 * 60 * 1000,
 );
