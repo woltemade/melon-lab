@@ -1,12 +1,12 @@
-import setupVault from "../../../../lib/version/transactions/setupVault";
+import setupFund from "../../../../lib/version/transactions/setupFund";
 
 /* eslint-disable global-require */
 jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
 
 /* eslint-enable */
 
-test("it creates a vault", async () => {
-  const result = await setupVault("TESTVAULT");
+test("it creates a fund", async () => {
+  const result = await setupFund("TESTVAULT");
   expect(result).toBeTruthy();
   expect(result.id).toBe(1);
   expect(result.address).toBe("0xVAULT");
