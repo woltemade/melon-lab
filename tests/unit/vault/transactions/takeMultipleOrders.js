@@ -2,7 +2,7 @@ import BigNumber from "bignumber.js";
 
 import matchedOrders from "../../../fixtures/matchedOrders";
 
-import takeMultipleOrders from "../../../../lib/vault/transactions/takeMultipleOrders";
+import takeMultipleOrders from "../../../../lib/fund/transactions/takeMultipleOrders";
 
 /* eslint-disable global-require */
 jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
