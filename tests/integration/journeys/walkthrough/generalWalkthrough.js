@@ -10,13 +10,15 @@ import getParticipation from "../../../../lib/participation/calls/getParticipati
 import subscribe from "../../../../lib/participation/transactions/subscribe";
 import executeRequest from "../../../../lib/participation/transactions/executeRequest";
 import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
+import makeOrder from "../../../../lib/fund/transactions/makeOrder";
+
 /*
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
 import takeOrder from "../../../../lib/vault/transactions/takeOrder";
 import redeem from "../../../../lib/participation/transactions/redeem";
 */
 
-const INITIAL_SUBSCRIBE_QUANTITY = 1;
+const INITIAL_SUBSCRIBE_QUANTITY = 50;
 
 const shared = { etherBalance: {}, participation: {}, melonBalance: {} };
 
@@ -47,7 +49,7 @@ it(
     shared.vaultName = `test-${randomString()}`;
     shared.vault = await setupFund(shared.vaultName);
     expect(shared.vault.name).toBe(shared.vaultName);
-    expect(shared.vault.id).toBeGreaterThan(0);
+    expect(shared.vault.id).toBeGreaterThanOrEqual(0);
     expect(shared.vault.address).toBeTruthy();
     expect(shared.vault.timestamp instanceof Date).toBeTruthy();
     trace({
@@ -95,6 +97,17 @@ it(
     expect(shared.participation.invested.totalSupply.toNumber()).toBe(
       INITIAL_SUBSCRIBE_QUANTITY,
     );
+
+    shared.makeOrder = await makeOrder(
+      shared.vault.address,
+      // "0xcaf546dce6f793a11e872a5878881e537c306c67",
+      "MLN-T",
+      "ETH-T",
+      4,
+      1,
+    );
+
+    console.log(shared.makeOrder);
 
     /*
     shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
