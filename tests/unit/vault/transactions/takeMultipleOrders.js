@@ -6,9 +6,6 @@ import takeMultipleOrders from "../../../../lib/fund/transactions/takeMultipleOr
 
 /* eslint-disable global-require */
 jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
-jest.mock("../../../../lib/universe/calls/getConfig", () =>
-  require("../../../mocks/truffle-contract"),
-);
 /* eslint-enable */
 
 test("buy 1.5 MLN from two orders: one full and one partial", async () => {
