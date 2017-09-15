@@ -7,7 +7,7 @@ try {
   setup.init({
     web3,
     daemonAddress: "0x00360d2b7d240ec0643b6d819ba81a09e40e5bcd",
-    defaultAccount: "0x2809a8B74D51eEcFE4d229a47937964e43D55c30",
+    defaultAccount: "0xfc669feb5c9a551bea36729f8f4193929a44871d",
     tracer: ({ timestamp, message, category, data }) => {
       const args = [timestamp.toISOString(), `[${category}]`, message];
       if (category === "ensureFailed") {

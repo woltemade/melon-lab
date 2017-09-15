@@ -22,6 +22,7 @@ A convenient Javascript interface to the Melon protocol Ethereum smart contracts
   "1200000000000" (number of 0s depending on the token decimals)
 - Abstract token address problem: Always consume and return tokens in their 
   symbol name instead of address.
+- Return standard JS object wherever possible. For example: Timestamps are Date objects. Ids are numbers (no need for bignumber), ...
 
 ## Usage
 
