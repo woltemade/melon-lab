@@ -1,5 +1,5 @@
 import BigNumber from "bignumber.js";
-// import { findLast, propEq } from "ramda";
+import { findLast, propEq } from "ramda";
 
 import setup from "../../../../lib/utils/setup";
 import trace from "../../../../lib/utils/trace";
@@ -12,10 +12,11 @@ import executeRequest from "../../../../lib/participation/transactions/executeRe
 import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
 import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFund";
 import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
+import cancelOrder from "../../../../lib/exchange/transactions/cancelOrder";
 
-/*
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
-import takeOrder from "../../../../lib/vault/transactions/takeOrder";
+import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFund";
+/*
 import redeem from "../../../../lib/participation/transactions/redeem";
 */
 
@@ -109,32 +110,39 @@ it(
     // );
 
     shared.simpleOrder = await makeOrder(
-      new BigNumber(1),
+      new BigNumber(2),
       "ETH-T",
       new BigNumber(2),
       "MLN-T",
     );
+    trace({ message: `Made order with id: ${shared.simpleOrder.id}` });
 
-    console.log(shared.simpleOrder);
-
-    /*
-    shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
-    trace({
-      message: `Got orderbook for MLN-T/ETH-T with length: ${shared.orderBook
-        .length}`,
-      data: shared,
-    });
-
-    const orderToTake = findLast(propEq("type", "sell"))(shared.orderBook);
-    trace({ message: `orderToTake: ${orderToTake.id}`, data: orderToTake });
-
-    await takeOrder(
-      orderToTake.id,
+    shared.canceledOrder = await cancelOrder(
+      shared.simpleOrder.id - 1,
       setup.defaultAccount,
-      shared.vault.address,
-      new BigNumber(2),
     );
 
+    console.log(shared.canceledOrder);
+
+    // shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
+    // trace({
+    //   message: `Got orderbook for MLN-T/ETH-T with length: ${shared.orderBook
+    //     .length}`,
+    //   data: shared,
+    // });
+
+    // const orderToTake = findLast(propEq("type", "sell"))(shared.orderBook);
+    // trace({ message: `orderToTake: ${orderToTake.id}`, data: orderToTake });
+
+    // shared.takenOrder = await takeOrderFromFund(
+    //   shared.simpleOrder.id,
+    //   setup.defaultAccount,
+    //   "0xcaf546dce6f793a11e872a5878881e537c306c67",
+    //   new BigNumber(2),
+    // );
+
+    console.log(shared.takenOrder);
+    /*
     shared.redeem = await redeem(
       setup.defaultAccount,
       shared.vault.address,
