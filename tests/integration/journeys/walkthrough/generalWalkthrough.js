@@ -11,6 +11,7 @@ import subscribe from "../../../../lib/participation/transactions/subscribe";
 import executeRequest from "../../../../lib/participation/transactions/executeRequest";
 import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
 import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFund";
+import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
 
 /*
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
@@ -46,68 +47,75 @@ it(
     shared.melonBalance.initial = await getBalance("MLN-T");
     trace({ message: `Melon Balance: Ⓜ  ${shared.melonBalance.initial} ` });
 
-    shared.vaultName = `test-${randomString()}`;
-    shared.vault = await setupFund(shared.vaultName);
-    expect(shared.vault.name).toBe(shared.vaultName);
-    expect(shared.vault.id).toBeGreaterThanOrEqual(0);
-    expect(shared.vault.address).toBeTruthy();
-    expect(shared.vault.timestamp instanceof Date).toBeTruthy();
-    trace({
-      message: `vaultCreated: ${shared.vault.name} (${shared.vault
-        .id}) at ${shared.vault.address}`,
-      data: shared,
-    });
+    // shared.vaultName = `test-${randomString()}`;
+    // shared.vault = await setupFund(shared.vaultName);
+    // expect(shared.vault.name).toBe(shared.vaultName);
+    // expect(shared.vault.id).toBeGreaterThanOrEqual(0);
+    // expect(shared.vault.address).toBeTruthy();
+    // expect(shared.vault.timestamp instanceof Date).toBeTruthy();
+    // trace({
+    //   message: `vaultCreated: ${shared.vault.name} (${shared.vault
+    //     .id}) at ${shared.vault.address}`,
+    //   data: shared,
+    // });
 
-    const vaultAddress = await getFundForManager(setup.defaultAccount);
-    expect(vaultAddress).toBe(shared.vault.address);
+    // const vaultAddress = await getFundForManager(setup.defaultAccount);
+    // expect(vaultAddress).toBe(shared.vault.address);
 
-    shared.participation.initial = await getParticipation(
-      shared.vault.address,
-      setup.defaultAccount,
-    );
-    expect(shared.participation.initial.personalStake.toNumber()).toBe(0);
-    expect(shared.participation.initial.totalSupply.toNumber()).toBe(0);
+    // shared.participation.initial = await getParticipation(
+    //   shared.vault.address,
+    //   setup.defaultAccount,
+    // );
+    // expect(shared.participation.initial.personalStake.toNumber()).toBe(0);
+    // expect(shared.participation.initial.totalSupply.toNumber()).toBe(0);
 
-    shared.subscriptionRequest = await subscribe(
-      shared.vault.address,
-      new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
-      new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
-    );
-    trace({
-      message: `Subscribe requested. shares: ${shared.subscriptionRequest
-        .numShares}`,
-      data: shared,
-    });
+    // shared.subscriptionRequest = await subscribe(
+    //   shared.vault.address,
+    //   new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
+    //   new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
+    // );
+    // trace({
+    //   message: `Subscribe requested. shares: ${shared.subscriptionRequest
+    //     .numShares}`,
+    //   data: shared,
+    // });
 
-    await awaitDataFeedUpdates(2);
+    // await awaitDataFeedUpdates(2);
 
-    shared.executedRequest = await executeRequest(
-      shared.subscriptionRequest.id,
-      shared.vault.address,
-    );
+    // shared.executedRequest = await executeRequest(
+    //   shared.subscriptionRequest.id,
+    //   shared.vault.address,
+    // );
 
-    shared.participation.invested = await getParticipation(
-      shared.vault.address,
-      setup.defaultAccount,
-    );
+    // shared.participation.invested = await getParticipation(
+    //   shared.vault.address,
+    //   setup.defaultAccount,
+    // );
 
-    expect(shared.participation.invested.personalStake.toNumber()).toBe(
-      INITIAL_SUBSCRIBE_QUANTITY,
-    );
-    expect(shared.participation.invested.totalSupply.toNumber()).toBe(
-      INITIAL_SUBSCRIBE_QUANTITY,
-    );
+    // expect(shared.participation.invested.personalStake.toNumber()).toBe(
+    //   INITIAL_SUBSCRIBE_QUANTITY,
+    // );
+    // expect(shared.participation.invested.totalSupply.toNumber()).toBe(
+    //   INITIAL_SUBSCRIBE_QUANTITY,
+    // );
 
-    shared.makeOrderFromFund = await makeOrderFromFund(
-      shared.vault.address,
-      // "0xcaf546dce6f793a11e872a5878881e537c306c67",
-      "MLN-T",
+    // shared.makeOrderFromFund = await makeOrderFromFund(
+    //   shared.vault.address,
+    //   // "0xcaf546dce6f793a11e872a5878881e537c306c67",
+    //   "MLN-T",
+    //   "ETH-T",
+    //   4,
+    //   1,
+    // );
+
+    shared.simpleOrder = await makeOrder(
+      new BigNumber(1),
       "ETH-T",
-      4,
-      1,
+      new BigNumber(2),
+      "MLN-T",
     );
 
-    console.log(shared.makeOrderFromFund);
+    console.log(shared.simpleOrder);
 
     /*
     shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
