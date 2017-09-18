@@ -2,7 +2,7 @@ import BigNumber from "bignumber.js";
 
 import matchedOrders from "../../../fixtures/matchedOrders";
 
-import takeMultipleOrders from "../../../../lib/fund/transactions/takeMultipleOrders";
+import takeMultipleOrdersFromFund from "../../../../lib/fund/transactions/takeMultipleOrdersFromFund";
 
 /* eslint-disable global-require */
 jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
@@ -12,7 +12,7 @@ jest.mock("../../../../lib/universe/calls/getConfig", () =>
 /* eslint-enable */
 
 test("buy 1.5 MLN from two orders: one full and one partial", async () => {
-  const result = await takeMultipleOrders(
+  const result = await takeMultipleOrdersFromFund(
     matchedOrders,
     "0xMANAGER",
     "0xVAULT",

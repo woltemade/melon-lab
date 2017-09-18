@@ -1,7 +1,7 @@
 import contract from "truffle-contract";
 import BigNumber from "bignumber.js";
 
-import takeOrder from "../../../../lib/fund/transactions/takeOrder";
+import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFund";
 
 /* eslint-disable global-require */
 jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
@@ -11,7 +11,7 @@ jest.mock("../../../../lib/universe/calls/getConfig", () =>
 /* eslint-enable */
 
 test("without quantity (-> max) & basic calling testing", async () => {
-  const result = await takeOrder(6870, "0xMANAGER", "0xVAULT");
+  const result = await takeOrderFromFund(6870, "0xMANAGER", "0xVAULT");
 
   expect(result).toBeTruthy();
   expect(result.executedQuantity.eq("8.55505176")).toBeTruthy();
@@ -27,7 +27,7 @@ test("without quantity (-> max) & basic calling testing", async () => {
 });
 
 test("with higher quantity -> take max", async () => {
-  const result = await takeOrder(
+  const result = await takeOrderFromFund(
     6870,
     "0xMANAGER",
     "0xVAULT",
@@ -44,7 +44,7 @@ test("with higher quantity -> take max", async () => {
 });
 
 test("with lower quantity -> take as specified", async () => {
-  const result = await takeOrder(
+  const result = await takeOrderFromFund(
     6870,
     "0xMANAGER",
     "0xVAULT",

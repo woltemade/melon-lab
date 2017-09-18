@@ -10,7 +10,7 @@ import getParticipation from "../../../../lib/participation/calls/getParticipati
 import subscribe from "../../../../lib/participation/transactions/subscribe";
 import executeRequest from "../../../../lib/participation/transactions/executeRequest";
 import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
-import makeOrder from "../../../../lib/fund/transactions/makeOrder";
+import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFund";
 
 /*
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
@@ -98,7 +98,7 @@ it(
       INITIAL_SUBSCRIBE_QUANTITY,
     );
 
-    shared.makeOrder = await makeOrder(
+    shared.makeOrderFromFund = await makeOrderFromFund(
       shared.vault.address,
       // "0xcaf546dce6f793a11e872a5878881e537c306c67",
       "MLN-T",
@@ -107,7 +107,7 @@ it(
       1,
     );
 
-    console.log(shared.makeOrder);
+    console.log(shared.makeOrderFromFund);
 
     /*
     shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
