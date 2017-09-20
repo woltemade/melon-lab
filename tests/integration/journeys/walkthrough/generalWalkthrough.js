@@ -1,5 +1,5 @@
 import BigNumber from "bignumber.js";
-import { findLast, propEq } from "ramda";
+// import { findLast, propEq } from "ramda";
 
 import setup from "../../../../lib/utils/setup";
 import getConfig from "../../../../lib/version/calls/getConfig";
@@ -15,9 +15,9 @@ import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFu
 import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
 import cancelOrder from "../../../../lib/exchange/transactions/cancelOrder";
 
+/*
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
 import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFund";
-/*
 import redeem from "../../../../lib/participation/transactions/redeem";
 */
 
@@ -113,18 +113,18 @@ it(
         .participation.invested.personalStake}`,
     });
 
-    // shared.simpleOrder = await makeOrder(
-    //   new BigNumber(1),
-    //   "ETH-T",
-    //   new BigNumber(2),
-    //   "MLN-T",
-    // );
-    // trace({ message: `Made order with id: ${shared.simpleOrder.id}` });
+    shared.simpleOrder = await makeOrder(
+      new BigNumber(1),
+      "ETH-T",
+      new BigNumber(2),
+      "MLN-T",
+    );
+    trace({ message: `Made order with id: ${shared.simpleOrder.id}` });
 
-    // shared.canceledOrder = await cancelOrder(
-    //   shared.simpleOrder.id - 1,
-    //   setup.defaultAccount,
-    // );
+    shared.canceledOrder = await cancelOrder(
+      shared.simpleOrder.id - 1,
+      setup.defaultAccount,
+    );
 
     // console.log(shared.canceledOrder);
 
