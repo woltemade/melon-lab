@@ -14,6 +14,7 @@ import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeed
 import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFund";
 import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
 import cancelOrder from "../../../../lib/exchange/transactions/cancelOrder";
+// import list from "../../../../lib/participation/transactions/list";
 
 /*
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
@@ -21,7 +22,7 @@ import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFu
 import redeem from "../../../../lib/participation/transactions/redeem";
 */
 
-const INITIAL_SUBSCRIBE_QUANTITY = 50;
+const INITIAL_SUBSCRIBE_QUANTITY = 27;
 
 const shared = { etherBalance: {}, participation: {}, melonBalance: {} };
 
@@ -70,6 +71,8 @@ it(
 
     // const vaultAddress = await getFundForManager(setup.defaultAccount);
     // expect(vaultAddress).toBe(shared.vault.address);
+
+    // // await list(setup.defaultAccount);
 
     // shared.participation.initial = await getParticipation(
     //   shared.vault.address,
@@ -126,18 +129,18 @@ it(
       setup.defaultAccount,
     );
 
-    console.log(shared.canceledOrder);
+    // console.log(shared.canceledOrder);
 
-    shared.orderFromFund = await makeOrderFromFund(
-      // shared.vault.address,
-      "0x3a1170383fb0e0614b3068f850415940a559ac66",
-      "MLN-T",
-      "ETH-T",
-      new BigNumber(4),
-      new BigNumber(1),
-    );
+    // shared.orderFromFund = await makeOrderFromFund(
+    //   shared.vault.address,
+    //   // "0xe51aa0361eda8eac06eb4b9ff207c61da6ecac59",
+    //   "MLN-T",
+    //   "ETH-T",
+    //   new BigNumber(1),
+    //   new BigNumber(1),
+    // );
 
-    console.log(shared.orderFromFund);
+    // console.log(shared.orderFromFund);
 
     // shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
     // trace({
