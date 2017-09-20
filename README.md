@@ -170,6 +170,13 @@ By interacting with the smart contracts, we have 2 levels of testing:
 
 - Back to the terminal, make this new file executable by running: `chmod 755 run.sh`
 
+### Configure integration tests to use your address
+Integration tests use [dotenv](https://github.com/motdotla/dotenv) files for 
+enviroment specific configurations. Duplicate `.env.example` to `.env` in the
+projects root folder and change the settings accordingly.
+
+
+
 [gitter-badge]: https://img.shields.io/gitter/room/melonproject/general.js.svg?style=flat-square
 [gitter-url]: https://gitter.im/melonproject/general?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 [license-badge]: https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square
