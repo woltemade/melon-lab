@@ -1,5 +1,9 @@
 import melonTracker from "../../../../lib/version/events/melonTracker";
 
+/* eslint-disable global-require */
+jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
+/* eslint-enable */
+
 it("tracker", done => {
   const tracker = melonTracker.on("DataUpdated");
   tracker(data => {
