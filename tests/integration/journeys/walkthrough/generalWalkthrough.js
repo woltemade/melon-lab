@@ -14,11 +14,11 @@ import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeed
 import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFund";
 import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
 import cancelOrder from "../../../../lib/exchange/transactions/cancelOrder";
+import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
+import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFund";
 // import list from "../../../../lib/participation/transactions/list";
 
 /*
-import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
-import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFund";
 import redeem from "../../../../lib/participation/transactions/redeem";
 */
 
@@ -122,25 +122,27 @@ it(
       new BigNumber(2),
       "MLN-T",
     );
-    trace({ message: `Made order with id: ${shared.simpleOrder.id}` });
+    trace({
+      message: `Regular account made order with id: ${shared.simpleOrder.id}`,
+    });
 
-    shared.canceledOrder = await cancelOrder(
-      shared.simpleOrder.id - 1,
-      setup.defaultAccount,
-    );
-
-    // console.log(shared.canceledOrder);
+    // shared.canceledOrder = await cancelOrder(
+    //   shared.simpleOrder.id,
+    //   setup.defaultAccount,
+    // );
 
     // shared.orderFromFund = await makeOrderFromFund(
-    //   shared.vault.address,
-    //   // "0xe51aa0361eda8eac06eb4b9ff207c61da6ecac59",
+    //   // shared.vault.address,
+    //   "0x00c8775b2932abbff70d0278765f53b2710470cf",
     //   "MLN-T",
     //   "ETH-T",
     //   new BigNumber(1),
     //   new BigNumber(1),
     // );
 
-    // console.log(shared.orderFromFund);
+    // trace({
+    //   message: `Fund placed an order with id: ${shared.orderFromFund.id.toNumber()}`,
+    // });
 
     // shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
     // trace({
@@ -152,14 +154,18 @@ it(
     // const orderToTake = findLast(propEq("type", "sell"))(shared.orderBook);
     // trace({ message: `orderToTake: ${orderToTake.id}`, data: orderToTake });
 
-    // shared.takenOrder = await takeOrderFromFund(
-    //   shared.simpleOrder.id,
-    //   setup.defaultAccount,
-    //   "0xcaf546dce6f793a11e872a5878881e537c306c67",
-    //   new BigNumber(2),
-    // );
+    shared.takenOrder = await takeOrderFromFund(
+      shared.simpleOrder.id,
+      "0x00c8775b2932abbff70d0278765f53b2710470cf",
+      new BigNumber(1.5),
+    );
 
-    // console.log(shared.takenOrder);
+    trace({
+      message: `Fund took order; executed quantity: ${shared.takenOrder
+        .executedQuantity}`,
+      data: shared,
+    });
+
     /*
     shared.redeem = await redeem(
       setup.defaultAccount,
