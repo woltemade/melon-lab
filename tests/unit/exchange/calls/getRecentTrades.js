@@ -2,10 +2,6 @@ import getRecentTrades from "../../../../lib/exchange/calls/getRecentTrades";
 
 /* eslint-disable global-require */
 jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
-
-jest.mock("../../../../lib/universe/calls/getConfig", () =>
-  require("../../../mocks/truffle-contract"),
-);
 /* eslint-enable */
 
 test("getRecentTrades", async () => {

@@ -5,9 +5,6 @@ import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFu
 
 /* eslint-disable global-require */
 jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
-jest.mock("../../../../lib/universe/calls/getConfig", () =>
-  require("../../../mocks/truffle-contract"),
-);
 /* eslint-enable */
 
 test("without quantity (-> max) & basic calling testing", async () => {

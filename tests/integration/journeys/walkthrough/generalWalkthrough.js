@@ -2,7 +2,7 @@ import BigNumber from "bignumber.js";
 import { findLast, propEq } from "ramda";
 
 import setup from "../../../../lib/utils/setup";
-import getConfig from "../../../../lib/universe/calls/getConfig";
+import getConfig from "../../../../lib/version/calls/getConfig";
 import trace from "../../../../lib/utils/trace";
 import getBalance from "../../../../lib/assets/calls/getBalance";
 import setupFund from "../../../../lib/version/transactions/setupFund";
@@ -52,7 +52,7 @@ it(
     shared.config = await getConfig();
     trace({
       message: `Got config w exchange at ${shared.config
-        .exchange}, and datafeed at ${shared.config.datafeed}`,
+        .exchangeAddress}, and datafeed at ${shared.config.dataFeedAddress}`,
       data: shared.config,
     });
 
@@ -113,24 +113,24 @@ it(
         .participation.invested.personalStake}`,
     });
 
-    shared.simpleOrder = await makeOrder(
-      new BigNumber(1),
-      "ETH-T",
-      new BigNumber(2),
-      "MLN-T",
-    );
-    trace({ message: `Made order with id: ${shared.simpleOrder.id}` });
+    // shared.simpleOrder = await makeOrder(
+    //   new BigNumber(1),
+    //   "ETH-T",
+    //   new BigNumber(2),
+    //   "MLN-T",
+    // );
+    // trace({ message: `Made order with id: ${shared.simpleOrder.id}` });
 
-    shared.canceledOrder = await cancelOrder(
-      shared.simpleOrder.id - 1,
-      setup.defaultAccount,
-    );
+    // shared.canceledOrder = await cancelOrder(
+    //   shared.simpleOrder.id - 1,
+    //   setup.defaultAccount,
+    // );
 
-    console.log(shared.canceledOrder);
+    // console.log(shared.canceledOrder);
 
     shared.orderFromFund = await makeOrderFromFund(
-      // shared.vault.address,
-      "0x1ccb2ecc8465d200cea06383068d44110a65ed92",
+      shared.vault.address,
+      // "0x1ccb2ecc8465d200cea06383068d44110a65ed92",
       "MLN-T",
       "ETH-T",
       new BigNumber(4),
