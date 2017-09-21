@@ -18,7 +18,8 @@ const eventExpectations = {
     expect(args.name).toEqual(fundName);
   },
 };
-xit(
+
+it(
   "watchVaultAssociated",
   async () =>
     new Promise(async resolve => {
@@ -28,9 +29,7 @@ xit(
         if (all(i => i)(Object.values(eventsSeen))) resolve();
       });
 
-      console.log("before setupFund");
       await setupFund(fundName);
-      console.log("after setupFund");
     }),
   2 * 60 * 1000,
 );
