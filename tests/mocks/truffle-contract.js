@@ -2,7 +2,6 @@ import BigNumber from "bignumber.js";
 
 import orderBook from "../fixtures/blockChainOrders";
 import recentTrades from "../fixtures/recentTrades";
-import toProcessable from "../../lib/assets/utils/toProcessable";
 
 const instance = {
   offers: jest.fn(
