@@ -10,6 +10,12 @@ const instance = {
         resolve(orderBook.find(o => o.id === id).data);
       }),
   ),
+  getOrder: jest.fn(
+    (consigned, id) =>
+      new Promise(resolve => {
+        resolve(orderBook.find(o => o.id === id).data);
+      }),
+  ),
   takeOrder: jest.fn(
     (/* exchange, id, quantity, objects */) =>
       new Promise(resolve => {
@@ -17,7 +23,10 @@ const instance = {
       }),
   ),
   makeOrder: jest.fn(
-    () => new Promise(resolve => resolve({ logs: [{ args: { id: 1 } }] })),
+    () =>
+      new Promise(resolve =>
+        resolve({ logs: ["", "", "", "", "", { args: { id: 1 } }] }),
+      ),
   ),
   balanceOf: jest.fn(
     (/* ofAddress */) =>
@@ -97,7 +106,7 @@ const instance = {
         ]),
       ),
   ),
-  getLastOfferId: jest.fn(
+  getLastOrderId: jest.fn(
     () => new Promise(resolve => resolve(new BigNumber(8))),
   ),
   Trade: jest.fn(() => ({
@@ -121,6 +130,8 @@ const instance = {
   ),
   getName: jest.fn(() => new Promise(resolve => resolve("Test Fund"))),
   getDecimal: jest.fn(() => new Promise(resolve => resolve(new BigNumber(18)))),
+  getDataFeed: jest.fn(() => new Promise(resolve => resolve("0xDATAFEED"))),
+  getExchange: jest.fn(() => new Promise(resolve => resolve("0xSIMPLEMARKET"))),
 };
 
 instance.setupFund.estimateGas = jest.fn(() => 650000);
