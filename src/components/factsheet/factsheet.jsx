@@ -23,13 +23,13 @@ const Factsheet = props => (
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>AUM: {props.aum} ETH</List.Header>
+            <List.Header>AUM: {props.aum} MLN</List.Header>
           </List.Content>
         </List.Item>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Share Price: {props.sharePrice}</List.Header>
+            <List.Header>Share Price: {props.sharePrice} MLN/Share</List.Header>
           </List.Content>
         </List.Item>
         <List.Item as="a">

@@ -1,4 +1,4 @@
-import { getBalance } from "@melonproject/melon.js";
+import { getBalance, getPrice } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 
 const fundHoldingsMiddleware = store => next => action => {
@@ -23,6 +23,24 @@ const fundHoldingsMiddleware = store => next => action => {
       });
       break;
     }
+
+    case types.REQUEST_PRICES: {
+      currentState.assets.forEach(asset => {
+        getPrice(asset)
+          .then(price => {
+            store.dispatch(
+              creators.updatePrices({
+                [`${asset}_PRICE`]: price.toNumber(),
+              }),
+            );
+          })
+          .catch(err => {
+            throw err;
+          });
+      });
+      break;
+    }
+
     default:
   }
   return next(action);

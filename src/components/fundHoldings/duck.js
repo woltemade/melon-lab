@@ -37,11 +37,31 @@ export const initialState = {
   "XRP-T": 0,
   "SNGLS-T": 0,
   "SNT-T": 0,
+  "MLN-T_PRICE": 0,
+  "ANT-T_PRICE": 0,
+  "BNT-T_PRICE": 0,
+  "BAT-T_PRICE": 0,
+  "BTC-T_PRICE": 0,
+  "DGD-T_PRICE": 0,
+  "DOGE-T_PRICE": 0,
+  "ETC-T_PRICE": 0,
+  "ETH-T_PRICE": 0,
+  "EUR-T_PRICE": 0,
+  "GNO-T_PRICE": 0,
+  "GNT-T_PRICE": 0,
+  "ICN-T_PRICE": 0,
+  "LTC-T_PRICE": 0,
+  "REP-T_PRICE": 0,
+  "XRP-T_PRICE": 0,
+  "SNGLS-T_PRICE": 0,
+  "SNT-T_PRICE": 0,
 };
 
 export const types = {
   REQUEST_HOLDINGS: "REQUEST_HOLDINGS:fundHoldings:melon.network",
   UPDATE_HOLDINGS: "UPDATE_HOLDINGS:fundHoldings:melon.network",
+  REQUEST_PRICES: "REQUEST_PRICES:fundHoldings:melon.network",
+  UPDATE_PRICES: "UPDATE_PRICES:fundHoldings:melon.network",
 };
 
 export const creators = {
@@ -50,6 +70,13 @@ export const creators = {
   }),
   updateHoldings: newValues => ({
     type: types.UPDATE_HOLDINGS,
+    ...newValues,
+  }),
+  requestPrices: () => ({
+    type: types.REQUEST_PRICES,
+  }),
+  updatePrices: newValues => ({
+    type: types.UPDATE_PRICES,
     ...newValues,
   }),
 };
@@ -64,6 +91,17 @@ export const reducer = (state = initialState, action) => {
       };
     }
     case types.UPDATE_HOLDINGS: {
+      return {
+        ...state,
+        ...params,
+      };
+    }
+    case types.REQUEST_PRICES: {
+      return {
+        ...state,
+      };
+    }
+    case types.UPDATE_PRICES: {
       return {
         ...state,
         ...params,

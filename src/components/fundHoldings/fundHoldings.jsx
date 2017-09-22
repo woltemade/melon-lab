@@ -1,8 +1,8 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
 
-const FundHoldings = props =>
-  (<div id="holdings">
+const FundHoldings = props => (
+  <div id="holdings">
     <p className="App-intro">Fund Holdings</p>
     <Table celled size={"small"}>
       <Table.Header>
@@ -15,25 +15,20 @@ const FundHoldings = props =>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {props.assets.map((asset, i) =>
-          (<Table.Row key={i}>
-            <Table.Cell>
-              {asset}
-            </Table.Cell>
-            <Table.Cell>
-              {props[asset]}
-            </Table.Cell>
-            <Table.Cell>
-              {props[asset] / props.aum * 100}
-            </Table.Cell>
-            <Table.Cell>0</Table.Cell>
+        {props.assets.map((asset, i) => (
+          <Table.Row key={i}>
+            <Table.Cell>{asset}</Table.Cell>
+            <Table.Cell>{props[asset]}</Table.Cell>
+            <Table.Cell>{props[asset] / props.aum * 100}</Table.Cell>
+            <Table.Cell>{props[`${asset}_PRICE`]}</Table.Cell>
             <Table.Cell onClick={() => props.onClick(asset)}>
               <a href="#trade">Buy/Sell</a>
             </Table.Cell>
-          </Table.Row>),
-        )}
+          </Table.Row>
+        ))}
       </Table.Body>
     </Table>
-  </div>);
+  </div>
+);
 
 export default FundHoldings;
