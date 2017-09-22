@@ -1,5 +1,5 @@
 export const initialState = {
-  mode: "Invest", // 4 existing modes right now: setup / invest / execute / manage
+  mode: "", // 4 existing modes right now: setup / invest / execute / manage
   vaultAddress: "",
   managerAddress: "",
   inceptionDate: null,

@@ -7,14 +7,15 @@ const ExecuteRequest = props => (
     <div className="ui segment">
       <br />
       <p className="App-intro">
-        Now, time to execute your subscription request!
+        Well done! Your investment request will be ready for execution shortly.
+        We kindly ask you to wait a few minutes.
       </p>
       <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
-        <div className="ui text loader">ExecuteRequesting in your fund ...</div>
+        <div className="ui text loader">Loading...</div>
       </div>
       <Card centered>
         <Card.Content>
-          <Card.Header>Execute request</Card.Header>
+          <Card.Header>Remaining waiting time:</Card.Header>
           <br />
           <List>
             <List.Item as="a">

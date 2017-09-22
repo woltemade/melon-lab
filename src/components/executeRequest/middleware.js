@@ -25,7 +25,6 @@ const executeRequestMiddleware = store => next => action => {
       )
         .then(response => {
           console.log("Request executed: ", response);
-          // store.dispatch(creators.change({ loading: false }));
           store.dispatch(generalCreators.update({ mode: "Manage" }));
           store.dispatch(factsheetCreators.requestInformations());
           store.dispatch(fundHoldingsCreators.requestHoldings());

@@ -6,6 +6,7 @@ import {
   setup,
   getFundForManager,
   getFundInformations,
+  performCalculations,
 } from "@melonproject/melon.js";
 import store from "./store";
 import "./index.css";
@@ -37,28 +38,43 @@ window.addEventListener("load", () => {
     daemonAddress: "0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd",
   });
 
-  getFundForManager(setup.web3.eth.accounts[0])
-    .then(fundAddress => {
-      if (!fundAddress)
-        store.dispatch(
-          generalCreators.update({
-            mode: "Setup",
-          }),
-        );
-      return getFundInformations(fundAddress);
-    })
-    .then(result => {
-      if (result) {
-        console.log(result);
-        store.dispatch(
-          generalCreators.update({
-            mode: "Invest",
-            fundAddress: result.fundAddress,
-            fundName: result.name,
-          }),
-        );
-      }
-    });
+  getFundForManager(setup.web3.eth.accounts[0]).then(fundAddress => {
+    if (!fundAddress) {
+      store.dispatch(
+        generalCreators.update({
+          mode: "Setup",
+        }),
+      );
+    } else {
+      getFundInformations(fundAddress).then(fundInformations => {
+        if (fundInformations) {
+          store.dispatch(
+            generalCreators.update({
+              fundAddress: fundInformations.fundAddress,
+              fundName: fundInformations.name,
+            }),
+          );
+          return performCalculations(
+            fundInformations.fundAddress,
+          ).then(calculations => {
+            if (calculations.totalSupply.toNumber() !== 0) {
+              store.dispatch(
+                generalCreators.update({
+                  mode: "Manage",
+                }),
+              );
+            } else {
+              store.dispatch(
+                generalCreators.update({
+                  mode: "Invest",
+                }),
+              );
+            }
+          });
+        }
+      });
+    }
+  });
 
   // Now you can start your app & access web3 freely:
   const defaultAssetPair = "MLN-T/ETH-T";

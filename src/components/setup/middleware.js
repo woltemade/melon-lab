@@ -26,7 +26,7 @@ const setupMiddleware = store => next => action => {
               vaultId: response.id,
               vaultName: response.name,
               inceptionDate: response.timestamp,
-              mode: "invest",
+              mode: "Invest",
             }),
           );
         })
