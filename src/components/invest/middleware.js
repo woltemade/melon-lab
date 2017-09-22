@@ -1,8 +1,8 @@
 import BigNumber from "bignumber.js";
-import { subscribe } from "@melonproject/melon.js";
+import { setup, subscribe } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
-import { creators as factsheetCreators } from "../factsheet/duck";
-import { creators as fundHoldingsCreators } from "../fundHoldings/duck";
+import { creators as generalCreators } from "../general";
+import { creators as executeRequestCreators } from "../executeRequest/duck";
 
 const investMiddleware = store => next => action => {
   const { type, ...params } = action;
@@ -12,17 +12,34 @@ const investMiddleware = store => next => action => {
   switch (type) {
     case types.INVEST: {
       subscribe(
-        // store.getState().setup.vaultAddress,
-        "0x90a765a2ba68f2644dd7b8f6b671128409daab7f",
-        new BigNumber(currentState.total),
+        store.getState().general.fundAddress,
         new BigNumber(currentState.amount),
+        new BigNumber(currentState.total),
+        new BigNumber(0.1),
+        setup.web3.eth.accounts[0],
       )
-        .then(response => {
-          console.log("Subscription receipt: ", response);
-          store.dispatch(creators.change({ loading: false }));
-          store.dispatch(factsheetCreators.requestInformations());
-          store.dispatch(fundHoldingsCreators.requestHoldings());
+        .then(subscribeRequestResponse => {
+          console.log("Subscription receipt: ", subscribeRequestResponse);
+          store.dispatch(
+            executeRequestCreators.update({
+              requestId: subscribeRequestResponse.id,
+            }),
+          );
+          store.dispatch(generalCreators.update({ mode: "Execute" }));
         })
+        // .then(() =>
+        //   executeRequest(
+        //     requestId,
+        //     store.getState().general.fundAddress,
+        //     setup.web3.eth.accounts[0],
+        //   ),
+        // )
+        // .then(response => {
+        //   console.log("Request executed: ", response);
+        //   store.dispatch(creators.change({ loading: false }));
+        //   store.dispatch(factsheetCreators.requestInformations());
+        //   store.dispatch(fundHoldingsCreators.requestHoldings());
+        // })
         .catch(err => {
           throw err;
         });

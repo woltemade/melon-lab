@@ -9,6 +9,7 @@ import recentTrades from "./components/recentTrades/duck";
 import trade from "./components/trade/duck";
 import tradeHelper from "./components/tradeHelper/duck";
 import participation from "./components/participation/duck";
+import executeRequest from "./components/executeRequest/duck";
 
 import generalMiddleware from "./components/generalMiddleware";
 import setupMiddleware from "./components/setup/middleware";
@@ -20,6 +21,7 @@ import recentTradesMiddleware from "./components/recentTrades/middleware";
 import tradeMiddleware from "./components/trade/middleware";
 import tradeHelperMiddleware from "./components/tradeHelper/middleware";
 import participationMiddleware from "./components/participation/middleware";
+import executeRequestMiddleware from "./components/executeRequest/middleware";
 
 export default createStore(
   combineReducers({
@@ -33,6 +35,7 @@ export default createStore(
     trade,
     tradeHelper,
     participation,
+    executeRequest,
   }),
   {
     /* preloadedState */
@@ -49,6 +52,7 @@ export default createStore(
       tradeHelperMiddleware,
       generalMiddleware,
       participationMiddleware,
+      executeRequestMiddleware,
     ),
     /* eslint-disable no-underscore-dangle */
     window.__REDUX_DEVTOOLS_EXTENSION__

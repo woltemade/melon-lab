@@ -4,11 +4,11 @@
   "private": true,
   "dependencies": {
     "@melonproject/melon.js": "^0.2.6",
-    "@melonproject/protocol": "^0.3.2-alpha.9",
     "bignumber.js": "^4.0.2",
     "prop-types": "^15.5.10",
     "ramda": "^0.24.1",
     "react": "^15.6.1",
+    "react-cntdwn": "^0.3.0",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
     "react-router": "^4.1.2",

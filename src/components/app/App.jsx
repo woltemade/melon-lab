@@ -3,6 +3,8 @@ import { Menu } from "semantic-ui-react";
 import ManagerView from "../managerView/managerView";
 import SetupContainer from "../setup/container";
 import InvestContainer from "../invest/container";
+import ExecuteRequestContainer from "../executeRequest/container";
+
 import "../../App.css";
 
 const App = props => (
@@ -18,12 +20,26 @@ const App = props => (
       </Menu>
     </div>
     <hr />
-    {props.general.mode === "Manage" ? (
+    {/* {props.general.mode === "Manage" ? (
       <ManagerView />
     ) : props.general.mode === "Setup" ? (
       <SetupContainer />
-    ) : (
+    ) : props.general.mode === "Invest" ? (
       <InvestContainer />
+    ) : (
+      <ExecuteRequestContainer />
+    )} */}
+
+    {props.general.mode === "Setup" ? (
+      <SetupContainer />
+    ) : props.general.mode === "Invest" ? (
+      <InvestContainer />
+    ) : props.general.mode === "Execute" ? (
+      <ExecuteRequestContainer />
+    ) : props.general.mode === "Manage" ? (
+      <ManagerView />
+    ) : (
+      <div />
     )}
   </div>
 );

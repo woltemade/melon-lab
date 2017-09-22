@@ -1,4 +1,4 @@
-import { setup, setupVault } from "@melonproject/melon.js";
+import { setup, setupFund } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 import { creators as generalCreators } from "../general";
 
@@ -9,13 +9,13 @@ const setupMiddleware = store => next => action => {
 
   switch (type) {
     case types.CREATE: {
-      setupVault(currentState.name, setup.web3.eth.accounts[0])
+      setupFund(currentState.name, setup.web3.eth.accounts[0])
         .then(response => {
           console.log("Vault successfully created: ", response);
           store.dispatch(
             creators.change({
               vaultAddress: response.address,
-              vaultOwner: response.owner,
+              vaultOwner: setup.web3.eth.accounts[0],
               loading: false,
             }),
           );

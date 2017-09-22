@@ -4,8 +4,8 @@ import { Provider } from "react-redux";
 import Web3 from "web3";
 import {
   setup,
-  getVaultForManager,
-  getVaultInformations,
+  getFundForManager,
+  getFundInformations,
 } from "@melonproject/melon.js";
 import store from "./store";
 import "./index.css";
@@ -37,14 +37,15 @@ window.addEventListener("load", () => {
     daemonAddress: "0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd",
   });
 
-  getVaultForManager(setup.web3.eth.accounts[0])
-    .then(vaultAddress => {
-      if (vaultAddress) return getVaultInformations(vaultAddress);
-      store.dispatch(
-        generalCreators.update({
-          mode: "Setup",
-        }),
-      );
+  getFundForManager(setup.web3.eth.accounts[0])
+    .then(fundAddress => {
+      if (!fundAddress)
+        store.dispatch(
+          generalCreators.update({
+            mode: "Setup",
+          }),
+        );
+      return getFundInformations(fundAddress);
     })
     .then(result => {
       if (result) {
@@ -52,10 +53,8 @@ window.addEventListener("load", () => {
         store.dispatch(
           generalCreators.update({
             mode: "Invest",
-            vaultAddress: result.vaultAddress,
-            managerAddress: result.managerAddress,
-            vaultName: result.name,
-            inceptionDate: result.creationDate,
+            fundAddress: result.fundAddress,
+            fundName: result.name,
           }),
         );
       }

@@ -1,8 +1,8 @@
 import React from "react";
 import { List, Input, Button, Card } from "semantic-ui-react";
 
-const Invest = props =>
-  (<div>
+const Invest = props => (
+  <div>
     <div className="ui segment">
       <br />
       <p className="App-intro">Now, time to invest in your fund!</p>
@@ -52,6 +52,7 @@ const Invest = props =>
         </Card.Content>
       </Card>
     </div>
-  </div>);
+  </div>
+);
 
 export default Invest;

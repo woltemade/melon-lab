@@ -1,16 +1,13 @@
 export const initialState = {
-  mode: "Invest", // 4 existing modes right now: setup / invest / execute / manage
-  vaultAddress: "",
-  managerAddress: "",
-  inceptionDate: null,
-  assetPair: "MLN-T/ETH-T",
-  baseTokenSymbol: "MLN-T",
-  quoteTokenSymbol: "ETH-T",
+  requestId: "",
+  readyToExecute: false,
+  loading: false,
+  // countdown: null,
 };
 
 export const types = {
-  UPDATE: "UPDATE:general:melon.network",
-  UPDATE_ASSET_PAIR: "UPDATE_ASSET_PAIR:general:melon.network",
+  UPDATE: "UPDATE:executeRequest:melon.network",
+  EXECUTE: "EXECUTE:executeRequest:melon.network",
 };
 
 export const creators = {
@@ -18,9 +15,8 @@ export const creators = {
     type: types.UPDATE,
     ...newValues,
   }),
-  updateAssetPair: assetPair => ({
-    type: types.UPDATE_ASSET_PAIR,
-    assetPair,
+  execute: () => ({
+    type: types.EXECUTE,
   }),
 };
 
@@ -34,10 +30,10 @@ export const reducer = (state = initialState, action) => {
         ...params,
       };
     }
-    case types.UPDATE_ASSET_PAIR: {
+    case types.EXECUTE: {
       return {
         ...state,
-        ...params,
+        loading: true,
       };
     }
     default:
