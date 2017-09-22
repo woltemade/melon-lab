@@ -9,7 +9,7 @@ const tradeHelperMiddleware = store => next => action => {
       const baseTokenSymbol = params.assetPair.split("/")[0];
       const quoteTokenSymbol = params.assetPair.split("/")[1];
 
-      getBalance(baseTokenSymbol, "0x90a765a2ba68f2644dd7b8f6b671128409daab7f")
+      getBalance(baseTokenSymbol, store.getState().general.fundAddress)
         .then(baseTokenBalance => {
           store.dispatch(
             creators.update({
@@ -18,7 +18,7 @@ const tradeHelperMiddleware = store => next => action => {
           );
           return getBalance(
             quoteTokenSymbol,
-            "0x90a765a2ba68f2644dd7b8f6b671128409daab7f",
+            store.getState().general.fundAddress,
           );
         })
         .then(quoteTokenBalance => {
