@@ -63,6 +63,16 @@ window.addEventListener("load", () => {
                   mode: "Manage",
                 }),
               );
+              const defaultAssetPair = "MLN-T/ETH-T";
+              store.dispatch(
+                orderbookCreators.requestOrderbook(defaultAssetPair),
+              );
+              store.dispatch(factsheetCreators.requestInformations());
+              store.dispatch(fundHoldingsCreators.requestHoldings());
+              store.dispatch(
+                recentTradesCreators.requestRecentTrades(defaultAssetPair),
+              );
+              store.dispatch(tradeHelperCreators.request(defaultAssetPair));
             } else {
               store.dispatch(
                 generalCreators.update({
@@ -74,23 +84,13 @@ window.addEventListener("load", () => {
         }
       });
     }
+    ReactDOM.render(
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>,
+      document.getElementById("root"),
+    );
   });
-
-  // Now you can start your app & access web3 freely:
-  const defaultAssetPair = "MLN-T/ETH-T";
-  // Dispatching on startup actions to get initial data
-  store.dispatch(orderbookCreators.requestOrderbook(defaultAssetPair));
-  store.dispatch(factsheetCreators.requestInformations());
-  store.dispatch(fundHoldingsCreators.requestHoldings());
-  store.dispatch(recentTradesCreators.requestRecentTrades(defaultAssetPair));
-  store.dispatch(tradeHelperCreators.request(defaultAssetPair));
-
-  ReactDOM.render(
-    <Provider store={store}>
-      <AppContainer />
-    </Provider>,
-    document.getElementById("root"),
-  );
 });
 
 registerServiceWorker();

@@ -9,11 +9,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   handleFinish: () => {
     dispatch(creators.update({ readyToExecute: true }));
-    console.log("Countdown finished");
-    // dispatch(creators.invest());
   },
   onExecute: () => {
-    console.log("Executing request");
     dispatch(creators.execute());
   },
 });

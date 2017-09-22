@@ -1,8 +1,8 @@
 import React from "react";
 import { List, Card, Icon, Divider } from "semantic-ui-react";
 
-const Factsheet = props =>
-  (<Card centered id="factsheet">
+const Factsheet = props => (
+  <Card centered id="factsheet">
     <Card.Content>
       <Card.Header>
         <strong>μέλλω Capital </strong>
@@ -23,17 +23,19 @@ const Factsheet = props =>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>
-              AUM: {props.aum} ETH
-            </List.Header>
+            <List.Header>AUM: {props.aum} ETH</List.Header>
           </List.Content>
         </List.Item>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>
-              Share Price: {props.sharePrice}
-            </List.Header>
+            <List.Header>Share Price: {props.sharePrice}</List.Header>
+          </List.Content>
+        </List.Item>
+        <List.Item as="a">
+          <Icon name="right triangle" />
+          <List.Content>
+            <List.Header>Existing # of shares: {props.totalSupply}</List.Header>
           </List.Content>
         </List.Item>
         <Divider />
@@ -77,6 +79,7 @@ const Factsheet = props =>
         </List.Item>
       </List>
     </Card.Content>
-  </Card>);
+  </Card>
+);
 
 export default Factsheet;

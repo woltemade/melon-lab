@@ -7,6 +7,13 @@ import ExecuteRequestContainer from "../executeRequest/container";
 
 import "../../App.css";
 
+const containerSelector = {
+  Setup: <SetupContainer />,
+  Invest: <InvestContainer />,
+  Execute: <ExecuteRequestContainer />,
+  Manage: <ManagerView />,
+};
+
 const App = props => (
   <div className="App">
     <div className="App-header">
@@ -20,27 +27,8 @@ const App = props => (
       </Menu>
     </div>
     <hr />
-    {/* {props.general.mode === "Manage" ? (
-      <ManagerView />
-    ) : props.general.mode === "Setup" ? (
-      <SetupContainer />
-    ) : props.general.mode === "Invest" ? (
-      <InvestContainer />
-    ) : (
-      <ExecuteRequestContainer />
-    )} */}
 
-    {props.general.mode === "Setup" ? (
-      <SetupContainer />
-    ) : props.general.mode === "Invest" ? (
-      <InvestContainer />
-    ) : props.general.mode === "Execute" ? (
-      <ExecuteRequestContainer />
-    ) : props.general.mode === "Manage" ? (
-      <ManagerView />
-    ) : (
-      <div />
-    )}
+    {containerSelector[props.general.mode]}
   </div>
 );
 
