@@ -129,7 +129,9 @@ const instance = {
       ),
   ),
   getName: jest.fn(() => new Promise(resolve => resolve("Test Fund"))),
-  getDecimal: jest.fn(() => new Promise(resolve => resolve(new BigNumber(18)))),
+  getDecimals: jest.fn(
+    () => new Promise(resolve => resolve(new BigNumber(18))),
+  ),
   getDataFeed: jest.fn(() => new Promise(resolve => resolve("0xDATAFEED"))),
   getExchange: jest.fn(() => new Promise(resolve => resolve("0xSIMPLEMARKET"))),
 };
