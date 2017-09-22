@@ -13,8 +13,7 @@ const participationMiddleware = store => next => action => {
     case types.INVEST: {
       if (currentState.participationType === "Invest") {
         subscribe(
-          // store.getState().setup.vaultAddress,
-          "0x90a765a2ba68f2644dd7b8f6b671128409daab7f",
+          store.getState().setup.fundAddress,
           new BigNumber(currentState.total),
           new BigNumber(currentState.amount),
         )
@@ -29,7 +28,7 @@ const participationMiddleware = store => next => action => {
           });
       } else if (currentState.participationType === "Redeem") {
         redeem(
-          "0x90a765a2ba68f2644dd7b8f6b671128409daab7f",
+          store.getState().setup.fundAddress,
           new BigNumber(currentState.amount),
         )
           .then(response => {

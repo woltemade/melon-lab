@@ -8,7 +8,6 @@ const factsheetMiddleware = store => next => action => {
     case types.REQUEST_INFORMATIONS: {
       performCalculations(store.getState().general.fundAddress) // store.getState().setup.vaultAddress,
         .then(response => {
-          console.log("Performed calculations ", response);
           store.dispatch(
             creators.updateInformations({
               aum: response.gav.toNumber(),

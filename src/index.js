@@ -63,7 +63,7 @@ window.addEventListener("load", () => {
                   mode: "Manage",
                 }),
               );
-              const defaultAssetPair = "MLN-T/ETH-T";
+              const defaultAssetPair = "BTC-T/MLN-T";
               store.dispatch(
                 orderbookCreators.requestOrderbook(defaultAssetPair),
               );

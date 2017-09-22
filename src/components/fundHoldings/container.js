@@ -13,8 +13,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(creators.requestHoldings());
   },
   onClick: asset => {
-    if (asset !== "ETH-T") {
-      const assetPair = `${asset}/ETH-T`;
+    if (asset !== "MLN-T") {
+      const assetPair = `${asset}/MLN-T`;
       dispatch(generalCreators.updateAssetPair(assetPair));
     }
   },
