@@ -1,9 +1,10 @@
 import BigNumber from "bignumber.js";
 import {
+  setup,
   deserializeOrder,
   averagePrice,
   matchOrders,
-  takeMultipleOrders,
+  takeMultipleOrdersFromFund,
   getPrices,
 } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
@@ -110,10 +111,10 @@ const tradeMiddleware = store => next => action => {
         ourOrderType === "buy"
           ? new BigNumber(currentState.amount)
           : new BigNumber(currentState.total);
-      takeMultipleOrders(
+      takeMultipleOrdersFromFund(
         matchedOrders,
-        "0x609eF3E6aCf7DE50F29e0144eD7d0fF735331680",
-        "0x90a765a2ba68f2644dd7b8f6b671128409daab7f",
+        setup.web3.eth.accounts[0],
+        store.getState().general.fundAddress,
         quantityAsked,
       )
         .then(result => {

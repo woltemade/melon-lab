@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@melonproject/melon.js": "^0.2.6",
+    "@melonproject/melon.js": "^0.3.0-alpha.6",
     "bignumber.js": "^4.0.2",
     "prop-types": "^15.5.10",
     "ramda": "^0.24.1",
