@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import Trade from "./trade";
 import { creators } from "./duck";
+import store from "../../store";
 
 const mapStateToProps = state => ({
   ...state.trade,
@@ -15,7 +16,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch(creators.change({ [event.target.name]: event.target.value }));
   },
   placeOrder: () => {
-    dispatch(creators.placeOrder());
+    if (store.getState().trade.selectedOrder.id) {
+      dispatch(creators.placeOrder());
+    } else {
+      console.log("No order selected. Make order");
+    }
   },
 });
 

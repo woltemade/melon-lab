@@ -87,6 +87,15 @@ const tradeMiddleware = store => next => action => {
             total: params.total.toString(10),
           }),
         );
+      } else if (params.price) {
+        total = params.price * currentState.amount;
+        store.dispatch(
+          creators.update({
+            price: params.price.toString(10),
+            total: total.toString(10),
+            selectedOrder: {},
+          }),
+        );
       }
       break;
     }

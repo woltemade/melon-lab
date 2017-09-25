@@ -2,9 +2,9 @@ export const initialState = {
   mode: "", // 4 existing modes right now: setup / invest / execute / manage
   fundAddress: "",
   inceptionDate: null,
-  assetPair: "MLN-T/ETH-T",
-  baseTokenSymbol: "MLN-T",
-  quoteTokenSymbol: "ETH-T",
+  assetPair: "BTC-T/MLN-T",
+  baseTokenSymbol: "BTC-T",
+  quoteTokenSymbol: "MLN-T",
 };
 
 export const types = {

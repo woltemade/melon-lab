@@ -1,8 +1,8 @@
 import React from "react";
 import { List, Input, Button, Card } from "semantic-ui-react";
 
-const Trade = props =>
-  (<Card centered id="trade">
+const Trade = props => (
+  <Card centered id="trade">
     <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
       <div className="ui text loader">Executing your order ...</div>
     </div>
@@ -23,7 +23,6 @@ const Trade = props =>
         <List.Item as="a">
           <List.Content>
             <Input
-              readOnly
               label="Price"
               name="price"
               placeholder=""
@@ -63,6 +62,7 @@ const Trade = props =>
         </Button>
       </div>
     </Card.Content>
-  </Card>);
+  </Card>
+);
 
 export default Trade;
