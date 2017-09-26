@@ -6,13 +6,11 @@ import setup from "../../lib/utils/setup";
 /* eslint-enable */
 
 const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-
 try {
   setup.init({
     web3,
     daemonAddress: "0x00360d2b7d240ec0643b6d819ba81a09e40e5bcd",
-    defaultAccount: "0x2809a8b74d51eecfe4d229a47937964e43d55c30",
-    // defaultAccount: process.env.UNLOCKED_ACCOUNT,
+    defaultAccount: process.env.UNLOCKED_ACCOUNT,
     tracer: ({ timestamp, message, category, data }) => {
       const args = [timestamp.toISOString(), `[${category}]`, message];
       if (category === "ensureFailed") {
