@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.3.0-alpha.6",
+  "version": "0.3.0-alpha.7",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/main.js",
   "sign-git-tag": true,
@@ -82,7 +82,11 @@
     "walk": "^2.3.9"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@melonproject/protocol": "0.3.2-alpha.24",
+=======
+    "@melonproject/protocol": "^0.3.4-alpha.1",
+>>>>>>> Add getSubscriptionHistory and getFunds on VersionContract
     "bignumber.js": "^4.0.2",
     "pify": "^3.0.0",
     "ramda": "^0.24.1",

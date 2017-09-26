@@ -6,7 +6,7 @@ import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
 import cancelOrder from "../../../../lib/exchange/transactions/cancelOrder";
 import getOrder from "../../../../lib/exchange/calls/getOrder";
 
-it(
+xit(
   "make an order and cancel it",
   async () => {
     trace({
