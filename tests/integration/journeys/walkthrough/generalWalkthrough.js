@@ -12,13 +12,9 @@ import executeRequest from "../../../../lib/participation/transactions/executeRe
 import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
 import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFund";
 import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
-import cancelOrder from "../../../../lib/exchange/transactions/cancelOrder";
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
 import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFund";
 import performCalculations from "../../../../lib/fund/calls/performCalculations";
-import getRequestsHistory from "../../../../lib/fund/calls/getRequestsHistory";
-import getOrdersHistory from "../../../../lib/fund/calls/getOrdersHistory";
-
 import redeem from "../../../../lib/participation/transactions/redeem";
 
 const INITIAL_SUBSCRIBE_QUANTITY = 100;
