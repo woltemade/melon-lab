@@ -2,7 +2,7 @@ import { performCalculations } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 
 const factsheetMiddleware = store => next => action => {
-  const { type, ...params } = action;
+  const { type } = action;
 
   switch (type) {
     case types.REQUEST_INFORMATIONS: {

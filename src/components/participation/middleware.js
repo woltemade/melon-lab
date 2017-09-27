@@ -5,7 +5,7 @@ import { creators as factsheetCreators } from "../factsheet/duck";
 import { creators as fundHoldingsCreators } from "../fundHoldings/duck";
 
 const participationMiddleware = store => next => action => {
-  const { type, ...params } = action;
+  const { type } = action;
 
   const currentState = store.getState().participation;
 

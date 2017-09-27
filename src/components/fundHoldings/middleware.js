@@ -2,7 +2,7 @@ import { getBalance, getPrice } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 
 const fundHoldingsMiddleware = store => next => action => {
-  const { type, ...params } = action;
+  const { type } = action;
 
   const currentState = store.getState().fundHoldings;
 

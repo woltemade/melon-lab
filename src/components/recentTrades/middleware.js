@@ -1,13 +1,13 @@
-import { getRecentTrades } from "@melonproject/melon.js";
-import { types, creators } from "./duck";
+// import { getRecentTrades } from "@melonproject/melon.js";
+import { types } from "./duck";
 
 const recentTradesMiddleware = store => next => action => {
-  const { type, ...params } = action;
+  const { type } = action;
 
   switch (type) {
     case types.REQUEST_RECENT_TRADES: {
-      const baseTokenSymbol = params.assetPair.split("/")[0];
-      const quoteTokenSymbol = params.assetPair.split("/")[1];
+      // const baseTokenSymbol = params.assetPair.split("/")[0];
+      // const quoteTokenSymbol = params.assetPair.split("/")[1];
       // getRecentTrades(
       //   baseTokenSymbol,
       //   quoteTokenSymbol,

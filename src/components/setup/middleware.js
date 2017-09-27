@@ -3,7 +3,7 @@ import { types, creators } from "./duck";
 import { creators as generalCreators } from "../general";
 
 const setupMiddleware = store => next => action => {
-  const { type, ...params } = action;
+  const { type } = action;
 
   const currentState = store.getState().setup;
 

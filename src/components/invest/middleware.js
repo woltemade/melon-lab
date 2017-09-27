@@ -1,11 +1,11 @@
 import BigNumber from "bignumber.js";
 import { setup, subscribe } from "@melonproject/melon.js";
-import { types, creators } from "./duck";
+import { types } from "./duck";
 import { creators as generalCreators } from "../general";
 import { creators as executeRequestCreators } from "../executeRequest/duck";
 
 const investMiddleware = store => next => action => {
-  const { type, ...params } = action;
+  const { type } = action;
 
   const currentState = store.getState().invest;
 
