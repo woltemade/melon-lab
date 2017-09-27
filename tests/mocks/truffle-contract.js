@@ -25,7 +25,7 @@ const instance = {
   makeOrder: jest.fn(
     () =>
       new Promise(resolve =>
-        resolve({ logs: ["", "", "", "", "", { args: { id: 1 } }] }),
+        resolve({ logs: [{ event: "OrderUpdated", args: { id: 1 } }] }),
       ),
   ),
   balanceOf: jest.fn(
@@ -134,6 +134,9 @@ const instance = {
   ),
   getDataFeed: jest.fn(() => new Promise(resolve => resolve("0xDATAFEED"))),
   getExchange: jest.fn(() => new Promise(resolve => resolve("0xSIMPLEMARKET"))),
+  getCreationTime: jest.fn(
+    () => new Promise(resolve => resolve(new BigNumber(1505292372))),
+  ),
 };
 
 instance.setupFund.estimateGas = jest.fn(() => 650000);

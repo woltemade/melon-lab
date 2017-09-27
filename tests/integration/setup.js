@@ -6,7 +6,6 @@ import setup from "../../lib/utils/setup";
 /* eslint-enable */
 
 const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-
 try {
   setup.init({
     web3,
