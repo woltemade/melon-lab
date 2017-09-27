@@ -17,9 +17,10 @@ const mapDispatchToProps = dispatch => ({
   },
   placeOrder: () => {
     if (store.getState().trade.selectedOrder.id) {
-      dispatch(creators.placeOrder());
+      dispatch(creators.takeOrder());
     } else {
       console.log("No order selected. Make order");
+      dispatch(creators.makeOrder());
     }
   },
 });

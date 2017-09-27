@@ -6,6 +6,7 @@ import {
   matchOrders,
   takeMultipleOrdersFromFund,
   getPrices,
+  makeOrderFromFund,
 } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 
@@ -100,7 +101,7 @@ const tradeMiddleware = store => next => action => {
       break;
     }
 
-    case types.PLACE_ORDER: {
+    case types.TAKE_ORDER: {
       const theirOrderType = currentState.selectedOrder.type;
       const ourOrderType = theirOrderType === "buy" ? "sell" : "buy";
       const priceTreshold = getPrices(currentState.selectedOrder)[
@@ -125,6 +126,64 @@ const tradeMiddleware = store => next => action => {
         setup.web3.eth.accounts[0],
         store.getState().general.fundAddress,
         quantityAsked,
+      )
+        .then(result => {
+          console.log("Trade receipt ", result);
+          store.dispatch(
+            creators.update({
+              amount: "",
+              price: "",
+              total: "",
+              selectedOrder: {},
+              orderType: "Buy",
+              theirOrderType: "Sell",
+              loading: false,
+            }),
+          );
+          const assetPair = store.getState().general.assetPair;
+          store.dispatch(fundHoldingsCreators.requestHoldings());
+          store.dispatch(tradeHelperCreators.request(assetPair));
+          store.dispatch(orderbookCreators.requestOrderbook(assetPair));
+          store.dispatch(recentTradesCreators.requestRecentTrades(assetPair));
+        })
+        .catch(error => console.log(error));
+      break;
+    }
+
+    case types.MAKE_ORDER: {
+      let buyHowMuch;
+      let buyWhichToken;
+      let sellHowMuch;
+      let sellWhichToken;
+
+      if (currentState.orderType === "Buy") {
+        buyHowMuch = currentState.amount;
+        buyWhichToken = store.getState().general.baseTokenSymbol;
+        sellHowMuch = currentState.total;
+        sellWhichToken = store.getState().general.quoteTokenSymbol;
+      } else if (currentState.orderType === "Sell") {
+        buyHowMuch = currentState.total;
+        buyWhichToken = store.getState().general.quoteTokenSymbol;
+        sellHowMuch = currentState.amount;
+        sellWhichToken = store.getState().general.baseTokenSymbol;
+      }
+
+      console.log(
+        "Make order from fund with ",
+        store.getState().general.fundAddress,
+        sellWhichToken,
+        buyWhichToken,
+        sellHowMuch,
+        buyHowMuch,
+        setup.web3.eth.accounts[0],
+      );
+      makeOrderFromFund(
+        store.getState().general.fundAddress,
+        sellWhichToken,
+        buyWhichToken,
+        sellHowMuch,
+        buyHowMuch,
+        setup.web3.eth.accounts[0],
       )
         .then(result => {
           console.log("Trade receipt ", result);

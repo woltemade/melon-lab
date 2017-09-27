@@ -19,7 +19,6 @@ const investMiddleware = store => next => action => {
         setup.web3.eth.accounts[0],
       )
         .then(subscribeRequestResponse => {
-          console.log("Subscription receipt: ", subscribeRequestResponse);
           store.dispatch(
             executeRequestCreators.update({
               requestId: subscribeRequestResponse.id,
@@ -27,19 +26,6 @@ const investMiddleware = store => next => action => {
           );
           store.dispatch(generalCreators.update({ mode: "Execute" }));
         })
-        // .then(() =>
-        //   executeRequest(
-        //     requestId,
-        //     store.getState().general.fundAddress,
-        //     setup.web3.eth.accounts[0],
-        //   ),
-        // )
-        // .then(response => {
-        //   console.log("Request executed: ", response);
-        //   store.dispatch(creators.change({ loading: false }));
-        //   store.dispatch(factsheetCreators.requestInformations());
-        //   store.dispatch(fundHoldingsCreators.requestHoldings());
-        // })
         .catch(err => {
           throw err;
         });
