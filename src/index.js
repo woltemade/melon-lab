@@ -7,6 +7,7 @@ import {
   getFundForManager,
   getFundInformations,
   performCalculations,
+  melonTracker,
 } from "@melonproject/melon.js";
 import store from "./store";
 import "./index.css";
@@ -38,6 +39,24 @@ window.addEventListener("load", () => {
     daemonAddress: "0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd",
   });
 
+  const defaultAssetPair = store.getState().general.assetPair;
+
+  const tracker = melonTracker.on("DataUpdated", "LogItemUpdate");
+
+  tracker((type, data) => {
+    switch (type) {
+      case "DataUpdated":
+        store.dispatch(fundHoldingsCreators.requestPrices());
+        break;
+
+      case "LogItemUpdate":
+        store.dispatch(orderbookCreators.requestOrderbook(defaultAssetPair));
+        break;
+
+      default:
+    }
+  });
+
   getFundForManager(setup.web3.eth.accounts[0]).then(fundAddress => {
     if (!fundAddress) {
       store.dispatch(
@@ -63,9 +82,10 @@ window.addEventListener("load", () => {
                   mode: "Manage",
                 }),
               );
-              const defaultAssetPair = "BTC-T/MLN-T";
               store.dispatch(
-                orderbookCreators.requestOrderbook(defaultAssetPair),
+                orderbookCreators.requestOrderbook(
+                  store.getState().general.assetPair,
+                ),
               );
               store.dispatch(factsheetCreators.requestInformations());
               store.dispatch(fundHoldingsCreators.requestHoldings());
