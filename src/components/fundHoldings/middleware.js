@@ -1,4 +1,4 @@
-import { getBalance, getPrice } from "@melonproject/melon.js";
+import { getBalance, getPrice, toReadable } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 
 const fundHoldingsMiddleware = store => next => action => {
@@ -28,10 +28,9 @@ const fundHoldingsMiddleware = store => next => action => {
       currentState.assets.forEach(asset => {
         getPrice(asset)
           .then(price => {
-            const inversedPrice = 1 / price.toNumber();
             store.dispatch(
               creators.updatePrices({
-                [`${asset}_PRICE`]: inversedPrice,
+                [`${asset}_PRICE`]: price.toNumber(),
               }),
             );
           })
