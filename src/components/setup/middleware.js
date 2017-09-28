@@ -11,20 +11,20 @@ const setupMiddleware = store => next => action => {
     case types.CREATE: {
       setupFund(currentState.name, setup.web3.eth.accounts[0])
         .then(response => {
-          console.log("Vault successfully created: ", response);
+          console.log("Fund successfully created: ", response);
           store.dispatch(
             creators.change({
-              vaultAddress: response.address,
-              vaultOwner: setup.web3.eth.accounts[0],
+              fundAddress: response.address,
+              fundOwner: setup.web3.eth.accounts[0],
               loading: false,
             }),
           );
           store.dispatch(
             generalCreators.update({
-              vaultAddress: response.address,
+              fundAddress: response.address,
               managerAddress: setup.web3.eth.accounts[0],
-              vaultId: response.id,
-              vaultName: response.name,
+              fundId: response.id,
+              fundName: response.name,
               inceptionDate: response.timestamp,
               mode: "Invest",
             }),

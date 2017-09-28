@@ -6,7 +6,7 @@ const factsheetMiddleware = store => next => action => {
 
   switch (type) {
     case types.REQUEST_INFORMATIONS: {
-      performCalculations(store.getState().general.fundAddress) // store.getState().setup.vaultAddress,
+      performCalculations(store.getState().general.fundAddress)
         .then(response => {
           store.dispatch(
             creators.updateInformations({

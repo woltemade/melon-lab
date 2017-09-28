@@ -28,9 +28,10 @@ const fundHoldingsMiddleware = store => next => action => {
       currentState.assets.forEach(asset => {
         getPrice(asset)
           .then(price => {
+            const inversedPrice = 1 / price.toNumber();
             store.dispatch(
               creators.updatePrices({
-                [`${asset}_PRICE`]: price.toNumber(),
+                [`${asset}_PRICE`]: inversedPrice,
               }),
             );
           })

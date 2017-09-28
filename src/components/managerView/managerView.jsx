@@ -7,14 +7,15 @@ import RecentTradesContainer from "../recentTrades/container";
 import TradeContainer from "../trade/container";
 import TradeHelperContainer from "../tradeHelper/container";
 import ParticipationContainer from "../participation/container";
+import ExecuteRequestContainer from "../executeRequest/container";
 
 import FundActivity from "../fundActivity/fundActivity";
 import TradingActivity from "../tradingActivity/tradingActivity";
 import Settings from "../settings/settings";
 import Statistics from "../statistics/statistics";
 
-const ManagerView = () =>
-  (<div className="App">
+const ManagerView = props => (
+  <div className="App">
     <br />
     <div>
       <Card.Group>
@@ -53,12 +54,17 @@ const ManagerView = () =>
       <Card.Group>
         <Settings />
         <Statistics />
-        <ParticipationContainer />
+        {props.general.pendingRequest ? (
+          <ExecuteRequestContainer />
+        ) : (
+          <ParticipationContainer />
+        )}
       </Card.Group>
     </div>
     <br />
     <br />
     <br />
-  </div>);
+  </div>
+);
 
 export default ManagerView;

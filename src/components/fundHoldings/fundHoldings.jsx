@@ -10,7 +10,7 @@ const FundHoldings = props => (
           <Table.HeaderCell>Asset</Table.HeaderCell>
           <Table.HeaderCell>Quantity</Table.HeaderCell>
           <Table.HeaderCell>% of portfolio</Table.HeaderCell>
-          <Table.HeaderCell>Price</Table.HeaderCell>
+          <Table.HeaderCell>Price (MLN)</Table.HeaderCell>
           <Table.HeaderCell>Trade</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -19,7 +19,9 @@ const FundHoldings = props => (
           <Table.Row key={i}>
             <Table.Cell>{asset}</Table.Cell>
             <Table.Cell>{props[asset]}</Table.Cell>
-            <Table.Cell>{props[asset] / props.aum * 100}</Table.Cell>
+            <Table.Cell>
+              {props[asset] * props[`${asset}_PRICE`] / props.aum * 100}
+            </Table.Cell>
             <Table.Cell>{props[`${asset}_PRICE`]}</Table.Cell>
             <Table.Cell onClick={() => props.onClick(asset)}>
               <a href="#trade">Buy/Sell</a>

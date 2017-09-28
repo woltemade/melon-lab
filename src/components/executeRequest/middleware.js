@@ -18,7 +18,10 @@ const executeRequestMiddleware = store => next => action => {
         setup.web3.eth.accounts[0],
       )
         .then(response => {
-          store.dispatch(generalCreators.update({ mode: "Manage" }));
+          if (store.getState().general.mode === "Execute")
+            store.dispatch(generalCreators.update({ mode: "Manage" }));
+          else if (store.getState().general.pendingRequest === true)
+            store.dispatch(generalCreators.update({ pendingRequest: false }));
           store.dispatch(factsheetCreators.requestInformations());
           store.dispatch(fundHoldingsCreators.requestHoldings());
         })

@@ -1,6 +1,6 @@
 import React from "react";
 import { Menu } from "semantic-ui-react";
-import ManagerView from "../managerView/managerView";
+import ManagerViewContainer from "../managerView/container";
 import SetupContainer from "../setup/container";
 import InvestContainer from "../invest/container";
 import ExecuteRequestContainer from "../executeRequest/container";
@@ -11,7 +11,7 @@ const containerSelector = {
   Setup: <SetupContainer />,
   Invest: <InvestContainer />,
   Execute: <ExecuteRequestContainer />,
-  Manage: <ManagerView />,
+  Manage: <ManagerViewContainer />,
 };
 
 const App = props => (

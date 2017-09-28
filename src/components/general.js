@@ -5,6 +5,7 @@ export const initialState = {
   assetPair: "BTC-T/MLN-T",
   baseTokenSymbol: "BTC-T",
   quoteTokenSymbol: "MLN-T",
+  pendingRequest: false,
 };
 
 export const types = {

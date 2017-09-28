@@ -6,16 +6,15 @@ const ExecuteRequest = props => (
   <div>
     <div className="ui segment">
       <br />
-      <p className="App-intro">
-        Well done! Your investment request will be ready for execution shortly.
-        We kindly ask you to wait a few minutes.
-      </p>
+
       <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
         <div className="ui text loader">Loading...</div>
       </div>
       <Card centered>
         <Card.Content>
-          <Card.Header>Remaining waiting time:</Card.Header>
+          <Card.Header>
+            Remaining waiting time before request execution:
+          </Card.Header>
           <br />
           <List>
             <List.Item as="a">

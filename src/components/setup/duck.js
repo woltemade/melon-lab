@@ -2,8 +2,8 @@ export const initialState = {
   name: "Fund Name",
   managementFee: "2%",
   performanceFee: "5%",
-  vaultAddress: "",
-  vaultOwner: "",
+  fundAddress: "",
+  fundOwner: "",
   loading: false,
 };
 
