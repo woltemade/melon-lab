@@ -50,7 +50,11 @@ window.addEventListener("load", () => {
         break;
 
       case "LogItemUpdate":
-        store.dispatch(orderbookCreators.requestOrderbook(defaultAssetPair));
+        store.dispatch(
+          orderbookCreators.requestOrderbook(
+            store.getState().general.assetPair,
+          ),
+        );
         break;
 
       default:
