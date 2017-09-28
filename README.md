@@ -143,7 +143,7 @@ Each of these contract folders can have the following subfolders:
 
 Note: Some calls & transactions are more or less a simple JS-wrapper on the
 contract, where others do more complex stuff and even combine multiple calls
-to the contracts. But you can be certain: Transactions are free.
+to the contracts. But you can be certain: Calls are free.
 
 ## `testing`
 
