@@ -15,10 +15,10 @@ import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
 import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFund";
 import performCalculations from "../../../../lib/fund/calls/performCalculations";
-import redeem from "../../../../lib/participation/transactions/redeem";
+// import redeem from "../../../../lib/participation/transactions/redeem";
 
 const INITIAL_SUBSCRIBE_QUANTITY = 5;
-const REDEEM_QUANTITY = 1;
+// const REDEEM_QUANTITY = 1;
 
 const shared = { etherBalance: {}, participation: {}, melonBalance: {} };
 

@@ -17,10 +17,10 @@ const instance = {
       }),
   ),
   takeOrder: jest.fn(
-    (/* exchange, id, quantity, objects */) =>
-      new Promise(resolve => {
-        resolve({ transactionHash: "0xBLUB" });
-      }),
+    () =>
+      new Promise(resolve =>
+        resolve({ logs: [{ event: "OrderUpdated", args: { id: 1 } }] }),
+      ),
   ),
   makeOrder: jest.fn(
     () =>
