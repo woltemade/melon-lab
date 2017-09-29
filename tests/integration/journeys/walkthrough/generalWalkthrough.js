@@ -18,14 +18,14 @@ import performCalculations from "../../../../lib/fund/calls/performCalculations"
 import redeem from "../../../../lib/participation/transactions/redeem";
 
 const INITIAL_SUBSCRIBE_QUANTITY = 5;
-const REDEEM_QUANTITY = 5;
+const REDEEM_QUANTITY = 1;
 
 const shared = { etherBalance: {}, participation: {}, melonBalance: {} };
 
 const randomString = (length = 4) =>
   Math.random().toString(36).substr(2, length);
 
-it(
+fit(
   "Create fund, invest, take order, redeem",
   async () => {
     console.log("\n");
@@ -125,6 +125,8 @@ it(
         .participation.invested.personalStake}`,
     });
 
+    /*
+
     shared.redemptionRequest = await redeem(
       // "0x4c476a34a92cda676654b43c5d5d42879d45e38b",
       shared.vault.address,
@@ -162,6 +164,8 @@ it(
       message: `Redeem request executed. Personal stake: ${shared.participation
         .invested.personalStake}`,
     });
+
+    */
 
     shared.simpleOrder = await makeOrder({
       sell: {
