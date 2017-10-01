@@ -17,7 +17,7 @@ import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFu
 import performCalculations from "../../../../lib/fund/calls/performCalculations";
 import redeem from "../../../../lib/participation/transactions/redeem";
 
-const INITIAL_SUBSCRIBE_QUANTITY = 100;
+const INITIAL_SUBSCRIBE_QUANTITY = 20;
 const REDEEM_QUANTITY = 5;
 
 const shared = { etherBalance: {}, participation: {}, melonBalance: {} };
@@ -65,8 +65,8 @@ it(
       data: shared,
     });
 
-    const vaultAddress = await getFundForManager(setup.defaultAccount);
-    expect(vaultAddress).toBe(shared.vault.address);
+    // const vaultAddress = await getFundForManager(setup.defaultAccount);
+    // expect(vaultAddress).toBe(shared.vault.address);
 
     shared.participation.initial = await getParticipation(
       shared.vault.address,
@@ -79,6 +79,13 @@ it(
       shared.vault.address,
     );
 
+    trace({
+      message: `Initial calculations \n GAV: ${shared.initialCalculations
+        .gav}\n NAV: ${shared.initialCalculations.nav} \n Share Price: ${shared
+        .initialCalculations.sharePrice} \n totalSupply: ${shared
+        .initialCalculations.totalSupply}`,
+      data: shared,
+    });
     expect(shared.initialCalculations.sharePrice.toNumber()).toBe(1);
     expect(shared.initialCalculations.gav.toNumber()).toBe(0);
 
@@ -100,11 +107,11 @@ it(
     shared.executedSubscriptionRequest = await executeRequest(
       shared.subscriptionRequest.id,
       shared.vault.address,
-      // "0x4c476a34a92cda676654b43c5d5d42879d45e38b",
+      // "0x1787a2242cbb8ac2d755568f99a4314309637493",
     );
 
     shared.participation.invested = await getParticipation(
-      // "0x4c476a34a92cda676654b43c5d5d42879d45e38b",
+      // "0x1787a2242cbb8ac2d755568f99a4314309637493",
       shared.vault.address,
       setup.defaultAccount,
     );
@@ -121,8 +128,18 @@ it(
         .participation.invested.personalStake}`,
     });
 
+    shared.midCalculations = await performCalculations(shared.vault.address);
+
+    trace({
+      message: `End calculations \n GAV: ${shared.midCalculations
+        .gav}\n NAV: ${shared.midCalculations.nav} \n Share Price: ${shared
+        .midCalculations.sharePrice} \n totalSupply: ${shared.midCalculations
+        .totalSupply}`,
+      data: shared,
+    });
+
     shared.redemptionRequest = await redeem(
-      // "0x4c476a34a92cda676654b43c5d5d42879d45e38b",
+      // "0x1787a2242cbb8ac2d755568f99a4314309637493",
       shared.vault.address,
       REDEEM_QUANTITY,
       REDEEM_QUANTITY,
@@ -138,7 +155,7 @@ it(
 
     shared.executedRedeemRequest = await executeRequest(
       shared.redemptionRequest.id,
-      // "0x4c476a34a92cda676654b43c5d5d42879d45e38b",
+      // "0x1787a2242cbb8ac2d755568f99a4314309637493",
       shared.vault.address,
     );
 
@@ -165,7 +182,7 @@ it(
         symbol: "ETH-T",
       },
       buy: {
-        howMuch: new BigNumber(2),
+        howMuch: new BigNumber(4),
         symbol: "MLN-T",
       },
     });
@@ -192,8 +209,8 @@ it(
     // });
 
     shared.orderFromFund = await makeOrderFromFund(
-      shared.vault.address,
-      // "0x4c476a34a92cda676654b43c5d5d42879d45e38b",
+      // shared.vault.address,
+      "0x1787a2242cbb8ac2d755568f99a4314309637493",
       "MLN-T",
       "ETH-T",
       new BigNumber(1),
@@ -205,6 +222,7 @@ it(
     });
 
     shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
+
     trace({
       message: `Got orderbook for MLN-T/ETH-T with length: ${shared.orderBook
         .length}`,
@@ -214,7 +232,7 @@ it(
     shared.takenOrder = await takeOrderFromFund(
       shared.simpleOrder.id,
       shared.vault.address,
-      // "0x4c476a34a92cda676654b43c5d5d42879d45e38b",
+      // "0x1787a2242cbb8ac2d755568f99a4314309637493",
       new BigNumber(1.5),
     );
 
@@ -225,6 +243,14 @@ it(
     });
 
     shared.endCalculations = await performCalculations(shared.vault.address);
+
+    trace({
+      message: `End calculations \n GAV: ${shared.endCalculations
+        .gav}\n NAV: ${shared.endCalculations.nav} \n Share Price: ${shared
+        .endCalculations.sharePrice} \n totalSupply: ${shared.endCalculations
+        .totalSupply}`,
+      data: shared,
+    });
   },
   10 * 60 * 1000,
 );
