@@ -10,7 +10,7 @@ import { creators as generalCreators } from "../general";
 import { creators as executeRequestCreators } from "../executeRequest/duck";
 
 const participationMiddleware = store => next => action => {
-  const { type } = action;
+  const { type, ...params } = action;
 
   const currentState = store.getState().participation;
 
@@ -53,7 +53,7 @@ const participationMiddleware = store => next => action => {
           setup.web3.eth.accounts[0],
         )
           .then(request => {
-            console.log("Redeem receipt ", request);
+            console.log("Redeem request ", request);
             store.dispatch(
               executeRequestCreators.update({
                 requestId: request.id,
@@ -85,8 +85,33 @@ const participationMiddleware = store => next => action => {
             ? calculations.sharePrice.toNumber() * 1.05
             : calculations.sharePrice.toNumber() * 0.95;
 
-        store.dispatch(creators.change({ price: enhancedSharePrice }));
+        store.dispatch(creators.update({ price: enhancedSharePrice }));
       });
+      break;
+    }
+
+    case types.CHANGE: {
+      let amount;
+      let total;
+
+      if (params.amount) {
+        total = params.amount * currentState.price;
+        store.dispatch(
+          creators.update({
+            amount: params.amount.toString(10),
+            total: total.toString(10),
+          }),
+        );
+      } else if (params.total) {
+        amount = params.total / currentState.price;
+        store.dispatch(
+          creators.update({
+            amount: amount.toString(10),
+            total: params.total.toString(10),
+          }),
+        );
+      }
+      break;
     }
 
     default:

@@ -28,7 +28,8 @@ const Participation = props => (
           <List.Content>
             <Input
               name="amount"
-              placeholder={props.amount}
+              placeholder="Amount"
+              value={props.amount}
               onChange={props.onChange}
             />
           </List.Content>
@@ -39,7 +40,6 @@ const Participation = props => (
               readOnly
               name="price"
               value={props.price}
-              onChange={props.onChange}
               label="Share Price"
             />
           </List.Content>
@@ -48,7 +48,8 @@ const Participation = props => (
           <List.Content>
             <Input
               name="total"
-              placeholder={props.total}
+              placeholder="Total"
+              value={props.total}
               onChange={props.onChange}
             />
           </List.Content>
