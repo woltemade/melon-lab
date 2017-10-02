@@ -5,7 +5,7 @@ import getConfig from "../../../../lib/version/calls/getConfig";
 import trace from "../../../../lib/utils/trace";
 import getBalance from "../../../../lib/assets/calls/getBalance";
 import setupFund from "../../../../lib/version/transactions/setupFund";
-import getFundForManager from "../../../../lib/version/calls/getFundForManager";
+// import getFundForManager from "../../../../lib/version/calls/getFundForManager";
 import getParticipation from "../../../../lib/participation/calls/getParticipation";
 import subscribe from "../../../../lib/participation/transactions/subscribe";
 import executeRequest from "../../../../lib/participation/transactions/executeRequest";
@@ -80,9 +80,9 @@ it(
     );
 
     trace({
-      message: `Initial calculations \n GAV: ${shared.initialCalculations
-        .gav}\n NAV: ${shared.initialCalculations.nav} \n Share Price: ${shared
-        .initialCalculations.sharePrice} \n totalSupply: ${shared
+      message: `Initial calculations- GAV: ${shared.initialCalculations
+        .gav}, NAV: ${shared.initialCalculations.nav}, Share Price: ${shared
+        .initialCalculations.sharePrice}, totalSupply: ${shared
         .initialCalculations.totalSupply}`,
       data: shared,
     });
@@ -131,9 +131,9 @@ it(
     shared.midCalculations = await performCalculations(shared.vault.address);
 
     trace({
-      message: `End calculations \n GAV: ${shared.midCalculations
-        .gav}\n NAV: ${shared.midCalculations.nav} \n Share Price: ${shared
-        .midCalculations.sharePrice} \n totalSupply: ${shared.midCalculations
+      message: `Mid calculations- GAV: ${shared.midCalculations
+        .gav}, NAV: ${shared.midCalculations.nav}, Share Price: ${shared
+        .midCalculations.sharePrice}, totalSupply: ${shared.midCalculations
         .totalSupply}`,
       data: shared,
     });
@@ -191,26 +191,9 @@ it(
       message: `Regular account made order with id: ${shared.simpleOrder.id}`,
     });
 
-    // shared.simpleOrderToBeCanceled = await makeOrder(
-    //   new BigNumber(1),
-    //   "ETH-T",
-    //   new BigNumber(2),
-    //   "MLN-T",
-    // );
-
-    // shared.canceledOrder = await cancelOrder(
-    //   shared.simpleOrderToBeCanceled.id,
-    //   setup.defaultAccount,
-    // );
-
-    // trace({
-    //   message: `Regular account made an order with id : ${shared
-    //     .simpleOrderToBeCanceled.id} and then canceled it.`,
-    // });
-
     shared.orderFromFund = await makeOrderFromFund(
-      // shared.vault.address,
-      "0x1787a2242cbb8ac2d755568f99a4314309637493",
+      shared.vault.address,
+      // "0xbe7edc252e1395a6c1b34387968931a177022d89",
       "MLN-T",
       "ETH-T",
       new BigNumber(1),
@@ -232,7 +215,7 @@ it(
     shared.takenOrder = await takeOrderFromFund(
       shared.simpleOrder.id,
       shared.vault.address,
-      // "0x1787a2242cbb8ac2d755568f99a4314309637493",
+      // "0xbe7edc252e1395a6c1b34387968931a177022d89",
       new BigNumber(1.5),
     );
 
@@ -245,9 +228,9 @@ it(
     shared.endCalculations = await performCalculations(shared.vault.address);
 
     trace({
-      message: `End calculations \n GAV: ${shared.endCalculations
-        .gav}\n NAV: ${shared.endCalculations.nav} \n Share Price: ${shared
-        .endCalculations.sharePrice} \n totalSupply: ${shared.endCalculations
+      message: `End calculations- GAV: ${shared.endCalculations
+        .gav}\n NAV: ${shared.endCalculations.nav}, Share Price: ${shared
+        .endCalculations.sharePrice}, totalSupply: ${shared.endCalculations
         .totalSupply}`,
       data: shared,
     });

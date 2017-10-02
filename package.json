@@ -82,7 +82,7 @@
     "walk": "^2.3.9"
   },
   "dependencies": {
-    "@melonproject/protocol": "^0.3.6-alpha.6",
+    "@melonproject/protocol": "^0.3.8-alpha.1",
     "bignumber.js": "^4.0.2",
     "pify": "^3.0.0",
     "ramda": "^0.24.1",
