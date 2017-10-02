@@ -32,7 +32,8 @@
     "postversion": "git push && git push --tags",
     "deploy": "npm version patch && npm publish",
     "deploy:alpha": "npm publish --tag alpha",
-    "depcheck": "depcheck --ignores=husky,eslint-config-plugin:flowtype",
+    "depcheck":
+      "depcheck --ignores=husky,eslint-config-plugin:flowtype,nan,debug",
     "depcheck:json": "depcheck --ignores=husky --json"
   },
   "lint-staged": {
