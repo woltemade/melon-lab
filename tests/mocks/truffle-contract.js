@@ -80,32 +80,16 @@ const instance = {
         resolve({
           logs: [
             {
-              event: "FundAdded",
+              event: "FundUpdated",
               args: {
                 id: new BigNumber(1),
-                fundAddr: "0xVAULT",
-                name: "TESTFUND",
-                atTime: new BigNumber(723310098),
               },
             },
           ],
         }),
       ),
   ),
-  getVault: jest.fn(
-    () =>
-      new Promise(resolve =>
-        resolve([
-          "0xVAULT",
-          "0xUSER",
-          "TESTFUND",
-          "MLN-T",
-          new BigNumber(18),
-          true,
-          123,
-        ]),
-      ),
-  ),
+  getFund: jest.fn(() => new Promise(resolve => resolve("0xVAULT"))),
   getLastOrderId: jest.fn(
     () => new Promise(resolve => resolve(new BigNumber(8))),
   ),
@@ -128,7 +112,7 @@ const instance = {
         ]),
       ),
   ),
-  getName: jest.fn(() => new Promise(resolve => resolve("Test Fund"))),
+  getName: jest.fn(() => new Promise(resolve => resolve("TESTFUND"))),
   getDecimals: jest.fn(
     () => new Promise(resolve => resolve(new BigNumber(18))),
   ),
