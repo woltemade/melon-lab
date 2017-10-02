@@ -31,6 +31,7 @@ const Participation = props => (
               placeholder="Amount"
               value={props.amount}
               onChange={props.onChange}
+              label="Amount"
             />
           </List.Content>
         </List.Item>
@@ -51,6 +52,7 @@ const Participation = props => (
               placeholder="Total"
               value={props.total}
               onChange={props.onChange}
+              label="Total"
             />
           </List.Content>
         </List.Item>

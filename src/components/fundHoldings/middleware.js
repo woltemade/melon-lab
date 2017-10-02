@@ -1,4 +1,4 @@
-import { getBalance, getPrice, toReadable } from "@melonproject/melon.js";
+import { getBalance, getPrice } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 
 const fundHoldingsMiddleware = store => next => action => {

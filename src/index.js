@@ -64,57 +64,57 @@ window.addEventListener("load", () => {
   });
 
   getFundForManager(setup.web3.eth.accounts[0]).then(fundAddress => {
-    if (fundAddress === "0x") {
-      store.dispatch(
-        generalCreators.update({
-          mode: "Setup",
-        }),
-      );
-    } else {
-      // getFundInformations(
-      //   "0x95280090c79ac9e12fb1340230b14ce0f73036c7",
-      // ).then(fundInformations => {
-      getFundInformations(fundAddress).then(fundInformations => {
-        if (fundInformations) {
-          store.dispatch(
-            generalCreators.update({
-              fundAddress: fundInformations.fundAddress,
-              fundName: fundInformations.name,
-            }),
-          );
-          return performCalculations(
-            fundInformations.fundAddress,
-          ).then(calculations => {
-            if (calculations.totalSupply.toNumber() !== 0) {
-              store.dispatch(
-                generalCreators.update({
-                  mode: "Manage",
-                }),
-              );
-              store.dispatch(
-                orderbookCreators.requestOrderbook(
-                  store.getState().general.assetPair,
-                ),
-              );
-              store.dispatch(factsheetCreators.requestInformations());
-              store.dispatch(fundHoldingsCreators.requestHoldings());
-              store.dispatch(fundHoldingsCreators.requestPrices());
-              store.dispatch(
-                recentTradesCreators.requestRecentTrades(defaultAssetPair),
-              );
-              store.dispatch(tradeHelperCreators.request(defaultAssetPair));
-              store.dispatch(participationCreators.request_price());
-            } else {
-              store.dispatch(
-                generalCreators.update({
-                  mode: "Invest",
-                }),
-              );
-            }
-          });
-        }
-      });
-    }
+    // if (fundAddress === "0x") {
+    //   store.dispatch(
+    //     generalCreators.update({
+    //       mode: "Setup",
+    //     }),
+    //   );
+    // } else {
+    getFundInformations(
+      "0x95280090c79ac9e12fb1340230b14ce0f73036c7",
+    ).then(fundInformations => {
+      // getFundInformations(fundAddress).then(fundInformations => {
+      if (fundInformations) {
+        store.dispatch(
+          generalCreators.update({
+            fundAddress: fundInformations.fundAddress,
+            fundName: fundInformations.name,
+          }),
+        );
+        return performCalculations(
+          fundInformations.fundAddress,
+        ).then(calculations => {
+          if (calculations.totalSupply.toNumber() !== 0) {
+            store.dispatch(
+              generalCreators.update({
+                mode: "Manage",
+              }),
+            );
+            store.dispatch(
+              orderbookCreators.requestOrderbook(
+                store.getState().general.assetPair,
+              ),
+            );
+            store.dispatch(factsheetCreators.requestInformations());
+            store.dispatch(fundHoldingsCreators.requestHoldings());
+            store.dispatch(fundHoldingsCreators.requestPrices());
+            store.dispatch(
+              recentTradesCreators.requestRecentTrades(defaultAssetPair),
+            );
+            store.dispatch(tradeHelperCreators.request(defaultAssetPair));
+            store.dispatch(participationCreators.request_price());
+          } else {
+            store.dispatch(
+              generalCreators.update({
+                mode: "Invest",
+              }),
+            );
+          }
+        });
+      }
+    });
+    // }
     ReactDOM.render(
       <Provider store={store}>
         <AppContainer />

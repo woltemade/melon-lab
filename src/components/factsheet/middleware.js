@@ -1,4 +1,7 @@
-import { performCalculations } from "@melonproject/melon.js";
+import {
+  performCalculations,
+  getFundInformations,
+} from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 
 const factsheetMiddleware = store => next => action => {
@@ -16,6 +19,18 @@ const factsheetMiddleware = store => next => action => {
               performanceReward: response.performanceReward.toNumber(),
               unclaimedRewards: response.unclaimedRewards.toNumber(),
               totalSupply: response.totalSupply.toNumber(),
+            }),
+          );
+          return getFundInformations(store.getState().general.fundAddress);
+        })
+        .then(fundInformations => {
+          const rawDate = fundInformations.creationDate;
+          const formattedDate = `${rawDate.getDate()}-${rawDate.getMonth() +
+            1}-${rawDate.getFullYear()}`;
+          store.dispatch(
+            creators.updateInformations({
+              name: fundInformations.name,
+              inception: formattedDate,
             }),
           );
         })

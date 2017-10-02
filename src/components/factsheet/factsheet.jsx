@@ -5,7 +5,7 @@ const Factsheet = props => (
   <Card centered id="factsheet">
     <Card.Content>
       <Card.Header>
-        <strong>μέλλω Capital </strong>
+        <strong>{props.name} </strong>
       </Card.Header>
       <br />
       <Card.Meta>
@@ -17,7 +17,7 @@ const Factsheet = props => (
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Inception date: 07/07/2017</List.Header>
+            <List.Header>Inception date: {props.inception}</List.Header>
           </List.Content>
         </List.Item>
         <List.Item as="a">
