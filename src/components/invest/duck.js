@@ -1,7 +1,7 @@
 export const initialState = {
-  amount: "Amount",
+  amount: "",
   price: 1,
-  total: "Total",
+  total: "",
   loading: false,
   countdown: null,
 };
@@ -9,6 +9,7 @@ export const initialState = {
 export const types = {
   INVEST: "INVEST:invest:melon.network",
   CHANGE: "CHANGE:invest:melon.network",
+  UPDATE: "UPDATE:invest:melon.network",
 };
 
 export const creators = {
@@ -17,6 +18,10 @@ export const creators = {
   }),
   change: newValues => ({
     type: types.CHANGE,
+    ...newValues,
+  }),
+  update: newValues => ({
+    type: types.UPDATE,
     ...newValues,
   }),
 };
@@ -35,6 +40,12 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+      };
+    }
+    case types.UPDATE: {
+      return {
+        ...state,
+        ...params,
       };
     }
     default:

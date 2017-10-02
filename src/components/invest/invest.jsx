@@ -18,8 +18,10 @@ const Invest = props => (
               <List.Content>
                 <Input
                   name="amount"
-                  placeholder={props.amount}
+                  placeholder="Amount"
+                  value={props.amount}
                   onChange={props.onChange}
+                  label="Amount"
                 />
               </List.Content>
             </List.Item>
@@ -29,7 +31,7 @@ const Invest = props => (
                   readOnly
                   name="price"
                   value={props.price}
-                  onChange={props.onChange}
+                  label="Share Price"
                 />
               </List.Content>
             </List.Item>
@@ -37,8 +39,10 @@ const Invest = props => (
               <List.Content>
                 <Input
                   name="total"
-                  placeholder={props.total}
+                  placeholder="Total"
+                  value={props.total}
                   onChange={props.onChange}
+                  label="Total"
                 />
               </List.Content>
             </List.Item>
