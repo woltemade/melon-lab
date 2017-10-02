@@ -20,6 +20,7 @@ import { creators as factsheetCreators } from "./components/factsheet/duck";
 import { creators as fundHoldingsCreators } from "./components/fundHoldings/duck";
 import { creators as recentTradesCreators } from "./components/recentTrades/duck";
 import { creators as tradeHelperCreators } from "./components/tradeHelper/duck";
+import { creators as participationCreators } from "./components/participation/duck";
 
 window.addEventListener("load", () => {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
@@ -34,6 +35,7 @@ window.addEventListener("load", () => {
       new Web3.providers.HttpProvider("http://localhost:8545"),
     );
   }
+
   setup.init({
     web3: window.web3,
     daemonAddress: "0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd",
@@ -62,53 +64,56 @@ window.addEventListener("load", () => {
   });
 
   getFundForManager(setup.web3.eth.accounts[0]).then(fundAddress => {
-    if (!fundAddress) {
-      store.dispatch(
-        generalCreators.update({
-          mode: "Setup",
-        }),
-      );
-    } else {
-      getFundInformations(fundAddress).then(fundInformations => {
-        if (fundInformations) {
-          store.dispatch(
-            generalCreators.update({
-              fundAddress: fundInformations.fundAddress,
-              fundName: fundInformations.name,
-            }),
-          );
-          return performCalculations(
-            fundInformations.fundAddress,
-          ).then(calculations => {
-            if (calculations.totalSupply.toNumber() !== 0) {
-              store.dispatch(
-                generalCreators.update({
-                  mode: "Manage",
-                }),
-              );
-              store.dispatch(
-                orderbookCreators.requestOrderbook(
-                  store.getState().general.assetPair,
-                ),
-              );
-              store.dispatch(factsheetCreators.requestInformations());
-              store.dispatch(fundHoldingsCreators.requestHoldings());
-              store.dispatch(fundHoldingsCreators.requestPrices());
-              store.dispatch(
-                recentTradesCreators.requestRecentTrades(defaultAssetPair),
-              );
-              store.dispatch(tradeHelperCreators.request(defaultAssetPair));
-            } else {
-              store.dispatch(
-                generalCreators.update({
-                  mode: "Invest",
-                }),
-              );
-            }
-          });
-        }
-      });
-    }
+    // if (fundAddress === "0x") {
+    //   store.dispatch(
+    //     generalCreators.update({
+    //       mode: "Setup",
+    //     }),
+    //   );
+    // } else {
+    getFundInformations(
+      "0x95280090c79ac9e12fb1340230b14ce0f73036c7",
+    ).then(fundInformations => {
+      if (fundInformations) {
+        store.dispatch(
+          generalCreators.update({
+            fundAddress: fundInformations.fundAddress,
+            fundName: fundInformations.name,
+          }),
+        );
+        return performCalculations(
+          fundInformations.fundAddress,
+        ).then(calculations => {
+          if (calculations.totalSupply.toNumber() !== 0) {
+            store.dispatch(
+              generalCreators.update({
+                mode: "Manage",
+              }),
+            );
+            store.dispatch(
+              orderbookCreators.requestOrderbook(
+                store.getState().general.assetPair,
+              ),
+            );
+            store.dispatch(factsheetCreators.requestInformations());
+            store.dispatch(fundHoldingsCreators.requestHoldings());
+            store.dispatch(fundHoldingsCreators.requestPrices());
+            store.dispatch(
+              recentTradesCreators.requestRecentTrades(defaultAssetPair),
+            );
+            store.dispatch(tradeHelperCreators.request(defaultAssetPair));
+            store.dispatch(participationCreators.request_price());
+          } else {
+            store.dispatch(
+              generalCreators.update({
+                mode: "Invest",
+              }),
+            );
+          }
+        });
+      }
+    });
+    // }
     ReactDOM.render(
       <Provider store={store}>
         <AppContainer />

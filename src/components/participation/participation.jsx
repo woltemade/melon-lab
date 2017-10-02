@@ -36,9 +36,11 @@ const Participation = props => (
         <List.Item as="a">
           <List.Content>
             <Input
+              readOnly
               name="price"
-              placeholder={props.price}
+              value={props.price}
               onChange={props.onChange}
+              label="Share Price"
             />
           </List.Content>
         </List.Item>

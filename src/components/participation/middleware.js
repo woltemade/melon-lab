@@ -1,5 +1,10 @@
 import BigNumber from "bignumber.js";
-import { setup, subscribe, redeem } from "@melonproject/melon.js";
+import {
+  setup,
+  subscribe,
+  redeem,
+  performCalculations,
+} from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 import { creators as generalCreators } from "../general";
 import { creators as executeRequestCreators } from "../executeRequest/duck";
@@ -70,6 +75,20 @@ const participationMiddleware = store => next => action => {
       }
       break;
     }
+
+    case types.REQUEST_PRICE: {
+      performCalculations(
+        store.getState().general.fundAddress,
+      ).then(calculations => {
+        const enhancedSharePrice =
+          currentState.participationType === "Invest"
+            ? calculations.sharePrice.toNumber() * 1.05
+            : calculations.sharePrice.toNumber() * 0.95;
+
+        store.dispatch(creators.change({ price: enhancedSharePrice }));
+      });
+    }
+
     default:
   }
 

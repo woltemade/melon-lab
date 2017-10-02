@@ -15,6 +15,7 @@ const mapDispatchToProps = dispatch => ({
   },
   onSelect: (event, { name }) => {
     dispatch(creators.change({ participationType: name }));
+    dispatch(creators.request_price());
   },
 });
 

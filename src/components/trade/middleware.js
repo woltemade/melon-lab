@@ -14,6 +14,7 @@ import { creators as orderbookCreators } from "../orderbook/duck";
 import { creators as fundHoldingsCreators } from "../fundHoldings/duck";
 import { creators as tradeHelperCreators } from "../tradeHelper/duck";
 import { creators as recentTradesCreators } from "../recentTrades/duck";
+import { creators as factsheetCreators } from "../factsheet/duck";
 
 const tradeMiddleware = store => next => action => {
   const { type, ...params } = action;
@@ -145,6 +146,7 @@ const tradeMiddleware = store => next => action => {
           store.dispatch(tradeHelperCreators.request(assetPair));
           store.dispatch(orderbookCreators.requestOrderbook(assetPair));
           store.dispatch(recentTradesCreators.requestRecentTrades(assetPair));
+          store.dispatch(factsheetCreators.requestInformations());
         })
         .catch(error => console.log(error));
       break;

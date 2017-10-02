@@ -26,8 +26,9 @@ const Invest = props => (
             <List.Item as="a">
               <List.Content>
                 <Input
+                  readOnly
                   name="price"
-                  placeholder={props.price}
+                  value={props.price}
                   onChange={props.onChange}
                 />
               </List.Content>

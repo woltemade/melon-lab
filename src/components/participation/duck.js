@@ -9,6 +9,7 @@ export const initialState = {
 export const types = {
   INVEST: "INVEST:participation:melon.network",
   CHANGE: "CHANGE:participation:melon.network",
+  REQUEST_PRICE: "REQUEST_PRICE:participation:melon.network",
 };
 
 export const creators = {
@@ -18,6 +19,9 @@ export const creators = {
   change: newValues => ({
     type: types.CHANGE,
     ...newValues,
+  }),
+  request_price: () => ({
+    type: types.REQUEST_PRICE,
   }),
 };
 
@@ -35,6 +39,11 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+      };
+    }
+    case types.REQUEST_PRICE: {
+      return {
+        ...state,
       };
     }
     default:

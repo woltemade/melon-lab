@@ -1,6 +1,6 @@
 export const initialState = {
   amount: "Amount",
-  price: "Price per share",
+  price: 1,
   total: "Total",
   loading: false,
   countdown: null,
