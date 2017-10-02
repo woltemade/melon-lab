@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.3.1-alpha.1",
+  "version": "0.3.1-alpha.2",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/main.js",
   "sign-git-tag": true,
@@ -76,6 +76,8 @@
   "dependencies": {
     "@melonproject/protocol": "^0.3.8-alpha.1",
     "bignumber.js": "^4.0.2",
+    "debug": "^3.1.0",
+    "nan": "^2.7.0",
     "pify": "^3.0.0",
     "ramda": "^0.24.1",
     "truffle-contract": "^2.0.3",
