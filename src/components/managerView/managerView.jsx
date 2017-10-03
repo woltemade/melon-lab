@@ -8,9 +8,8 @@ import TradeContainer from "../trade/container";
 import TradeHelperContainer from "../tradeHelper/container";
 import ParticipationContainer from "../participation/container";
 import ExecuteRequestContainer from "../executeRequest/container";
-
+import TradingActivityContainer from "../tradingActivity/container";
 import FundActivity from "../fundActivity/fundActivity";
-import TradingActivity from "../tradingActivity/tradingActivity";
 import Settings from "../settings/settings";
 import Statistics from "../statistics/statistics";
 
@@ -21,7 +20,7 @@ const ManagerView = props => (
       <Card.Group>
         <FactsheetContainer />
         <FundActivity />
-        <TradingActivity />
+        <TradingActivityContainer />
       </Card.Group>
     </div>
     <div>

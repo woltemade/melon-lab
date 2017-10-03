@@ -21,6 +21,7 @@ import { creators as fundHoldingsCreators } from "./components/fundHoldings/duck
 import { creators as recentTradesCreators } from "./components/recentTrades/duck";
 import { creators as tradeHelperCreators } from "./components/tradeHelper/duck";
 import { creators as participationCreators } from "./components/participation/duck";
+import { creators as tradingActivityCreators } from "./components/tradingActivity/duck";
 
 window.addEventListener("load", () => {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
@@ -104,6 +105,7 @@ window.addEventListener("load", () => {
             );
             store.dispatch(tradeHelperCreators.request(defaultAssetPair));
             store.dispatch(participationCreators.request_price());
+            store.dispatch(tradingActivityCreators.requestFundRecentTrades());
           } else {
             store.dispatch(
               generalCreators.update({
