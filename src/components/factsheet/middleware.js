@@ -25,8 +25,8 @@ const factsheetMiddleware = store => next => action => {
         })
         .then(fundInformations => {
           const rawDate = fundInformations.creationDate;
-          const formattedDate = `${rawDate.getDate()}-${rawDate.getMonth() +
-            1}-${rawDate.getFullYear()}`;
+          const formattedDate = `${rawDate.getDate()}/${rawDate.getMonth() +
+            1}/${rawDate.getFullYear()}`;
           store.dispatch(
             creators.updateInformations({
               name: fundInformations.name,

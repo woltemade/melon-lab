@@ -4,7 +4,6 @@ import ManagerViewContainer from "../managerView/container";
 import SetupContainer from "../setup/container";
 import InvestContainer from "../invest/container";
 import ExecuteRequestContainer from "../executeRequest/container";
-
 import "../../App.css";
 
 const containerSelector = {
