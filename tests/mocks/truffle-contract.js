@@ -93,7 +93,7 @@ const instance = {
   getLastOrderId: jest.fn(
     () => new Promise(resolve => resolve(new BigNumber(8))),
   ),
-  Trade: jest.fn(() => ({
+  LogTake: jest.fn(() => ({
     get: jest.fn(callback => callback(null, recentTrades)),
   })),
   isActive: jest.fn(() => new Promise(resolve => resolve(true))),

@@ -16,6 +16,7 @@ import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
 import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFund";
 import performCalculations from "../../../../lib/fund/calls/performCalculations";
 import redeem from "../../../../lib/participation/transactions/redeem";
+import getRecentTrades from "../../../../lib/exchange/calls/getRecentTrades";
 
 const INITIAL_SUBSCRIBE_QUANTITY = 20;
 const REDEEM_QUANTITY = 5;
@@ -234,6 +235,8 @@ it(
         .totalSupply}`,
       data: shared,
     });
+
+    shared.recentTrades = await getRecentTrades("MLN-T", "ETH-T");
   },
   10 * 60 * 1000,
 );
