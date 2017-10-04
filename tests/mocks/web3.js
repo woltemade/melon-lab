@@ -10,6 +10,7 @@ const instance = {
   },
   eth: {
     accounts: ["0xUSER"],
+    getBlock: jest.fn(() => ({ number: 333333333333, gasLimit: 6986338 })),
     getBlockNumber: callback => callback(null, 333333333333),
     filter: jest.fn(() => ({
       watch: jest.fn(callback => {

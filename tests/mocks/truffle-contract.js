@@ -17,10 +17,10 @@ const instance = {
       }),
   ),
   takeOrder: jest.fn(
-    (/* exchange, id, quantity, objects */) =>
-      new Promise(resolve => {
-        resolve({ transactionHash: "0xBLUB" });
-      }),
+    () =>
+      new Promise(resolve =>
+        resolve({ logs: [{ event: "OrderUpdated", args: { id: 1 } }] }),
+      ),
   ),
   makeOrder: jest.fn(
     () =>
@@ -125,6 +125,10 @@ const instance = {
 
 instance.setupFund.estimateGas = jest.fn(() => 650000);
 instance.approve.estimateGas = jest.fn(() => 50000);
+instance.transferFrom.estimateGas = jest.fn(() => 50000);
+instance.transfer.estimateGas = jest.fn(() => 50000);
+instance.takeOrder.estimateGas = jest.fn(() => 50000);
+instance.makeOrder.estimateGas = jest.fn(() => 50000);
 
 const contract = {
   setProvider: jest.fn(),
