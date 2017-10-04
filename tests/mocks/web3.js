@@ -9,8 +9,10 @@ const instance = {
     network: 42,
   },
   eth: {
-    accounts: ["0xUSER"],
-    getBlock: jest.fn(() => ({ number: 333333333333, gasLimit: 6986338 })),
+    accounts: ["0xMANAGER"],
+    getBlock: jest.fn((block, callback) =>
+      callback(null, { number: 333333333333, gasLimit: 6986338 }),
+    ),
     getBlockNumber: callback => callback(null, 333333333333),
     filter: jest.fn(() => ({
       watch: jest.fn(callback => {

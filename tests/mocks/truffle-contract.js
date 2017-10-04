@@ -97,13 +97,13 @@ const instance = {
     get: jest.fn(callback => callback(null, recentTrades)),
   })),
   isActive: jest.fn(() => new Promise(resolve => resolve(true))),
-  getOwner: jest.fn(() => new Promise(resolve => resolve("0xUSER"))),
+  getOwner: jest.fn(() => new Promise(resolve => resolve("0xMANAGER"))),
   avatar: jest.fn(() => new Promise(resolve => resolve(true))),
   info: jest.fn(
     () =>
       new Promise(resolve =>
         resolve([
-          "0xUSER",
+          "0xMANAGER",
           "Test Fund",
           "MLN-T",
           new BigNumber(18),
@@ -121,6 +121,8 @@ const instance = {
   getCreationTime: jest.fn(
     () => new Promise(resolve => resolve(new BigNumber(1505292372))),
   ),
+  isShutDown: jest.fn(() => new Promise(resolve => resolve(false))),
+  owner: jest.fn(() => new Promise(resolve => resolve("0xMANAGER"))),
 };
 
 instance.setupFund.estimateGas = jest.fn(() => 650000);
