@@ -15,17 +15,17 @@ import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
 import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFund";
 import performCalculations from "../../../../lib/fund/calls/performCalculations";
-import redeem from "../../../../lib/participation/transactions/redeem";
+// import redeem from "../../../../lib/participation/transactions/redeem";
 
-const INITIAL_SUBSCRIBE_QUANTITY = 100;
-const REDEEM_QUANTITY = 5;
+const INITIAL_SUBSCRIBE_QUANTITY = 5;
+// const REDEEM_QUANTITY = 1;
 
 const shared = { etherBalance: {}, participation: {}, melonBalance: {} };
 
 const randomString = (length = 4) =>
   Math.random().toString(36).substr(2, length);
 
-it(
+fit(
   "Create fund, invest, take order, redeem",
   async () => {
     console.log("\n");
@@ -97,11 +97,15 @@ it(
 
     await awaitDataFeedUpdates(2);
 
+    trace("Awaited two data feed updates");
+
     shared.executedSubscriptionRequest = await executeRequest(
       shared.subscriptionRequest.id,
       shared.vault.address,
       // "0x4c476a34a92cda676654b43c5d5d42879d45e38b",
     );
+
+    trace(`executedSubscriptionRequest ${shared.executedSubscriptionRequest}`);
 
     shared.participation.invested = await getParticipation(
       // "0x4c476a34a92cda676654b43c5d5d42879d45e38b",
@@ -120,6 +124,8 @@ it(
       message: `Subscribe request executed. Personal stake: ${shared
         .participation.invested.personalStake}`,
     });
+
+    /*
 
     shared.redemptionRequest = await redeem(
       // "0x4c476a34a92cda676654b43c5d5d42879d45e38b",
@@ -158,6 +164,8 @@ it(
       message: `Redeem request executed. Personal stake: ${shared.participation
         .invested.personalStake}`,
     });
+
+    */
 
     shared.simpleOrder = await makeOrder({
       sell: {
