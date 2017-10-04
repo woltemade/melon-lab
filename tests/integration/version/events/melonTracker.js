@@ -18,8 +18,7 @@ const eventExpectations = {
     expect(args.name).toEqual(fundName);
   },
 };
-
-it(
+xit(
   "watchVaultAssociated",
   async () =>
     new Promise(async resolve => {

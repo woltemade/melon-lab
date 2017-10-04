@@ -11,5 +11,5 @@ test("it creates a fund", async () => {
   expect(result.id).toBe(1);
   expect(result.address).toBe("0xVAULT");
   expect(result.name).toBe("TESTFUND");
-  expect(result.timestamp.toISOString()).toBe("1992-12-02T15:28:18.000Z");
+  expect(result.timestamp.toISOString()).toBe("2017-09-13T08:46:12.000Z");
 });

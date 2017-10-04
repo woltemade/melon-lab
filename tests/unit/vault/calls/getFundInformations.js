@@ -10,5 +10,5 @@ test("get vault informations", async () => {
 
   expect(result).toBeTruthy();
   expect(result.fundAddress).toBe("0xVAULT");
-  expect(result.name).toBe("Test Fund");
+  expect(result.name).toBe("TESTFUND");
 });

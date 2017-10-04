@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.3.1",
+  "version": "0.3.1-alpha.5",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/main.js",
   "sign-git-tag": true,
@@ -24,33 +24,25 @@
     "build": "npm run walklib && npm run babel",
     "walklib": "babel-node ./scripts/walkLib.js",
     "lint": "eslint . --ignore-path .gitignore",
-    "format": "prettier-eslint --write \"lib/**/*.js\" && prettier-eslint --write \"tests/**/*.js\"",
+    "format":
+      "prettier-eslint --write \"lib/**/*.js\" && prettier-eslint --write \"tests/**/*.js\"",
     "precommit": "lint-staged",
     "preversion": "npm test",
     "version": "npm run test",
     "postversion": "git push && git push --tags",
     "deploy": "npm version patch && npm publish",
     "deploy:alpha": "npm publish --tag alpha",
-    "depcheck": "depcheck --ignores=husky,eslint-config-plugin:flowtype",
+    "depcheck": "depcheck --ignores=husky,eslint-config-plugin:flowtype,debug",
     "depcheck:json": "depcheck --ignores=husky --json"
   },
   "lint-staged": {
-    "*.js": [
-      "npm run format",
-      "git add"
-    ]
+    "*.js": ["npm run format", "git add"]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/melonproject/melon.js.git"
   },
-  "keywords": [
-    "melon",
-    "melonproject",
-    "javascript",
-    "ethereum",
-    "api"
-  ],
+  "keywords": ["melon", "melonproject", "javascript", "ethereum", "api"],
   "author": "Simon Emanuel Schmid <simon@melonport.com>",
   "license": "GPL-3.0",
   "bugs": {
@@ -79,10 +71,11 @@
     "jest": "^20.0.4",
     "lint-staged": "^4.0.2",
     "prettier-eslint-cli": "^4.1.1",
-    "walk": "^2.3.9"
+    "walk": "^2.3.9",
+    "debug": "^3.1.0"
   },
   "dependencies": {
-    "@melonproject/protocol": "^0.3.6-alpha.2",
+    "@melonproject/protocol": "0.3.8-alpha.1",
     "bignumber.js": "^4.0.2",
     "pify": "^3.0.0",
     "ramda": "^0.24.1",
