@@ -32,8 +32,7 @@
     "postversion": "git push && git push --tags",
     "deploy": "npm version patch && npm publish",
     "deploy:alpha": "npm publish --tag alpha",
-    "depcheck":
-      "depcheck --ignores=husky,eslint-config-plugin:flowtype,nan,debug",
+    "depcheck": "depcheck --ignores=husky,eslint-config-plugin:flowtype",
     "depcheck:json": "depcheck --ignores=husky --json"
   },
   "lint-staged": {
@@ -75,10 +74,8 @@
     "walk": "^2.3.9"
   },
   "dependencies": {
-    "@melonproject/protocol": "^0.3.8-alpha.1",
+    "@melonproject/protocol": "0.3.8-alpha.1",
     "bignumber.js": "^4.0.2",
-    "debug": "^3.1.0",
-    "nan": "^2.7.0",
     "pify": "^3.0.0",
     "ramda": "^0.24.1",
     "truffle-contract": "^2.0.3",
