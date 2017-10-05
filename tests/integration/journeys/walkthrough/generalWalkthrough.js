@@ -5,14 +5,15 @@ import getConfig from "../../../../lib/version/calls/getConfig";
 import trace from "../../../../lib/utils/trace";
 import getBalance from "../../../../lib/assets/calls/getBalance";
 import setupFund from "../../../../lib/version/transactions/setupFund";
-// import getFundForManager from "../../../../lib/version/calls/getFundForManager";
+import getFundForManager from "../../../../lib/version/calls/getFundForManager";
 import getParticipation from "../../../../lib/participation/calls/getParticipation";
 import subscribe from "../../../../lib/participation/transactions/subscribe";
 import executeRequest from "../../../../lib/participation/transactions/executeRequest";
-import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
+// import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
 import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFund";
 import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
+// import getActiveOrders from "../../../../lib/exchange/calls/getActiveOrders";
 import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFund";
 import performCalculations from "../../../../lib/fund/calls/performCalculations";
 import redeem from "../../../../lib/participation/transactions/redeem";
@@ -66,8 +67,8 @@ fit(
       data: shared,
     });
 
-    // const vaultAddress = await getFundForManager(setup.defaultAccount);
-    // expect(vaultAddress).toBe(shared.vault.address);
+    const fundCreatedByManager = await getFundForManager(setup.defaultAccount);
+    expect(fundCreatedByManager).toBe(shared.vault.address);
 
     shared.participation.initial = await getParticipation(
       shared.vault.address,
@@ -103,9 +104,9 @@ fit(
       data: shared,
     });
 
-    await awaitDataFeedUpdates(2);
+    // await awaitDataFeedUpdates(2);
 
-    trace("Awaited two data feed updates");
+    // trace("Awaited two data feed updates");
 
     shared.executedSubscriptionRequest = await executeRequest(
       shared.subscriptionRequest.id,
@@ -156,7 +157,7 @@ fit(
       data: shared,
     });
 
-    await awaitDataFeedUpdates(2);
+    // await awaitDataFeedUpdates(2);
 
     shared.executedRedeemRequest = await executeRequest(
       shared.redemptionRequest.id,
@@ -198,7 +199,7 @@ fit(
 
     shared.orderFromFund = await makeOrderFromFund(
       shared.vault.address,
-      // "0xbe7edc252e1395a6c1b34387968931a177022d89",
+      // "0xada9810b566a62912feba9c7fa55c85e65083f84",
       "MLN-T",
       "ETH-T",
       new BigNumber(1),
