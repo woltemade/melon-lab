@@ -73,7 +73,7 @@ window.addEventListener("load", () => {
     //   );
     // } else {
     getFundInformations(
-      "0x95280090c79ac9e12fb1340230b14ce0f73036c7",
+      "0x04347ebaf1e1e3b59e0f96cf018f87a2e9cc9dbc",
     ).then(fundInformations => {
       // getFundInformations(fundAddress).then(fundInformations => {
       if (fundInformations) {

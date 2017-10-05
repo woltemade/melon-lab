@@ -1,11 +1,13 @@
 import React from "react";
 import { List, Card, Icon } from "semantic-ui-react";
 
-const Statistics = () =>
-  (<Card centered>
+const Statistics = () => (
+  <Card centered>
     <Card.Content>
       <Card.Header>Statistiques</Card.Header>
       <br />
+      Coming soon ;)
+      {/*
       <List>
         <List.Item as="a">
           <Icon name="right triangle" />
@@ -44,7 +46,9 @@ const Statistics = () =>
           </List.Content>
         </List.Item>
       </List>
+    */}
     </Card.Content>
-  </Card>);
+  </Card>
+);
 
 export default Statistics;
