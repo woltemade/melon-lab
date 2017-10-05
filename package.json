@@ -25,10 +25,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && npm run semantic:build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "semantic:build": "cd public/semantic && gulp build-css"
+    "semantic:build": "cd public/semantic && gulp build",
+    "semantic:watch": "cd public/semantic && gulp"
   },
   "devDependencies": {
     "eslint": "^4.3.0",
