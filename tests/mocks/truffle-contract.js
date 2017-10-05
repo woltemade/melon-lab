@@ -89,7 +89,8 @@ const instance = {
         }),
       ),
   ),
-  getFund: jest.fn(() => new Promise(resolve => resolve("0xVAULT"))),
+  getFundById: jest.fn(() => new Promise(resolve => resolve("0xVAULT"))),
+  getFundByManager: jest.fn(() => new Promise(resolve => resolve("0xVAULT"))),
   getLastOrderId: jest.fn(
     () => new Promise(resolve => resolve(new BigNumber(8))),
   ),
@@ -123,6 +124,21 @@ const instance = {
   ),
   isShutDown: jest.fn(() => new Promise(resolve => resolve(false))),
   owner: jest.fn(() => new Promise(resolve => resolve("0xMANAGER"))),
+  numRegisteredAssets: jest.fn(
+    () => new Promise(resolve => resolve(new BigNumber(18))),
+  ),
+  getRegisteredAssetAt: jest.fn(() => new Promise(resolve => resolve("0x"))),
+  information: jest.fn(
+    () =>
+      new Promise(resolve =>
+        resolve([
+          "0x64C4406C58C512f326d83065a72F12884105520b",
+          "Status Network Token",
+          new BigNumber(18),
+          "https://status.im/",
+        ]),
+      ),
+  ),
 };
 
 instance.setupFund.estimateGas = jest.fn(() => 650000);
