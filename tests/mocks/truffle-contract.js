@@ -139,6 +139,12 @@ const instance = {
         ]),
       ),
   ),
+  getQuoteAsset: jest.fn(
+    () =>
+      new Promise(resolve =>
+        resolve("0x2a20ff70596e431ab26C2365acab1b988DA8eCCF"),
+      ),
+  ),
 };
 
 instance.setupFund.estimateGas = jest.fn(() => 650000);
