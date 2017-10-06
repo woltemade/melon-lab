@@ -11,6 +11,7 @@ import tradeHelper from "./components/tradeHelper/duck";
 import participation from "./components/participation/duck";
 import executeRequest from "./components/executeRequest/duck";
 import tradingActivity from "./components/tradingActivity/duck";
+import web3 from "./components/web3";
 
 import generalMiddleware from "./components/generalMiddleware";
 import setupMiddleware from "./components/setup/middleware";
@@ -39,6 +40,7 @@ export default createStore(
     participation,
     executeRequest,
     tradingActivity,
+    web3,
   }),
   {
     /* preloadedState */
