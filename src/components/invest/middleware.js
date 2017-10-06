@@ -1,8 +1,9 @@
 import BigNumber from "bignumber.js";
-import { setup, subscribe } from "@melonproject/melon.js";
+import { setup, subscribe, executeRequest } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 import { creators as generalCreators } from "../general";
-import { creators as executeRequestCreators } from "../executeRequest/duck";
+import { creators as factsheetCreators } from "../factsheet/duck";
+import { creators as fundHoldingsCreators } from "../fundHoldings/duck";
 
 const investMiddleware = store => next => action => {
   const { type, ...params } = action;
@@ -18,13 +19,17 @@ const investMiddleware = store => next => action => {
         new BigNumber(0.1),
         setup.web3.eth.accounts[0],
       )
-        .then(subscribeRequestResponse => {
-          store.dispatch(
-            executeRequestCreators.update({
-              requestId: subscribeRequestResponse.id,
-            }),
-          );
-          store.dispatch(generalCreators.update({ mode: "Execute" }));
+        .then(subscribeRequestResponse =>
+          executeRequest(
+            subscribeRequestResponse.id,
+            store.getState().general.fundAddress,
+            setup.web3.eth.accounts[0],
+          ),
+        )
+        .then(() => {
+          store.dispatch(generalCreators.update({ mode: "Manage" }));
+          store.dispatch(factsheetCreators.requestInformations());
+          store.dispatch(fundHoldingsCreators.requestHoldings());
         })
         .catch(err => {
           throw err;

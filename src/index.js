@@ -86,18 +86,14 @@ window.addEventListener("load", () => {
 
   if (setup.defaultAccount) {
     getFundForManager(setup.web3.eth.accounts[0]).then(fundAddress => {
-      // if (fundAddress === "0x") {
-      //   store.dispatch(
-      //     generalCreators.update({
-      //       mode: "Setup",
-      //     }),
-      //   );
-      // } else {
-      getFundInformations(
-        "0x04347ebaf1e1e3b59e0f96cf018f87a2e9cc9dbc",
-      ).then(fundInformations => {
-        // getFundInformations(fundAddress).then(fundInformations => {
-        if (fundInformations) {
+      if (!fundAddress) {
+        store.dispatch(
+          generalCreators.update({
+            mode: "Setup",
+          }),
+        );
+      } else {
+        getFundInformations(fundAddress).then(fundInformations => {
           store.dispatch(
             generalCreators.update({
               fundAddress: fundInformations.fundAddress,
@@ -135,9 +131,8 @@ window.addEventListener("load", () => {
               );
             }
           });
-        }
-      });
-      // }
+        });
+      }
     });
   }
 });
