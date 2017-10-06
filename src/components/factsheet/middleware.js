@@ -13,12 +13,12 @@ const factsheetMiddleware = store => next => action => {
         .then(response => {
           store.dispatch(
             creators.updateInformations({
-              aum: response.gav.toNumber(),
-              sharePrice: response.sharePrice.toNumber(),
-              managementReward: response.managementReward.toNumber(),
-              performanceReward: response.performanceReward.toNumber(),
-              unclaimedRewards: response.unclaimedRewards.toNumber(),
-              totalSupply: response.totalSupply.toNumber(),
+              aum: response.gav.toString(),
+              sharePrice: response.sharePrice.toString(),
+              managementReward: response.managementReward.toString(),
+              performanceReward: response.performanceReward.toString(),
+              unclaimedRewards: response.unclaimedRewards.toString(),
+              totalSupply: response.totalSupply.toString(),
             }),
           );
           return getFundInformations(store.getState().general.fundAddress);

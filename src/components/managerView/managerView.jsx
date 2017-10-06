@@ -9,7 +9,7 @@ import TradeHelperContainer from "../tradeHelper/container";
 import ParticipationContainer from "../participation/container";
 import ExecuteRequestContainer from "../executeRequest/container";
 import TradingActivityContainer from "../tradingActivity/container";
-import FundActivity from "../fundActivity/fundActivity";
+// import FundActivity from "../fundActivity/fundActivity";
 import Settings from "../settings/settings";
 import Statistics from "../statistics/statistics";
 
@@ -19,7 +19,7 @@ const ManagerView = props => (
     <div>
       <Card.Group>
         <FactsheetContainer />
-        <FundActivity />
+        {/* <FundActivity /> */}
         <TradingActivityContainer />
       </Card.Group>
     </div>

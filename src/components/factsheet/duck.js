@@ -1,11 +1,11 @@
 export const initialState = {
   name: "My fund",
   inception: "N/A",
-  aum: "N/A",
-  sharePrice: "N/A",
-  managementReward: "N/A",
-  performanceReward: "N/A",
-  unclaimedRewards: "N/A",
+  aum: "0",
+  sharePrice: "0",
+  managementReward: "0",
+  performanceReward: "0",
+  unclaimedRewards: "0",
 };
 
 export const types = {
