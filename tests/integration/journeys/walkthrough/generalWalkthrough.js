@@ -13,7 +13,6 @@ import executeRequest from "../../../../lib/participation/transactions/executeRe
 import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFund";
 import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
-// import getActiveOrders from "../../../../lib/exchange/calls/getActiveOrders";
 import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFund";
 import performCalculations from "../../../../lib/fund/calls/performCalculations";
 import redeem from "../../../../lib/participation/transactions/redeem";
@@ -242,6 +241,8 @@ fit(
     });
 
     shared.recentTrades = await getRecentTrades("MLN-T", "ETH-T");
+
+    shared.orderbook = await getOrderbook("MLN-T", "ETH-T");
   },
   10 * 60 * 1000,
 );
