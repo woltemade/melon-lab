@@ -11,7 +11,7 @@ import tradeHelper from "./components/tradeHelper/duck";
 import participation from "./components/participation/duck";
 import executeRequest from "./components/executeRequest/duck";
 import tradingActivity from "./components/tradingActivity/duck";
-import web3 from "./components/web3";
+import web3 from "./components/web3/duck";
 
 import generalMiddleware from "./components/generalMiddleware";
 import setupMiddleware from "./components/setup/middleware";
@@ -25,6 +25,7 @@ import tradeHelperMiddleware from "./components/tradeHelper/middleware";
 import participationMiddleware from "./components/participation/middleware";
 import executeRequestMiddleware from "./components/executeRequest/middleware";
 import tradingActivityMiddleware from "./components/tradingActivity/middleware";
+import web3Middleware from "./components/web3/middleware";
 
 export default createStore(
   combineReducers({
@@ -59,6 +60,7 @@ export default createStore(
       participationMiddleware,
       executeRequestMiddleware,
       tradingActivityMiddleware,
+      web3Middleware,
     ),
     /* eslint-disable no-underscore-dangle */
     window.__REDUX_DEVTOOLS_EXTENSION__

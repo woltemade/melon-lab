@@ -22,7 +22,10 @@ import { creators as recentTradesCreators } from "./components/recentTrades/duck
 import { creators as tradeHelperCreators } from "./components/tradeHelper/duck";
 import { creators as participationCreators } from "./components/participation/duck";
 import { creators as tradingActivityCreators } from "./components/tradingActivity/duck";
-import { creators as web3Creators, connectionModes } from "./components/web3";
+import {
+  creators as web3Creators,
+  connectionModes,
+} from "./components/web3/duck";
 
 const getWeb3 = (web3 = window.web3) => {
   if (web3) {

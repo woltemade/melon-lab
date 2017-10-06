@@ -43,7 +43,7 @@ const readyCheck = state => ({
     state.connectionMode !== connectionModes.NOT_CONNECTED &&
     !state.syncing &&
     state.blockNumber > 0 &&
-    new Date() - state.lastUpdate < MAX_BLOCK_TIME_SECONDS * 10,
+    new Date() - state.lastUpdate < MAX_BLOCK_TIME_SECONDS * 1000,
 });
 
 export const reducers = {
