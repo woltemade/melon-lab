@@ -9,3 +9,4 @@
 @absoluteBorderRadius: 0;
 
 @defaultBorderRadius: 0;
+@pageBackground: #fffdf3;
