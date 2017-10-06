@@ -17,6 +17,7 @@ import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFu
 import performCalculations from "../../../../lib/fund/calls/performCalculations";
 import redeem from "../../../../lib/participation/transactions/redeem";
 import getRecentTrades from "../../../../lib/exchange/calls/getRecentTrades";
+import getFundRecentTrades from "../../../../lib/exchange/calls/getFundRecentTrades";
 
 const INITIAL_SUBSCRIBE_QUANTITY = 20;
 const REDEEM_QUANTITY = 5;
@@ -241,6 +242,11 @@ fit(
     });
 
     shared.recentTrades = await getRecentTrades("MLN-T", "ETH-T");
+    expect(shared.recentTrades.length).toBeGreaterThanOrEqual(0);
+
+    shared.fundRecentTrades = await getFundRecentTrades(shared.vault.address);
+    expect(shared.fundRecentTrades.length).toEqual(1);
+    expect(shared.fundRecentTrades[0].taker).toEqual(shared.vault.address);
 
     shared.orderbook = await getOrderbook("MLN-T", "ETH-T");
   },
