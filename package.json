@@ -83,7 +83,7 @@
     "debug": "^3.1.0"
   },
   "dependencies": {
-    "@melonproject/protocol": "0.3.8-alpha.3",
+    "@melonproject/protocol": "0.3.8-alpha.5",
     "bignumber.js": "^4.0.2",
     "pify": "^3.0.0",
     "ramda": "^0.24.1",

@@ -9,7 +9,7 @@ import getFundForManager from "../../../../lib/version/calls/getFundForManager";
 import getParticipation from "../../../../lib/participation/calls/getParticipation";
 import subscribe from "../../../../lib/participation/transactions/subscribe";
 import executeRequest from "../../../../lib/participation/transactions/executeRequest";
-// import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
+import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
 import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFund";
 import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
@@ -157,7 +157,7 @@ fit(
       data: shared,
     });
 
-    // await awaitDataFeedUpdates(2);
+    await awaitDataFeedUpdates(2);
 
     shared.executedRedeemRequest = await executeRequest(
       shared.redemptionRequest.id,
