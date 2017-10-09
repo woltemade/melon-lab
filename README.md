@@ -31,3 +31,20 @@ Go to the above `decentralized-portal` directory, open a terminal and launch the
 npm start
 ```
 
+## Build
+
+```
+npm run-script build
+```
+
+## Deploy
+
+You need to have IPFS installed accessible from the path folder and run the IPFS daemon:
+
+```
+ipfs daemon
+```
+
+```
+npm run-script deploy
+```

@@ -17,7 +17,7 @@ const App = props => (
     <div className="App-header">
       <Container>
         <br />
-        <Image src="/melon-logo.png" size="small" centered />
+        <Image src="./melon-logo.png" size="small" centered />
       </Container>
       <Menu secondary>
         <Menu.Menu position="right">
