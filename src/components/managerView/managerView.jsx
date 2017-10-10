@@ -20,7 +20,12 @@ const ManagerView = props => (
       <Card.Group>
         <FactsheetContainer />
         {/* <FundActivity /> */}
-        <TradingActivityContainer />
+        <Settings />
+        {props.general.pendingRequest ? (
+          <ExecuteRequestContainer />
+        ) : (
+          <ParticipationContainer />
+        )}
       </Card.Group>
     </div>
     <div>
@@ -50,15 +55,8 @@ const ManagerView = props => (
     <br />
     <br />
     <div>
-      <Card.Group>
-        <Settings />
-        {/* <Statistics /> */}
-        {props.general.pendingRequest ? (
-          <ExecuteRequestContainer />
-        ) : (
-          <ParticipationContainer />
-        )}
-      </Card.Group>
+      {/* <Statistics /> */}
+      <TradingActivityContainer />
     </div>
     <br />
     <br />

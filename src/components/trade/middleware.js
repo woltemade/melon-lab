@@ -207,6 +207,7 @@ const tradeMiddleware = store => next => action => {
           store.dispatch(tradeHelperCreators.request(assetPair));
           store.dispatch(orderbookCreators.requestOrderbook(assetPair));
           store.dispatch(recentTradesCreators.requestRecentTrades(assetPair));
+          store.dispatch(tradingActivityCreators.requestFundRecentTrades());
         })
         .catch(error => console.log(error));
       break;
