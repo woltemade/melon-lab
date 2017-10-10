@@ -5,7 +5,18 @@ const Setup = props => (
   <div>
     <h2>Welcome to the future of investment funds</h2>
     <div className="ui segment">
-      <p className="App-intro">To get started, let's create your Melon fund.</p>
+      <p className="App-intro">
+        To get started, head to our{" "}
+        <a href="http://faucet.melon.network" target="_blank">
+          faucet
+        </a>{" "}
+        to receive Kovan Ether and Kovan Melon
+      </p>
+      <br />
+      <p className="App-intro">
+        Once you have received k-ETH and k-MLN, go ahead and create your Melon
+        fund.
+      </p>
       <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
         <div className="ui text loader">
           Deploying your fund to the Ethereum blockchain

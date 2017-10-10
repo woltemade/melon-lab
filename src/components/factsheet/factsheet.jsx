@@ -35,7 +35,7 @@ const Factsheet = props => (
           <Icon name="right triangle" />
           <List.Content>
             <List.Header href="#participation">
-              Total number of shares:: {props.totalSupply}
+              Total number of shares: {props.totalSupply}
             </List.Header>
           </List.Content>
         </List.Item>
