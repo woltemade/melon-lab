@@ -11,7 +11,7 @@ const setupMiddleware = store => next => action => {
     case types.CREATE: {
       setupFund(currentState.name, setup.web3.eth.accounts[0])
         .then(response => {
-          console.log("Fund successfully created: ", response);
+          console.log("Fund successfully created : ", response);
           store.dispatch(
             creators.change({
               fundAddress: response.address,

@@ -6,6 +6,7 @@ export const initialState = {
   managementReward: "0",
   performanceReward: "0",
   unclaimedRewards: "0",
+  personalStake: "0",
 };
 
 export const types = {

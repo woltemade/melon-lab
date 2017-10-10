@@ -1,8 +1,8 @@
 import React from "react";
 import { List, Card, Icon } from "semantic-ui-react";
 
-const Settings = () =>
-  (<Card centered id="settings">
+const Settings = () => (
+  <Card centered id="settings">
     <Card.Content>
       <Card.Header>Settings</Card.Header>
       <br />
@@ -12,13 +12,7 @@ const Settings = () =>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Change reference currency: MLN</List.Header>
-          </List.Content>
-        </List.Item>
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header>Claim rewards: 7 MLN</List.Header>
+            <List.Header>Claim rewards: 0 MLN</List.Header>
           </List.Content>
         </List.Item>
         <List.Item as="a">
@@ -29,6 +23,7 @@ const Settings = () =>
         </List.Item>
       </List>
     </Card.Content>
-  </Card>);
+  </Card>
+);
 
 export default Settings;
