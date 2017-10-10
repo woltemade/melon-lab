@@ -1,9 +1,9 @@
 import React from "react";
 import { List, Input, Button, Card } from "semantic-ui-react";
 
-const Setup = props =>
-  (<div>
-    <h2>Welcome to the Melon Protocol.</h2>
+const Setup = props => (
+  <div>
+    <h2>Welcome to the future of investment funds</h2>
     <div className="ui segment">
       <p className="App-intro">To get started, let's create your Melon fund.</p>
       <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
@@ -54,6 +54,7 @@ const Setup = props =>
         </Card.Content>
       </Card>
     </div>
-  </div>);
+  </div>
+);
 
 export default Setup;

@@ -4,9 +4,9 @@ import { List, Card, Icon } from "semantic-ui-react";
 const Statistics = () => (
   <Card centered>
     <Card.Content>
-      <Card.Header>Statistiques</Card.Header>
+      <Card.Header>Statistics</Card.Header>
       <br />
-      Coming soon ;)
+      In development
       {/*
       <List>
         <List.Item as="a">

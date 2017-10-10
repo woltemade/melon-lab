@@ -8,10 +8,7 @@ const Factsheet = props => (
         <strong>{props.name} </strong>
       </Card.Header>
       <br />
-      <Card.Meta>
-        - Actively managed portfolio with <strong>crypto only</strong> exposure
-        -
-      </Card.Meta>
+      <Card.Meta />
       <br />
       <List>
         <List.Item as="a">
