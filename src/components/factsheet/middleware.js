@@ -1,6 +1,8 @@
 import {
+  setup,
   performCalculations,
   getFundInformations,
+  getParticipation,
 } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 
@@ -31,6 +33,17 @@ const factsheetMiddleware = store => next => action => {
             creators.updateInformations({
               name: fundInformations.name,
               inception: formattedDate,
+            }),
+          );
+          return getParticipation(
+            store.getState().general.fundAddress,
+            setup.web3.eth.accounts[0],
+          );
+        })
+        .then(participation => {
+          store.dispatch(
+            creators.updateInformations({
+              personalStake: participation.personalStake.toNumber(),
             }),
           );
         })

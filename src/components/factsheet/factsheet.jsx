@@ -35,7 +35,15 @@ const Factsheet = props => (
           <Icon name="right triangle" />
           <List.Content>
             <List.Header href="#participation">
-              Existing # of shares: {props.totalSupply}
+              Total number of shares:: {props.totalSupply}
+            </List.Header>
+          </List.Content>
+        </List.Item>
+        <List.Item as="a">
+          <Icon name="right triangle" />
+          <List.Content>
+            <List.Header href="#participation">
+              Shares owned by me: {props.personalStake}
             </List.Header>
           </List.Content>
         </List.Item>
