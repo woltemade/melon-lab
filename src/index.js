@@ -120,9 +120,9 @@ window.addEventListener("load", () => {
               store.dispatch(
                 recentTradesCreators.requestRecentTrades(defaultAssetPair),
               );
-              store.dispatch(tradeHelperCreators.request(defaultAssetPair));
               store.dispatch(participationCreators.request_price());
               store.dispatch(tradingActivityCreators.requestFundRecentTrades());
+              store.dispatch(tradeHelperCreators.request(defaultAssetPair));
             } else {
               store.dispatch(
                 generalCreators.update({

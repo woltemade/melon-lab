@@ -1,5 +1,6 @@
 import { getOrderbook } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
+import { creators as tradeHelperCreators } from "../tradeHelper/duck";
 
 const orderbookMiddleware = store => next => action => {
   const { type, ...params } = action;
@@ -30,6 +31,32 @@ const orderbookMiddleware = store => next => action => {
               sellOrders,
             }),
           );
+          if (buyOrders.length) {
+            store.dispatch(
+              tradeHelperCreators.update({
+                bid: buyOrders[0].price,
+              }),
+            );
+          } else {
+            store.dispatch(
+              tradeHelperCreators.update({
+                bid: 0,
+              }),
+            );
+          }
+          if (sellOrders.length) {
+            store.dispatch(
+              tradeHelperCreators.update({
+                ask: sellOrders[0].price,
+              }),
+            );
+          } else {
+            store.dispatch(
+              tradeHelperCreators.update({
+                ask: 0,
+              }),
+            );
+          }
         })
         .catch(error => console.log(error));
       break;
