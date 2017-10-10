@@ -52,7 +52,7 @@ const ManagerView = props => (
     <div>
       <Card.Group>
         <Settings />
-        <Statistics />
+        {/* <Statistics /> */}
         {props.general.pendingRequest ? (
           <ExecuteRequestContainer />
         ) : (

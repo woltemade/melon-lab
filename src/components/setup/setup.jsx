@@ -25,9 +25,13 @@ const Setup = props => (
                 />
               </List.Content>
             </List.Item>
+            <br />
+            <br />
+            <p>Default Configuration</p>
             <List.Item as="a">
               <List.Content>
                 <Input
+                  readOnly
                   name="managementFee"
                   placeholder={props.managementFee}
                   onChange={props.onChange}
@@ -37,10 +41,24 @@ const Setup = props => (
             <List.Item as="a">
               <List.Content>
                 <Input
+                  readOnly
                   name="performanceFee"
                   placeholder={props.performanceFee}
                   onChange={props.onChange}
                 />
+              </List.Content>
+            </List.Item>
+            <List.Item as="a">
+              <List.Content>
+                <Input
+                  readOnly
+                  placeholder="Exchange: OasisDex implementation"
+                />
+              </List.Content>
+            </List.Item>
+            <List.Item as="a">
+              <List.Content>
+                <Input readOnly placeholder="DataFeed: Melon Datafeed" />
               </List.Content>
             </List.Item>
           </List>
