@@ -1,4 +1,5 @@
 import React from "react";
+import BigNumber from "bignumber.js";
 import { Table } from "semantic-ui-react";
 
 const OrderBook = props => (
@@ -15,9 +16,13 @@ const OrderBook = props => (
       <Table.Body style={{ cursor: "pointer" }}>
         {props.buyOrders.map((order, i) => (
           <Table.Row key={i} onClick={() => props.onClick(order)}>
-            <Table.Cell>{order.cumulativeVolume}</Table.Cell>
-            <Table.Cell>{order.buy.howMuch}</Table.Cell>
-            <Table.Cell>{order.price}</Table.Cell>
+            <Table.Cell>
+              {new BigNumber(order.cumulativeVolume).toFixed(4)}
+            </Table.Cell>
+            <Table.Cell>
+              {new BigNumber(order.buy.howMuch).toFixed(4)}
+            </Table.Cell>
+            <Table.Cell>{new BigNumber(order.price).toFixed(4)}</Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>
@@ -33,9 +38,13 @@ const OrderBook = props => (
       <Table.Body style={{ cursor: "pointer" }}>
         {props.sellOrders.map((order, i) => (
           <Table.Row key={i} onClick={() => props.onClick(order)}>
-            <Table.Cell>{order.price}</Table.Cell>
-            <Table.Cell>{order.sell.howMuch}</Table.Cell>
-            <Table.Cell>{order.cumulativeVolume}</Table.Cell>
+            <Table.Cell>{new BigNumber(order.price).toFixed(4)}</Table.Cell>
+            <Table.Cell>
+              {new BigNumber(order.sell.howMuch).toFixed(4)}
+            </Table.Cell>
+            <Table.Cell>
+              {new BigNumber(order.cumulativeVolume).toFixed(4)}
+            </Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>

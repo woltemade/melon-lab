@@ -1,4 +1,6 @@
 import React from "react";
+import BigNumber from "bignumber.js";
+
 import { Table } from "semantic-ui-react";
 
 const FundHoldings = props => (

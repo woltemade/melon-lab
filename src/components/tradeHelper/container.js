@@ -9,6 +9,12 @@ const mapStateToProps = state => ({
   bid: new BigNumber(state.tradeHelper.bid).toFixed(4),
   ask: new BigNumber(state.tradeHelper.ask).toFixed(4),
   last: state.tradeHelper.last.toFixed(4),
+  baseTokenBalance: new BigNumber(state.tradeHelper.baseTokenBalance).toFixed(
+    4,
+  ),
+  quoteTokenBalance: new BigNumber(state.tradeHelper.quoteTokenBalance).toFixed(
+    4,
+  ),
 });
 
 const mapDispatchToProps = dispatch => ({
