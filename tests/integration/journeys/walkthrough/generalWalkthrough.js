@@ -9,8 +9,11 @@ import getFundForManager from "../../../../lib/version/calls/getFundForManager";
 import getParticipation from "../../../../lib/participation/calls/getParticipation";
 import subscribe from "../../../../lib/participation/transactions/subscribe";
 import executeRequest from "../../../../lib/participation/transactions/executeRequest";
-// import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
+import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
 import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFund";
+import toggleSubscription from "../../../../lib/fund/transactions/toggleSubscription";
+import toggleRedemption from "../../../../lib/fund/transactions/toggleRedemption";
+import getParticipationAuthorizations from "../../../../lib/fund/calls/getParticipationAuthorizations";
 import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
 import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFund";
@@ -145,7 +148,7 @@ fit(
     });
 
     shared.redemptionRequest = await redeem(
-      // "0x1787a2242cbb8ac2d755568f99a4314309637493",
+      // "0xcce976f728a0d260e45b63f2e65545338db05a84",
       shared.vault.address,
       REDEEM_QUANTITY,
       REDEEM_QUANTITY,
@@ -157,16 +160,17 @@ fit(
       data: shared,
     });
 
-    // await awaitDataFeedUpdates(2);
+    await awaitDataFeedUpdates(2);
 
     shared.executedRedeemRequest = await executeRequest(
       shared.redemptionRequest.id,
-      // "0x1787a2242cbb8ac2d755568f99a4314309637493",
+      // "0xcce976f728a0d260e45b63f2e65545338db05a84",
       shared.vault.address,
     );
 
     shared.participation.invested = await getParticipation(
       shared.vault.address,
+      // "0xcce976f728a0d260e45b63f2e65545338db05a84",
       setup.defaultAccount,
     );
 
@@ -241,7 +245,7 @@ fit(
       data: shared,
     });
 
-    shared.recentTrades = await getRecentTrades("MLN-T", "ETH-T");
+    shared.recentTrades = await getRecentTrades("BTC-T", "MLN-T");
     expect(shared.recentTrades.length).toBeGreaterThanOrEqual(0);
 
     shared.fundRecentTrades = await getFundRecentTrades(shared.vault.address);
@@ -249,6 +253,37 @@ fit(
     expect(shared.fundRecentTrades[0].taker).toEqual(shared.vault.address);
 
     shared.orderbook = await getOrderbook("MLN-T", "ETH-T");
+
+    shared.toggledSubscription = await toggleSubscription(
+      shared.vault.address,
+      setup.defaultAccount,
+    );
+
+    expect(shared.toggledSubscription).toBe(false);
+
+    shared.toggledSubscription = await toggleSubscription(
+      shared.vault.address,
+      setup.defaultAccount,
+    );
+
+    expect(shared.toggledSubscription).toBe(true);
+
+    shared.toggledRedemption = await toggleRedemption(
+      shared.vault.address,
+      setup.defaultAccount,
+    );
+
+    expect(shared.toggledRedemption).toBe(false);
+    shared.toggledRedemption = await toggleRedemption(
+      shared.vault.address,
+      setup.defaultAccount,
+    );
+    expect(shared.toggledRedemption).toBe(true);
+
+    shared.participationAuthorizations = await getParticipationAuthorizations(
+      shared.vault.address,
+    );
+    console.log(shared.participationAuthorizations);
   },
   10 * 60 * 1000,
 );
