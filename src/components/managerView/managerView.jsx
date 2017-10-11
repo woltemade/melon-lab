@@ -9,8 +9,7 @@ import TradeHelperContainer from "../tradeHelper/container";
 import ParticipationContainer from "../participation/container";
 import ExecuteRequestContainer from "../executeRequest/container";
 import TradingActivityContainer from "../tradingActivity/container";
-// import FundActivity from "../fundActivity/fundActivity";
-import Settings from "../settings/settings";
+import SettingsContainer from "../settings/container";
 
 const ManagerView = props => (
   <div className="App">
@@ -18,8 +17,7 @@ const ManagerView = props => (
     <div>
       <Card.Group>
         <FactsheetContainer />
-        {/* <FundActivity /> */}
-        <Settings />
+        <SettingsContainer />
         {props.general.pendingRequest ? (
           <ExecuteRequestContainer />
         ) : (

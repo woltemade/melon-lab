@@ -1,27 +1,55 @@
 import React from "react";
 import { List, Card, Icon } from "semantic-ui-react";
 
-const Settings = () => (
+const Settings = props => (
   <Card centered id="settings">
+    <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
+      <div className="ui text loader">
+        Please wait for upcoming Metamask popup
+      </div>
+    </div>
     <Card.Content>
       <Card.Header>Settings</Card.Header>
       <br />
       <br />
-      <br />
       <List>
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header>Enable/Refuse subscription in MLN</List.Header>
-          </List.Content>
-        </List.Item>
+        {props.subscriptionAllowed ? (
+          <List.Item
+            as="a"
+            onClick={() => props.onToggle("toggleSubscription")}
+          >
+            <Icon name="right triangle" />
+            <List.Content>
+              <List.Header>Disable subscription</List.Header>
+            </List.Content>
+          </List.Item>
+        ) : (
+          <List.Item
+            as="a"
+            onClick={() => props.onToggle("toggleSubscription")}
+          >
+            <Icon name="right triangle" />
+            <List.Content>
+              <List.Header>Enable subscription</List.Header>
+            </List.Content>
+          </List.Item>
+        )}
 
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header>Enable/Refuse redemption in MLN</List.Header>
-          </List.Content>
-        </List.Item>
+        {props.redemptionAllowed ? (
+          <List.Item as="a" onClick={() => props.onToggle("toggleRedemption")}>
+            <Icon name="right triangle" />
+            <List.Content>
+              <List.Header>Disable redemption in MLN</List.Header>
+            </List.Content>
+          </List.Item>
+        ) : (
+          <List.Item as="a" onClick={() => props.onToggle("toggleRedemption")}>
+            <Icon name="right triangle" />
+            <List.Content>
+              <List.Header>Enable redemption in MLN</List.Header>
+            </List.Content>
+          </List.Item>
+        )}
 
         <List.Item as="a">
           <Icon name="right triangle" />

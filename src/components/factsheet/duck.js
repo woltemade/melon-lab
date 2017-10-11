@@ -28,7 +28,7 @@ export const reducer = (state = initialState, action) => {
   const { type, ...params } = action;
 
   switch (type) {
-    case types.REQUEST_INFORMATION: {
+    case types.REQUEST_INFORMATIONS: {
       return {
         ...state,
       };

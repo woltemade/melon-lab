@@ -22,6 +22,8 @@ import { creators as recentTradesCreators } from "./components/recentTrades/duck
 import { creators as tradeHelperCreators } from "./components/tradeHelper/duck";
 import { creators as participationCreators } from "./components/participation/duck";
 import { creators as tradingActivityCreators } from "./components/tradingActivity/duck";
+import { creators as settingsCreators } from "./components/settings/duck";
+
 import {
   creators as web3Creators,
   connectionModes,
@@ -123,6 +125,7 @@ window.addEventListener("load", () => {
               store.dispatch(participationCreators.request_price());
               store.dispatch(tradingActivityCreators.requestFundRecentTrades());
               store.dispatch(tradeHelperCreators.request(defaultAssetPair));
+              store.dispatch(settingsCreators.requestSettings());
             } else {
               store.dispatch(
                 generalCreators.update({

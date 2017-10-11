@@ -13,7 +13,6 @@ const recentTradesMiddleware = store => next => action => {
         baseTokenSymbol,
         quoteTokenSymbol,
       ).then(rawRecentTrades => {
-        console.log("Here", rawRecentTrades);
         const recentTrades = rawRecentTrades.map(trade => {
           trade.price = trade.price.toString();
           trade.quantity = trade.quantity.toString();

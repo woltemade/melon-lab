@@ -11,6 +11,7 @@ import tradeHelper from "./components/tradeHelper/duck";
 import participation from "./components/participation/duck";
 import executeRequest from "./components/executeRequest/duck";
 import tradingActivity from "./components/tradingActivity/duck";
+import settings from "./components/settings/duck";
 import web3 from "./components/web3/duck";
 
 import generalMiddleware from "./components/generalMiddleware";
@@ -25,6 +26,7 @@ import tradeHelperMiddleware from "./components/tradeHelper/middleware";
 import participationMiddleware from "./components/participation/middleware";
 import executeRequestMiddleware from "./components/executeRequest/middleware";
 import tradingActivityMiddleware from "./components/tradingActivity/middleware";
+import settingsMiddleware from "./components/settings/middleware";
 import web3Middleware from "./components/web3/middleware";
 
 export default createStore(
@@ -41,6 +43,7 @@ export default createStore(
     participation,
     executeRequest,
     tradingActivity,
+    settings,
     web3,
   }),
   {
@@ -60,6 +63,7 @@ export default createStore(
       participationMiddleware,
       executeRequestMiddleware,
       tradingActivityMiddleware,
+      settingsMiddleware,
       web3Middleware,
     ),
     /* eslint-disable no-underscore-dangle */
