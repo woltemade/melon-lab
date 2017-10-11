@@ -123,6 +123,7 @@ const tradeMiddleware = store => next => action => {
         ourOrderType === "buy"
           ? new BigNumber(currentState.amount)
           : new BigNumber(currentState.total);
+      console.log(matchedOrders, quantityAsked);
       takeMultipleOrdersFromFund(
         matchedOrders,
         setup.web3.eth.accounts[0],
@@ -207,6 +208,7 @@ const tradeMiddleware = store => next => action => {
           store.dispatch(tradeHelperCreators.request(assetPair));
           store.dispatch(orderbookCreators.requestOrderbook(assetPair));
           store.dispatch(recentTradesCreators.requestRecentTrades(assetPair));
+          store.dispatch(tradingActivityCreators.requestFundRecentTrades());
         })
         .catch(error => console.log(error));
       break;

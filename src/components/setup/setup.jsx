@@ -7,7 +7,11 @@ const Setup = props => (
     <div className="ui segment">
       <p className="App-intro">
         To get started, head to our{" "}
-        <a href="http://faucet.melon.network" target="_blank">
+        <a
+          href="http://faucet.melon.network"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           faucet
         </a>{" "}
         to receive Kovan Ether and Kovan Melon

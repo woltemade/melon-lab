@@ -11,7 +11,6 @@ import ExecuteRequestContainer from "../executeRequest/container";
 import TradingActivityContainer from "../tradingActivity/container";
 // import FundActivity from "../fundActivity/fundActivity";
 import Settings from "../settings/settings";
-import Statistics from "../statistics/statistics";
 
 const ManagerView = props => (
   <div className="App">
@@ -20,7 +19,12 @@ const ManagerView = props => (
       <Card.Group>
         <FactsheetContainer />
         {/* <FundActivity /> */}
-        <TradingActivityContainer />
+        <Settings />
+        {props.general.pendingRequest ? (
+          <ExecuteRequestContainer />
+        ) : (
+          <ParticipationContainer />
+        )}
       </Card.Group>
     </div>
     <div>
@@ -41,7 +45,6 @@ const ManagerView = props => (
     <br />
     <br />
     <OrderbookContainer />
-    {/* </div> */}
     <br />
     <br />
     <br />
@@ -50,15 +53,7 @@ const ManagerView = props => (
     <br />
     <br />
     <div>
-      <Card.Group>
-        <Settings />
-        {/* <Statistics /> */}
-        {props.general.pendingRequest ? (
-          <ExecuteRequestContainer />
-        ) : (
-          <ParticipationContainer />
-        )}
-      </Card.Group>
+      <TradingActivityContainer />
     </div>
     <br />
     <br />
