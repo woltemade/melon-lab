@@ -123,6 +123,7 @@ const tradeMiddleware = store => next => action => {
         ourOrderType === "buy"
           ? new BigNumber(currentState.amount)
           : new BigNumber(currentState.total);
+      console.log(matchedOrders, quantityAsked);
       takeMultipleOrdersFromFund(
         matchedOrders,
         setup.web3.eth.accounts[0],

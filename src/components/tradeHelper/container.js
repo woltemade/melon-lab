@@ -13,13 +13,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   changePrice: price => {
-    dispatch(tradeCreators.update({ price }));
+    dispatch(tradeCreators.change({ price }));
   },
   changeQuantity: amount => {
-    dispatch(tradeCreators.update({ amount }));
+    dispatch(tradeCreators.change({ amount }));
   },
   changeTotal: total => {
-    dispatch(tradeCreators.update({ total }));
+    dispatch(tradeCreators.change({ total }));
   },
 });
 

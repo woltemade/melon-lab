@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Card, Icon, Button, Table } from "semantic-ui-react";
+import { Table } from "semantic-ui-react";
 
 const TradingActivity = props => (
   <div>
@@ -20,10 +20,10 @@ const TradingActivity = props => (
         {props.fundRecentTrades.map((trade, i) => (
           <Table.Row key={i}>
             <Table.Cell>{trade.timestamp}</Table.Cell>
-            <Table.Cell>{trade.ourOrderType}</Table.Cell>
-            <Table.Cell>{trade.buyToken}</Table.Cell>
-            <Table.Cell>{trade.sellToken}</Table.Cell>
+            <Table.Cell>{trade.type}</Table.Cell>
             <Table.Cell>{trade.price}</Table.Cell>
+            <Table.Cell>{trade.sellToken}</Table.Cell>
+            <Table.Cell>{trade.buyToken}</Table.Cell>
             <Table.Cell>{trade.quantity}</Table.Cell>
           </Table.Row>
         ))}

@@ -7,7 +7,6 @@ const Statistics = () => (
       <Card.Header>Statistics</Card.Header>
       <br />
       In development
-      {/*
       <List>
         <List.Item as="a">
           <Icon name="right triangle" />
@@ -46,7 +45,6 @@ const Statistics = () => (
           </List.Content>
         </List.Item>
       </List>
-    */}
     </Card.Content>
   </Card>
 );

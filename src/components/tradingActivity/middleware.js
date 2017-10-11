@@ -2,7 +2,7 @@ import { getFundRecentTrades } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 
 const tradingActivityMiddleware = store => next => action => {
-  const { type, ...params } = action;
+  const { type } = action;
 
   switch (type) {
     case types.REQUEST_FUND_RECENT_TRADES: {

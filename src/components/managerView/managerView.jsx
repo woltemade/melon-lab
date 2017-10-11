@@ -11,7 +11,6 @@ import ExecuteRequestContainer from "../executeRequest/container";
 import TradingActivityContainer from "../tradingActivity/container";
 // import FundActivity from "../fundActivity/fundActivity";
 import Settings from "../settings/settings";
-import Statistics from "../statistics/statistics";
 
 const ManagerView = props => (
   <div className="App">
@@ -46,7 +45,6 @@ const ManagerView = props => (
     <br />
     <br />
     <OrderbookContainer />
-    {/* </div> */}
     <br />
     <br />
     <br />
@@ -55,7 +53,6 @@ const ManagerView = props => (
     <br />
     <br />
     <div>
-      {/* <Statistics /> */}
       <TradingActivityContainer />
     </div>
     <br />
