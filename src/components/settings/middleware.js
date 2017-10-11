@@ -3,6 +3,8 @@ import {
   getParticipationAuthorizations,
   toggleSubscription,
   toggleRedemption,
+  convertUnclaimedRewards,
+  shutDownFund,
 } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 
@@ -51,6 +53,44 @@ const settingsMiddleware = store => next => action => {
         );
       }
 
+      break;
+    }
+
+    case types.CONVERT_UNCLAIMED_REWARDS: {
+      convertUnclaimedRewards(
+        store.getState().general.fundAddress,
+        setup.web3.eth.accounts[0],
+      )
+        .then(response => {
+          console.log(response);
+          store.dispatch(
+            creators.updateSettings({
+              loading: false,
+            }),
+          );
+        })
+        .catch(err => {
+          throw err;
+        });
+      break;
+    }
+
+    case types.SHUT_DOWN: {
+      shutDownFund(
+        store.getState().general.fundAddress,
+        setup.web3.eth.accounts[0],
+      )
+        .then(response => {
+          console.log(response);
+          store.dispatch(
+            creators.updateSettings({
+              loading: false,
+            }),
+          );
+        })
+        .catch(err => {
+          throw err;
+        });
       break;
     }
     default:

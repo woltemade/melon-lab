@@ -51,13 +51,13 @@ const Settings = props => (
           </List.Item>
         )}
 
-        <List.Item as="a">
+        <List.Item as="a" onClick={() => props.convertUnclaimedRewards()}>
           <Icon name="right triangle" />
           <List.Content>
             <List.Header>Convert unclaimed rewards: 0 MLN</List.Header>
           </List.Content>
         </List.Item>
-        <List.Item as="a">
+        <List.Item as="a" onClick={() => props.shutDown()}>
           <Icon name="right triangle" />
           <List.Content>
             <List.Header>Irreversibly shut down fund</List.Header>

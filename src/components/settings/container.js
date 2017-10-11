@@ -17,8 +17,13 @@ const mapDispatchToProps = dispatch => ({
     );
   },
   onToggle: toggleType => {
-    console.log(toggleType);
     dispatch(creators.toggle(toggleType));
+  },
+  convertUnclaimedRewards: () => {
+    dispatch(creators.convertUnclaimedRewards());
+  },
+  shutDown: () => {
+    dispatch(creators.shutDown());
   },
 });
 
