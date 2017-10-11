@@ -164,13 +164,13 @@ fit(
 
     shared.executedRedeemRequest = await executeRequest(
       shared.redemptionRequest.id,
-      //"0xcce976f728a0d260e45b63f2e65545338db05a84",
+      // "0xcce976f728a0d260e45b63f2e65545338db05a84",
       shared.vault.address,
     );
 
     shared.participation.invested = await getParticipation(
       shared.vault.address,
-      //"0xcce976f728a0d260e45b63f2e65545338db05a84",
+      // "0xcce976f728a0d260e45b63f2e65545338db05a84",
       setup.defaultAccount,
     );
 
