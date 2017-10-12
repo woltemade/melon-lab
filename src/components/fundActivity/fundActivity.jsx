@@ -10,13 +10,13 @@ const FundActivity = () =>
       <br />
       <List>
         <List.Item as="a">
-          <Icon name="right triangle" />
+
           <List.Content>
             <List.Header>Recent Subscriptions</List.Header>
           </List.Content>
         </List.Item>
         <List.Item as="a">
-          <Icon name="right triangle" />
+
           <List.Content>
             <List.Header>Recent Redemptions</List.Header>
           </List.Content>

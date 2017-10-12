@@ -5,14 +5,14 @@ const Participation = props => (
   <Card id="participation">
     <Card.Content>
       <Card.Header>Participation</Card.Header>
-      <br />
       <div>
-        <Menu text>
+        <Menu text style={{ display: 'flex', justifyContent: 'center'}}>
           <Menu.Item
             name="Invest"
             active={props.participationType === "Invest"}
             onClick={props.onSelect}
           />
+          <div style={{marginTop: '0.7em'}}>|</div>
           <Menu.Item
             name="Redeem"
             active={props.participationType === "Redeem"}
@@ -57,13 +57,11 @@ const Participation = props => (
           </List.Content>
         </List.Item>
       </List>
-    </Card.Content>
-    <Card.Content extra>
-      <div className="ui two buttons">
-        <Button basic color="black" onClick={() => props.onSubmit()}>
-          Submit request
-        </Button>
-      </div>
+
+      <Button basic color="black" onClick={() => props.onSubmit()} style={{ width: '100%'}}>
+        Submit request
+      </Button>
+
     </Card.Content>
     <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
       <div className="ui text loader">Processing transaction ...</div>

@@ -3,9 +3,6 @@ import { List, Input, Button, Card, Image } from "semantic-ui-react";
 
 const Trade = props => (
   <Card centered id="trade">
-    <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
-      <div className="ui text loader">Executing your order ...</div>
-    </div>
     <Card.Content>
       <Card.Header>Place an order</Card.Header>
       <br />
@@ -61,14 +58,15 @@ const Trade = props => (
           </List.Content>
         </List.Item>
       </List>
+
+      <Button basic color="black" onClick={props.placeOrder} style={{ width: '100%'}}>
+        {props.orderType}
+      </Button>
+
     </Card.Content>
-    <Card.Content extra>
-      <div className="ui two buttons">
-        <Button basic color="black" onClick={props.placeOrder}>
-          {props.orderType}
-        </Button>
-      </div>
-    </Card.Content>
+    <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
+      <div className="ui text loader">Executing your order ...</div>
+    </div>
   </Card>
 );
 

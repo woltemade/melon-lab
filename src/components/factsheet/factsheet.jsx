@@ -9,58 +9,58 @@ const Factsheet = props => (
       </Card.Header>
       <List>
         <List.Item>
-          <Icon name="right triangle" />
+
           <List.Content>
             Inception date: {props.inception}
           </List.Content>
         </List.Item>
         <List.Item>
-          <Icon name="right triangle" />
+
           <List.Content href="#holdings">
             AUM: {props.aum} MLN
           </List.Content>
         </List.Item>
         <List.Item>
-          <Icon name="right triangle" />
+
           <List.Content href="#holdings">
             Share Price: {props.sharePrice} MLN/Share
           </List.Content>
         </List.Item>
         <List.Item>
-          <Icon name="right triangle" />
+
           <List.Content>
               Total number of shares: {props.totalSupply}
           </List.Content>
         </List.Item>
         <List.Item>
-          <Icon name="right triangle" />
+
           <List.Content>
             Shares owned by me: {props.personalStake}
           </List.Content>
         </List.Item>
         <Divider />
         <List.Item>
-          <Icon name="right triangle" />
+
           <List.Content>
             Management Reward: {props.managementReward}%
           </List.Content>
         </List.Item>
         <List.Item>
-          <Icon name="right triangle" />
+
           <List.Content>
             Performance Reward: {props.performanceReward}%
           </List.Content>
         </List.Item>
         <List.Item>
-          <Icon name="right triangle" />
+
           <List.Content>
             Unclaimed rewards: {props.unclaimedRewards} MLN
           </List.Content>
         </List.Item>
         <Divider />
         <List.Item>
-          <Icon name="right triangle" />
-          <List.Content>
+
+          <List.Content href="https://ipfs.io/ipfs/QmSe6E2pw3htMWTDybMxUjEgKRUBawTSQXTF3nbpQ2EukP/" target="_blank">
             Contact Manager
           </List.Content>
         </List.Item>

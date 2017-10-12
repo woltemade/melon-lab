@@ -7,19 +7,19 @@ const Settings = props => (
       <Card.Header>Fund Administration</Card.Header>
       <List>
         {props.subscriptionAllowed ? (
-          <List.Item
+          <List.Item as="a"
             onClick={() => props.onToggle("toggleSubscription")}
           >
-            <Icon name="right triangle" />
+
             <List.Content>
               Disable subscription
             </List.Content>
           </List.Item>
         ) : (
-          <List.Item
+          <List.Item as="a"
             onClick={() => props.onToggle("toggleSubscription")}
           >
-            <Icon name="right triangle" />
+
             <List.Content>
               Enable subscription
             </List.Content>
@@ -27,29 +27,29 @@ const Settings = props => (
         )}
 
         {props.redemptionAllowed ? (
-          <List.Item onClick={() => props.onToggle("toggleRedemption")}>
-            <Icon name="right triangle" />
+          <List.Item as="a" onClick={() => props.onToggle("toggleRedemption")}>
+
             <List.Content>
               Disable redemption in MLN
             </List.Content>
           </List.Item>
         ) : (
-          <List.Item onClick={() => props.onToggle("toggleRedemption")}>
-            <Icon name="right triangle" />
+          <List.Item as="a" onClick={() => props.onToggle("toggleRedemption")}>
+
             <List.Content>
               Enable redemption in MLN
             </List.Content>
           </List.Item>
         )}
 
-        <List.Item onClick={() => props.convertUnclaimedRewards()}>
-          <Icon name="right triangle" />
+        <List.Item as="a" onClick={() => props.convertUnclaimedRewards()}>
+
           <List.Content>
             Convert unclaimed rewards: 0 MLN
           </List.Content>
         </List.Item>
-        <List.Item onClick={() => props.shutDown()}>
-          <Icon name="right triangle" />
+        <List.Item as="a" onClick={() => props.shutDown()}>
+
           <List.Content>
             Irreversibly shut down fund
           </List.Content>

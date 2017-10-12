@@ -34,9 +34,9 @@ const OrderBook = props => (
           <Table>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell>Cum. Vol.</Table.HeaderCell>
-                <Table.HeaderCell>Vol.</Table.HeaderCell>
-                <Table.HeaderCell>Bid</Table.HeaderCell>
+                <Table.HeaderCell style={{ textAlign: 'right'}}>Cum. Vol.</Table.HeaderCell>
+                <Table.HeaderCell style={{ textAlign: 'right'}}>Vol.</Table.HeaderCell>
+                <Table.HeaderCell style={{ textAlign: 'right'}}>Bid</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body style={{ cursor: "pointer" }}>
@@ -48,13 +48,13 @@ const OrderBook = props => (
                   onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut}
                 >
-                  <Table.Cell>
+                  <Table.Cell style={{ textAlign: 'right'}}>
                     {new BigNumber(order.cumulativeVolume).toFixed(4)}
                   </Table.Cell>
-                  <Table.Cell>
+                  <Table.Cell style={{ textAlign: 'right'}}>
                     {new BigNumber(order.buy.howMuch).toFixed(4)}
                   </Table.Cell>
-                  <Table.Cell>{new BigNumber(order.price).toFixed(4)}</Table.Cell>
+                  <Table.Cell style={{ textAlign: 'right'}}>{new BigNumber(order.price).toFixed(4)}</Table.Cell>
                 </Table.Row>
               ))}
             </Table.Body>
@@ -64,7 +64,7 @@ const OrderBook = props => (
           <Table>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell>Ask</Table.HeaderCell>
+                <Table.HeaderCell>&nbsp;&nbsp;&nbsp;&nbsp;Ask</Table.HeaderCell>
                 <Table.HeaderCell>Vol.</Table.HeaderCell>
                 <Table.HeaderCell>Cum. Vol.</Table.HeaderCell>
               </Table.Row>
@@ -78,7 +78,7 @@ const OrderBook = props => (
                   onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut}
                 >
-                  <Table.Cell>{new BigNumber(order.price).toFixed(4)}</Table.Cell>
+                  <Table.Cell>&nbsp;&nbsp;&nbsp;&nbsp;{new BigNumber(order.price).toFixed(4)}</Table.Cell>
                   <Table.Cell>
                     {new BigNumber(order.sell.howMuch).toFixed(4)}
                   </Table.Cell>

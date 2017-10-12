@@ -4,9 +4,7 @@ import { List, Input, Button, Card } from "semantic-ui-react";
 const Invest = props => (
   <div>
     <Card centered style={{ marginTop: '2em'}}>
-      <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
-        <div className="ui text loader">Investing in your fund ...</div>
-      </div>
+
       <Card.Content>
         <Card.Header>Invest MLN in {props.fundName}</Card.Header>
         <br />
@@ -47,14 +45,16 @@ const Invest = props => (
             </List.Content>
           </List.Item>
         </List>
-      </Card.Content>
-      <Card.Content extra>
-        <div className="ui two buttons">
-          <Button basic color="black" onClick={props.onInvest}>
+
+
+        <Button basic color="black" onClick={props.onInvest} style={{ width: '100%'}}>
               Invest
             </Button>
-        </div>
+
       </Card.Content>
+      <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
+        <div className="ui text loader">Investing in your fund ...</div>
+      </div>
     </Card>
   </div>
 
