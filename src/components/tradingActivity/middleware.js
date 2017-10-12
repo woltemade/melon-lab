@@ -2,14 +2,12 @@ import { getFundRecentTrades } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 
 const tradingActivityMiddleware = store => next => action => {
-  const { type, ...params } = action;
+  const { type } = action;
 
   switch (type) {
     case types.REQUEST_FUND_RECENT_TRADES: {
-      console.log(store.getState().general.fundAddress);
       getFundRecentTrades(
         store.getState().general.fundAddress,
-        2,
       ).then(rawFundRecentTrades => {
         const fundRecentTrades = rawFundRecentTrades.map(trade => {
           trade.price = trade.price.toString();

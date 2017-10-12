@@ -1,34 +1,71 @@
 import React from "react";
 import { List, Card, Icon } from "semantic-ui-react";
 
-const Settings = () =>
-  (<Card centered id="settings">
+const Settings = props => (
+  <Card centered id="settings">
+    <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
+      <div className="ui text loader">
+        Please wait for upcoming Metamask popup
+      </div>
+    </div>
     <Card.Content>
-      <Card.Header>Settings</Card.Header>
-      <br />
+      <Card.Header>Fund Administration</Card.Header>
       <br />
       <br />
       <List>
-        <List.Item as="a">
+        {props.subscriptionAllowed ? (
+          <List.Item
+            as="a"
+            onClick={() => props.onToggle("toggleSubscription")}
+          >
+            <Icon name="right triangle" />
+            <List.Content>
+              <List.Header>Disable subscription</List.Header>
+            </List.Content>
+          </List.Item>
+        ) : (
+          <List.Item
+            as="a"
+            onClick={() => props.onToggle("toggleSubscription")}
+          >
+            <Icon name="right triangle" />
+            <List.Content>
+              <List.Header>Enable subscription</List.Header>
+            </List.Content>
+          </List.Item>
+        )}
+
+        {props.redemptionAllowed ? (
+          <List.Item as="a" onClick={() => props.onToggle("toggleRedemption")}>
+            <Icon name="right triangle" />
+            <List.Content>
+              <List.Header>Disable redemption in MLN</List.Header>
+            </List.Content>
+          </List.Item>
+        ) : (
+          <List.Item as="a" onClick={() => props.onToggle("toggleRedemption")}>
+            <Icon name="right triangle" />
+            <List.Content>
+              <List.Header>Enable redemption in MLN</List.Header>
+            </List.Content>
+          </List.Item>
+        )}
+
+        <List.Item as="a" onClick={() => props.convertUnclaimedRewards()}>
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Change reference currency: MLN</List.Header>
+            <List.Header>Convert unclaimed rewards: 0 MLN</List.Header>
           </List.Content>
         </List.Item>
-        <List.Item as="a">
+        <List.Item as="a" onClick={() => props.shutDown()}>
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Claim rewards: 7 MLN</List.Header>
-          </List.Content>
-        </List.Item>
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header>Shut down fund</List.Header>
+            <List.Header>Irreversibly shut down fund</List.Header>
           </List.Content>
         </List.Item>
       </List>
     </Card.Content>
-  </Card>);
+  </Card>
+);
 
 export default Settings;

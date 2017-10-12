@@ -13,7 +13,7 @@ const fundHoldingsMiddleware = store => next => action => {
           .then(balance => {
             store.dispatch(
               creators.updateHoldings({
-                [asset]: balance.toNumber(),
+                [asset]: balance.toFixed(4),
               }),
             );
           })
@@ -30,7 +30,7 @@ const fundHoldingsMiddleware = store => next => action => {
           .then(price => {
             store.dispatch(
               creators.updatePrices({
-                [`${asset}_PRICE`]: price.toNumber(),
+                [`${asset}_PRICE`]: price.toFixed(4),
               }),
             );
           })

@@ -1,5 +1,6 @@
 import { getRecentTrades } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
+import { creators as tradeHelperCreators } from "../tradeHelper/duck";
 
 const recentTradesMiddleware = store => next => action => {
   const { type, ...params } = action;
@@ -11,7 +12,6 @@ const recentTradesMiddleware = store => next => action => {
       getRecentTrades(
         baseTokenSymbol,
         quoteTokenSymbol,
-        1,
       ).then(rawRecentTrades => {
         const recentTrades = rawRecentTrades.map(trade => {
           trade.price = trade.price.toString();
@@ -31,6 +31,12 @@ const recentTradesMiddleware = store => next => action => {
             quoteTokenSymbol,
           }),
         );
+        if (recentTrades.length)
+          store.dispatch(
+            tradeHelperCreators.update({
+              last: 1 / recentTrades[recentTrades.length - 1].price,
+            }),
+          );
       });
 
       break;

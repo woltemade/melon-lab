@@ -2,7 +2,7 @@ import React from "react";
 import { List, Input, Button, Card, Menu } from "semantic-ui-react";
 
 const Participation = props => (
-  <Card centered id="investredeem">
+  <Card centered id="participation">
     <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
       <div className="ui text loader">Processing transaction ...</div>
     </div>

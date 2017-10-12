@@ -1,6 +1,9 @@
 export const initialState = {
   baseTokenBalance: 0,
   quoteTokenBalance: 0,
+  last: 0,
+  bid: 0,
+  ask: 0,
 };
 
 export const types = {

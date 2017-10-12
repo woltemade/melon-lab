@@ -12,12 +12,19 @@ const ExecuteRequest = props => (
       </div>
       <Card centered>
         <Card.Content>
-          <Card.Header>
-            Remaining waiting time before request execution:
-          </Card.Header>
+          <Card.Header>Waiting time required</Card.Header>
           <br />
           <List>
-            <List.Item as="a">
+            <List.Item
+              as="a"
+              href="https://medium.com/melonport-blog/protecting-participants-ee55a752287"
+              target="_blank"
+            >
+              <p>
+                To prevent information advantage of any economic agent over
+                another, we enforce a waiting period before any subscription or
+                redemption can be executed.
+              </p>
               <List.Content />
             </List.Item>
           </List>
@@ -30,14 +37,17 @@ const ExecuteRequest = props => (
               </Button>
             </div>
           ) : (
-            <Countdown
-              targetDate={new Date(Date.now() + 180000)}
-              startDelay={100}
-              interval={1000}
-              timeSeparator={":"}
-              leadingZero
-              onFinished={props.handleFinish}
-            />
+            <div>
+              Remaining waiting time before request execution:
+              <Countdown
+                targetDate={new Date(Date.now() + 180000)}
+                startDelay={100}
+                interval={1000}
+                timeSeparator={":"}
+                leadingZero
+                onFinished={props.handleFinish}
+              />
+            </div>
           )}
         </Card.Content>
       </Card>

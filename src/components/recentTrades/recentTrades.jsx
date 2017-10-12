@@ -1,4 +1,5 @@
 import React from "react";
+import BigNumber from "bignumber.js";
 import { Table } from "semantic-ui-react";
 
 const RecentTrades = props => (
@@ -19,9 +20,9 @@ const RecentTrades = props => (
         {props.recentTrades.map((trade, i) => (
           <Table.Row key={i}>
             <Table.Cell>{trade.timestamp}</Table.Cell>
-            <Table.Cell>{trade.ourOrderType}</Table.Cell>
-            <Table.Cell>{trade.price}</Table.Cell>
-            <Table.Cell>{trade.quantity}</Table.Cell>
+            <Table.Cell>{trade.type}</Table.Cell>
+            <Table.Cell>{new BigNumber(trade.price).toFixed(4)}</Table.Cell>
+            <Table.Cell>{new BigNumber(trade.quantity).toFixed(4)}</Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>

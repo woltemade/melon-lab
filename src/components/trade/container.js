@@ -23,6 +23,9 @@ const mapDispatchToProps = dispatch => ({
       dispatch(creators.makeOrder());
     }
   },
+  prefillPrice: price => {
+    dispatch(creators.update({ price }));
+  },
 });
 
 const TradeContainer = connect(mapStateToProps, mapDispatchToProps)(Trade);

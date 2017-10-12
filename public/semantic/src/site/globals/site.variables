@@ -1,0 +1,12 @@
+/*******************************
+     User Global Variables
+*******************************/
+
+@fontName          : 'Source Sans Pro';
+@fontSmoothing     : antialiased;
+
+@relativeBorderRadius: 0;
+@absoluteBorderRadius: 0;
+
+@defaultBorderRadius: 0;
+@pageBackground: #fffdf3;

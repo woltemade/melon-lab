@@ -8,10 +8,7 @@ const Factsheet = props => (
         <strong>{props.name} </strong>
       </Card.Header>
       <br />
-      <Card.Meta>
-        - Actively managed portfolio with <strong>crypto only</strong> exposure
-        -
-      </Card.Meta>
+      <Card.Meta />
       <br />
       <List>
         <List.Item as="a">
@@ -23,19 +20,29 @@ const Factsheet = props => (
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>AUM: {props.aum} MLN</List.Header>
+            <List.Header href="#holdings">AUM: {props.aum} MLN</List.Header>
           </List.Content>
         </List.Item>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Share Price: {props.sharePrice} MLN/Share</List.Header>
+            <List.Header href="#holdings">
+              Share Price: {props.sharePrice} MLN/Share
+            </List.Header>
           </List.Content>
         </List.Item>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Existing # of shares: {props.totalSupply}</List.Header>
+            <List.Header>
+              Total number of shares: {props.totalSupply}
+            </List.Header>
+          </List.Content>
+        </List.Item>
+        <List.Item as="a">
+          <Icon name="right triangle" />
+          <List.Content>
+            <List.Header>Shares owned by me: {props.personalStake}</List.Header>
           </List.Content>
         </List.Item>
         <Divider />
@@ -59,7 +66,7 @@ const Factsheet = props => (
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>
+            <List.Header href="#settings">
               Unclaimed rewards: {props.unclaimedRewards} MLN
             </List.Header>
           </List.Content>
@@ -67,7 +74,7 @@ const Factsheet = props => (
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Settings</List.Header>
+            <List.Header href="#settings">Settings</List.Header>
           </List.Content>
         </List.Item>
         <Divider />

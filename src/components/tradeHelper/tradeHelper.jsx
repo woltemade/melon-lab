@@ -1,42 +1,38 @@
 import React from "react";
 import { List, Card, Icon, Divider } from "semantic-ui-react";
 
-const TradeHelper = props =>
-  (<Card centered>
+const TradeHelper = props => (
+  <Card centered>
     <Card.Content>
       <Card.Header>Overview</Card.Header>
       <br />
       <br />
       <Card.Meta>
-        <strong>
-          {props.assetPair}
-        </strong>
+        <strong>{props.assetPair}</strong>
       </Card.Meta>
       <br />
       <List>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Last Price: 0.2290</List.Header>
+            <List.Header onClick={() => props.changePrice(props.last)}>
+              Last Price: {props.last}
+            </List.Header>
           </List.Content>
         </List.Item>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Bid : 0.2286</List.Header>
+            <List.Header onClick={() => props.changePrice(props.bid)}>
+              Bid : {props.bid}
+            </List.Header>
           </List.Content>
         </List.Item>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Ask: 0.2291</List.Header>
-          </List.Content>
-        </List.Item>
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header>
-              24h Volume: 1700 {props.baseTokenSymbol}
+            <List.Header onClick={() => props.changePrice(props.ask)}>
+              Ask: {props.ask}
             </List.Header>
           </List.Content>
         </List.Item>
@@ -44,7 +40,9 @@ const TradeHelper = props =>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>
+            <List.Header
+              onClick={() => props.changeQuantity(props.baseTokenBalance)}
+            >
               {props.baseTokenSymbol} Balance: {props.baseTokenBalance}
             </List.Header>
           </List.Content>
@@ -52,13 +50,16 @@ const TradeHelper = props =>
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>
+            <List.Header
+              onClick={() => props.changeTotal(props.quoteTokenBalance)}
+            >
               {props.quoteTokenSymbol} Balance: {props.quoteTokenBalance}
             </List.Header>
           </List.Content>
         </List.Item>
       </List>
     </Card.Content>
-  </Card>);
+  </Card>
+);
 
 export default TradeHelper;
