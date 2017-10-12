@@ -2,15 +2,15 @@
 
 # ipfs-frontend
 
-Front-end application of the decentralized Melon portal. 
+IPFS Front-end application of the Melon portal. 
 
 
 ## Installation
 
 1. Clone this repository
     ```
-    git clone git@github.com:melonproject/decentralized-portal.git
-    cd decentralized-portal
+    git clone git@github.com:melonproject/ipfs-frontend.git
+    cd ipfs-frontend
 
     ```
 
@@ -18,14 +18,13 @@ Front-end application of the decentralized Melon portal.
     ```
     npm install
     ```
+**Right now, the Melon.js library is injected with a local link, not through npm (see instructions in Melon.js repo, under Link Dev Build section: https://github.com/melonproject/melon.js)**.
 
 ## Getting started
 
 After installation is complete
 
-**Right now, the Melon.js library is injected with a local link, not through npm (see instructions in Melon.js repo, under Link Dev Build section: https://github.com/melonproject/melon.js)**.
-
-Go to the above `decentralized-portal` directory, open a terminal and launch the react application:
+Go to the above `ipfs-frontend` directory, open a terminal and launch the react application:
 
 ```
 npm start
