@@ -5,77 +5,63 @@ const Factsheet = props => (
   <Card id="factsheet">
     <Card.Content>
       <Card.Header>
-        <strong>{props.name} </strong>
+        {props.name}
       </Card.Header>
-      <br />
-      <Card.Meta />
-      <br />
       <List>
-        <List.Item as="a">
+        <List.Item>
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Inception date: {props.inception}</List.Header>
+            Inception date: {props.inception}
           </List.Content>
         </List.Item>
-        <List.Item as="a">
+        <List.Item>
           <Icon name="right triangle" />
-          <List.Content>
-            <List.Header href="#holdings">AUM: {props.aum} MLN</List.Header>
+          <List.Content href="#holdings">
+            AUM: {props.aum} MLN
           </List.Content>
         </List.Item>
-        <List.Item as="a">
+        <List.Item>
           <Icon name="right triangle" />
-          <List.Content>
-            <List.Header href="#holdings">
-              Share Price: {props.sharePrice} MLN/Share
-            </List.Header>
+          <List.Content href="#holdings">
+            Share Price: {props.sharePrice} MLN/Share
           </List.Content>
         </List.Item>
-        <List.Item as="a">
+        <List.Item>
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>
               Total number of shares: {props.totalSupply}
-            </List.Header>
           </List.Content>
         </List.Item>
-        <List.Item as="a">
+        <List.Item>
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Shares owned by me: {props.personalStake}</List.Header>
-          </List.Content>
-        </List.Item>
-        <Divider />
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header>
-              Management Reward: {props.managementReward}%
-            </List.Header>
-          </List.Content>
-        </List.Item>
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header>
-              Performance Reward: {props.performanceReward}%
-            </List.Header>
+            Shares owned by me: {props.personalStake}
           </List.Content>
         </List.Item>
         <Divider />
-        <List.Item as="a">
+        <List.Item>
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>
-              Unclaimed rewards: {props.unclaimedRewards} MLN
-            </List.Header>
+            Management Reward: {props.managementReward}%
+          </List.Content>
+        </List.Item>
+        <List.Item>
+          <Icon name="right triangle" />
+          <List.Content>
+            Performance Reward: {props.performanceReward}%
+          </List.Content>
+        </List.Item>
+        <List.Item>
+          <Icon name="right triangle" />
+          <List.Content>
+            Unclaimed rewards: {props.unclaimedRewards} MLN
           </List.Content>
         </List.Item>
         <Divider />
-        <List.Item as="a">
+        <List.Item>
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Contact Manager</List.Header>
+            Contact Manager
           </List.Content>
         </List.Item>
       </List>

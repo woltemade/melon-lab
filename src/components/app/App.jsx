@@ -15,18 +15,10 @@ const containerSelector = {
 const App = props => (
   <div className="App">
     <Container>
-      <div className="App-header">
-        <br />
+      <div className="App-header" style={{ margin: '2em'}}>
         <Image src="./melon-logo.png" size="small" centered />
-        <Menu secondary>
-          <Menu.Menu position="right">
-            <Menu.Item name="My fund" href="#factsheet" />
-            <Menu.Item name="Trade" href="#trade" />
-            <Menu.Item name="History" href="#history" />
-          </Menu.Menu>
-        </Menu>
       </div>
-      <hr />
+
 
       {containerSelector[props.general.mode]}
     </Container>

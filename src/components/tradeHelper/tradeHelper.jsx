@@ -4,12 +4,7 @@ import { List, Card, Icon, Divider } from "semantic-ui-react";
 const TradeHelper = props => (
   <Card centered>
     <Card.Content>
-      <Card.Header>Overview</Card.Header>
-      <br />
-      <br />
-      <Card.Meta>
-        <strong>{props.assetPair}</strong>
-      </Card.Meta>
+      <Card.Header>{props.assetPair}</Card.Header>
       <br />
       <List>
         <List.Item as="a">

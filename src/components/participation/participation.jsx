@@ -3,9 +3,6 @@ import { List, Input, Button, Card, Menu } from "semantic-ui-react";
 
 const Participation = props => (
   <Card id="participation">
-    <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
-      <div className="ui text loader">Processing transaction ...</div>
-    </div>
     <Card.Content>
       <Card.Header>Participation</Card.Header>
       <br />
@@ -68,6 +65,9 @@ const Participation = props => (
         </Button>
       </div>
     </Card.Content>
+    <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
+      <div className="ui text loader">Processing transaction ...</div>
+    </div>
   </Card>
 );
 

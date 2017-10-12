@@ -3,68 +3,64 @@ import { List, Card, Icon } from "semantic-ui-react";
 
 const Settings = props => (
   <Card centered id="settings">
-    <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
-      <div className="ui text loader">
-        Please wait for upcoming Metamask popup
-      </div>
-    </div>
     <Card.Content>
       <Card.Header>Fund Administration</Card.Header>
-      <br />
-      <br />
       <List>
         {props.subscriptionAllowed ? (
           <List.Item
-            as="a"
             onClick={() => props.onToggle("toggleSubscription")}
           >
             <Icon name="right triangle" />
             <List.Content>
-              <List.Header>Disable subscription</List.Header>
+              Disable subscription
             </List.Content>
           </List.Item>
         ) : (
           <List.Item
-            as="a"
             onClick={() => props.onToggle("toggleSubscription")}
           >
             <Icon name="right triangle" />
             <List.Content>
-              <List.Header>Enable subscription</List.Header>
+              Enable subscription
             </List.Content>
           </List.Item>
         )}
 
         {props.redemptionAllowed ? (
-          <List.Item as="a" onClick={() => props.onToggle("toggleRedemption")}>
+          <List.Item onClick={() => props.onToggle("toggleRedemption")}>
             <Icon name="right triangle" />
             <List.Content>
-              <List.Header>Disable redemption in MLN</List.Header>
+              Disable redemption in MLN
             </List.Content>
           </List.Item>
         ) : (
-          <List.Item as="a" onClick={() => props.onToggle("toggleRedemption")}>
+          <List.Item onClick={() => props.onToggle("toggleRedemption")}>
             <Icon name="right triangle" />
             <List.Content>
-              <List.Header>Enable redemption in MLN</List.Header>
+              Enable redemption in MLN
             </List.Content>
           </List.Item>
         )}
 
-        <List.Item as="a" onClick={() => props.convertUnclaimedRewards()}>
+        <List.Item onClick={() => props.convertUnclaimedRewards()}>
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Convert unclaimed rewards: 0 MLN</List.Header>
+            Convert unclaimed rewards: 0 MLN
           </List.Content>
         </List.Item>
-        <List.Item as="a" onClick={() => props.shutDown()}>
+        <List.Item onClick={() => props.shutDown()}>
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header>Irreversibly shut down fund</List.Header>
+            Irreversibly shut down fund
           </List.Content>
         </List.Item>
       </List>
     </Card.Content>
+    <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
+      <div className="ui text loader">
+        Please wait for upcoming Metamask popup
+      </div>
+    </div>
   </Card>
 );
 
