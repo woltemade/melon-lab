@@ -20,18 +20,16 @@ const orderbookMiddleware = store => next => action => {
             result.sell.howMuch = order.sell.howMuch.toString();
             return result;
           });
+
           const sellOrders = formattedOrderbook
             .filter(o => o.type === "sell")
             .reverse();
           const buyOrders = formattedOrderbook.filter(o => o.type === "buy");
-          const totalSellVolume = sellOrders.reduce(
-            (acc, o) => acc.add(o.sell.howMuch),
-            new BigNumber(0),
-          );
-          const totalBuyVolume = buyOrders.reduce(
-            (acc, o) => acc.add(o.buy.howMuch),
-            new BigNumber(0),
-          );
+
+          const totalSellVolume =
+            buyOrders[buyOrders.length - 1].cumulativeVolume;
+          const totalBuyVolume =
+            sellOrders[sellOrders.length - 1].cumulativeVolume;
 
           store.dispatch(
             creators.updateOrderbook({

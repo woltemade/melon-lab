@@ -2,7 +2,7 @@ import React from "react";
 import BigNumber from "bignumber.js";
 import { Table, Grid } from "semantic-ui-react";
 
-const getSellGradient = (cumulativeVolume, totalVolume, opacity=0.3) => {
+const getSellGradient = (cumulativeVolume, totalVolume) => {
   const percentage = new BigNumber(cumulativeVolume).div(totalVolume).times(100);
   const reverse = new BigNumber(100).minus(percentage);
   return {
@@ -11,7 +11,8 @@ const getSellGradient = (cumulativeVolume, totalVolume, opacity=0.3) => {
 }
 
 const getBuyGradient = (cumulativeVolume, totalVolume) => {
-  const percentage = new BigNumber(cumulativeVolume).div(totalVolume).times(100);
+  const percentage = (new BigNumber(cumulativeVolume).div(totalVolume)).times(100);
+  console.log({ percentage: percentage.toString(), cumulativeVolume: cumulativeVolume.toString(), totalVolume: totalVolume.toString()});
   return {
     background: `linear-gradient(to right, rgba(71, 161, 71,0.3) 0%, rgba(71, 161, 71,0.3) ${percentage}%, rgba(71, 161, 71,0) ${percentage}%, rgba(71, 161, 71,0) 100%)`
   }
@@ -30,7 +31,7 @@ const OrderBook = props => (
     <h3 className="App-intro">Orderbook for {props.assetPair}</h3>
     <Grid padded={false}>
       <Grid.Row columns={2}>
-        <Grid.Column streched>
+        <Grid.Column style={{paddingRight: 0}}>
           <Table>
             <Table.Header>
               <Table.Row>
@@ -60,7 +61,7 @@ const OrderBook = props => (
             </Table.Body>
           </Table>
         </Grid.Column>
-        <Grid.Column streched>
+        <Grid.Column  style={{paddingLeft: 0, marginLeft: -1}}>
           <Table>
             <Table.Header>
               <Table.Row>
