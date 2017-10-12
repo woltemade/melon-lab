@@ -117,8 +117,8 @@ window.addEventListener("load", () => {
                 ),
               );
               store.dispatch(factsheetCreators.requestInformations());
-              store.dispatch(fundHoldingsCreators.requestHoldings());
               store.dispatch(fundHoldingsCreators.requestPrices());
+              store.dispatch(fundHoldingsCreators.requestHoldings());
               store.dispatch(
                 recentTradesCreators.requestRecentTrades(defaultAssetPair),
               );

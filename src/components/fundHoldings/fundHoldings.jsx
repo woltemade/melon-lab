@@ -22,7 +22,12 @@ const FundHoldings = props => (
             <Table.Cell>{asset}</Table.Cell>
             <Table.Cell>{props[asset]}</Table.Cell>
             <Table.Cell>
-              {props[asset] * props[`${asset}_PRICE`] / props.aum * 100}
+              {new BigNumber(
+                (props[asset] *
+                  props[`${asset}_PRICE`] /
+                  props.aum *
+                  100).toFixed(4),
+              ).toFixed(4)}
             </Table.Cell>
             <Table.Cell>{props[`${asset}_PRICE`]}</Table.Cell>
             <Table.Cell onClick={() => props.onClick(asset)}>
