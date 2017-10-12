@@ -66,15 +66,9 @@ const Factsheet = props => (
         <List.Item as="a">
           <Icon name="right triangle" />
           <List.Content>
-            <List.Header href="#settings">
+            <List.Header>
               Unclaimed rewards: {props.unclaimedRewards} MLN
             </List.Header>
-          </List.Content>
-        </List.Item>
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header href="#settings">Settings</List.Header>
           </List.Content>
         </List.Item>
         <Divider />

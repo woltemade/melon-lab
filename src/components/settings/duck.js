@@ -1,6 +1,6 @@
 export const initialState = {
-  subscriptionAllowed: false,
-  redemptionAllowed: false,
+  subscriptionAllowed: true,
+  redemptionAllowed: true,
   loading: false,
 };
 
