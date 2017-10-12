@@ -10,7 +10,7 @@ const ExecuteRequest = props => (
       <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
         <div className="ui text loader">Loading...</div>
       </div>
-      <Card centered>
+      <Card>
         <Card.Content>
           <Card.Header>Waiting time required</Card.Header>
           <br />

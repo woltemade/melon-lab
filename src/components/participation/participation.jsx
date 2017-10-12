@@ -2,7 +2,7 @@ import React from "react";
 import { List, Input, Button, Card, Menu } from "semantic-ui-react";
 
 const Participation = props => (
-  <Card centered id="participation">
+  <Card id="participation">
     <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
       <div className="ui text loader">Processing transaction ...</div>
     </div>
@@ -32,6 +32,7 @@ const Participation = props => (
               value={props.amount}
               onChange={props.onChange}
               label="Amount"
+              style={{width: '100%'}}
             />
           </List.Content>
         </List.Item>
@@ -42,6 +43,7 @@ const Participation = props => (
               name="price"
               value={props.price}
               label="Share Price"
+              style={{width: '100%'}}
             />
           </List.Content>
         </List.Item>
@@ -53,6 +55,7 @@ const Participation = props => (
               value={props.total}
               onChange={props.onChange}
               label="Total"
+              style={{width: '100%'}}
             />
           </List.Content>
         </List.Item>

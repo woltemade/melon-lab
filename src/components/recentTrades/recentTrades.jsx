@@ -4,7 +4,7 @@ import { Table } from "semantic-ui-react";
 
 const RecentTrades = props => (
   <div>
-    <p className="App-intro">Recent trades for {props.assetPair}</p>
+    <h3 id="history" className="App-intro">Recent trades for {props.assetPair}</h3>
     <Table celled>
       <Table.Header>
         <Table.Row>

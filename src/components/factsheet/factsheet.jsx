@@ -2,7 +2,7 @@ import React from "react";
 import { List, Card, Icon, Divider } from "semantic-ui-react";
 
 const Factsheet = props => (
-  <Card centered id="factsheet">
+  <Card id="factsheet">
     <Card.Content>
       <Card.Header>
         <strong>{props.name} </strong>

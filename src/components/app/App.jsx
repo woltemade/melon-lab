@@ -14,22 +14,22 @@ const containerSelector = {
 
 const App = props => (
   <div className="App">
-    <div className="App-header">
-      <Container>
+    <Container>
+      <div className="App-header">
         <br />
         <Image src="./melon-logo.png" size="small" centered />
-      </Container>
-      <Menu secondary>
-        <Menu.Menu position="right">
-          <Menu.Item name="My fund" href="#factsheet" />
-          <Menu.Item name="Trade" href="#trade" />
-          <Menu.Item name="Settings" href="#settings" />
-        </Menu.Menu>
-      </Menu>
-    </div>
-    <hr />
+        <Menu secondary>
+          <Menu.Menu position="right">
+            <Menu.Item name="My fund" href="#factsheet" />
+            <Menu.Item name="Trade" href="#trade" />
+            <Menu.Item name="History" href="#history" />
+          </Menu.Menu>
+        </Menu>
+      </div>
+      <hr />
 
-    {containerSelector[props.general.mode]}
+      {containerSelector[props.general.mode]}
+    </Container>
   </div>
 );
 

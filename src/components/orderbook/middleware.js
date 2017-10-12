@@ -1,3 +1,4 @@
+import BigNumber from "bignumber.js";
 import { getOrderbook } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 import { creators as tradeHelperCreators } from "../tradeHelper/duck";
@@ -23,12 +24,22 @@ const orderbookMiddleware = store => next => action => {
             .filter(o => o.type === "sell")
             .reverse();
           const buyOrders = formattedOrderbook.filter(o => o.type === "buy");
+          const totalSellVolume = sellOrders.reduce(
+            (acc, o) => acc.add(o.sell.howMuch),
+            new BigNumber(0),
+          );
+          const totalBuyVolume = buyOrders.reduce(
+            (acc, o) => acc.add(o.buy.howMuch),
+            new BigNumber(0),
+          );
 
           store.dispatch(
             creators.updateOrderbook({
               orders: orderbook,
               buyOrders,
               sellOrders,
+              totalSellVolume,
+              totalBuyVolume,
             }),
           );
           if (buyOrders.length) {

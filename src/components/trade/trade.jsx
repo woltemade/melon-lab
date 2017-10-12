@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Input, Button, Card } from "semantic-ui-react";
+import { List, Input, Button, Card, Image } from "semantic-ui-react";
 
 const Trade = props => (
   <Card centered id="trade">
@@ -10,14 +10,18 @@ const Trade = props => (
       <Card.Header>Place an order</Card.Header>
       <br />
       <br />
-      <Card.Meta>
-        {props.orderType} <strong>{props.baseTokenSymbol}</strong>
-      </Card.Meta>
-      <i className="shuffle icon" />
 
-      <Card.Meta>
-        {props.theirOrderType} <strong>{props.quoteTokenSymbol}</strong>
-      </Card.Meta>
+      <div style={{ textAlign: 'center', cursor: 'pointer'}} onClick={() => console.log('switch')}>
+        <Card.Meta>
+          {props.orderType} <strong>{props.baseTokenSymbol}</strong>
+        </Card.Meta>
+        <Image src="./switch.svg" width="18em" centered />
+
+        <Card.Meta>
+          {props.theirOrderType} <strong>{props.quoteTokenSymbol}</strong>
+        </Card.Meta>
+      </div>
+
       <br />
       <List>
         <List.Item as="a">
@@ -28,6 +32,7 @@ const Trade = props => (
               placeholder=""
               value={props.price}
               onChange={props.onChange}
+              style={{width: '100%'}}
             />
           </List.Content>
         </List.Item>
@@ -39,6 +44,7 @@ const Trade = props => (
               placeholder=""
               value={props.amount}
               onChange={props.onChange}
+              style={{width: '100%'}}
             />
           </List.Content>
         </List.Item>
@@ -50,6 +56,7 @@ const Trade = props => (
               placeholder=""
               value={props.total}
               onChange={props.onChange}
+              style={{width: '100%'}}
             />
           </List.Content>
         </List.Item>
