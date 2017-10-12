@@ -11,8 +11,7 @@ const getSellGradient = (cumulativeVolume, totalVolume) => {
 }
 
 const getBuyGradient = (cumulativeVolume, totalVolume) => {
-  const percentage = (new BigNumber(cumulativeVolume).div(totalVolume)).times(100);
-  console.log({ percentage: percentage.toString(), cumulativeVolume: cumulativeVolume.toString(), totalVolume: totalVolume.toString()});
+  const percentage = new BigNumber(cumulativeVolume).div(totalVolume).times(100);
   return {
     background: `linear-gradient(to right, rgba(71, 161, 71,0.3) 0%, rgba(71, 161, 71,0.3) ${percentage}%, rgba(71, 161, 71,0) ${percentage}%, rgba(71, 161, 71,0) 100%)`
   }
