@@ -9,7 +9,7 @@ const Settings = props => (
       </div>
     </div>
     <Card.Content>
-      <Card.Header>Settings</Card.Header>
+      <Card.Header>Fund Administration</Card.Header>
       <br />
       <br />
       <List>
