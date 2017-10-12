@@ -13,7 +13,7 @@ const tradeHelperMiddleware = store => next => action => {
         .then(baseTokenBalance => {
           store.dispatch(
             creators.update({
-              baseTokenBalance: baseTokenBalance.toNumber(),
+              baseTokenBalance: baseTokenBalance.toString(),
             }),
           );
           return getBalance(
@@ -24,7 +24,7 @@ const tradeHelperMiddleware = store => next => action => {
         .then(quoteTokenBalance => {
           store.dispatch(
             creators.update({
-              quoteTokenBalance: quoteTokenBalance.toNumber(),
+              quoteTokenBalance: quoteTokenBalance.toString(),
             }),
           );
         })
