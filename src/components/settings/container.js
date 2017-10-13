@@ -1,4 +1,3 @@
-import BigNumber from "bignumber.js";
 import { connect } from "react-redux";
 import Settings from "./settings";
 import { creators } from "./duck";

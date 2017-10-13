@@ -26,6 +26,19 @@ const mapDispatchToProps = dispatch => ({
   prefillPrice: price => {
     dispatch(creators.update({ price }));
   },
+  onSwitch: () => {
+    if (
+      store.getState().trade.orderType === "Buy" &&
+      store.getState().trade.theirOrderType === "Sell"
+    ) {
+      dispatch(creators.update({ orderType: "Sell", theirOrderType: "Buy" }));
+    } else if (
+      store.getState().trade.orderType === "Sell" &&
+      store.getState().trade.theirOrderType === "Buy"
+    ) {
+      dispatch(creators.update({ orderType: "Buy", theirOrderType: "Sell" }));
+    }
+  },
 });
 
 const TradeContainer = connect(mapStateToProps, mapDispatchToProps)(Trade);

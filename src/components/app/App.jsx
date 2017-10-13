@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, Image, Container } from "semantic-ui-react";
+import { Image, Container } from "semantic-ui-react";
 import ManagerViewContainer from "../managerView/container";
 import SetupContainer from "../setup/container";
 import InvestContainer from "../invest/container";
@@ -15,10 +15,9 @@ const containerSelector = {
 const App = props => (
   <div className="App">
     <Container>
-      <div className="App-header" style={{ margin: '2em'}}>
+      <div className="App-header" style={{ margin: "2em" }}>
         <Image src="./melon-logo.png" size="small" centered />
       </div>
-
 
       {containerSelector[props.general.mode]}
     </Container>

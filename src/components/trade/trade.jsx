@@ -8,11 +8,19 @@ const Trade = props => (
       <br />
       <br />
 
-      <div style={{ textAlign: 'center', cursor: 'pointer'}} onClick={() => console.log('switch')}>
+      <div
+        style={{ textAlign: "center", cursor: "pointer" }}
+        onClick={props.onSwitch}
+      >
         <Card.Meta>
           {props.orderType} <strong>{props.baseTokenSymbol}</strong>
         </Card.Meta>
-        <Image src="./switch.svg" width="18em" centered />
+        <Image
+          src="./switch.svg"
+          width="18em"
+          centered
+          style={{ cursor: "pointer" }}
+        />
 
         <Card.Meta>
           {props.theirOrderType} <strong>{props.quoteTokenSymbol}</strong>
@@ -29,7 +37,7 @@ const Trade = props => (
               placeholder=""
               value={props.price}
               onChange={props.onChange}
-              style={{width: '100%'}}
+              style={{ width: "100%" }}
             />
           </List.Content>
         </List.Item>
@@ -41,7 +49,7 @@ const Trade = props => (
               placeholder=""
               value={props.amount}
               onChange={props.onChange}
-              style={{width: '100%'}}
+              style={{ width: "100%" }}
             />
           </List.Content>
         </List.Item>
@@ -53,16 +61,20 @@ const Trade = props => (
               placeholder=""
               value={props.total}
               onChange={props.onChange}
-              style={{width: '100%'}}
+              style={{ width: "100%" }}
             />
           </List.Content>
         </List.Item>
       </List>
 
-      <Button basic color="black" onClick={props.placeOrder} style={{ width: '100%'}}>
+      <Button
+        basic
+        color="black"
+        onClick={props.placeOrder}
+        style={{ width: "100%" }}
+      >
         {props.orderType}
       </Button>
-
     </Card.Content>
     <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
       <div className="ui text loader">Executing your order ...</div>
