@@ -40,10 +40,10 @@ const Factsheet = props => (
         <Divider />
         <List.Item>
           <List.Content
-            href="https://ipfs.io/ipfs/QmSe6E2pw3htMWTDybMxUjEgKRUBawTSQXTF3nbpQ2EukP/"
+            href="http://melon.email"
             target="_blank"
           >
-            Contact Manager
+            Contact Investors/Managers
           </List.Content>
         </List.Item>
       </List>
