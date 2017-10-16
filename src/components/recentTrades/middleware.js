@@ -34,7 +34,7 @@ const recentTradesMiddleware = store => next => action => {
         if (recentTrades.length)
           store.dispatch(
             tradeHelperCreators.update({
-              last: 1 / recentTrades[recentTrades.length - 1].price,
+              last: recentTrades[recentTrades.length - 1].price,
             }),
           );
       });

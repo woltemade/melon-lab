@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
   ...state.tradeHelper,
   bid: new BigNumber(state.tradeHelper.bid).toFixed(4),
   ask: new BigNumber(state.tradeHelper.ask).toFixed(4),
-  last: state.tradeHelper.last.toFixed(4),
+  last: new BigNumber(state.tradeHelper.last).toFixed(4),
   baseTokenBalance: new BigNumber(state.tradeHelper.baseTokenBalance).toFixed(
     4,
   ),
