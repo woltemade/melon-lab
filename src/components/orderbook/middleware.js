@@ -25,11 +25,12 @@ const orderbookMiddleware = store => next => action => {
             .reverse();
           const buyOrders = formattedOrderbook.filter(o => o.type === "buy");
 
-          const totalSellVolume =
-            buyOrders[buyOrders.length - 1].cumulativeVolume;
-          const totalBuyVolume =
-            sellOrders[sellOrders.length - 1].cumulativeVolume;
-
+          const totalSellVolume = buyOrders.length
+            ? buyOrders[buyOrders.length - 1].cumulativeVolume
+            : 0;
+          const totalBuyVolume = sellOrders.length
+            ? sellOrders[sellOrders.length - 1].cumulativeVolume
+            : 0;
           store.dispatch(
             creators.updateOrderbook({
               orders: orderbook,
