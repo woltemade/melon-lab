@@ -14,9 +14,11 @@ export const initialState = {
   blockNumber: 0,
   lastUpdate: null,
   account: "0x",
+  network: null,
   connectionMode: connectionModes.NOT_CONNECTED,
   syncing: true,
   ready: false,
+  ethBalance: null,
 };
 
 export const types = {

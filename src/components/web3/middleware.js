@@ -19,6 +19,7 @@ const resolvePromiseObject = async obj => {
 };
 
 const onBlock = async (store, web3) => {
+  console.log("Inside onblock ", web3);
   const state = store.getState().web3;
 
   const info = await resolvePromiseObject({
@@ -32,10 +33,17 @@ const onBlock = async (store, web3) => {
 
 const middlewares = {
   [types.SET_CONNECTION](store, state, params, web3) {
+    console.log(
+      "connection mode params ",
+      state.connectionMode,
+      params.connectionMode,
+      web3,
+    );
     if (state.connectionMode !== params.connectionMode) {
       if (params.connectionMode === connectionModes.NOT_CONNECTED) {
         if (filter) filter.stopWatching();
       } else if (web3) {
+        console.log("HERE");
         filter = web3.eth.filter("latest", () => {
           onBlock(store, web3);
         });
