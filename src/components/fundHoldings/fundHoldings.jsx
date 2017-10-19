@@ -1,39 +1,43 @@
 import React from "react";
+import BigNumber from "bignumber.js";
+
 import { Table } from "semantic-ui-react";
 
-const FundHoldings = props =>
-  (<div id="holdings">
-    <p className="App-intro">Fund Holdings</p>
-    <Table celled size={"small"}>
+const FundHoldings = props => (
+  <div id="holdings">
+    <h3 className="App-intro">Fund Holdings</h3>
+    <Table size={"small"}>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Asset</Table.HeaderCell>
-          <Table.HeaderCell>Quantity</Table.HeaderCell>
-          <Table.HeaderCell>% of portfolio</Table.HeaderCell>
-          <Table.HeaderCell>Price</Table.HeaderCell>
-          <Table.HeaderCell>Trade</Table.HeaderCell>
+          <Table.HeaderCell textAlign='right'>Quantity</Table.HeaderCell>
+          <Table.HeaderCell textAlign='right'>% of portfolio</Table.HeaderCell>
+          <Table.HeaderCell textAlign='right'>Price (MLN)</Table.HeaderCell>
+          <Table.HeaderCell textAlign='right'>Trade</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {props.assets.map((asset, i) =>
-          (<Table.Row key={i}>
-            <Table.Cell>
-              {asset}
+        {props.assets.map((asset, i) => (
+          <Table.Row key={i}>
+            <Table.Cell>{asset}</Table.Cell>
+            <Table.Cell textAlign='right'>{props[asset]}</Table.Cell>
+            <Table.Cell textAlign='right'>
+              {new BigNumber(
+                (props[asset] *
+                  props[`${asset}_PRICE`] /
+                  props.aum *
+                  100).toFixed(4),
+              ).toFixed(4)}
             </Table.Cell>
-            <Table.Cell>
-              {props[asset]}
+            <Table.Cell textAlign='right'>{props[`${asset}_PRICE`]}</Table.Cell>
+            <Table.Cell textAlign='right' onClick={() => props.onClick(asset)}>
+              {i === 0 ? <div>❤</div> : <a href="#trade">Buy/Sell</a>}
             </Table.Cell>
-            <Table.Cell>
-              {props[asset] / props.aum * 100}
-            </Table.Cell>
-            <Table.Cell>0</Table.Cell>
-            <Table.Cell onClick={() => props.onClick(asset)}>
-              <a href="#trade">Buy/Sell</a>
-            </Table.Cell>
-          </Table.Row>),
-        )}
+          </Table.Row>
+        ))}
       </Table.Body>
     </Table>
-  </div>);
+  </div>
+);
 
 export default FundHoldings;

@@ -1,5 +1,4 @@
 export const initialState = {
-  assetPair: "MLN-T/ETH-T",
   amount: "",
   price: "",
   total: "",
@@ -13,7 +12,8 @@ export const types = {
   PREFILL: "PREFILL:trade:melon.network",
   CHANGE: "CHANGE:trade:melon.network",
   UPDATE: "UPDATE:trade:melon.network",
-  PLACE_ORDER: "PLACE_ORDER:trade:melon.network",
+  TAKE_ORDER: "TAKE_ORDER:trade:melon.network",
+  MAKE_ORDER: "MAKE_ORDER:trade:melon.network",
 };
 
 export const creators = {
@@ -29,8 +29,11 @@ export const creators = {
     type: types.UPDATE,
     ...newValues,
   }),
-  placeOrder: () => ({
-    type: types.PLACE_ORDER,
+  takeOrder: () => ({
+    type: types.TAKE_ORDER,
+  }),
+  makeOrder: () => ({
+    type: types.MAKE_ORDER,
   }),
 };
 
@@ -56,7 +59,13 @@ export const reducer = (state = initialState, action) => {
         ...params,
       };
     }
-    case types.PLACE_ORDER: {
+    case types.TAKE_ORDER: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+    case types.MAKE_ORDER: {
       return {
         ...state,
         loading: true,

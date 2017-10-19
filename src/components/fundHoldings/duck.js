@@ -19,29 +19,49 @@ export const initialState = {
     "SNGLS-T",
     "SNT-T",
   ],
-  "MLN-T": 0,
-  "ANT-T": 0,
-  "BNT-T": 0,
-  "BAT-T": 0,
-  "BTC-T": 0,
-  "DGD-T": 0,
-  "DOGE-T": 0,
-  "ETC-T": 0,
-  "ETH-T": 0,
-  "EUR-T": 0,
-  "GNO-T": 0,
-  "GNT-T": 0,
-  "ICN-T": 0,
-  "LTC-T": 0,
-  "REP-T": 0,
-  "XRP-T": 0,
-  "SNGLS-T": 0,
-  "SNT-T": 0,
+  "MLN-T": "-",
+  "ANT-T": "-",
+  "BNT-T": "-",
+  "BAT-T": "-",
+  "BTC-T": "-",
+  "DGD-T": "-",
+  "DOGE-T": "-",
+  "ETC-T": "-",
+  "ETH-T": "-",
+  "EUR-T": "-",
+  "GNO-T": "-",
+  "GNT-T": "-",
+  "ICN-T": "-",
+  "LTC-T": "-",
+  "REP-T": "-",
+  "XRP-T": "-",
+  "SNGLS-T": "-",
+  "SNT-T": "-",
+  "MLN-T_PRICE": "-",
+  "ANT-T_PRICE": "-",
+  "BNT-T_PRICE": "-",
+  "BAT-T_PRICE": "-",
+  "BTC-T_PRICE": "-",
+  "DGD-T_PRICE": "-",
+  "DOGE-T_PRICE": "-",
+  "ETC-T_PRICE": "-",
+  "ETH-T_PRICE": "-",
+  "EUR-T_PRICE": "-",
+  "GNO-T_PRICE": "-",
+  "GNT-T_PRICE": "-",
+  "ICN-T_PRICE": "-",
+  "LTC-T_PRICE": "-",
+  "REP-T_PRICE": "-",
+  "XRP-T_PRICE": "-",
+  "SNGLS-T_PRICE": "-",
+  "SNT-T_PRICE": "-",
 };
 
 export const types = {
   REQUEST_HOLDINGS: "REQUEST_HOLDINGS:fundHoldings:melon.network",
   UPDATE_HOLDINGS: "UPDATE_HOLDINGS:fundHoldings:melon.network",
+  REQUEST_PRICES: "REQUEST_PRICES:fundHoldings:melon.network",
+  UPDATE_PRICES: "UPDATE_PRICES:fundHoldings:melon.network",
 };
 
 export const creators = {
@@ -50,6 +70,13 @@ export const creators = {
   }),
   updateHoldings: newValues => ({
     type: types.UPDATE_HOLDINGS,
+    ...newValues,
+  }),
+  requestPrices: () => ({
+    type: types.REQUEST_PRICES,
+  }),
+  updatePrices: newValues => ({
+    type: types.UPDATE_PRICES,
     ...newValues,
   }),
 };
@@ -64,6 +91,17 @@ export const reducer = (state = initialState, action) => {
       };
     }
     case types.UPDATE_HOLDINGS: {
+      return {
+        ...state,
+        ...params,
+      };
+    }
+    case types.REQUEST_PRICES: {
+      return {
+        ...state,
+      };
+    }
+    case types.UPDATE_PRICES: {
       return {
         ...state,
         ...params,

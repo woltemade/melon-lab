@@ -2,6 +2,7 @@ import { types, creators } from "./general";
 import { creators as orderbookCreators } from "./orderbook/duck";
 import { creators as recentTradesCreators } from "./recentTrades/duck";
 import { creators as tradeHelperCreators } from "./tradeHelper/duck";
+import { creators as tradingActivityCreators } from "./tradingActivity/duck";
 
 const generalMiddleware = store => next => action => {
   const { type, ...params } = action;
@@ -18,6 +19,7 @@ const generalMiddleware = store => next => action => {
       store.dispatch(
         recentTradesCreators.requestRecentTrades(params.assetPair),
       );
+      store.dispatch(tradingActivityCreators.requestFundRecentTrades());
       store.dispatch(tradeHelperCreators.request(params.assetPair));
       break;
     }

@@ -1,35 +1,41 @@
 import React from "react";
-import { List, Card, Icon, Button } from "semantic-ui-react";
+import BigNumber from "bignumber.js";
+import { Table } from "semantic-ui-react";
 
-const TradingActivity = () =>
-  (<Card centered>
-    <Card.Content>
-      <Card.Header>Trading activity</Card.Header>
-      <br />
-      <Card.Meta />
-      <br />
-      <List>
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header>Open orders</List.Header>
-          </List.Content>
-        </List.Item>
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header>Executed orders (since last visit)</List.Header>
-          </List.Content>
-        </List.Item>
-      </List>
-    </Card.Content>
-    <Card.Content extra>
-      <div className="ui two buttons">
-        <Button basic color="black">
-          Request full trading history
-        </Button>
-      </div>
-    </Card.Content>
-  </Card>);
+const TradingActivity = props => (
+  <div>
+    <h3 className="App-intro">Fund trading activity</h3>
+
+    <Table>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell>Time</Table.HeaderCell>
+          <Table.HeaderCell>Type</Table.HeaderCell>
+          <Table.HeaderCell textAlign='right'>Price</Table.HeaderCell>
+          <Table.HeaderCell>Buy</Table.HeaderCell>
+          <Table.HeaderCell>Sell</Table.HeaderCell>
+          <Table.HeaderCell textAlign='right'>Amount</Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {props.fundRecentTrades.map((trade, i) => (
+          <Table.Row key={i}>
+            <Table.Cell>{trade.timestamp}</Table.Cell>
+            <Table.Cell>{trade.type}</Table.Cell>
+            <Table.Cell textAlign='right'>{new BigNumber(trade.price).toFixed(4)}</Table.Cell>
+            <Table.Cell>{trade.buyToken}</Table.Cell>
+            <Table.Cell>{trade.sellToken}</Table.Cell>
+            <Table.Cell textAlign='right'>{new BigNumber(trade.quantity).toFixed(4)}</Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
+    {/* <div className="ui two buttons">
+      <Button basic color="black">
+        Request full trading history
+      </Button>
+    </div> */}
+  </div>
+);
 
 export default TradingActivity;

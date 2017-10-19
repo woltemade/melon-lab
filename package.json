@@ -3,12 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@melonproject/melon.js": "^0.2.6",
-    "@melonproject/protocol": "0.2.0-alpha.17",
+    "@melonproject/melon.js": "0.3.4",
+    "babel-core": "^6.1.2",
+    "babel-loader": "^6.1.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "bignumber.js": "^4.0.2",
+    "debug": "^3.1.0",
+    "nan": "^2.7.0",
+    "pify": "^3.0.0",
     "prop-types": "^15.5.10",
     "ramda": "^0.24.1",
     "react": "^15.6.1",
+    "react-cntdwn": "^0.3.0",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
     "react-router": "^4.1.2",
@@ -22,17 +30,22 @@
     "web3": "^0.18.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "npm run semantic:watch & react-scripts start",
+    "build": "npm run semantic:build && webpack",
+    "deploy": "ipfs add -r public",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "semantic:build": "cd public/semantic && gulp build",
+    "semantic:watch": "cd public/semantic && gulp"
   },
   "devDependencies": {
+    "babel-preset-stage-2": "^6.24.1",
     "eslint": "^4.3.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-prettier": "^2.3.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.1.0"
+    "eslint-plugin-react": "^7.1.0",
+    "semantic-ui": "^2.2.13"
   }
 }

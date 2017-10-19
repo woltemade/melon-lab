@@ -1,10 +1,12 @@
 import BigNumber from "bignumber.js";
 import {
+  setup,
   deserializeOrder,
   averagePrice,
   matchOrders,
-  takeMultipleOrders,
+  takeMultipleOrdersFromFund,
   getPrices,
+  makeOrderFromFund,
 } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 
@@ -12,6 +14,8 @@ import { creators as orderbookCreators } from "../orderbook/duck";
 import { creators as fundHoldingsCreators } from "../fundHoldings/duck";
 import { creators as tradeHelperCreators } from "../tradeHelper/duck";
 import { creators as recentTradesCreators } from "../recentTrades/duck";
+import { creators as tradingActivityCreators } from "../tradingActivity/duck";
+import { creators as factsheetCreators } from "../factsheet/duck";
 
 const tradeMiddleware = store => next => action => {
   const { type, ...params } = action;
@@ -86,11 +90,20 @@ const tradeMiddleware = store => next => action => {
             total: params.total.toString(10),
           }),
         );
+      } else if (params.price) {
+        total = params.price * currentState.amount;
+        store.dispatch(
+          creators.update({
+            price: params.price.toString(10),
+            total: total.toString(10),
+            selectedOrder: {},
+          }),
+        );
       }
       break;
     }
 
-    case types.PLACE_ORDER: {
+    case types.TAKE_ORDER: {
       const theirOrderType = currentState.selectedOrder.type;
       const ourOrderType = theirOrderType === "buy" ? "sell" : "buy";
       const priceTreshold = getPrices(currentState.selectedOrder)[
@@ -110,10 +123,11 @@ const tradeMiddleware = store => next => action => {
         ourOrderType === "buy"
           ? new BigNumber(currentState.amount)
           : new BigNumber(currentState.total);
-      takeMultipleOrders(
+      console.log(matchedOrders, quantityAsked);
+      takeMultipleOrdersFromFund(
         matchedOrders,
-        "0x609eF3E6aCf7DE50F29e0144eD7d0fF735331680",
-        "0x90a765a2ba68f2644dd7b8f6b671128409daab7f",
+        setup.web3.eth.accounts[0],
+        store.getState().general.fundAddress,
         quantityAsked,
       )
         .then(result => {
@@ -134,6 +148,67 @@ const tradeMiddleware = store => next => action => {
           store.dispatch(tradeHelperCreators.request(assetPair));
           store.dispatch(orderbookCreators.requestOrderbook(assetPair));
           store.dispatch(recentTradesCreators.requestRecentTrades(assetPair));
+          store.dispatch(tradingActivityCreators.requestFundRecentTrades());
+          store.dispatch(factsheetCreators.requestInformations());
+        })
+        .catch(error => console.log(error));
+      break;
+    }
+
+    case types.MAKE_ORDER: {
+      let buyHowMuch;
+      let buyWhichToken;
+      let sellHowMuch;
+      let sellWhichToken;
+
+      if (currentState.orderType === "Buy") {
+        buyHowMuch = currentState.amount;
+        buyWhichToken = store.getState().general.baseTokenSymbol;
+        sellHowMuch = currentState.total;
+        sellWhichToken = store.getState().general.quoteTokenSymbol;
+      } else if (currentState.orderType === "Sell") {
+        buyHowMuch = currentState.total;
+        buyWhichToken = store.getState().general.quoteTokenSymbol;
+        sellHowMuch = currentState.amount;
+        sellWhichToken = store.getState().general.baseTokenSymbol;
+      }
+
+      console.log(
+        "Make order from fund with ",
+        store.getState().general.fundAddress,
+        sellWhichToken,
+        buyWhichToken,
+        sellHowMuch,
+        buyHowMuch,
+        setup.web3.eth.accounts[0],
+      );
+      makeOrderFromFund(
+        store.getState().general.fundAddress,
+        sellWhichToken,
+        buyWhichToken,
+        sellHowMuch,
+        buyHowMuch,
+        setup.web3.eth.accounts[0],
+      )
+        .then(result => {
+          console.log("Trade receipt ", result);
+          store.dispatch(
+            creators.update({
+              amount: "",
+              price: "",
+              total: "",
+              selectedOrder: {},
+              orderType: "Buy",
+              theirOrderType: "Sell",
+              loading: false,
+            }),
+          );
+          const assetPair = store.getState().general.assetPair;
+          store.dispatch(fundHoldingsCreators.requestHoldings());
+          store.dispatch(tradeHelperCreators.request(assetPair));
+          store.dispatch(orderbookCreators.requestOrderbook(assetPair));
+          store.dispatch(recentTradesCreators.requestRecentTrades(assetPair));
+          store.dispatch(tradingActivityCreators.requestFundRecentTrades());
         })
         .catch(error => console.log(error));
       break;

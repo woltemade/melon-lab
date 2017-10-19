@@ -1,8 +1,8 @@
-<img src = "https://github.com/melonproject/branding/blob/master/facebook/Facebook%20cover%20blue%20on%20white.png" width = "100%">
+<img src = "https://github.com/melonproject/branding/blob/master/melon/Social%20Media%20Profile%20Picture%202-01.jpg" width = "30%">
 
 # ipfs-frontend
 
-Front-end application of the decentralized Melon portal. 
+IPFS Front-end application of the Melon portal. 
 
 
 ## Installation
@@ -18,19 +18,34 @@ Front-end application of the decentralized Melon portal.
     ```
     npm install
     ```
+**Right now, the Melon.js library is injected with a local link, not through npm (see instructions in Melon.js repo, under Link Dev Build section: https://github.com/melonproject/melon.js)**.
 
 ## Getting started
 
 After installation is complete
-
-**Right now, the Melon.js library is injected with a local link, not through npm (see instructions in Melon.js repo, under Link Dev Build section: https://github.com/melonproject/melon.js)**.
 
 Go to the above `ipfs-frontend` directory, open a terminal and launch the react application:
 
 ```
 npm start
 ```
+## Build
 
+```
+npm run-script build
+```
+
+## Deploy
+
+You need to have IPFS installed accessible from the path folder and run the IPFS daemon:
+
+```
+ipfs daemon
+```
+
+```
+npm run-script deploy
+=======
 ## Ipfs deployment
 
 Build the react application:

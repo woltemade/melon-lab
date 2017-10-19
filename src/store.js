@@ -9,6 +9,10 @@ import recentTrades from "./components/recentTrades/duck";
 import trade from "./components/trade/duck";
 import tradeHelper from "./components/tradeHelper/duck";
 import participation from "./components/participation/duck";
+import executeRequest from "./components/executeRequest/duck";
+import tradingActivity from "./components/tradingActivity/duck";
+import settings from "./components/settings/duck";
+import web3 from "./components/web3/duck";
 
 import generalMiddleware from "./components/generalMiddleware";
 import setupMiddleware from "./components/setup/middleware";
@@ -20,6 +24,10 @@ import recentTradesMiddleware from "./components/recentTrades/middleware";
 import tradeMiddleware from "./components/trade/middleware";
 import tradeHelperMiddleware from "./components/tradeHelper/middleware";
 import participationMiddleware from "./components/participation/middleware";
+import executeRequestMiddleware from "./components/executeRequest/middleware";
+import tradingActivityMiddleware from "./components/tradingActivity/middleware";
+import settingsMiddleware from "./components/settings/middleware";
+import web3Middleware from "./components/web3/middleware";
 
 export default createStore(
   combineReducers({
@@ -33,6 +41,10 @@ export default createStore(
     trade,
     tradeHelper,
     participation,
+    executeRequest,
+    tradingActivity,
+    settings,
+    web3,
   }),
   {
     /* preloadedState */
@@ -49,6 +61,10 @@ export default createStore(
       tradeHelperMiddleware,
       generalMiddleware,
       participationMiddleware,
+      executeRequestMiddleware,
+      tradingActivityMiddleware,
+      settingsMiddleware,
+      web3Middleware,
     ),
     /* eslint-disable no-underscore-dangle */
     window.__REDUX_DEVTOOLS_EXTENSION__

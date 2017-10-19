@@ -1,82 +1,54 @@
 import React from "react";
 import { List, Card, Icon, Divider } from "semantic-ui-react";
 
-const Factsheet = props =>
-  (<Card centered id="factsheet">
+const Factsheet = props => (
+  <Card id="factsheet">
     <Card.Content>
-      <Card.Header>
-        <strong>μέλλω Capital </strong>
-      </Card.Header>
-      <br />
-      <Card.Meta>
-        - Actively managed portfolio with <strong>crypto only</strong> exposure
-        -
-      </Card.Meta>
-      <br />
+      <Card.Header>{props.name}</Card.Header>
       <List>
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header>Inception date: 07/07/2017</List.Header>
+        <List.Item>
+          <List.Content>Inception date: {props.inception}</List.Content>
+        </List.Item>
+        <List.Item>
+          <List.Content href="#holdings">AUM: {props.aum} MLN</List.Content>
+        </List.Item>
+        <List.Item>
+          <List.Content href="#holdings">
+            Share Price: {props.sharePrice} MLN/Share
           </List.Content>
         </List.Item>
-        <List.Item as="a">
-          <Icon name="right triangle" />
+        <List.Item>
           <List.Content>
-            <List.Header>
-              AUM: {props.aum} ETH
-            </List.Header>
+            Total number of shares: {props.totalSupply}
           </List.Content>
         </List.Item>
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header>
-              Share Price: {props.sharePrice}
-            </List.Header>
-          </List.Content>
+        <List.Item>
+          <List.Content>Shares owned by me: {props.personalStake}</List.Content>
         </List.Item>
         <Divider />
-        <List.Item as="a">
-          <Icon name="right triangle" />
+        <List.Item>
           <List.Content>
-            <List.Header>
-              Management Reward: {props.managementReward}%
-            </List.Header>
+            Management Reward: {props.managementReward}%
           </List.Content>
         </List.Item>
-        <List.Item as="a">
-          <Icon name="right triangle" />
+        <List.Item>
           <List.Content>
-            <List.Header>
-              Performance Reward: {props.performanceReward}%
-            </List.Header>
+            Performance Reward: {props.performanceReward}%
           </List.Content>
         </List.Item>
+
         <Divider />
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header>
-              Unclaimed rewards: {props.unclaimedRewards} MLN
-            </List.Header>
-          </List.Content>
-        </List.Item>
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header>Settings</List.Header>
-          </List.Content>
-        </List.Item>
-        <Divider />
-        <List.Item as="a">
-          <Icon name="right triangle" />
-          <List.Content>
-            <List.Header>Contact Manager</List.Header>
+        <List.Item>
+          <List.Content
+            href="http://melon.email"
+            target="_blank"
+          >
+            Contact Investors/Managers
           </List.Content>
         </List.Item>
       </List>
     </Card.Content>
-  </Card>);
+  </Card>
+);
 
 export default Factsheet;

@@ -4,6 +4,7 @@ import { creators } from "./duck";
 
 const mapStateToProps = state => ({
   ...state.invest,
+  ...state.general,
 });
 
 const mapDispatchToProps = dispatch => ({

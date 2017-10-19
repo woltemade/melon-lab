@@ -2,6 +2,8 @@ export const initialState = {
   buyOrders: [],
   sellOrders: [],
   orders: [],
+  totalBuyVolume: "0.0",
+  totalSellVolume: "0.0",
 };
 
 export const types = {

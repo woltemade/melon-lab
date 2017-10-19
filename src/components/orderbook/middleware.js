@@ -1,5 +1,6 @@
 import { getOrderbook } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
+import { creators as tradeHelperCreators } from "../tradeHelper/duck";
 
 const orderbookMiddleware = store => next => action => {
   const { type, ...params } = action;
@@ -18,18 +19,53 @@ const orderbookMiddleware = store => next => action => {
             result.sell.howMuch = order.sell.howMuch.toString();
             return result;
           });
+
           const sellOrders = formattedOrderbook
             .filter(o => o.type === "sell")
             .reverse();
           const buyOrders = formattedOrderbook.filter(o => o.type === "buy");
 
+          const totalSellVolume = buyOrders.length
+            ? buyOrders[buyOrders.length - 1].cumulativeVolume
+            : 0;
+          const totalBuyVolume = sellOrders.length
+            ? sellOrders[sellOrders.length - 1].cumulativeVolume
+            : 0;
           store.dispatch(
             creators.updateOrderbook({
               orders: orderbook,
               buyOrders,
               sellOrders,
+              totalSellVolume,
+              totalBuyVolume,
             }),
           );
+          if (buyOrders.length) {
+            store.dispatch(
+              tradeHelperCreators.update({
+                bid: buyOrders[0].price,
+              }),
+            );
+          } else {
+            store.dispatch(
+              tradeHelperCreators.update({
+                bid: 0,
+              }),
+            );
+          }
+          if (sellOrders.length) {
+            store.dispatch(
+              tradeHelperCreators.update({
+                ask: sellOrders[0].price,
+              }),
+            );
+          } else {
+            store.dispatch(
+              tradeHelperCreators.update({
+                ask: 0,
+              }),
+            );
+          }
         })
         .catch(error => console.log(error));
       break;
