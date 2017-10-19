@@ -35,17 +35,6 @@ npm start
 npm run-script build
 ```
 
-## Deploy
-
-You need to have IPFS installed accessible from the path folder and run the IPFS daemon:
-
-```
-ipfs daemon
-```
-
-```
-npm run-script deploy
-=======
 ## Ipfs deployment
 
 Build the react application:
