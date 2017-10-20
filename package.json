@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.2.8",
+  "version": "0.3.4",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/main.js",
   "sign-git-tag": true,
@@ -30,7 +30,8 @@
     "version": "npm run test",
     "postversion": "git push && git push --tags",
     "deploy": "npm version patch && npm publish",
-    "depcheck": "depcheck --ignores=husky,eslint-config-plugin:flowtype",
+    "deploy:alpha": "npm publish --tag alpha",
+    "depcheck": "depcheck --ignores=husky,eslint-config-plugin:flowtype,debug",
     "depcheck:json": "depcheck --ignores=husky --json"
   },
   "lint-staged": {
@@ -65,6 +66,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-runtime": "^6.26.0",
     "depcheck": "^0.6.7",
+    "dotenv": "^4.0.0",
     "eslint": "^4.3.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-prettier": "^2.3.0",
@@ -77,10 +79,11 @@
     "jest": "^20.0.4",
     "lint-staged": "^4.0.2",
     "prettier-eslint-cli": "^4.1.1",
-    "walk": "^2.3.9"
+    "walk": "^2.3.9",
+    "debug": "^3.1.0"
   },
   "dependencies": {
-    "@melonproject/protocol": "0.2.0-alpha.17",
+    "@melonproject/protocol": "0.3.8-alpha.5",
     "bignumber.js": "^4.0.2",
     "pify": "^3.0.0",
     "ramda": "^0.24.1",

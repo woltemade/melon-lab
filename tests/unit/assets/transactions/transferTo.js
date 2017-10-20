@@ -18,6 +18,7 @@ test("transferTo", async () => {
   expect(
     contract.mockInspect.instance.transfer,
   ).toHaveBeenCalledWith("0x1", new BigNumber(3 * 10 ** 18), {
-    from: "0xUSER",
+    from: "0xMANAGER",
+    gas: 60000,
   });
 });

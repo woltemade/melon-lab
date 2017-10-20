@@ -22,6 +22,7 @@ A convenient Javascript interface to the Melon protocol Ethereum smart contracts
   "1200000000000" (number of 0s depending on the token decimals)
 - Abstract token address problem: Always consume and return tokens in their 
   symbol name instead of address.
+- Return standard JS object wherever possible. For example: Timestamps are Date objects. Ids are numbers (no need for bignumber), ...
 
 ## Usage
 
@@ -168,6 +169,13 @@ By interacting with the smart contracts, we have 2 levels of testing:
 `parity --chain kovan --author YOURACCOUNTADDRESS --unlock YOURACCOUNTADDRESS --password ./account --auto-update=all --geth --force-ui`
 
 - Back to the terminal, make this new file executable by running: `chmod 755 run.sh`
+
+### Configure integration tests to use your address
+Integration tests use [dotenv](https://github.com/motdotla/dotenv) files for 
+enviroment specific configurations. Duplicate `.env.example` to `.env` in the
+projects root folder and change the settings accordingly.
+
+
 
 [gitter-badge]: https://img.shields.io/gitter/room/melonproject/general.js.svg?style=flat-square
 [gitter-url]: https://gitter.im/melonproject/general?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge

@@ -4,20 +4,29 @@ import orderBook from "../fixtures/blockChainOrders";
 import recentTrades from "../fixtures/recentTrades";
 
 const instance = {
-  orders: jest.fn(
+  offers: jest.fn(
     id =>
       new Promise(resolve => {
         resolve(orderBook.find(o => o.id === id).data);
       }),
   ),
-  takeOrder: jest.fn(
-    (/* exchange, id, quantity, objects */) =>
+  getOrder: jest.fn(
+    (consigned, id) =>
       new Promise(resolve => {
-        resolve({ transactionHash: "0xBLUB" });
+        resolve(orderBook.find(o => o.id === id).data);
       }),
   ),
-  make: jest.fn(
-    () => new Promise(resolve => resolve({ logs: [{ args: { id: 1 } }] })),
+  takeOrder: jest.fn(
+    () =>
+      new Promise(resolve =>
+        resolve({ logs: [{ event: "OrderUpdated", args: { id: 1 } }] }),
+      ),
+  ),
+  makeOrder: jest.fn(
+    () =>
+      new Promise(resolve =>
+        resolve({ logs: [{ event: "OrderUpdated", args: { id: 1 } }] }),
+      ),
   ),
   balanceOf: jest.fn(
     (/* ofAddress */) =>
@@ -65,35 +74,85 @@ const instance = {
   assetAt: jest.fn(i => new Promise(resolve => resolve(`0xTOKEN_${i}`))),
   exchangeAt: jest.fn(() => new Promise(resolve => resolve("0xEXCHANGE"))),
   priceFeedAt: jest.fn(() => new Promise(resolve => resolve("0xPRICEFEED"))),
-  createVault: jest.fn(
+  setupFund: jest.fn(
     () =>
       new Promise(resolve =>
-        resolve({ logs: [{ event: "VaultAdded", args: { id: 1 } }] }),
+        resolve({
+          logs: [
+            {
+              event: "FundUpdated",
+              args: {
+                id: new BigNumber(1),
+              },
+            },
+          ],
+        }),
       ),
   ),
-  getVault: jest.fn(
-    () =>
-      new Promise(resolve =>
-        resolve([
-          "0xVAULT",
-          "0xUSER",
-          "TESTFUND",
-          "MLN-T",
-          new BigNumber(18),
-          true,
-          123,
-        ]),
-      ),
-  ),
+  getFundById: jest.fn(() => new Promise(resolve => resolve("0xVAULT"))),
+  getFundByManager: jest.fn(() => new Promise(resolve => resolve("0xVAULT"))),
   getLastOrderId: jest.fn(
     () => new Promise(resolve => resolve(new BigNumber(8))),
   ),
-  Trade: jest.fn(() => ({
+  LogTake: jest.fn(() => ({
     get: jest.fn(callback => callback(null, recentTrades)),
   })),
+  isActive: jest.fn(() => new Promise(resolve => resolve(true))),
+  getOwner: jest.fn(() => new Promise(resolve => resolve("0xMANAGER"))),
+  avatar: jest.fn(() => new Promise(resolve => resolve(true))),
+  info: jest.fn(
+    () =>
+      new Promise(resolve =>
+        resolve([
+          "0xMANAGER",
+          "Test Fund",
+          "MLN-T",
+          new BigNumber(18),
+          new BigNumber(1505292372),
+          new BigNumber(0),
+        ]),
+      ),
+  ),
+  getName: jest.fn(() => new Promise(resolve => resolve("TESTFUND"))),
+  getDecimals: jest.fn(
+    () => new Promise(resolve => resolve(new BigNumber(18))),
+  ),
+  getDataFeed: jest.fn(() => new Promise(resolve => resolve("0xDATAFEED"))),
+  getExchange: jest.fn(() => new Promise(resolve => resolve("0xSIMPLEMARKET"))),
+  getCreationTime: jest.fn(
+    () => new Promise(resolve => resolve(new BigNumber(1505292372))),
+  ),
+  isShutDown: jest.fn(() => new Promise(resolve => resolve(false))),
+  owner: jest.fn(() => new Promise(resolve => resolve("0xMANAGER"))),
+  numRegisteredAssets: jest.fn(
+    () => new Promise(resolve => resolve(new BigNumber(18))),
+  ),
+  getRegisteredAssetAt: jest.fn(() => new Promise(resolve => resolve("0x"))),
+  information: jest.fn(
+    () =>
+      new Promise(resolve =>
+        resolve([
+          "0x64C4406C58C512f326d83065a72F12884105520b",
+          "Status Network Token",
+          new BigNumber(18),
+          "https://status.im/",
+        ]),
+      ),
+  ),
+  getQuoteAsset: jest.fn(
+    () =>
+      new Promise(resolve =>
+        resolve("0x2a20ff70596e431ab26C2365acab1b988DA8eCCF"),
+      ),
+  ),
 };
 
-instance.createVault.estimateGas = jest.fn(() => 650000);
+instance.setupFund.estimateGas = jest.fn(() => 650000);
+instance.approve.estimateGas = jest.fn(() => 50000);
+instance.transferFrom.estimateGas = jest.fn(() => 50000);
+instance.transfer.estimateGas = jest.fn(() => 50000);
+instance.takeOrder.estimateGas = jest.fn(() => 50000);
+instance.makeOrder.estimateGas = jest.fn(() => 50000);
 
 const contract = {
   setProvider: jest.fn(),

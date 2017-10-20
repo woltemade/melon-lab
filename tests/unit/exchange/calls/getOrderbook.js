@@ -3,9 +3,6 @@ import orderbookTest from "../../../shared/exchange/calls/orderbookTest";
 
 /* eslint-disable global-require */
 jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
-jest.mock("../../../../lib/universe/calls/getConfig", () =>
-  require("../../../mocks/truffle-contract"),
-);
 /* eslint-enable */
 
 test("getOrderbook", async () => {

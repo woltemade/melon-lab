@@ -20,5 +20,5 @@ test("approve", async () => {
   const mockCallArgs = contract.mockInspect.instance.approve.mock.calls[0];
   expect(mockCallArgs[0]).toBe("0xEXCHANGE");
   expect(mockCallArgs[1].toNumber()).toBe(4 * 10 ** 18);
-  expect(mockCallArgs[2].from).toBe("0xUSER");
+  expect(mockCallArgs[2].from).toBe("0xMANAGER");
 });
