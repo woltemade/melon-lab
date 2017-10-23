@@ -2,7 +2,7 @@ import pify from "pify";
 import { mergeAll } from "ramda";
 
 import { setup } from "@melonproject/melon.js";
-import { creators, types, connectionModes } from "./duck";
+import { creators, types, connectionModes, knownNetworks } from "./duck";
 
 let filter;
 
@@ -19,15 +19,26 @@ const resolvePromiseObject = async obj => {
 };
 
 const onBlock = async (store, web3) => {
-  const state = store.getState().web3;
+  const previousState = store.getState().web3;
 
   const info = await resolvePromiseObject({
     blockNumber: pify(web3.eth.getBlockNumber)(),
-    syncing: pify(web3.eth.getSyncing)(),
-    account: web3.eth.accounts[0],
+    syncing: pify(web3.eth.getSyncing)().then(syncing => !!syncing),
+    account: pify(web3.eth.getAccounts)().then(accounts => accounts[0]),
+    network:
+      knownNetworks[web3.version.network] || `Unknown ${web3.version.network}`,
   });
+  info.balance = info.account
+    ? await pify(web3.eth.getBalance)(info.account).then(balance =>
+        web3.fromWei(balance),
+      )
+    : null;
 
   store.dispatch(creators.update(info));
+
+  if (previousState.account !== info.account) {
+    store.dispatch(creators.accountChange(info.account));
+  }
 };
 
 const middlewares = {
