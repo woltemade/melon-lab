@@ -25,14 +25,14 @@ const onBlock = async (store, web3) => {
     blockNumber: pify(web3.eth.getBlockNumber)(),
     syncing: pify(web3.eth.getSyncing)().then(syncing => !!syncing),
     account: pify(web3.eth.getAccounts)().then(accounts => accounts[0]),
-    network: knownNetworks[web3.version.network] || `Unknown ${web3.version.network}`,
+    network:
+      knownNetworks[web3.version.network] || `Unknown ${web3.version.network}`,
   });
-
   info.balance = info.account
-    ? await pify(web3.eth.getBalance)(info.account)
-      .then(balance => web3.fromWei(balance))
+    ? await pify(web3.eth.getBalance)(info.account).then(balance =>
+        web3.fromWei(balance),
+      )
     : null;
-
 
   store.dispatch(creators.update(info));
 
@@ -43,7 +43,6 @@ const onBlock = async (store, web3) => {
 
 const middlewares = {
   [types.SET_CONNECTION](store, state, params, web3) {
-
     if (state.connectionMode !== params.connectionMode) {
       if (params.connectionMode === connectionModes.NOT_CONNECTED) {
         if (filter) filter.stopWatching();

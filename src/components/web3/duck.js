@@ -15,7 +15,7 @@ export const knownNetworks = {
   "42": "Kovan",
   "3": "Robsten",
   "4": "Rinkeby",
-}
+};
 
 export const initialState = {
   blockNumber: 0,
@@ -50,7 +50,7 @@ export const creators = {
   accountChange: account => ({
     type: types.ACCOUNT_CHANGE,
     account,
-  })
+  }),
 };
 
 const readyCheck = state => ({

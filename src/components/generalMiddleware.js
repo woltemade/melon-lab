@@ -76,7 +76,9 @@ const generalMiddleware = store => next => action => {
                     recentTradesCreators.requestRecentTrades(defaultAssetPair),
                   );
                   store.dispatch(participationCreators.request_price());
-                  store.dispatch(tradingActivityCreators.requestFundRecentTrades());
+                  store.dispatch(
+                    tradingActivityCreators.requestFundRecentTrades(),
+                  );
                   store.dispatch(tradeHelperCreators.request(defaultAssetPair));
                   store.dispatch(settingsCreators.requestSettings());
                 } else {

@@ -2,10 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import Web3 from "web3";
-import {
-  setup,
-  melonTracker,
-} from "@melonproject/melon.js";
+import { setup, melonTracker } from "@melonproject/melon.js";
 import store from "./store";
 import "./index.css";
 import AppContainer from "./components/app/container";
@@ -42,7 +39,6 @@ const getWeb3 = (web3 = window.web3) => {
       connectionMode = connectionModes.HOSTED;
     } else {
       connectionMode = connectionModes.NOT_CONNECTED;
-
     }
   }
 
@@ -61,7 +57,7 @@ window.addEventListener("load", () => {
 
   const tracker = melonTracker.on("DataUpdated", "LogItemUpdate");
 
-  tracker((type) => {
+  tracker(type => {
     switch (type) {
       case "DataUpdated":
         store.dispatch(fundHoldingsCreators.requestPrices());
