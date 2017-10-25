@@ -105,6 +105,16 @@
               
                 
                 <li><a
+                  href='#convertunclaimedrewards'
+                  class="">
+                  convertUnclaimedRewards
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#deserializeorder'
                   class="">
                   deserializeOrder
@@ -505,6 +515,16 @@
               
                 
                 <li><a
+                  href='#shutdownfund'
+                  class="">
+                  shutDownFund
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#sortbyprice'
                   class="">
                   sortByPrice
@@ -515,9 +535,29 @@
               
                 
                 <li><a
+                  href='#takemultipleordersfromfund'
+                  class="">
+                  takeMultipleOrdersFromFund
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#takeorderfromfund'
                   class="">
                   takeOrderFromFund
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#toggleredemption'
+                  class="">
+                  toggleRedemption
                   
                 </a>
                 
@@ -1128,7 +1168,7 @@ type <code>string</code></p>
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>from</span> <code class='quiet'>(<a href="#address">Address</a>
-            = <code>setup.web3.eth.defaultAccount</code>)</code>
+            = <code>setup.defaultAccount</code>)</code>
 	    
           </div>
           
@@ -1143,6 +1183,80 @@ type <code>string</code></p>
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='convertunclaimedrewards'>
+      convertUnclaimedRewards
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Convert unclaimed rewards of <code>fundAddress</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>convertUnclaimedRewards</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>from</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            = <code>setup.defaultAccount</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;RewardsConverted></code>
     
   
 
@@ -4126,6 +4240,80 @@ representation.</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='shutdownfund'>
+      shutDownFund
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Shut down fund at <code>fundAddress</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>shutDownFund</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>from</span> <code class='quiet'>(<a href="#address">Address</a>
+            = <code>setup.defaultAccount</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;any></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='sortbyprice'>
       sortByPrice
     </h3>
@@ -4197,6 +4385,96 @@ representation.</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='takemultipleordersfromfund'>
+      takeMultipleOrdersFromFund
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Takes multiple orders from fund at <code>fundAddress</code> upon to <code>totalQuantityAsked</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>takeMultipleOrdersFromFund</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>orders</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#order">Order</a>>)</code>
+	    sorted and filtered orders by matchOrders
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>managerAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>totalQuantityAsked</span> <code class='quiet'>(BigNumber)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;BigNumber></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='takeorderfromfund'>
       takeOrderFromFund
     </h3>
@@ -4233,7 +4511,7 @@ representation.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>vaultAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>vaultAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
 	    
           </div>
           
@@ -4264,6 +4542,85 @@ the remaining quantity is return.
 
   
 
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;any></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='toggleredemption'>
+      toggleRedemption
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Toggles redemption of fund at <code>fundAddress</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>toggleRedemption</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>from</span> <code class='quiet'>(<a href="#address">Address</a>
+            = <code>setup.defaultAccount</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>></code>
+    
   
 
   
