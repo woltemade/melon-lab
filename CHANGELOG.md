@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Documentation.js build command: `npm run docs`
+- Adding flow types & jsdocs to all library functions
 
 ### Added
 - Retrieve all assets from Datafeed contract in getConfig

@@ -55,6 +55,106 @@
               
                 
                 <li><a
+                  href='#gettokencontract'
+                  class="">
+                  getTokenContract
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#approve'
+                  class="">
+                  approve
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#ensureallowance'
+                  class="">
+                  ensureAllowance
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#transferfrom'
+                  class="">
+                  transferFrom
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#transferto'
+                  class="">
+                  transferTo
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getaddress'
+                  class="">
+                  getAddress
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getdecimals'
+                  class="">
+                  getDecimals
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getsymbol'
+                  class="">
+                  getSymbol
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#gettokeninfo'
+                  class="">
+                  getTokenInfo
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#tokeninfo'
+                  class="">
+                  tokenInfo
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#toprocessable'
                   class="">
                   toProcessable
@@ -140,6 +240,11 @@
 
   <div class='pre p1 fill-light mt0'>getAllowance</div>
   
+    <p>
+      Type:
+      BigNumber
+    </p>
+  
   
 
   
@@ -155,32 +260,26 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(any)</code>
-	    
+            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    the symbol of the token. Example: "MLN-T"
+
           </div>
           
         </div>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>ownerAddress</span> <code class='quiet'>(any)</code>
-	    
+            <span class='code bold'>ownerAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    holds the funds currently
+
           </div>
           
         </div>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>spenderAddress</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>null</span> <code class='quiet'>(any)</code>
-	    : ownerAddress is the address who owns the funds; spenderAddress is the address who is approved to spend it
+            <span class='code bold'>spenderAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    is eligible to spend the funds
 
           </div>
           
@@ -191,6 +290,14 @@
 
   
 
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        the amount which spender is still allowed to withdraw from owner
+
+      
+    
   
 
   
@@ -224,6 +331,11 @@
 
   <div class='pre p1 fill-light mt0'>getBalance</div>
   
+    <p>
+      Type:
+      BigNumber
+    </p>
+  
   
 
   
@@ -239,7 +351,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>symbol</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
 	    
           </div>
           
@@ -247,7 +359,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>ofAddress</span> <code class='quiet'>(any
+            <span class='code bold'>ofAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
             = <code>setup.defaultAccount</code>)</code>
 	    
           </div>
@@ -259,6 +371,14 @@
 
   
 
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        the balance of a token for an address
+
+      
+    
   
 
   
@@ -292,6 +412,11 @@
 
   <div class='pre p1 fill-light mt0'>getTotalSupply</div>
   
+    <p>
+      Type:
+      BigNumber
+    </p>
+  
   
 
   
@@ -307,13 +432,802 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>symbol</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
 	    
           </div>
           
         </div>
       
     </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        total supply of a token by its symbol
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='gettokencontract'>
+      getTokenContract
+    </h3>
+    
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>getTokenContract</div>
+  
+    <p>
+      Type:
+      contract
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        the contract instance of a token by symbol
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='approve'>
+      approve
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Approves <code>spender</code> to spend <code>quantity</code> of token with <code>symbol</code>
+<code>from</code> given address</p>
+
+
+  <div class='pre p1 fill-light mt0'>approve</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>spender</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>quantity</span> <code class='quiet'>(BigNumber)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>from</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            = <code>setup.defaultAccount</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><code>true</code></code>:
+        if approval was succesfull
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='ensureallowance'>
+      ensureAllowance
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Ensures that <code>spender</code> still has the allowance to spend <code>quantity</code> of tokens
+with <code>sympol</code> of <code>owner</code>. If current allowance is below requested allowance,
+only the difference is approved again.</p>
+
+
+  <div class='pre p1 fill-light mt0'>ensureAllowance</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>owner</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>spender</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>quantity</span> <code class='quiet'>(BigNumber)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>BigNumber</code>:
+        the actual approved quantity
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='transferfrom'>
+      transferFrom
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Transfers <code>quantity</code> amount of token with <code>symbol</code> from <code>fromAddress</code> to
+<code>toAddress</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>transferFrom</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fromAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>toAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>quantity</span> <code class='quiet'>(BigNumber)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        <code>true</code>
+ if successful, otherwise it throws
+
+      
+    
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Throws</div>
+    <ul>
+      
+        <li>EnsureError: </li>
+      
+    </ul>
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='transferto'>
+      transferTo
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Transfer <code>quantity</code> amount of tokens with symbol <code>symbol</code> from <code>from</code>
+account to <code>toAddress</code>. In contrast to <em>transferFrom</em>, this function can
+be called without approving the quantity/tokens first, if <code>from</code> can sign
+the transaction (i.e. unlocked node or the account of logged in user)</p>
+
+
+  <div class='pre p1 fill-light mt0'>transferTo</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>toAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>quantity</span> <code class='quiet'>(BigNumber)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>from</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            = <code>setup.defaultAccount</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        <code>true</code>
+ if transfer is successful
+
+      
+    
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Throws</div>
+    <ul>
+      
+        <li>EnsureError: </li>
+      
+    </ul>
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getaddress'>
+      getAddress
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets address of given <code>tokenSymbol</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>getAddress</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getdecimals'>
+      getDecimals
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets decimals of given <code>tokenSymbol</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>getDecimals</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getsymbol'>
+      getSymbol
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets the token symbol by its ERC20 <code>address</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>getSymbol</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>address</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='gettokeninfo'>
+      getTokenInfo
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets the token info by <code>tokenSymbol</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>getTokenInfo</div>
+  
+  
+
+  <div>Deprecated: Should get token info directly form AssetRegistrar
+</div>
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>
+    
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Throws</div>
+    <ul>
+      
+        <li>any: If no token with given symbol is registered
+</li>
+      
+    </ul>
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='tokeninfo'>
+      tokenInfo
+    </h3>
+    
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>tokenInfo</div>
+  
+  
+
+  <div>Deprecated: This is deprecated.
+</div>
+  
+  
+  
+  
+  
+
   
 
   
@@ -347,11 +1261,9 @@
   </div>
   
 
-  <p>Takes a human readable quantity and makes it processable by EVM according
-to the specified token decimals.</p>
-<p>Note that the EVM always consumes and returns BigNumbers.</p>
-<p>Eg: toProcessable(0.1, 'ETH-T'))
---> BigNumber(100000000000000000) // (17 zeros)</p>
+  <p>Takes a human readable <code>quantity</code> and makes it processable by EVM according
+to the decimals specified by <code>tokenSymbol</code>.</p>
+<p><em>Note</em> that the EVM always consumes and returns BigNumbers.</p>
 
 
   <div class='pre p1 fill-light mt0'>toProcessable</div>
@@ -371,7 +1283,7 @@ to the specified token decimals.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>quantity</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>quantity</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a> | BigNumber))</code>
 	    
           </div>
           
@@ -379,7 +1291,7 @@ to the specified token decimals.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>symbol</span> <code class='quiet'>(any
+            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
             = <code>&quot;ETH-T&quot;</code>)</code>
 	    
           </div>
@@ -392,9 +1304,21 @@ to the specified token decimals.</p>
   
 
   
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>BigNumber</code>
+    
+  
 
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>toProcessable(<span class="hljs-number">0.1</span>, <span class="hljs-string">'ETH-T'</span>));
+ <span class="hljs-comment">// --&gt; BigNumber(100000000000000000) // (17 zeros)</span></pre>
+    
   
 
   
@@ -420,11 +1344,9 @@ to the specified token decimals.</p>
   </div>
   
 
-  <p>Takes a quantity (number) from the EVM and makes it human readable
-according to the specified token decimals.</p>
-<p>Note that the EVM always consumes and returns BigNumbers.</p>
-<p>Eg: toReadable(new BigNumber(100000000000000000, 'ETH-T')) // (17 zeros)
---> // BigNumber(0.1)</p>
+  <p>Takes a <code>quantity</code> from the EVM and makes it human readable
+according to the decimals specified by <code>tokenSymbol</code>.</p>
+<p><em>Note</em> that the EVM always consumes and returns BigNumbers.</p>
 
 
   <div class='pre p1 fill-light mt0'>toReadable</div>
@@ -445,18 +1367,16 @@ according to the specified token decimals.</p>
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>quantity</span> <code class='quiet'>(BigNumber)</code>
-	    number coming from EVM without precision.
-
+	    
           </div>
           
         </div>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
             = <code>&quot;ETH-T&quot;</code>)</code>
-	    the symbol of the asset. Eg "MLN-T"
-
+	    
           </div>
           
         </div>
@@ -469,15 +1389,19 @@ according to the specified token decimals.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>BigNumber</code>:
-        
-
-      
+      <code>BigNumber</code>
     
   
 
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>toReadable(<span class="hljs-keyword">new</span> BigNumber(<span class="hljs-number">100000000000000000</span>, <span class="hljs-string">'ETH-T'</span>)) <span class="hljs-comment">// (17 zeros)</span>
+<span class="hljs-comment">// --&gt; // BigNumber(0.1)</span></pre>
+    
   
 
   
