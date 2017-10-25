@@ -115,6 +115,16 @@
               
                 
                 <li><a
+                  href='#depositandapproveether'
+                  class="">
+                  depositAndApproveEther
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#deserializeorder'
                   class="">
                   deserializeOrder
@@ -128,6 +138,16 @@
                   href='#ensureallowance'
                   class="">
                   ensureAllowance
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#executerequest'
+                  class="">
+                  executeRequest
                   
                 </a>
                 
@@ -345,6 +365,16 @@
               
                 
                 <li><a
+                  href='#getparticipationcontract'
+                  class="">
+                  getParticipationContract
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#getprice'
                   class="">
                   getPrice
@@ -445,6 +475,26 @@
               
                 
                 <li><a
+                  href='#issubscriberequestpermitted'
+                  class="">
+                  isSubscribeRequestPermitted
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#list'
+                  class="">
+                  list
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#makeorder'
                   class="">
                   makeOrder
@@ -485,6 +535,16 @@
               
                 
                 <li><a
+                  href='#participation'
+                  class="">
+                  Participation
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#participationauthorizations'
                   class="">
                   ParticipationAuthorizations
@@ -498,6 +558,16 @@
                   href='#prices'
                   class="">
                   Prices
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#redeem'
+                  class="">
+                  redeem
                   
                 </a>
                 
@@ -528,6 +598,16 @@
                   href='#sortbyprice'
                   class="">
                   sortByPrice
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#subscribe'
+                  class="">
+                  subscribe
                   
                 </a>
                 
@@ -1279,6 +1359,90 @@ type <code>string</code></p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='depositandapproveether'>
+      depositAndApproveEther
+    </h3>
+    
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>depositAndApproveEther</div>
+  
+  
+
+  <div>Deprecated: This is deprecated.
+</div>
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>from</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>toBeApprovedAddress</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>quantity</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>tokenAddress</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='deserializeorder'>
       deserializeOrder
     </h3>
@@ -1419,6 +1583,91 @@ only the difference is approved again.</p>
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;BigNumber></code>:
         the actual approved quantity
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='executerequest'>
+      executeRequest
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Execute request by <code>requestId</code> on fund at <code>fundAddress</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>executeRequest</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>requestId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>from</span> <code class='quiet'>(<a href="#address">Address</a>
+            = <code>setup.defaultAccount</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;BigNumber></code>:
+        number of allocated shares
 
       
     
@@ -2811,7 +3060,8 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
   </div>
   
 
-  <p>Get the personalStake and totalSupply of a manager in a vault</p>
+  <p>Get the personalStake and totalSupply of an <code>investorAddress</code> in a fund at
+fundAddress</p>
 
 
   <div class='pre p1 fill-light mt0'>getParticipation</div>
@@ -2831,7 +3081,7 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>vaultAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
 	    
           </div>
           
@@ -2839,7 +3089,7 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>managerAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>investorAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
 	    
           </div>
           
@@ -2850,6 +3100,11 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
 
   
 
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#participation">Participation</a>></code>
+    
   
 
   
@@ -2915,6 +3170,53 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#participationauthorizations">ParticipationAuthorizations</a>></code>
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getparticipationcontract'>
+      getParticipationContract
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Get deployed participation contract instance</p>
+
+
+  <div class='pre p1 fill-light mt0'>getParticipationContract</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
   
 
   
@@ -3604,6 +3906,178 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='issubscriberequestpermitted'>
+      isSubscribeRequestPermitted
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Test if subscribe request is permitted</p>
+
+
+  <div class='pre p1 fill-light mt0'>isSubscribeRequestPermitted</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>$0</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.numShares</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.offeredValue</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.subscriber</span> <code class='quiet'>any</code>
+  
+    (default <code>setup.defaultAccount</code>)
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='list'>
+      list
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>List an investor as eligible</p>
+
+
+  <div class='pre p1 fill-light mt0'>list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>subscriber</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='makeorder'>
       makeOrder
     </h3>
@@ -4034,6 +4508,75 @@ OrderUpdate event is triggered with <code>id</code> param only.</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='participation'>
+      Participation
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>The participation of an investor in fund</p>
+
+
+  <div class='pre p1 fill-light mt0'>Participation</div>
+  
+    <p>
+      Type:
+      {personalStake: BigNumber, totalSupply: BigNumber}
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>personalStake</span> <code class='quiet'>(BigNumber)</code>
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>totalSupply</span> <code class='quiet'>(BigNumber)</code>
+          
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='participationauthorizations'>
       ParticipationAuthorizations
     </h3>
@@ -4151,6 +4694,106 @@ OrderUpdate event is triggered with <code>id</code> param only.</p>
     </div>
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='redeem'>
+      redeem
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Redeem <code>numShares</code> of fund at <code>fundAddress</code> by requesting <code>requestedValue</code>
+and incentivice execution with <code>incentiveValue</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>redeem</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>numShares</span> <code class='quiet'>(BigNumber)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>requestedValue</span> <code class='quiet'>(BigNumber)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>incentiveValue</span> <code class='quiet'>(BigNumber
+            = <code>new BigNumber(0.01)</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>investor</span> <code class='quiet'>(BigNumber
+            = <code>setup.defaultAccount</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Redemption></code>
+    
   
 
   
@@ -4368,6 +5011,106 @@ representation.</p>
       
       <pre class='p1 overflow-auto round fill-light'>orders.sort(sortByPrice(<span class="hljs-string">'sell'</span>));</pre>
     
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='subscribe'>
+      subscribe
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Subscribe to fund at <code>fundAddress</code> by offering <code>offeredValue</code> and requesting
+<code>numShares</code> and incentivice execution with <code>incentiveValue</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>subscribe</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>numShares</span> <code class='quiet'>(BigNumber)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>offeredValue</span> <code class='quiet'>(BigNumber)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>incentiveValue</span> <code class='quiet'>(BigNumber
+            = <code>new BigNumber(0.01)</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>subscriber</span> <code class='quiet'>(<a href="#address">Address</a>
+            = <code>setup.defaultAccount</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Subscription></code>
+    
+  
+
+  
+
   
 
   
