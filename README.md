@@ -139,6 +139,8 @@ Each of these contract folders can have the following subfolders:
 - `contracts/`: Helpers to get instances of the deployed contracts. Meant for 
   internal use. 
 - `utils/`: Utility functions to interact with the data
+- `schemas/`: Flow types (and hopefully in the future, Type Script definitions
+  and GraphQL schemas)
 - `queries/`: Sort and filter functions to insert into JS own `.sort(fn)`,
   `.filter(fn)`.
 
