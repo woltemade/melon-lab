@@ -19,3 +19,5 @@ issues.
   - Make it incompatible with "string"
   - Specify length and even regex?
 - [ ] Check and remove depositAndApproveEther from makeOrder.js
+- [ ] Request schema for fund
+- [ ] convertUnclaimedRewards --> Timestamp as date, check other params

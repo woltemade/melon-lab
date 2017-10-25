@@ -75,9 +75,29 @@
               
                 
                 <li><a
+                  href='#calcgav'
+                  class="">
+                  calcGav
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#cancelorder'
                   class="">
                   cancelOrder
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#cancelorderfromfund'
+                  class="">
+                  cancelOrderFromFund
                   
                 </a>
                 
@@ -108,6 +128,16 @@
                   href='#filterbyassetpair'
                   class="">
                   filterByAssetPair
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#fundinformations'
+                  class="">
+                  FundInformations
                   
                 </a>
                 
@@ -205,6 +235,26 @@
               
                 
                 <li><a
+                  href='#getfundcontract'
+                  class="">
+                  getFundContract
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getfundinformations'
+                  class="">
+                  getFundInformations
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#getfundrecenttrades'
                   class="">
                   getFundRecentTrades
@@ -218,6 +268,16 @@
                   href='#getlastorderid'
                   class="">
                   getLastOrderId
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getmodules'
+                  class="">
+                  getModules
                   
                 </a>
                 
@@ -245,9 +305,29 @@
               
                 
                 <li><a
+                  href='#getordershistory'
+                  class="">
+                  getOrdersHistory
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#getparticipation'
                   class="">
                   getParticipation
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getparticipationauthorizations'
+                  class="">
+                  getParticipationAuthorizations
                   
                 </a>
                 
@@ -278,6 +358,16 @@
                   href='#getrecenttrades'
                   class="">
                   getRecentTrades
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getrequestshistory'
+                  class="">
+                  getRequestsHistory
                   
                 </a>
                 
@@ -335,6 +425,16 @@
               
                 
                 <li><a
+                  href='#isshutdown'
+                  class="">
+                  isShutDown
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#makeorder'
                   class="">
                   makeOrder
@@ -368,6 +468,16 @@
                   href='#order'
                   class="">
                   Order
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#participationauthorizations'
+                  class="">
+                  ParticipationAuthorizations
                   
                 </a>
                 
@@ -834,6 +944,71 @@ type <code>string</code></p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='calcgav'>
+      calcGav
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Calculates gross asset value (GAV) of fund at <code>fundAddress</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>calcGav</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;BigNumber></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='cancelorder'>
       cancelOrder
     </h3>
@@ -886,6 +1061,88 @@ type <code>string</code></p>
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='cancelorderfromfund'>
+      cancelOrderFromFund
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Cancel the order with <code>id</code> from fund at <code>fundAddress</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>cancelOrderFromFund</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>from</span> <code class='quiet'>(<a href="#address">Address</a>
+            = <code>setup.web3.eth.defaultAccount</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>></code>
     
   
 
@@ -1138,6 +1395,87 @@ specified, will filter for that address.
     </div>
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='fundinformations'>
+      FundInformations
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>General fund informations</p>
+
+
+  <div class='pre p1 fill-light mt0'>FundInformations</div>
+  
+    <p>
+      Type:
+      {fundAddress: <a href="#address">Address</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, decimals: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, creationDate: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>}
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>decimals</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>creationDate</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>)</code>
+          
+          
+        </div>
+      
+    </div>
   
 
   
@@ -1825,6 +2163,136 @@ consumption and boosts this estimation by the multiplier.</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='getfundcontract'>
+      getFundContract
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Get the contract instance of fund at <code>fundAddress</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>getFundContract</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;any></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getfundinformations'>
+      getFundInformations
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Get general fund informations for fund at <code>fundAddress</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>getFundInformations</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#fundinformations">FundInformations</a>></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='getfundrecenttrades'>
       getFundRecentTrades
     </h3>
@@ -1929,6 +2397,71 @@ consumption and boosts this estimation by the multiplier.</p>
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getmodules'>
+      getModules
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Returns the addresses of all modules linked to the fund at <code>fundAddress</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>getModules</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;[<a href="#address">Address</a>]></code>
     
   
 
@@ -2091,6 +2624,71 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='getordershistory'>
+      getOrdersHistory
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Get the order history on exchanges for fund at <code>fundAddress</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>getOrdersHistory</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;[<a href="#order">Order</a>]></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='getparticipation'>
       getParticipation
     </h3>
@@ -2138,6 +2736,71 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
 
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getparticipationauthorizations'>
+      getParticipationAuthorizations
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Get participation authorizations of fund at <code>fundAddress</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>getParticipationAuthorizations</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#participationauthorizations">ParticipationAuthorizations</a>></code>
+    
   
 
   
@@ -2350,6 +3013,71 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;[<a href="#trade">Trade</a>]></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getrequestshistory'>
+      getRequestsHistory
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Get all the subscribe/redeem requests this fund at <code>fundAddress</code> received so far</p>
+
+
+  <div class='pre p1 fill-light mt0'>getRequestsHistory</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;any></code>
     
   
 
@@ -2675,6 +3403,71 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
         total supply of a token by its symbol
 
       
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='isshutdown'>
+      isShutDown
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Checks if fund at <code>fundAddress</code> is shutdown</p>
+
+
+  <div class='pre p1 fill-light mt0'>isShutDown</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>></code>
     
   
 
@@ -3099,6 +3892,75 @@ OrderUpdate event is triggered with <code>id</code> param only.</p>
       
         <div class='space-bottom0'>
           <span class='code bold'>cumulativeVolume</span> <code class='quiet'>(BigNumber?)</code>
+          
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='participationauthorizations'>
+      ParticipationAuthorizations
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Fund participation authorizations</p>
+
+
+  <div class='pre p1 fill-light mt0'>ParticipationAuthorizations</div>
+  
+    <p>
+      Type:
+      {subscriptionAllowed: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, redemptionAllowed: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>}
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>subscriptionAllowed</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code>
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>redemptionAllowed</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code>
           
           
         </div>
