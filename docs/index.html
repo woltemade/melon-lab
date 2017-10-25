@@ -581,7 +581,7 @@ type <code>string</code></p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    
           </div>
           
@@ -589,7 +589,7 @@ type <code>string</code></p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>spender</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>spender</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
 	    
           </div>
           
@@ -605,7 +605,7 @@ type <code>string</code></p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>from</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            <span class='code bold'>from</span> <code class='quiet'>(<a href="#address">Address</a>
             = <code>setup.defaultAccount</code>)</code>
 	    
           </div>
@@ -1008,7 +1008,7 @@ only the difference is approved again.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    
           </div>
           
@@ -1016,7 +1016,7 @@ only the difference is approved again.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>owner</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>owner</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
 	    
           </div>
           
@@ -1024,7 +1024,7 @@ only the difference is approved again.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>spender</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>spender</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
 	    
           </div>
           
@@ -1046,7 +1046,7 @@ only the difference is approved again.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>BigNumber</code>:
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;BigNumber></code>:
         the actual approved quantity
 
       
@@ -1175,7 +1175,7 @@ specified, will filter for that address.
   
     <p>
       Type:
-      {maker: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, taker: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, timeStamp: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>, sellQuantity: BigNumber, buyQuantity: BigNumber, sellToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, buyToken: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}
+      {maker: <a href="#address">Address</a>, taker: <a href="#address">Address</a>, timeStamp: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>, sellQuantity: BigNumber, buyQuantity: BigNumber, sellToken: <a href="#tokensymbol">TokenSymbol</a>, buyToken: <a href="#tokensymbol">TokenSymbol</a>}
     </p>
   
   
@@ -1195,13 +1195,13 @@ specified, will filter for that address.
     <div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>maker</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          <span class='code bold'>maker</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
           
           
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>taker</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          <span class='code bold'>taker</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
           
           
         </div>
@@ -1225,13 +1225,13 @@ specified, will filter for that address.
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>sellToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          <span class='code bold'>sellToken</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
           
           
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>buyToken</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          <span class='code bold'>buyToken</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
           
           
         </div>
@@ -1375,7 +1375,7 @@ consumption and boosts this estimation by the multiplier.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>baseTokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>baseTokenSymbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    
           </div>
           
@@ -1383,7 +1383,7 @@ consumption and boosts this estimation by the multiplier.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>quoteTokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>quoteTokenSymbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    
           </div>
           
@@ -1457,7 +1457,7 @@ consumption and boosts this estimation by the multiplier.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    
           </div>
           
@@ -1471,7 +1471,7 @@ consumption and boosts this estimation by the multiplier.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+      <code><a href="#address">Address</a></code>
     
   
 
@@ -1526,7 +1526,7 @@ consumption and boosts this estimation by the multiplier.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    the symbol of the token. Example: "MLN-T"
 
           </div>
@@ -1535,7 +1535,7 @@ consumption and boosts this estimation by the multiplier.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>ownerAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>ownerAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
 	    holds the funds currently
 
           </div>
@@ -1544,7 +1544,7 @@ consumption and boosts this estimation by the multiplier.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>spenderAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>spenderAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
 	    is eligible to spend the funds
 
           </div>
@@ -1559,7 +1559,7 @@ consumption and boosts this estimation by the multiplier.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>any</code>:
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;BigNumber></code>:
         the amount which spender is still allowed to withdraw from owner
 
       
@@ -1597,11 +1597,6 @@ consumption and boosts this estimation by the multiplier.</p>
 
   <div class='pre p1 fill-light mt0'>getBalance</div>
   
-    <p>
-      Type:
-      BigNumber
-    </p>
-  
   
 
   
@@ -1617,7 +1612,7 @@ consumption and boosts this estimation by the multiplier.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    
           </div>
           
@@ -1625,7 +1620,7 @@ consumption and boosts this estimation by the multiplier.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>ofAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            <span class='code bold'>ofAddress</span> <code class='quiet'>(<a href="#address">Address</a>
             = <code>setup.defaultAccount</code>)</code>
 	    
           </div>
@@ -1640,7 +1635,7 @@ consumption and boosts this estimation by the multiplier.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>any</code>:
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;BigNumber></code>:
         the balance of a token for an address
 
       
@@ -1741,7 +1736,7 @@ consumption and boosts this estimation by the multiplier.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    
           </div>
           
@@ -1858,7 +1853,7 @@ consumption and boosts this estimation by the multiplier.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>fundAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
 	    
           </div>
           
@@ -2051,7 +2046,7 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>baseTokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>baseTokenSymbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    
           </div>
           
@@ -2059,7 +2054,7 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>quoteTokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>quoteTokenSymbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    
           </div>
           
@@ -2192,7 +2187,7 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    
           </div>
           
@@ -2323,7 +2318,7 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>baseTokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>baseTokenSymbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    
           </div>
           
@@ -2331,7 +2326,7 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>quoteTokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>quoteTokenSymbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    
           </div>
           
@@ -2452,7 +2447,7 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>address</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>address</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
 	    
           </div>
           
@@ -2466,7 +2461,7 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+      <code><a href="#tokensymbol">TokenSymbol</a></code>
     
   
 
@@ -2521,7 +2516,7 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    
           </div>
           
@@ -2647,11 +2642,6 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
 
   <div class='pre p1 fill-light mt0'>getTotalSupply</div>
   
-    <p>
-      Type:
-      BigNumber
-    </p>
-  
   
 
   
@@ -2667,7 +2657,7 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    
           </div>
           
@@ -2681,7 +2671,7 @@ Only if the order is active, it has the fields <code>buy</code> and <code>sell</
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>any</code>:
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;BigNumber></code>:
         total supply of a token by its symbol
 
       
@@ -3572,7 +3562,7 @@ to the decimals specified by <code>tokenSymbol</code>.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>
             = <code>&quot;ETH-T&quot;</code>)</code>
 	    
           </div>
@@ -3655,7 +3645,7 @@ according to the decimals specified by <code>tokenSymbol</code>.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            <span class='code bold'>tokenSymbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>
             = <code>&quot;ETH-T&quot;</code>)</code>
 	    
           </div>
@@ -3715,7 +3705,7 @@ according to the decimals specified by <code>tokenSymbol</code>.</p>
   
     <p>
       Type:
-      {maker: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, taker: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, timeStamp: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>, price: BigNumber, type: <a href="#buyorsell">BuyOrSell</a>, quantity: BigNumber}
+      {maker: <a href="#address">Address</a>, taker: <a href="#address">Address</a>, timeStamp: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>, price: BigNumber, type: <a href="#buyorsell">BuyOrSell</a>, quantity: BigNumber}
     </p>
   
   
@@ -3734,13 +3724,13 @@ according to the decimals specified by <code>tokenSymbol</code>.</p>
     <div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>maker</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          <span class='code bold'>maker</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
           
           
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>taker</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          <span class='code bold'>taker</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
           
           
         </div>
@@ -3822,7 +3812,7 @@ according to the decimals specified by <code>tokenSymbol</code>.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    
           </div>
           
@@ -3830,7 +3820,7 @@ according to the decimals specified by <code>tokenSymbol</code>.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>fromAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>fromAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
 	    
           </div>
           
@@ -3838,7 +3828,7 @@ according to the decimals specified by <code>tokenSymbol</code>.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>toAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>toAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
 	    
           </div>
           
@@ -3860,7 +3850,7 @@ according to the decimals specified by <code>tokenSymbol</code>.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>></code>:
         <code>true</code>
  if successful, otherwise it throws
 
@@ -3925,7 +3915,7 @@ the transaction (i.e. unlocked node or the account of logged in user)</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>symbol</span> <code class='quiet'>(<a href="#tokensymbol">TokenSymbol</a>)</code>
 	    
           </div>
           
@@ -3933,7 +3923,7 @@ the transaction (i.e. unlocked node or the account of logged in user)</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>toAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>toAddress</span> <code class='quiet'>(<a href="#address">Address</a>)</code>
 	    
           </div>
           
@@ -3949,7 +3939,7 @@ the transaction (i.e. unlocked node or the account of logged in user)</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>from</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            <span class='code bold'>from</span> <code class='quiet'>(<a href="#address">Address</a>
             = <code>setup.defaultAccount</code>)</code>
 	    
           </div>
