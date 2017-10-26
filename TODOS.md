@@ -24,3 +24,4 @@ issues.
 - [ ] depositAndApproveEther: Is this function still needed? If yes, change tokenAddress to tokenSymbol
 - [ ] Harmonize subscribe/redeem types. Especially atTimeStamp vs atTimestamp
 - [ ] Remove daemonAddress from setup
+- [ ] Transform timestamp in setupFund into date
