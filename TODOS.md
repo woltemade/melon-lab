@@ -23,3 +23,4 @@ issues.
 - [ ] convertUnclaimedRewards --> Timestamp as date, check other params
 - [ ] depositAndApproveEther: Is this function still needed? If yes, change tokenAddress to tokenSymbol
 - [ ] Harmonize subscribe/redeem types. Especially atTimeStamp vs atTimestamp
+- [ ] Remove daemonAddress from setup

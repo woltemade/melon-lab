@@ -75,6 +75,16 @@
               
                 
                 <li><a
+                  href='#cacheawait'
+                  class="">
+                  cacheAwait
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#calcgav'
                   class="">
                   calcGav
@@ -135,6 +145,16 @@
               
                 
                 <li><a
+                  href='#ensure'
+                  class="">
+                  ensure
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#ensureallowance'
                   class="">
                   ensureAllowance
@@ -155,9 +175,29 @@
               
                 
                 <li><a
+                  href='#extracteventdefinitions'
+                  class="">
+                  extractEventDefinitions
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#filterbyassetpair'
                   class="">
                   filterByAssetPair
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#findeventinlog'
+                  class="">
+                  findEventInLog
                   
                 </a>
                 
@@ -315,6 +355,16 @@
               
                 
                 <li><a
+                  href='#getnetworknamebyid'
+                  class="">
+                  getNetworkNameById
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#getorder'
                   class="">
                   getOrder
@@ -418,6 +468,16 @@
                   href='#getsimplemarketcontract'
                   class="">
                   getSimpleMarketContract
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getspherecontract'
+                  class="">
+                  getSphereContract
                   
                 </a>
                 
@@ -535,6 +595,16 @@
               
                 
                 <li><a
+                  href='#parseevent'
+                  class="">
+                  parseEvent
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#participation'
                   class="">
                   Participation
@@ -575,9 +645,29 @@
               
                 
                 <li><a
+                  href='#rush'
+                  class="">
+                  rush
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#serializeorder'
                   class="">
                   serializeOrder
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#setup'
+                  class="">
+                  setup
                   
                 </a>
                 
@@ -685,6 +775,16 @@
               
                 
                 <li><a
+                  href='#trace'
+                  class="">
+                  trace
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#trade'
                   class="">
                   Trade
@@ -708,6 +808,16 @@
                   href='#transferto'
                   class="">
                   transferTo
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#trufflejson'
+                  class="">
+                  TruffleJSON
                   
                 </a>
                 
@@ -1043,6 +1153,72 @@ type <code>string</code></p>
 
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='cacheawait'>
+      cacheAwait
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Create an in-memory cache for the execution of an async function for
+each set of parameters. Cache hit/index defined by <code>toString(args)</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>cacheAwait</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>asyncFunction</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">Function</a></code>
+    
   
 
   
@@ -1513,6 +1689,95 @@ representation.</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='ensure'>
+      ensure
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Similar to asset but throws on runtime if <code>condition</code> isn't met.
+Possibility to add a <code>message</code> and some <code>data</code> to trace.</p>
+
+
+  <div class='pre p1 fill-light mt0'>ensure</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>condition</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>message</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>data</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>
+    
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Throws</div>
+    <ul>
+      
+        <li>EnsureError: </li>
+      
+    </ul>
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='ensureallowance'>
       ensureAllowance
     </h3>
@@ -1692,6 +1957,122 @@ only the difference is approved again.</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='extracteventdefinitions'>
+      extractEventDefinitions
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Extract event definitions from truffle <code>json</code> and mixin <code>onEventMap</code>:</p>
+
+
+  <div class='pre p1 fill-light mt0'>extractEventDefinitions</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>$0</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.json</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.address</span> <code class='quiet'>any</code>
+  
+    (default <code>path([&quot;networks&quot;,setup.networkId,&quot;address&quot;],json)</code>)
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.onEventMap</span> <code class='quiet'>any</code>
+  
+    (default <code>{}</code>)
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;EventDefinition></code>
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>onEventMap = { <span class="hljs-string">'OrderUpdate'</span>: doSomething };
+<span class="hljs-comment">// will add doSomething to the generated event definition</span></pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='filterbyassetpair'>
       filterByAssetPair
     </h3>
@@ -1762,6 +2143,99 @@ specified, will filter for that address.
 
   
 
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='findeventinlog'>
+      findEventInLog
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Searches the log of the <code>receipt</code> for a given event <code>nameOrIndex</code>
+Possibility to add custom error <code>message</code> if event not found</p>
+
+
+  <div class='pre p1 fill-light mt0'>findEventInLog</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>nameOrIndex</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>))</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>receipt</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>message</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+            = <code>&quot;No transaction logs found in receipt&quot;</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        found event
+
+      
+    
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Throws</div>
+    <ul>
+      
+        <li>EnsureError: </li>
+      
+    </ul>
   
 
   
@@ -1969,8 +2443,9 @@ specified, will filter for that address.
   </div>
   
 
-  <p>Takes a truffle-method (eg. myContract.myMethod) and estimates the gas
-consumption and boosts this estimation by the multiplier.</p>
+  <p>Takes a truffle <code>method</code> (eg. myContract.myMethod) and estimates the gas
+consumption according to <code>params</code> and <code>options</code> and boosts this estimation
+by the <code>multiplier</code>.</p>
 
 
   <div class='pre p1 fill-light mt0'>gasBoost</div>
@@ -1998,7 +2473,7 @@ consumption and boosts this estimation by the multiplier.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>params</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;any>)</code>
+            <span class='code bold'>params</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | BigNumber | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)>)</code>
 	    
           </div>
           
@@ -2026,6 +2501,11 @@ consumption and boosts this estimation by the multiplier.</p>
 
   
 
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;any></code>
+    
   
 
   
@@ -2847,6 +3327,71 @@ consumption and boosts this estimation by the multiplier.</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='getnetworknamebyid'>
+      getNetworkNameById
+    </h3>
+    
+    
+  </div>
+  
+
+  <p><code>id</code> to name mapping helper</p>
+
+
+  <div class='pre p1 fill-light mt0'>getNetworkNameById</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='getorder'>
       getOrder
     </h3>
@@ -3528,6 +4073,53 @@ fundAddress</p>
 
 
   <div class='pre p1 fill-light mt0'>getSimpleMarketContract</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getspherecontract'>
+      getSphereContract
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>get deployed instance of sphere contract</p>
+
+
+  <div class='pre p1 fill-light mt0'>getSphereContract</div>
   
   
 
@@ -4508,6 +5100,79 @@ OrderUpdate event is triggered with <code>id</code> param only.</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='parseevent'>
+      parseEvent
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Parse a raw <code>event</code> from the blockchain with the given <code>abi</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>parseEvent</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>event</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>abi</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='participation'>
       Participation
     </h3>
@@ -4815,6 +5480,97 @@ and incentivice execution with <code>incentiveValue</code></p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='rush'>
+      rush
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Rush: If <code>promise</code> didn't resolve before <code>wait</code> miliseconds: recect with
+<code>errMsg</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>rush</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>promise</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;any>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>errMsg</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>wait</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+            = <code>30000</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;any></code>
+    
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Throws</div>
+    <ul>
+      
+        <li>any: rejects the promise
+</li>
+      
+    </ul>
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='serializeorder'>
       serializeOrder
     </h3>
@@ -4862,6 +5618,123 @@ representation.</p>
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code>SerializedOrder</code>
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='setup'>
+      setup
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Globally setup melon.js</p>
+
+
+  <div class='pre p1 fill-light mt0'>setup</div>
+  
+    <p>
+      Type:
+      Setup
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>setup</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>setup.web3</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span>connected web3 instance
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>setup.daemonAddress</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span>the address of the liquidity provider
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>setup.defaultAccount</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span>the default from address
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>tracer</span> <code class='quiet'>(any)</code>
+	    helper function to trace internals of melon.js
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
   
 
   
@@ -5652,6 +6525,113 @@ according to the decimals specified by <code>tokenSymbol</code>.</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='trace'>
+      trace
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Helper function to unveil internals of melon.js for logging</p>
+
+
+  <div class='pre p1 fill-light mt0'>trace</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>$0</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.message</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.category</span> <code class='quiet'>any</code>
+  
+    (default <code>&quot;trace&quot;</code>)
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.data</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='trade'>
       Trade
     </h3>
@@ -5931,6 +6911,69 @@ the transaction (i.e. unlocked node or the account of logged in user)</p>
         <li>EnsureError: </li>
       
     </ul>
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='trufflejson'>
+      TruffleJSON
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Shape of a JSON file generated by truffle</p>
+
+
+  <div class='pre p1 fill-light mt0'>TruffleJSON</div>
+  
+    <p>
+      Type:
+      {abi: any}
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>abi</span> <code class='quiet'>(any)</code>
+          
+          
+        </div>
+      
+    </div>
+  
+
+  
+
   
 
   
