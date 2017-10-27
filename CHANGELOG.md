@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - shutDownFund
 
 ### Changed
+- takeMultipleOrdersFromFund return value changed to remainingQuantity only
 - Integrate protocol@0.3.8-alpha.5
 - getFundById and getFundByManager
 - Refactor getOrderbook
