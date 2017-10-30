@@ -23,6 +23,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Refactor getOrderbook
 - Fix get recent trades / fund recent trades
 
+### Deprectaed
+- awaitDataFeedUpdates
+- depositAndApproveEther (needs more investigation)
+
 ### Fixed
 - Fix #61
 - Fix #60
