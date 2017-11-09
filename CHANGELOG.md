@@ -8,19 +8,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- .eslintignore file instead of --ignore-path --> Ignores docs/
 - Documentation.js build command: `npm run docs`
-
-### Added
+- Adding flow types & jsdocs to all library functions
 - Retrieve all assets from Datafeed contract in getConfig
 - Toggle Subscription and Toggle Redemption
 - ConvertUnclaimedRewards
 - shutDownFund
 
 ### Changed
+- takeMultipleOrdersFromFund return value changed to remainingQuantity only
 - Integrate protocol@0.3.8-alpha.5
 - getFundById and getFundByManager
 - Refactor getOrderbook
-- Fix get recent trades / fund recent trades 
+- Fix get recent trades / fund recent trades
+
+### Deprectaed
+- awaitDataFeedUpdates
+- depositAndApproveEther (needs more investigation)
 
 ### Fixed
 - Fix #61

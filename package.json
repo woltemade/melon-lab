@@ -23,7 +23,7 @@
     "babel:watch": "babel lib -w -d build",
     "build": "npm run walklib && npm run babel",
     "walklib": "babel-node ./scripts/walkLib.js",
-    "lint": "eslint . --ignore-path .gitignore",
+    "lint": "eslint .",
     "format": "prettier-eslint --write \"lib/**/*.js\" && prettier-eslint --write \"tests/**/*.js\"",
     "precommit": "lint-staged",
     "preversion": "npm test",
@@ -33,7 +33,7 @@
     "deploy:alpha": "npm publish --tag alpha",
     "depcheck": "depcheck --ignores=husky,eslint-config-plugin:flowtype,debug",
     "depcheck:json": "depcheck --ignores=husky --json",
-    "docs": "documentation build lib/** -f html -o docs"
+    "docs": "documentation build lib/** -f html -o docs --sort-order alpha"
   },
   "lint-staged": {
     "*.js": [
