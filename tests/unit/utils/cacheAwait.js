@@ -15,7 +15,7 @@ it("caches await", async () => {
   const secondResult = await cachedWait("a");
   const afterSecondExectution = new Date();
   expect(secondResult).toEqual("a");
-  expect(afterSecondExectution - afterFirstExectution).toBeLessThan(50);
+  expect(afterSecondExectution - afterFirstExectution).toBeLessThan(100);
 
   const withoutAwait = cachedWait("a");
   expect(withoutAwait instanceof Promise).toBeTruthy();
