@@ -10,12 +10,12 @@ it("caches await", async () => {
   const firstResult = await cachedWait("a");
   const afterFirstExectution = new Date();
   expect(firstResult).toEqual("a");
-  expect(afterFirstExectution - start).toBeGreaterThan(90);
+  expect(afterFirstExectution - start).toBeGreaterThanOrEqual(100);
 
   const secondResult = await cachedWait("a");
   const afterSecondExectution = new Date();
   expect(secondResult).toEqual("a");
-  expect(afterSecondExectution - afterFirstExectution).toBeLessThan(10);
+  expect(afterSecondExectution - afterFirstExectution).toBeLessThan(50);
 
   const withoutAwait = cachedWait("a");
   expect(withoutAwait instanceof Promise).toBeTruthy();
@@ -23,5 +23,5 @@ it("caches await", async () => {
   const withOtherArgs = await cachedWait("b");
   const afterOtherArgs = new Date();
   expect(withOtherArgs).toEqual("b");
-  expect(afterOtherArgs - afterSecondExectution).toBeGreaterThan(90);
+  expect(afterOtherArgs - afterSecondExectution).toBeGreaterThanOrEqual(100);
 });
