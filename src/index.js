@@ -5,16 +5,16 @@ import Web3 from "web3";
 import { setup, melonTracker } from "@melonproject/melon.js";
 import store from "./store";
 import "./index.css";
-import AppContainer from "./components/app/container";
+import AppContainer from "./legacyComponents/app/container";
 import registerServiceWorker from "./registerServiceWorker";
 
-import { creators as orderbookCreators } from "./components/orderbook/duck";
-import { creators as fundHoldingsCreators } from "./components/fundHoldings/duck";
+import { creators as orderbookCreators } from "./legacyComponents/orderbook/duck";
+import { creators as fundHoldingsCreators } from "./legacyComponents/fundHoldings/duck";
 
 import {
   creators as web3Creators,
   connectionModes,
-} from "./components/web3/duck";
+} from "./legacyComponents/web3/duck";
 
 const getWeb3 = (web3 = window.web3) => {
   let connectionMode;
