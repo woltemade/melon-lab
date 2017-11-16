@@ -12,9 +12,8 @@ export const providers = {
 };
 
 export const networks = {
-  KOVAN: "Kovan:41",
-  MAIN: "Main:1",
-  null: "Unknown",
+  "42": "Kovan",
+  "1": "Main",
 };
 
 const initialState = {
@@ -23,24 +22,24 @@ const initialState = {
   balance: null,
   blockNumber: 0,
   lastUpdate: null,
-  network: networks.null,
+  network: 0,
   provider: providers.NONE,
   syncing: true,
+  isConnected: false,
 
   // derived state
-  isConnected: false,
+  networkName: null,
   isReadyToVisit: false,
   isReadyToTrade: false,
 };
 
-const isConnected = state => state.providers !== providers.NONE;
 const isUpToDate = state =>
   new Date() - state.lastUpdate < MAX_BLOCK_TIME_SECONDS * 1000;
 
 const isReadyToVisit = state =>
   !state.syncing &&
   state.network === networks.KOVAN &&
-  isConnected(state) &&
+  state.isConnected &&
   isUpToDate(state);
 
 const isReadyToTrade = state =>
@@ -59,6 +58,8 @@ const reducers = {
 
 const mapActionToReducer = {
   [types.SET_PROVIDER]: reducers.merge,
+  [types.HAS_CONNECTED]: reducers.merge,
+  [types.NEW_BLOCK]: reducers.merge,
 };
 
 export const reducer = (state = initialState, action = {}) => {
@@ -68,9 +69,9 @@ export const reducer = (state = initialState, action = {}) => {
   const newState = matchedReducer(state, params);
 
   const derivedState = {
-    isConnected: isConnected(newState),
     isReadyToVisit: isReadyToVisit(newState),
     isReadyToTrade: isReadyToTrade(newState),
+    networkName: networks[newState.network],
   };
 
   return {

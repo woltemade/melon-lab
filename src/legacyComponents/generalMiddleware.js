@@ -14,7 +14,6 @@ import { creators as factsheetCreators } from "./factsheet/duck";
 import { creators as fundHoldingsCreators } from "./fundHoldings/duck";
 import { creators as participationCreators } from "./participation/duck";
 import { creators as settingsCreators } from "./settings/duck";
-import { types as web3types } from "./web3/duck";
 
 const generalMiddleware = store => next => action => {
   const { type, ...params } = action;
@@ -35,6 +34,7 @@ const generalMiddleware = store => next => action => {
       store.dispatch(tradeHelperCreators.request(params.assetPair));
       break;
     }
+    /*
     case web3types.ACCOUNT_CHANGE: {
       console.log(params.account);
       if (params.account) {
@@ -95,6 +95,7 @@ const generalMiddleware = store => next => action => {
       }
       break;
     }
+    */
     default:
   }
 

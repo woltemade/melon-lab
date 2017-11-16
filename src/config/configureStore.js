@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, compose } from "redux";
+import createSagaMiddleware from "redux-saga";
 
 import generalMiddleware from "../legacyComponents/generalMiddleware";
 import setupMiddleware from "../legacyComponents/setup/middleware";
@@ -13,36 +14,45 @@ import participationMiddleware from "../legacyComponents/participation/middlewar
 import executeRequestMiddleware from "../legacyComponents/executeRequest/middleware";
 import tradingActivityMiddleware from "../legacyComponents/tradingActivity/middleware";
 import settingsMiddleware from "../legacyComponents/settings/middleware";
-import web3Middleware from "../legacyComponents/web3/middleware";
 
 import rootReducer from "../reducers";
+import rootSaga from "../sagas";
 
-export default createStore(
-  rootReducer,
-  {
-    /* preloadedState */
-  },
-  compose(
-    applyMiddleware(
-      setupMiddleware,
-      investMiddleware,
-      factsheetMiddleware,
-      fundHoldingsMiddleware,
-      orderbookMiddleware,
-      recentTradesMiddleware,
-      tradeMiddleware,
-      tradeHelperMiddleware,
-      generalMiddleware,
-      participationMiddleware,
-      executeRequestMiddleware,
-      tradingActivityMiddleware,
-      settingsMiddleware,
-      web3Middleware,
-    ),
-    /* eslint-disable no-underscore-dangle */
-    window.__REDUX_DEVTOOLS_EXTENSION__
-      ? window.__REDUX_DEVTOOLS_EXTENSION__()
-      : f => f,
-    /* eslint-enable */
-  ),
-);
+const configureStore = preloadedState => {
+  const sagaMiddleware = createSagaMiddleware();
+
+  const middlewares = applyMiddleware(
+    /*
+    setupMiddleware,
+    investMiddleware,
+    factsheetMiddleware,
+    fundHoldingsMiddleware,
+    orderbookMiddleware,
+    recentTradesMiddleware,
+    tradeMiddleware,
+    tradeHelperMiddleware,
+    generalMiddleware,
+    participationMiddleware,
+    executeRequestMiddleware,
+    tradingActivityMiddleware,
+    settingsMiddleware,
+    */
+    sagaMiddleware,
+  );
+
+  /* eslint-disable no-underscore-dangle */
+  const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
+    ? window.__REDUX_DEVTOOLS_EXTENSION__()
+    : f => f;
+  /* eslint-enable */
+
+  const enhancer = compose(middlewares, devTools);
+
+  const store = createStore(rootReducer, preloadedState, enhancer);
+
+  sagaMiddleware.run(rootSaga);
+
+  return store;
+};
+
+export default configureStore;

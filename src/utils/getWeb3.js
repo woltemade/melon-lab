@@ -1,5 +1,5 @@
 import Web3 from "web3";
-import providers from "../reducers/ethereum";
+import { providers } from "../reducers/ethereum";
 
 const checkHttpProvider = url => {
   const provider = new Web3.providers.HttpProvider(url);
@@ -7,34 +7,34 @@ const checkHttpProvider = url => {
 };
 
 const getWeb3 = (web3 = window.web3) => {
-  let providerType;
+  let provider;
 
   if (web3) {
     if (web3.parity) {
-      providerType = providers.PARITY;
+      provider = providers.PARITY;
     } else if (web3.currentProvider.isMetaMask) {
-      providerType = providers.METAMASK;
+      provider = providers.METAMASK;
     } else {
-      providerType = providers.INJECTED;
+      provider = providers.INJECTED;
     }
-    return { web3: new Web3(web3.currentProvider), providerType };
+    return { web3: new Web3(web3.currentProvider), provider };
   }
 
-  let provider = checkHttpProvider("http://localhost:8545");
+  let httpProvider = checkHttpProvider("http://localhost:8545");
 
-  if (provider) {
-    providerType = providers.LOCAL;
+  if (httpProvider) {
+    provider = providers.LOCAL;
   } else {
-    provider = checkHttpProvider("https://kovan.melonport.com");
+    httpProvider = checkHttpProvider("https://kovan.melonport.com");
 
-    if (provider) {
-      providerType = providers.HOSTED;
+    if (httpProvider) {
+      provider = providers.HOSTED;
     } else {
-      providerType = providers.NONE;
+      provider = providers.NONE;
     }
   }
 
-  return { web3: new Web3(provider), provider: providerType };
+  return { web3: new Web3(httpProvider), provider };
 };
 
 export default getWeb3;
