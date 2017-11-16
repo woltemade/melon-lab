@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import Trade from "./trade";
 import { creators } from "./duck";
-import store from "../../store";
+import store from "../../config/store";
 
 const mapStateToProps = state => ({
   ...state.trade,

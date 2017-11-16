@@ -18,7 +18,6 @@ IPFS Front-end application of the Melon portal.
     ```
     npm install
     ```
-**Right now, the Melon.js library is injected with a local link, not through npm (see instructions in Melon.js repo, under Link Dev Build section: https://github.com/melonproject/melon.js)**.
 
 ## Getting started
 

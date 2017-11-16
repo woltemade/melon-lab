@@ -1,59 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import Web3 from "web3";
 import { setup, melonTracker } from "@melonproject/melon.js";
-import store from "./store";
+
+import store from "./config/store";
 import "./index.css";
 import AppContainer from "./legacyComponents/app/container";
 import registerServiceWorker from "./registerServiceWorker";
-
 import { creators as orderbookCreators } from "./legacyComponents/orderbook/duck";
 import { creators as fundHoldingsCreators } from "./legacyComponents/fundHoldings/duck";
-
-import {
-  creators as web3Creators,
-  connectionModes,
-} from "./legacyComponents/web3/duck";
-
-const getWeb3 = (web3 = window.web3) => {
-  let connectionMode;
-
-  if (web3) {
-    if (web3.currentProvider.isMetaMask) {
-      connectionMode = connectionModes.METAMASK;
-    } else {
-      connectionMode = connectionModes.UNKNOWN_INJECTED;
-    }
-    return { web3: new Web3(web3.currentProvider), connectionMode };
-  }
-
-  let provider = new Web3.providers.HttpProvider("http://localhost:8545");
-
-  if (provider.isConnected()) {
-    connectionMode = connectionModes.LOCAL;
-  } else {
-    provider = new Web3.providers.HttpProvider("https://kovan.melonport.com");
-
-    if (provider.isConnected()) {
-      connectionMode = connectionModes.HOSTED;
-    } else {
-      connectionMode = connectionModes.NOT_CONNECTED;
-    }
-  }
-
-  return { web3: new Web3(provider), connectionMode };
-};
+import getWeb3 from "./utils/getWeb3";
+import { creators } from "./actions/ethereum";
 
 window.addEventListener("load", () => {
-  const { web3, connectionMode } = getWeb3();
+  const { web3, provider } = getWeb3();
 
   setup.init({
     web3,
     daemonAddress: "0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd",
   });
 
-  store.dispatch(web3Creators.setConnection(connectionMode));
+  store.dispatch(creators.setProvider(provider));
 
   const tracker = melonTracker.on("DataUpdated", "LogItemUpdate");
 
