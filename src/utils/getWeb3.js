@@ -3,7 +3,7 @@ import { providers } from "../reducers/ethereum";
 
 const checkHttpProvider = url => {
   const provider = new Web3.providers.HttpProvider(url);
-  return provider.isConnected ? provider : null;
+  return provider.isConnected() ? provider : null;
 };
 
 const getWeb3 = (web3 = window.web3) => {
