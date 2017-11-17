@@ -1,5 +1,5 @@
 import { types } from "../actions/ethereum";
-import { providers } from "./ethereum";
+import { providers, networks } from "./ethereum";
 
 // Note: These items are sorted: NO_PROVIDER is the state before NO_CONNECTION
 // and so on. (Thats why it is named ...Path and not ...States)
@@ -23,11 +23,18 @@ const reducers = {
         ? onboardingPath.NO_CONNECTION
         : onboardingPath.NO_PROVIDER,
   }),
+  setConnection: (state, params) => ({
+    onboardingState:
+      params.network === networks.KOVAN
+        ? onboardingPath.LOCKED_ACCOUNT
+        : onboardingPath.WRONG_NETWORK,
+  }),
   default: state => ({ ...state }),
 };
 
 const mapActionToReducer = {
   [types.SET_PROVIDER]: reducers.setProvider,
+  [types.HAS_CONNECTED]: reducers.setConnection,
 };
 
 export const reducer = (state = initialState, action = {}) => {

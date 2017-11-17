@@ -4,6 +4,7 @@ export const types = {
   NEW_BLOCK: "NEW_BLOCK:ethereum:melon.js",
 };
 
+// Explicitely declare all parameters (no ...args)
 export const creators = {
   setProvider: provider => ({
     type: types.SET_PROVIDER,
@@ -14,13 +15,20 @@ export const creators = {
     isConnected: true,
     network,
   }),
-  newBlock: ({ blockNumber, syncing, account, balance, network }) => ({
-    type: types.NEW_BLOCK,
-    lastUpdate: new Date(),
+  newBlock: ({
     blockNumber,
     syncing,
     account,
     balance,
     network,
+    lastUpdate = new Date(),
+  }) => ({
+    type: types.NEW_BLOCK,
+    blockNumber,
+    syncing,
+    account,
+    balance,
+    network,
+    lastUpdate,
   }),
 };
