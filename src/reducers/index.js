@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 
+import app from "./app";
 import ethereum from "./ethereum";
 import executeRequest from "../legacyComponents/executeRequest/duck";
 import factsheet from "../legacyComponents/factsheet/duck";
@@ -16,6 +17,7 @@ import tradeHelper from "../legacyComponents/tradeHelper/duck";
 import tradingActivity from "../legacyComponents/tradingActivity/duck";
 
 const rootReducer = combineReducers({
+  app,
   ethereum,
   executeRequest,
   factsheet,
