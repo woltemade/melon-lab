@@ -4,7 +4,7 @@ import WrongNetwork from "./WrongNetwork";
 import NoMetamask from "./NoMetamask";
 import LockedAccount from "./LockedAccount";
 import ManagerViewContainer from "../managerView/container";
-import SetupContainer from "../setup/container";
+import SetupContainer from "../../containers/Setup";
 import InvestContainer from "../invest/container";
 import { onboardingPath } from "../../reducers/app";
 

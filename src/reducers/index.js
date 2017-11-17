@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
 
 import app from "./app";
+import fund from "./fund";
+
 import ethereum from "./ethereum";
 import executeRequest from "../legacyComponents/executeRequest/duck";
 import factsheet from "../legacyComponents/factsheet/duck";
@@ -11,7 +13,6 @@ import orderbook from "../legacyComponents/orderbook/duck";
 import participation from "../legacyComponents/participation/duck";
 import recentTrades from "../legacyComponents/recentTrades/duck";
 import settings from "../legacyComponents/settings/duck";
-import setup from "../legacyComponents/setup/duck";
 import trade from "../legacyComponents/trade/duck";
 import tradeHelper from "../legacyComponents/tradeHelper/duck";
 import tradingActivity from "../legacyComponents/tradingActivity/duck";
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   ethereum,
   executeRequest,
   factsheet,
+  fund,
   fundHoldings,
   general,
   invest,
@@ -28,7 +30,6 @@ const rootReducer = combineReducers({
   participation,
   recentTrades,
   settings,
-  setup,
   trade,
   tradeHelper,
   tradingActivity,

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import Setup from "./setup";
-import { creators } from "./duck";
+import Setup from "../components/organisms/Setup";
+import { creators } from "../actions/fund";
 
 const mapStateToProps = state => ({
   ...state.setup,

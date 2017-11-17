@@ -1,5 +1,5 @@
 import { setup, setupFund } from "@melonproject/melon.js";
-import { types, creators } from "./duck";
+import { types, creators } from "../../actions/fund";
 import { creators as generalCreators } from "../general";
 
 const setupMiddleware = store => next => action => {
