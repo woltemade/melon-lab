@@ -53,6 +53,9 @@ function* init() {
     yield put(ethereumCreators.hasConnected(web3.version.network));
 
     const blockChannel = eventChannel(emitter => {
+      // Immediately get infos from the latest block before watching new blocks
+      onBlock(web3).then(data => emitter(data));
+
       const filter = web3.eth.filter("latest", () => {
         onBlock(web3).then(data => emitter(data));
       });

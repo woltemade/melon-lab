@@ -22,8 +22,6 @@ it("Not ready on main net", () => {
   const newState = reducer(oldState);
 
   expectObservedStateToBeUnchanged(oldState, newState);
-  expect(newState.isReadyToVisit).toBe(false);
-  expect(newState.isReadyToTrade).toBe(false);
   expect(newState.networkName).toBe("MAIN");
 });
 
@@ -41,8 +39,6 @@ it("Ready to trade on Kovan with account", () => {
   const newState = reducer(oldState);
 
   expectObservedStateToBeUnchanged(oldState, newState);
-  expect(newState.isReadyToVisit).toBe(true);
-  expect(newState.isReadyToTrade).toBe(true);
   expect(newState.networkName).toBe("KOVAN");
 });
 
@@ -58,8 +54,6 @@ it("Ready to visit", () => {
   const newState = reducer(oldState);
 
   expectObservedStateToBeUnchanged(oldState, newState);
-  expect(newState.isReadyToVisit).toBe(true);
-  expect(newState.isReadyToTrade).toBe(false);
 });
 
 it("Not ready while syncing to trade on Kovan with account", () => {
@@ -76,8 +70,6 @@ it("Not ready while syncing to trade on Kovan with account", () => {
   const newState = reducer(oldState);
 
   expectObservedStateToBeUnchanged(oldState, newState);
-  expect(newState.isReadyToVisit).toBe(false);
-  expect(newState.isReadyToTrade).toBe(false);
 });
 
 it("setProvider", () => {

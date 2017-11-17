@@ -36,24 +36,11 @@ const initialState = {
 
   // derived state
   networkName: null,
-  isReadyToVisit: false,
-  isReadyToTrade: false,
 };
 
+// TODO: Move this to saga
 const isUpToDate = state =>
   new Date() - state.lastUpdate < MAX_BLOCK_TIME_SECONDS * 1000;
-
-const isReadyToVisit = state =>
-  !state.syncing &&
-  state.network === "42" &&
-  state.isConnected &&
-  isUpToDate(state);
-
-const isReadyToTrade = state =>
-  isReadyToVisit(state) &&
-  !!state.account &&
-  state.balance > 0 &&
-  state.blockNumber > 0;
 
 const reducers = {
   merge: (state, params) => ({
@@ -76,8 +63,6 @@ export const reducer = (state = initialState, action = {}) => {
   const newState = matchedReducer(state, params);
 
   const derivedState = {
-    isReadyToVisit: isReadyToVisit(newState),
-    isReadyToTrade: isReadyToTrade(newState),
     networkName: getNetworkName(newState.network),
   };
 
