@@ -15,15 +15,16 @@ it("Not ready on main net", () => {
     lastUpdate: new Date(),
     network: networks.MAIN,
     provider: providers.METAMASK,
+    isConnected: true,
+    syncing: false,
   };
 
   const newState = reducer(oldState);
 
   expectObservedStateToBeUnchanged(oldState, newState);
-
-  expect(newState.isConnected).toBe(true);
   expect(newState.isReadyToVisit).toBe(false);
   expect(newState.isReadyToTrade).toBe(false);
+  expect(newState.networkName).toBe("MAIN");
 });
 
 it("Ready to trade on Kovan with account", () => {
@@ -34,15 +35,15 @@ it("Ready to trade on Kovan with account", () => {
     lastUpdate: new Date(),
     network: networks.KOVAN,
     provider: providers.PARITY,
+    isConnected: true,
   };
 
   const newState = reducer(oldState);
 
   expectObservedStateToBeUnchanged(oldState, newState);
-
-  expect(newState.isConnected).toBe(true);
   expect(newState.isReadyToVisit).toBe(true);
   expect(newState.isReadyToTrade).toBe(true);
+  expect(newState.networkName).toBe("KOVAN");
 });
 
 it("Ready to visit", () => {
@@ -51,13 +52,12 @@ it("Ready to visit", () => {
     lastUpdate: new Date(),
     network: networks.KOVAN,
     provider: providers.HOSTED,
+    isConnected: true,
   };
 
   const newState = reducer(oldState);
 
   expectObservedStateToBeUnchanged(oldState, newState);
-
-  expect(newState.isConnected).toBe(true);
   expect(newState.isReadyToVisit).toBe(true);
   expect(newState.isReadyToTrade).toBe(false);
 });
@@ -76,8 +76,6 @@ it("Not ready while syncing to trade on Kovan with account", () => {
   const newState = reducer(oldState);
 
   expectObservedStateToBeUnchanged(oldState, newState);
-
-  expect(newState.isConnected).toBe(true);
   expect(newState.isReadyToVisit).toBe(false);
   expect(newState.isReadyToTrade).toBe(false);
 });

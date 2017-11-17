@@ -12,8 +12,15 @@ export const providers = {
 };
 
 export const networks = {
-  "42": "Kovan",
-  "1": "Main",
+  KOVAN: "42",
+  MAIN: "1",
+};
+
+const getNetworkName = id => {
+  const networkEntry = Object.entries(networks).find(
+    ([, value]) => id.toString() === value,
+  );
+  return networkEntry ? networkEntry[0] : null;
 };
 
 const initialState = {
@@ -38,7 +45,7 @@ const isUpToDate = state =>
 
 const isReadyToVisit = state =>
   !state.syncing &&
-  state.network === networks.KOVAN &&
+  state.network === "42" &&
   state.isConnected &&
   isUpToDate(state);
 
@@ -71,7 +78,7 @@ export const reducer = (state = initialState, action = {}) => {
   const derivedState = {
     isReadyToVisit: isReadyToVisit(newState),
     isReadyToTrade: isReadyToTrade(newState),
-    networkName: networks[newState.network],
+    networkName: getNetworkName(newState.network),
   };
 
   return {
