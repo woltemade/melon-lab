@@ -22,7 +22,6 @@ const configureStore = preloadedState => {
   const sagaMiddleware = createSagaMiddleware();
 
   const middlewares = applyMiddleware(
-    /*
     setupMiddleware,
     investMiddleware,
     factsheetMiddleware,
@@ -36,7 +35,6 @@ const configureStore = preloadedState => {
     executeRequestMiddleware,
     tradingActivityMiddleware,
     settingsMiddleware,
-    */
     sagaMiddleware,
   );
 

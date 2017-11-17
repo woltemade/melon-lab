@@ -41,8 +41,7 @@ window.addEventListener("load", () => {
 
 ReactDOM.render(
   <Provider store={store}>
-    <div>Hello</div>
-    {/* <AppContainer /> */}
+    <AppContainer />
   </Provider>,
   document.getElementById("root"),
 );
