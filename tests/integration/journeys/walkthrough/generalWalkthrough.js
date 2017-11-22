@@ -2,7 +2,7 @@ import BigNumber from "bignumber.js";
 
 import setup from "../../../../lib/utils/setup";
 import getConfig from "../../../../lib/version/calls/getConfig";
-import trace from "../../../../lib/utils/trace";
+import trace from "../../../../lib/utils/generic/trace";
 import getBalance from "../../../../lib/assets/calls/getBalance";
 import setupFund from "../../../../lib/version/transactions/setupFund";
 import getFundForManager from "../../../../lib/version/calls/getFundForManager";

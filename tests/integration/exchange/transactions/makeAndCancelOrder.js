@@ -1,7 +1,7 @@
 import BigNumber from "bignumber.js";
 
 import setup from "../../../../lib/utils/setup";
-import trace from "../../../../lib/utils/trace";
+import trace from "../../../../lib/utils/generic/trace";
 import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
 import cancelOrder from "../../../../lib/exchange/transactions/cancelOrder";
 import getOrder from "../../../../lib/exchange/calls/getOrder";
