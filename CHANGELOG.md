@@ -14,6 +14,7 @@ and this project adheres to
 
 ### Added
 
+* getWeb3 functionality
 * onBlock function to query some status everyblock
 * .eslintignore file instead of --ignore-path --> Ignores docs/
 * Documentation.js build command: `npm run docs`
