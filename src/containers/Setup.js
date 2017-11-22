@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Setup from "../components/organisms/Setup";
-import { creators } from "../actions/fund";
+import { actions } from "../actions/fund";
 
 const mapStateToProps = state => ({
   ...state.setup,
@@ -8,10 +8,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onCreate: () => {
-    dispatch(creators.create());
+    dispatch(actions.create());
   },
   onChange: event => {
-    dispatch(creators.change({ [event.target.name]: event.target.value }));
+    dispatch(actions.change({ [event.target.name]: event.target.value }));
   },
 });
 

@@ -9,7 +9,7 @@ export const onboardingPath = {
   WRONG_NETWORK: "Wrong network",
   LOCKED_ACCOUNT: "Locked account",
   INSUFFICENT_ETH: "Insufficent ETH",
-  INSUFFICENT_MLN: "Insufficent MLN ",
+  INSUFFICENT_MLN: "Insufficent MLN",
   NO_FUND_CREATED: "No fund created ",
   NOT_INVESTED_IN_OWN_FUND: "Not invested in own fund",
   NOT_TRADED_YET: "Not traded yet",

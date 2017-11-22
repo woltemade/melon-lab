@@ -65,12 +65,10 @@ Here is a quick overview and description of the subfolders of `/src`:
 The main entry point is here: `index.js`
 
 ### `/actions`
-[Redux actions](https://redux.js.org/docs/basics/Actions.html) and creators. 
-We strive to write reactive actions, not imperative:
+[Redux actions](https://redux.js.org/docs/basics/Actions.html) and creators. Each file exports `{ types, actions }`.
 
-> In imperative style, the store is given “what to do,” e.g. SHOW_MESSAGE_BOX or SHOW_ERROR
-> In reactive style, the store is given “a fact of what happened,” e.g. DATA_FETCHING_FAILED or USER_ENTERED_INVALID_THING_ID. The store reacts accordingly.
-[dtinth in a comment on redux best practices](https://github.com/reactjs/redux/issues/1171#issuecomment-167714850)
+As a rule of thumb, we write imperative actions for user interactions: E.g. `SHOW_MESSAGE_BOX` or `SHOW_ERROR`.
+And reactive actions for blockchain observations: `HAS_CONNECTED`, `NEW_BLOCK`, ...
 
 ### `/components`
 Stateless, functional components.

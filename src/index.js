@@ -9,12 +9,12 @@ import registerServiceWorker from "./registerServiceWorker";
 import { creators as orderbookCreators } from "./legacyComponents/orderbook/duck";
 import { creators as fundHoldingsCreators } from "./legacyComponents/fundHoldings/duck";
 
-import { creators } from "./actions/browser";
+import { actions } from "./actions/browser";
 
 export const store = configureStore();
 
 window.addEventListener("load", () => {
-  store.dispatch(creators.loaded());
+  store.dispatch(actions.loaded());
   /*
   // TODO: Refactor this ino own saga
   const tracker = melonTracker.on("DataUpdated", "LogItemUpdate");

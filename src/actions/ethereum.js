@@ -5,7 +5,7 @@ export const types = {
 };
 
 // Explicitely declare all parameters (no ...args)
-export const creators = {
+export const actions = {
   setProvider: provider => ({
     type: types.SET_PROVIDER,
     provider,

@@ -2,7 +2,7 @@ export const types = {
   LOADED: "LOADED:browser:ipfs-frontend",
 };
 
-export const creators = {
+export const actions = {
   loaded: () => ({
     type: types.LOADED,
   }),

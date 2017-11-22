@@ -1,5 +1,5 @@
 import { setup, setupFund } from "@melonproject/melon.js";
-import { types, creators } from "../../actions/fund";
+import { types, actions } from "../../actions/fund";
 import { creators as generalCreators } from "../general";
 
 const setupMiddleware = store => next => action => {
@@ -13,7 +13,7 @@ const setupMiddleware = store => next => action => {
         .then(response => {
           console.log("Fund successfully created : ", response);
           store.dispatch(
-            creators.change({
+            actions.change({
               fundAddress: response.address,
               fundOwner: setup.web3.eth.accounts[0],
               loading: false,

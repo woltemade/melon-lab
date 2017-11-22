@@ -6,7 +6,7 @@ import { eventChannel } from "redux-saga";
 import { setup } from "@melonproject/melon.js";
 
 import { types as browserTypes } from "../actions/browser";
-import { creators as ethereumCreators } from "../actions/ethereum";
+import { actions as ethereumActions } from "../actions/ethereum";
 
 import getWeb3 from "../utils/getWeb3";
 
@@ -47,10 +47,10 @@ function* init() {
     daemonAddress: "0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd",
   });
 
-  yield put(ethereumCreators.setProvider(provider));
+  yield put(ethereumActions.setProvider(provider));
 
   if (web3.currentProvider.isConnected()) {
-    yield put(ethereumCreators.hasConnected(web3.version.network));
+    yield put(ethereumActions.hasConnected(web3.version.network));
 
     const blockChannel = eventChannel(emitter => {
       // Immediately get infos from the latest block before watching new blocks
@@ -70,7 +70,7 @@ function* init() {
       if (!data) {
         break;
       }
-      yield put(ethereumCreators.newBlock(data));
+      yield put(ethereumActions.newBlock(data));
     }
   }
 }

@@ -3,7 +3,7 @@ export const types = {
   CHANGE: "CHANGE:setup:melon.network",
 };
 
-export const creators = {
+export const actions = {
   create: () => ({
     type: types.CREATE,
   }),
