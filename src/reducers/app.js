@@ -1,5 +1,5 @@
+import { providers, networks } from "@melonproject/melon.js";
 import { types } from "../actions/ethereum";
-import { providers, networks } from "./ethereum";
 
 // Note: These items are sorted: NO_PROVIDER is the state before NO_CONNECTION
 // and so on. (Thats why it is named ...Path and not ...States)

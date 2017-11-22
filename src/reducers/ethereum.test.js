@@ -1,4 +1,5 @@
-import { providers, networks, reducer } from "./ethereum";
+import { providers, networks } from "@melonproject/melon.js";
+import { reducer } from "./ethereum";
 import { creators } from "../actions/ethereum";
 
 const expectObservedStateToBeUnchanged = (oldState, newState) => {

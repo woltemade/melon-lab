@@ -1,27 +1,7 @@
+import { providers, getNetworkName } from "@melonproject/melon.js";
 import { types } from "../actions/ethereum";
 
 const MAX_BLOCK_TIME_SECONDS = 14;
-
-export const providers = {
-  PARITY: "Personal Parity",
-  METAMASK: "MetaMask",
-  INJECTED: "Unknown Injected",
-  LOCAL: "Other local node",
-  HOSTED: "Hosted by us",
-  NONE: "No provider found",
-};
-
-export const networks = {
-  KOVAN: "42",
-  MAIN: "1",
-};
-
-const getNetworkName = id => {
-  const networkEntry = Object.entries(networks).find(
-    ([, value]) => id.toString() === value,
-  );
-  return networkEntry ? networkEntry[0] : null;
-};
 
 const initialState = {
   // observed state
