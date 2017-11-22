@@ -12,8 +12,13 @@ import waitForTransactionReceipt from "../../../../lib/utils/waitForTransactionR
 import gasBoost from "../../../../lib/utils/gasBoost";
 // import getConfig from "../../../../lib/version/calls/getConfig";
 // import trace from "../../../../lib/utils/trace";
-// import getBalance from "../../../../lib/assets/calls/getBalance";
+import getBalance from "../../../../lib/assets/calls/getBalance";
+import approve from "../../../../lib/assets/transactions/approve";
+
 import setupFund from "../../../../lib/version/transactions/setupFund";
+import getSimpleMarketContract from "../../../../lib/exchange/contracts/getSimpleMarketContract";
+import getDataFeedContract from "../../../../lib/datafeeds/contracts/getDataFeedContract";
+
 // import getFundForManager from "../../../../lib/version/calls/getFundForManager";
 // import getParticipation from "../../../../lib/participation/calls/getParticipation";
 // import subscribe from "../../../../lib/participation/transactions/subscribe";
@@ -46,16 +51,34 @@ fit(
 
     const api = new Api(setup.provider);
 
+    // const exchangeContract = await getSimpleMarketContract();
+    // const datafeedContract = await getDataFeedContract();
+    // console.log(datafeedContract._events);
+    // const watch = datafeedContract._events[0].subscribe({}, r =>
+    //   console.log(r),
+    // );
+
+    // watch();
+
     // 1 - instantiate wallet
     const jsonWallet = JSON.stringify(encryptedWallet);
     const wallet = await Wallet.Wallet.fromEncryptedWallet(
       jsonWallet,
       password.kovan,
     );
-
+    setup.wallet = wallet;
     const receipt = await setupFund("MYFUND", wallet);
     console.log("Setup fund returns :  ", receipt);
 
+    const balance = await getBalance("MLN-T");
+    console.log(balance);
+
+    const approved = await approve(
+      "MLN-T",
+      "0xeE2BB8598725445B532BDb14F522A99E04e84B38",
+      10,
+      wallet,
+    );
     // -----LEGACY
     // expect(setup.web3.eth.syncing).toBeFalsy();
 
