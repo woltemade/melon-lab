@@ -81,6 +81,10 @@ const reducers = {
     ...state,
     transactionInProgress: false,
   }),
+  setupSucceeded: state => ({
+    ...state,
+    onboardingState: onboardingPath.NOT_INVESTED_IN_OWN_FUND,
+  }),
   default: state => ({ ...state }),
 };
 
@@ -89,7 +93,7 @@ const mapActionToReducer = {
   [ethereumTypes.HAS_CONNECTED]: reducers.setConnection,
   [ethereumTypes.NEW_BLOCK]: reducers.newBlock,
   [fundTypes.SETUP_REQUESTED]: reducers.transactionStarted,
-  [fundTypes.SETUP_SUCCEEDED]: reducers.transactionFinished,
+  [fundTypes.SETUP_SUCCEEDED]: reducers.setupSucceeded,
   [fundTypes.SETUP_FAILED]: reducers.transactionFinished,
 };
 

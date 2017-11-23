@@ -9,12 +9,13 @@ export const actions = {
     type: types.SETUP_REQUESTED,
     name,
   }),
-  setupSucceeded: ({ id, address, name, timestamp }) => ({
+  setupSucceeded: ({ id, address, name, timestamp, owner }) => ({
     type: types.SETUP_SUCCEEDED,
     id,
     address,
     name,
     timestamp,
+    owner,
   }),
   setupFailed: ({ reason }) => ({
     type: types.SETUP_FAILED,

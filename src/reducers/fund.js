@@ -1,12 +1,13 @@
 import { types } from "../actions/fund";
 
 export const initialState = {
+  id: 0,
   name: "-",
   managementFee: 0,
   performanceFee: 0,
-  fundAddress: "",
-  fundOwner: "",
-  loading: false,
+  address: "",
+  owner: "",
+  timestamp: 0,
 };
 
 const reducers = {
@@ -14,16 +15,11 @@ const reducers = {
     ...state,
     ...params,
   }),
-  loading: state => ({
-    ...state,
-    loading: true,
-  }),
   default: state => ({ ...state }),
 };
 
 const mapActionToReducer = {
-  [types.CHANGE]: reducers.merge,
-  [types.CREATE]: reducers.loading,
+  [types.SETUP_SUCCEEDED]: reducers.merge,
 };
 
 export const reducer = (state = initialState, action) => {
