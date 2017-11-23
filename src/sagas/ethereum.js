@@ -5,7 +5,7 @@ import { setup, onBlock, getWeb3 } from "@melonproject/melon.js";
 import { types as browserTypes } from "../actions/browser";
 import { actions as ethereumActions } from "../actions/ethereum";
 
-const MAX_BLOCK_TIME = 14 * 1000;
+const MAX_BLOCK_TIME = 20 * 1000;
 
 function* init() {
   const { web3, provider } = getWeb3(window.web3);
@@ -44,6 +44,7 @@ function* init() {
 
     while (true) {
       const data = yield take(blockChannel);
+
       if (data.onBlock) {
         yield put(ethereumActions.newBlock(data.onBlock));
       } else {
