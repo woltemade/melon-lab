@@ -85,7 +85,7 @@
     "walk": "^2.3.9"
   },
   "dependencies": {
-    "@melonproject/protocol": "0.4.0",
+    "@melonproject/protocol": "^0.4.1",
     "@parity/api": "^2.1.5",
     "bignumber.js": "^4.0.2",
     "ethers-wallet": "^2.1.4",
