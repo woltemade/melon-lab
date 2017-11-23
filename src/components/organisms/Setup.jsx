@@ -1,11 +1,17 @@
 import React from "react";
+import { Field } from "redux-form";
 import { List, Input, Button, Card } from "semantic-ui-react";
 
-const Setup = props => (
-  <div>
+const renderInput = ({ input }) => (
+  <Input {...input} placeholder="Fund Name" style={{ width: "100%" }} />
+);
+
+// Explicitely decompose props here.
+const Setup = ({ loading, name, handleSubmit }) => (
+  <form onSubmit={handleSubmit}>
     <Card centered>
       <Card.Content>
-        <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
+        <div className={`ui ${loading ? "active" : ""} inverted dimmer`}>
           <div className="ui text loader">
             Deploying your fund to the Ethereum blockchain
           </div>
@@ -34,22 +40,17 @@ const Setup = props => (
         <List>
           <List.Item as="a">
             <List.Content>
-              <Input
-                name="name"
-                placeholder={props.name}
-                onChange={props.onChange}
-                style={{ width: "100%" }}
-              />
+              <Field name="name" component={renderInput} />
             </List.Content>
           </List.Item>
           <br />
           <h4>Melon Default Configuration:</h4>
 
           <List.Item>
-            <List.Content>Performance fee: {props.performanceFee}</List.Content>
+            <List.Content>Performance fee: 0%</List.Content>
           </List.Item>
           <List.Item>
-            <List.Content>Management fee: {props.managementFee}</List.Content>
+            <List.Content>Management fee: 0%</List.Content>
           </List.Item>
 
           <List.Item
@@ -78,7 +79,7 @@ const Setup = props => (
               registered)
             </List.Content>
           </List.Item>
-          <List.Item as="a">
+          <List.Item>
             <List.Content
               href="https://github.com/melonproject/protocol/blob/0.3.8-alpha.5/contracts/participation/Participation.sol"
               target="_blank"
@@ -96,17 +97,12 @@ const Setup = props => (
           </List.Item>
         </List>
 
-        <Button
-          basic
-          color="black"
-          onClick={props.onCreate}
-          style={{ width: "100%" }}
-        >
+        <Button basic color="black" style={{ width: "100%" }}>
           Create and deploy my fund!
         </Button>
       </Card.Content>
     </Card>
-  </div>
+  </form>
 );
 
 export default Setup;

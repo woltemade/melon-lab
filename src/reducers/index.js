@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { reducer as form } from "redux-form";
 
 import app from "./app";
 import fund from "./fund";
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   ethereum,
   executeRequest,
   factsheet,
+  form,
   fund,
   fundHoldings,
   general,
