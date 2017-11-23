@@ -19,7 +19,7 @@ const mapDispatchToProps = dispatch => ({
 */
 
 const onSubmit = (values, dispatch) => {
-  dispatch(actions.requestSetup(values.name));
+  dispatch(actions.setupRequested(values.name));
 };
 
 const SetupContainer = reduxForm({

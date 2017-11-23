@@ -38,7 +38,7 @@ const Setup = ({ loading, name, handleSubmit }) => (
         <Card.Header>Setup your fund</Card.Header>
 
         <List>
-          <List.Item as="a">
+          <List.Item>
             <List.Content>
               <Field name="name" component={renderInput} />
             </List.Content>

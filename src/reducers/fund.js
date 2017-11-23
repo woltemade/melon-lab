@@ -1,9 +1,9 @@
 import { types } from "../actions/fund";
 
 export const initialState = {
-  name: "Fund Name",
-  managementFee: "0%",
-  performanceFee: "0%",
+  name: "-",
+  managementFee: 0,
+  performanceFee: 0,
   fundAddress: "",
   fundOwner: "",
   loading: false,

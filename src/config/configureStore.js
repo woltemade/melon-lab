@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import createSagaMiddleware from "redux-saga";
 
 import generalMiddleware from "../legacyComponents/generalMiddleware";
-import setupMiddleware from "../legacyComponents/setup/middleware";
+// import setupMiddleware from "../legacyComponents/setup/middleware";
 import investMiddleware from "../legacyComponents/invest/middleware";
 import factsheetMiddleware from "../legacyComponents/factsheet/middleware";
 import fundHoldingsMiddleware from "../legacyComponents/fundHoldings/middleware";
@@ -22,7 +22,7 @@ const configureStore = preloadedState => {
   const sagaMiddleware = createSagaMiddleware();
 
   const middlewares = applyMiddleware(
-    setupMiddleware,
+    // setupMiddleware,
     investMiddleware,
     factsheetMiddleware,
     fundHoldingsMiddleware,
