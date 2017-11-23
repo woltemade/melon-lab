@@ -8,7 +8,8 @@ function* createFund({ name }) {
     const fund = yield call(setupFund, name);
     yield put(actions.setupSucceeded(fund));
   } catch (err) {
-    yield put(actions.setupFailed());
+    console.error(err);
+    yield put(actions.setupFailed(err));
   }
 }
 

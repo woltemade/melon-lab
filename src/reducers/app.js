@@ -1,5 +1,6 @@
 import { providers, networks } from "@melonproject/melon.js";
-import { types } from "../actions/ethereum";
+import { types as ethereumTypes } from "../actions/ethereum";
+import { types as fundTypes } from "../actions/fund";
 
 // Note: These items are sorted: NO_PROVIDER is the state before NO_CONNECTION
 // and so on. (Thats why it is named ...Path and not ...States)
@@ -21,6 +22,7 @@ const initialState = {
   isConnected: false,
   isReadyToVisit: false,
   isReadyToInteract: false,
+  transactionInProgress: false,
 };
 
 const isReadyToVisit = ({ network }) => network === "42";
@@ -40,12 +42,14 @@ const isReadyToInteract = ({
 
 const reducers = {
   setProvider: (state, params) => ({
+    ...state,
     onboardingState:
       params.provider !== providers.NONE
         ? onboardingPath.NO_CONNECTION
         : onboardingPath.NO_PROVIDER,
   }),
   setConnection: (state, params) => ({
+    ...state,
     onboardingState:
       params.network === networks.KOVAN
         ? onboardingPath.LOCKED_ACCOUNT
@@ -53,6 +57,7 @@ const reducers = {
   }),
   newBlock: (state, params) => {
     const newState = {
+      ...state,
       isConnected: true,
       isReadyToVisit: isReadyToVisit(params),
       isReadyToInteract: isReadyToInteract(params),
@@ -68,13 +73,24 @@ const reducers = {
 
     return { ...newState, onboardingState: onboardingPath.INSUFFICENT_MLN };
   },
+  transactionStarted: state => ({
+    ...state,
+    transactionInProgress: true,
+  }),
+  transactionFinished: state => ({
+    ...state,
+    transactionInProgress: false,
+  }),
   default: state => ({ ...state }),
 };
 
 const mapActionToReducer = {
-  [types.SET_PROVIDER]: reducers.setProvider,
-  [types.HAS_CONNECTED]: reducers.setConnection,
-  [types.NEW_BLOCK]: reducers.newBlock,
+  [ethereumTypes.SET_PROVIDER]: reducers.setProvider,
+  [ethereumTypes.HAS_CONNECTED]: reducers.setConnection,
+  [ethereumTypes.NEW_BLOCK]: reducers.newBlock,
+  [fundTypes.SETUP_REQUESTED]: reducers.transactionStarted,
+  [fundTypes.SETUP_SUCCEEDED]: reducers.transactionFinished,
+  [fundTypes.SETUP_FAILED]: reducers.transactionFinished,
 };
 
 export const reducer = (state = initialState, action = {}) => {

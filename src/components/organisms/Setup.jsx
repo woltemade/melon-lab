@@ -7,7 +7,7 @@ const renderInput = ({ input }) => (
 );
 
 // Explicitely decompose props here.
-const Setup = ({ loading, name, handleSubmit }) => (
+const Setup = ({ loading, handleSubmit }) => (
   <form onSubmit={handleSubmit}>
     <Card centered>
       <Card.Content>

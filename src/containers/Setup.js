@@ -3,28 +3,19 @@ import { reduxForm } from "redux-form";
 import Setup from "../components/organisms/Setup";
 import { actions } from "../actions/fund";
 
-/*
 const mapStateToProps = state => ({
-  ...state.setup,
+  loading: state.app.transactionInProgress,
 });
-
-const mapDispatchToProps = dispatch => ({
-  onCreate: () => {
-    dispatch(actions.create());
-  },
-  onChange: event => {
-    dispatch(actions.change({ [event.target.name]: event.target.value }));
-  },
-});
-*/
 
 const onSubmit = (values, dispatch) => {
   dispatch(actions.setupRequested(values.name));
 };
 
-const SetupContainer = reduxForm({
+const SetupRedux = connect(mapStateToProps)(Setup);
+
+const SetupForm = reduxForm({
   form: "setup",
   onSubmit,
-})(Setup);
+})(SetupRedux);
 
-export default SetupContainer;
+export default SetupForm;
