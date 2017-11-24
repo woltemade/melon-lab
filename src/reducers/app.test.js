@@ -22,6 +22,8 @@ it("Set wrong network: Main", () => {
 
 it("New block: Ready to transact", () => {
   const initialState = reducer();
+  initialState.onboardingState = onboardingPath.NO_FUND_CREATED;
+
   const newState = reducer(
     initialState,
     actions.newBlock({
@@ -34,7 +36,7 @@ it("New block: Ready to transact", () => {
   );
   expect(newState.isReadyToVisit).toBe(true);
   expect(newState.isReadyToInteract).toBe(true);
-  expect(newState.onboardingState).toBe(onboardingPath.INSUFFICENT_MLN);
+  expect(newState.onboardingState).toBe(onboardingPath.NO_FUND_CREATED);
 });
 
 it("New block: Out of ETH", () => {
@@ -99,5 +101,5 @@ it("New block: Syncing", () => {
   );
   expect(newState.isReadyToVisit).toBe(true);
   expect(newState.isReadyToInteract).toBe(false);
-  expect(newState.onboardingState).toBe(onboardingPath.INSUFFICENT_MLN);
+  expect(newState.onboardingState).toBe(onboardingPath.NO_FUND_CREATED);
 });

@@ -1,4 +1,6 @@
+import { partial } from "ramda";
 import { providers, networks } from "@melonproject/melon.js";
+import isBefore from "../utils/isBefore";
 import { types as ethereumTypes } from "../actions/ethereum";
 import { types as fundTypes } from "../actions/fund";
 
@@ -16,6 +18,8 @@ export const onboardingPath = {
   NOT_TRADED_YET: "Not traded yet",
   ONBOARDED: "Onboarded",
 };
+
+const isBeforeInPath = partial(isBefore, [Object.values(onboardingPath)]);
 
 const initialState = {
   onboardingState: onboardingPath.NO_PROVIDER,
@@ -69,9 +73,13 @@ const reducers = {
       return { ...newState, onboardingState: onboardingPath.LOCKED_ACCOUNT };
     } else if (parseInt(params.balance || 0, 10) <= 0) {
       return { ...newState, onboardingState: onboardingPath.INSUFFICENT_ETH };
+    } else if (
+      isBeforeInPath(newState.onboardingState, onboardingPath.NO_FUND_CREATED)
+    ) {
+      return { ...newState, onboardingState: onboardingPath.NO_FUND_CREATED };
     }
 
-    return { ...newState, onboardingState: onboardingPath.INSUFFICENT_MLN };
+    return { ...newState };
   },
   transactionStarted: state => ({
     ...state,
@@ -83,6 +91,7 @@ const reducers = {
   }),
   setupSucceeded: state => ({
     ...state,
+    transactionInProgress: false,
     onboardingState: onboardingPath.NOT_INVESTED_IN_OWN_FUND,
   }),
   default: state => ({ ...state }),
