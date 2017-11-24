@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "semantic-ui-react";
 
-const LockedAccount = props => (
+const LockedAccount = () => (
   <div>
     <Card centered>
       <Card.Content>
