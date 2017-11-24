@@ -8,6 +8,7 @@ import { actions as ethereumActions } from "../actions/ethereum";
 const MAX_BLOCK_TIME = 20 * 1000;
 
 function* init() {
+  let currentAccount;
   const { web3, provider } = getWeb3(window.web3);
 
   setup.init({
@@ -47,6 +48,11 @@ function* init() {
 
       if (data.onBlock) {
         yield put(ethereumActions.newBlock(data.onBlock));
+
+        if (currentAccount !== data.onBlock.account) {
+          yield put(ethereumActions.accountChanged(data.onBlock.account));
+          currentAccount = data.onBlock.account;
+        }
       } else {
         yield put(ethereumActions.blockOverdue());
       }

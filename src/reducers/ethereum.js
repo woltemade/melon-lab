@@ -26,10 +26,11 @@ const reducers = {
 };
 
 const mapActionToReducer = {
-  [types.SET_PROVIDER]: reducers.merge,
+  [types.ACCOUNT_CHANGED]: reducers.merge,
+  [types.BLOCK_OVERDUE]: reducers.merge,
   [types.HAS_CONNECTED]: reducers.merge,
   [types.NEW_BLOCK]: reducers.merge,
-  [types.BLOCK_OVERDUE]: reducers.merge,
+  [types.SET_PROVIDER]: reducers.merge,
 };
 
 export const reducer = (state = initialState, action = {}) => {
