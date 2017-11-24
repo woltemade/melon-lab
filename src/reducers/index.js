@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { reducer as form } from "redux-form";
+import { routerReducer as router } from "react-router-redux";
 
 import app from "./app";
 import fund from "./fund";
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   orderbook,
   participation,
   recentTrades,
+  router,
   settings,
   trade,
   tradeHelper,

@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import { ConnectedRouter } from "react-router-redux";
 
 import "./index.css";
-import configureStore from "./config/configureStore";
+import { configureStore, history } from "./config/configureStore";
 import AppContainer from "./containers/App";
 import registerServiceWorker from "./registerServiceWorker";
 import { creators as orderbookCreators } from "./legacyComponents/orderbook/duck";
@@ -41,7 +42,9 @@ window.addEventListener("load", () => {
 
 ReactDOM.render(
   <Provider store={store}>
-    <AppContainer />
+    <ConnectedRouter history={history}>
+      <AppContainer />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById("root"),
 );
