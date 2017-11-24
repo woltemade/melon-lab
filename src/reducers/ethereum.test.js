@@ -1,6 +1,6 @@
 import { providers, networks } from "@melonproject/melon.js";
 import { reducer } from "./ethereum";
-import { creators } from "../actions/ethereum";
+import { actions } from "../actions/ethereum";
 
 const expectObservedStateToBeUnchanged = (oldState, newState) => {
   Object.entries(oldState).map(([key, value]) =>
@@ -75,7 +75,7 @@ it("Not ready while syncing to trade on Kovan with account", () => {
 
 it("setProvider", () => {
   const initialState = reducer();
-  const action = creators.setProvider(providers.PARITY);
+  const action = actions.setProvider(providers.PARITY);
   const newState = reducer(initialState, action);
 
   expect(newState.provider).toBe(providers.PARITY);
