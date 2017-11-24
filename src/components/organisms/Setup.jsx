@@ -16,7 +16,6 @@ const Setup = ({ loading, handleSubmit }) => (
             Deploying your fund to the Ethereum blockchain
           </div>
         </div>
-        <p>Welcome to the future of investment funds</p>
 
         <br />
         <Card.Header>Setup your fund</Card.Header>

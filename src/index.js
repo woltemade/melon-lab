@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 
 import "./index.css";
 import configureStore from "./config/configureStore";
-import AppContainer from "./legacyComponents/app/container";
+import AppContainer from "./containers/App";
 import registerServiceWorker from "./registerServiceWorker";
 import { creators as orderbookCreators } from "./legacyComponents/orderbook/duck";
 import { creators as fundHoldingsCreators } from "./legacyComponents/fundHoldings/duck";
