@@ -4,7 +4,8 @@ import { types } from "../actions/ethereum";
 const initialState = {
   // observed state
   account: null,
-  balance: null,
+  ethBalance: "0",
+  mlnBalance: "0",
   blockNumber: 0,
   lastUpdate: null,
   network: 0,

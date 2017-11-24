@@ -36,12 +36,12 @@ const isReadyToInteract = ({
   syncing,
   network,
   account,
-  balance,
+  ethBalance,
 }) =>
   isReadyToVisit({ syncing, network }) &&
   !syncing &&
   !!account &&
-  parseInt(balance, 10) > 0 &&
+  ethBalance.gt(0) &&
   blockNumber > 0;
 
 const reducers = {
@@ -71,8 +71,10 @@ const reducers = {
       return { ...newState, onboardingState: onboardingPath.WRONG_NETWORK };
     } else if (!params.account) {
       return { ...newState, onboardingState: onboardingPath.LOCKED_ACCOUNT };
-    } else if (parseInt(params.balance || 0, 10) <= 0) {
+    } else if (params.ethBalance.lte(0)) {
       return { ...newState, onboardingState: onboardingPath.INSUFFICENT_ETH };
+    } else if (params.mlnBalance.lte(0)) {
+      return { ...newState, onboardingState: onboardingPath.INSUFFICENT_MLN };
     } else if (
       isBeforeInPath(newState.onboardingState, onboardingPath.NO_FUND_CREATED)
     ) {

@@ -3,6 +3,7 @@ import { Image, Container } from "semantic-ui-react";
 import WrongNetwork from "./WrongNetwork";
 import NoMetamask from "./NoMetamask";
 import LockedAccount from "./LockedAccount";
+import InsufficentFunds from "./InsufficentFunds";
 import ManagerViewContainer from "../managerView/container";
 import SetupContainer from "../../containers/Setup";
 import InvestContainer from "../invest/container";
@@ -13,8 +14,8 @@ const mapOnboardingStateToMainContainer = {
   [onboardingPath.NO_CONNECTION]: <NoMetamask />,
   [onboardingPath.WRONG_NETWORK]: <WrongNetwork />,
   [onboardingPath.LOCKED_ACCOUNT]: <LockedAccount />,
-  [onboardingPath.INSUFFICENT_ETH]: <SetupContainer />,
-  [onboardingPath.INSUFFICENT_MLN]: <SetupContainer />,
+  [onboardingPath.INSUFFICENT_ETH]: <InsufficentFunds />,
+  [onboardingPath.INSUFFICENT_MLN]: <InsufficentFunds />,
   [onboardingPath.NO_FUND_CREATED]: <SetupContainer />,
   [onboardingPath.NOT_INVESTED_IN_OWN_FUND]: <InvestContainer />,
   [onboardingPath.NOT_TRADED_YET]: <ManagerViewContainer />,

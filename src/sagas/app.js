@@ -21,39 +21,43 @@ import { creators as tradingActivityCreators } from "../legacyComponents/trading
 
 function* loadAccount({ account }) {
   const address = yield call(getFundForManager, account);
-  const fundInfo = yield call(getFundInformations, address);
-  const calculations = yield call(performCalculations, address);
 
-  yield put(
-    fundActions.fundLoaded({
-      address: fundInfo.fundAddress,
-      owner: account,
-      name: fundInfo.name,
-      ...serialize(calculations),
-    }),
-  );
+  if (address) {
+    const fundInfo = yield call(getFundInformations, address);
+    const calculations = yield call(performCalculations, address);
 
-  // TODO: These are legacy dispatches, refactor them to the
-  // new saga architecture
-  const mode = calculations.totalSupply.gt(0) ? "Manage" : "Invest";
+    yield put(
+      fundActions.fundLoaded({
+        address: fundInfo.fundAddress,
+        owner: account,
+        name: fundInfo.name,
+        ...calculations,
+      }),
+    );
 
-  yield put(
-    generalCreators.update({
-      mode,
-      fundAddress: fundInfo.fundAddress,
-      fundName: fundInfo.name,
-    }),
-  );
+    // TODO: These are legacy dispatches, refactor them to the
+    // new saga architecture
+    const mode = calculations.totalSupply.gt(0) ? "Manage" : "Invest";
 
-  yield put(factsheetCreators.requestInformations());
-  yield put(fundHoldingsCreators.requestHoldings());
-  yield put(fundHoldingsCreators.requestPrices());
-  yield put(orderbookCreators.requestOrderbook("BTC-T/MLN-T"));
-  yield put(participationCreators.request_price());
-  yield put(recentTradesCreators.requestRecentTrades("BTC-T/MLN-T"));
-  yield put(settingsCreators.requestSettings());
-  yield put(tradeHelperCreators.request("BTC-T/MLN-T"));
-  yield put(tradingActivityCreators.requestFundRecentTrades());
+    yield put(
+      generalCreators.update({
+        mode,
+        fundAddress: fundInfo.fundAddress,
+        fundName: fundInfo.name,
+      }),
+    );
+
+    // Also legacy : REMOVE!
+    yield put(factsheetCreators.requestInformations());
+    yield put(fundHoldingsCreators.requestHoldings());
+    yield put(fundHoldingsCreators.requestPrices());
+    yield put(orderbookCreators.requestOrderbook("BTC-T/MLN-T"));
+    yield put(participationCreators.request_price());
+    yield put(recentTradesCreators.requestRecentTrades("BTC-T/MLN-T"));
+    yield put(settingsCreators.requestSettings());
+    yield put(tradeHelperCreators.request("BTC-T/MLN-T"));
+    yield put(tradingActivityCreators.requestFundRecentTrades());
+  }
 }
 
 function* app() {

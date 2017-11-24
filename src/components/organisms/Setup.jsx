@@ -17,23 +17,7 @@ const Setup = ({ loading, handleSubmit }) => (
           </div>
         </div>
         <p>Welcome to the future of investment funds</p>
-        <p className="App-intro">
-          To get started, head to our{" "}
-          <strong>
-            <a
-              href="http://faucet.melon.network"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              faucet
-            </a>
-          </strong>{" "}
-          to receive Kovan Ether and Kovan Melon
-        </p>
-        <p className="App-intro">
-          Once you have received k-ETH and k-MLN, go ahead and create your Melon
-          fund.
-        </p>
+
         <br />
         <Card.Header>Setup your fund</Card.Header>
 
