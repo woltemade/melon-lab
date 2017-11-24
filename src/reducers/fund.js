@@ -8,6 +8,13 @@ export const initialState = {
   address: "",
   owner: "",
   timestamp: 0,
+  gav: "0",
+  managementReward: "0",
+  performanceReward: "0",
+  unclaimedRewards: "0",
+  nav: "0",
+  sharePrice: "0",
+  totalSupply: "0",
 };
 
 const reducers = {
@@ -20,6 +27,7 @@ const reducers = {
 
 const mapActionToReducer = {
   [types.SETUP_SUCCEEDED]: reducers.merge,
+  [types.FUND_LOADED]: reducers.merge,
 };
 
 export const reducer = (state = initialState, action) => {

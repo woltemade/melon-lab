@@ -4,18 +4,20 @@ import { types, creators } from "./duck";
 import { creators as generalCreators } from "../general";
 import { creators as factsheetCreators } from "../factsheet/duck";
 import { creators as fundHoldingsCreators } from "../fundHoldings/duck";
+import { actions as ethereumActions } from "../../actions/ethereum";
 
 const investMiddleware = store => next => action => {
   const { type, ...params } = action;
 
-  const currentState = store.getState().invest;
+  const currentState = store.getState();
+  const investState = currentState.invest;
 
   switch (type) {
     case types.INVEST: {
       subscribe(
         store.getState().general.fundAddress,
-        new BigNumber(currentState.amount),
-        new BigNumber(currentState.total),
+        new BigNumber(investState.amount),
+        new BigNumber(investState.total),
         new BigNumber(0.1),
         setup.web3.eth.accounts[0],
       )
@@ -30,6 +32,11 @@ const investMiddleware = store => next => action => {
           store.dispatch(generalCreators.update({ mode: "Manage" }));
           store.dispatch(factsheetCreators.requestInformations());
           store.dispatch(fundHoldingsCreators.requestHoldings());
+
+          // HACK: Retrigger accountChanged to refresh new onboarding state
+          store.dispatch(
+            ethereumActions.accountChanged(currentState.ethereum.account),
+          );
         })
         .catch(err => {
           throw err;
@@ -42,7 +49,7 @@ const investMiddleware = store => next => action => {
       let total;
 
       if (params.amount) {
-        total = params.amount * currentState.price;
+        total = params.amount * investState.price;
         store.dispatch(
           creators.update({
             amount: params.amount.toString(10),
@@ -50,7 +57,7 @@ const investMiddleware = store => next => action => {
           }),
         );
       } else if (params.total) {
-        amount = params.total / currentState.price;
+        amount = params.total / investState.price;
         store.dispatch(
           creators.update({
             amount: amount.toString(10),

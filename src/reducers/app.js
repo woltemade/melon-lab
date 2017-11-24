@@ -94,6 +94,13 @@ const reducers = {
     transactionInProgress: false,
     onboardingState: onboardingPath.NOT_INVESTED_IN_OWN_FUND,
   }),
+  fundLoaded: (state, params) => ({
+    ...state,
+    onboardingState:
+      params.totalSupply === "0"
+        ? onboardingPath.NOT_INVESTED_IN_OWN_FUND
+        : onboardingPath.NOT_TRADED_YET,
+  }),
   default: state => ({ ...state }),
 };
 
@@ -104,6 +111,7 @@ const mapActionToReducer = {
   [fundTypes.SETUP_REQUESTED]: reducers.transactionStarted,
   [fundTypes.SETUP_SUCCEEDED]: reducers.setupSucceeded,
   [fundTypes.SETUP_FAILED]: reducers.transactionFinished,
+  [fundTypes.FUND_LOADED]: reducers.fundLoaded,
 };
 
 export const reducer = (state = initialState, action = {}) => {
