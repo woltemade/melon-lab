@@ -26,6 +26,7 @@ const initialState = {
   isConnected: false,
   isReadyToVisit: false,
   isReadyToInteract: false,
+  isReadyToTrade: false,
   transactionInProgress: false,
 };
 
@@ -79,6 +80,10 @@ const reducers = {
       isBeforeInPath(newState.onboardingState, onboardingPath.NO_FUND_CREATED)
     ) {
       return { ...newState, onboardingState: onboardingPath.NO_FUND_CREATED };
+    } else if (
+      !isBeforeInPath(newState.onboardingState, onboardingPath.NOT_TRADED_YET)
+    ) {
+      return { ...newState, isReadyToTrade: true };
     }
 
     return { ...newState };
