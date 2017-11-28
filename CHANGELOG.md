@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * getRecentTrades for an asset pair and getFundRecentTrades, using rpc call getLogs
 * awaitDataFeedUpdate -used only for integration test
 * Upgrade to protocol v0.4.1
+* [labeling] Renamed 'creationDate' and 'timestamp' in setupFund an getFundInformations to 'inception'
 
 ### Deprecated
 
