@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * [labeling] Renamed 'timestamp' in convertUnclaimedRewards to 'date'
 * [labeling] Harmonized in subscribe/redeem from atTimeStamp/atTimeStamp to timestamp
 
-### Deprecated
+### Removed
 
 * depositAndApproveEther
 * filterByAssetPair
