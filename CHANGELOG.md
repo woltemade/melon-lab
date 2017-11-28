@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * sendTransaction function
 * constructTransactionObject function
 * getPastEvents (unused as of now; prepared it for later)
+* getRankingContract function
+* getRanking function
 
 ### Changed
 
