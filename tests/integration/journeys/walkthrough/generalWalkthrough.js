@@ -9,6 +9,7 @@ import getConfig from "../../../../lib/version/calls/getConfig";
 import trace from "../../../../lib/utils/trace";
 import getBalance from "../../../../lib/assets/calls/getBalance";
 
+import getRanking from "../../../../lib/version/calls/getRanking";
 import setupFund from "../../../../lib/version/transactions/setupFund";
 import getFundForManager from "../../../../lib/version/calls/getFundForManager";
 import getParticipation from "../../../../lib/participation/calls/getParticipation";
@@ -63,7 +64,7 @@ fit(
     );
 
     shared.config = await getConfig();
-    console.log("VERSION ", shared.config.versionAddress);
+
     trace({
       message: `Got config w exchange at ${shared.config
         .exchangeAddress},and datafeed at ${shared.config.dataFeedAddress}`,

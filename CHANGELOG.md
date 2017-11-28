@@ -26,12 +26,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * awaitDataFeedUpdate -used only for integration test
 * Upgrade to protocol v0.4.1
 * [labeling] Renamed 'creationDate' and 'timestamp' in setupFund an getFundInformations to 'inception'
+* [labeling] Renamed 'timestamp' in convertUnclaimedRewards to 'date'
+* [labeling] Harmonized in subscribe/redeem from atTimeStamp/atTimeStamp to timestamp
 
 ### Deprecated
 
 * depositAndApproveEther
+* filterByAssetPair
+* sortByPrice
 
 ### Fixed
+* #69
+* #76
+* #86
+* #87
+* #89
+* #90
+* #91
+* #92
 * #94
 
 ## [0.3.5]
