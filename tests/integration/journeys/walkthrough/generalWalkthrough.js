@@ -5,20 +5,11 @@ import setup from "../../../../lib/utils/setup";
 import Wallet from "ethers-wallet";
 import encryptedWallet from "../../../../encryptedWallet.json";
 import password from "../../../../password.json";
-import addressBook from "@melonproject/protocol/address-book.json";
-import getVersionContract from "../../../../lib/version/contracts/getVersionContract";
-import constructTransactionObject from "../../../../lib/utils/constructTransactionObject";
-import waitForTransactionReceipt from "../../../../lib/utils/waitForTransactionReceipt";
-import gasBoost from "../../../../lib/utils/gasBoost";
 import getConfig from "../../../../lib/version/calls/getConfig";
 import trace from "../../../../lib/utils/trace";
 import getBalance from "../../../../lib/assets/calls/getBalance";
-import approve from "../../../../lib/assets/transactions/approve";
 
 import setupFund from "../../../../lib/version/transactions/setupFund";
-import getSimpleMarketContract from "../../../../lib/exchange/contracts/getSimpleMarketContract";
-import getDataFeedContract from "../../../../lib/datafeeds/contracts/getDataFeedContract";
-
 import getFundForManager from "../../../../lib/version/calls/getFundForManager";
 import getParticipation from "../../../../lib/participation/calls/getParticipation";
 import subscribe from "../../../../lib/participation/transactions/subscribe";
@@ -72,6 +63,7 @@ fit(
     );
 
     shared.config = await getConfig();
+    console.log("VERSION ", shared.config.versionAddress);
     trace({
       message: `Got config w exchange at ${shared.config
         .exchangeAddress},and datafeed at ${shared.config.dataFeedAddress}`,
