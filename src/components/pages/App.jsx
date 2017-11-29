@@ -10,10 +10,10 @@ import WrongNetwork from "../organisms/WrongNetwork";
 import NoMetamask from "../organisms/NoMetamask";
 import LockedAccount from "../organisms/LockedAccount";
 import InsufficentFunds from "../organisms/InsufficentFunds";
-import ManagerViewContainer from "../../legacyComponents/managerView/container";
 import SetupContainer from "../../containers/Setup";
 import InvestContainer from "../../legacyComponents/invest/container";
 import { onboardingPath } from "../../reducers/app";
+import FundContainer from "../../containers/Fund";
 
 const mapOnboardingStateToMainContainer = {
   [onboardingPath.NO_PROVIDER]: NoMetamask,
@@ -24,8 +24,6 @@ const mapOnboardingStateToMainContainer = {
   [onboardingPath.INSUFFICENT_MLN]: InsufficentFunds,
   [onboardingPath.NO_FUND_CREATED]: SetupContainer,
   [onboardingPath.NOT_INVESTED_IN_OWN_FUND]: InvestContainer,
-  // [onboardingPath.NOT_TRADED_YET]: ManagerViewContainer,
-  // [onboardingPath.ONBOARDED]: ManagerViewContainer,
 };
 
 const getSetupComponent = ({
@@ -65,7 +63,7 @@ const App = props => (
             }
           />
           {/* <Route path="/ranking" component={Ranking} /> */}
-          <Route path="/:fundAddress" component={ManagerViewContainer} />
+          <Route path="/:fundAddress" component={FundContainer} />
           <Route
             render={routerProps => redirecter({ ...routerProps, ...props })}
           />

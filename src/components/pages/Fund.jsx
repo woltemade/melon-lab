@@ -1,15 +1,15 @@
 import React from "react";
 import { Card } from "semantic-ui-react";
-import FactsheetContainer from "../factsheet/container";
-import FundHoldingsContainer from "../fundHoldings/container";
-import OrderbookContainer from "../orderbook/container";
-import RecentTradesContainer from "../recentTrades/container";
-import TradeContainer from "../trade/container";
-import TradeHelperContainer from "../tradeHelper/container";
-import ParticipationContainer from "../participation/container";
-import ExecuteRequestContainer from "../executeRequest/container";
-import TradingActivityContainer from "../tradingActivity/container";
-import SettingsContainer from "../settings/container";
+import FactsheetContainer from "../../legacyComponents/factsheet/container";
+import FundHoldingsContainer from "../../legacyComponents/fundHoldings/container";
+import OrderbookContainer from "../../legacyComponents/orderbook/container";
+import RecentTradesContainer from "../../legacyComponents/recentTrades/container";
+import TradeContainer from "../../legacyComponents/trade/container";
+import TradeHelperContainer from "../../legacyComponents/tradeHelper/container";
+import ParticipationContainer from "../../legacyComponents/participation/container";
+import ExecuteRequestContainer from "../../legacyComponents/executeRequest/container";
+import TradingActivityContainer from "../../legacyComponents/tradingActivity/container";
+import SettingsContainer from "../../legacyComponents/settings/container";
 
 const ManagerView = props => (
   <div className="App">
