@@ -19,7 +19,13 @@ function* init() {
   yield put(ethereumActions.setProvider(provider));
 
   if (web3.currentProvider.isConnected()) {
+    const fund = yield select(state => state.fund);
+
     yield put(ethereumActions.hasConnected(web3.version.network));
+
+    if (fund.address !== "" && fund.name === "-") {
+      yield put(fundActions.infoRequested(fund.address));
+    }
 
     const blockChannel = eventChannel(emitter => {
       let blockTimeout;
@@ -50,11 +56,6 @@ function* init() {
         yield put(ethereumActions.newBlock(data.onBlock));
 
         const currentAccount = yield select(state => state.ethereum.account);
-        const fund = yield select(state => state.fund);
-
-        if (fund.address !== "" && fund.id === 0) {
-          yield put(fundActions.infoRequested(fund.address));
-        }
 
         if (currentAccount !== data.onBlock.account) {
           yield put(ethereumActions.accountChanged(data.onBlock.account));
