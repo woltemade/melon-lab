@@ -22,8 +22,6 @@ function* requestInfo({ address }) {
     const fundInfo = yield call(getFundInformations, address);
     const calculations = yield call(performCalculations, address);
 
-    console.log(fundInfo);
-
     const info = {
       address: fundInfo.fundAddress,
       creationDate: fundInfo.creationDate,
@@ -40,8 +38,6 @@ function* requestInfo({ address }) {
       );
       info.personalStake = participation.personalStake;
     }
-
-    console.log(info);
 
     yield put(actions.infoSucceeded(info));
 

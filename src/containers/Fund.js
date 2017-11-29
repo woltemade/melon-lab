@@ -1,4 +1,5 @@
 import BigNumber from "bignumber.js";
+import moment from "moment";
 import { connect } from "react-redux";
 import { lifecycle } from "recompose";
 import { actions } from "../actions/fund";
@@ -8,13 +9,17 @@ const mapStateToProps = state => ({
   pendingRequet: state.general.pendingRequest,
   factsheet: {
     aum: new BigNumber(state.fund.aum || 0).toFixed(4),
-    creationDate: state.fund.creationDate,
-    managementReward: state.fund.managementReward,
+    creationDate: moment(state.fund.creationDate).format(),
+    managementReward: new BigNumber(state.fund.managementReward || 0).toFixed(
+      4,
+    ),
     name: state.fund.name,
-    performanceReward: state.fund.performanceReward,
-    personalStake: state.fund.personalStake,
+    performanceReward: new BigNumber(state.fund.performanceReward || 0).toFixed(
+      4,
+    ),
+    personalStake: new BigNumber(state.fund.personalStake || 0).toFixed(4),
     sharePrice: new BigNumber(state.fund.sharePrice || 0).toFixed(4),
-    totalSupply: state.fund.totalSupply,
+    totalSupply: new BigNumber(state.fund.totalSupply || 0).toFixed(4),
   },
 });
 

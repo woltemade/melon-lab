@@ -20,14 +20,15 @@ const ManagerView = ({ factsheet, pendingRequest }) => (
     <div>
       <Card.Group>
         <Factsheet {...factsheet} />
+      </Card.Group>
+    </div>
+    {/*
         <SettingsContainer />
         {pendingRequest ? (
           <ExecuteRequestContainer />
         ) : (
           <ParticipationContainer />
         )}
-      </Card.Group>
-    </div>
     <div>
       <br />
       <br />
@@ -58,6 +59,7 @@ const ManagerView = ({ factsheet, pendingRequest }) => (
     </div>
     <br />
     <br />
+    */}
     <br />
   </div>
 );
