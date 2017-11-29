@@ -2,7 +2,6 @@ import BigNumber from "bignumber.js";
 import { setup, subscribe, executeRequest } from "@melonproject/melon.js";
 import { types, creators } from "./duck";
 import { creators as generalCreators } from "../general";
-import { creators as factsheetCreators } from "../factsheet/duck";
 import { creators as fundHoldingsCreators } from "../fundHoldings/duck";
 import { actions as ethereumActions } from "../../actions/ethereum";
 
@@ -30,7 +29,6 @@ const investMiddleware = store => next => action => {
         )
         .then(() => {
           store.dispatch(generalCreators.update({ mode: "Manage" }));
-          store.dispatch(factsheetCreators.requestInformations());
           store.dispatch(fundHoldingsCreators.requestHoldings());
 
           // HACK: Retrigger accountChanged to refresh new onboarding state

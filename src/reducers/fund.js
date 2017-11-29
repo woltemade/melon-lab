@@ -1,20 +1,21 @@
 import { types } from "../actions/fund";
 
 export const initialState = {
-  id: 0,
-  name: "-",
-  managementFee: 0,
-  performanceFee: 0,
   address: "",
-  owner: "",
-  timestamp: 0,
+  creationDate: 0,
   gav: "0",
+  id: 0,
+  managementFee: 0,
   managementReward: "0",
-  performanceReward: "0",
-  unclaimedRewards: "0",
+  name: "-",
   nav: "0",
+  owner: "",
+  performanceFee: 0,
+  performanceReward: "0",
+  personalStake: "0",
   sharePrice: "0",
   totalSupply: "0",
+  unclaimedRewards: "0",
 };
 
 const reducers = {

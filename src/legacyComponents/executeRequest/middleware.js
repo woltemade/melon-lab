@@ -1,6 +1,5 @@
 import { setup, executeRequest } from "@melonproject/melon.js";
 import { types } from "./duck";
-import { creators as factsheetCreators } from "../factsheet/duck";
 import { creators as fundHoldingsCreators } from "../fundHoldings/duck";
 import { creators as generalCreators } from "../general";
 
@@ -17,12 +16,11 @@ const executeRequestMiddleware = store => next => action => {
         store.getState().general.fundAddress,
         setup.web3.eth.accounts[0],
       )
-        .then(response => {
+        .then(() => {
           if (store.getState().general.mode === "Execute")
             store.dispatch(generalCreators.update({ mode: "Manage" }));
           else if (store.getState().general.pendingRequest === true)
             store.dispatch(generalCreators.update({ pendingRequest: false }));
-          store.dispatch(factsheetCreators.requestInformations());
           store.dispatch(fundHoldingsCreators.requestHoldings());
         })
         .catch(err => {

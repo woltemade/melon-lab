@@ -1,6 +1,9 @@
 import React from "react";
 import { Card } from "semantic-ui-react";
-import FactsheetContainer from "../../legacyComponents/factsheet/container";
+
+import Factsheet from "../organisms/Factsheet";
+
+// TODO: Remove legacyComponents
 import FundHoldingsContainer from "../../legacyComponents/fundHoldings/container";
 import OrderbookContainer from "../../legacyComponents/orderbook/container";
 import RecentTradesContainer from "../../legacyComponents/recentTrades/container";
@@ -11,14 +14,14 @@ import ExecuteRequestContainer from "../../legacyComponents/executeRequest/conta
 import TradingActivityContainer from "../../legacyComponents/tradingActivity/container";
 import SettingsContainer from "../../legacyComponents/settings/container";
 
-const ManagerView = props => (
+const ManagerView = ({ factsheet, pendingRequest }) => (
   <div className="App">
     <br />
     <div>
       <Card.Group>
-        <FactsheetContainer />
+        <Factsheet {...factsheet} />
         <SettingsContainer />
-        {props.general.pendingRequest ? (
+        {pendingRequest ? (
           <ExecuteRequestContainer />
         ) : (
           <ParticipationContainer />
