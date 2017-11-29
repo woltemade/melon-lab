@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@melonproject/melon.js": "0.3.6-alpha.1",
+    "@melonproject/melon.js": "0.3.6-alpha.2",
     "babel-core": "^6.1.2",
     "babel-loader": "^6.1.0",
     "babel-polyfill": "^6.23.0",
@@ -25,6 +25,7 @@
     "react-router-native": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.8",
     "react-scripts": "1.0.11",
+    "recompose": "^0.26.0",
     "redux": "^3.7.2",
     "redux-form": "^7.1.2",
     "redux-saga": "^0.16.0",

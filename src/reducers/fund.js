@@ -18,6 +18,10 @@ export const initialState = {
 };
 
 const reducers = {
+  setAddress: (state, { address }) => ({
+    ...state,
+    address,
+  }),
   merge: (state, params) => ({
     ...state,
     ...params,
@@ -26,8 +30,9 @@ const reducers = {
 };
 
 const mapActionToReducer = {
+  [types.SET]: reducers.setAddress,
   [types.SETUP_SUCCEEDED]: reducers.merge,
-  [types.FUND_LOADED]: reducers.merge,
+  [types.INFO_SUCCEEDED]: reducers.merge,
 };
 
 export const reducer = (state = initialState, action) => {

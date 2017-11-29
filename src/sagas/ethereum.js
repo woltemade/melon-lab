@@ -1,14 +1,14 @@
-import { take, put, takeLatest } from "redux-saga/effects";
+import { take, put, takeLatest, select } from "redux-saga/effects";
 import { eventChannel } from "redux-saga";
 import { setup, onBlock, getWeb3 } from "@melonproject/melon.js";
 
 import { types as browserTypes } from "../actions/browser";
 import { actions as ethereumActions } from "../actions/ethereum";
+import { actions as fundActions } from "../actions/fund";
 
 const MAX_BLOCK_TIME = 20 * 1000;
 
 function* init() {
-  let currentAccount;
   const { web3, provider } = getWeb3(window.web3);
 
   setup.init({
@@ -49,9 +49,15 @@ function* init() {
       if (data.onBlock) {
         yield put(ethereumActions.newBlock(data.onBlock));
 
+        const currentAccount = yield select(state => state.ethereum.account);
+        const fund = yield select(state => state.fund);
+
+        if (fund.address !== "" && fund.id === 0) {
+          yield put(fundActions.infoRequested(fund.address));
+        }
+
         if (currentAccount !== data.onBlock.account) {
           yield put(ethereumActions.accountChanged(data.onBlock.account));
-          currentAccount = data.onBlock.account;
         }
       } else {
         yield put(ethereumActions.blockOverdue());

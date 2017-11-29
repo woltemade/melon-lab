@@ -1,12 +1,9 @@
 import {
-  getFundForManager,
   getFundInformations,
   performCalculations,
 } from "@melonproject/melon.js";
-import { takeLatest, put, call } from "redux-saga/effects";
-import { types as ethereumTypes } from "../actions/ethereum";
-import { actions as fundActions } from "../actions/fund";
-import serialize from "../utils/serialize";
+import { takeEvery, takeLatest, put, call, select } from "redux-saga/effects";
+import { actions, types } from "../actions/fund";
 
 // TODO: Refactor these into new saga architecture
 import { creators as factsheetCreators } from "../legacyComponents/factsheet/duck";
@@ -19,17 +16,15 @@ import { creators as settingsCreators } from "../legacyComponents/settings/duck"
 import { creators as tradeHelperCreators } from "../legacyComponents/tradeHelper/duck";
 import { creators as tradingActivityCreators } from "../legacyComponents/tradingActivity/duck";
 
-function* loadAccount({ account }) {
-  const address = yield call(getFundForManager, account);
-
-  if (address) {
+function* requestInfo({ address }) {
+  try {
     const fundInfo = yield call(getFundInformations, address);
     const calculations = yield call(performCalculations, address);
 
     yield put(
-      fundActions.fundLoaded({
+      actions.infoSucceeded({
         address: fundInfo.fundAddress,
-        owner: account,
+        // owner: account,
         name: fundInfo.name,
         ...calculations,
       }),
@@ -57,11 +52,23 @@ function* loadAccount({ account }) {
     yield put(settingsCreators.requestSettings());
     yield put(tradeHelperCreators.request("BTC-T/MLN-T"));
     yield put(tradingActivityCreators.requestFundRecentTrades());
+  } catch (err) {
+    console.error(err);
+    yield put(actions.infoFailed(err));
   }
 }
 
-function* app() {
-  yield takeLatest(ethereumTypes.ACCOUNT_CHANGED, loadAccount);
+function* checkAndLoad({ address }) {
+  const isReadyToVisit = yield select(state => state.app.isReadyToVisit);
+
+  if (isReadyToVisit) {
+    yield put(actions.infoRequested(address));
+  }
 }
 
-export default app;
+function* fund() {
+  yield takeLatest(types.INFO_REQUESTED, requestInfo);
+  yield takeEvery(types.SET, checkAndLoad);
+}
+
+export default fund;
