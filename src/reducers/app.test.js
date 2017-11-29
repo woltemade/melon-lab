@@ -1,3 +1,5 @@
+import BigNumber from "bignumber.js";
+
 import { providers, networks } from "@melonproject/melon.js";
 import { actions } from "../actions/ethereum";
 import { reducer, onboardingPath } from "./app";
@@ -29,7 +31,8 @@ it("New block: Ready to transact", () => {
     actions.newBlock({
       blockNumber: 1234,
       syncing: false,
-      balance: "10.2",
+      ethBalance: new BigNumber("10.2"),
+      mlnBalance: new BigNumber("5"),
       account: "0xDEADBEEF",
       network: networks.KOVAN,
     }),
@@ -46,6 +49,8 @@ it("New block: Out of ETH", () => {
     actions.newBlock({
       blockNumber: 1234,
       syncing: false,
+      ethBalance: new BigNumber("0"),
+      mlnBalance: new BigNumber("5"),
       account: "0xDEADBEEF",
       network: networks.KOVAN,
     }),
@@ -62,7 +67,8 @@ it("New block: Wrong network", () => {
     actions.newBlock({
       blockNumber: 1234,
       syncing: false,
-      balance: "10.2",
+      ethBalance: new BigNumber("5"),
+      mlnBalance: new BigNumber("5"),
       account: "0xDEADBEEF",
       network: networks.MAIN,
     }),
@@ -94,7 +100,8 @@ it("New block: Syncing", () => {
     actions.newBlock({
       blockNumber: 1234,
       syncing: true,
-      balance: "10.2",
+      ethBalance: new BigNumber("5"),
+      mlnBalance: new BigNumber("5"),
       account: "0xDEADBEEF",
       network: networks.KOVAN,
     }),

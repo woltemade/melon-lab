@@ -6,8 +6,8 @@ const mapStateToProps = state => ({
   fundAddress: state.fund.address,
   onboardingState: state.app.onboardingState,
   isReadyToTrade: state.app.isReadyToTrade,
-  mlnBalance: new BigNumber(state.ethereum.mlnBalance).toFixed(4),
-  ethBalance: new BigNumber(state.ethereum.ethBalance).toFixed(4),
+  mlnBalance: new BigNumber(state.ethereum.mlnBalance || 0).toFixed(4),
+  ethBalance: new BigNumber(state.ethereum.ethBalance || 0).toFixed(4),
 });
 
 const AppContainer = connect(mapStateToProps)(App);
