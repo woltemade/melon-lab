@@ -13,6 +13,30 @@ export const actions = {
     type: types.SET,
     address,
   }),
+  setupRequested: name => ({
+    type: types.SETUP_REQUESTED,
+    name,
+  }),
+  setupSucceeded: ({ id, address, name, timestamp, owner }) => ({
+    type: types.SETUP_SUCCEEDED,
+    id,
+    address,
+    name,
+    timestamp,
+    owner,
+  }),
+  setupFailed: ({ reason }) => ({
+    type: types.SETUP_FAILED,
+    reason,
+  }),
+  infoRequested: address => ({
+    type: types.INFO_REQUESTED,
+    address,
+  }),
+  infoFailed: ({ reason }) => ({
+    type: types.INFO_FAILED,
+    reason,
+  }),
   infoSucceeded: ({
     address,
     aum,
@@ -42,29 +66,5 @@ export const actions = {
     sharePrice,
     totalSupply,
     unclaimedRewards,
-  }),
-  setupRequested: name => ({
-    type: types.SETUP_REQUESTED,
-    name,
-  }),
-  setupSucceeded: ({ id, address, name, timestamp, owner }) => ({
-    type: types.SETUP_SUCCEEDED,
-    id,
-    address,
-    name,
-    timestamp,
-    owner,
-  }),
-  setupFailed: ({ reason }) => ({
-    type: types.SETUP_FAILED,
-    reason,
-  }),
-  infoRequested: address => ({
-    type: types.INFO_REQUESTED,
-    address,
-  }),
-  infoFailed: ({ reason }) => ({
-    type: types.INFO_FAILED,
-    reason,
   }),
 };

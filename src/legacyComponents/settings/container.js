@@ -7,14 +7,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onRequest: () => {
-    dispatch(creators.requestSettings());
-  },
-  onUpdate: event => {
-    dispatch(
-      creators.updateSettings({ [event.target.name]: event.target.value }),
-    );
-  },
   onToggle: toggleType => {
     dispatch(creators.toggle(toggleType));
   },
