@@ -14,6 +14,8 @@ and this project adheres to
 
 ### Changed
 
+* getFundInformations also returns owner
+
 ### Deprecated
 
 ### Fixed
