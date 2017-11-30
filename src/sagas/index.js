@@ -1,13 +1,15 @@
 import { fork } from "redux-saga/effects";
 
-import fund from "./fund";
+import administration from "./administration";
 import ethereum from "./ethereum";
+import fund from "./fund";
 import setup from "./setup";
 
 function* rootSaga() {
+  yield fork(administration);
   yield fork(ethereum);
-  yield fork(setup);
   yield fork(fund);
+  yield fork(setup);
 }
 
 export default rootSaga;

@@ -1,4 +1,5 @@
 import { types } from "../actions/fund";
+import { types as adminTypes } from "../actions/administration";
 
 export const initialState = {
   address: "",
@@ -36,6 +37,8 @@ const mapActionToReducer = {
   [types.SET]: reducers.setAddress,
   [types.SETUP_SUCCEEDED]: reducers.merge,
   [types.INFO_SUCCEEDED]: reducers.merge,
+  [adminTypes.TOGGLE_SUBSCRIPTION_SUCCEEDED]: reducers.merge,
+  [adminTypes.TOGGLE_REDEMPTION_SUCCEEDED]: reducers.merge,
 };
 
 export const reducer = (state = initialState, action) => {

@@ -31,8 +31,9 @@ export const actions = {
     type: types.TOGGLE_SUBSCRIPTION_FAILED,
     reason,
   }),
-  toggleSubscriptionSucceeded: () => ({
+  toggleSubscriptionSucceeded: subscriptionAllowed => ({
     type: types.TOGGLE_SUBSCRIPTION_SUCCEEDED,
+    subscriptionAllowed,
   }),
   toggleRedemption: address => ({
     type: types.TOGGLE_REDEMPTION_REQUESTED,
@@ -42,8 +43,9 @@ export const actions = {
     type: types.TOGGLE_REDEMPTION_FAILED,
     reason,
   }),
-  toggleRedemptionSucceeded: () => ({
+  toggleRedemptionSucceeded: redemptionAllowed => ({
     type: types.TOGGLE_REDEMPTION_SUCCEEDED,
+    redemptionAllowed,
   }),
   convertUnclaimedRewards: address => ({
     type: types.CONVERT_UNCLAIMED_REWARDS_REQUESTED,
