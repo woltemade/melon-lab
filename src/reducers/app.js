@@ -3,6 +3,7 @@ import { providers, networks } from "@melonproject/melon.js";
 import isBefore from "../utils/isBefore";
 import { types as ethereumTypes } from "../actions/ethereum";
 import { types as fundTypes } from "../actions/fund";
+import { types as appTypes } from "../actions/app";
 
 // Note: These items are sorted: NO_PROVIDER is the state before NO_CONNECTION
 // and so on. (Thats why it is named ...Path and not ...States)
@@ -115,10 +116,10 @@ const mapActionToReducer = {
   [ethereumTypes.SET_PROVIDER]: reducers.setProvider,
   [ethereumTypes.HAS_CONNECTED]: reducers.setConnection,
   [ethereumTypes.NEW_BLOCK]: reducers.newBlock,
-  [fundTypes.SETUP_REQUESTED]: reducers.transactionStarted,
   [fundTypes.SETUP_SUCCEEDED]: reducers.setupSucceeded,
-  [fundTypes.SETUP_FAILED]: reducers.transactionFinished,
   [fundTypes.INFO_SUCCEEDED]: reducers.infoSucceeded,
+  [appTypes.TRANSACTION_STARTED]: reducers.transactionStarted,
+  [appTypes.TRANSACTION_FINISHED]: reducers.transactionFinished,
 };
 
 export const reducer = (state = initialState, action = {}) => {
