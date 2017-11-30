@@ -7,8 +7,6 @@ import "./index.css";
 import { configureStore, history } from "./config/configureStore";
 import AppContainer from "./containers/App";
 import registerServiceWorker from "./registerServiceWorker";
-import { creators as orderbookCreators } from "./legacyComponents/orderbook/duck";
-import { creators as fundHoldingsCreators } from "./legacyComponents/fundHoldings/duck";
 
 import { actions } from "./actions/browser";
 
