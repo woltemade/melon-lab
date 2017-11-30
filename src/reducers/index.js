@@ -13,7 +13,6 @@ import invest from "../legacyComponents/invest/duck";
 import orderbook from "../legacyComponents/orderbook/duck";
 import participation from "../legacyComponents/participation/duck";
 import recentTrades from "../legacyComponents/recentTrades/duck";
-import settings from "../legacyComponents/settings/duck";
 import trade from "../legacyComponents/trade/duck";
 import tradeHelper from "../legacyComponents/tradeHelper/duck";
 import tradingActivity from "../legacyComponents/tradingActivity/duck";
@@ -31,7 +30,6 @@ const rootReducer = combineReducers({
   participation,
   recentTrades,
   router,
-  settings,
   trade,
   tradeHelper,
   tradingActivity,

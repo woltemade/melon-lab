@@ -2,6 +2,7 @@ import {
   getFundInformations,
   performCalculations,
   getParticipation,
+  getParticipationAuthorizations,
 } from "@melonproject/melon.js";
 import { takeEvery, takeLatest, put, call, select } from "redux-saga/effects";
 import { actions, types } from "../actions/fund";
@@ -12,7 +13,6 @@ import { creators as generalCreators } from "../legacyComponents/general";
 import { creators as orderbookCreators } from "../legacyComponents/orderbook/duck";
 import { creators as participationCreators } from "../legacyComponents/participation/duck";
 import { creators as recentTradesCreators } from "../legacyComponents/recentTrades/duck";
-import { creators as settingsCreators } from "../legacyComponents/settings/duck";
 import { creators as tradeHelperCreators } from "../legacyComponents/tradeHelper/duck";
 import { creators as tradingActivityCreators } from "../legacyComponents/tradingActivity/duck";
 
@@ -21,13 +21,15 @@ function* requestInfo({ address }) {
     const account = yield select(state => state.ethereum.account);
     const fundInfo = yield call(getFundInformations, address);
     const calculations = yield call(performCalculations, address);
+    const participationAuthorizations = yield call(
+      getParticipationAuthorizations,
+      address,
+    );
 
     const info = {
-      address: fundInfo.fundAddress,
-      creationDate: fundInfo.creationDate,
-      // owner: account,
-      name: fundInfo.name,
+      ...fundInfo,
       ...calculations,
+      ...participationAuthorizations,
     };
 
     if (account) {
@@ -59,7 +61,6 @@ function* requestInfo({ address }) {
     yield put(orderbookCreators.requestOrderbook("BTC-T/MLN-T"));
     yield put(participationCreators.request_price());
     yield put(recentTradesCreators.requestRecentTrades("BTC-T/MLN-T"));
-    yield put(settingsCreators.requestSettings());
     yield put(tradeHelperCreators.request("BTC-T/MLN-T"));
     yield put(tradingActivityCreators.requestFundRecentTrades());
   } catch (err) {

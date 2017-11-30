@@ -16,7 +16,6 @@ import tradeHelperMiddleware from "../legacyComponents/tradeHelper/middleware";
 import participationMiddleware from "../legacyComponents/participation/middleware";
 import executeRequestMiddleware from "../legacyComponents/executeRequest/middleware";
 import tradingActivityMiddleware from "../legacyComponents/tradingActivity/middleware";
-import settingsMiddleware from "../legacyComponents/settings/middleware";
 
 import rootReducer from "../reducers";
 import rootSaga from "../sagas";
@@ -40,7 +39,6 @@ export const configureStore = preloadedState => {
     participationMiddleware,
     executeRequestMiddleware,
     tradingActivityMiddleware,
-    settingsMiddleware,
     routerMiddleware,
     sagaMiddleware,
   );

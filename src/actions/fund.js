@@ -51,6 +51,8 @@ export const actions = {
     sharePrice,
     totalSupply,
     unclaimedRewards,
+    subscriptionAllowed,
+    redemptionAllowed,
   }) => ({
     type: types.INFO_SUCCEEDED,
     address,
@@ -63,7 +65,9 @@ export const actions = {
     owner,
     performanceReward,
     personalStake,
+    redemptionAllowed,
     sharePrice,
+    subscriptionAllowed,
     totalSupply,
     unclaimedRewards,
   }),

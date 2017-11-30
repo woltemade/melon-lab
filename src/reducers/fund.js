@@ -13,7 +13,9 @@ export const initialState = {
   performanceFee: 0,
   performanceReward: "0",
   personalStake: "0",
+  redemptionAllowed: false,
   sharePrice: "0",
+  subscriptionAllowed: false,
   totalSupply: "0",
   unclaimedRewards: "0",
 };
