@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "semantic-ui-react";
 
 import Factsheet from "../../containers/Factsheet";
-import Administration from "../organisms/Administration";
+import Administration from "../../containers/Administration";
 import Participation from "../organisms/Participation";
 
 // TODO: Remove legacyComponents
@@ -15,31 +15,17 @@ import TradeHelperContainer from "../../legacyComponents/tradeHelper/container";
 import TradingActivityContainer from "../../legacyComponents/tradingActivity/container";
 */
 
-const ManagerView = ({
-  adminActions,
-  adminProps,
-  factsheet,
-  isOwner,
-  loading,
-}) => (
+const ManagerView = ({ isOwner, loading }) => (
   <div className="App">
     <br />
     <div>
       <Card.Group>
-        <Factsheet {...factsheet} />
-        {isOwner ? (
-          <Administration {...adminActions} {...adminProps} loading={loading} />
-        ) : (
-          <div>visitor</div>
-        )}
+        <Factsheet />
+        {isOwner ? <Administration /> : <div>visitor</div>}
       </Card.Group>
     </div>
     <div>
-      <Participation
-        {...participationActions}
-        {...participationProps}
-        loading={loading}
-      />
+      <Participation />
     </div>
     {/*
     <div>
