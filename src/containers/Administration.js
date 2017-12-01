@@ -1,4 +1,4 @@
-import { connect } from "redux";
+import { connect } from "react-redux";
 
 import { actions } from "../actions/administration";
 import Administration from "../components/organisms/Administration";

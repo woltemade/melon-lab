@@ -2,12 +2,17 @@ import React from "react";
 import { List, Button, Card } from "semantic-ui-react";
 import Countdown from "react-cntdwn";
 
-const ExecuteRequest = props => (
+const ExecuteRequest = ({
+  handleFinish,
+  loading,
+  onExecute,
+  readyToExecute,
+}) => (
   <div>
     <div className="ui segment">
       <br />
 
-      <div className={`ui ${props.loading ? "active" : ""} inverted dimmer`}>
+      <div className={`ui ${loading ? "active" : ""} inverted dimmer`}>
         <div className="ui text loader">Loading...</div>
       </div>
       <Card>
@@ -30,9 +35,9 @@ const ExecuteRequest = props => (
           </List>
         </Card.Content>
         <Card.Content extra>
-          {props.readyToExecute ? (
+          {readyToExecute ? (
             <div className="ui two buttons">
-              <Button basic color="black" onClick={props.onExecute}>
+              <Button basic color="black" onClick={onExecute}>
                 Execute my request!
               </Button>
             </div>
@@ -45,7 +50,7 @@ const ExecuteRequest = props => (
                 interval={1000}
                 timeSeparator={":"}
                 leadingZero
-                onFinished={props.handleFinish}
+                onFinished={handleFinish}
               />
             </div>
           )}
