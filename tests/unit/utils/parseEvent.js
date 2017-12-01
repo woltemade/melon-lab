@@ -1,4 +1,4 @@
-import parseEvent from "../../../lib/utils/parseEvent";
+import parseEvent from "../../../lib/utils/ethereum/parseEvent";
 
 const tx = {
   address: "0x81bfb6a2db736c5ec06ddf4654478cf78b3e0be7",

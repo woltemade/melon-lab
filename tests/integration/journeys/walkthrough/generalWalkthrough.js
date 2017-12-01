@@ -6,7 +6,7 @@ import setup from "../../../../lib/utils/setup";
 import encryptedWallet from "../../../../encryptedWallet.json";
 import password from "../../../../password.json";
 import getConfig from "../../../../lib/version/calls/getConfig";
-import trace from "../../../../lib/utils/trace";
+import trace from "../../../../lib/utils/generic/trace";
 import getBalance from "../../../../lib/assets/calls/getBalance";
 
 import signTermsAndConditions from "../../../../lib/version/transactions/signTermsAndConditions";
