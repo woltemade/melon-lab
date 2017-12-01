@@ -1,26 +1,22 @@
 import BigNumber from "bignumber.js";
 import Api from "@parity/api";
+import Wallet from "ethers-wallet";
 
 import setup from "../../../../lib/utils/setup";
-import Wallet from "ethers-wallet";
 import encryptedWallet from "../../../../encryptedWallet.json";
 import password from "../../../../password.json";
 import getConfig from "../../../../lib/version/calls/getConfig";
 import trace from "../../../../lib/utils/trace";
 import getBalance from "../../../../lib/assets/calls/getBalance";
 
-import createWallet from "../../../../lib/utils/createWallet";
-import importWallet from "../../../../lib/utils/importWallet";
-
 import signTermsAndConditions from "../../../../lib/version/transactions/signTermsAndConditions";
-import getRanking from "../../../../lib/version/calls/getRanking";
 import setupFund from "../../../../lib/version/transactions/setupFund";
 import getFundForManager from "../../../../lib/version/calls/getFundForManager";
 import getParticipation from "../../../../lib/participation/calls/getParticipation";
 import subscribe from "../../../../lib/participation/transactions/subscribe";
 import executeRequest from "../../../../lib/participation/transactions/executeRequest";
 import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
-import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFund";
+// import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFund";
 import toggleSubscription from "../../../../lib/fund/transactions/toggleSubscription";
 import toggleRedemption from "../../../../lib/fund/transactions/toggleRedemption";
 import getParticipationAuthorizations from "../../../../lib/fund/calls/getParticipationAuthorizations";
@@ -76,151 +72,160 @@ fit(
     });
 
     const signature = await signTermsAndConditions();
-    console.log(signature);
-    // shared.vaultName = `test-${randomString()}`;
-    // shared.vault = await setupFund(shared.vaultName);
-    // expect(shared.vault.name).toBe(shared.vaultName);
-    // expect(shared.vault.id).toBeGreaterThanOrEqual(0);
-    // expect(shared.vault.address).toBeTruthy();
-    // expect(shared.vault.timestamp instanceof Date).toBeTruthy();
-    // trace({
-    //   message: `vaultCreated: ${shared.vault.name} (${shared.vault
-    //     .id}) at ${shared.vault.address}`,
-    //   data: shared,
-    // });
 
-    // const fundCreatedByManager = await getFundForManager(setup.defaultAccount);
-    // expect(fundCreatedByManager).toBe(shared.vault.address);
+    shared.vaultName = `test-${randomString()}`;
+    shared.vault = await setupFund(
+      shared.vaultName,
+      signature.v,
+      signature.r,
+      signature.s,
+    );
+    expect(shared.vault.name).toBe(shared.vaultName);
+    expect(shared.vault.id).toBeGreaterThanOrEqual(0);
+    expect(shared.vault.address).toBeTruthy();
+    expect(shared.vault.inception instanceof Date).toBeTruthy();
+    trace({
+      message: `vaultCreated: ${shared.vault.name} (${shared.vault
+        .id}) at ${shared.vault.address}`,
+      data: shared,
+    });
 
-    // shared.participation.initial = await getParticipation(
-    //   shared.vault.address,
-    //   setup.defaultAccount,
-    // );
-    // expect(shared.participation.initial.personalStake.toNumber()).toBe(0);
-    // expect(shared.participation.initial.totalSupply.toNumber()).toBe(0);
+    const fundCreatedByManager = await getFundForManager(setup.defaultAccount);
+    expect(fundCreatedByManager).toBe(shared.vault.address);
 
-    // shared.initialCalculations = await performCalculations(
-    //   shared.vault.address,
-    // );
+    shared.participation.initial = await getParticipation(
+      shared.vault.address,
+      setup.defaultAccount,
+    );
+    expect(shared.participation.initial.personalStake.toNumber()).toBe(0);
+    expect(shared.participation.initial.totalSupply.toNumber()).toBe(0);
 
-    // trace({
-    //   message: `Initial calculations- GAV: ${shared.initialCalculations
-    //     .gav}, NAV: ${shared.initialCalculations.nav}, Share Price: ${shared
-    //     .initialCalculations.sharePrice}, totalSupply: ${shared
-    //     .initialCalculations.totalSupply}`,
-    //   data: shared,
-    // });
-    // expect(shared.initialCalculations.sharePrice.toNumber()).toBe(1);
-    // expect(shared.initialCalculations.gav.toNumber()).toBe(0);
+    shared.initialCalculations = await performCalculations(
+      // shared.vault.address,
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    );
 
-    // shared.subscriptionRequest = await subscribe(
-    //   shared.vault.address,
-    //   new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
-    //   new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
-    // );
+    trace({
+      message: `Initial calculations- GAV: ${shared.initialCalculations
+        .gav}, NAV: ${shared.initialCalculations.nav}, Share Price: ${shared
+        .initialCalculations.sharePrice}, totalSupply: ${shared
+        .initialCalculations.totalSupply}`,
+      data: shared,
+    });
+    expect(shared.initialCalculations.sharePrice.toNumber()).toBe(1);
+    expect(shared.initialCalculations.gav.toNumber()).toBe(0);
 
-    // trace({
-    //   message: `Subscribe requested. shares: ${shared.subscriptionRequest
-    //     .numShares}`,
-    //   data: shared,
-    // });
+    shared.subscriptionRequest = await subscribe(
+      // shared.vault.address,
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
+      new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
+    );
 
-    // shared.executedSubscriptionRequest = await executeRequest(
-    //   shared.subscriptionRequest.id,
-    //   shared.vault.address,
-    //   // 0,
-    //   // "0x7116bE8B44Ad8197a54DC1388cCe2CBb53c9Db8B",
-    // );
+    trace({
+      message: `Subscribe requested. shares: ${shared.subscriptionRequest
+        .numShares}`,
+      data: shared,
+    });
 
-    // trace(`executedSubscriptionRequest ${shared.executedSubscriptionRequest}`);
+    shared.executedSubscriptionRequest = await executeRequest(
+      shared.subscriptionRequest.id,
+      // shared.vault.address,
+      // 0,
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    );
 
-    // shared.participation.invested = await getParticipation(
-    //   // "0x7116bE8B44Ad8197a54DC1388cCe2CBb53c9Db8B",
-    //   shared.vault.address,
-    //   setup.defaultAccount,
-    // );
+    trace(`executedSubscriptionRequest ${shared.executedSubscriptionRequest}`);
 
-    // expect(shared.participation.invested.personalStake.toNumber()).toBe(
-    //   INITIAL_SUBSCRIBE_QUANTITY,
-    // );
-    // expect(shared.participation.invested.totalSupply.toNumber()).toBe(
-    //   INITIAL_SUBSCRIBE_QUANTITY,
-    // );
+    shared.participation.invested = await getParticipation(
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      // shared.vault.address,
+      setup.defaultAccount,
+    );
 
-    // trace({
-    //   message: `Subscribe request executed. Personal stake: ${shared
-    //     .participation.invested.personalStake}`,
-    // });
+    expect(shared.participation.invested.personalStake.toNumber()).toBe(
+      INITIAL_SUBSCRIBE_QUANTITY,
+    );
+    expect(shared.participation.invested.totalSupply.toNumber()).toBe(
+      INITIAL_SUBSCRIBE_QUANTITY,
+    );
 
-    // shared.midCalculations = await performCalculations(shared.vault.address);
+    trace({
+      message: `Subscribe request executed. Personal stake: ${shared
+        .participation.invested.personalStake}`,
+    });
 
-    // trace({
-    //   message: `Mid calculations- GAV: ${shared.midCalculations
-    //     .gav}, NAV: ${shared.midCalculations.nav}, Share Price: ${shared
-    //     .midCalculations.sharePrice}, totalSupply: ${shared.midCalculations
-    //     .totalSupply}`,
-    //   data: shared,
-    // });
+    shared.midCalculations = await performCalculations(
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    );
 
-    // shared.redemptionRequest = await redeem(
-    //   // "0xcce976f728a0d260e45b63f2e65545338db05a84",
-    //   shared.vault.address,
-    //   REDEEM_QUANTITY,
-    //   REDEEM_QUANTITY,
-    // );
+    trace({
+      message: `Mid calculations- GAV: ${shared.midCalculations
+        .gav}, NAV: ${shared.midCalculations.nav}, Share Price: ${shared
+        .midCalculations.sharePrice}, totalSupply: ${shared.midCalculations
+        .totalSupply}`,
+      data: shared,
+    });
 
-    // trace({
-    //   message: `Redeem requested. shares: ${shared.redemptionRequest
-    //     .numShares}`,
-    //   data: shared,
-    // });
+    shared.redemptionRequest = await redeem(
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      // shared.vault.address,
+      REDEEM_QUANTITY,
+      REDEEM_QUANTITY,
+    );
 
-    // await awaitDataFeedUpdates(2);
+    trace({
+      message: `Redeem requested. shares: ${shared.redemptionRequest
+        .numShares}`,
+      data: shared,
+    });
 
-    // trace("Awaited two data feed updates");
+    await awaitDataFeedUpdates(2);
 
-    // shared.executedRedeemRequest = await executeRequest(
-    //   shared.redemptionRequest.id,
-    //   // "0xcce976f728a0d260e45b63f2e65545338db05a84",
-    //   shared.vault.address,
-    // );
+    trace("Awaited two data feed updates");
 
-    // shared.participation.invested = await getParticipation(
-    //   shared.vault.address,
-    //   // "0xcce976f728a0d260e45b63f2e65545338db05a84",
-    //   setup.defaultAccount,
-    // );
+    shared.executedRedeemRequest = await executeRequest(
+      shared.redemptionRequest.id,
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      // shared.vault.address,
+    );
 
-    // expect(shared.participation.invested.personalStake.toNumber()).toBe(
-    //   INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
-    // );
-    // expect(shared.participation.invested.totalSupply.toNumber()).toBe(
-    //   INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
-    // );
+    shared.participation.invested = await getParticipation(
+      // shared.vault.address,
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      setup.defaultAccount,
+    );
 
-    // trace({
-    //   message: `Redeem request executed. Personal stake: ${shared.participation
-    //     .invested.personalStake}`,
-    // });
+    expect(shared.participation.invested.personalStake.toNumber()).toBe(
+      INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
+    );
+    expect(shared.participation.invested.totalSupply.toNumber()).toBe(
+      INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
+    );
 
-    // shared.simpleOrder = await makeOrder({
-    //   sell: {
-    //     howMuch: new BigNumber(1),
-    //     symbol: "ETH-T",
-    //   },
-    //   buy: {
-    //     howMuch: new BigNumber(4),
-    //     symbol: "MLN-T",
-    //   },
-    // });
+    trace({
+      message: `Redeem request executed. Personal stake: ${shared.participation
+        .invested.personalStake}`,
+    });
 
-    // trace({
-    //   message: `Regular account made order with id: ${shared.simpleOrder.id}`,
-    // });
+    shared.simpleOrder = await makeOrder({
+      sell: {
+        howMuch: new BigNumber(1),
+        symbol: "ETH-T",
+      },
+      buy: {
+        howMuch: new BigNumber(4),
+        symbol: "MLN-T",
+      },
+    });
+
+    trace({
+      message: `Regular account made order with id: ${shared.simpleOrder.id}`,
+    });
 
     // shared.orderFromFund = await makeOrderFromFund(
-    //   shared.vault.address,
-    //   // "0xcb178D3065ec0d2Ede30729A7C734056A5134978",
+    //   // shared.vault.address,
+    //   "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
     //   "MLN-T",
     //   "ETH-T",
     //   new BigNumber(1),
@@ -231,79 +236,85 @@ fit(
     //   message: `Fund placed an order with id: ${shared.orderFromFund.id}`,
     // });
 
-    // shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
+    shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
 
-    // trace({
-    //   message: `Got orderbook for MLN-T/ETH-T with length: ${shared.orderBook
-    //     .length}`,
-    //   data: shared,
-    // });
+    trace({
+      message: `Got orderbook for MLN-T/ETH-T with length: ${shared.orderBook
+        .length}`,
+      data: shared,
+    });
 
-    // shared.takenOrder = await takeOrderFromFund(
-    //   shared.simpleOrder.id,
-    //   shared.vault.address,
-    //   // "0xcb178D3065ec0d2Ede30729A7C734056A5134978",
-    //   new BigNumber(1.5),
-    // );
+    shared.takenOrder = await takeOrderFromFund(
+      shared.simpleOrder.id,
+      // shared.vault.address,
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      new BigNumber(1.5),
+    );
 
-    // trace({
-    //   message: `Fund took order; executed quantity: ${shared.takenOrder
-    //     .executedQuantity}`,
-    //   data: shared,
-    // });
+    trace({
+      message: `Fund took order; executed quantity: ${shared.takenOrder
+        .executedQuantity}`,
+      data: shared,
+    });
 
-    // shared.endCalculations = await performCalculations(shared.vault.address);
+    shared.endCalculations = await performCalculations(
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    );
 
-    // trace({
-    //   message: `End calculations- GAV: ${shared.endCalculations
-    //     .gav}\n NAV: ${shared.endCalculations.nav}, Share Price: ${shared
-    //     .endCalculations.sharePrice}, totalSupply: ${shared.endCalculations
-    //     .totalSupply}`,
-    //   data: shared,
-    // });
+    trace({
+      message: `End calculations- GAV: ${shared.endCalculations
+        .gav}\n NAV: ${shared.endCalculations.nav}, Share Price: ${shared
+        .endCalculations.sharePrice}, totalSupply: ${shared.endCalculations
+        .totalSupply}`,
+      data: shared,
+    });
 
-    // shared.toggledSubscription = await toggleSubscription(
-    //   shared.vault.address,
-    //   // "0xcb178D3065ec0d2Ede30729A7C734056A5134978",
-    //   setup.defaultAccount,
-    // );
+    shared.toggledSubscription = await toggleSubscription(
+      // shared.vault.address,
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      setup.defaultAccount,
+    );
 
-    // expect(shared.toggledSubscription).toBe(false);
+    expect(shared.toggledSubscription).toBe(false);
 
-    // shared.toggledSubscription = await toggleSubscription(
-    //   shared.vault.address,
-    //   // "0xcb178D3065ec0d2Ede30729A7C734056A5134978",
-    //   setup.defaultAccount,
-    // );
+    shared.toggledSubscription = await toggleSubscription(
+      // shared.vault.address,
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      setup.defaultAccount,
+    );
 
-    // expect(shared.toggledSubscription).toBe(true);
+    expect(shared.toggledSubscription).toBe(true);
 
-    // shared.toggledRedemption = await toggleRedemption(
-    //   shared.vault.address,
-    //   // "0xcb178D3065ec0d2Ede30729A7C734056A5134978",
-    //   setup.defaultAccount,
-    // );
+    shared.toggledRedemption = await toggleRedemption(
+      // shared.vault.address,
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      setup.defaultAccount,
+    );
 
-    // expect(shared.toggledRedemption).toBe(false);
-    // shared.toggledRedemption = await toggleRedemption(
-    //   shared.vault.address,
-    //   // "0xcb178D3065ec0d2Ede30729A7C734056A5134978",
-    //   setup.defaultAccount,
-    // );
-    // expect(shared.toggledRedemption).toBe(true);
+    expect(shared.toggledRedemption).toBe(false);
+    shared.toggledRedemption = await toggleRedemption(
+      // shared.vault.address,
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      setup.defaultAccount,
+    );
+    expect(shared.toggledRedemption).toBe(true);
 
-    // shared.participationAuthorizations = await getParticipationAuthorizations(
-    //   shared.vault.address,
-    // );
-    // expect(shared.participationAuthorizations.subscriptionAllowed).toBe(true);
-    // expect(shared.participationAuthorizations.redemptionAllowed).toBe(true);
+    shared.participationAuthorizations = await getParticipationAuthorizations(
+      // shared.vault.address,
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    );
+    expect(shared.participationAuthorizations.subscriptionAllowed).toBe(true);
+    expect(shared.participationAuthorizations.redemptionAllowed).toBe(true);
 
-    // shared.recentTrades = await getRecentTrades("ETH-T", "MLN-T");
-    // shared.fundRecentTrades = await getFundRecentTrades(
-    //   "0x7d3E4D11C0EFDEB91A8F96afA098dD79e498b3Fb",
-    // );
-    // expect(shared.recentTrades.length).toBe(true);
-    // expect(shared.fundRecentTrades.length).toBe(true);
+    shared.recentTrades = await getRecentTrades("ETH-T", "MLN-T");
+    shared.fundRecentTrades = await getFundRecentTrades(
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    );
+    expect(shared.recentTrades.length).toBe(true);
+    expect(shared.fundRecentTrades.length).toBe(true);
+
+    console.log("RECENT TRADES ", shared.recentTrades);
+    console.log("FUND RECENT TRADES ", shared.fundRecentTrades);
   },
   10 * 60 * 1000,
 );

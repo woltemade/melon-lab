@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.3.7",
+  "version": "0.5.0-alpha.1",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/main.js",
   "sign-git-tag": true,
@@ -77,10 +77,12 @@
     "walk": "^2.3.9"
   },
   "dependencies": {
-    "@melonproject/protocol": "^0.5.0",
+    "@melonproject/protocol": "0.5.2-alpha.1",
     "@parity/api": "^2.1.5",
     "bignumber.js": "^4.0.2",
     "bip39": "^2.4.0",
+    "eth-sig-util": "^1.4.0",
+    "ethereumjs-util": "^5.1.2",
     "ethers-wallet": "^2.1.4",
     "fs": "0.0.1-security",
     "pify": "^3.0.0",
