@@ -1,11 +1,14 @@
 import {
   getFundInformations,
-  performCalculations,
   getParticipation,
   getParticipationAuthorizations,
+  performCalculations,
+  getFundForManager,
 } from "@melonproject/melon.js";
-import { takeEvery, takeLatest, put, call, select } from "redux-saga/effects";
+import { takeLatest, put, call, select } from "redux-saga/effects";
 import { actions, types } from "../actions/fund";
+import { types as ethereumTypes } from "../actions/ethereum";
+import { actions as appActions } from "../actions/app";
 
 // TODO: Refactor these into new saga architecture
 import { creators as fundHoldingsCreators } from "../legacyComponents/fundHoldings/duck";
@@ -77,9 +80,15 @@ function* checkAndLoad({ address }) {
   }
 }
 
+function* getUsersFund({ account }) {
+  const fundAddress = yield call(getFundForManager, account);
+  if (fundAddress) yield put(appActions.setUsersFund(fundAddress));
+}
+
 function* fund() {
   yield takeLatest(types.INFO_REQUESTED, requestInfo);
-  yield takeEvery(types.SET, checkAndLoad);
+  yield takeLatest(types.SET, checkAndLoad);
+  yield takeLatest(ethereumTypes.ACCOUNT_CHANGED, getUsersFund);
 }
 
 export default fund;

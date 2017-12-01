@@ -53,9 +53,9 @@ function* init() {
       const data = yield take(blockChannel);
 
       if (data.onBlock) {
-        yield put(ethereumActions.newBlock(data.onBlock));
-
         const currentAccount = yield select(state => state.ethereum.account);
+
+        yield put(ethereumActions.newBlock(data.onBlock));
 
         if (currentAccount !== data.onBlock.account) {
           yield put(ethereumActions.accountChanged(data.onBlock.account));

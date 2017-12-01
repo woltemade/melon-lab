@@ -6,7 +6,6 @@ import createHistory from "history/createHashHistory";
 import { routerMiddleware as createRouterMiddleware } from "react-router-redux";
 
 import generalMiddleware from "../legacyComponents/generalMiddleware";
-// import setupMiddleware from "../legacyComponents/setup/middleware";
 import investMiddleware from "../legacyComponents/invest/middleware";
 import fundHoldingsMiddleware from "../legacyComponents/fundHoldings/middleware";
 import orderbookMiddleware from "../legacyComponents/orderbook/middleware";
@@ -28,7 +27,6 @@ export const configureStore = preloadedState => {
   const sagaMiddleware = createSagaMiddleware();
 
   const middlewares = applyMiddleware(
-    // setupMiddleware,
     investMiddleware,
     fundHoldingsMiddleware,
     orderbookMiddleware,

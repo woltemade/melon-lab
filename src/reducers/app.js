@@ -29,6 +29,7 @@ const initialState = {
   isReadyToInteract: false,
   isReadyToTrade: false,
   transactionInProgress: false,
+  usersFund: "",
 };
 
 const isReadyToVisit = ({ network }) => network === "42";
@@ -109,6 +110,10 @@ const reducers = {
         ? onboardingPath.NOT_INVESTED_IN_OWN_FUND
         : onboardingPath.NOT_TRADED_YET,
   }),
+  merge: (state, params) => ({
+    ...state,
+    ...params,
+  }),
   default: state => ({ ...state }),
 };
 
@@ -120,6 +125,7 @@ const mapActionToReducer = {
   [fundTypes.INFO_SUCCEEDED]: reducers.infoSucceeded,
   [appTypes.TRANSACTION_STARTED]: reducers.transactionStarted,
   [appTypes.TRANSACTION_FINISHED]: reducers.transactionFinished,
+  [appTypes.SET_USERS_FUND]: reducers.merge,
 };
 
 export const reducer = (state = initialState, action = {}) => {
