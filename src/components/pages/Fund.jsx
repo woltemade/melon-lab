@@ -1,8 +1,9 @@
 import React from "react";
 import { Card } from "semantic-ui-react";
 
-import Factsheet from "../organisms/Factsheet";
+import Factsheet from "../../containers/Factsheet";
 import Administration from "../organisms/Administration";
+import Participation from "../organisms/Participation";
 
 // TODO: Remove legacyComponents
 /*
@@ -11,18 +12,15 @@ import OrderbookContainer from "../../legacyComponents/orderbook/container";
 import RecentTradesContainer from "../../legacyComponents/recentTrades/container";
 import TradeContainer from "../../legacyComponents/trade/container";
 import TradeHelperContainer from "../../legacyComponents/tradeHelper/container";
-import ParticipationContainer from "../../legacyComponents/participation/container";
-import ExecuteRequestContainer from "../../legacyComponents/executeRequest/container";
 import TradingActivityContainer from "../../legacyComponents/tradingActivity/container";
 */
 
 const ManagerView = ({
-  factsheet,
-  pendingRequest,
   adminActions,
   adminProps,
-  loading,
+  factsheet,
   isOwner,
+  loading,
 }) => (
   <div className="App">
     <br />
@@ -36,12 +34,14 @@ const ManagerView = ({
         )}
       </Card.Group>
     </div>
+    <div>
+      <Participation
+        {...participationActions}
+        {...participationProps}
+        loading={loading}
+      />
+    </div>
     {/*
-        {pendingRequest ? (
-          <ExecuteRequestContainer />
-        ) : (
-          <ParticipationContainer />
-        )}
     <div>
       <br />
       <br />
