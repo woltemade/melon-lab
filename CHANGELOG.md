@@ -24,6 +24,8 @@ and this project adheres to
 * createWallet function
 * importWallet function
 * signTermsAndConditions function
+* parity and wallet folder in utils folder
+* getParityProvider function
 
 ### Changed
 
