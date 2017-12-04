@@ -21,10 +21,13 @@ and this project adheres to
 * getPastEvents (unused as of now; prepared it for later)
 * getRankingContract function
 * getRanking function
+* createWallet function
+* importWallet function
+* signTermsAndConditions function
 
 ### Changed
 
-* Switch from web3 to parity.js (parity all transactions/calls to the contracts)
+* Switch from web3 to parity.js (parityfy all transactions/calls to the contracts)
 * gasBoost function adjusted to parity.js
 * getRecentTrades for an asset pair and getFundRecentTrades, using rpc call getLogs
 * awaitDataFeedUpdate -used only for integration test
@@ -32,6 +35,7 @@ and this project adheres to
 * [labeling] Renamed 'creationDate' and 'timestamp' in setupFund an getFundInformations to 'inception'
 * [labeling] Renamed 'timestamp' in convertUnclaimedRewards to 'date'
 * [labeling] Harmonized in subscribe/redeem from atTimeStamp/atTimeStamp to timestamp
+* onBlock function adjusted to parity.js
 
 ### Removed
 

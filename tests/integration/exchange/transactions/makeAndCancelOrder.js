@@ -10,7 +10,9 @@ xit(
   "make an order and cancel it",
   async () => {
     trace({
-      message: `Start make order and cancel with defaultAccount: ${setup.defaultAccount}`,
+      message: `Start make order and cancel with defaultAccount: ${
+        setup.defaultAccount
+      }`,
       data: setup,
     });
 

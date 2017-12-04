@@ -30,8 +30,7 @@
     "build": "npm run walklib && npm run babel",
     "walklib": "babel-node ./scripts/walkLib.js",
     "lint": "eslint .",
-    "format":
-      "prettier-eslint --write \"lib/**/*.js\" && prettier-eslint --write \"tests/**/*.js\"",
+    "format": "prettier-eslint --write \"lib/**/*.js\" && prettier-eslint --write \"tests/**/*.js\"",
     "precommit": "lint-staged",
     "preversion": "npm test",
     "version": "npm run test",
@@ -43,13 +42,22 @@
     "docs": "documentation build lib/** -f html -o docs --sort-order alpha"
   },
   "lint-staged": {
-    "*.js": ["npm run format", "git add"]
+    "*.js": [
+      "npm run format",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/melonproject/melon.js.git"
   },
-  "keywords": ["melon", "melonproject", "javascript", "ethereum", "api"],
+  "keywords": [
+    "melon",
+    "melonproject",
+    "javascript",
+    "ethereum",
+    "api"
+  ],
   "author": "Simon Emanuel Schmid <simon@melonport.com>",
   "license": "GPL-3.0",
   "bugs": {
@@ -87,8 +95,7 @@
     "@parity/api": "^2.1.5",
     "bignumber.js": "^4.0.2",
     "bip39": "^2.4.0",
-    "eth-sig-util": "^1.4.0",
-    "ethereumjs-util": "^5.1.2",
+    "ethers-utils": "^2.1.8",
     "ethers-wallet": "^2.1.4",
     "fs": "0.0.1-security",
     "pify": "^3.0.0",
