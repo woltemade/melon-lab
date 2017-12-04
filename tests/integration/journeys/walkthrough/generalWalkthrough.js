@@ -27,6 +27,7 @@ import performCalculations from "../../../../lib/fund/calls/performCalculations"
 import redeem from "../../../../lib/participation/transactions/redeem";
 import getRecentTrades from "../../../../lib/exchange/calls/getRecentTrades";
 import getFundRecentTrades from "../../../../lib/exchange/calls/getFundRecentTrades";
+import getParityApi from "../../../../lib/utils/getParityApi";
 
 const INITIAL_SUBSCRIBE_QUANTITY = 20;
 const REDEEM_QUANTITY = 5;
