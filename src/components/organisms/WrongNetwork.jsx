@@ -13,8 +13,7 @@ const WrongNetwork = () => (
           <strong>
             {" "}
             In order to interact with the Melon protocol, please switch to Kovan
-            Network in Metamask and refresh the page. The page should load
-            within few seconds.{" "}
+            Network in Metamask. The page should load within few seconds.{" "}
           </strong>
         </p>
         <p className="App-intro">

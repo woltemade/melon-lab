@@ -1,8 +1,14 @@
 import React from "react";
-import { List, Card, Icon, Button } from "semantic-ui-react";
+import { List, Card, Button } from "semantic-ui-react";
 
-const FundActivity = () =>
-  (<Card centered>
+const FundActivity = ({
+  requestFullParticipationHistory,
+  /*
+  subscriptions,
+  redemptions,
+  */
+}) => (
+  <Card centered>
     <Card.Content>
       <Card.Header>Fund Activity</Card.Header>
       <br />
@@ -10,13 +16,11 @@ const FundActivity = () =>
       <br />
       <List>
         <List.Item as="a">
-
           <List.Content>
             <List.Header>Recent Subscriptions</List.Header>
           </List.Content>
         </List.Item>
         <List.Item as="a">
-
           <List.Content>
             <List.Header>Recent Redemptions</List.Header>
           </List.Content>
@@ -25,22 +29,12 @@ const FundActivity = () =>
     </Card.Content>
     <Card.Content extra>
       <div className="ui two buttons">
-        <Button basic color="black">
+        <Button basic color="black" onClick={requestFullParticipationHistory}>
           Request full subscriptions/redeem history
         </Button>
       </div>
-      <br />
-      <br />
-      <br />
-      <div className="ui two buttons">
-        <Button basic color="black" href="#investredeem">
-          Invest
-        </Button>
-        <Button basic color="black" href="#investredeem">
-          Redeem
-        </Button>
-      </div>
     </Card.Content>
-  </Card>);
+  </Card>
+);
 
 export default FundActivity;
