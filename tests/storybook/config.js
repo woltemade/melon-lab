@@ -9,6 +9,7 @@ setDefaults({
 });
 
 addDecorator(ContainerDecorator);
+// addDecorator(withKnobs);
 
 const req = require.context("../../src/", true, /\.story\.jsx$/);
 
