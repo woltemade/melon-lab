@@ -42,9 +42,11 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "semantic:build": "cd public/semantic && gulp build",
-    "semantic:watch": "cd public/semantic && gulp"
+    "semantic:watch": "cd public/semantic && gulp",
+    "storybook": "start-storybook -p 9001 -c tests/storybook"
   },
   "devDependencies": {
+    "@storybook/react": "^3.2.17",
     "babel-preset-stage-2": "^6.24.1",
     "eslint": "^4.3.0",
     "eslint-config-airbnb": "^15.1.0",
