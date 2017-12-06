@@ -7,6 +7,10 @@ Semantic-ui.
 
 * Explicitely deconstruct props in the function signature
 * Write state-less functional components
+* Data preparation is part of the containers. I.e. Don't do stuff like `new
+  BigNumber(q).toFixed(4)` inside the organisms. Just stupidly display whats
+  given. In other words: Props should be JSON compatible: Only numbers, strings,
+  booleans and arrays/maps of these.
 
 # Organism Boilerplate
 
