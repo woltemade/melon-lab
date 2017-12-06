@@ -1,10 +1,8 @@
 import React from "react";
 import { Field } from "redux-form";
-import { List, Input, Button, Card } from "semantic-ui-react";
+import { List, Button, Card } from "semantic-ui-react";
 
-const renderInput = ({ input }) => (
-  <Input {...input} placeholder="Fund Name" style={{ width: "100%" }} />
-);
+import renderInput from "./utils/renderInput";
 
 // Explicitely decompose props here.
 const Setup = ({ loading, handleSubmit }) => (
