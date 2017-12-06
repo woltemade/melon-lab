@@ -35,16 +35,16 @@ const onMouseOut = e => {
 
 const Orderbook = ({
   buyOrders,
-  buySymbol,
+  baseSymbol,
   sellOrders,
-  sellSymbol,
+  quoteSymbol,
   takeOrder,
   totalBuyVolume,
   totalSellVolume,
 }) => (
   <div id="orderbook">
     <h3 className="App-intro">
-      Orderbook for {buySymbol}/{sellSymbol}
+      Orderbook for {baseSymbol}/{quoteSymbol}
     </h3>
     <Grid padded={false}>
       <Grid.Row columns={2}>

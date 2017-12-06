@@ -55,8 +55,8 @@ storiesOf("Orderbook", module)
     "Default",
     withInfo("Short info about organism")(() => (
       <Orderbook
-        sellSymbol={text("sellSymbol", "MLN-T")}
-        buySymbol={text("buySymbol", "ETH-T")}
+        quoteSymbol={text("quoteSymbol", "MLN-T")}
+        baseSymbol={text("baseSymbol", "ETH-T")}
         buyOrders={object("buyOrders", mockedOrderbook.buy)}
         sellOrders={object("sellOrders", mockedOrderbook.sell)}
         totalBuyVolume={text("totalBuyVolume", "3.0000")}
