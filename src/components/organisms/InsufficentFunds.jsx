@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button } from "semantic-ui-react";
 
-const LockedAccount = ({ mlnBalance, ethBalance }) => (
+const InsufficentFunds = ({ mlnBalance, ethBalance }) => (
   <div>
     <Card centered>
       <Card.Content>
@@ -46,4 +46,4 @@ const LockedAccount = ({ mlnBalance, ethBalance }) => (
   </div>
 );
 
-export default LockedAccount;
+export default InsufficentFunds;
