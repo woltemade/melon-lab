@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import { boolean, withKnobs } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
-import CenteredCardDecorator from "../../../tests/storybook/CenteredCardDecorator";
+import CenteredCardDecorator from "../../../tests/storybook/decorators/CenteredCard";
 
 import ExecuteRequest from "./ExecuteRequest";
 

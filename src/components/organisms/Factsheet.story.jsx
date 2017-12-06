@@ -2,7 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import { text, withKnobs } from "@storybook/addon-knobs";
-import CenteredCardDecorator from "../../../tests/storybook/CenteredCardDecorator";
+import CenteredCardDecorator from "../../../tests/storybook/decorators/CenteredCard";
 
 import Factsheet from "./Factsheet";
 
