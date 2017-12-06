@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import Participation from "../components/organisms/Participation";
+import Participation from "../components/organisms/ParticipationForm";
 
 const mapStateToProps = state => ({
   loading: state.app.transactionInProgress,

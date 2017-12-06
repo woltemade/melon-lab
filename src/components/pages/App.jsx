@@ -11,7 +11,7 @@ import NoMetamask from "../organisms/NoMetamask";
 import LockedAccount from "../organisms/LockedAccount";
 import InsufficentFunds from "../organisms/InsufficentFunds";
 import SetupContainer from "../../containers/Setup";
-import InvestContainer from "../../legacyComponents/invest/container";
+// import InvestContainer from "../../legacyComponents/invest/container";
 import { onboardingPath } from "../../reducers/app";
 import FundContainer from "../../containers/Fund";
 
@@ -23,7 +23,7 @@ const mapOnboardingStateToMainContainer = {
   [onboardingPath.INSUFFICENT_ETH]: InsufficentFunds,
   [onboardingPath.INSUFFICENT_MLN]: InsufficentFunds,
   [onboardingPath.NO_FUND_CREATED]: SetupContainer,
-  [onboardingPath.NOT_INVESTED_IN_OWN_FUND]: InvestContainer,
+  // [onboardingPath.NOT_INVESTED_IN_OWN_FUND]: InvestContainer,
 };
 
 const getSetupComponent = ({

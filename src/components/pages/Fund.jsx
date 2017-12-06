@@ -3,7 +3,7 @@ import { Card } from "semantic-ui-react";
 
 import Factsheet from "../../containers/Factsheet";
 import Administration from "../../containers/Administration";
-import Participation from "../organisms/Participation";
+// import Participation from "../organisms/Participation";
 
 // TODO: Remove legacyComponents
 /*
@@ -24,10 +24,10 @@ const ManagerView = ({ isOwner, loading }) => (
         {isOwner ? <Administration /> : <div>visitor</div>}
       </Card.Group>
     </div>
+    {/*
     <div>
       <Participation />
     </div>
-    {/*
     <div>
       <br />
       <br />

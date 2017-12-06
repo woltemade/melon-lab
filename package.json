@@ -37,6 +37,7 @@
   },
   "scripts": {
     "start": "npm run semantic:watch & react-scripts start",
+    "lint": "eslint ./",
     "build": "npm run semantic:build && webpack",
     "deploy": "ipfs add -r public",
     "test": "react-scripts test --env=jsdom",
