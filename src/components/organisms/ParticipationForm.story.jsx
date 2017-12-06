@@ -6,7 +6,7 @@ import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
-import { ReduxForm } from "../../../tests/storybook/decorators/ReduxForm";
+import { ReduxProvider } from "../../../tests/storybook/decorators/ReduxProvider";
 
 import ParticipationForm from "./ParticipationForm";
 
@@ -24,7 +24,7 @@ const Form = reduxForm({
 storiesOf("ParticipationForm", module)
   .addDecorator(withKnobs)
   // .addDecorator(story => <Provider {...{ store }}>{story}</Provider>)
-  // .addDecorator(ReduxForm)
+  // .addDecorator(ReduxProvider)
   .add(
     "Default",
     withInfo("Short info about organism")(() => (
