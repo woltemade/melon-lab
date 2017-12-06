@@ -43,7 +43,8 @@
     "eject": "react-scripts eject",
     "semantic:build": "cd public/semantic && gulp build",
     "semantic:watch": "cd public/semantic && gulp",
-    "storybook": "start-storybook -p 9001 -c tests/storybook"
+    "storybook": "start-storybook -p 9001 -c tests/storybook",
+    "storybook:build": "build-storybook -s public -o .out  -c tests/storybook"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.2.17",
