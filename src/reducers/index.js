@@ -6,6 +6,7 @@ import app from "./app";
 import fund from "./fund";
 
 import ethereum from "./ethereum";
+/*
 import executeRequest from "../legacyComponents/executeRequest/duck";
 import fundHoldings from "../legacyComponents/fundHoldings/duck";
 import general from "../legacyComponents/general";
@@ -16,23 +17,26 @@ import recentTrades from "../legacyComponents/recentTrades/duck";
 import trade from "../legacyComponents/trade/duck";
 import tradeHelper from "../legacyComponents/tradeHelper/duck";
 import tradingActivity from "../legacyComponents/tradingActivity/duck";
+*/
 
 const rootReducer = combineReducers({
   app,
   ethereum,
-  executeRequest,
   form,
   fund,
+  router,
+  /*
+  executeRequest,
   fundHoldings,
   general,
   invest,
   orderbook,
   participation,
   recentTrades,
-  router,
   trade,
   tradeHelper,
   tradingActivity,
+  */
 });
 
 export default rootReducer;
