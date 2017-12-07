@@ -16,13 +16,13 @@ import getParticipation from "../../../../lib/participation/calls/getParticipati
 import subscribe from "../../../../lib/participation/transactions/subscribe";
 import executeRequest from "../../../../lib/participation/transactions/executeRequest";
 import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
-import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFund";
+import makeOrder from "../../../../lib/fund/transactions/makeOrder";
 import toggleSubscription from "../../../../lib/fund/transactions/toggleSubscription";
 import toggleRedemption from "../../../../lib/fund/transactions/toggleRedemption";
 import getParticipationAuthorizations from "../../../../lib/fund/calls/getParticipationAuthorizations";
-import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
+import makeOrderFromExchange from "../../../../lib/exchange/transactions/makeOrderFromExchange";
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
-import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFund";
+import takeOrder from "../../../../lib/fund/transactions/takeOrder";
 import performCalculations from "../../../../lib/fund/calls/performCalculations";
 import redeem from "../../../../lib/participation/transactions/redeem";
 import getRecentTrades from "../../../../lib/exchange/calls/getRecentTrades";
