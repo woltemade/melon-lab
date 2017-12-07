@@ -2,8 +2,8 @@
 
 import setup from "../../../../lib/utils/setup";
 import trace from "../../../../lib/utils/generic/trace";
-import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
-import cancelOrder from "../../../../lib/exchange/transactions/cancelOrder";
+import makeOrderFromAccount from "../../../../lib/exchange/transactions/makeOrderFromAccount";
+import cancelOrderFromAccount from "../../../../lib/exchange/transactions/cancelOrderFromAccount";
 import getOrder from "../../../../lib/exchange/calls/getOrder";
 
 xit(
@@ -16,7 +16,7 @@ xit(
       data: setup,
     });
 
-    const order = await makeOrder({
+    const order = await makeOrderFromAccount({
       sell: {
         howMuch: new BigNumber(1),
         symbol: "ETH-T",
@@ -28,7 +28,7 @@ xit(
     });
     trace({ message: `Made order with id: ${order.id}`, data: order });
 
-    const wasCancelled = await cancelOrder(order.id);
+    const wasCancelled = await cancelOrderFromAccount(order.id);
     expect(!!wasCancelled).toBeTruthy();
     trace({ message: `Order canceled: ${order.id}` });
 

@@ -17,12 +17,12 @@ import subscribe from "../../../../lib/participation/transactions/subscribe";
 import executeRequest from "../../../../lib/participation/transactions/executeRequest";
 import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
 import makeOrder from "../../../../lib/fund/transactions/makeOrder";
+import takeOrder from "../../../../lib/fund/transactions/takeOrder";
 import toggleSubscription from "../../../../lib/fund/transactions/toggleSubscription";
 import toggleRedemption from "../../../../lib/fund/transactions/toggleRedemption";
 import getParticipationAuthorizations from "../../../../lib/fund/calls/getParticipationAuthorizations";
-import makeOrderFromExchange from "../../../../lib/exchange/transactions/makeOrderFromExchange";
+import makeOrderFromAccount from "../../../../lib/exchange/transactions/makeOrderFromAccount";
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
-import takeOrder from "../../../../lib/fund/transactions/takeOrder";
 import performCalculations from "../../../../lib/fund/calls/performCalculations";
 import redeem from "../../../../lib/participation/transactions/redeem";
 import getRecentTrades from "../../../../lib/exchange/calls/getRecentTrades";
@@ -216,7 +216,7 @@ fit(
       }`,
     });
 
-    shared.simpleOrder = await makeOrder({
+    shared.simpleOrder = await makeOrderFromAccount({
       sell: {
         howMuch: new BigNumber(1),
         symbol: "ETH-T",
@@ -231,9 +231,9 @@ fit(
       message: `Regular account made order with id: ${shared.simpleOrder.id}`,
     });
 
-    shared.orderFromFund = await makeOrderFromFund(
-      // shared.vault.address,
-      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    shared.orderFromFund = await makeOrder(
+      shared.vault.address,
+      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       "MLN-T",
       "ETH-T",
       new BigNumber(1),
@@ -253,7 +253,7 @@ fit(
       data: shared,
     });
 
-    shared.takenOrder = await takeOrderFromFund(
+    shared.takenOrder = await takeOrder(
       shared.simpleOrder.id,
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
