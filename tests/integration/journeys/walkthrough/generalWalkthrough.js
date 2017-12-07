@@ -16,7 +16,7 @@ import getParticipation from "../../../../lib/participation/calls/getParticipati
 import subscribe from "../../../../lib/participation/transactions/subscribe";
 import executeRequest from "../../../../lib/participation/transactions/executeRequest";
 import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
-// import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFund";
+import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFund";
 import toggleSubscription from "../../../../lib/fund/transactions/toggleSubscription";
 import toggleRedemption from "../../../../lib/fund/transactions/toggleRedemption";
 import getParticipationAuthorizations from "../../../../lib/fund/calls/getParticipationAuthorizations";
@@ -27,7 +27,10 @@ import performCalculations from "../../../../lib/fund/calls/performCalculations"
 import redeem from "../../../../lib/participation/transactions/redeem";
 import getRecentTrades from "../../../../lib/exchange/calls/getRecentTrades";
 import getFundRecentTrades from "../../../../lib/exchange/calls/getFundRecentTrades";
-import getParityApi from "../../../../lib/utils/getParityApi";
+import getParityProvider from "../../../../lib/utils/parity/getParityProvider";
+import createWallet from "../../../../lib/utils/wallet/createWallet";
+import encryptWallet from "../../../../lib/utils/wallet/encryptWallet";
+import decryptWallet from "../../../../lib/utils/wallet/decryptWallet";
 
 const INITIAL_SUBSCRIBE_QUANTITY = 20;
 const REDEEM_QUANTITY = 5;
@@ -43,15 +46,11 @@ fit(
   "Create fund, invest, take order, redeem",
   async () => {
     console.log("\n");
-
     const api = new Api(setup.provider);
 
     // 1 - instantiate wallet
     const jsonWallet = JSON.stringify(encryptedWallet);
-    const wallet = await Wallet.Wallet.fromEncryptedWallet(
-      jsonWallet,
-      password.kovan,
-    );
+    const wallet = await decryptWallet(jsonWallet, password.kovan);
     setup.wallet = wallet;
 
     trace({
@@ -232,18 +231,18 @@ fit(
       message: `Regular account made order with id: ${shared.simpleOrder.id}`,
     });
 
-    // shared.orderFromFund = await makeOrderFromFund(
-    //   // shared.vault.address,
-    //   "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    //   "MLN-T",
-    //   "ETH-T",
-    //   new BigNumber(1),
-    //   new BigNumber(1),
-    // );
+    shared.orderFromFund = await makeOrderFromFund(
+      // shared.vault.address,
+      "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      "MLN-T",
+      "ETH-T",
+      new BigNumber(1),
+      new BigNumber(1),
+    );
 
-    // trace({
-    //   message: `Fund placed an order with id: ${shared.orderFromFund.id}`,
-    // });
+    trace({
+      message: `Fund placed an order with id: ${shared.orderFromFund.id}`,
+    });
 
     shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
 
