@@ -70,9 +70,7 @@ const reducers = {
       isReadyToInteract: isReadyToInteract(params),
     };
 
-    if (params.network !== networks.KOVAN) {
-      return { ...newState, onboardingState: onboardingPath.WRONG_NETWORK };
-    } else if (!params.account) {
+    if (!params.account) {
       return { ...newState, onboardingState: onboardingPath.LOCKED_ACCOUNT };
     } else if (params.ethBalance.lte(0)) {
       return { ...newState, onboardingState: onboardingPath.INSUFFICENT_ETH };

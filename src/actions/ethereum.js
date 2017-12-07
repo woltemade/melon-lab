@@ -25,21 +25,13 @@ export const actions = {
     type: types.SET_PROVIDER,
     provider,
   }),
-  newBlock: ({
-    blockNumber,
-    syncing,
-    account,
-    ethBalance,
-    mlnBalance,
-    network,
-  }) => ({
+  newBlock: ({ blockNumber, syncing, account, ethBalance, mlnBalance }) => ({
     type: types.NEW_BLOCK,
     blockNumber,
     syncing,
     account,
     ethBalance,
     mlnBalance,
-    network,
     lastUpdate: new Date(),
     isUpToDate: true,
   }),
