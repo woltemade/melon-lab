@@ -20,13 +20,13 @@ import getParticipation from "../../../../lib/participation/calls/getParticipati
 import subscribe from "../../../../lib/participation/transactions/subscribe";
 import executeRequest from "../../../../lib/participation/transactions/executeRequest";
 import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
-import makeOrderFromFund from "../../../../lib/fund/transactions/makeOrderFromFund";
+import makeOrder from "../../../../lib/fund/transactions/makeOrder";
 import toggleSubscription from "../../../../lib/fund/transactions/toggleSubscription";
 import toggleRedemption from "../../../../lib/fund/transactions/toggleRedemption";
 import getParticipationAuthorizations from "../../../../lib/fund/calls/getParticipationAuthorizations";
-import makeOrder from "../../../../lib/exchange/transactions/makeOrder";
+import makeOrderFromExchange from "../../../../lib/exchange/transactions/makeOrderFromExchange";
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
-import takeOrderFromFund from "../../../../lib/fund/transactions/takeOrderFromFund";
+import takeOrder from "../../../../lib/fund/transactions/takeOrder";
 import performCalculations from "../../../../lib/fund/calls/performCalculations";
 import redeem from "../../../../lib/participation/transactions/redeem";
 import getRecentTrades from "../../../../lib/exchange/calls/getRecentTrades";
@@ -203,7 +203,7 @@ fit(
     //     .invested.personalStake}`,
     // });
 
-    // shared.simpleOrder = await makeOrder({
+    // shared.simpleOrder = await makeOrderFromExchange({
     //   sell: {
     //     howMuch: new BigNumber(1),
     //     symbol: "ETH-T",
@@ -218,7 +218,7 @@ fit(
     //   message: `Regular account made order with id: ${shared.simpleOrder.id}`,
     // });
 
-    // shared.orderFromFund = await makeOrderFromFund(
+    // shared.orderFromFund = await makeOrder(
     //   shared.vault.address,
     //   // "0xcb178D3065ec0d2Ede30729A7C734056A5134978",
     //   "MLN-T",
@@ -239,7 +239,7 @@ fit(
     //   data: shared,
     // });
 
-    // shared.takenOrder = await takeOrderFromFund(
+    // shared.takenOrder = await takeOrder(
     //   shared.simpleOrder.id,
     //   shared.vault.address,
     //   // "0xcb178D3065ec0d2Ede30729A7C734056A5134978",
