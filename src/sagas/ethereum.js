@@ -1,6 +1,11 @@
-import { take, put, takeLatest, select } from "redux-saga/effects";
+import { take, put, takeLatest, select, apply } from "redux-saga/effects";
 import { eventChannel } from "redux-saga";
-import { setup, onBlock, getWeb3 } from "@melonproject/melon.js";
+import {
+  setup,
+  onBlock,
+  getParityProvider,
+  importWallet,
+} from "@melonproject/melon.js";
 
 import { types as browserTypes } from "../actions/browser";
 import { actions as ethereumActions } from "../actions/ethereum";
@@ -9,60 +14,72 @@ import { actions as fundActions } from "../actions/fund";
 const MAX_BLOCK_TIME = 20 * 1000;
 
 function* init() {
-  const { web3, provider } = getWeb3(window.web3);
+  const { provider, providerType, api } = getParityProvider();
 
   setup.init({
-    web3,
+    provider,
     daemonAddress: "0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd",
   });
 
-  yield put(ethereumActions.setProvider(provider));
+  yield put(ethereumActions.setProvider(providerType));
 
-  if (web3.currentProvider.isConnected()) {
-    const fund = yield select(state => state.fund);
+  // Reading the fund address from the URL
+  const fund = yield select(state => state.fund);
+  const networkId = yield apply(api, api.net.version);
 
-    yield put(ethereumActions.hasConnected(web3.version.network));
+  yield put(ethereumActions.hasConnected(networkId));
 
-    if (fund.address !== "" && fund.name === "-") {
-      yield put(fundActions.infoRequested(fund.address));
-    }
+  // TODO: Real functionality which can create a new wallet if needed
+  setup.wallet = importWallet(
+    "ability ensure nasty lazy final guess private electric eyebrow oil noise ritual",
+  );
 
-    const blockChannel = eventChannel(emitter => {
-      let blockTimeout;
+  setup.defaultAccount = setup.wallet.address;
 
-      const setBlockOverdue = () => {
-        emitter({ blockOverdue: true });
-      };
+  console.log(setup);
 
-      // Immediately get infos from the latest block before watching new blocks
-      onBlock(web3).then(data => emitter({ onBlock: data }));
+  if (fund.address !== "" && fund.name === "-") {
+    yield put(fundActions.infoRequested(fund.address));
+  }
+
+  const blockChannel = eventChannel(emitter => {
+    let blockTimeout;
+
+    const setBlockOverdue = () => {
+      emitter({ blockOverdue: true });
+    };
+
+    // Immediately get infos from the latest block before watching new blocks
+    onBlock().then(data => emitter({ onBlock: data }));
+    blockTimeout = window.setTimeout(setBlockOverdue, MAX_BLOCK_TIME);
+
+    /*
+    const filter = web3.eth.filter("latest", () => {
+      onBlock().then(data => emitter({ onBlock: data }));
+      window.clearTimeout(blockTimeout);
       blockTimeout = window.setTimeout(setBlockOverdue, MAX_BLOCK_TIME);
-
-      const filter = web3.eth.filter("latest", () => {
-        onBlock(web3).then(data => emitter({ onBlock: data }));
-        window.clearTimeout(blockTimeout);
-        blockTimeout = window.setTimeout(setBlockOverdue, MAX_BLOCK_TIME);
-      });
-
-      return () => {
-        filter.stopWatching();
-      };
     });
 
-    while (true) {
-      const data = yield take(blockChannel);
+    return () => {
+      filter.stopWatching();
+    };
+    */
+    return () => {};
+  });
 
-      if (data.onBlock) {
-        const currentAccount = yield select(state => state.ethereum.account);
+  while (true) {
+    const data = yield take(blockChannel);
 
-        yield put(ethereumActions.newBlock(data.onBlock));
+    if (data.onBlock) {
+      const currentAccount = yield select(state => state.ethereum.account);
 
-        if (currentAccount !== data.onBlock.account) {
-          yield put(ethereumActions.accountChanged(data.onBlock.account));
-        }
-      } else {
-        yield put(ethereumActions.blockOverdue());
+      yield put(ethereumActions.newBlock(data.onBlock));
+
+      if (currentAccount !== data.onBlock.account) {
+        yield put(ethereumActions.accountChanged(data.onBlock.account));
       }
+    } else {
+      yield put(ethereumActions.blockOverdue());
     }
   }
 }
