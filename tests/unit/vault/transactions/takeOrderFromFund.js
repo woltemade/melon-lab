@@ -31,12 +31,14 @@ test("with higher quantity -> take max", async () => {
 
   expect(result).toBeTruthy();
   expect(result.executedQuantity.eq("8.55505176")).toBeTruthy();
-  expect(
-    contract.mockInspect.instance.takeOrder,
-  ).toHaveBeenCalledWith(6870, new BigNumber("8555051760000000000"), {
-    from: "0xMANAGER",
-    gas: 60000,
-  });
+  expect(contract.mockInspect.instance.takeOrder).toHaveBeenCalledWith(
+    6870,
+    new BigNumber("8555051760000000000"),
+    {
+      from: "0xMANAGER",
+      gas: 60000,
+    },
+  );
 });
 
 test("with lower quantity -> take as specified", async () => {
@@ -49,10 +51,12 @@ test("with lower quantity -> take as specified", async () => {
 
   expect(result).toBeTruthy();
   expect(result.executedQuantity.eq("1")).toBeTruthy();
-  expect(
-    contract.mockInspect.instance.takeOrder,
-  ).toHaveBeenCalledWith(6870, new BigNumber("1000000000000000000"), {
-    from: "0xMANAGER",
-    gas: 60000,
-  });
+  expect(contract.mockInspect.instance.takeOrder).toHaveBeenCalledWith(
+    6870,
+    new BigNumber("1000000000000000000"),
+    {
+      from: "0xMANAGER",
+      gas: 60000,
+    },
+  );
 });

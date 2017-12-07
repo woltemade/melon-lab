@@ -1,4 +1,4 @@
-import gasBoost from "../../../lib/utils/gasBoost";
+import gasBoost from "../../../lib/utils/ethereum/gasBoost";
 
 describe("gasBoost", () => {
   it("boosts gas regular function", async () => {

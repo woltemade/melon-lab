@@ -15,10 +15,12 @@ test("transferTo", async () => {
   expect(contract().at).toHaveBeenCalledWith(
     "0x1a825e9bf3bdc8ef8b975f97c78b5208a947d0ec",
   );
-  expect(
-    contract.mockInspect.instance.transfer,
-  ).toHaveBeenCalledWith("0x1", new BigNumber(3 * 10 ** 18), {
-    from: "0xMANAGER",
-    gas: 60000,
-  });
+  expect(contract.mockInspect.instance.transfer).toHaveBeenCalledWith(
+    "0x1",
+    new BigNumber(3 * 10 ** 18),
+    {
+      from: "0xMANAGER",
+      gas: 60000,
+    },
+  );
 });

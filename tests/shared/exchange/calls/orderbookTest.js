@@ -11,7 +11,7 @@ const orderbookTest = (orderbook, assetPairArray) =>
         previous.cumulativeVolume.minus(current.cumulativeVolume).toNumber(),
       ).toBe(previous.sell.howMuch.toNumber());
 
-    if (previous.type === current.type === "buy")
+    if ((previous.type === current.type) === "buy")
       expect(
         current.cumulativeVolume.minus(previous.cumulativeVolume).toNumber(),
       ).toBe(current.buy.howMuch.toNumber());

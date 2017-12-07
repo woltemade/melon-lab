@@ -3,8 +3,12 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+and this project adheres to
+[Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Refactored
 
 ## Unreleased
 
@@ -17,10 +21,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * getPastEvents (unused as of now; prepared it for later)
 * getRankingContract function
 * getRanking function
+* createWallet function
+* importWallet function
+* signTermsAndConditions function
+* parity and wallet folder in utils folder
+* getParityProvider function
 
 ### Changed
 
-* Switch from web3 to parity.js (parity all transactions/calls to the contracts)
+* Switch from web3 to parity.js (parityfy all transactions/calls to the contracts)
 * gasBoost function adjusted to parity.js
 * getRecentTrades for an asset pair and getFundRecentTrades, using rpc call getLogs
 * awaitDataFeedUpdate -used only for integration test
@@ -28,6 +37,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * [labeling] Renamed 'creationDate' and 'timestamp' in setupFund an getFundInformations to 'inception'
 * [labeling] Renamed 'timestamp' in convertUnclaimedRewards to 'date'
 * [labeling] Harmonized in subscribe/redeem from atTimeStamp/atTimeStamp to timestamp
+* onBlock function adjusted to parity.js
 
 ### Removed
 
@@ -83,12 +93,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Fix #61
 * Fix #60
 
-
 ## [0.3.2]
 
 ### Added
-- getRecentTrades
-- getFundRecentTrades
+
+* getRecentTrades
+* getFundRecentTrades
 
 ### Changed
-- Integrate protocol@0.3.6-alpha.6
+
+* Integrate protocol@0.3.6-alpha.6

@@ -1,4 +1,4 @@
-import cacheAwait from "../../../lib/utils/cacheAwait";
+import cacheAwait from "../../../lib/utils/generic/cacheAwait";
 
 const wait = async arg =>
   new Promise(resolve => global.setTimeout(() => resolve(arg), 100));
