@@ -1,15 +1,20 @@
-import { take, put, takeLatest, select, apply } from "redux-saga/effects";
+import { take, put, takeLatest, select, apply, call } from "redux-saga/effects";
 import { eventChannel } from "redux-saga";
 import {
   setup,
   onBlock,
   getParityProvider,
-  importWallet,
+  importWalletFromMnemonic,
+  encryptWallet,
+  decryptWallet,
 } from "@melonproject/melon.js";
 
 import { types as browserTypes } from "../actions/browser";
 import { actions as ethereumActions } from "../actions/ethereum";
 import { actions as fundActions } from "../actions/fund";
+
+import Wallet from "ethers-wallet";
+import loadedWallet from "../_key/wallet.json";
 
 const MAX_BLOCK_TIME = 20 * 1000;
 
@@ -30,13 +35,38 @@ function* init() {
   yield put(ethereumActions.hasConnected(networkId));
 
   // TODO: Real functionality which can create a new wallet if needed
-  setup.wallet = importWallet(
-    "ability ensure nasty lazy final guess private electric eyebrow oil noise ritual",
+
+  // const walletFromMnemonic = importWalletFromMnemonic(
+  //   "divide regular fit traffic ride tag destroy flower holiday lion art million",
+  // );
+
+  // const wallet = new Wallet.Wallet.createRandom();
+
+  // console.log({ wallet, walletFromMnemonic });
+
+  // const encrypted = yield call(
+  //   encryptWallet,
+  //   walletFromMnemonic,
+  //   "9tjSQGCx5z9TZHtDMLClRdzcmBhj8z4fN8u9dWhOI2vpumDGAksBGlESJ2",
+  // );
+  // const encryptedParsed = JSON.parse(encrypted);
+  // encryptedParsed.crypto = encryptedParsed.Crypto;
+
+  // console.log(
+  //   JSON.parse(encrypted),
+  //   "---",
+  //   JSON.parse(JSON.stringify(encrypted)),
+  //   "---",
+  //   JSON.parse(JSON.stringify(loadedWallet)),
+  // );
+  // // setup.wallet = wallet;
+
+  setup.wallet = yield call(
+    decryptWallet,
+    JSON.stringify(loadedWallet),
+    "9tjSQGCx5z9TZHtDMLClRdzcmBhj8z4fN8u9dWhOI2vpumDGAksBGlESJ2",
   );
-
   setup.defaultAccount = setup.wallet.address;
-
-  console.log(setup);
 
   if (fund.address !== "" && fund.name === "-") {
     yield put(fundActions.infoRequested(fund.address));
@@ -50,21 +80,20 @@ function* init() {
     };
 
     // Immediately get infos from the latest block before watching new blocks
-    onBlock().then(data => emitter({ onBlock: data }));
+    onBlock().then(data => emitter({ onBlock: data })); // ;
+
     blockTimeout = window.setTimeout(setBlockOverdue, MAX_BLOCK_TIME);
 
-    /*
-    const filter = web3.eth.filter("latest", () => {
+    const sub = api.subscribe("eth_blockNumber", () => {
       onBlock().then(data => emitter({ onBlock: data }));
       window.clearTimeout(blockTimeout);
       blockTimeout = window.setTimeout(setBlockOverdue, MAX_BLOCK_TIME);
     });
 
     return () => {
-      filter.stopWatching();
+      console.error("Cannot stop this atm", sub);
+      // filter.stopWatching();
     };
-    */
-    return () => {};
   });
 
   while (true) {
