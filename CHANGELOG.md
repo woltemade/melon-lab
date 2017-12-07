@@ -38,12 +38,15 @@ and this project adheres to
 * [labeling] Renamed 'timestamp' in convertUnclaimedRewards to 'date'
 * [labeling] Harmonized in subscribe/redeem from atTimeStamp/atTimeStamp to timestamp
 * onBlock function adjusted to parity.js
+* getFundInformations also returns owner
 
 ### Removed
 
 * depositAndApproveEther
 * filterByAssetPair
 * sortByPrice
+
+### Deprecated
 
 ### Fixed
 * #69
