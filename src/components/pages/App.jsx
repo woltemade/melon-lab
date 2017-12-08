@@ -32,21 +32,24 @@ const getSetupComponent = ({
   mlnBalance,
   ethBalance,
   isReadyToTrade,
-  fundAddress,
+  usersFund,
 }) => {
   if (isReadyToTrade) {
-    return <Redirect to={`/${fundAddress}`} />;
+    return <Redirect to={`/${usersFund}`} />;
   }
   const Main = mapOnboardingStateToMainContainer[onboardingState];
   return Main ? <Main mlnBalance={mlnBalance} ethBalance={ethBalance} /> : null;
 };
 
-const redirecter = ({ isReadyToTrade, fundAddress }) => {
-  if (isReadyToTrade) {
-    return <Redirect to={`/${fundAddress}`} />;
+const redirecter = ({ isReadyToTrade, usersFund, isReadyToVisit }) => {
+  if (isReadyToVisit) {
+    if (isReadyToTrade) {
+      return <Redirect to={`/${usersFund}`} />;
+    }
+    // TODO: Change this to /ranking as soon as ranking is implemented
+    return <Redirect to="/setup" />;
   }
-  // TODO: Change this to /ranking as soon as ranking is implemented
-  return <Redirect to="/setup" />;
+  return <div>Loading ...</div>;
 };
 
 const App = props => (

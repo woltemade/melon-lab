@@ -5,7 +5,6 @@ import { actions as fundActions } from "../actions/fund";
 import Fund from "../components/pages/Fund";
 
 const mapStateToProps = state => ({
-  pendingRequest: state.general.pendingRequest,
   loading: state.app.transactionInProgress,
   isOwner: state.ethereum.account === state.fund.owner,
 });

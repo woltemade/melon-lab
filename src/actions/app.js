@@ -3,6 +3,7 @@ export const types = {
   TRANSACTION_STARTED: "TRANSACTION_STARTED:app:melon.fund",
   TRANSACTION_FINISHED: "TRANSACTION_FINISHED:app:melon.fund",
   SET_USERS_FUND: "SET_USERS_FUND:app:melon.fund",
+  SET_READY_STATE: "SET_READY_STATE:app:melon.fund",
 };
 
 export const actions = {
@@ -15,5 +16,21 @@ export const actions = {
   setUsersFund: usersFund => ({
     type: types.SET_USERS_FUND,
     usersFund,
+  }),
+  setReadyState: ({
+    onboardingState,
+    isConnected,
+    isReadyToVisit,
+    isReadyToInteract,
+    isReadyToInvest,
+    isReadyToTrade,
+  }) => ({
+    type: types.SET_READY_STATE,
+    onboardingState,
+    isConnected,
+    isReadyToVisit,
+    isReadyToInteract,
+    isReadyToInvest,
+    isReadyToTrade,
   }),
 };
