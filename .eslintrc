@@ -1,4 +1,17 @@
 {
+  "env": {
+    "jest": true,
+    "browser": true
+  },
   "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier"]
+  "extends": ["airbnb", "prettier"],
+  "rules": {
+    "react/prop-types": 0,
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.test.js", "**/*.story.jsx", "/tests/**"]
+      }
+    ]
+  }
 }

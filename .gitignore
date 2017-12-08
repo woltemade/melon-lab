@@ -22,3 +22,6 @@ yarn-error.log*
 
 # semantic
 /public/semantic/dist
+
+# storybook build
+.out
