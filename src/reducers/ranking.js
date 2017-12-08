@@ -20,7 +20,7 @@ const reducers = {
 };
 
 const mapActionToReducer = {
-  [types.LOAD_RANKING_SUCCEEDED]: reducers.merge,
+  [types.GET_RANKING_SUCCEEDED]: reducers.merge,
 };
 
 export const reducer = (state = initialState, action) => {
