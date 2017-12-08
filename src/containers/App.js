@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import App from "../components/pages/App";
 
 const mapStateToProps = state => ({
-  fundAddress: state.fund.address,
+  usersFund: state.app.usersFund,
   onboardingState: state.app.onboardingState,
   isReadyToTrade: state.app.isReadyToTrade,
   isReadyToVisit: state.app.isReadyToVisit,
