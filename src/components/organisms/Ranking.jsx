@@ -18,7 +18,7 @@ const Ranking = ({ rankingList }) => (
       <Table.Body>
         {rankingList.map((fund, i) => (
           <Table.Row key={i + 1}>
-            <Table.Cell>{i}</Table.Cell>
+            <Table.Cell>{i + 1}</Table.Cell>
             <Table.Cell>{fund.name}</Table.Cell>
             <Table.Cell textAlign="right">{fund.sharePrice}</Table.Cell>
             <Table.Cell textAlign="right">{fund.inception}</Table.Cell>
