@@ -3,7 +3,7 @@ import {
   getParticipation,
   getParticipationAuthorizations,
   performCalculations,
-  // getFundForManager,
+  getFundForManager,
 } from "@melonproject/melon.js";
 import { takeLatest, put, call, select } from "redux-saga/effects";
 import { actions, types } from "../actions/fund";
@@ -85,12 +85,9 @@ function* checkAndLoad({ address }) {
 }
 
 function* getUsersFund({ account }) {
-  console.warn("reactivate me!");
-  /*
   if (!account) return;
   const fundAddress = yield call(getFundForManager, account);
   if (fundAddress) yield put(appActions.setUsersFund(fundAddress));
-  */
 }
 
 function* fund() {

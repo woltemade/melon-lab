@@ -4,8 +4,8 @@ import {
   setup,
   onBlock,
   getParityProvider,
-  importWalletFromMnemonic,
-  encryptWallet,
+  // importWalletFromMnemonic,
+  // encryptWallet,
   decryptWallet,
 } from "@melonproject/melon.js";
 
@@ -13,7 +13,7 @@ import { types as browserTypes } from "../actions/browser";
 import { actions as ethereumActions } from "../actions/ethereum";
 import { actions as fundActions } from "../actions/fund";
 
-import Wallet from "ethers-wallet";
+// import Wallet from "ethers-wallet";
 import loadedWallet from "../_key/wallet.json";
 
 const MAX_BLOCK_TIME = 20 * 1000;
