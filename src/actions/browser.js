@@ -1,5 +1,5 @@
 export const types = {
-  LOADED: "LOADED:browser:ipfs-frontend",
+  LOADED: "LOADED:browser:melon.fund",
 };
 
 export const actions = {

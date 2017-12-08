@@ -1,11 +1,11 @@
 export const types = {
-  SET: "SET:fund:melon.network",
-  INFO_REQUESTED: "INFO_REQUESTED:fund:melon.network",
-  INFO_SUCCEEDED: "INFO_SUCCEEDED:fund:melon.network",
-  INFO_FAILED: "INFO_FAILED:fund:melon.network",
-  SETUP_REQUESTED: "SETUP_REQUESTED:fund:melon.network",
-  SETUP_SUCCEEDED: "SETUP_SUCCEEDED:fund:melon.network",
-  SETUP_FAILED: "SETUP_FAILED:fund:melon.network",
+  SET: "SET:fund:melon.fund",
+  INFO_REQUESTED: "INFO_REQUESTED:fund:melon.fund",
+  INFO_SUCCEEDED: "INFO_SUCCEEDED:fund:melon.fund",
+  INFO_FAILED: "INFO_FAILED:fund:melon.fund",
+  SETUP_REQUESTED: "SETUP_REQUESTED:fund:melon.fund",
+  SETUP_SUCCEEDED: "SETUP_SUCCEEDED:fund:melon.fund",
+  SETUP_FAILED: "SETUP_FAILED:fund:melon.fund",
 };
 
 export const actions = {
