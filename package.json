@@ -96,7 +96,7 @@
     "bignumber.js": "^4.0.2",
     "bip39": "^2.4.0",
     "ethers-utils": "^2.1.8",
-    "ethers-wallet": "^2.1.4",
+    "ethers-wallet": "^2.1.6",
     "fs": "0.0.1-security",
     "pify": "^3.0.0",
     "ramda": "^0.24.1",
