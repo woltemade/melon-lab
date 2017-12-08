@@ -6,6 +6,7 @@ import ethereum from "./ethereum";
 import fund from "./fund";
 import setup from "./setup";
 import ranking from "./ranking";
+import holdings from "./holdings";
 
 function* rootSaga() {
   yield fork(administration);
@@ -14,6 +15,7 @@ function* rootSaga() {
   yield fork(fund);
   yield fork(setup);
   yield fork(ranking);
+  yield fork(holdings);
 }
 
 export default rootSaga;

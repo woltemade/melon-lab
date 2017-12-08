@@ -5,7 +5,7 @@ import { routerReducer as router } from "react-router-redux";
 import app from "./app";
 import fund from "./fund";
 import ranking from "./ranking";
-import fundHoldings from "./fundHoldings";
+import holdings from "./holdings";
 
 import ethereum from "./ethereum";
 /*
@@ -27,7 +27,7 @@ const rootReducer = combineReducers({
   form,
   fund,
   ranking,
-  fundHoldings,
+  holdings,
   router,
   /*
   executeRequest,

@@ -1,9 +1,7 @@
-import { types } from "../actions/fundHoldings";
+import { types } from "../actions/holdings";
 
 export const initialState = {
-  fundHoldings: {
-    holdings: [],
-  },
+  holdings: [],
 };
 
 const reducers = {

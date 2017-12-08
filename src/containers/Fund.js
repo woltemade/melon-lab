@@ -4,13 +4,14 @@ import { actions as fundActions } from "../actions/fund";
 
 import Fund from "../components/pages/Fund";
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   loading: state.app.transactionInProgress,
   isVisitor: state.app.isReadyToVisit && !state.app.usersFund,
   isInvestor:
     state.app.isReadyToInteract && state.app.usersFund !== state.fund.address,
   isManager:
     state.app.isReadyToInteract && state.ethereum.account === state.fund.owner,
+  fundAddress: ownProps.match.params.fundAddress,
 });
 
 const mapDispatchToProps = dispatch => ({

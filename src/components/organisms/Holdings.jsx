@@ -18,16 +18,16 @@ const FundHoldings = ({ holdings, selectAsset }) => (
       </Table.Header>
       <Table.Body>
         {holdings.map(asset => (
-          <Table.Row key={asset.symbol}>
-            <Table.Cell>{asset.symbol}</Table.Cell>
-            <Table.Cell textAlign="right">{asset.quantity}</Table.Cell>
-            <Table.Cell textAlign="right">{asset.percentage}</Table.Cell>
+          <Table.Row key={asset.name}>
+            <Table.Cell>{asset.name}</Table.Cell>
+            <Table.Cell textAlign="right">{asset.balance}</Table.Cell>
+            <Table.Cell textAlign="right">{asset.percentage}%</Table.Cell>
             <Table.Cell textAlign="right">{asset.price}</Table.Cell>
             <Table.Cell
               textAlign="right"
-              onClick={() => selectAsset(asset.symbol)}
+              onClick={() => selectAsset(asset.name)}
             >
-              {asset.symbol === "MLN-T" ? (
+              {asset[0] === "MLN-T" ? (
                 <div>❤</div>
               ) : (
                 <div className="interactive">Buy/Sell</div>

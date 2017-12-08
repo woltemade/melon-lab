@@ -5,7 +5,7 @@ import Factsheet from "../components/organisms/Factsheet";
 import displayNumber from "../utils/displayNumber";
 
 const mapStateToProps = state => ({
-  aum: displayNumber(state.fund.aum),
+  aum: displayNumber(state.fund.gav),
   creationDate: moment(state.fund.creationDate).format("D. MMM YYYY HH:mm"),
   loading: state.app.transactionInProgress,
   managementReward: displayNumber(state.fund.managementReward),

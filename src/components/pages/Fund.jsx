@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "semantic-ui-react";
 
 import Factsheet from "../../containers/Factsheet";
-// import FundHoldings from "../../containers/FundHoldings";
+import FundHoldings from "../../containers/Holdings";
 
 import Administration from "../../containers/Administration";
 
@@ -24,6 +24,7 @@ const ManagerView = ({
   isVisitor,
   isInvestor,
   isManager,
+  fundAddress,
 }) => (
   <div className="App">
     <br />
@@ -31,9 +32,9 @@ const ManagerView = ({
       <Card.Group>
         <Factsheet />
         {isManager ? <Administration /> : <div />}
-        {isInvestor ? <ParticipationForm /> : <div />}
+        {/* {isInvestor ? <ParticipationForm /> : <div />} */}
       </Card.Group>
-      {/* <FundHoldingsContainer /> */}
+      <FundHoldings address={fundAddress} />
     </div>
     {/*
     <div>

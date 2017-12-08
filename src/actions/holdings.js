@@ -5,8 +5,9 @@ export const types = {
 };
 
 export const actions = {
-  getHoldings: () => ({
+  getHoldings: fundAddress => ({
     type: types.GET_HOLDINGS_REQUESTED,
+    fundAddress,
   }),
   getHoldingsFailed: reason => ({
     type: types.GET_HOLDINGS_FAILED,
