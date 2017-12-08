@@ -6,6 +6,7 @@ const mapStateToProps = state => ({
   fundAddress: state.fund.address,
   onboardingState: state.app.onboardingState,
   isReadyToTrade: state.app.isReadyToTrade,
+  isReadyToVisit: state.app.isReadyToVisit,
   mlnBalance: new BigNumber(state.ethereum.mlnBalance || 0).toFixed(4),
   ethBalance: new BigNumber(state.ethereum.ethBalance || 0).toFixed(4),
 });
