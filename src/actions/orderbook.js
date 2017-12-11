@@ -13,18 +13,8 @@ export const actions = {
     type: types.GET_ORDERBOOK_FAILED,
     reason,
   }),
-  getOrderbookSucceeded: ({
-    formattedOrderbook,
-    sellOrders,
-    buyOrders,
-    totalSellVolume,
-    totalBuyVolume,
-  }) => ({
+  getOrderbookSucceeded: orderbookData => ({
     type: types.GET_ORDERBOOK_SUCCEEDED,
-    orders: formattedOrderbook,
-    sellOrders,
-    buyOrders,
-    totalSellVolume,
-    totalBuyVolume,
+    ...orderbookData,
   }),
 };

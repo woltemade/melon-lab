@@ -3,7 +3,7 @@ import BigNumber from "bignumber.js";
 
 import { Table } from "semantic-ui-react";
 
-const FundHoldings = ({ holdings, selectAsset }) => (
+const Holdings = ({ holdings, selectAsset }) => (
   <div id="holdings">
     <h3 className="App-intro">Fund Holdings</h3>
     <Table size={"small"}>
@@ -40,4 +40,4 @@ const FundHoldings = ({ holdings, selectAsset }) => (
   </div>
 );
 
-export default FundHoldings;
+export default Holdings;

@@ -9,7 +9,6 @@ function* getRankingSaga() {
   if (true) {
     try {
       const rankingList = yield call(getRanking);
-      console.log("------- ", rankingList);
       yield put(actions.getRankingSucceeded(rankingList));
     } catch (err) {
       console.error(err);

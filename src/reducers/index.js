@@ -6,6 +6,7 @@ import app from "./app";
 import fund from "./fund";
 import ranking from "./ranking";
 import holdings from "./holdings";
+import orderbook from "./orderbook";
 
 import ethereum from "./ethereum";
 /*
@@ -23,12 +24,13 @@ import tradingActivity from "../legacyComponents/tradingActivity/duck";
 
 const rootReducer = combineReducers({
   app,
+  router,
   ethereum,
   form,
   fund,
   ranking,
   holdings,
-  router,
+  orderbook,
   /*
   executeRequest,
   fundHoldings,

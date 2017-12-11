@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => ({
   loading: state.app.transactionInProgress,
   isVisitor: state.app.isReadyToVisit && !state.app.usersFund,
   isInvestor:
-    state.app.isReadyToInteract && state.app.usersFund !== state.fund.address,
+    state.app.isReadyToInteract && state.ethereum.account !== state.fund.owner,
   isManager:
     state.app.isReadyToInteract && state.ethereum.account === state.fund.owner,
   fundAddress: ownProps.match.params.fundAddress,

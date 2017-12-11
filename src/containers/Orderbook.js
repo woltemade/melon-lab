@@ -5,10 +5,23 @@ import Orderbook from "../components/organisms/Orderbook";
 import displayNumber from "../utils/displayNumber";
 
 const mapStateToProps = state => ({
-  buyOrders: state.orderbook.buyOrders,
-  sellOrders: state.orderbook.sellOrders,
-  totalBuyVolume: state.orderbook.totalBuyVolume,
-  totalSellVolume: state.orderbook.totalSellVolume,
+  ...state.orderbook,
+  buyOrders: state.orderbook.buyOrders.map(order => {
+    const formattedOrder = order;
+    formattedOrder.price = displayNumber(order.price);
+    formattedOrder.cumulativeVolume = displayNumber(order.cumulativeVolume);
+    formattedOrder.howMuch = displayNumber(order.buy.howMuch);
+    return formattedOrder;
+  }),
+  sellOrders: state.orderbook.sellOrders.map(order => {
+    const formattedOrder = order;
+    formattedOrder.price = displayNumber(order.price);
+    formattedOrder.cumulativeVolume = displayNumber(order.cumulativeVolume);
+    formattedOrder.howMuch = displayNumber(order.sell.howMuch);
+    return formattedOrder;
+  }),
+  totalBuyVolume: displayNumber(state.orderbook.totalBuyVolume),
+  totalSellVolume: displayNumber(state.orderbook.totalSellVolume),
 });
 
 const mapDispatchToProps = dispatch => ({

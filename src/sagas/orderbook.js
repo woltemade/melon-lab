@@ -14,7 +14,7 @@ function* getOrderbookSaga() {
         baseTokenSymbol,
         quoteTokenSymbol,
       );
-      const formattedOrderbook = rawOrderbook.map(order => {
+      const orders = rawOrderbook.map(order => {
         const result = order;
         result.price = order.price.toString();
         result.cumulativeVolume = order.cumulativeVolume.toString();
@@ -22,10 +22,8 @@ function* getOrderbookSaga() {
         result.sell.howMuch = order.sell.howMuch.toString();
         return result;
       });
-      const sellOrders = formattedOrderbook
-        .filter(o => o.type === "sell")
-        .reverse();
-      const buyOrders = formattedOrderbook.filter(o => o.type === "buy");
+      const sellOrders = orders.filter(o => o.type === "sell").reverse();
+      const buyOrders = orders.filter(o => o.type === "buy");
       const totalSellVolume = buyOrders.length
         ? buyOrders[buyOrders.length - 1].cumulativeVolume
         : 0;
@@ -34,7 +32,7 @@ function* getOrderbookSaga() {
         : 0;
       yield put(
         actions.getOrderbookSucceeded({
-          formattedOrderbook,
+          orders,
           sellOrders,
           buyOrders,
           totalSellVolume,
@@ -49,7 +47,7 @@ function* getOrderbookSaga() {
 }
 
 function* orderbook() {
-  yield takeLatest(types.GET_ORDERBOOK_REQUESTED, getOrderbookSaga);
+  // yield takeLatest(types.GET_ORDERBOOK_REQUESTED, getOrderbookSaga);
   yield takeLatest(ethereumTypes.HAS_CONNECTED, getOrderbookSaga);
 }
 

@@ -7,6 +7,7 @@ import fund from "./fund";
 import setup from "./setup";
 import ranking from "./ranking";
 import holdings from "./holdings";
+import orderbook from "./orderbook";
 
 function* rootSaga() {
   yield fork(administration);
@@ -16,6 +17,7 @@ function* rootSaga() {
   yield fork(setup);
   yield fork(ranking);
   yield fork(holdings);
+  yield fork(orderbook);
 }
 
 export default rootSaga;

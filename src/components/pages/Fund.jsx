@@ -2,13 +2,13 @@ import React from "react";
 import { Card } from "semantic-ui-react";
 
 import Factsheet from "../../containers/Factsheet";
-import FundHoldings from "../../containers/Holdings";
+import Holdings from "../../containers/Holdings";
+// import Administration from "../../containers/Administration";
+import Orderbook from "../../containers/Orderbook";
 
-import Administration from "../../containers/Administration";
+// import ParticipationForm from "../organisms/ParticipationForm";
 
-import ParticipationForm from "../organisms/ParticipationForm";
-
-// TODO: Remove legacyComponents
+// TODO: Remove legacyComponents;
 /*
 import FundHoldingsContainer from "../../legacyComponents/fundHoldings/container";
 import OrderbookContainer from "../../legacyComponents/orderbook/container";
@@ -31,10 +31,13 @@ const ManagerView = ({
     <div>
       <Card.Group>
         <Factsheet />
-        {isManager ? <Administration /> : <div />}
+        {/* {isManager ? <Administration /> : <div />} */}
         {/* {isInvestor ? <ParticipationForm /> : <div />} */}
       </Card.Group>
-      <FundHoldings address={fundAddress} />
+      <br />
+      <Holdings address={fundAddress} />
+      <br />
+      <Orderbook />
     </div>
     {/*
     <div>

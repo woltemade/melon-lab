@@ -17,9 +17,9 @@ function* getHoldingsSaga() {
   }
 }
 
-function* ranking() {
+function* holdings() {
   // yield takeLatest(types.GET_HOLDINGS_REQUESTED, getHoldingsSaga);
   yield takeLatest(ethereumTypes.HAS_CONNECTED, getHoldingsSaga);
 }
 
-export default ranking;
+export default holdings;
