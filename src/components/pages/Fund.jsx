@@ -5,6 +5,7 @@ import Factsheet from "../../containers/Factsheet";
 import Holdings from "../../containers/Holdings";
 // import Administration from "../../containers/Administration";
 import Orderbook from "../../containers/Orderbook";
+import RecentTrades from "../../containers/RecentTrades";
 
 // import ParticipationForm from "../organisms/ParticipationForm";
 
@@ -38,6 +39,8 @@ const ManagerView = ({
       <Holdings address={fundAddress} />
       <br />
       <Orderbook />
+      <br />
+      <RecentTrades />
     </div>
     {/*
     <div>

@@ -8,6 +8,7 @@ import setup from "./setup";
 import ranking from "./ranking";
 import holdings from "./holdings";
 import orderbook from "./orderbook";
+import recentTrades from "./recentTrades";
 
 function* rootSaga() {
   yield fork(administration);
@@ -18,6 +19,7 @@ function* rootSaga() {
   yield fork(ranking);
   yield fork(holdings);
   yield fork(orderbook);
+  yield fork(recentTrades);
 }
 
 export default rootSaga;

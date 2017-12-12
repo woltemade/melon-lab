@@ -7,6 +7,7 @@ import fund from "./fund";
 import ranking from "./ranking";
 import holdings from "./holdings";
 import orderbook from "./orderbook";
+import recentTrades from "./recentTrades";
 
 import ethereum from "./ethereum";
 /*
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   ranking,
   holdings,
   orderbook,
+  recentTrades,
   /*
   executeRequest,
   fundHoldings,
