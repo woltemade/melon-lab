@@ -4,7 +4,8 @@ export const initialState = {
   wallet: undefined,
   hasGenerated: false,
   hasSavedMnemonic: false,
-  hasEncryptedAndStoredLocally: false,
+  hasEncrypted: false,
+  encryptedWallet: undefined,
 };
 
 const reducers = {
@@ -17,6 +18,7 @@ const reducers = {
 
 const mapActionToReducer = {
   [types.GENERATE_WALLET_SUCCEEDED]: reducers.merge,
+  [types.ENCRYPT_WALLET_SUCCEEDED]: reducers.merge,
 };
 
 export const reducer = (state = initialState, action) => {

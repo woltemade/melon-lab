@@ -10,6 +10,7 @@ import holdings from "./holdings";
 import orderbook from "./orderbook";
 import recentTrades from "./recentTrades";
 import tradeHistory from "./tradeHistory";
+import newUser from "./newUser";
 
 function* rootSaga() {
   yield fork(administration);
@@ -22,6 +23,7 @@ function* rootSaga() {
   yield fork(orderbook);
   yield fork(recentTrades);
   yield fork(tradeHistory);
+  yield fork(newUser);
 }
 
 export default rootSaga;

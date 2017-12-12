@@ -4,13 +4,14 @@ import { actions } from "../actions/newUser";
 import NewUser from "../components/organisms/NewUser";
 
 const mapStateToProps = state => ({
-  subscriptionAllowed: state.fund.subscriptionAllowed,
-  redemptionAllowed: state.fund.redemptionAllowed,
-  loading: state.app.transactionInProgress,
+  ...state.newUser,
 });
 
 const mapDispatchToProps = dispatch => ({
   generateWallet: () => dispatch(actions.generateWallet()),
+  iSaved: () => dispatch(actions.iSaved()),
+  encryptWallet: () => dispatch(actions.encryptWallet()),
+  // TODO:we need to wipe out unencrypted wallet from redux on newUser.wallet after encryptWallet
 });
 
 const NewUserContainer = connect(mapStateToProps, mapDispatchToProps)(NewUser);
