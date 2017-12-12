@@ -6,17 +6,14 @@ import Holdings from "../../containers/Holdings";
 // import Administration from "../../containers/Administration";
 import Orderbook from "../../containers/Orderbook";
 import RecentTrades from "../../containers/RecentTrades";
+import TradeHistory from "../../containers/TradeHistory";
 
 // import ParticipationForm from "../organisms/ParticipationForm";
 
 // TODO: Remove legacyComponents;
 /*
-import FundHoldingsContainer from "../../legacyComponents/fundHoldings/container";
-import OrderbookContainer from "../../legacyComponents/orderbook/container";
-import RecentTradesContainer from "../../legacyComponents/recentTrades/container";
 import TradeContainer from "../../legacyComponents/trade/container";
 import TradeHelperContainer from "../../legacyComponents/tradeHelper/container";
-import TradingActivityContainer from "../../legacyComponents/tradingActivity/container";
 */
 
 const ManagerView = ({
@@ -41,6 +38,8 @@ const ManagerView = ({
       <Orderbook />
       <br />
       <RecentTrades />
+      <br />
+      <TradeHistory address={fundAddress} />
     </div>
     {/*
     <div>

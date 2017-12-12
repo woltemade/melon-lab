@@ -1,7 +1,9 @@
 export const types = {
-  GET_RECENTTRADES_REQUESTED: "GET_RECENTTRADES_REQUESTED:orderbook:melon.fund",
-  GET_RECENTTRADES_SUCCEEDED: "GET_RECENTTRADES_SUCCEEDED:orderbook:melon.fund",
-  GET_RECENTTRADES_FAILED: "GET_RECENTTRADES_FAILED:orderbook:melon.fund",
+  GET_RECENTTRADES_REQUESTED:
+    "GET_RECENTTRADES_REQUESTED:recentTrades:melon.fund",
+  GET_RECENTTRADES_SUCCEEDED:
+    "GET_RECENTTRADES_SUCCEEDED:recentTrades:melon.fund",
+  GET_RECENTTRADES_FAILED: "GET_RECENTTRADES_FAILED:recentTrades:melon.fund",
 };
 
 export const actions = {

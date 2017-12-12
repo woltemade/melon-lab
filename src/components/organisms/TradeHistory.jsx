@@ -2,7 +2,7 @@ import React from "react";
 import BigNumber from "bignumber.js";
 import { Table } from "semantic-ui-react";
 
-const TradingActivity = ({ fundRecentTrades }) => (
+const TradingActivity = ({ trades }) => (
   <div>
     <h3 className="App-intro">Fund trading activity</h3>
 
@@ -18,7 +18,7 @@ const TradingActivity = ({ fundRecentTrades }) => (
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {fundRecentTrades.map(trade => (
+        {trades.map(trade => (
           <Table.Row key={trade.id}>
             <Table.Cell>{trade.timestamp}</Table.Cell>
             <Table.Cell>{trade.type}</Table.Cell>
