@@ -1,12 +1,14 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import GetStarted from "./GetStarted";
 
 const Ranking = ({ rankingList }) => (
   <div>
-    <h3 id="history" className="App-intro">
-      RANKING TABLE
-    </h3>
+    <GetStarted />
+    <h2 id="history" className="App-intro">
+      Melon Funds Ranking
+    </h2>
     <Table>
       <Table.Header>
         <Table.Row>

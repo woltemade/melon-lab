@@ -1,17 +1,26 @@
 import React from "react";
-import { Card, Divider, Header } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import { Card } from "semantic-ui-react";
 
 const GetStarted = () => (
   <Card centered>
     <Card.Content>
-      <h2>Get Started</h2>
       <p>
-        Melon ([méllō], μέλλω; Greek for "destined to be") is a blockchain
-        software that seeks to enable participants to set up, manage and invest
-        in technology regulated digital investment funds.
+        <b>Melon</b> ([méllō], <b>μέλλω; Greek for "destined to be"</b>) is a
+        blockchain software that seeks to enable participants to set up, manage
+        and invest in technology regulated digital investment funds.
       </p>
 
-      <h4>Enter Melon and set up your own technology regulated fund</h4>
+      <p>
+        Set up your own technology regulated fund and discover the future of
+        asset management.
+      </p>
+      <div style={{ textAlign: "right" }}>
+        <h3>
+          <Link to={`/newuser`}>Enter Melon</Link>
+        </h3>
+      </div>
+      <br />
     </Card.Content>
   </Card>
 );

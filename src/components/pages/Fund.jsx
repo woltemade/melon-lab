@@ -31,7 +31,7 @@ const ManagerView = ({
         <Factsheet />
         {/* {isManager ? <Administration /> : <div />} */}
         {/* {isInvestor ? <ParticipationForm /> : <div />} */}
-        <GetStarted />
+        {isVisitor ? <GetStarted /> : <div />}
       </Card.Group>
       <br />
       <Holdings address={fundAddress} />

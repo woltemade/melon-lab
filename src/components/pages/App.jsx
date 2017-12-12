@@ -15,6 +15,7 @@ import SetupContainer from "../../containers/Setup";
 import { onboardingPath } from "../../reducers/app";
 import FundContainer from "../../containers/Fund";
 import RankingContainer from "../../containers/Ranking";
+import NewUser from "../../components/organisms/NewUser";
 
 const mapOnboardingStateToMainContainer = {
   [onboardingPath.NO_PROVIDER]: NoMetamask,
@@ -66,6 +67,7 @@ const App = props => (
               getSetupComponent({ ...routerProps, ...props })}
           />
           <Route path="/ranking" component={RankingContainer} />
+          <Route path="/newuser" component={NewUser} />
           <Route path="/:fundAddress" component={FundContainer} />
           <Route
             render={routerProps => redirecter({ ...routerProps, ...props })}
