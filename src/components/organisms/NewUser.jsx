@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Header, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import { Field } from "redux-form";
 import renderInput from "./utils/renderInput";
 
@@ -95,7 +96,7 @@ const NewUser = ({
           fund.
         </p>
         <Button basic color="black" style={{ width: "100%" }}>
-          Get started with Melon
+          <Link to={`/setup`}>Get started with Melon</Link>
         </Button>
       </div>
     ) : (
