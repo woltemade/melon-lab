@@ -4,7 +4,7 @@ import { withInfo } from "@storybook/addon-info";
 import { object, withKnobs } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
-import FundHoldings from "./FundHoldings";
+import Holdings from "./Holdings";
 
 const mockHoldings = [
   {
@@ -27,12 +27,12 @@ const mockHoldings = [
   },
 ];
 
-storiesOf("FundHoldings", module)
+storiesOf("Holdings", module)
   .addDecorator(withKnobs)
   .add(
     "Default",
     withInfo("Short info about organism")(() => (
-      <FundHoldings
+      <Holdings
         holdings={object("holdings", mockHoldings)}
         selectAsset={action("selectAsset")}
       />

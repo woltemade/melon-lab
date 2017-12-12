@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import { text, object, withKnobs } from "@storybook/addon-knobs";
 
-import TradingActivity from "./TradingActivity";
+import TradeHistory from "./TradeHistory";
 
 const mockedTrades = [
   {
@@ -29,13 +29,11 @@ const mockedTrades = [
   },
 ];
 
-storiesOf("TradingActivity", module)
+storiesOf("TradeHistory", module)
   .addDecorator(withKnobs)
   .add(
     "Default",
     withInfo("Short info about organism")(() => (
-      <TradingActivity
-        fundRecentTrades={object("recentTrades", mockedTrades)}
-      />
+      <TradeHistory fundRecentTrades={object("recentTrades", mockedTrades)} />
     )),
   );

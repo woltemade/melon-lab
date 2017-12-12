@@ -7,8 +7,8 @@ import Holdings from "../../containers/Holdings";
 import Orderbook from "../../containers/Orderbook";
 import RecentTrades from "../../containers/RecentTrades";
 import TradeHistory from "../../containers/TradeHistory";
-
-// import ParticipationForm from "../organisms/ParticipationForm";
+import GetStarted from "../organisms/GetStarted";
+// import ParticipationForm from "../containers/Participation";
 
 // TODO: Remove legacyComponents;
 /*
@@ -31,6 +31,7 @@ const ManagerView = ({
         <Factsheet />
         {/* {isManager ? <Administration /> : <div />} */}
         {/* {isInvestor ? <ParticipationForm /> : <div />} */}
+        <GetStarted />
       </Card.Group>
       <br />
       <Holdings address={fundAddress} />
