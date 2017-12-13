@@ -1,9 +1,12 @@
 import BigNumber from "bignumber.js";
-import { takeLatest, select, put } from "redux-saga/effects";
+import { takeLatest, takeEvery, select, put, take } from "redux-saga/effects";
 import { networks } from "@melonproject/melon.js";
 import { onboardingPath } from "../reducers/app";
 import { actions, types } from "../actions/app";
-import { actions as fundActions } from "../actions/fund";
+import {
+  types as routeTypes,
+  actions as routeActions,
+} from "../actions/routes";
 
 const getOnboardingState = ({ ethereum, app, fund }) => {
   if (!ethereum.isConnected) return onboardingPath.NO_CONNECTION;
@@ -59,10 +62,28 @@ function* deriveReadyState() {
   if (hasChanged) yield put(actions.setReadyState(readyState));
 }
 
+function* redirectSaga() {
+  const usersFundChecked = yield select(state => state.app.usersFundChecked);
+
+  if (!usersFundChecked) {
+    yield take(types.SET_USERS_FUND);
+  }
+
+  const usersFund = yield select(state => state.app.usersFund);
+
+  if (usersFund) {
+    yield put(routeActions.fund(usersFund));
+  } else {
+    yield put(routeActions.ranking);
+  }
+}
+
 const onlyMelonActions = action =>
   action.type !== types.SET_READY_STATE && action.type.includes("melon");
 
 function* appSaga() {
+  yield takeEvery("*", console.log);
+  yield takeLatest(routeTypes.ROOT, redirectSaga);
   yield takeLatest(onlyMelonActions, deriveReadyState);
 }
 

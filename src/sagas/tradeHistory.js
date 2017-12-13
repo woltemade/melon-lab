@@ -29,7 +29,7 @@ function* getTradeHistorySaga() {
 
 function* tradeHistory() {
   // yield takeLatest(types.GET_RECENTTRADES_REQUESTED, getTradeHistorySaga);
-  yield takeLatest(ethereumTypes.HAS_CONNECTED, getTradeHistorySaga);
+  // yield takeLatest(ethereumTypes.HAS_CONNECTED, getTradeHistorySaga);
 }
 
 export default tradeHistory;

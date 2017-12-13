@@ -48,7 +48,7 @@ function* getOrderbookSaga() {
 
 function* orderbook() {
   // yield takeLatest(types.GET_ORDERBOOK_REQUESTED, getOrderbookSaga);
-  yield takeLatest(ethereumTypes.HAS_CONNECTED, getOrderbookSaga);
+  // yield takeLatest(ethereumTypes.HAS_CONNECTED, getOrderbookSaga);
 }
 
 export default orderbook;

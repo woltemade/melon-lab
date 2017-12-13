@@ -19,7 +19,7 @@ function* getRankingSaga() {
 
 function* ranking() {
   // yield takeLatest(types.GET_RANKING_REQUESTED, getRankingSaga);
-  yield takeLatest(ethereumTypes.HAS_CONNECTED, getRankingSaga);
+  // yield takeLatest(ethereumTypes.HAS_CONNECTED, getRankingSaga);
 }
 
 export default ranking;

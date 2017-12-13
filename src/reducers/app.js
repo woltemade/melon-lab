@@ -19,6 +19,7 @@ const initialState = {
   isReadyToTrade: false,
   isReadyToInvest: false,
   transactionInProgress: false,
+  usersFundChecked: false,
   usersFund: "",
 };
 
@@ -35,6 +36,11 @@ const reducers = {
     ...state,
     ...params,
   }),
+  setUsersFunc: (state, params) => ({
+    ...state,
+    ...params,
+    usersFundChecked: true,
+  }),
   default: state => ({ ...state }),
 };
 
@@ -42,7 +48,7 @@ const mapActionToReducer = {
   [types.TRANSACTION_STARTED]: reducers.transactionStarted,
   [types.TRANSACTION_FINISHED]: reducers.transactionFinished,
   [types.SET_READY_STATE]: reducers.merge,
-  [types.SET_USERS_FUND]: reducers.merge,
+  [types.SET_USERS_FUND]: reducers.setUsersFunc,
 };
 
 export const reducer = (state = initialState, action = {}) => {

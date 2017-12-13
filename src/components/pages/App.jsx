@@ -1,10 +1,4 @@
 import React from "react";
-import {
-  Switch,
-  Redirect,
-  Route,
-  HashRouter as Router,
-} from "react-router-dom";
 import { Image, Container } from "semantic-ui-react";
 import WrongNetwork from "../organisms/WrongNetwork";
 import NoMetamask from "../organisms/NoMetamask";
@@ -28,6 +22,7 @@ const mapOnboardingStateToMainContainer = {
   [onboardingPath.NOT_INVESTED_IN_OWN_FUND]: ParticipationContainer,
 };
 
+/*
 const getSetupComponent = ({
   onboardingState,
   mlnBalance,
@@ -54,30 +49,16 @@ const rootRedirecter = ({ isReadyToTrade, usersFund, isReadyToVisit }) => {
   }
   return <div>Loading ...</div>;
 };
+*/
 
 const App = props => (
-  <Router>
-    <div className="App">
-      <Container>
-        <div className="App-header" style={{ margin: "2em" }}>
-          <Image src="./melon-logo.png" size="small" centered />
-        </div>
-        <Switch>
-          <Route
-            path="/setup"
-            render={routerProps =>
-              getSetupComponent({ ...routerProps, ...props })}
-          />
-          <Route path="/ranking" component={RankingContainer} />
-          <Route path="/newuser" component={NewUserContainer} />
-          <Route path="/:fundAddress" component={FundContainer} />
-          <Route
-            render={routerProps => rootRedirecter({ ...routerProps, ...props })}
-          />
-        </Switch>
-      </Container>
-    </div>
-  </Router>
+  <div className="App">
+    <Container>
+      <div className="App-header" style={{ margin: "2em" }}>
+        <Image src="./melon-logo.png" size="small" centered />
+      </div>
+    </Container>
+  </div>
 );
 
 export default App;

@@ -87,7 +87,7 @@ function* checkAndLoad({ address }) {
 function* getUsersFund({ account }) {
   if (!account) return;
   const fundAddress = yield call(getFundForManager, account);
-  if (fundAddress) yield put(appActions.setUsersFund(fundAddress));
+  yield put(appActions.setUsersFund(fundAddress));
 }
 
 function* fund() {

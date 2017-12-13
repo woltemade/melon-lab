@@ -34,7 +34,7 @@ function* getRecentTradesSaga() {
 
 function* recentTrades() {
   // yield takeLatest(types.GET_RECENTTRADES_REQUESTED, getRecentTradesSaga);
-  yield takeLatest(ethereumTypes.HAS_CONNECTED, getRecentTradesSaga);
+  // yield takeLatest(ethereumTypes.HAS_CONNECTED, getRecentTradesSaga);
 }
 
 export default recentTrades;
