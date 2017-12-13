@@ -4,8 +4,9 @@ import {
   setup,
   onBlock,
   getParityProvider,
-  // importWalletFromMnemonic,
+  importWalletFromMnemonic,
   // encryptWallet,
+  createWallet,
   decryptWallet,
 } from "@melonproject/melon.js";
 
@@ -60,12 +61,15 @@ function* init() {
   //   JSON.parse(JSON.stringify(loadedWallet)),
   // );
   // // setup.wallet = wallet;
-
   setup.wallet = yield call(
-    decryptWallet,
-    JSON.stringify(loadedWallet),
-    "9tjSQGCx5z9TZHtDMLClRdzcmBhj8z4fN8u9dWhOI2vpumDGAksBGlESJ2",
+    importWalletFromMnemonic,
+    "train any keen neck arctic census only limb beauty mass fancy potato",
   );
+  // setup.wallet = yield call(
+  //   decryptWallet,
+  //   JSON.stringify(loadedWallet),
+  //   "9tjSQGCx5z9TZHtDMLClRdzcmBhj8z4fN8u9dWhOI2vpumDGAksBGlESJ2",
+  // );
   setup.defaultAccount = setup.wallet.address;
 
   if (fund.address !== "" && fund.name === "-") {

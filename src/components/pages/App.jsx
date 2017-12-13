@@ -11,7 +11,7 @@ import NoMetamask from "../organisms/NoMetamask";
 import LockedAccount from "../organisms/LockedAccount";
 import InsufficentFunds from "../organisms/InsufficentFunds";
 import SetupContainer from "../../containers/Setup";
-// import InvestContainer from "../../legacyComponents/invest/container";
+import ParticipationContainer from "../../containers/Participation";
 import { onboardingPath } from "../../reducers/app";
 import FundContainer from "../../containers/Fund";
 import RankingContainer from "../../containers/Ranking";
@@ -25,7 +25,7 @@ const mapOnboardingStateToMainContainer = {
   [onboardingPath.INSUFFICENT_ETH]: InsufficentFunds,
   [onboardingPath.INSUFFICENT_MLN]: InsufficentFunds,
   [onboardingPath.NO_FUND_CREATED]: SetupContainer,
-  // [onboardingPath.NOT_INVESTED_IN_OWN_FUND]: InvestContainer,
+  [onboardingPath.NOT_INVESTED_IN_OWN_FUND]: ParticipationContainer,
 };
 
 const getSetupComponent = ({
@@ -35,14 +35,16 @@ const getSetupComponent = ({
   isReadyToTrade,
   usersFund,
 }) => {
-  if (isReadyToTrade) {
-    return <Redirect to={`/${usersFund}`} />;
-  }
+  // if (isReadyToTrade) {
+  //   return <Redirect to={`/${usersFund}`} />;
+  // }
   const Main = mapOnboardingStateToMainContainer[onboardingState];
-  return Main ? <Main mlnBalance={mlnBalance} ethBalance={ethBalance} /> : null;
+  return Main ? (
+    <Main mlnBalance={mlnBalance} ethBalance={ethBalance} setup />
+  ) : null;
 };
 
-const redirecter = ({ isReadyToTrade, usersFund, isReadyToVisit }) => {
+const rootRedirecter = ({ isReadyToTrade, usersFund, isReadyToVisit }) => {
   if (isReadyToVisit) {
     if (isReadyToTrade) {
       return <Redirect to={`/${usersFund}`} />;
@@ -70,7 +72,7 @@ const App = props => (
           <Route path="/newuser" component={NewUserContainer} />
           <Route path="/:fundAddress" component={FundContainer} />
           <Route
-            render={routerProps => redirecter({ ...routerProps, ...props })}
+            render={routerProps => rootRedirecter({ ...routerProps, ...props })}
           />
         </Switch>
       </Container>

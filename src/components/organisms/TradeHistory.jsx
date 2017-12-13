@@ -2,7 +2,7 @@ import React from "react";
 import BigNumber from "bignumber.js";
 import { Table } from "semantic-ui-react";
 
-const TradingActivity = ({ trades }) => (
+const TradeHistory = ({ trades }) => (
   <div>
     <h3 className="App-intro">Fund Trading History</h3>
 
@@ -37,4 +37,4 @@ const TradingActivity = ({ trades }) => (
   </div>
 );
 
-export default TradingActivity;
+export default TradeHistory;

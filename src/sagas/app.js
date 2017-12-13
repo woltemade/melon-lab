@@ -3,6 +3,7 @@ import { takeLatest, select, put } from "redux-saga/effects";
 import { networks } from "@melonproject/melon.js";
 import { onboardingPath } from "../reducers/app";
 import { actions, types } from "../actions/app";
+import { actions as fundActions } from "../actions/fund";
 
 const getOnboardingState = ({ ethereum, app, fund }) => {
   if (!ethereum.isConnected) return onboardingPath.NO_CONNECTION;
@@ -15,8 +16,8 @@ const getOnboardingState = ({ ethereum, app, fund }) => {
     return onboardingPath.INSUFFICENT_FUNDS;
   if (!app.usersFund) return onboardingPath.NO_FUND_CREATED;
   if (
-    ethereum.address === fund.owner &&
-    new BigNumber(fund.personalStake).eq(0)
+    (ethereum.account === fund.owner && new BigNumber(fund.gav).eq(0)) ||
+    (!!app.usersFund && !fund.address)
   )
     return onboardingPath.NOT_INVESTED_IN_OWN_FUND;
   return onboardingPath.ONBOARDED;
@@ -37,7 +38,10 @@ function* deriveReadyState() {
   const isReadyToInvest =
     isReadyToInteract && new BigNumber(ethereum.mlnBalance).gt(0);
 
-  const isReadyToTrade = isReadyToInteract && !!app.usersFund;
+  const isReadyToTrade =
+    isReadyToInteract &&
+    fund.owner === ethereum.account &&
+    new BigNumber(fund.gav).gt(0);
 
   const readyState = {
     isReadyToVisit,
