@@ -1,4 +1,6 @@
 import { connect } from "react-redux";
+import { reduxForm } from "redux-form";
+import { actions } from "../actions/participation";
 
 import Participation from "../components/organisms/ParticipationForm";
 
@@ -7,12 +9,21 @@ const mapStateToProps = state => ({
   /* ... */
 });
 
+const onSubmit = (values, dispatch) => {
+  dispatch(actions.subscribe(values));
+};
+
 const mapDispatchToProps = (dispatch, ownProps) => ({
   /* ... */
 });
 
-const ParticipationContainer = connect(mapStateToProps, mapDispatchToProps)(
+const ParticipationRedux = connect(mapStateToProps, mapDispatchToProps)(
   Participation,
 );
 
-export default ParticipationContainer;
+const ParticipationForm = reduxForm({
+  form: "participation",
+  onSubmit,
+})(ParticipationRedux);
+
+export default ParticipationForm;

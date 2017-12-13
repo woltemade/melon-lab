@@ -20,8 +20,8 @@ const RecentTrades = ({ baseSymbol, quoteSymbol, trades }) => (
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {trades.map(trade => (
-          <Table.Row key={trade.id}>
+        {trades.map((trade, i) => (
+          <Table.Row key={i}>
             <Table.Cell>{trade.timestamp}</Table.Cell>
             <Table.Cell>{trade.type}</Table.Cell>
             <Table.Cell textAlign="right">{trade.price}</Table.Cell>

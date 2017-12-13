@@ -7,12 +7,14 @@ import displayNumber from "../utils/displayNumber";
 
 const mapStateToProps = state => ({
   ...state.tradeHistory,
-  trades: state.tradeHistory.trades.map(trade => {
-    trade.price = displayNumber(trade.price);
-    trade.quantity = displayNumber(trade.quantity);
-    trade.timestamp = moment(trade.timeStamp).format("D. MMM YYYY HH:mm");
-    return trade;
-  }),
+  trades: state.tradeHistory.trades.map(trade => ({
+    price: displayNumber(trade.price),
+    quantity: displayNumber(trade.quantity),
+    timestamp: moment(trade.timeStamp).format("D. MMM YYYY HH:mm"),
+    type: trade.type,
+    buyToken: trade.buyToken,
+    sellToken: trade.sellToken,
+  })),
 });
 
 const mapDispatchToProps = dispatch => ({
