@@ -22,34 +22,12 @@ const mapOnboardingStateToMainContainer = {
   [onboardingPath.NOT_INVESTED_IN_OWN_FUND]: ParticipationContainer,
 };
 
-/*
-const getSetupComponent = ({
-  onboardingState,
-  mlnBalance,
-  ethBalance,
-  isReadyToTrade,
-  usersFund,
-}) => {
-  // if (isReadyToTrade) {
-  //   return <Redirect to={`/${usersFund}`} />;
-  // }
+const getSetupComponent = ({ onboardingState, mlnBalance, ethBalance }) => {
   const Main = mapOnboardingStateToMainContainer[onboardingState];
   return Main ? (
     <Main mlnBalance={mlnBalance} ethBalance={ethBalance} setup />
   ) : null;
 };
-
-const rootRedirecter = ({ isReadyToTrade, usersFund, isReadyToVisit }) => {
-  if (isReadyToVisit) {
-    if (isReadyToTrade) {
-      return <Redirect to={`/${usersFund}`} />;
-    }
-    // TODO: Change this to /ranking as soon as ranking is implemented
-    return <Redirect to="/setup" />;
-  }
-  return <div>Loading ...</div>;
-};
-*/
 
 const App = props => (
   <div className="App">
@@ -57,6 +35,7 @@ const App = props => (
       <div className="App-header" style={{ margin: "2em" }}>
         <Image src="./melon-logo.png" size="small" centered />
       </div>
+      {getSetupComponent(props)}
     </Container>
   </div>
 );

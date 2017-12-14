@@ -21,33 +21,8 @@ const mapDispatchToProps = dispatch => ({
   requestFund: fundAddress => dispatch(fundActions.infoRequested(fundAddress)),
 });
 
-const ParticipationLifecycle = lifecycle({
-  componentDidMount() {
-    console.log("********* componenet did mount");
-  },
-  componentWillReceiveProps(nextProps) {
-    console.log("******************");
-    console.log(
-      nextProps.onboardingState,
-      onboardingPath.NOT_INVESTED_IN_OWN_FUND,
-      nextProps.onboardingState,
-      this.props.onboardingState,
-      nextProps.usersFund,
-      nextProps.fundAddress,
-    );
-    if (
-      nextProps.onboardingState === onboardingPath.NOT_INVESTED_IN_OWN_FUND &&
-      nextProps.onboardingState !== this.props.onboardingState &&
-      nextProps.usersFund !== nextProps.fundAddress &&
-      this.props.setup
-    ) {
-      this.props.requestFund(nextProps.usersFund);
-    }
-  },
-})(Participation);
-
 const ParticipationRedux = connect(mapStateToProps, mapDispatchToProps)(
-  ParticipationLifecycle,
+  Participation,
 );
 
 const ParticipationForm = reduxForm({
