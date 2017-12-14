@@ -1,9 +1,9 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import Link from "redux-first-router-link";
 import GetStarted from "./GetStarted";
 
-const Ranking = ({ rankingList }) => (
+const Ranking = ({ rankingList, getFundLinkAction }) => (
   <div>
     <GetStarted />
     <h2 id="history" className="App-intro">
@@ -23,7 +23,7 @@ const Ranking = ({ rankingList }) => (
           <Table.Row key={i + 1}>
             <Table.Cell>{i + 1}</Table.Cell>
             <Table.Cell>
-              <Link to={`/${fund.address}`}>{fund.name}</Link>
+              <Link to={getFundLinkAction(fund.address)}>{fund.name}</Link>
             </Table.Cell>
             <Table.Cell textAlign="right">{fund.sharePrice}</Table.Cell>
             <Table.Cell textAlign="right">{fund.inception}</Table.Cell>

@@ -22,4 +22,7 @@ export const actions = {
   ranking: () => ({
     type: types.RANKING,
   }),
+  setup: () => ({
+    type: types.SETUP,
+  }),
 };

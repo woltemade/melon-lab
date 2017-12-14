@@ -1,5 +1,5 @@
 import BigNumber from "bignumber.js";
-import { takeLatest, takeEvery, select, put, take } from "redux-saga/effects";
+import { takeLatest, select, put, take } from "redux-saga/effects";
 import { networks } from "@melonproject/melon.js";
 import { onboardingPath } from "../reducers/app";
 import { actions, types } from "../actions/app";
@@ -70,9 +70,14 @@ function* redirectSaga() {
   }
 
   const usersFund = yield select(state => state.app.usersFund);
+  const isReadyToTrade = yield select(state => state.app.isReadyToTrade);
 
   if (usersFund) {
-    yield put(routeActions.fund(usersFund));
+    if (isReadyToTrade) {
+      yield put(routeActions.fund(usersFund));
+    } else {
+      yield put(routeActions.setup());
+    }
   } else {
     yield put(routeActions.ranking);
   }
@@ -82,7 +87,6 @@ const onlyMelonActions = action =>
   action.type !== types.SET_READY_STATE && action.type.includes("melon");
 
 function* appSaga() {
-  yield takeEvery("*", console.log);
   yield takeLatest(routeTypes.ROOT, redirectSaga);
   yield takeLatest(onlyMelonActions, deriveReadyState);
 }

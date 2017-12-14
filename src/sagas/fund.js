@@ -1,3 +1,4 @@
+import BigNumber from "bignumber.js";
 import {
   getFundInformations,
   getParticipation,
@@ -9,6 +10,10 @@ import { takeLatest, put, call, select } from "redux-saga/effects";
 import { actions, types } from "../actions/fund";
 import { types as ethereumTypes } from "../actions/ethereum";
 import { actions as appActions } from "../actions/app";
+import {
+  types as routeTypes,
+  actions as routeActions,
+} from "../actions/routes";
 
 // TODO: Refactor these into new saga architecture
 /*
@@ -90,10 +95,23 @@ function* getUsersFund({ account }) {
   yield put(appActions.setUsersFund(fundAddress));
 }
 
+/*
+function* redirectSaga(action) {
+  console.log(action);
+
+  const gav = yield select(store => new BigNumber(store.fund.gav));
+
+  if (gav.eq(0)) {
+    yield routeActions.setup();
+  }
+}
+*/
+
 function* fund() {
-  yield takeLatest(types.INFO_REQUESTED, requestInfo);
-  yield takeLatest(types.SET, checkAndLoad);
-  yield takeLatest(ethereumTypes.ACCOUNT_CHANGED, getUsersFund);
+  // yield takeLatest(routeTypes.FUND, redirectSaga);
+  // yield takeLatest(types.INFO_REQUESTED, requestInfo);
+  // yield takeLatest(types.SET, checkAndLoad);
+  // yield takeLatest(ethereumTypes.ACCOUNT_CHANGED, getUsersFund);
 }
 
 export default fund;

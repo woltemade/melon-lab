@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "redux-first-router-link";
 import { Card } from "semantic-ui-react";
 
 const GetStarted = () => (

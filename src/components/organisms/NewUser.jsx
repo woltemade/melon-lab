@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Header, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import Link from "redux-first-router-link";
 import { Field } from "redux-form";
 import renderInput from "./utils/renderInput";
 
@@ -12,6 +12,7 @@ const NewUser = ({
   hasSavedMnemonic,
   hasEncrypted,
   wallet,
+  setupAction,
 }) => (
   <Container text>
     <Header as="h2">Welcome to Melon</Header>
@@ -96,7 +97,7 @@ const NewUser = ({
           fund.
         </p>
         <Button basic color="black" style={{ width: "100%" }}>
-          <Link to={`/setup`}>Get started with Melon</Link>
+          <Link to={setupAction}>Get started with Melon</Link>
         </Button>
       </div>
     ) : (
