@@ -25,7 +25,7 @@ function* rootSaga() {
   yield fork(recentTrades);
   yield fork(tradeHistory);
   yield fork(newUser);
-  // yield fork(participation);
+  yield fork(participation);
 }
 
 export default rootSaga;

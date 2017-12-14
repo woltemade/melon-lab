@@ -8,26 +8,28 @@ export const types = {
 };
 
 export const actions = {
-  subscribe: () => ({
+  subscribe: ({ amount, total }) => ({
     type: types.SUBSCRIBE_REQUESTED,
+    amount,
+    total,
   }),
   subscribeFailed: reason => ({
     type: types.SUBSCRIBE_FAILED,
     reason,
   }),
-  subscribeSucceeded: rankingList => ({
+  subscribeSucceeded: () => ({
     type: types.SUBSCRIBE_SUCCEEDED,
-    rankingList,
   }),
-  redeem: () => ({
+  redeem: ({ amount, total }) => ({
     type: types.REDEEM_REQUESTED,
+    amount,
+    total,
   }),
   redeemFailed: reason => ({
     type: types.REDEEM_FAILED,
     reason,
   }),
-  redeemSucceeded: rankingList => ({
+  redeemSucceeded: () => ({
     type: types.REDEEM_SUCCEEDED,
-    rankingList,
   }),
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import { Field } from "redux-form";
-import { List, Button, Card, Menu, Label } from "semantic-ui-react";
+import { List, Button, Card, Menu } from "semantic-ui-react";
 
 import renderInput from "./utils/renderInput";
 
@@ -36,8 +36,8 @@ const ParticipationForm = ({
         <List>
           <List.Item>
             <List.Content>
-              <Label>Quantity</Label>
               <Field
+                label="Quantity"
                 name="amount"
                 component={renderInput}
                 onChange={onChange}
@@ -47,8 +47,8 @@ const ParticipationForm = ({
           </List.Item>
           <List.Item>
             <List.Content>
-              <Label>Price</Label>
               <Field
+                label="Price"
                 name="price"
                 component={renderInput}
                 onChange={onChange}
@@ -59,8 +59,8 @@ const ParticipationForm = ({
           </List.Item>
           <List.Item>
             <List.Content>
-              <Label>Total</Label>
               <Field
+                label="Total"
                 name="total"
                 component={renderInput}
                 onChange={onChange}

@@ -15,7 +15,11 @@ const mapStateToProps = state => ({
 });
 
 const onSubmit = (values, dispatch) => {
-  dispatch(actions.subscribe(values));
+  if (values.type === "subscribe") {
+    dispatch(actions.subscribe(values));
+  } else {
+    dispatch(actions.redeem(values));
+  }
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -42,6 +46,7 @@ const ParticipationForm = reduxForm({
 // A bit hacky, but it brings in inital values
 const ParticipationFormRedux = connect(state => ({
   initialValues: {
+    type: "subscribe",
     amount: 1,
     price: state.fund.sharePrice,
     total: multiply(1, state.fund.sharePrice),
