@@ -1,4 +1,4 @@
-import { takeLatest, call, put } from "redux-saga/effects";
+import { takeLatest, call, put, take, select } from "redux-saga/effects";
 import {
   setupFund,
   setup as melonJsSetup,
@@ -6,7 +6,8 @@ import {
 } from "@melonproject/melon.js";
 
 import { types, actions } from "../actions/fund";
-import { actions as appActions } from "../actions/app";
+import { actions as appActions, types as appTypes } from "../actions/app";
+import { types as routeTypes } from "../actions/routes";
 
 function* createFund({ name }) {
   try {
@@ -25,8 +26,23 @@ function* createFund({ name }) {
   }
 }
 
+function* loadFundOnSetup() {
+  const usersFundChecked = yield select(state => state.app.usersFundChecked);
+
+  if (!usersFundChecked) {
+    yield take(appTypes.SET_USERS_FUND);
+  }
+
+  const usersFund = yield select(state => state.app.usersFund);
+
+  if (usersFund) {
+    yield put(actions.infoRequested(usersFund));
+  }
+}
+
 function* setup() {
   yield takeLatest(types.SETUP_REQUESTED, createFund);
+  yield takeLatest(routeTypes.SETUP, loadFundOnSetup);
 }
 
 export default setup;

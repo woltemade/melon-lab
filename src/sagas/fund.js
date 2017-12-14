@@ -92,6 +92,8 @@ function* checkAndLoad({ address }) {
 function* getUsersFund({ account }) {
   if (!account) return;
   const fundAddress = yield call(getFundForManager, account);
+  // Even if fundAddress is undefined (i.e. user hasnt a fund yet), we dispatch
+  // this action to signal that we tried to get the users fund
   yield put(appActions.setUsersFund(fundAddress));
 }
 
@@ -109,9 +111,9 @@ function* redirectSaga(action) {
 
 function* fund() {
   // yield takeLatest(routeTypes.FUND, redirectSaga);
-  // yield takeLatest(types.INFO_REQUESTED, requestInfo);
+  yield takeLatest(types.INFO_REQUESTED, requestInfo);
   // yield takeLatest(types.SET, checkAndLoad);
-  // yield takeLatest(ethereumTypes.ACCOUNT_CHANGED, getUsersFund);
+  yield takeLatest(ethereumTypes.ACCOUNT_CHANGED, getUsersFund);
 }
 
 export default fund;
