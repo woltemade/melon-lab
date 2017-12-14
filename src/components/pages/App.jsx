@@ -10,6 +10,7 @@ import { onboardingPath } from "../../reducers/app";
 import FundContainer from "../../containers/Fund";
 import RankingContainer from "../../containers/Ranking";
 import NewUserContainer from "../../containers/NewUser";
+import { types } from "../../actions/routes";
 
 const mapOnboardingStateToMainContainer = {
   [onboardingPath.NO_PROVIDER]: NoMetamask,
@@ -22,11 +23,26 @@ const mapOnboardingStateToMainContainer = {
   [onboardingPath.NOT_INVESTED_IN_OWN_FUND]: ParticipationContainer,
 };
 
-const getSetupComponent = ({ onboardingState, mlnBalance, ethBalance }) => {
-  const Main = mapOnboardingStateToMainContainer[onboardingState];
-  return Main ? (
-    <Main mlnBalance={mlnBalance} ethBalance={ethBalance} setup />
-  ) : null;
+const routeContainerMap = {
+  [types.RANKING]: RankingContainer,
+  [types.NEW_USER]: NewUserContainer,
+  [types.FUND]: FundContainer,
+};
+
+const getMainComponent = ({
+  onboardingState,
+  mlnBalance,
+  ethBalance,
+  route,
+}) => {
+  if (route === types.SETUP) {
+    const Main = mapOnboardingStateToMainContainer[onboardingState];
+    return Main ? (
+      <Main mlnBalance={mlnBalance} ethBalance={ethBalance} setup />
+    ) : null;
+  }
+  const Main = routeContainerMap[route];
+  return Main ? <Main /> : <div />;
 };
 
 const App = props => (
@@ -35,7 +51,7 @@ const App = props => (
       <div className="App-header" style={{ margin: "2em" }}>
         <Image src="./melon-logo.png" size="small" centered />
       </div>
-      {getSetupComponent(props)}
+      {getMainComponent(props)}
     </Container>
   </div>
 );

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import App from "../components/pages/App";
 
 const mapStateToProps = state => ({
+  route: state.location.type,
   usersFund: state.app.usersFund,
   onboardingState: state.app.onboardingState,
   isReadyToTrade: state.app.isReadyToTrade,

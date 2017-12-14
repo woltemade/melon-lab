@@ -9,9 +9,9 @@ export const types = {
 export const routeMap = {
   [types.SETUP]: "/setup",
   [types.ROOT]: "/",
-  [types.FUND]: "/:address",
   [types.RANKING]: "/ranking",
   [types.NEW_USER]: "/newuser",
+  [types.FUND]: "/:address",
 };
 
 export const actions = {

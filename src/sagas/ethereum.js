@@ -63,7 +63,7 @@ function* init() {
   // // setup.wallet = wallet;
   setup.wallet = yield call(
     importWalletFromMnemonic,
-    "train any keen neck arctic census only limb beauty mass fancy potato",
+    "thought index admit seed room disagree diagram expand pond truly oppose call",
   );
   // setup.wallet = yield call(
   //   decryptWallet,

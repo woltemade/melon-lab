@@ -19,7 +19,8 @@ function* encrypt() {
     const wallet = yield select(state => state.newUser.wallet);
     const password = "asdf";
     const encryptedWallet = yield call(encryptWallet, wallet, password);
-    localStorage.setItem("Wallet", encryptedWallet);
+    // HACK! TODO: put encrypted wallet in local storage!
+    localStorage.setItem("Wallet", wallet);
     yield put(
       actions.encryptWalletSucceeded({ encryptedWallet, hasEncrypted: true }),
     );
