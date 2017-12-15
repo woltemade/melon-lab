@@ -1,4 +1,4 @@
-import { types } from "../actions/newUser";
+import { types } from "../actions/account";
 
 export const initialState = {
   hasGenerated: false,

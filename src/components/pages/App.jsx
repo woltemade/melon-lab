@@ -9,7 +9,8 @@ import ParticipationContainer from "../../containers/Participation";
 import { onboardingPath } from "../../reducers/app";
 import FundContainer from "../../containers/Fund";
 import RankingContainer from "../../containers/Ranking";
-import NewUserContainer from "../../containers/NewUser";
+import AccountContainer from "../../containers/Account";
+import RestoreContainer from "../../containers/Restore";
 import { types } from "../../actions/routes";
 
 const mapOnboardingStateToMainContainer = {
@@ -25,8 +26,13 @@ const mapOnboardingStateToMainContainer = {
 
 const routeContainerMap = {
   [types.RANKING]: RankingContainer,
-  [types.NEW_USER]: NewUserContainer,
+  [types.ACCOUNT_SETUP]: AccountContainer,
+  [types.ACCOUNT_RESTORE]: AccountContainer,
+  [types.ACCOUNT_CREATE]: AccountContainer,
+  [types.ACCOUNT_ENCRYPT]: AccountContainer,
+  // [types.ACCOUNT_SETUP]: AccountContainer,
   [types.FUND]: FundContainer,
+  [types.RESTORE]: RestoreContainer,
 };
 
 const getMainComponent = ({

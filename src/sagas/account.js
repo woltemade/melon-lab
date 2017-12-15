@@ -1,7 +1,7 @@
 import { takeLatest, call, put, select, take } from "redux-saga/effects";
 import { createWallet, encryptWallet } from "@melonproject/melon.js";
 
-import { types, actions } from "../actions/newUser";
+import { types, actions } from "../actions/account";
 
 function* generateWallet() {
   try {
@@ -18,8 +18,8 @@ function* generateWallet() {
   }
 }
 
-function* newUser() {
+function* account() {
   yield takeLatest(types.GENERATE_WALLET_REQUESTED, generateWallet);
 }
 
-export default newUser;
+export default account;
