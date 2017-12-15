@@ -16,9 +16,9 @@ export const actions = {
     type: types.GENERATE_WALLET_FAILED,
     reason,
   }),
-  generateWalletSucceeded: result => ({
+  generateWalletSucceeded: newAddress => ({
     type: types.GENERATE_WALLET_SUCCEEDED,
-    ...result,
+    newAddress,
   }),
   encryptWallet: () => ({
     type: types.ENCRYPT_WALLET_REQUESTED,
@@ -27,9 +27,8 @@ export const actions = {
     type: types.ENCRYPT_WALLET_FAILED,
     reason,
   }),
-  encryptWalletSucceeded: result => ({
+  encryptWalletSucceeded: () => ({
     type: types.ENCRYPT_WALLET_SUCCEEDED,
-    ...result,
   }),
   iSaved: () => ({
     type: types.GENERATE_WALLET_SUCCEEDED,

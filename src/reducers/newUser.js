@@ -1,24 +1,25 @@
 import { types } from "../actions/newUser";
 
 export const initialState = {
-  wallet: undefined,
   hasGenerated: false,
   hasSavedMnemonic: false,
   hasEncrypted: false,
-  encryptedWallet: undefined,
+  newAddress: "",
 };
 
 const reducers = {
-  merge: (state, params) => ({
+  generated: (state, params) => ({
     ...state,
-    ...params,
+    hasGenerated: true,
+    newAddress: params.newAddress,
   }),
+  encrypted: state => ({ ...state, hasEncrypted: true }),
   default: state => ({ ...state }),
 };
 
 const mapActionToReducer = {
-  [types.GENERATE_WALLET_SUCCEEDED]: reducers.merge,
-  [types.ENCRYPT_WALLET_SUCCEEDED]: reducers.merge,
+  [types.GENERATE_WALLET_SUCCEEDED]: reducers.generated,
+  [types.ENCRYPT_WALLET_SUCCEEDED]: reducers.encrypted,
 };
 
 export const reducer = (state = initialState, action) => {

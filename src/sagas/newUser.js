@@ -1,38 +1,26 @@
-import { takeLatest, call, put, select } from "redux-saga/effects";
+import { takeLatest, call, put, select, take } from "redux-saga/effects";
 import { createWallet, encryptWallet } from "@melonproject/melon.js";
 
 import { types, actions } from "../actions/newUser";
-import { actions as appActions } from "../actions/app";
 
 function* generateWallet() {
   try {
     const wallet = yield call(createWallet);
-    yield put(actions.generateWalletSucceeded({ wallet, hasGenerated: true }));
+    // Security Hack: To the mnemonic on the window scope to circumvent redux
+    window[wallet.address] = wallet.mnemonic;
+    yield put(actions.generateWalletSucceeded(wallet.address));
+    yield take(types.I_SAVED);
+    const password = yield take(types.ENCRYPT_WALLET_REQUESTED);
+    const encryptedWallet = yield call(encryptWallet, wallet, password);
+    localStorage.setItem("wallet:melon.fund", encryptedWallet);
   } catch (err) {
     console.error(err);
     yield put(actions.generateWalletFailed(err));
   }
 }
 
-function* encrypt() {
-  try {
-    const wallet = yield select(state => state.newUser.wallet);
-    const password = "asdf";
-    const encryptedWallet = yield call(encryptWallet, wallet, password);
-    // HACK! TODO: put encrypted wallet in local storage!
-    localStorage.setItem("Wallet", wallet);
-    yield put(
-      actions.encryptWalletSucceeded({ encryptedWallet, hasEncrypted: true }),
-    );
-  } catch (err) {
-    console.error(err);
-    yield put(actions.encryptWalletFailed(err));
-  }
-}
-
 function* newUser() {
   yield takeLatest(types.GENERATE_WALLET_REQUESTED, generateWallet);
-  yield takeLatest(types.ENCRYPT_WALLET_REQUESTED, encrypt);
 }
 
 export default newUser;
