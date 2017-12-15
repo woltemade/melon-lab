@@ -34,16 +34,17 @@
     "web3": "^0.18.4"
   },
   "scripts": {
-    "start": "npm run semantic:watch & react-scripts start",
-    "lint": "eslint ./",
     "build": "npm run semantic:build && webpack",
+    "cypress:open": "cypress open",
     "deploy": "ipfs add -r public",
-    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
+    "lint": "eslint ./",
     "semantic:build": "cd public/semantic && gulp build",
     "semantic:watch": "cd public/semantic && gulp",
+    "start": "npm run semantic:watch & react-scripts start",
+    "storybook:build": "build-storybook -s public -o .out  -c tests/storybook",
     "storybook": "start-storybook -p 9001 -c tests/storybook",
-    "storybook:build": "build-storybook -s public -o .out  -c tests/storybook"
+    "test": "react-scripts test --env=jsdom"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.2.17",
@@ -51,6 +52,7 @@
     "@storybook/addon-knobs": "^3.2.17",
     "@storybook/react": "^3.2.17",
     "babel-preset-stage-2": "^6.24.1",
+    "cypress": "^1.2.0",
     "eslint": "^4.3.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-prettier": "^2.3.0",
