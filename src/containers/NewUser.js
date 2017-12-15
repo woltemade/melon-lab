@@ -6,6 +6,7 @@ import NewUser from "../components/pages/NewUser";
 
 const mapStateToProps = state => ({
   ...state.newUser,
+  mnemonic: window[state.newUser.newAddress],
   setupAction: routeActions.setup(),
 });
 

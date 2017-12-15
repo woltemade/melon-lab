@@ -8,18 +8,14 @@ export const initialState = {
 };
 
 const reducers = {
-  generated: (state, params) => ({
-    ...state,
-    hasGenerated: true,
-    newAddress: params.newAddress,
-  }),
-  encrypted: state => ({ ...state, hasEncrypted: true }),
+  merge: (state, params) => ({ ...state, ...params }),
   default: state => ({ ...state }),
 };
 
 const mapActionToReducer = {
-  [types.GENERATE_WALLET_SUCCEEDED]: reducers.generated,
-  [types.ENCRYPT_WALLET_SUCCEEDED]: reducers.encrypted,
+  [types.GENERATE_WALLET_SUCCEEDED]: reducers.merge,
+  [types.ENCRYPT_WALLET_SUCCEEDED]: reducers.merge,
+  [types.I_SAVED]: reducers.merge,
 };
 
 export const reducer = (state = initialState, action) => {

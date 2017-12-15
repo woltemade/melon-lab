@@ -24,7 +24,7 @@ const generationPath = {
     <div>
       <p>Generated Mnemonic:</p>
       <p>
-        <strong> {mnemonic}</strong>
+        <strong id="mnemonic">{mnemonic}</strong>
       </p>
       <p>
         Associated Public Address: <strong>{address}</strong>
@@ -46,7 +46,7 @@ const generationPath = {
       <p>
         Now it is time to encrypt your wallet with a password of your choice.
         The encrypted wallet will be stored in the local storage of your
-        browser.{" "}
+        browser.
       </p>
       <h5>
         Make sure to remember your password. Everytime you will send a
@@ -83,13 +83,14 @@ const renderContent = ({
   hasGenerated,
   hasSavedMnemonic,
   hasEncrypted,
-  wallet,
+  newAddress,
+  mnemonic,
   setupAction,
 }) => {
   if (!hasGenerated) {
     return generationPath.Generate(generateWallet);
   } else if (!hasSavedMnemonic) {
-    return generationPath.WriteDown(wallet.mnemonic, wallet.address, iSaved);
+    return generationPath.WriteDown(mnemonic, newAddress, iSaved);
   } else if (!hasEncrypted) {
     return generationPath.Encrypt(encryptWallet);
   }

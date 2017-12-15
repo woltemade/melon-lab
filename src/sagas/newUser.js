@@ -10,7 +10,8 @@ function* generateWallet() {
     window[wallet.address] = wallet.mnemonic;
     yield put(actions.generateWalletSucceeded(wallet.address));
     yield take(types.I_SAVED);
-    const password = yield take(types.ENCRYPT_WALLET_REQUESTED);
+    window[wallet.address] = undefined;
+    const { password } = yield take(types.ENCRYPT_WALLET_REQUESTED);
     const encryptedWallet = yield call(encryptWallet, wallet, password);
     localStorage.setItem("wallet:melon.fund", encryptedWallet);
   } catch (err) {

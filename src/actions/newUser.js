@@ -18,6 +18,7 @@ export const actions = {
   }),
   generateWalletSucceeded: newAddress => ({
     type: types.GENERATE_WALLET_SUCCEEDED,
+    hasGenerated: true,
     newAddress,
   }),
   encryptWallet: () => ({
@@ -29,9 +30,10 @@ export const actions = {
   }),
   encryptWalletSucceeded: () => ({
     type: types.ENCRYPT_WALLET_SUCCEEDED,
+    hasEncrypted: true,
   }),
   iSaved: () => ({
-    type: types.GENERATE_WALLET_SUCCEEDED,
+    type: types.I_SAVED,
     hasSavedMnemonic: true,
   }),
 };
