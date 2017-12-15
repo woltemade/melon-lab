@@ -5,6 +5,7 @@ export const initialState = {
   hasSavedMnemonic: false,
   hasEncrypted: false,
   newAddress: "",
+  mnemonic: "",
 };
 
 const reducers = {

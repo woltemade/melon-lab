@@ -31,7 +31,7 @@ const onSubmit = (values, dispatch) => {
       _error: "Password too short.",
     });
   } else {
-    // dispatch(actions.encryptWallet(values.password));
+    dispatch(actions.encryptWallet(values.password));
   }
 };
 

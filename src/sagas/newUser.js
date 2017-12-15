@@ -6,14 +6,12 @@ import { types, actions } from "../actions/newUser";
 function* generateWallet() {
   try {
     const wallet = yield call(createWallet);
-    // Security Hack: To the mnemonic on the window scope to circumvent redux
-    window[wallet.address] = wallet.mnemonic;
-    yield put(actions.generateWalletSucceeded(wallet.address));
+    yield put(actions.generateWalletSucceeded(wallet.address, wallet.mnemonic));
     yield take(types.I_SAVED);
-    window[wallet.address] = undefined;
     const { password } = yield take(types.ENCRYPT_WALLET_REQUESTED);
     const encryptedWallet = yield call(encryptWallet, wallet, password);
     localStorage.setItem("wallet:melon.fund", encryptedWallet);
+    yield put(actions.encryptWalletSucceeded());
   } catch (err) {
     console.error(err);
     yield put(actions.generateWalletFailed(err));
