@@ -1,6 +1,4 @@
 import { connect } from "react-redux";
-import { lifecycle } from "recompose";
-import { actions as fundActions } from "../actions/fund";
 
 import Fund from "../components/pages/Fund";
 
@@ -11,21 +9,9 @@ const mapStateToProps = (state, ownProps) => ({
     state.app.isReadyToInteract && state.ethereum.account !== state.fund.owner,
   isManager:
     state.app.isReadyToInteract && state.ethereum.account === state.fund.owner,
-  fundAddress: ownProps.match.params.fundAddress,
+  // fundAddress: ownProps.match.params.fundAddress,
 });
 
-const mapDispatchToProps = dispatch => ({
-  setFund: address => dispatch(fundActions.set(address)),
-});
-
-const FundLifecycle = lifecycle({
-  componentDidMount() {
-    this.props.setFund(this.props.match.params.fundAddress);
-  },
-})(Fund);
-
-const FundContainer = connect(mapStateToProps, mapDispatchToProps)(
-  FundLifecycle,
-);
+const FundContainer = connect(mapStateToProps)(Fund);
 
 export default FundContainer;

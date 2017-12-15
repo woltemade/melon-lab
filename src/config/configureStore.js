@@ -8,16 +8,15 @@ import { routeMap } from "../actions/routes";
 import reducerMap from "../reducers";
 import rootSaga from "../sagas";
 
-export const history = createHistory();
-
 export const configureStore = preloadedState => {
   const {
     reducer: location,
     middleware: routerMiddleware,
     enhancer,
     initialDispatch,
-  } = connectRoutes(history, routeMap, {
+  } = connectRoutes(routeMap, {
     initialDispatch: false,
+    createHistory,
   });
 
   const sagaMiddleware = createSagaMiddleware();

@@ -79,7 +79,7 @@ function* redirectSaga() {
       yield put(routeActions.setup());
     }
   } else {
-    yield put(routeActions.ranking);
+    yield put(routeActions.ranking());
   }
 }
 

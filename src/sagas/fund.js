@@ -1,4 +1,3 @@
-import BigNumber from "bignumber.js";
 import {
   getFundInformations,
   getParticipation,
@@ -6,25 +5,14 @@ import {
   performCalculations,
   getFundForManager,
 } from "@melonproject/melon.js";
-import { takeLatest, put, call, select } from "redux-saga/effects";
+import { takeLatest, put, call, take, select } from "redux-saga/effects";
 import { actions, types } from "../actions/fund";
 import { types as ethereumTypes } from "../actions/ethereum";
-import { actions as appActions } from "../actions/app";
+import { actions as appActions, types as appTypes } from "../actions/app";
 import {
   types as routeTypes,
   actions as routeActions,
 } from "../actions/routes";
-
-// TODO: Refactor these into new saga architecture
-/*
-import { creators as fundHoldingsCreators } from "../legacyComponents/fundHoldings/duck";
-import { creators as generalCreators } from "../legacyComponents/general";
-import { creators as orderbookCreators } from "../legacyComponents/orderbook/duck";
-import { creators as participationCreators } from "../legacyComponents/participation/duck";
-import { creators as recentTradesCreators } from "../legacyComponents/recentTrades/duck";
-import { creators as tradeHelperCreators } from "../legacyComponents/tradeHelper/duck";
-import { creators as tradingActivityCreators } from "../legacyComponents/tradingActivity/duck";
-*/
 
 function* requestInfo({ address }) {
   try {
@@ -52,41 +40,22 @@ function* requestInfo({ address }) {
     }
 
     yield put(actions.infoSucceeded(info));
-
-    // TODO: These are legacy dispatches, refactor them to the
-    // new saga architecture
-    /*
-    const mode = calculations.totalSupply.gt(0) ? "Manage" : "Invest";
-
-    yield put(
-      generalCreators.update({
-        mode,
-        fundAddress: fundInfo.fundAddress,
-        fundName: fundInfo.name,
-      }),
-    );
-
-    // Also legacy : REMOVE!
-    yield put(fundHoldingsCreators.requestHoldings());
-    yield put(fundHoldingsCreators.requestPrices());
-    yield put(orderbookCreators.requestOrderbook("BTC-T/MLN-T"));
-    yield put(participationCreators.request_price());
-    yield put(recentTradesCreators.requestRecentTrades("BTC-T/MLN-T"));
-    yield put(tradeHelperCreators.request("BTC-T/MLN-T"));
-    yield put(tradingActivityCreators.requestFundRecentTrades());
-    */
   } catch (err) {
     console.error(err);
     yield put(actions.infoFailed(err));
   }
 }
 
-function* checkAndLoad({ address }) {
-  const isReadyToVisit = yield select(state => state.app.isReadyToVisit);
+function* checkAndLoad() {
+  const address = yield select(state => state.location.payload.address);
+  let isReadyToVisit = yield select(state => state.app.isReadyToVisit);
 
-  if (isReadyToVisit) {
-    yield put(actions.infoRequested(address));
+  while (!isReadyToVisit) {
+    yield take(appTypes.SET_READY_STATE);
+    isReadyToVisit = yield select(state => state.app.isReadyToVisit);
   }
+
+  yield put(actions.infoRequested(address));
 }
 
 function* getUsersFund({ account }) {
@@ -97,20 +66,8 @@ function* getUsersFund({ account }) {
   yield put(appActions.setUsersFund(fundAddress));
 }
 
-/*
-function* redirectSaga(action) {
-  console.log(action);
-
-  const gav = yield select(store => new BigNumber(store.fund.gav));
-
-  if (gav.eq(0)) {
-    yield routeActions.setup();
-  }
-}
-*/
-
 function* fund() {
-  // yield takeLatest(routeTypes.FUND, redirectSaga);
+  yield takeLatest(routeTypes.FUND, checkAndLoad);
   yield takeLatest(types.INFO_REQUESTED, requestInfo);
   // yield takeLatest(types.SET, checkAndLoad);
   yield takeLatest(ethereumTypes.ACCOUNT_CHANGED, getUsersFund);

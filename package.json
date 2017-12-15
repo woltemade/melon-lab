@@ -24,7 +24,7 @@
     "react-scripts": "1.0.11",
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
-    "redux-first-router": "0.0.16-next",
+    "redux-first-router": "0.0.4-rudy",
     "redux-first-router-link": "^1.4.2",
     "redux-form": "^7.1.2",
     "redux-saga": "^0.16.0",

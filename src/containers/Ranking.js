@@ -4,7 +4,7 @@ import { lifecycle } from "recompose";
 import Ranking from "../components/organisms/Ranking";
 import { actions } from "../actions/ranking";
 import displayNumber from "../utils/displayNumber";
-import { actions as routeActions } from "../actions/fund";
+import { actions as routeActions } from "../actions/routes";
 
 const mapStateToProps = state => ({
   rankingList: state.ranking.rankingList.map(fund => ({
@@ -12,9 +12,7 @@ const mapStateToProps = state => ({
     inception: moment(fund.inception).format("D. MMM YYYY HH:mm"),
     sharePrice: displayNumber(fund.sharePrice.toString()),
   })),
-  getFundLinkAction(fundAddress) {
-    routeActions(fundAddress);
-  },
+  getFundLinkAction: fundAddress => routeActions.fund(fundAddress),
 });
 
 const mapDispatchToProps = dispatch => ({
