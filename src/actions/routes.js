@@ -20,7 +20,6 @@ export const routeMap = {
   [types.ACCOUNT_CREATE]: "/account/create",
   [types.ACCOUNT_ENCRYPT]: "/account/encrypt",
   [types.DONE]: "/account/done",
-  [types.RESTORE]: "/restore",
   [types.FUND]: "/:address",
 };
 
@@ -33,7 +32,7 @@ export const actions = {
     type: types.RANKING,
   }),
   restore: () => ({
-    type: types.RESTORE,
+    type: types.ACCOUNT_RESTORE,
   }),
   setup: () => ({
     type: types.SETUP,

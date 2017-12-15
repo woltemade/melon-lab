@@ -4,7 +4,7 @@ import { importWalletFromMnemonic } from "@melonproject/melon.js";
 
 import { actions as routeActions } from "../actions/routes";
 import { actions } from "../actions/account";
-import Restore from "../components/pages/Restore.jsx";
+import Restore from "../components/organisms/account/Restore";
 
 const mapStateToProps = state => ({});
 

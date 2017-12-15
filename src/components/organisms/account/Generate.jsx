@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "semantic-ui-react";
 import Link from "redux-first-router-link";
 
-const Generate = ({ generateWallet, importWalletAction }) => (
+const Generate = ({ generateWallet, restoreWalletAction }) => (
   <div>
     <p>
       Before you can set up your fund, you need to create or restore wallet.
@@ -23,7 +23,7 @@ const Generate = ({ generateWallet, importWalletAction }) => (
     </p>
     <p>
       <Button basic color="black" style={{ width: "100%" }}>
-        <Link to={importWalletAction}>Restore wallet with mnemonic</Link>
+        <Link to={restoreWalletAction}>Restore wallet with mnemonic</Link>
       </Button>
     </p>
   </div>

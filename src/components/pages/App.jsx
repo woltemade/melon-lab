@@ -27,12 +27,11 @@ const mapOnboardingStateToMainContainer = {
 const routeContainerMap = {
   [types.RANKING]: RankingContainer,
   [types.ACCOUNT_SETUP]: AccountContainer,
-  [types.ACCOUNT_RESTORE]: AccountContainer,
+  [types.ACCOUNT_RESTORE]: RestoreContainer,
   [types.ACCOUNT_CREATE]: AccountContainer,
   [types.ACCOUNT_ENCRYPT]: AccountContainer,
   // [types.ACCOUNT_SETUP]: AccountContainer,
   [types.FUND]: FundContainer,
-  [types.RESTORE]: RestoreContainer,
 };
 
 const getMainComponent = ({

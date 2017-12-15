@@ -7,7 +7,7 @@ import Account from "../components/pages/Account";
 const mapStateToProps = state => ({
   ...state.account,
   setupAction: routeActions.setup(),
-  importWalletAction: routeActions.restore(),
+  restoreWalletAction: routeActions.restore(),
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -2,7 +2,7 @@ import React from "react";
 import { Field } from "redux-form";
 import { Card, Header, Button } from "semantic-ui-react";
 
-import renderInput from "../utils/renderInput";
+import renderInput from "../../utils/renderInput";
 
 const Restore = ({ handleSubmit, error }) => (
   <Card centered>
