@@ -10,20 +10,7 @@ import TradeHistory from "../../containers/TradeHistory";
 import GetStarted from "../organisms/GetStarted";
 import Participation from "../../containers/Participation";
 
-// TODO: Remove legacyComponents;
-/*
-import TradeContainer from "../../legacyComponents/trade/container";
-import TradeHelperContainer from "../../legacyComponents/tradeHelper/container";
-*/
-
-const ManagerView = ({
-  isOwner,
-  loading,
-  isVisitor,
-  isInvestor,
-  isManager,
-  fundAddress,
-}) => (
+const ManagerView = ({ isVisitor, isInvestor, isManager, fundAddress }) => (
   <div className="App">
     <br />
     <div>
@@ -42,40 +29,6 @@ const ManagerView = ({
       <br />
       <TradeHistory address={fundAddress} />
     </div>
-    {/*
-    <div>
-    </div>
-    <div>
-      <br />
-      <br />
-      <FundHoldingsContainer />
-    </div>
-    <br />
-    <br />
-    <br />
-    <div>
-      <Card.Group>
-        <TradeContainer />
-        <TradeHelperContainer />
-      </Card.Group>
-    </div>
-    <br />
-    <br />
-    <br />
-    <OrderbookContainer />
-    <br />
-    <br />
-    <br />
-    <RecentTradesContainer />
-    <br />
-    <br />
-    <br />
-    <div>
-      <TradingActivityContainer />
-    </div>
-    <br />
-    <br />
-    */}
     <br />
   </div>
 );

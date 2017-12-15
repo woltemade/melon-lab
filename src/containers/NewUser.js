@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 
 import { actions } from "../actions/newUser";
 import { actions as routeActions } from "../actions/routes";
-import NewUser from "../components/organisms/NewUser";
+import NewUser from "../components/pages/NewUser";
 
 const mapStateToProps = state => ({
   ...state.newUser,

@@ -2,7 +2,7 @@ import React from "react";
 import { Field } from "redux-form";
 import { List, Button, Card, Image } from "semantic-ui-react";
 
-import renderInput from "./utils/renderInput";
+import renderInput from "../utils/renderInput";
 
 const Trade = ({
   switchSymbols,
