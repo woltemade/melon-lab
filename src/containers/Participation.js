@@ -1,9 +1,7 @@
 import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
-import { lifecycle } from "recompose";
 import { actions } from "../actions/participation";
 import Participation from "../components/organisms/ParticipationForm";
-import { onboardingPath } from "../reducers/app";
 import { actions as fundActions } from "../actions/fund";
 import { multiply, divide } from "../utils/functionalBigNumber";
 

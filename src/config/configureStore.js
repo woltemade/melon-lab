@@ -23,6 +23,8 @@ export const configureStore = preloadedState => {
 
   const middlewares = applyMiddleware(routerMiddleware, sagaMiddleware);
 
+  // TODO: For security reasons (intercepting passwords and stuff), disable
+  // redux devtools on production!
   /* eslint-disable no-underscore-dangle */
   const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
     ? window.__REDUX_DEVTOOLS_EXTENSION__()

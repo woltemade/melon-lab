@@ -1,6 +1,9 @@
 import React from "react";
+import { Field } from "redux-form";
 import { Card, Header, Button } from "semantic-ui-react";
 import Link from "redux-first-router-link";
+
+import renderInput from "../utils/renderInput";
 
 const generationPath = {
   Generate: generateWallet => (
@@ -41,8 +44,8 @@ const generationPath = {
       </Button>
     </div>
   ),
-  Encrypt: encryptWallet => (
-    <div>
+  Encrypt: ({ handleSubmit, error, submitting }) => (
+    <form onSubmit={handleSubmit}>
       <p>
         Now it is time to encrypt your wallet with a password of your choice.
         The encrypted wallet will be stored in the local storage of your
@@ -52,16 +55,32 @@ const generationPath = {
         Make sure to remember your password. Everytime you will send a
         transaction, you will need to type in your password.
       </h5>
-      <h5>TYPE PASSWORD</h5>
+      <h5>Enter a password: Do not forget it!</h5>
+      {error ? <div className="error">{error}</div> : null}
+      <p>
+        <Field
+          label="Password"
+          name="password"
+          component={renderInput}
+          type="password"
+        />
+
+        <Field
+          label="Repeat"
+          name="repeat"
+          component={renderInput}
+          type="password"
+        />
+      </p>
       <Button
         basic
+        disabled={submitting}
         color="black"
         style={{ width: "100%" }}
-        onClick={encryptWallet}
       >
         Encrypt my wallet
       </Button>
-    </div>
+    </form>
   ),
   Done: setupAction => (
     <div>
@@ -79,20 +98,26 @@ const generationPath = {
 const renderContent = ({
   generateWallet,
   iSaved,
-  encryptWallet,
   hasGenerated,
   hasSavedMnemonic,
   hasEncrypted,
   newAddress,
   mnemonic,
   setupAction,
+  handleSubmit,
+  error,
+  submitting,
 }) => {
   if (!hasGenerated) {
     return generationPath.Generate(generateWallet);
   } else if (!hasSavedMnemonic) {
     return generationPath.WriteDown(mnemonic, newAddress, iSaved);
   } else if (!hasEncrypted) {
-    return generationPath.Encrypt(encryptWallet);
+    return generationPath.Encrypt({
+      handleSubmit,
+      error,
+      submitting,
+    });
   }
 
   return generationPath.Done(setupAction);
