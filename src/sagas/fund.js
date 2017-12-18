@@ -28,6 +28,7 @@ function* requestInfo({ address }) {
       ...fundInfo,
       ...calculations,
       ...participationAuthorizations,
+      address,
     };
 
     if (account) {

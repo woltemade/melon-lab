@@ -21,8 +21,10 @@ const getOnboardingState = ({ ethereum, app, fund }) => {
   if (
     (ethereum.account === fund.owner && new BigNumber(fund.gav).eq(0)) ||
     (!!app.usersFund && !fund.address)
-  )
+  ) {
+    // State does not change to OT_INVESTED_IN_OWN_FUND after fund setup; need reload atm
     return onboardingPath.NOT_INVESTED_IN_OWN_FUND;
+  }
   return onboardingPath.ONBOARDED;
 };
 

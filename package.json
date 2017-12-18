@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@melonproject/melon.js": "0.5.0-alpha.12",
+    "@melonproject/melon.js": "^0.5.0-alpha.13",
     "babel-core": "^6.1.2",
     "babel-loader": "^6.1.0",
     "babel-polyfill": "^6.23.0",

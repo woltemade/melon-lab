@@ -36,41 +36,20 @@ function* init() {
   yield put(ethereumActions.hasConnected(networkId));
 
   // TODO: Real functionality which can create a new wallet if needed
-
-  // const walletFromMnemonic = importWalletFromMnemonic(
-  //   "divide regular fit traffic ride tag destroy flower holiday lion art million",
-  // );
-
-  // const wallet = new Wallet.Wallet.createRandom();
-
-  // console.log({ wallet, walletFromMnemonic });
-
-  // const encrypted = yield call(
-  //   encryptWallet,
-  //   walletFromMnemonic,
-  //   "9tjSQGCx5z9TZHtDMLClRdzcmBhj8z4fN8u9dWhOI2vpumDGAksBGlESJ2",
-  // );
-  // const encryptedParsed = JSON.parse(encrypted);
-  // encryptedParsed.crypto = encryptedParsed.Crypto;
-
-  // console.log(
-  //   JSON.parse(encrypted),
-  //   "---",
-  //   JSON.parse(JSON.stringify(encrypted)),
-  //   "---",
-  //   JSON.parse(JSON.stringify(loadedWallet)),
-  // );
-  // // setup.wallet = wallet;
   setup.wallet = yield call(
     importWalletFromMnemonic,
-    "thought index admit seed room disagree diagram expand pond truly oppose call",
+    "galaxy arrange tower sentence gift hub pony butter inner critic vessel echo",
   );
+  setup.defaultAccount = setup.wallet.address;
   // setup.wallet = yield call(
   //   decryptWallet,
   //   JSON.stringify(loadedWallet),
   //   "9tjSQGCx5z9TZHtDMLClRdzcmBhj8z4fN8u9dWhOI2vpumDGAksBGlESJ2",
   // );
-  setup.defaultAccount = setup.wallet.address;
+
+  // const wallet = localStorage.getItem("wallet:melon.fund");
+  // setup.wallet = JSON.parse(wallet);
+  // setup.defaultAccount = setup.wallet.address;
 
   if (fund.address !== "" && fund.name === "-") {
     yield put(fundActions.infoRequested(fund.address));
@@ -109,7 +88,11 @@ function* init() {
       yield put(ethereumActions.newBlock(data.onBlock));
 
       if (currentAccount !== data.onBlock.account) {
-        yield put(ethereumActions.accountChanged(data.onBlock.account));
+        const account = data.onBlock.account.startsWith("0x")
+          ? data.onBlock.account
+          : `0x${data.onBlock.account}`;
+        console.log("******* ", account);
+        yield put(ethereumActions.accountChanged(account));
       }
     } else {
       yield put(ethereumActions.blockOverdue());
