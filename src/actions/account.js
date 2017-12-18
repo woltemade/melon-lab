@@ -6,6 +6,10 @@ export const types = {
   ENCRYPT_WALLET_SUCCEEDED: "ENCRYPT_WALLET_SUCCEEDED:newuser:melon.fund",
   RESTORE_FROM_MNEMONIC_REQUESTED:
     "RESTORE_FROM_MNEMONIC_REQUESTED:newuser:melon.fund",
+  RESTORE_FROM_MNEMONIC_SUCCEEDED:
+    "RESTORE_FROM_MNEMONIC_SUCCEEDED:newuser:melon.fund",
+  RESTORE_FROM_MNEMONIC_FAILED:
+    "RESTORE_FROM_MNEMONIC_FAILED:newuser:melon.fund",
   I_SAVED: "I_SAVED:newuser:melon.fund",
 };
 
@@ -38,7 +42,17 @@ export const actions = {
   }),
   restoreFromMnemonic: mnemonic => ({
     type: types.RESTORE_FROM_MNEMONIC_REQUESTED,
-
     mnemonic,
+  }),
+  restoreFromMnemonicSucceeded: (newAddress, wallet) => ({
+    type: types.RESTORE_FROM_MNEMONIC_SUCCEEDED,
+    hasGenerated: true,
+    hasSavedMnemonic: true,
+    newAddress,
+    wallet,
+  }),
+  restoreFromMnemonicFailed: reason => ({
+    type: types.RESTORE_FROM_MNEMONIC_FAILED,
+    reason,
   }),
 };

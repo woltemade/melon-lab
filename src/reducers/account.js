@@ -16,6 +16,7 @@ const reducers = {
 const mapActionToReducer = {
   [types.GENERATE_WALLET_SUCCEEDED]: reducers.merge,
   [types.ENCRYPT_WALLET_SUCCEEDED]: reducers.merge,
+  [types.RESTORE_FROM_MNEMONIC_SUCCEEDED]: reducers.merge,
   [types.I_SAVED]: reducers.merge,
 };
 

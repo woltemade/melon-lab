@@ -8,11 +8,6 @@ import Restore from "../components/organisms/account/Restore";
 
 const mapStateToProps = state => ({});
 
-const mapDispatchToProps = dispatch => ({
-  // importWallet: actions.importWallet(),
-  // en
-});
-
 const onSubmit = (values, dispatch) => {
   try {
     importWalletFromMnemonic(values.mnemonic);
@@ -26,7 +21,7 @@ const onSubmit = (values, dispatch) => {
   }
 };
 
-const RestoreRedux = connect(mapStateToProps, mapDispatchToProps)(Restore);
+const RestoreRedux = connect(mapStateToProps)(Restore);
 const RestoreForm = reduxForm({ form: "restore", onSubmit })(RestoreRedux);
 
 export default RestoreForm;

@@ -34,6 +34,9 @@ export const actions = {
   restore: () => ({
     type: types.ACCOUNT_RESTORE,
   }),
+  encrypt: () => ({
+    type: types.ACCOUNT_ENCRYPT,
+  }),
   setup: () => ({
     type: types.SETUP,
   }),
