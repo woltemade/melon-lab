@@ -7,19 +7,17 @@ import {
 
 import { types, actions } from "../actions/fund";
 import { actions as appActions, types as appTypes } from "../actions/app";
-import { actions as fundActions } from "../actions/fund";
 import { types as routeTypes } from "../actions/routes";
 
 function* createFund({ name }) {
   try {
     yield put(appActions.transactionStarted());
     const signature = yield call(signTermsAndConditions);
-    console.log(signature);
     const fund = yield call(setupFund, name, signature);
     yield put(
       actions.setupSucceeded({ ...fund, owner: melonJsSetup.defaultAccount }),
     );
-    yield put(fundActions.infoRequested(fund.address));
+    yield put(actions.infoRequested(fund.address));
   } catch (err) {
     console.error(err);
     yield put(actions.setupFailed(err));

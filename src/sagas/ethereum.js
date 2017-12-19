@@ -91,7 +91,6 @@ function* init() {
         const account = data.onBlock.account.startsWith("0x")
           ? data.onBlock.account
           : `0x${data.onBlock.account}`;
-        console.log("******* ", account);
         yield put(ethereumActions.accountChanged(account));
       }
     } else {

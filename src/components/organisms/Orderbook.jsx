@@ -34,12 +34,12 @@ const Orderbook = ({
   sellOrders,
   totalSellVolume,
   totalBuyVolume,
-  baseSymbol,
-  quoteSymbol,
+  baseTokenSymbol,
+  quoteTokenSymbol,
 }) => (
   <div id="orderbook">
     <h3 className="App-intro">
-      Orderbook for {baseSymbol}/{quoteSymbol}
+      Orderbook for {baseTokenSymbol}/{quoteTokenSymbol}
     </h3>
     <Grid padded={false}>
       <Grid.Row columns={2}>

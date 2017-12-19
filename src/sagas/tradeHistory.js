@@ -1,6 +1,6 @@
 import { takeLatest, call, put, select } from "redux-saga/effects";
 import { getFundRecentTrades } from "@melonproject/melon.js";
-import { actions } from "../actions/tradeHistory";
+import { actions, types } from "../actions/tradeHistory";
 import { types as ethereumTypes } from "../actions/ethereum";
 
 function* getTradeHistorySaga() {
@@ -28,8 +28,7 @@ function* getTradeHistorySaga() {
 }
 
 function* tradeHistory() {
-  // yield takeLatest(types.GET_RECENTTRADES_REQUESTED, getTradeHistorySaga);
-  // yield takeLatest(ethereumTypes.HAS_CONNECTED, getTradeHistorySaga);
+  yield takeLatest(types.GET_TRADEHISTORY_REQUESTED, getTradeHistorySaga);
 }
 
 export default tradeHistory;

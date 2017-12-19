@@ -22,11 +22,13 @@ const mapStateToProps = state => ({
   }),
   totalBuyVolume: displayNumber(state.orderbook.totalBuyVolume),
   totalSellVolume: displayNumber(state.orderbook.totalSellVolume),
+  baseTokenSymbol: state.app.assetPair.split("/")[0],
+  quoteTokenSymbol: state.app.assetPair.split("/")[1],
 });
 
 const mapDispatchToProps = dispatch => ({
-  getOrderbook: assetPair => {
-    dispatch(actions.getOrderbook(assetPair));
+  getOrderbook: () => {
+    dispatch(actions.getOrderbook());
   },
   // onClick: asset => {
   //   if (asset !== "MLN-T") {
@@ -38,7 +40,7 @@ const mapDispatchToProps = dispatch => ({
 
 const OrderbookLifecycle = lifecycle({
   componentDidMount() {
-    this.props.getOrderbook("ETH-T/MLN-T");
+    this.props.getOrderbook();
   },
 })(Orderbook);
 

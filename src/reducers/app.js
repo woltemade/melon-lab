@@ -21,6 +21,7 @@ const initialState = {
   transactionInProgress: false,
   usersFundChecked: false,
   usersFund: "",
+  assetPair: "ETH-T/MLN-T",
 };
 
 const reducers = {

@@ -13,11 +13,13 @@ const mapStateToProps = state => ({
     timestamp: moment(trade.timeStamp).format("D. MMM YYYY HH:mm"),
     type: trade.type,
   })),
+  baseTokenSymbol: state.app.assetPair.split("/")[0],
+  quoteTokenSymbol: state.app.assetPair.split("/")[1],
 });
 
 const mapDispatchToProps = dispatch => ({
-  getRecentTrades: assetPair => {
-    dispatch(actions.getRecentTrades(assetPair));
+  getRecentTrades: () => {
+    dispatch(actions.getRecentTrades());
   },
 });
 

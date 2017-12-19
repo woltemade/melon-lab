@@ -1,10 +1,8 @@
 import { takeLatest, call, put, select } from "redux-saga/effects";
 import { getHoldingsAndPrices } from "@melonproject/melon.js";
 import { types, actions } from "../actions/holdings";
-import { types as ethereumTypes } from "../actions/ethereum";
 
 function* getHoldingsSaga() {
-  // const isConnected = yield select(state => state.app.isConnected);
   const fundAddress = yield select(state => state.fund.address);
   if (true) {
     try {
@@ -18,8 +16,7 @@ function* getHoldingsSaga() {
 }
 
 function* holdings() {
-  // yield takeLatest(types.GET_HOLDINGS_REQUESTED, getHoldingsSaga);
-  // yield takeLatest(ethereumTypes.HAS_CONNECTED, getHoldingsSaga);
+  yield takeLatest(types.GET_HOLDINGS_REQUESTED, getHoldingsSaga);
 }
 
 export default holdings;

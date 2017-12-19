@@ -76,6 +76,7 @@ function* redirectSaga() {
 
   if (usersFund) {
     if (isReadyToTrade) {
+      console.log("IS READY TO TRADE -> REDIRECT SHOULD HAPPEN");
       yield put(routeActions.fund(usersFund));
     } else {
       yield put(routeActions.setup());
@@ -90,6 +91,7 @@ const onlyMelonActions = action =>
 
 function* appSaga() {
   yield takeLatest(routeTypes.ROOT, redirectSaga);
+  // yield takeLatest(routeTypes.FUND, redirectSaga);
   yield takeLatest(onlyMelonActions, deriveReadyState);
 }
 

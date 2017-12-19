@@ -6,9 +6,6 @@ export const initialState = {
   sellOrders: [],
   totalBuyVolume: 0,
   totalSellVolume: 0,
-  assetPair: "ETH-T/MLN-T",
-  baseSymbol: "ETH-T",
-  quoteSymbol: "MLN-T",
 };
 
 const reducers = {

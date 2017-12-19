@@ -1,10 +1,9 @@
 import { takeLatest, call, put, select } from "redux-saga/effects";
 import { getRecentTrades } from "@melonproject/melon.js";
-import { actions } from "../actions/recentTrades";
-import { types as ethereumTypes } from "../actions/ethereum";
+import { actions, types } from "../actions/recentTrades";
 
 function* getRecentTradesSaga() {
-  const assetPair = yield select(state => state.recentTrades.assetPair);
+  const assetPair = yield select(state => state.app.assetPair);
   const baseTokenSymbol = assetPair.split("/")[0];
   const quoteTokenSymbol = assetPair.split("/")[1];
   if (true) {
@@ -33,8 +32,7 @@ function* getRecentTradesSaga() {
 }
 
 function* recentTrades() {
-  // yield takeLatest(types.GET_RECENTTRADES_REQUESTED, getRecentTradesSaga);
-  // yield takeLatest(ethereumTypes.HAS_CONNECTED, getRecentTradesSaga);
+  yield takeLatest(types.GET_RECENTTRADES_REQUESTED, getRecentTradesSaga);
 }
 
 export default recentTrades;

@@ -2,9 +2,6 @@ import { types } from "../actions/recentTrades";
 
 export const initialState = {
   trades: [],
-  assetPair: "ETH-T/MLN-T",
-  baseSymbol: "ETH-T",
-  quoteSymbol: "MLN-T",
 };
 
 const reducers = {

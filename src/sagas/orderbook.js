@@ -4,7 +4,7 @@ import { types, actions } from "../actions/orderbook";
 import { types as ethereumTypes } from "../actions/ethereum";
 
 function* getOrderbookSaga() {
-  const assetPair = yield select(state => state.orderbook.assetPair);
+  const assetPair = yield select(state => state.app.assetPair);
   const baseTokenSymbol = assetPair.split("/")[0];
   const quoteTokenSymbol = assetPair.split("/")[1];
   if (true) {
@@ -47,8 +47,7 @@ function* getOrderbookSaga() {
 }
 
 function* orderbook() {
-  // yield takeLatest(types.GET_ORDERBOOK_REQUESTED, getOrderbookSaga);
-  // yield takeLatest(ethereumTypes.HAS_CONNECTED, getOrderbookSaga);
+  yield takeLatest(types.GET_ORDERBOOK_REQUESTED, getOrderbookSaga);
 }
 
 export default orderbook;
