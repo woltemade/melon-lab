@@ -8,6 +8,7 @@ import {
   // encryptWallet,
   createWallet,
   decryptWallet,
+  getConfig
 } from "@melonproject/melon.js";
 
 import { types as browserTypes } from "../actions/browser";
@@ -24,7 +25,7 @@ function* init() {
 
   setup.init({
     provider,
-    daemonAddress: "0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd",
+    daemonAddress: "0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd"
   });
 
   yield put(ethereumActions.setProvider(providerType));
@@ -35,10 +36,13 @@ function* init() {
 
   yield put(ethereumActions.hasConnected(networkId));
 
+  const melonConfig = yield call(getConfig);
+  console.log("Melon.js config:", melonConfig);
+
   // TODO: Real functionality which can create a new wallet if needed
   setup.wallet = yield call(
     importWalletFromMnemonic,
-    "galaxy arrange tower sentence gift hub pony butter inner critic vessel echo",
+    "galaxy arrange tower sentence gift hub pony butter inner critic vessel echo"
   );
   setup.defaultAccount = setup.wallet.address;
   // setup.wallet = yield call(
