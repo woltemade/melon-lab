@@ -3,39 +3,39 @@ import {
   getParticipation,
   getParticipationAuthorizations,
   performCalculations,
-  getFundForManager,
+  getFundForManager
 } from "@melonproject/melon.js";
 import { takeLatest, put, call, take, select } from "redux-saga/effects";
 import { actions, types } from "../actions/fund";
 import { types as ethereumTypes } from "../actions/ethereum";
 import { actions as appActions, types as appTypes } from "../actions/app";
-import {
-  types as routeTypes,
-  actions as routeActions,
-} from "../actions/routes";
+import { types as routeTypes } from "../actions/routes";
 
 function* requestInfo({ address }) {
+  const isConnected = yield select(state => state.ethereum.isConnected);
+  if (!isConnected) yield take(ethereumTypes.HAS_CONNECTED);
+
   try {
     const account = yield select(state => state.ethereum.account);
     const fundInfo = yield call(getFundInformations, address);
     const calculations = yield call(performCalculations, address);
     const participationAuthorizations = yield call(
       getParticipationAuthorizations,
-      address,
+      address
     );
 
     const info = {
       ...fundInfo,
       ...calculations,
       ...participationAuthorizations,
-      address,
+      address
     };
 
     if (account) {
       const participation = yield call(
         getParticipation,
         fundInfo.fundAddress,
-        account,
+        account
       );
       info.personalStake = participation.personalStake;
     }
@@ -48,7 +48,8 @@ function* requestInfo({ address }) {
 }
 
 function* checkAndLoad() {
-  const address = yield select(state => state.location.payload.address);
+  // HACK: We should use state.location.payload... but it seems to be broken
+  const address = yield select(state => state.location.pathname.slice(1));
   let isReadyToVisit = yield select(state => state.app.isReadyToVisit);
 
   while (!isReadyToVisit) {
@@ -68,9 +69,8 @@ function* getUsersFund({ account }) {
 }
 
 function* fund() {
-  yield takeLatest(routeTypes.FUND, checkAndLoad);
   yield takeLatest(types.INFO_REQUESTED, requestInfo);
-  // yield takeLatest(types.SET, checkAndLoad);
+  yield takeLatest(routeTypes.FUND, checkAndLoad);
   yield takeLatest(ethereumTypes.ACCOUNT_CHANGED, getUsersFund);
 }
 

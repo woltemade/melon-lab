@@ -5,11 +5,8 @@ import { types as ethereumTypes } from "../actions/ethereum";
 import { types as routeTypes } from "../actions/routes";
 
 function* getRankingSaga() {
-  const isConnected = yield select(state => state.app.isConnected);
-
-  if (!isConnected) {
-    yield take(ethereumTypes.HAS_CONNECTED);
-  }
+  const isConnected = yield select(state => state.ethereum.isConnected);
+  if (!isConnected) yield take(ethereumTypes.HAS_CONNECTED);
 
   try {
     const rankingList = yield call(getRanking);
