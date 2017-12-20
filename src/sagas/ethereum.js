@@ -15,9 +15,6 @@ import { types as browserTypes } from "../actions/browser";
 import { actions as ethereumActions } from "../actions/ethereum";
 import { actions as fundActions } from "../actions/fund";
 
-// import Wallet from "ethers-wallet";
-import loadedWallet from "../_key/wallet.json";
-
 const MAX_BLOCK_TIME = 20 * 1000;
 
 function* init() {
@@ -39,21 +36,11 @@ function* init() {
   const melonConfig = yield call(getConfig);
   console.log("Melon.js config:", melonConfig);
 
-  // TODO: Real functionality which can create a new wallet if needed
-  setup.wallet = yield call(
-    importWalletFromMnemonic,
-    "galaxy arrange tower sentence gift hub pony butter inner critic vessel echo"
-  );
-  setup.defaultAccount = setup.wallet.address;
-  // setup.wallet = yield call(
-  //   decryptWallet,
-  //   JSON.stringify(loadedWallet),
-  //   "9tjSQGCx5z9TZHtDMLClRdzcmBhj8z4fN8u9dWhOI2vpumDGAksBGlESJ2",
-  // );
+  // TEST Mnemonic: "galaxy arrange tower sentence gift hub pony butter inner critic vessel echo"
 
-  // const wallet = localStorage.getItem("wallet:melon.fund");
-  // setup.wallet = JSON.parse(wallet);
-  // setup.defaultAccount = setup.wallet.address;
+  const wallet = localStorage.getItem("wallet:melon.fund");
+  setup.wallet = JSON.parse(wallet);
+  setup.defaultAccount = `0x${  setup.wallet.address}`;
 
   if (fund.address !== "" && fund.name === "-") {
     yield put(fundActions.infoRequested(fund.address));
@@ -92,10 +79,10 @@ function* init() {
       yield put(ethereumActions.newBlock(data.onBlock));
 
       if (currentAccount !== data.onBlock.account) {
-        const account = data.onBlock.account.startsWith("0x")
-          ? data.onBlock.account
-          : `0x${data.onBlock.account}`;
-        yield put(ethereumActions.accountChanged(account));
+        // const account = data.onBlock.account.startsWith("0x")
+        //   ? data.onBlock.account
+        //   : `0x${data.onBlock.account}`;
+        yield put(ethereumActions.accountChanged(data.onBlock.account));
       }
     } else {
       yield put(ethereumActions.blockOverdue());
