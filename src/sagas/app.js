@@ -1,4 +1,3 @@
-import BigNumber from "bignumber.js";
 import { takeLatest, select, put, take } from "redux-saga/effects";
 import { networks } from "@melonproject/melon.js";
 import { onboardingPath } from "../reducers/app";
@@ -9,20 +8,17 @@ import {
 } from "../actions/routes";
 import { types as fundTypes, actions as fundActions } from "../actions/fund";
 import isSameAddress from "../utils/isSameAddress";
+import { isZero } from "../utils/functionalBigNumber";
 
 const getOnboardingState = ({ ethereum, app, fund }) => {
   if (!ethereum.isConnected) return onboardingPath.NO_CONNECTION;
   if (ethereum.network !== networks.KOVAN) return onboardingPath.WRONG_NETWORK;
   if (!ethereum.account) return onboardingPath.NO_ACCOUNT;
-  if (
-    new BigNumber(ethereum.ethBalance).eq(0) ||
-    new BigNumber(ethereum.mlnBalance).eq(0)
-  )
+  if (isZero(ethereum.ethBalance) || isZero(ethereum.mlnBalance))
     return onboardingPath.INSUFFICENT_FUNDS;
   if (!app.usersFund) return onboardingPath.NO_FUND_CREATED;
   if (
-    (ethereum.account === fund.owner &&
-      new BigNumber(fund.totalSupply).eq(0)) ||
+    (ethereum.account === fund.owner && isZero(fund.totalSupply)) ||
     (!!app.usersFund && !fund.address)
   ) {
     // State does not change to OT_INVESTED_IN_OWN_FUND after fund setup; need reload atm
@@ -41,15 +37,14 @@ function* deriveReadyState() {
     ethereum.blockNumber > 0 &&
     !ethereum.syncing &&
     !!ethereum.account &&
-    new BigNumber(ethereum.ethBalance).gt(0);
+    !isZero(ethereum.ethBalance);
 
-  const isReadyToInvest =
-    isReadyToInteract && new BigNumber(ethereum.mlnBalance).gt(0);
+  const isReadyToInvest = isReadyToInteract && isZero(ethereum.mlnBalance);
 
   const isReadyToTrade =
     isReadyToInteract &&
     isSameAddress(fund.owner, ethereum.account) &&
-    new BigNumber(fund.totalSupply).gt(0);
+    isZero(fund.totalSupply);
 
   const readyState = {
     isReadyToVisit,

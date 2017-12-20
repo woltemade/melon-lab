@@ -10,3 +10,5 @@ export const add = (base, ...args) =>
 
 export const divide = (base, ...args) =>
   args.reduce((acc, current) => acc.div(current), toBigNumber(base));
+
+export const isZero = number => toBigNumber(number).eq(0);

@@ -2,7 +2,8 @@ import { takeLatest, call, put, take, select } from "redux-saga/effects";
 import {
   setupFund,
   setup as melonJsSetup,
-  signTermsAndConditions
+  signTermsAndConditions,
+  decryptWallet
 } from "@melonproject/melon.js";
 
 import { types, actions } from "../actions/fund";
@@ -13,10 +14,14 @@ import {
 } from "../actions/routes";
 
 function* createFund({ name }) {
+  const password = window.prompt("Enter your password. Yes. Really. Do IT.");
+  const wallet = localStorage.getItem("wallet:melon.fund");
+
   try {
     yield put(appActions.transactionStarted());
-    const signature = yield call(signTermsAndConditions);
-    const fund = yield call(setupFund, name, signature);
+    const decryptedWallet = yield call(decryptWallet, wallet, password);
+    const signature = yield call(signTermsAndConditions, decryptedWallet);
+    const fund = yield call(setupFund, name, signature, decryptedWallet);
     yield put(
       actions.setupSucceeded({ ...fund, owner: melonJsSetup.defaultAccount })
     );
