@@ -2,16 +2,18 @@ import { takeLatest, call, put, select, take } from "redux-saga/effects";
 import {
   createWallet,
   encryptWallet,
-  importWalletFromMnemonic,
+  importWalletFromMnemonic
 } from "@melonproject/melon.js";
 
 import { types, actions } from "../actions/account";
+import { actions as ethereumActions } from "../actions/ethereum";
 import { actions as routeActions } from "../actions/routes";
 
 function* encryptWalletSaga(wallet, password) {
   const encryptedWallet = yield call(encryptWallet, wallet, password);
   localStorage.setItem("wallet:melon.fund", encryptedWallet);
   yield put(actions.encryptWalletSucceeded());
+  yield put(ethereumActions.accountChanged(`0x${wallet.address}`));
 }
 
 function* generateWalletSaga() {

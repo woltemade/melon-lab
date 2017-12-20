@@ -29,8 +29,8 @@ function* init() {
 
   if (wallet) {
     setup.wallet = JSON.parse(wallet);
-    setup.defaultAccount = `0x${wallet.address}`;
-    yield put(ethereumActions.accountChanged(`0x${wallet.address}`));
+    setup.defaultAccount = `0x${setup.wallet.address}`;
+    yield put(ethereumActions.accountChanged(`0x${setup.wallet.address}`));
   } else {
     yield put(ethereumActions.accountChanged(""));
   }
