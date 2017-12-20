@@ -47,7 +47,7 @@ function* deriveReadyState() {
 
   const isReadyToTrade =
     isReadyToInteract &&
-    fund.owner === ethereum.account &&
+    fund.owner.toLowerCase() === ethereum.account.toLowerCase() &&
     new BigNumber(fund.totalSupply).gt(0);
 
   const readyState = {
@@ -91,6 +91,7 @@ function* redirectSaga() {
     if (isReadyToTrade) {
       yield put(routeActions.fund(usersFund));
     } else {
+      console.log(isReadyToTrade);
       yield put(routeActions.setup());
     }
   } else {
