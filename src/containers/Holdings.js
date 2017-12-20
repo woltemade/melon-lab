@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { actions } from "../actions/holdings";
+import { actions as appActions } from "../actions/app";
 import { lifecycle } from "recompose";
 import Holdings from "../components/organisms/Holdings";
 import displayNumber from "../utils/displayNumber";
@@ -22,12 +23,12 @@ const mapDispatchToProps = dispatch => ({
   getHoldings: fundAddress => {
     dispatch(actions.getHoldings(fundAddress));
   },
-  // onClick: asset => {
-  //   if (asset !== "MLN-T") {
-  //     const assetPair = `${asset}/MLN-T`;
-  //     dispatch(generalCreators.updateAssetPair(assetPair));
-  //   }
-  // },
+  selectAsset: asset => {
+    if (asset !== "MLN-T") {
+      const assetPair = `${asset}/MLN-T`;
+      dispatch(appActions.updateAssetPair(assetPair));
+    }
+  },
 });
 
 const HoldingsLifecycle = lifecycle({

@@ -37,10 +37,14 @@ const reducers = {
     ...state,
     ...params,
   }),
-  setUsersFunc: (state, params) => ({
+  setUsersFund: (state, params) => ({
     ...state,
     ...params,
     usersFundChecked: true,
+  }),
+  updateAssetPair: (state, assetPair) => ({
+    ...state,
+    assetPair,
   }),
   default: state => ({ ...state }),
 };
@@ -49,7 +53,8 @@ const mapActionToReducer = {
   [types.TRANSACTION_STARTED]: reducers.transactionStarted,
   [types.TRANSACTION_FINISHED]: reducers.transactionFinished,
   [types.SET_READY_STATE]: reducers.merge,
-  [types.SET_USERS_FUND]: reducers.setUsersFunc,
+  [types.SET_USERS_FUND]: reducers.setUsersFund,
+  [types.UPDATE_ASSET_PAIR]: reducers.updateAssetPair,
 };
 
 export const reducer = (state = initialState, action = {}) => {

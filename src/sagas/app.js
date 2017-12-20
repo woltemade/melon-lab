@@ -19,7 +19,8 @@ const getOnboardingState = ({ ethereum, app, fund }) => {
     return onboardingPath.INSUFFICENT_FUNDS;
   if (!app.usersFund) return onboardingPath.NO_FUND_CREATED;
   if (
-    (ethereum.account === fund.owner && new BigNumber(fund.gav).eq(0)) ||
+    (ethereum.account === fund.owner &&
+      new BigNumber(fund.totalSupply).eq(0)) ||
     (!!app.usersFund && !fund.address)
   ) {
     // State does not change to OT_INVESTED_IN_OWN_FUND after fund setup; need reload atm
@@ -46,7 +47,7 @@ function* deriveReadyState() {
   const isReadyToTrade =
     isReadyToInteract &&
     fund.owner === ethereum.account &&
-    new BigNumber(fund.gav).gt(0);
+    new BigNumber(fund.totalSupply).gt(0);
 
   const readyState = {
     isReadyToVisit,

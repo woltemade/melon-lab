@@ -9,6 +9,7 @@ import RecentTrades from "../../containers/RecentTrades";
 import TradeHistory from "../../containers/TradeHistory";
 import GetStarted from "../organisms/GetStarted";
 import Participation from "../../containers/Participation";
+import TradeHelper from "../../containers/TradeHelper";
 
 const Fund = ({ isVisitor, isInvestor, isManager, fundAddress }) => (
   <div className="App">
@@ -22,6 +23,8 @@ const Fund = ({ isVisitor, isInvestor, isManager, fundAddress }) => (
       </Card.Group>
       <br />
       <Holdings address={fundAddress} />
+      <br />
+      {isManager ? <TradeHelper /> : <div />}
       <br />
       <Orderbook />
       <br />

@@ -4,6 +4,7 @@ export const types = {
   TRANSACTION_FINISHED: "TRANSACTION_FINISHED:app:melon.fund",
   SET_USERS_FUND: "SET_USERS_FUND:app:melon.fund",
   SET_READY_STATE: "SET_READY_STATE:app:melon.fund",
+  UPDATE_ASSET_PAIR: "UPDATE_ASSET_PAIR:app:melon.fund",
 };
 
 export const actions = {
@@ -32,5 +33,9 @@ export const actions = {
     isReadyToInteract,
     isReadyToInvest,
     isReadyToTrade,
+  }),
+  updateAssetPair: assetPair => ({
+    type: types.UPDATE_ASSET_PAIR,
+    assetPair,
   }),
 };

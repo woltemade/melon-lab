@@ -8,6 +8,7 @@ import orderbook from "./orderbook";
 import recentTrades from "./recentTrades";
 import tradeHistory from "./tradeHistory";
 import account from "./account";
+import tradeHelper from "./tradeHelper";
 import ethereum from "./ethereum";
 
 const reducerMap = {
@@ -21,6 +22,7 @@ const reducerMap = {
   recentTrades,
   tradeHistory,
   account,
+  tradeHelper,
 };
 
 export default reducerMap;
