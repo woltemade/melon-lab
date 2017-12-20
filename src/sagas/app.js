@@ -5,8 +5,9 @@ import { onboardingPath } from "../reducers/app";
 import { actions, types } from "../actions/app";
 import {
   types as routeTypes,
-  actions as routeActions,
+  actions as routeActions
 } from "../actions/routes";
+import { types as fundTypes, actions as fundActions } from "../actions/fund";
 
 const getOnboardingState = ({ ethereum, app, fund }) => {
   if (!ethereum.isConnected) return onboardingPath.NO_CONNECTION;
@@ -54,12 +55,12 @@ function* deriveReadyState() {
     isReadyToInteract,
     isReadyToInvest,
     isReadyToTrade,
-    onboardingState: getOnboardingState({ app, ethereum, fund }),
+    onboardingState: getOnboardingState({ app, ethereum, fund })
   };
 
   const hasChanged = Object.entries(readyState).reduce(
     (acc, [key, value]) => acc || value !== app[key],
-    false,
+    false
   );
 
   if (hasChanged) yield put(actions.setReadyState(readyState));
@@ -73,11 +74,21 @@ function* redirectSaga() {
   }
 
   const usersFund = yield select(state => state.app.usersFund);
-  const isReadyToTrade = yield select(state => state.app.isReadyToTrade);
 
   if (usersFund) {
+    const fundInfoReceived = yield select(
+      state => !["", "-"].includes(state.fund.name)
+    );
+
+    if (!fundInfoReceived) {
+      yield put(fundActions.infoRequested(usersFund));
+      yield take(fundTypes.INFO_SUCCEEDED);
+      yield take(types.SET_READY_STATE);
+    }
+
+    const isReadyToTrade = yield select(state => state.app.isReadyToTrade);
+
     if (isReadyToTrade) {
-      console.log("IS READY TO TRADE -> REDIRECT SHOULD HAPPEN");
       yield put(routeActions.fund(usersFund));
     } else {
       yield put(routeActions.setup());
@@ -92,7 +103,6 @@ const onlyMelonActions = action =>
 
 function* appSaga() {
   yield takeLatest(routeTypes.ROOT, redirectSaga);
-  // yield takeLatest(routeTypes.FUND, redirectSaga);
   yield takeLatest(onlyMelonActions, deriveReadyState);
 }
 

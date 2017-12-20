@@ -6,20 +6,20 @@ import TradeHelper from "../components/organisms/TradeHelper";
 import displayNumber from "../utils/displayNumber";
 
 const mapStateToProps = state => ({
-  last:
-    displayNumber(
-      state.recentTrades.trades[state.recentTrades.trades.length - 1].price,
-    ) || 0,
-  bid: displayNumber(state.orderbook.buyOrders[0].price) || 0,
-  ask: displayNumber(state.orderbook.sellOrders[0].price) || 0,
-  baseTokenSymbol: state.app.assetPair.split("/")[0],
-  quoteTokenSymbol: state.app.assetPair.split("/")[1],
-  baseTokenBalance:
-    state.holdings.find(o => o.name === state.app.assetPair.split("/")[0])
-      .balance || 0,
-  quoteTokenBalance:
-    state.holdings.find(o => o.name === state.app.assetPair.split("/")[1])
-      .balance || 0,
+  // last:
+  //   displayNumber(
+  //     state.recentTrades.trades[state.recentTrades.trades.length - 1].price,
+  //   ) || 0,
+  // bid: displayNumber(state.orderbook.buyOrders[0].price) || 0,
+  // ask: displayNumber(state.orderbook.sellOrders[0].price) || 0,
+  // baseTokenSymbol: state.app.assetPair.split("/")[0],
+  // quoteTokenSymbol: state.app.assetPair.split("/")[1],
+  // baseTokenBalance:
+  //   state.holdings.find(o => o.name === state.app.assetPair.split("/")[0])
+  //     .balance || 0,
+  // quoteTokenBalance:
+  //   state.holdings.find(o => o.name === state.app.assetPair.split("/")[1])
+  //     .balance || 0,
 });
 
 const mapDispatchToProps = dispatch => ({
