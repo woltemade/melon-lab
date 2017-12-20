@@ -68,7 +68,7 @@ fit(
 
     console.log(wallet);
 
-    setup.wallet = wallet;
+    // setup.wallet = wallet;
     setup.defaultAccount = wallet.address;
     trace({
       message: `Start walkthrough with defaultAccount: ${setup.defaultAccount}`,
@@ -91,9 +91,9 @@ fit(
       data: shared.config,
     });
 
-    const signature = await signTermsAndConditions();
-    shared.vaultName = `test-${randomString()}`;
-    shared.vault = await setupFund(shared.vaultName, signature);
+    const signature = await signTermsAndConditions(wallet);
+    shared.vaultName = randomString();
+    shared.vault = await setupFund(shared.vaultName, signature, wallet);
     expect(shared.vault.name).toBe(shared.vaultName);
     expect(shared.vault.id).toBeGreaterThanOrEqual(0);
     expect(shared.vault.address).toBeTruthy();
@@ -136,6 +136,7 @@ fit(
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
       new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
+      wallet,
     );
 
     trace({
@@ -148,6 +149,7 @@ fit(
     shared.executedSubscriptionRequest = await executeRequest(
       shared.subscriptionRequest.id,
       shared.vault.address,
+      wallet,
       // 0,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
     );
@@ -189,6 +191,7 @@ fit(
       shared.vault.address,
       REDEEM_QUANTITY,
       REDEEM_QUANTITY,
+      wallet,
     );
 
     trace({
@@ -206,6 +209,7 @@ fit(
       shared.redemptionRequest.id,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       shared.vault.address,
+      wallet,
     );
 
     shared.participation.invested = await getParticipation(
@@ -236,10 +240,27 @@ fit(
         howMuch: new BigNumber(4),
         symbol: "MLN-T",
       },
+      wallet,
     });
 
     trace({
       message: `Regular account made order with id: ${shared.simpleOrder.id}`,
+    });
+
+    shared.simpleOrder2 = await makeOrderFromAccount({
+      sell: {
+        howMuch: new BigNumber(1),
+        symbol: "ETH-T",
+      },
+      buy: {
+        howMuch: new BigNumber(3),
+        symbol: "MLN-T",
+      },
+      wallet,
+    });
+
+    trace({
+      message: `Regular account made order with id: ${shared.simpleOrder2.id}`,
     });
 
     shared.orderFromFund = await makeOrder(
@@ -248,7 +269,8 @@ fit(
       "MLN-T",
       "ETH-T",
       new BigNumber(1),
-      new BigNumber(1),
+      new BigNumber(5),
+      wallet,
     );
 
     trace({
@@ -269,11 +291,27 @@ fit(
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       new BigNumber(1.5),
+      wallet,
     );
 
     trace({
       message: `Fund took order; executed quantity: ${
         shared.takenOrder.executedQuantity
+      }`,
+      data: shared,
+    });
+
+    shared.takenOrder2 = await takeOrder(
+      shared.simpleOrder2.id,
+      shared.vault.address,
+      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      new BigNumber(2),
+      wallet,
+    );
+
+    trace({
+      message: `Fund took order; executed quantity: ${
+        shared.takenOrder2.executedQuantity
       }`,
       data: shared,
     });
@@ -292,6 +330,7 @@ fit(
     shared.toggledSubscription = await toggleSubscription(
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      wallet,
       setup.defaultAccount,
     );
 
@@ -300,6 +339,7 @@ fit(
     shared.toggledSubscription = await toggleSubscription(
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      wallet,
       setup.defaultAccount,
     );
 
@@ -308,6 +348,7 @@ fit(
     shared.toggledRedemption = await toggleRedemption(
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      wallet,
       setup.defaultAccount,
     );
 
@@ -315,6 +356,7 @@ fit(
     shared.toggledRedemption = await toggleRedemption(
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      wallet,
       setup.defaultAccount,
     );
     expect(shared.toggledRedemption).toBe(true);
