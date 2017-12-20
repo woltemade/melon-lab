@@ -5,7 +5,6 @@ import { setup, onBlock, getParityProvider } from "@melonproject/melon.js";
 import { types as browserTypes } from "../actions/browser";
 import { actions as ethereumActions } from "../actions/ethereum";
 import { actions as fundActions } from "../actions/fund";
-import { actions as routeActions } from "../actions/routes";
 
 const MAX_BLOCK_TIME = 20 * 1000;
 
@@ -28,12 +27,12 @@ function* init() {
   // TEST Mnemonic: "galaxy arrange tower sentence gift hub pony butter inner critic vessel echo"
   const wallet = localStorage.getItem("wallet:melon.fund");
 
-  if (!wallet) {
-    yield put(routeActions.account());
-  } else {
+  if (wallet) {
     setup.wallet = JSON.parse(wallet);
-    setup.defaultAccount = `0x${setup.wallet.address}`;
-    yield put(ethereumActions.accountChanged(`0x${setup.wallet.address}`));
+    setup.defaultAccount = `0x${wallet.address}`;
+    yield put(ethereumActions.accountChanged(`0x${wallet.address}`));
+  } else {
+    yield put(ethereumActions.accountChanged(""));
   }
 
   if (fund.address !== "" && fund.name === "-") {

@@ -8,6 +8,7 @@ import {
   actions as routeActions
 } from "../actions/routes";
 import { types as fundTypes, actions as fundActions } from "../actions/fund";
+import isSameAddress from "../utils/isSameAddress";
 
 const getOnboardingState = ({ ethereum, app, fund }) => {
   if (!ethereum.isConnected) return onboardingPath.NO_CONNECTION;
@@ -47,7 +48,7 @@ function* deriveReadyState() {
 
   const isReadyToTrade =
     isReadyToInteract &&
-    fund.owner.toLowerCase() === ethereum.account.toLowerCase() &&
+    isSameAddress(fund.owner, ethereum.account) &&
     new BigNumber(fund.totalSupply).gt(0);
 
   const readyState = {
@@ -91,7 +92,6 @@ function* redirectSaga() {
     if (isReadyToTrade) {
       yield put(routeActions.fund(usersFund));
     } else {
-      console.log(isReadyToTrade);
       yield put(routeActions.setup());
     }
   } else {

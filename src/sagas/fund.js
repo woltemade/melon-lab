@@ -61,7 +61,7 @@ function* checkAndLoad() {
 }
 
 function* getUsersFund({ account }) {
-  if (!account) return;
+  if (!account) put(appActions.setUsersFund());
   const fundAddress = yield call(getFundForManager, account);
   // Even if fundAddress is undefined (i.e. user hasnt a fund yet), we dispatch
   // this action to signal that we tried to get the users fund

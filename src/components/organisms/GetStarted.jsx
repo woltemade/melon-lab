@@ -20,7 +20,7 @@ const GetStarted = () => (
       </p>
       <div style={{ textAlign: "left" }}>
         <h3>
-          <Link to={`/account`}>Enter Melon</Link>
+          <Link to={`/setup`}>Enter Melon</Link>
         </h3>
       </div>
       <br />
