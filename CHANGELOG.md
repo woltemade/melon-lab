@@ -34,12 +34,13 @@ and this project adheres to
 * gasBoost function adjusted to parity.js
 * getRecentTrades for an asset pair and getFundRecentTrades, using rpc call getLogs
 * awaitDataFeedUpdate -used only for integration test
-* Upgrade to protocol v0.4.1
+* Upgrade to protocol v0.5.2-alpha.1
 * [labeling] Renamed 'creationDate' and 'timestamp' in setupFund an getFundInformations to 'inception'
 * [labeling] Renamed 'timestamp' in convertUnclaimedRewards to 'date'
 * [labeling] Harmonized in subscribe/redeem from atTimeStamp/atTimeStamp to timestamp
 * onBlock function adjusted to parity.js
 * getFundInformations also returns owner
+* Pass in decrypted wallet instance as first argument to ALL functions performing an on-chain transaction
 
 ### Removed
 
@@ -59,6 +60,7 @@ and this project adheres to
 * #91
 * #92
 * #94
+* #113
 
 ## [0.3.5]
 

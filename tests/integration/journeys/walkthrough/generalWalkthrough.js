@@ -53,9 +53,9 @@ fit(
     // const api = new Api(setup.provider);
 
     // // 1 - instantiate wallet
-    const wallet = importWalletFromMnemonic(
-      "ability ensure nasty lazy final guess private electric eyebrow oil noise ritual",
-    );
+    // const wallet = importWalletFromMnemonic(
+    //   "ability ensure nasty lazy final guess private electric eyebrow oil noise ritual",
+    // );
     // const wallet = importWalletFromMnemonic(
     //   "liquid summer daring situate raccoon result juice over kiwi cherry grief short",
     // );
@@ -63,9 +63,9 @@ fit(
     // const wallet = importWalletFromMnemonic(
     //   "mule faint author gun sell carbon smile disorder shove toast gasp message",
     // );
-    // const wallet = importWalletFromMnemonic(
-    //   "dinosaur pulse rice lumber machine entry tackle off require draw edge almost",
-    // );
+    const wallet = importWalletFromMnemonic(
+      "dinosaur pulse rice lumber machine entry tackle off require draw edge almost",
+    );
 
     // const jsonWallet = JSON.stringify(encryptedWallet);
     // const wallet = await decryptWallet(jsonWallet, password.kovan);
@@ -97,7 +97,7 @@ fit(
 
     const signature = await signTermsAndConditions(wallet);
     shared.vaultName = randomString();
-    shared.vault = await setupFund(shared.vaultName, signature, wallet);
+    shared.vault = await setupFund(wallet, shared.vaultName, signature);
     expect(shared.vault.name).toBe(shared.vaultName);
     expect(shared.vault.id).toBeGreaterThanOrEqual(0);
     expect(shared.vault.address).toBeTruthy();
@@ -136,11 +136,11 @@ fit(
     expect(shared.initialCalculations.gav.toNumber()).toBe(0);
 
     shared.subscriptionRequest = await subscribe(
+      wallet,
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
       new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
-      wallet,
     );
 
     trace({
@@ -151,9 +151,9 @@ fit(
     });
 
     shared.executedSubscriptionRequest = await executeRequest(
+      wallet,
       shared.subscriptionRequest.id,
       shared.vault.address,
-      wallet,
       // 0,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
     );
@@ -190,52 +190,53 @@ fit(
       data: shared,
     });
 
-    shared.redemptionRequest = await redeem(
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      shared.vault.address,
-      REDEEM_QUANTITY,
-      REDEEM_QUANTITY,
-      wallet,
-    );
+    // shared.redemptionRequest = await redeem(
+    //   wallet,
+    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    //   shared.vault.address,
+    //   REDEEM_QUANTITY,
+    //   REDEEM_QUANTITY,
+    // );
 
-    trace({
-      message: `Redeem requested. shares: ${
-        shared.redemptionRequest.numShares
-      }`,
-      data: shared,
-    });
+    // trace({
+    //   message: `Redeem requested. shares: ${
+    //     shared.redemptionRequest.numShares
+    //   }`,
+    //   data: shared,
+    // });
 
-    await awaitDataFeedUpdates(2);
+    // await awaitDataFeedUpdates(2);
 
-    trace("Awaited two data feed updates");
+    // trace("Awaited two data feed updates");
 
-    shared.executedRedeemRequest = await executeRequest(
-      shared.redemptionRequest.id,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      shared.vault.address,
-      wallet,
-    );
+    // shared.executedRedeemRequest = await executeRequest(
+    //   wallet,
+    //   shared.redemptionRequest.id,
+    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    //   shared.vault.address,
+    // );
 
-    shared.participation.invested = await getParticipation(
-      shared.vault.address,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      setup.defaultAccount,
-    );
+    // shared.participation.invested = await getParticipation(
+    //   shared.vault.address,
+    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    //   setup.defaultAccount,
+    // );
 
-    expect(shared.participation.invested.personalStake.toNumber()).toBe(
-      INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
-    );
-    expect(shared.participation.invested.totalSupply.toNumber()).toBe(
-      INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
-    );
+    // expect(shared.participation.invested.personalStake.toNumber()).toBe(
+    //   INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
+    // );
+    // expect(shared.participation.invested.totalSupply.toNumber()).toBe(
+    //   INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
+    // );
 
-    trace({
-      message: `Redeem request executed. Personal stake: ${
-        shared.participation.invested.personalStake
-      }`,
-    });
+    // trace({
+    //   message: `Redeem request executed. Personal stake: ${
+    //     shared.participation.invested.personalStake
+    //   }`,
+    // });
 
     shared.simpleOrder = await makeOrderFromAccount({
+      wallet,
       sell: {
         howMuch: new BigNumber(1),
         symbol: "ETH-T",
@@ -244,7 +245,6 @@ fit(
         howMuch: new BigNumber(4),
         symbol: "MLN-T",
       },
-      wallet,
     });
 
     trace({
@@ -252,6 +252,7 @@ fit(
     });
 
     shared.simpleOrder2 = await makeOrderFromAccount({
+      wallet,
       sell: {
         howMuch: new BigNumber(1),
         symbol: "ETH-T",
@@ -260,7 +261,6 @@ fit(
         howMuch: new BigNumber(3),
         symbol: "MLN-T",
       },
-      wallet,
     });
 
     trace({
@@ -268,13 +268,13 @@ fit(
     });
 
     shared.orderFromFund = await makeOrder(
+      wallet,
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       "MLN-T",
       "ETH-T",
       new BigNumber(1),
       new BigNumber(5),
-      wallet,
     );
 
     trace({
@@ -291,11 +291,11 @@ fit(
     });
 
     shared.takenOrder = await takeOrder(
+      wallet,
       shared.simpleOrder.id,
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       new BigNumber(1.5),
-      wallet,
     );
 
     trace({
@@ -306,11 +306,11 @@ fit(
     });
 
     shared.takenOrder2 = await takeOrder(
+      wallet,
       shared.simpleOrder2.id,
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       new BigNumber(2),
-      wallet,
     );
 
     trace({
@@ -332,35 +332,35 @@ fit(
     });
 
     shared.toggledSubscription = await toggleSubscription(
+      wallet,
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      wallet,
       setup.defaultAccount,
     );
 
     expect(shared.toggledSubscription).toBe(false);
 
     shared.toggledSubscription = await toggleSubscription(
+      wallet,
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      wallet,
       setup.defaultAccount,
     );
 
     expect(shared.toggledSubscription).toBe(true);
 
     shared.toggledRedemption = await toggleRedemption(
+      wallet,
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      wallet,
       setup.defaultAccount,
     );
 
     expect(shared.toggledRedemption).toBe(false);
     shared.toggledRedemption = await toggleRedemption(
+      wallet,
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      wallet,
       setup.defaultAccount,
     );
     expect(shared.toggledRedemption).toBe(true);
