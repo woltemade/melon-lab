@@ -11,6 +11,7 @@ import FundContainer from "../../containers/Fund";
 import RankingContainer from "../../containers/Ranking";
 import AccountContainer from "../../containers/Account";
 import RestoreContainer from "../../containers/Restore";
+import Modal from "../../containers/Modal";
 import { types } from "../../actions/routes";
 
 const mapOnboardingStateToMainContainer = {
@@ -65,6 +66,7 @@ const App = props => (
       </div>
       {getMainComponent(props)}
     </Container>
+    <Modal />
   </div>
 );
 

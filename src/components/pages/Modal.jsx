@@ -87,14 +87,15 @@ const Modal = ({
   primaryAction,
   primaryActionText,
   secondaryAction,
-  secondaryActionText
+  secondaryActionText,
+  handleSubmit
 }) => (
   <ReactModal isOpen={isOpen} style={type === types.ERROR ? errorStyle : style}>
     <Container>
       <Card centered style={{ backgroundColor: "#fffdf3", padding: 10 }}>
         <Card.Content>
           {" "}
-          <form>
+          <form onSubmit={handleSubmit}>
             <Header as="h2" style={type === types.ERROR ? markError : {}}>
               {title}
             </Header>

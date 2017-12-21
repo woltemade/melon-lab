@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import ReactModal from "react-modal";
 // import { ConnectedRouter } from "react-router-redux";
 
 import "./index.css";
@@ -11,6 +12,8 @@ import registerServiceWorker from "./registerServiceWorker";
 import { actions } from "./actions/browser";
 
 export const store = configureStore();
+
+ReactModal.setAppElement("#root");
 
 window.addEventListener("load", () => {
   store.dispatch(actions.loaded());
@@ -42,7 +45,7 @@ ReactDOM.render(
   <Provider store={store}>
     <AppContainer />
   </Provider>,
-  document.getElementById("root"),
+  document.getElementById("root")
 );
 
 registerServiceWorker();
