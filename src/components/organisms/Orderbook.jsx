@@ -8,9 +8,7 @@ const getSellGradient = (cumulativeVolume, totalVolume) => {
     .times(100);
   const reverse = new BigNumber(100).minus(percentage);
   return {
-    background: `linear-gradient(to right, rgba(201, 88, 88,0) 0%, rgba(201, 88, 88,0) ${
-      reverse
-    }%, rgba(201, 88, 88,0.3) ${reverse}%, rgba(201, 88, 88,0.3) 100%)`,
+    background: `linear-gradient(to right, rgba(201, 88, 88,0) 0%, rgba(201, 88, 88,0) ${reverse}%, rgba(201, 88, 88,0.3) ${reverse}%, rgba(201, 88, 88,0.3) 100%)`,
   };
 };
 
@@ -19,9 +17,7 @@ const getBuyGradient = (cumulativeVolume, totalVolume) => {
     .div(totalVolume)
     .times(100);
   return {
-    background: `linear-gradient(to right, rgba(71, 161, 71,0.3) 0%, rgba(71, 161, 71,0.3) ${
-      percentage
-    }%, rgba(71, 161, 71,0) ${percentage}%, rgba(71, 161, 71,0) 100%)`,
+    background: `linear-gradient(to right, rgba(71, 161, 71,0.3) 0%, rgba(71, 161, 71,0.3) ${percentage}%, rgba(71, 161, 71,0) ${percentage}%, rgba(71, 161, 71,0) 100%)`,
   };
 };
 
@@ -35,16 +31,15 @@ const onMouseOut = e => {
 
 const Orderbook = ({
   buyOrders,
-  baseSymbol,
   sellOrders,
-  quoteSymbol,
-  takeOrder,
-  totalBuyVolume,
   totalSellVolume,
+  totalBuyVolume,
+  baseTokenSymbol,
+  quoteTokenSymbol,
 }) => (
   <div id="orderbook">
     <h3 className="App-intro">
-      Orderbook for {baseSymbol}/{quoteSymbol}
+      Orderbook for {baseTokenSymbol}/{quoteTokenSymbol}
     </h3>
     <Grid padded={false}>
       <Grid.Row columns={2}>
@@ -67,7 +62,6 @@ const Orderbook = ({
               {buyOrders.map(order => (
                 <Table.Row
                   key={order.id}
-                  onClick={() => takeOrder(order.id)}
                   style={getSellGradient(
                     order.cumulativeVolume,
                     totalSellVolume,
@@ -79,7 +73,7 @@ const Orderbook = ({
                     {order.cumulativeVolume}
                   </Table.Cell>
                   <Table.Cell style={{ textAlign: "right" }}>
-                    {order.howMuch}
+                    {order.buy.howMuch}
                   </Table.Cell>
                   <Table.Cell style={{ textAlign: "right" }}>
                     {order.price}
@@ -102,13 +96,12 @@ const Orderbook = ({
               {sellOrders.map(order => (
                 <Table.Row
                   key={order.id}
-                  onClick={() => takeOrder(order.id)}
                   style={getBuyGradient(order.cumulativeVolume, totalBuyVolume)}
                   onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut}
                 >
                   <Table.Cell>&nbsp;&nbsp;&nbsp;&nbsp;{order.price}</Table.Cell>
-                  <Table.Cell>{order.howMuch}</Table.Cell>
+                  <Table.Cell>{order.sell.howMuch}</Table.Cell>
                   <Table.Cell>{order.cumulativeVolume}</Table.Cell>
                 </Table.Row>
               ))}

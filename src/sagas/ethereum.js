@@ -1,20 +1,10 @@
 import { take, put, takeLatest, select, apply, call } from "redux-saga/effects";
 import { eventChannel } from "redux-saga";
-import {
-  setup,
-  onBlock,
-  getParityProvider,
-  // importWalletFromMnemonic,
-  // encryptWallet,
-  decryptWallet,
-} from "@melonproject/melon.js";
+import { setup, onBlock, getParityProvider } from "@melonproject/melon.js";
 
 import { types as browserTypes } from "../actions/browser";
 import { actions as ethereumActions } from "../actions/ethereum";
 import { actions as fundActions } from "../actions/fund";
-
-// import Wallet from "ethers-wallet";
-import loadedWallet from "../_key/wallet.json";
 
 const MAX_BLOCK_TIME = 20 * 1000;
 
@@ -23,7 +13,7 @@ function* init() {
 
   setup.init({
     provider,
-    daemonAddress: "0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd",
+    daemonAddress: "0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd"
   });
 
   yield put(ethereumActions.setProvider(providerType));
@@ -34,39 +24,16 @@ function* init() {
 
   yield put(ethereumActions.hasConnected(networkId));
 
-  // TODO: Real functionality which can create a new wallet if needed
+  // TEST Mnemonic: "galaxy arrange tower sentence gift hub pony butter inner critic vessel echo"
+  const wallet = localStorage.getItem("wallet:melon.fund");
 
-  // const walletFromMnemonic = importWalletFromMnemonic(
-  //   "divide regular fit traffic ride tag destroy flower holiday lion art million",
-  // );
-
-  // const wallet = new Wallet.Wallet.createRandom();
-
-  // console.log({ wallet, walletFromMnemonic });
-
-  // const encrypted = yield call(
-  //   encryptWallet,
-  //   walletFromMnemonic,
-  //   "9tjSQGCx5z9TZHtDMLClRdzcmBhj8z4fN8u9dWhOI2vpumDGAksBGlESJ2",
-  // );
-  // const encryptedParsed = JSON.parse(encrypted);
-  // encryptedParsed.crypto = encryptedParsed.Crypto;
-
-  // console.log(
-  //   JSON.parse(encrypted),
-  //   "---",
-  //   JSON.parse(JSON.stringify(encrypted)),
-  //   "---",
-  //   JSON.parse(JSON.stringify(loadedWallet)),
-  // );
-  // // setup.wallet = wallet;
-
-  setup.wallet = yield call(
-    decryptWallet,
-    JSON.stringify(loadedWallet),
-    "9tjSQGCx5z9TZHtDMLClRdzcmBhj8z4fN8u9dWhOI2vpumDGAksBGlESJ2",
-  );
-  setup.defaultAccount = setup.wallet.address;
+  if (wallet) {
+    setup.wallet = JSON.parse(wallet);
+    setup.defaultAccount = `0x${setup.wallet.address}`;
+    yield put(ethereumActions.accountChanged(`0x${setup.wallet.address}`));
+  } else {
+    yield put(ethereumActions.accountChanged(""));
+  }
 
   if (fund.address !== "" && fund.name === "-") {
     yield put(fundActions.infoRequested(fund.address));
@@ -100,13 +67,7 @@ function* init() {
     const data = yield take(blockChannel);
 
     if (data.onBlock) {
-      const currentAccount = yield select(state => state.ethereum.account);
-
       yield put(ethereumActions.newBlock(data.onBlock));
-
-      if (currentAccount !== data.onBlock.account) {
-        yield put(ethereumActions.accountChanged(data.onBlock.account));
-      }
     } else {
       yield put(ethereumActions.blockOverdue());
     }

@@ -2,8 +2,8 @@ import React from "react";
 import { List, Card, Divider } from "semantic-ui-react";
 
 const TradeHelper = ({
-  baseSymbol,
-  quoteSymbol,
+  baseTokenSymbol,
+  quoteTokenSymbol,
   last,
   bid,
   ask,
@@ -16,7 +16,7 @@ const TradeHelper = ({
   <Card centered>
     <Card.Content>
       <Card.Header>
-        {baseSymbol}/{quoteSymbol}
+        {baseTokenSymbol}/{quoteTokenSymbol}
       </Card.Header>
       <br />
       <List>
@@ -34,12 +34,12 @@ const TradeHelper = ({
         <Divider />
         <List.Item as="a">
           <List.Content onClick={() => setQuantity(baseBalance)}>
-            {baseSymbol} Balance: {baseBalance}
+            {baseTokenSymbol} Balance: {baseBalance}
           </List.Content>
         </List.Item>
         <List.Item as="a">
           <List.Content onClick={() => setTotal(quoteBalance)}>
-            {quoteSymbol} Balance: {quoteBalance}
+            {quoteTokenSymbol} Balance: {quoteBalance}
           </List.Content>
         </List.Item>
       </List>

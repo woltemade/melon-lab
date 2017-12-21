@@ -1,44 +1,28 @@
-import { combineReducers } from "redux";
 import { reducer as form } from "redux-form";
-import { routerReducer as router } from "react-router-redux";
 
 import app from "./app";
 import fund from "./fund";
 import ranking from "./ranking";
-
+import holdings from "./holdings";
+import orderbook from "./orderbook";
+import recentTrades from "./recentTrades";
+import tradeHistory from "./tradeHistory";
+import account from "./account";
+import tradeHelper from "./tradeHelper";
 import ethereum from "./ethereum";
-/*
-import executeRequest from "../legacyComponents/executeRequest/duck";
-import fundHoldings from "../legacyComponents/fundHoldings/duck";
-import general from "../legacyComponents/general";
-import invest from "../legacyComponents/invest/duck";
-import orderbook from "../legacyComponents/orderbook/duck";
-import participation from "../legacyComponents/participation/duck";
-import recentTrades from "../legacyComponents/recentTrades/duck";
-import trade from "../legacyComponents/trade/duck";
-import tradeHelper from "../legacyComponents/tradeHelper/duck";
-import tradingActivity from "../legacyComponents/tradingActivity/duck";
-*/
 
-const rootReducer = combineReducers({
+const reducerMap = {
   app,
   ethereum,
   form,
   fund,
   ranking,
-  router,
-  /*
-  executeRequest,
-  fundHoldings,
-  general,
-  invest,
+  holdings,
   orderbook,
-  participation,
   recentTrades,
-  trade,
+  tradeHistory,
+  account,
   tradeHelper,
-  tradingActivity,
-  */
-});
+};
 
-export default rootReducer;
+export default reducerMap;

@@ -2,65 +2,38 @@ import React from "react";
 import { Card } from "semantic-ui-react";
 
 import Factsheet from "../../containers/Factsheet";
+import Holdings from "../../containers/Holdings";
 import Administration from "../../containers/Administration";
-// import Participation from "../organisms/Participation";
+import Orderbook from "../../containers/Orderbook";
+import RecentTrades from "../../containers/RecentTrades";
+import TradeHistory from "../../containers/TradeHistory";
+import GetStarted from "../organisms/GetStarted";
+import Participation from "../../containers/Participation";
+import TradeHelper from "../../containers/TradeHelper";
 
-// TODO: Remove legacyComponents
-/*
-import FundHoldingsContainer from "../../legacyComponents/fundHoldings/container";
-import OrderbookContainer from "../../legacyComponents/orderbook/container";
-import RecentTradesContainer from "../../legacyComponents/recentTrades/container";
-import TradeContainer from "../../legacyComponents/trade/container";
-import TradeHelperContainer from "../../legacyComponents/tradeHelper/container";
-import TradingActivityContainer from "../../legacyComponents/tradingActivity/container";
-*/
-
-const ManagerView = ({ isOwner, loading }) => (
+const Fund = ({ isVisitor, isInvestor, isManager, fundAddress }) => (
   <div className="App">
     <br />
     <div>
       <Card.Group>
         <Factsheet />
-        {isOwner ? <Administration /> : <div>visitor</div>}
+        {isManager ? <Administration /> : <div />}
+        {isVisitor ? <GetStarted /> : <div />}
+        {isInvestor || isManager ? <Participation /> : <div />}
       </Card.Group>
-    </div>
-    {/*
-    <div>
-      <Participation />
-    </div>
-    <div>
       <br />
+      <Holdings address={fundAddress} />
       <br />
-      <FundHoldingsContainer />
+      {isManager ? <TradeHelper /> : <div />}
+      <br />
+      <Orderbook />
+      <br />
+      <RecentTrades />
+      <br />
+      <TradeHistory address={fundAddress} />
     </div>
-    <br />
-    <br />
-    <br />
-    <div>
-      <Card.Group>
-        <TradeContainer />
-        <TradeHelperContainer />
-      </Card.Group>
-    </div>
-    <br />
-    <br />
-    <br />
-    <OrderbookContainer />
-    <br />
-    <br />
-    <br />
-    <RecentTradesContainer />
-    <br />
-    <br />
-    <br />
-    <div>
-      <TradingActivityContainer />
-    </div>
-    <br />
-    <br />
-    */}
     <br />
   </div>
 );
 
-export default ManagerView;
+export default Fund;

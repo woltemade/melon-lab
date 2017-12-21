@@ -2,47 +2,70 @@ import React from "react";
 import { Field } from "redux-form";
 import { List, Button, Card, Menu } from "semantic-ui-react";
 
-import renderInput from "./utils/renderInput";
+import renderInput from "../utils/renderInput";
 
 const ParticipationForm = ({
+  setup,
   loading,
   handleSubmit,
   setParticipationType,
   participationType,
+  onChange,
 }) => (
   <form onSubmit={handleSubmit}>
-    <Card id="participation">
+    <Card id="participation" centered>
       <Card.Content>
         <Card.Header>Participation</Card.Header>
-        <div>
-          <Menu text style={{ display: "flex", justifyContent: "center" }}>
-            <Menu.Item
-              name="Invest"
-              active={participationType === "Invest"}
-              onClick={() => setParticipationType("Invest")}
-            />
-            <div style={{ marginTop: "0.7em" }}>|</div>
-            <Menu.Item
-              name="Redeem"
-              active={participationType === "Redeem"}
-              onClick={() => setParticipationType("Redeem")}
-            />
-          </Menu>
-        </div>
+        {setup ? null : (
+          <div>
+            <Menu text style={{ display: "flex", justifyContent: "center" }}>
+              <Menu.Item
+                name="Invest"
+                active={participationType === "Invest"}
+                onClick={() => setParticipationType("Invest")}
+              />
+              <div style={{ marginTop: "0.7em" }}>|</div>
+              <Menu.Item
+                name="Redeem"
+                active={participationType === "Redeem"}
+                onClick={() => setParticipationType("Redeem")}
+              />
+            </Menu>
+          </div>
+        )}
         <List>
-          <List.Item as="a">
+          <List.Item>
             <List.Content>
-              <Field name="amount" component={renderInput} />
+              <Field
+                label="Quantity"
+                name="amount"
+                component={renderInput}
+                onChange={onChange}
+                type="number"
+              />
             </List.Content>
           </List.Item>
-          <List.Item as="a">
+          <List.Item>
             <List.Content>
-              <Field name="price" component={renderInput} />
+              <Field
+                label="Price"
+                name="price"
+                component={renderInput}
+                onChange={onChange}
+                type="number"
+                disabled
+              />
             </List.Content>
           </List.Item>
-          <List.Item as="a">
+          <List.Item>
             <List.Content>
-              <Field name="total" component={renderInput} />
+              <Field
+                label="Total"
+                name="total"
+                component={renderInput}
+                onChange={onChange}
+                type="number"
+              />
             </List.Content>
           </List.Item>
         </List>

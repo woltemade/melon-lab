@@ -1,10 +1,10 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
 
-const RecentTrades = ({ baseSymbol, quoteSymbol, recentTrades }) => (
+const RecentTrades = ({ baseTokenSymbol, quoteTokenSymbol, trades }) => (
   <div>
     <h3 id="history" className="App-intro">
-      Recent trades for {baseSymbol}/{quoteSymbol}
+      Recent trades for {baseTokenSymbol}/{quoteTokenSymbol}
     </h3>
     <Table>
       <Table.Header>
@@ -12,16 +12,16 @@ const RecentTrades = ({ baseSymbol, quoteSymbol, recentTrades }) => (
           <Table.HeaderCell>Time</Table.HeaderCell>
           <Table.HeaderCell>Type</Table.HeaderCell>
           <Table.HeaderCell textAlign="right">
-            Price ({baseSymbol}/{quoteSymbol})
+            Price ({baseTokenSymbol}/{quoteTokenSymbol})
           </Table.HeaderCell>
           <Table.HeaderCell textAlign="right">
-            Amount ({baseSymbol})
+            Amount ({baseTokenSymbol})
           </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {recentTrades.map(trade => (
-          <Table.Row key={trade.id}>
+        {trades.map((trade, i) => (
+          <Table.Row key={i}>
             <Table.Cell>{trade.timestamp}</Table.Cell>
             <Table.Cell>{trade.type}</Table.Cell>
             <Table.Cell textAlign="right">{trade.price}</Table.Cell>

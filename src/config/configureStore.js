@@ -1,33 +1,46 @@
-import { createStore, applyMiddleware, compose } from "redux";
+import { connectRoutes } from "redux-first-router";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
 
 import createHistory from "history/createHashHistory";
 
-import { routerMiddleware as createRouterMiddleware } from "react-router-redux";
-
-import rootReducer from "../reducers";
+import { routeMap } from "../actions/routes";
+import reducerMap from "../reducers";
 import rootSaga from "../sagas";
 
-export const history = createHistory();
-
 export const configureStore = preloadedState => {
-  const routerMiddleware = createRouterMiddleware(history);
+  const {
+    reducer: location,
+    middleware: routerMiddleware,
+    enhancer,
+    initialDispatch,
+  } = connectRoutes(routeMap, {
+    initialDispatch: false,
+    createHistory,
+  });
 
   const sagaMiddleware = createSagaMiddleware();
 
   const middlewares = applyMiddleware(routerMiddleware, sagaMiddleware);
 
+  // TODO: For security reasons (intercepting passwords and stuff), disable
+  // redux devtools on production!
   /* eslint-disable no-underscore-dangle */
   const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
     ? window.__REDUX_DEVTOOLS_EXTENSION__()
     : f => f;
   /* eslint-enable */
 
-  const enhancer = compose(middlewares, devTools);
+  const enhanced = compose(enhancer, middlewares, devTools);
 
-  const store = createStore(rootReducer, preloadedState, enhancer);
+  const store = createStore(
+    combineReducers({ ...reducerMap, location }),
+    preloadedState,
+    enhanced,
+  );
 
   sagaMiddleware.run(rootSaga);
+  initialDispatch();
 
   return store;
 };

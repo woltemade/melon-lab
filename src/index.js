@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { ConnectedRouter } from "react-router-redux";
+// import { ConnectedRouter } from "react-router-redux";
 
 import "./index.css";
-import { configureStore, history } from "./config/configureStore";
+import { configureStore } from "./config/configureStore";
 import AppContainer from "./containers/App";
 import registerServiceWorker from "./registerServiceWorker";
 
@@ -40,9 +40,7 @@ window.addEventListener("load", () => {
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <AppContainer />
-    </ConnectedRouter>
+    <AppContainer />
   </Provider>,
   document.getElementById("root"),
 );
