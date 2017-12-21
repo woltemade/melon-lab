@@ -3,14 +3,14 @@ import {
   setupFund,
   setup as melonJsSetup,
   signTermsAndConditions,
-  decryptWallet
+  decryptWallet,
 } from "@melonproject/melon.js";
 
 import { types, actions } from "../actions/fund";
 import { actions as appActions, types as appTypes } from "../actions/app";
 import {
   types as routeTypes,
-  actions as routeActions
+  actions as routeActions,
 } from "../actions/routes";
 
 function* createFund({ name }) {
@@ -21,9 +21,9 @@ function* createFund({ name }) {
     yield put(appActions.transactionStarted());
     const decryptedWallet = yield call(decryptWallet, wallet, password);
     const signature = yield call(signTermsAndConditions, decryptedWallet);
-    const fund = yield call(setupFund, name, signature, decryptedWallet);
+    const fund = yield call(setupFund, decryptedWallet, name, signature);
     yield put(
-      actions.setupSucceeded({ ...fund, owner: melonJsSetup.defaultAccount })
+      actions.setupSucceeded({ ...fund, owner: melonJsSetup.defaultAccount }),
     );
     yield put(appActions.setUsersFund(fund.address));
     yield put(actions.infoRequested(fund.address));
