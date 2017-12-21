@@ -33,7 +33,7 @@ const mapDispatchToProps = dispatch => ({
       // Here need to reload orderbook, recent trades and trade helper data
       dispatch(orderbookActions.getOrderbook());
       dispatch(recentTradesActions.getRecentTrades());
-      dispatch(tradeHelperActions.tradeInfoRequested());
+      // dispatch(tradeHelperActions.tradeInfoRequested());
     }
   },
 });

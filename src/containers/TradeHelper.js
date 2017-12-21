@@ -6,6 +6,7 @@ import TradeHelper from "../components/organisms/TradeHelper";
 import displayNumber from "../utils/displayNumber";
 
 const mapStateToProps = state => ({
+  ...state.tradeHelper,
   last: displayNumber(state.tradeHelper.last),
   bid: displayNumber(state.tradeHelper.bid),
   ask: displayNumber(state.tradeHelper.ask),

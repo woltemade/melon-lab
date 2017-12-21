@@ -17,7 +17,8 @@ const reducers = {
 };
 
 const mapActionToReducer = {
-  [types.TRADE_INFO]: reducers.merge,
+  [types.TRADE_INFO_SUCCEEDED]: reducers.merge,
+  [types.UPDATE_TRADE_INFO]: reducers.merge,
 };
 
 export const reducer = (state = initialState, action) => {

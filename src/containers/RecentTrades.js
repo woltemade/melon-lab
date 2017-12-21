@@ -25,7 +25,7 @@ const mapDispatchToProps = dispatch => ({
 
 const RecentTradesLifecycle = lifecycle({
   componentDidMount() {
-    this.props.getRecentTrades("ETH-T/MLN-T");
+    this.props.getRecentTrades();
   },
 })(RecentTrades);
 
