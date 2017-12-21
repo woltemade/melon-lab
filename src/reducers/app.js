@@ -9,7 +9,7 @@ export const onboardingPath = {
   INSUFFICIENT_FUNDS: "Insufficent Funds",
   NO_FUND_CREATED: "No fund created ",
   NOT_INVESTED_IN_OWN_FUND: "Not invested in own fund",
-  ONBOARDED: "Onboarded"
+  ONBOARDED: "Onboarded",
 };
 
 const initialState = {
@@ -21,32 +21,32 @@ const initialState = {
   transactionInProgress: false,
   usersFundChecked: false,
   usersFund: "",
-  assetPair: "ETH-T/MLN-T"
+  assetPair: { base: "ETH-T", quote: "MLN-T" },
 };
 
 const reducers = {
   transactionStarted: state => ({
     ...state,
-    transactionInProgress: true
+    transactionInProgress: true,
   }),
   transactionFinished: state => ({
     ...state,
-    transactionInProgress: false
+    transactionInProgress: false,
   }),
   merge: (state, params) => ({
     ...state,
-    ...params
+    ...params,
   }),
   setUsersFund: (state, params) => ({
     ...state,
     ...params,
-    usersFundChecked: true
+    usersFundChecked: true,
   }),
   updateAssetPair: (state, assetPair) => ({
     ...state,
-    assetPair
+    assetPair,
   }),
-  default: state => ({ ...state })
+  default: state => ({ ...state }),
 };
 
 const mapActionToReducer = {
@@ -54,7 +54,7 @@ const mapActionToReducer = {
   [types.TRANSACTION_FINISHED]: reducers.transactionFinished,
   [types.SET_READY_STATE]: reducers.merge,
   [types.SET_USERS_FUND]: reducers.setUsersFund,
-  [types.UPDATE_ASSET_PAIR]: reducers.updateAssetPair
+  [types.UPDATE_ASSET_PAIR]: reducers.updateAssetPair,
 };
 
 export const reducer = (state = initialState, action = {}) => {

@@ -7,26 +7,25 @@ function* getRecentTradesSaga() {
   const isConnected = yield select(state => state.ethereum.isConnected);
   if (!isConnected) yield take(ethereumTypes.HAS_CONNECTED);
 
-  const assetPair = yield select(state => state.app.assetPair);
-  const baseTokenSymbol = assetPair.split("/")[0];
-  const quoteTokenSymbol = assetPair.split("/")[1];
+  const baseTokenSymbol = yield select(state => state.app.assetPair.base);
+  const quoteTokenSymbol = yield select(state => state.app.assetPair.quote);
 
   try {
     const rawRecentTrades = yield call(
       getRecentTrades,
       baseTokenSymbol,
-      quoteTokenSymbol
+      quoteTokenSymbol,
     );
     const trades = rawRecentTrades.map(trade => ({
       // CAUTION: here we switch the order type to match the user terminology
       ...trade,
-      ourOrderType: trade.type === "buy" ? "Sell" : "Buy"
+      ourOrderType: trade.type === "buy" ? "Sell" : "Buy",
     }));
 
     yield put(
       actions.getRecentTradesSucceeded({
-        trades
-      })
+        trades,
+      }),
     );
   } catch (err) {
     console.error(err);

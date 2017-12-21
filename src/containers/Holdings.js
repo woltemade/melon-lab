@@ -1,6 +1,10 @@
 import { connect } from "react-redux";
 import { actions } from "../actions/holdings";
 import { actions as appActions } from "../actions/app";
+import { actions as orderbookActions } from "../actions/orderbook";
+import { actions as recentTradesActions } from "../actions/recentTrades";
+import { actions as tradeHelperActions } from "../actions/tradeHelper";
+
 import { lifecycle } from "recompose";
 import Holdings from "../components/organisms/Holdings";
 import displayNumber from "../utils/displayNumber";
@@ -25,8 +29,11 @@ const mapDispatchToProps = dispatch => ({
   },
   selectAsset: asset => {
     if (asset !== "MLN-T") {
-      const assetPair = `${asset}/MLN-T`;
-      dispatch(appActions.updateAssetPair(assetPair));
+      dispatch(appActions.updateAssetPair({ base: asset, quote: "MLN-T" }));
+      // Here need to reload orderbook, recent trades and trade helper data
+      dispatch(orderbookActions.getOrderbook());
+      dispatch(recentTradesActions.getRecentTrades());
+      dispatch(tradeHelperActions.tradeInfoRequested());
     }
   },
 });

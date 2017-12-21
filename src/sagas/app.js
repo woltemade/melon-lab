@@ -4,7 +4,7 @@ import { onboardingPath } from "../reducers/app";
 import { actions, types } from "../actions/app";
 import {
   types as routeTypes,
-  actions as routeActions
+  actions as routeActions,
 } from "../actions/routes";
 import { types as fundTypes, actions as fundActions } from "../actions/fund";
 import isSameAddress from "../utils/isSameAddress";
@@ -51,12 +51,12 @@ function* deriveReadyState() {
     isReadyToInteract,
     isReadyToInvest,
     isReadyToTrade,
-    onboardingState: getOnboardingState({ app, ethereum, fund })
+    onboardingState: getOnboardingState({ app, ethereum, fund }),
   };
 
   const hasChanged = Object.entries(readyState).reduce(
     (acc, [key, value]) => acc || value !== app[key],
-    false
+    false,
   );
 
   if (hasChanged) yield put(actions.setReadyState(readyState));
@@ -73,7 +73,7 @@ function* redirectSaga() {
 
   if (usersFund) {
     const fundInfoReceived = yield select(
-      state => !["", "-"].includes(state.fund.name)
+      state => !["", "-"].includes(state.fund.name),
     );
 
     if (!fundInfoReceived) {

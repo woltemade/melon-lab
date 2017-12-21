@@ -5,9 +5,8 @@ export const types = {
 };
 
 export const actions = {
-  getOrderbook: assetPair => ({
+  getOrderbook: () => ({
     type: types.GET_ORDERBOOK_REQUESTED,
-    assetPair,
   }),
   getOrderbookFailed: reason => ({
     type: types.GET_ORDERBOOK_FAILED,
