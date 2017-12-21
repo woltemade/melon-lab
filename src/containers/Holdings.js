@@ -30,10 +30,9 @@ const mapDispatchToProps = dispatch => ({
   selectAsset: asset => {
     if (asset !== "MLN-T") {
       dispatch(appActions.updateAssetPair({ base: asset, quote: "MLN-T" }));
-      // Here need to reload orderbook, recent trades and trade helper data
       dispatch(orderbookActions.getOrderbook());
       dispatch(recentTradesActions.getRecentTrades());
-      // dispatch(tradeHelperActions.tradeInfoRequested());
+      dispatch(tradeHelperActions.tradeInfoRequested());
     }
   },
 });
