@@ -15,7 +15,7 @@ const getOnboardingState = ({ ethereum, app, fund }) => {
   if (ethereum.network !== networks.KOVAN) return onboardingPath.WRONG_NETWORK;
   if (!ethereum.account) return onboardingPath.NO_ACCOUNT;
   if (isZero(ethereum.ethBalance) || isZero(ethereum.mlnBalance))
-    return onboardingPath.INSUFFICENT_FUNDS;
+    return onboardingPath.INSUFFICIENT_FUNDS;
   if (!app.usersFund) return onboardingPath.NO_FUND_CREATED;
   if (
     (isSameAddress(ethereum.account, fund.owner) && isZero(fund.totalSupply)) ||

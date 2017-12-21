@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button } from "semantic-ui-react";
 
-const InsufficentFunds = ({ mlnBalance, ethBalance }) => (
+const InsufficientFunds = ({ mlnBalance, ethBalance, walletAddress }) => (
   <div>
     <Card centered>
       <Card.Content>
@@ -18,7 +18,7 @@ const InsufficentFunds = ({ mlnBalance, ethBalance }) => (
           To get started, head to our{" "}
           <strong>
             <a
-              href="http://faucet.melon.network"
+              href={`http://faucet.melon.network/${walletAddress}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -35,7 +35,7 @@ const InsufficentFunds = ({ mlnBalance, ethBalance }) => (
           basic
           color="black"
           style={{ width: "100%" }}
-          href="http://faucet.melon.network"
+          href={`http://faucet.melon.network/${walletAddress}`}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -46,4 +46,4 @@ const InsufficentFunds = ({ mlnBalance, ethBalance }) => (
   </div>
 );
 
-export default InsufficentFunds;
+export default InsufficientFunds;

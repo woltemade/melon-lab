@@ -1,22 +1,19 @@
 import React from "react";
 import { Card, Header } from "semantic-ui-react";
-import Done from "../organisms/account/Done";
 import Encrypt from "../../containers/Encrypt";
 import Generate from "../organisms/account/Generate";
 import WriteDown from "../organisms/account/WriteDown";
 
 const renderContent = props => {
-  const { hasGenerated, hasSavedMnemonic, hasEncrypted } = props;
+  const { hasGenerated, hasSavedMnemonic } = props;
 
   if (!hasGenerated) {
     return <Generate {...props} />;
   } else if (!hasSavedMnemonic) {
     return <WriteDown {...props} />;
-  } else if (!hasEncrypted) {
-    return <Encrypt {...props} />;
   }
 
-  return <Done {...props} />;
+  return <Encrypt {...props} />;
 };
 
 const Account = props => (
