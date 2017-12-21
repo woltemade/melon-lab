@@ -3,7 +3,7 @@ import {
   subscribe,
   redeem,
   executeRequest,
-  decryptWallet
+  decryptWallet,
 } from "@melonproject/melon.js";
 import { types, actions } from "../actions/participation";
 import { actions as appActions } from "../actions/app";
@@ -19,12 +19,12 @@ function* subscribeSaga(action) {
     const fundAddress = yield select(state => state.fund.address);
     const subscription = yield call(
       subscribe,
+      decryptedWallet,
       fundAddress,
       action.amount,
       action.total,
-      decryptedWallet
     );
-    yield call(executeRequest, subscription.id, fundAddress, decryptedWallet);
+    yield call(executeRequest, decryptedWallet, subscription.id, fundAddress);
     yield put(actions.subscribeSucceeded());
     yield put(fundActions.infoRequested(fundAddress));
   } catch (err) {
@@ -45,12 +45,12 @@ function* redeemSaga(action) {
     const fundAddress = yield select(state => state.fund.address);
     const redemption = yield call(
       redeem,
+      decryptedWallet,
       fundAddress,
       action.amount,
       action.total,
-      decryptedWallet
     );
-    yield call(executeRequest, redemption.id, fundAddress, decryptedWallet);
+    yield call(executeRequest, decryptedWallet, redemption.id, fundAddress);
     yield put(actions.redeemSucceeded());
     yield put(fundActions.infoRequested(fundAddress));
   } catch (err) {
