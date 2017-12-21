@@ -53,14 +53,18 @@ fit(
     // const api = new Api(setup.provider);
 
     // // 1 - instantiate wallet
-    // const wallet = importWalletFromMnemonic(
-    //   "ability ensure nasty lazy final guess private electric eyebrow oil noise ritual",
-    // );
     const wallet = importWalletFromMnemonic(
-      "dinosaur pulse rice lumber machine entry tackle off require draw edge almost",
+      "ability ensure nasty lazy final guess private electric eyebrow oil noise ritual",
     );
     // const wallet = importWalletFromMnemonic(
     //   "liquid summer daring situate raccoon result juice over kiwi cherry grief short",
+    // );
+
+    // const wallet = importWalletFromMnemonic(
+    //   "mule faint author gun sell carbon smile disorder shove toast gasp message",
+    // );
+    // const wallet = importWalletFromMnemonic(
+    //   "dinosaur pulse rice lumber machine entry tackle off require draw edge almost",
     // );
 
     // const jsonWallet = JSON.stringify(encryptedWallet);
@@ -68,7 +72,7 @@ fit(
 
     console.log(wallet);
 
-    // setup.wallet = wallet;
+    setup.wallet = wallet;
     setup.defaultAccount = wallet.address;
     trace({
       message: `Start walkthrough with defaultAccount: ${setup.defaultAccount}`,
