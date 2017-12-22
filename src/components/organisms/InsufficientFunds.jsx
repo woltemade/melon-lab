@@ -20,6 +20,7 @@ const InsufficientFunds = ({ mlnBalance, ethBalance, walletAddress }) => (
             <a
               href={`https://faucet.melon.network/${walletAddress}`}
               rel="noopener noreferrer"
+              target="_blank"
             >
               faucet
             </a>
@@ -36,6 +37,7 @@ const InsufficientFunds = ({ mlnBalance, ethBalance, walletAddress }) => (
           style={{ width: "100%" }}
           href={`https://faucet.melon.network/${walletAddress}`}
           rel="noopener noreferrer"
+          target="_blank"
         >
           Go to faucet
         </Button>
