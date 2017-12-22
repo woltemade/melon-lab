@@ -7,9 +7,8 @@ export const types = {
 };
 
 export const actions = {
-  getRecentTrades: assetPair => ({
+  getRecentTrades: () => ({
     type: types.GET_RECENTTRADES_REQUESTED,
-    assetPair,
   }),
   getRecentTradesFailed: reason => ({
     type: types.GET_RECENTTRADES_FAILED,
