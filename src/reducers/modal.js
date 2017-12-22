@@ -5,8 +5,8 @@ export const initialState = {
   modalType: modalTypes.INFO,
   title: "",
   body: "",
-  primaryActionText: "Ok",
-  secondaryActionText: ""
+  primaryAction: "Ok",
+  secondaryAction: "",
 };
 
 export const reducer = (state = initialState, action = {}) => {
@@ -14,7 +14,7 @@ export const reducer = (state = initialState, action = {}) => {
 
   return {
     ...state,
-    ...params
+    ...params,
   };
 };
 

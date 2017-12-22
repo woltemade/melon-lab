@@ -1,22 +1,38 @@
 import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
 import Modal from "../components/pages/Modal";
-import { actions } from "../actions/modal";
+import { actions, interactions } from "../actions/modal";
 
 const mapStateToProps = state => ({
   ...state.modal,
-  type: state.modal.modalType
+  type: state.modal.modalType,
+});
+
+const interactionDispatchMap = {
+  [interactions.CANCEL]: () => actions.close(),
+};
+
+const mapDispatchToProps = dispatch => ({
+  interactionHandler: (event, interaction) => {
+    // Hint: Submit is handled by the form, not as action. But we need to
+    // prevent form submitting for the other actions.
+    const action = interactionDispatchMap[interaction];
+    if (action) {
+      event.preventDefault();
+      dispatch(action());
+    }
+  },
 });
 
 const onSubmit = (values, dispatch) => {
   dispatch(actions.confirmed(values.password));
 };
 
-const ModalRedux = connect(mapStateToProps)(Modal);
+const ModalRedux = connect(mapStateToProps, mapDispatchToProps)(Modal);
 
 const ModalForm = reduxForm({
   form: "modal",
-  onSubmit
+  onSubmit,
 })(ModalRedux);
 
 export default ModalForm;
