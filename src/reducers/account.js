@@ -12,7 +12,9 @@ export const initialState = {
 export const reducer = (state = initialState, action = {}) => {
   const { type, ...params } = action;
 
-  return Object.values(types).includes(type)
+  return Object.keys(types)
+    .map(key => types[key])
+    .includes(type)
     ? {
         ...state,
         ...params,

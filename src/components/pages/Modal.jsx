@@ -99,7 +99,7 @@ const Modal = ({
       <Card centered style={{ backgroundColor: "#fffdf3", padding: 10 }}>
         <Card.Content>
           {" "}
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} data-hook="modal">
             <Header as="h2" style={type === types.ERROR ? markError : {}}>
               {title}
             </Header>
