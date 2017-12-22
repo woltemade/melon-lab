@@ -6,27 +6,18 @@ export const initialState = {
   hasEncrypted: false,
   newAddress: "",
   mnemonic: "",
+  loading: false,
 };
 
-const reducers = {
-  merge: (state, params) => ({ ...state, ...params }),
-  default: state => ({ ...state }),
-};
-
-const mapActionToReducer = {
-  [types.GENERATE_WALLET_SUCCEEDED]: reducers.merge,
-  [types.ENCRYPT_WALLET_SUCCEEDED]: reducers.merge,
-  [types.RESTORE_FROM_MNEMONIC_SUCCEEDED]: reducers.merge,
-  [types.I_SAVED]: reducers.merge,
-};
-
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action = {}) => {
   const { type, ...params } = action;
 
-  const matchedReducer = mapActionToReducer[type] || reducers.default;
-  const newState = matchedReducer(state, params);
-
-  return newState;
+  return Object.values(types).includes(type)
+    ? {
+        ...state,
+        ...params,
+      }
+    : state;
 };
 
 export default reducer;
