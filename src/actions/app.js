@@ -4,19 +4,19 @@ export const types = {
   TRANSACTION_FINISHED: "TRANSACTION_FINISHED:app:melon.fund",
   SET_USERS_FUND: "SET_USERS_FUND:app:melon.fund",
   SET_READY_STATE: "SET_READY_STATE:app:melon.fund",
-  UPDATE_ASSET_PAIR: "UPDATE_ASSET_PAIR:app:melon.fund",
+  UPDATE_ASSET_PAIR: "UPDATE_ASSET_PAIR:app:melon.fund"
 };
 
 export const actions = {
   transactionStarted: () => ({
-    type: types.TRANSACTION_STARTED,
+    type: types.TRANSACTION_STARTED
   }),
   transactionFinished: () => ({
-    type: types.TRANSACTION_FINISHED,
+    type: types.TRANSACTION_FINISHED
   }),
   setUsersFund: usersFund => ({
     type: types.SET_USERS_FUND,
-    usersFund,
+    usersFund
   }),
   setReadyState: ({
     onboardingState,
@@ -24,7 +24,7 @@ export const actions = {
     isReadyToVisit,
     isReadyToInteract,
     isReadyToInvest,
-    isReadyToTrade,
+    isReadyToTrade
   }) => ({
     type: types.SET_READY_STATE,
     onboardingState,
@@ -32,7 +32,7 @@ export const actions = {
     isReadyToVisit,
     isReadyToInteract,
     isReadyToInvest,
-    isReadyToTrade,
+    isReadyToTrade
   }),
   updateAssetPair: assetPair => ({
     type: types.UPDATE_ASSET_PAIR,

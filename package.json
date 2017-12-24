@@ -20,6 +20,7 @@
     "react": "^15.6.1",
     "react-cntdwn": "^0.3.0",
     "react-dom": "^15.6.1",
+    "react-modal": "^3.1.10",
     "react-redux": "^5.0.6",
     "react-scripts": "1.0.11",
     "recompose": "^0.26.0",
@@ -42,8 +43,8 @@
     "semantic:build": "cd public/semantic && gulp build",
     "semantic:watch": "cd public/semantic && gulp",
     "start": "npm run semantic:watch & react-scripts start",
-    "storybook:build": "build-storybook -s public -o .out  -c tests/storybook",
-    "storybook": "start-storybook -p 9001 -c tests/storybook",
+    "storybook:build": "build-storybook -s public -o .out -c tests/storybook",
+    "storybook": "start-storybook -p 9001 -c tests/storybook -s public",
     "test": "react-scripts test --env=jsdom"
   },
   "devDependencies": {

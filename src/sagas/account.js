@@ -1,4 +1,4 @@
-import { takeLatest, call, put, select, take } from "redux-saga/effects";
+import { takeLatest, call, put, take } from "redux-saga/effects";
 import {
   createWallet,
   encryptWallet,
