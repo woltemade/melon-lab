@@ -36,6 +36,6 @@ export const actions = {
   }),
   updateAssetPair: assetPair => ({
     type: types.UPDATE_ASSET_PAIR,
-    assetPair
-  })
+    ...assetPair,
+  }),
 };

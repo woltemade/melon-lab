@@ -2,11 +2,11 @@ import { takeLatest, call, put, select, take } from "redux-saga/effects";
 import { getOrderbook } from "@melonproject/melon.js";
 import { types, actions } from "../actions/orderbook";
 import { types as ethereumTypes } from "../actions/ethereum";
+import { actions as tradeHelperActions } from "../actions/tradeHelper";
 
 function* getOrderbookSaga() {
-  const assetPair = yield select(state => state.app.assetPair);
-  const baseTokenSymbol = assetPair.split("/")[0];
-  const quoteTokenSymbol = assetPair.split("/")[1];
+  const baseTokenSymbol = yield select(state => state.app.assetPair.base);
+  const quoteTokenSymbol = yield select(state => state.app.assetPair.quote);
 
   const isConnected = yield select(state => state.ethereum.isConnected);
   if (!isConnected) yield take(ethereumTypes.HAS_CONNECTED);
@@ -15,7 +15,7 @@ function* getOrderbookSaga() {
     const rawOrderbook = yield call(
       getOrderbook,
       baseTokenSymbol,
-      quoteTokenSymbol
+      quoteTokenSymbol,
     );
     const orders = rawOrderbook.map(order => {
       const result = order;
@@ -39,9 +39,12 @@ function* getOrderbookSaga() {
         sellOrders,
         buyOrders,
         totalSellVolume,
-        totalBuyVolume
-      })
+        totalBuyVolume,
+      }),
     );
+    const bid = buyOrders.length ? buyOrders[0].price : 0;
+    const ask = sellOrders.length ? sellOrders[0].price : 0;
+    yield put(tradeHelperActions.updateTradeInfo({ bid, ask }));
   } catch (err) {
     console.error(err);
     yield put(actions.getOrderbookFailed(err));

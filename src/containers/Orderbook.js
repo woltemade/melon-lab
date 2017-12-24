@@ -22,8 +22,8 @@ const mapStateToProps = state => ({
   }),
   totalBuyVolume: displayNumber(state.orderbook.totalBuyVolume),
   totalSellVolume: displayNumber(state.orderbook.totalSellVolume),
-  baseTokenSymbol: state.app.assetPair.split("/")[0],
-  quoteTokenSymbol: state.app.assetPair.split("/")[1],
+  baseTokenSymbol: state.app.assetPair.base,
+  quoteTokenSymbol: state.app.assetPair.quote,
 });
 
 const mapDispatchToProps = dispatch => ({
