@@ -6,20 +6,18 @@ import displayNumber from "../utils/displayNumber";
 
 const mapStateToProps = state => ({
   ...state.orderbook,
-  buyOrders: state.orderbook.buyOrders.map(order => {
-    const formattedOrder = order;
-    formattedOrder.price = displayNumber(order.price);
-    formattedOrder.cumulativeVolume = displayNumber(order.cumulativeVolume);
-    formattedOrder.howMuch = displayNumber(order.buy.howMuch);
-    return formattedOrder;
-  }),
-  sellOrders: state.orderbook.sellOrders.map(order => {
-    const formattedOrder = order;
-    formattedOrder.price = displayNumber(order.price);
-    formattedOrder.cumulativeVolume = displayNumber(order.cumulativeVolume);
-    formattedOrder.howMuch = displayNumber(order.sell.howMuch);
-    return formattedOrder;
-  }),
+  buyOrders: state.orderbook.buyOrders.map(order => ({
+    id: order.id,
+    price: displayNumber(order.price),
+    cumulativeVolume: displayNumber(order.cumulativeVolume),
+    howMuch: displayNumber(order.buy.howMuch),
+  })),
+  sellOrders: state.orderbook.sellOrders.map(order => ({
+    id: order.id,
+    price: displayNumber(order.price),
+    cumulativeVolume: displayNumber(order.cumulativeVolume),
+    howMuch: displayNumber(order.sell.howMuch),
+  })),
   totalBuyVolume: displayNumber(state.orderbook.totalBuyVolume),
   totalSellVolume: displayNumber(state.orderbook.totalSellVolume),
   baseTokenSymbol: state.app.assetPair.base,
@@ -30,12 +28,9 @@ const mapDispatchToProps = dispatch => ({
   getOrderbook: () => {
     dispatch(actions.getOrderbook());
   },
-  // onClick: asset => {
-  //   if (asset !== "MLN-T") {
-  //     const assetPair = `${asset}/MLN-T`;
-  //     dispatch(generalCreators.updateAssetPair(assetPair));
-  //   }
-  // },
+  onClick: orderId => {
+    dispatch(actions.selectOrder(orderId));
+  },
 });
 
 const OrderbookLifecycle = lifecycle({

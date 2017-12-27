@@ -10,6 +10,7 @@ import TradeHistory from "../../containers/TradeHistory";
 import GetStarted from "../organisms/GetStarted";
 import Participation from "../../containers/Participation";
 import TradeHelper from "../../containers/TradeHelper";
+import Trade from "../../containers/Trade";
 
 const Fund = ({ isVisitor, isInvestor, isManager, fundAddress }) => (
   <div className="App">
@@ -24,7 +25,14 @@ const Fund = ({ isVisitor, isInvestor, isManager, fundAddress }) => (
       <br />
       <Holdings address={fundAddress} />
       <br />
-      {isManager ? <TradeHelper /> : <div />}
+      {isManager ? (
+        <div>
+          {" "}
+          <Trade /> <TradeHelper />
+        </div>
+      ) : (
+        <div />
+      )}
       <br />
       <Orderbook />
       <br />

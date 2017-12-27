@@ -6,6 +6,7 @@ export const initialState = {
   sellOrders: [],
   totalBuyVolume: 0,
   totalSellVolume: 0,
+  selectedOrder: null,
 };
 
 const reducers = {
@@ -18,6 +19,7 @@ const reducers = {
 
 const mapActionToReducer = {
   [types.GET_ORDERBOOK_SUCCEEDED]: reducers.merge,
+  [types.SELECT_ORDER]: reducers.merge,
 };
 
 export const reducer = (state = initialState, action) => {

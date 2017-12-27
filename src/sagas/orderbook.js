@@ -1,5 +1,11 @@
 import { takeLatest, call, put, select, take } from "redux-saga/effects";
-import { getOrderbook } from "@melonproject/melon.js";
+import {
+  getOrderbook,
+  deserializeOrder,
+  averagePrice,
+} from "@melonproject/melon.js";
+import { change } from "redux-form";
+import BigNumber from "bignumber.js";
 import { types, actions } from "../actions/orderbook";
 import { types as ethereumTypes } from "../actions/ethereum";
 import { actions as tradeHelperActions } from "../actions/tradeHelper";
@@ -51,8 +57,58 @@ function* getOrderbookSaga() {
   }
 }
 
+function* selectOrderSaga() {
+  const selectedOrderId = yield select(state => state.orderbook.selectedOrder);
+  const selectedOrder = yield select(state =>
+    state.orderbook.orders.find(o => o.id === selectedOrderId),
+  );
+  try {
+    let index;
+    let subsetOfOrders;
+    let average;
+    let orderType;
+    let theirOrderType;
+    console.log("***** ", selectedOrder);
+    if (selectedOrder.type === "buy") {
+      orderType = "Sell";
+      theirOrderType = "Buy";
+      const buyOrders = yield select(state => state.orderbook.buyOrders);
+      const deserializedBuyOrders = buyOrders.map(order =>
+        deserializeOrder(order),
+      );
+      index = deserializedBuyOrders.indexOf(selectedOrder);
+      subsetOfOrders = deserializedBuyOrders.slice(0, index + 1);
+      average = averagePrice("buy", subsetOfOrders);
+    } else if (selectedOrder.type === "sell") {
+      orderType = "Buy";
+      theirOrderType = "Sell";
+      const sellOrders = yield select(state => state.orderbook.sellOrders);
+      const deserializedSellOrders = sellOrders.map(order =>
+        deserializeOrder(order),
+      );
+      index = deserializedSellOrders.indexOf(selectedOrder);
+      subsetOfOrders = deserializedSellOrders.slice(0, index + 1);
+      average = averagePrice("sell", subsetOfOrders);
+    }
+
+    const total = average
+      .times(new BigNumber(selectedOrder.cumulativeVolume))
+      .toFixed(18);
+    const amount = new BigNumber(selectedOrder.cumulativeVolume).toString();
+    const price = average.toString();
+    yield put(change("trade", "quantity", amount));
+    yield put(change("trade", "total", total));
+    yield put(change("trade", "price", price));
+    yield put(change("trade", "type", orderType));
+    yield put(change("trade", "order", selectedOrder));
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 function* orderbook() {
   yield takeLatest(types.GET_ORDERBOOK_REQUESTED, getOrderbookSaga);
+  yield takeLatest(types.SELECT_ORDER, selectOrderSaga);
 }
 
 export default orderbook;

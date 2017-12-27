@@ -8,8 +8,8 @@ const Trade = ({
   switchSymbols,
   orderType,
   theirOrderType,
-  baseSymbol,
-  quoteSymbol,
+  baseTokenSymbol,
+  quoteTokenSymbol,
   handleSubmit,
   loading,
 }) => (
@@ -25,7 +25,7 @@ const Trade = ({
           onClick={switchSymbols}
         >
           <Card.Meta>
-            {orderType} <strong>{baseSymbol}</strong>
+            {orderType} <strong>{baseTokenSymbol}</strong>
           </Card.Meta>
           <Image
             src="./switch.svg"
@@ -35,7 +35,7 @@ const Trade = ({
           />
 
           <Card.Meta>
-            {theirOrderType} <strong>{quoteSymbol}</strong>
+            {theirOrderType} <strong>{quoteTokenSymbol}</strong>
           </Card.Meta>
         </button>
 
@@ -48,7 +48,7 @@ const Trade = ({
           </List.Item>
           <List.Item as="a">
             <List.Content>
-              <Field name="amount" component={renderInput} label="Quantity" />
+              <Field name="quantity" component={renderInput} label="Quantity" />
             </List.Content>
           </List.Item>
           <List.Item as="a">
