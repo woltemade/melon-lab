@@ -67,10 +67,8 @@ function* selectOrderSaga() {
     let subsetOfOrders;
     let average;
     let orderType;
-    let theirOrderType;
     if (selectedOrder.type === "buy") {
       orderType = "Sell";
-      theirOrderType = "Buy";
       const buyOrders = yield select(state => state.orderbook.buyOrders);
       const deserializedBuyOrders = buyOrders.map(order =>
         deserializeOrder(order),
@@ -80,7 +78,6 @@ function* selectOrderSaga() {
       average = averagePrice("buy", subsetOfOrders);
     } else if (selectedOrder.type === "sell") {
       orderType = "Buy";
-      theirOrderType = "Sell";
       const sellOrders = yield select(state => state.orderbook.sellOrders);
       const deserializedSellOrders = sellOrders.map(order =>
         deserializeOrder(order),
@@ -94,13 +91,12 @@ function* selectOrderSaga() {
 
     const amount = selectedOrder.cumulativeVolume;
     const price = average;
+
     yield put(change("trade", "strategy", "Market"));
     yield put(change("trade", "quantity", amount));
     yield put(change("trade", "total", total));
     yield put(change("trade", "price", price));
     yield put(change("trade", "type", orderType));
-    yield put(change("trade", "maxQuantity", amount));
-    yield put(change("trade", "maxTotal", total));
   } catch (err) {
     console.error(err);
   }

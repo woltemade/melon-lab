@@ -71,7 +71,7 @@ const Trade = ({
                 component={renderInput}
                 label="Price"
                 type="number"
-                step="0.01"
+                step="0.0001"
                 min={0}
               />
             </List.Content>
@@ -85,7 +85,7 @@ const Trade = ({
                 component={renderInput}
                 label="Quantity"
                 type="number"
-                step="0.01"
+                step="0.0001"
                 min={0}
               />
             </List.Content>
@@ -99,7 +99,7 @@ const Trade = ({
                 component={renderInput}
                 label="Total"
                 type="number"
-                step="0.01"
+                step="0.0001"
                 min={0}
               />
             </List.Content>

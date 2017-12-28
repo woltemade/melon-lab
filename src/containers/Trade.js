@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { reduxForm, change } from "redux-form";
+import { reduxForm, change, formValueSelector } from "redux-form";
 import { actions } from "../actions/trade";
 import Trade from "../components/organisms/Trade";
 import { actions as fundActions } from "../actions/fund";
@@ -11,19 +11,33 @@ import {
 } from "../utils/functionalBigNumber";
 import displayNumber from "../utils/displayNumber";
 
+const selector = formValueSelector("trade");
+
 const mapStateToProps = state => ({
   loading: state.app.transactionInProgress,
   baseTokenSymbol: state.app.assetPair.base,
   quoteTokenSymbol: state.app.assetPair.quote,
-  orderType: state.orderbook.selectedOrder
-    ? state.form.trade.values.type
-    : "Buy",
-  strategy: state.form.trade.values.strategy,
-  selectedOrder: state.orderbook.selectedOrder,
+  orderType: state.orderbook.selectedOrder ? selector(state, "type") : "Buy",
+  selectedOrder: state.orderbook.orders.find(
+    o => o.id === state.orderbook.selectedOrder,
+  ),
+  quoteTokenBalance: state.holdings.holdings.length
+    ? state.holdings.holdings.find(a => a.name === state.app.assetPair.quote)
+        .balance
+    : undefined,
+  baseTokenBalance: state.holdings.holdings.length
+    ? state.holdings.holdings.find(a => a.name === state.app.assetPair.base)
+        .balance
+    : undefined,
+  initialValues: {
+    strategy: "Market",
+    type: "Buy",
+  },
+  strategy: selector(state, "strategy"),
 });
 
 const onSubmit = (values, dispatch) => {
-  if (values.order.id) {
+  if (values.strategy === "Market") {
     dispatch(actions.takeOrder(values));
   } else {
     dispatch(actions.makeOrder(values));
@@ -47,9 +61,25 @@ const onChange = (values, dispatch, props, previousValues) => {
       props.reset();
     }
 
+    let maxTotal;
+    let maxQuantity;
+
+    if (values.strategy === "Market") {
+      maxTotal =
+        values.type === "Buy"
+          ? Math.min(props.quoteTokenBalance, values.total)
+          : values.total;
+      maxQuantity =
+        values.type === "Sell"
+          ? Math.min(props.baseTokenBalance, values.quantity)
+          : values.quantity;
+    } else if (values.strategy === "Limit") {
+      maxTotal = values.type === "Buy" ? props.quoteTokenBalance : Infinity;
+      maxQuantity = values.type === "Sell" ? props.baseTokenBalance : Infinity;
+    }
     if (field === "total") {
-      if (greaterThan(values.total, values.maxTotal)) {
-        dispatch(change("trade", "total", values.maxTotal));
+      if (greaterThan(values.total, maxTotal)) {
+        dispatch(change("trade", "total", maxTotal));
       } else {
         const quantity = divide(values.total, values.price);
 
@@ -59,11 +89,10 @@ const onChange = (values, dispatch, props, previousValues) => {
     }
 
     if (field === "quantity") {
-      if (greaterThan(values.quantity, values.maxQuantity)) {
-        dispatch(change("trade", "quantity", values.maxQuantity));
+      if (greaterThan(values.quantity, maxQuantity)) {
+        dispatch(change("trade", "quantity", maxQuantity));
       } else {
         const total = multiply(values.quantity, values.price);
-
         if (values.total !== total)
           dispatch(change("trade", "total", displayNumber(total)));
       }
@@ -77,28 +106,12 @@ const onChange = (values, dispatch, props, previousValues) => {
   }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  /* onChange: (event, value) => {
-    // console.log(ownProps);
-    // if (event.target.name === "total") {
-    //   ownProps.change("quantity", divide(value, ownProps.values.price));
-    // } else {
-    //   ownProps.change("total", multiply(value, ownProps.values.price));
-    // }
-  },
-  */
-});
-
-const TradeRedux = connect(mapStateToProps, mapDispatchToProps)(Trade);
-
 const TradeForm = reduxForm({
   form: "trade",
   onSubmit,
   onChange,
-  initialValues: {
-    strategy: "Market",
-    type: "Buy",
-  },
-})(TradeRedux);
+})(Trade);
 
-export default TradeForm;
+const TradeRedux = connect(mapStateToProps)(TradeForm);
+
+export default TradeRedux;
