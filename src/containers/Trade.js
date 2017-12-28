@@ -1,9 +1,10 @@
 import { connect } from "react-redux";
-import { reduxForm } from "redux-form";
+import { reduxForm, change } from "redux-form";
 import { actions } from "../actions/trade";
 import Trade from "../components/organisms/Trade";
 import { actions as fundActions } from "../actions/fund";
 import { multiply, divide } from "../utils/functionalBigNumber";
+import displayNumber from "../utils/displayNumber";
 
 const mapStateToProps = state => ({
   loading: state.app.transactionInProgress,
@@ -12,6 +13,8 @@ const mapStateToProps = state => ({
   orderType: state.orderbook.selectedOrder
     ? state.form.trade.values.type
     : "Buy",
+  strategy: state.form.trade.values.strategy,
+  selectedOrder: state.orderbook.selectedOrder,
 });
 
 const onSubmit = (values, dispatch) => {
@@ -22,8 +25,35 @@ const onSubmit = (values, dispatch) => {
   }
 };
 
+const onChange = (values, dispatch, props, previousValues) => {
+  const changed = Object.keys(values).reduce(
+    (acc, key) => (values[key] !== previousValues[key] ? [key, ...acc] : acc),
+    [],
+  );
+
+  // Only correct if only one field is changed (i.e. the user is in the form)
+  // More than one changes come from the click on the orderbook for example.
+  // Furthermore: Only dispatch a change if there is actually a change to avoid
+  // infinite loop
+  if (changed.length === 1) {
+    const field = changed[0];
+
+    if (field === "total") {
+      const quantity = divide(values.total, values.price);
+
+      if (values.quantity !== quantity)
+        dispatch(change("trade", "quantity", displayNumber(quantity)));
+    } else if (field === "quantity") {
+      const total = multiply(values.quantity, values.price);
+
+      if (values.total !== total)
+        dispatch(change("trade", "total", displayNumber(total)));
+    }
+  }
+};
+
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (event, value) => {
+  /* onChange: (event, value) => {
     // console.log(ownProps);
     // if (event.target.name === "total") {
     //   ownProps.change("quantity", divide(value, ownProps.values.price));
@@ -31,6 +61,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     //   ownProps.change("total", multiply(value, ownProps.values.price));
     // }
   },
+  */
 });
 
 const TradeRedux = connect(mapStateToProps, mapDispatchToProps)(Trade);
@@ -38,6 +69,10 @@ const TradeRedux = connect(mapStateToProps, mapDispatchToProps)(Trade);
 const TradeForm = reduxForm({
   form: "trade",
   onSubmit,
+  onChange,
+  initialValues: {
+    strategy: "Market",
+  },
 })(TradeRedux);
 
 export default TradeForm;

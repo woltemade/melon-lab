@@ -1,8 +1,26 @@
 import React from "react";
 import { Field } from "redux-form";
-import { List, Button, Card, Image } from "semantic-ui-react";
+import { List, Button, Card, Image, Menu } from "semantic-ui-react";
 
 import renderInput from "../utils/renderInput";
+
+const orderStrategySelector = ({ input }) => (
+  <div>
+    <Menu text style={{ display: "flex", justifyContent: "center" }}>
+      <Menu.Item
+        name="Market"
+        active={input.value === "Market"}
+        onClick={() => input.onChange("Market")}
+      />
+      <div style={{ marginTop: "0.7em" }}>|</div>
+      <Menu.Item
+        name="Limit"
+        active={input.value === "Limit"}
+        onClick={() => input.onChange("Limit")}
+      />
+    </Menu>
+  </div>
+);
 
 const Trade = ({
   switchSymbols,
@@ -12,14 +30,13 @@ const Trade = ({
   quoteTokenSymbol,
   handleSubmit,
   loading,
-  onChange,
+  strategy,
+  selectedOrder,
 }) => (
   <form onSubmit={handleSubmit}>
     <Card centered id="trade">
       <Card.Content>
-        <Card.Header>Place an order</Card.Header>
-        <br />
-        <br />
+        <Card.Header>Trade</Card.Header>
 
         <button
           style={{ textAlign: "center", cursor: "pointer" }}
@@ -41,40 +58,53 @@ const Trade = ({
         </button>
 
         <br />
+        <Field name="strategy" component={orderStrategySelector} />
+        {strategy === "Market" ? <p>Select from the orderbook</p> : null}
         <List>
-          <List.Item as="a">
+          <List.Item>
             <List.Content>
               <Field
+                disabled={strategy === "Market"}
                 name="price"
                 component={renderInput}
-                onChange={onChange}
                 label="Price"
+                type="number"
+                min={0}
               />
             </List.Content>
           </List.Item>
-          <List.Item as="a">
+          <List.Item>
             <List.Content>
               <Field
+                disabled={strategy === "Market" && !selectedOrder}
                 name="quantity"
                 component={renderInput}
-                onChange={onChange}
                 label="Quantity"
+                type="number"
+                min={0}
               />
             </List.Content>
           </List.Item>
-          <List.Item as="a">
+          <List.Item>
             <List.Content>
               <Field
+                disabled={strategy === "Market" && !selectedOrder}
                 name="total"
                 component={renderInput}
-                onChange={onChange}
                 label="Total"
+                type="number"
+                min={0}
               />
             </List.Content>
           </List.Item>
         </List>
 
-        <Button basic color="black" style={{ width: "100%" }}>
+        <Button
+          basic
+          color="black"
+          style={{ width: "100%" }}
+          disabled={strategy === "Market" && !selectedOrder}
+        >
           {orderType}
         </Button>
       </Card.Content>
