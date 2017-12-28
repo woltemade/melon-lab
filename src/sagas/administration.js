@@ -48,46 +48,106 @@ function* toggleSubscriptionSaga() {
 }
 
 function* toggleRedemptionSaga() {
+  const redemptionAllowed = yield select(
+    state => state.fund.subscriptionAllowed,
+  );
+  yield put(
+    modalActions.confirm(
+      `Do you really want to buy ${
+        redemptionAllowed ? "disable" : "enable"
+      } redemptions? If yes, please type your password below:`,
+    ),
+  );
+  const { password } = yield take(modalTypes.CONFIRMED);
+
   try {
-    yield put(appActions.transactionStarted());
+    yield put(modalActions.loading());
+    const wallet = localStorage.getItem("wallet:melon.fund");
+    const decryptedWallet = yield call(decryptWallet, wallet, password);
     const address = yield select(state => state.fund.address);
-    const redemptionAllowed = yield call(toggleRedemption, address);
-    yield put(actions.toggleRedemptionSucceeded(redemptionAllowed));
+    yield call(toggleRedemption, decryptedWallet, address);
+    yield put(actions.toggleRedemptionSucceeded(!redemptionAllowed));
   } catch (err) {
-    console.error(err);
+    if (err.name === "password") {
+      yield put(modalActions.error("Wrong password"));
+    } else if (err.name === "EnsureError") {
+      yield put(modalActions.error(err.message));
+    } else {
+      yield put(modalActions.error(err.message));
+      console.error(err);
+      console.log(JSON.stringify(err, null, 4));
+    }
     yield put(actions.toggleRedemptionFailed(err));
-  } finally {
-    yield put(appActions.transactionFinished());
   }
 }
 
 function* convertUnclaimedRewardsSaga() {
+  const redemptionAllowed = yield select(
+    state => state.fund.subscriptionAllowed,
+  );
+  yield put(
+    modalActions.confirm(
+      `Do you really want to buy ${
+        redemptionAllowed ? "disable" : "enable"
+      } redemptions? If yes, please type your password below:`,
+    ),
+  );
+  const { password } = yield take(modalTypes.CONFIRMED);
+
   try {
-    yield put(appActions.transactionStarted());
+    yield put(modalActions.loading());
+    const wallet = localStorage.getItem("wallet:melon.fund");
+    const decryptedWallet = yield call(decryptWallet, wallet, password);
     const address = yield select(state => state.fund.address);
     // TODO: Check if it succeeded
-    yield call(convertUnclaimedRewards, address);
+    yield call(convertUnclaimedRewards, decryptedWallet, address);
     yield put(actions.convertUnclaimedRewardsSucceeded());
   } catch (err) {
-    console.error(err);
+    if (err.name === "password") {
+      yield put(modalActions.error("Wrong password"));
+    } else if (err.name === "EnsureError") {
+      yield put(modalActions.error(err.message));
+    } else {
+      yield put(modalActions.error(err.message));
+      console.error(err);
+      console.log(JSON.stringify(err, null, 4));
+    }
     yield put(actions.convertUnclaimedRewardsFailed(err));
-  } finally {
-    yield put(appActions.transactionFinished());
   }
 }
 
 function* shutDownFundSaga() {
+  const redemptionAllowed = yield select(
+    state => state.fund.subscriptionAllowed,
+  );
+  yield put(
+    modalActions.confirm(
+      `Do you really want to buy ${
+        redemptionAllowed ? "disable" : "enable"
+      } redemptions? If yes, please type your password below:`,
+    ),
+  );
+  const { password } = yield take(modalTypes.CONFIRMED);
+
   try {
-    yield put(appActions.transactionStarted());
+    yield put(modalActions.loading());
+    const wallet = localStorage.getItem("wallet:melon.fund");
+    const decryptedWallet = yield call(decryptWallet, wallet, password);
     const address = yield select(state => state.fund.address);
     // TODO: Check if it succeeded
-    yield call(shutDownFund, address);
+    yield call(shutDownFund, decryptedWallet, address);
     yield put(actions.shutdownSucceeded());
   } catch (err) {
-    console.error(err);
+    if (err.name === "password") {
+      yield put(modalActions.error("Wrong password"));
+    } else if (err.name === "EnsureError") {
+      yield put(modalActions.error(err.message));
+    } else {
+      yield put(modalActions.error(err.message));
+      console.error(err);
+      console.log(JSON.stringify(err, null, 4));
+    }
     yield put(actions.shutdownFailed(err));
-  } finally {
-    yield put(appActions.transactionFinished());
   }
 }
 
