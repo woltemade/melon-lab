@@ -13,4 +13,4 @@ export const divide = (base, ...args) =>
 
 export const isZero = number => toBigNumber(number).eq(0);
 
-export const greaterThan = (a, b) => toBigNumber(a).gt(b);
+export const greaterThan = (a, b) => toBigNumber(a).gt(b || 0);

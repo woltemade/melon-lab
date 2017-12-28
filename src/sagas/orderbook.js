@@ -91,13 +91,12 @@ function* selectOrderSaga() {
 
     const amount = selectedOrder.cumulativeVolume;
     const price = average;
+
     yield put(change("trade", "strategy", "Market"));
     yield put(change("trade", "quantity", amount));
     yield put(change("trade", "total", total));
     yield put(change("trade", "price", price));
     yield put(change("trade", "type", orderType));
-    yield put(change("trade", "maxQuantity", amount));
-    yield put(change("trade", "maxTotal", total));
   } catch (err) {
     console.error(err);
   }
