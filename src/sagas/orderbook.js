@@ -67,10 +67,8 @@ function* selectOrderSaga() {
     let subsetOfOrders;
     let average;
     let orderType;
-    let theirOrderType;
     if (selectedOrder.type === "buy") {
       orderType = "Sell";
-      theirOrderType = "Buy";
       const buyOrders = yield select(state => state.orderbook.buyOrders);
       const deserializedBuyOrders = buyOrders.map(order =>
         deserializeOrder(order),
@@ -80,7 +78,6 @@ function* selectOrderSaga() {
       average = averagePrice("buy", subsetOfOrders);
     } else if (selectedOrder.type === "sell") {
       orderType = "Buy";
-      theirOrderType = "Sell";
       const sellOrders = yield select(state => state.orderbook.sellOrders);
       const deserializedSellOrders = sellOrders.map(order =>
         deserializeOrder(order),

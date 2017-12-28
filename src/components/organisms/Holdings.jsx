@@ -27,7 +27,7 @@ const Holdings = ({ holdings, selectAsset }) => (
               textAlign="right"
               onClick={() => selectAsset(asset.name)}
             >
-              {asset[0] === "MLN-T" ? (
+              {asset.name === "MLN-T" ? (
                 <div>❤</div>
               ) : (
                 <div className="interactive">Buy/Sell</div>
