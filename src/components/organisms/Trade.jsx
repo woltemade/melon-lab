@@ -12,6 +12,7 @@ const Trade = ({
   quoteTokenSymbol,
   handleSubmit,
   loading,
+  onChange,
 }) => (
   <form onSubmit={handleSubmit}>
     <Card centered id="trade">
@@ -43,17 +44,32 @@ const Trade = ({
         <List>
           <List.Item as="a">
             <List.Content>
-              <Field name="price" component={renderInput} label="Price" />
+              <Field
+                name="price"
+                component={renderInput}
+                onChange={onChange}
+                label="Price"
+              />
             </List.Content>
           </List.Item>
           <List.Item as="a">
             <List.Content>
-              <Field name="quantity" component={renderInput} label="Quantity" />
+              <Field
+                name="quantity"
+                component={renderInput}
+                onChange={onChange}
+                label="Quantity"
+              />
             </List.Content>
           </List.Item>
           <List.Item as="a">
             <List.Content>
-              <Field name="total" component={renderInput} label="Total" />
+              <Field
+                name="total"
+                component={renderInput}
+                onChange={onChange}
+                label="Total"
+              />
             </List.Content>
           </List.Item>
         </List>

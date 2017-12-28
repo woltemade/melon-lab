@@ -20,15 +20,15 @@ export const actions = {
   placeOrderSucceeded: () => ({
     type: types.PLACE_ORDER_SUCCEEDED,
   }),
-  takeOrder: ({ orderId }) => ({
-    type: types.PLACE_ORDER_REQUESTED,
-    orderId,
+  takeOrder: values => ({
+    type: types.TAKE_ORDER_REQUESTED,
+    values,
   }),
   takeOrderFailed: reason => ({
-    type: types.PLACE_ORDER_FAILED,
+    type: types.TAKE_ORDER_FAILED,
     reason,
   }),
   takeOrderSucceeded: () => ({
-    type: types.PLACE_ORDER_SUCCEEDED,
+    type: types.TAKE_ORDER_SUCCEEDED,
   }),
 };

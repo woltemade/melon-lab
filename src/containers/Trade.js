@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
 });
 
 const onSubmit = (values, dispatch) => {
-  if (values.selectedOrder) {
+  if (values.order.id) {
     dispatch(actions.takeOrder(values));
   } else {
     dispatch(actions.makeOrder(values));
@@ -24,15 +24,16 @@ const onSubmit = (values, dispatch) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onChange: (event, value) => {
+    // console.log(ownProps);
     // if (event.target.name === "total") {
-    //   ownProps.change("quantity", divide(value, ownProps.price));
+    //   ownProps.change("quantity", divide(value, ownProps.values.price));
     // } else {
-    //   ownProps.change("total", multiply(value, ownProps.price));
+    //   ownProps.change("total", multiply(value, ownProps.values.price));
     // }
   },
 });
 
-const TradeRedux = connect(mapStateToProps)(Trade);
+const TradeRedux = connect(mapStateToProps, mapDispatchToProps)(Trade);
 
 const TradeForm = reduxForm({
   form: "trade",

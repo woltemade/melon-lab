@@ -9,6 +9,7 @@ import BigNumber from "bignumber.js";
 import { types, actions } from "../actions/orderbook";
 import { types as ethereumTypes } from "../actions/ethereum";
 import { actions as tradeHelperActions } from "../actions/tradeHelper";
+import displayNumber from "../utils/displayNumber";
 
 function* getOrderbookSaga() {
   const baseTokenSymbol = yield select(state => state.app.assetPair.base);
@@ -68,7 +69,6 @@ function* selectOrderSaga() {
     let average;
     let orderType;
     let theirOrderType;
-    console.log("***** ", selectedOrder);
     if (selectedOrder.type === "buy") {
       orderType = "Sell";
       theirOrderType = "Buy";
@@ -91,11 +91,11 @@ function* selectOrderSaga() {
       average = averagePrice("sell", subsetOfOrders);
     }
 
-    const total = average
-      .times(new BigNumber(selectedOrder.cumulativeVolume))
-      .toFixed(18);
-    const amount = new BigNumber(selectedOrder.cumulativeVolume).toString();
-    const price = average.toString();
+    const total = displayNumber(
+      average.times(new BigNumber(selectedOrder.cumulativeVolume)).toFixed(18),
+    );
+    const amount = displayNumber(selectedOrder.cumulativeVolume);
+    const price = displayNumber(average);
     yield put(change("trade", "quantity", amount));
     yield put(change("trade", "total", total));
     yield put(change("trade", "price", price));

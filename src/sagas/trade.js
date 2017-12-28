@@ -51,6 +51,7 @@ function* placeOrderSaga(action) {
 }
 
 function* takeOrderSaga(action) {
+  console.log("inside sagaa ", action.values);
   const password = window.prompt("Enter your password. Yes. Really. Do IT.");
   const wallet = localStorage.getItem("wallet:melon.fund");
   const decryptedWallet = yield call(decryptWallet, wallet, password);
@@ -58,17 +59,17 @@ function* takeOrderSaga(action) {
   try {
     yield put(appActions.transactionStarted());
     const fundAddress = yield select(state => state.fund.address);
-    // const orderId;
-    // const quantityAsked;
-    // const orderTaken = yield call(
-    //   takeOrder,
-    //   decryptedWallet,
-    //   orderId,
-    //   fundAddress,
-    //   quantityAsked
-    // );
-    // yield put(actions.takeOrderSucceeded());
-    // yield put(fundActions.infoRequested(fundAddress));
+    const orderId = action.values.order.id;
+    const quantityAsked = action.values.quantity;
+    const orderTaken = yield call(
+      takeOrder,
+      decryptedWallet,
+      orderId,
+      fundAddress,
+      quantityAsked,
+    );
+    yield put(actions.takeOrderSucceeded());
+    yield put(fundActions.infoRequested(fundAddress));
   } catch (err) {
     console.error(err);
     yield put(actions.takeOrderFailed());
