@@ -9,16 +9,11 @@ const mapStateToProps = state => ({
   loading: state.app.transactionInProgress,
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  toggleSubscription: () =>
-    dispatch(actions.toggleSubscription(ownProps.match.params.fundAddress)),
-  toggleRedemption: () =>
-    dispatch(actions.toggleRedemption(ownProps.match.params.fundAddress)),
-  convertUnclaimedRewards: () =>
-    dispatch(
-      actions.convertUnclaimedRewards(ownProps.match.params.fundAddress),
-    ),
-  shutdown: () => dispatch(actions.shutdown(ownProps.match.params.fundAddress)),
+const mapDispatchToProps = dispatch => ({
+  toggleSubscription: () => dispatch(actions.toggleSubscription()),
+  toggleRedemption: () => dispatch(actions.toggleRedemption()),
+  convertUnclaimedRewards: () => dispatch(actions.convertUnclaimedRewards()),
+  shutdown: () => dispatch(actions.shutdown()),
 });
 
 const AdministrationContainer = connect(mapStateToProps, mapDispatchToProps)(

@@ -18,19 +18,19 @@ export const initialState = {
   sharePrice: "0",
   subscriptionAllowed: false,
   totalSupply: "0",
-  unclaimedRewards: "0"
+  unclaimedRewards: "0",
 };
 
 const reducers = {
   setAddress: (state, { address }) => ({
     ...state,
-    address
+    address,
   }),
   merge: (state, params) => ({
     ...state,
-    ...params
+    ...params,
   }),
-  default: state => ({ ...state })
+  default: state => ({ ...state }),
 };
 
 const mapActionToReducer = {
@@ -39,7 +39,7 @@ const mapActionToReducer = {
   [types.INFO_SUCCEEDED]: reducers.merge,
   [types.INFO_REQUESTED]: reducers.merge,
   [adminTypes.TOGGLE_SUBSCRIPTION_SUCCEEDED]: reducers.merge,
-  [adminTypes.TOGGLE_REDEMPTION_SUCCEEDED]: reducers.merge
+  [adminTypes.TOGGLE_REDEMPTION_SUCCEEDED]: reducers.merge,
 };
 
 export const reducer = (state = initialState, action) => {

@@ -1,6 +1,7 @@
-import { take, put, takeLatest, select, apply, call } from "redux-saga/effects";
+import { take, put, takeLatest, select, apply } from "redux-saga/effects";
 import { eventChannel } from "redux-saga";
 import { setup, onBlock, getParityProvider } from "@melonproject/melon.js";
+import { utils } from "ethers";
 
 import { types as browserTypes } from "../actions/browser";
 import { actions as ethereumActions } from "../actions/ethereum";
@@ -13,7 +14,7 @@ function* init() {
 
   setup.init({
     provider,
-    daemonAddress: "0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd"
+    daemonAddress: "0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd",
   });
 
   yield put(ethereumActions.setProvider(providerType));
@@ -29,8 +30,9 @@ function* init() {
 
   if (wallet) {
     setup.wallet = JSON.parse(wallet);
-    setup.defaultAccount = `0x${setup.wallet.address}`;
-    yield put(ethereumActions.accountChanged(`0x${setup.wallet.address}`));
+    const address = utils.getAddress(setup.wallet.address);
+    setup.defaultAccount = address;
+    yield put(ethereumActions.accountChanged(address));
   } else {
     yield put(ethereumActions.accountChanged(""));
   }
