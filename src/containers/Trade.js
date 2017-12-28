@@ -3,7 +3,12 @@ import { reduxForm, change } from "redux-form";
 import { actions } from "../actions/trade";
 import Trade from "../components/organisms/Trade";
 import { actions as fundActions } from "../actions/fund";
-import { multiply, divide, greaterThan } from "../utils/functionalBigNumber";
+import {
+  multiply,
+  divide,
+  greaterThan,
+  isZero,
+} from "../utils/functionalBigNumber";
 import displayNumber from "../utils/displayNumber";
 
 const mapStateToProps = state => ({
@@ -38,6 +43,10 @@ const onChange = (values, dispatch, props, previousValues) => {
   if (changed.length === 1) {
     const field = changed[0];
 
+    if (field === "strategy" && previousValues.strategy === "Limit") {
+      props.reset();
+    }
+
     if (field === "total") {
       if (greaterThan(values.total, values.maxTotal)) {
         dispatch(change("trade", "total", values.maxTotal));
@@ -47,7 +56,9 @@ const onChange = (values, dispatch, props, previousValues) => {
         if (values.quantity !== quantity)
           dispatch(change("trade", "quantity", displayNumber(quantity)));
       }
-    } else if (field === "quantity") {
+    }
+
+    if (field === "quantity") {
       if (greaterThan(values.quantity, values.maxQuantity)) {
         dispatch(change("trade", "quantity", values.maxQuantity));
       } else {
@@ -56,6 +67,12 @@ const onChange = (values, dispatch, props, previousValues) => {
         if (values.total !== total)
           dispatch(change("trade", "total", displayNumber(total)));
       }
+    }
+
+    if (field === "price") {
+      dispatch(
+        change("trade", "total", multiply(values.quantity, values.price)),
+      );
     }
   }
 };
@@ -80,6 +97,7 @@ const TradeForm = reduxForm({
   onChange,
   initialValues: {
     strategy: "Market",
+    type: "Buy",
   },
 })(TradeRedux);
 
