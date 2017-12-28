@@ -46,6 +46,14 @@ const Factsheet = ({
             Contact Investors/Managers
           </List.Content>
         </List.Item>
+        <br />
+        <a
+          className="twitter-share-button"
+          href="https://twitter.com/intent/"
+          data-size="large"
+        >
+          Tweet
+        </a>
       </List>
     </Card.Content>
   </Card>
