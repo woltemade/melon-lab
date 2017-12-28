@@ -36,6 +36,7 @@ const Orderbook = ({
   totalBuyVolume,
   baseTokenSymbol,
   quoteTokenSymbol,
+  onClick,
 }) => (
   <div id="orderbook">
     <h3 className="App-intro">
@@ -68,12 +69,13 @@ const Orderbook = ({
                   )}
                   onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut}
+                  onClick={() => onClick(order.id)}
                 >
                   <Table.Cell style={{ textAlign: "right" }}>
                     {order.cumulativeVolume}
                   </Table.Cell>
                   <Table.Cell style={{ textAlign: "right" }}>
-                    {order.buy.howMuch}
+                    {order.howMuch}
                   </Table.Cell>
                   <Table.Cell style={{ textAlign: "right" }}>
                     {order.price}
@@ -99,9 +101,10 @@ const Orderbook = ({
                   style={getBuyGradient(order.cumulativeVolume, totalBuyVolume)}
                   onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut}
+                  onClick={() => onClick(order.id)}
                 >
                   <Table.Cell>&nbsp;&nbsp;&nbsp;&nbsp;{order.price}</Table.Cell>
-                  <Table.Cell>{order.sell.howMuch}</Table.Cell>
+                  <Table.Cell>{order.howMuch}</Table.Cell>
                   <Table.Cell>{order.cumulativeVolume}</Table.Cell>
                 </Table.Row>
               ))}
