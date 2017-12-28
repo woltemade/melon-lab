@@ -10,6 +10,7 @@ const renderInput = ({
   label,
   min,
   max,
+  step,
 }) => (
   <Input
     {...input}
@@ -20,6 +21,7 @@ const renderInput = ({
     disabled={disabled}
     placeholder={placeholder || input.name}
     style={{ width: "100%" }}
+    step={step}
   />
 );
 

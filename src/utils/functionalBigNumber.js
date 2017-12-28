@@ -12,3 +12,5 @@ export const divide = (base, ...args) =>
   args.reduce((acc, current) => acc.div(current), toBigNumber(base));
 
 export const isZero = number => toBigNumber(number).eq(0);
+
+export const greaterThan = (a, b) => toBigNumber(a).gt(b);

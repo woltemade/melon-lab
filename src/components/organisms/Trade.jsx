@@ -3,6 +3,7 @@ import { Field } from "redux-form";
 import { List, Button, Card, Image, Menu } from "semantic-ui-react";
 
 import renderInput from "../utils/renderInput";
+import displayNumber from "../../utils/displayNumber";
 
 const orderStrategySelector = ({ input }) => (
   <div>
@@ -65,10 +66,12 @@ const Trade = ({
             <List.Content>
               <Field
                 disabled={strategy === "Market"}
+                format={displayNumber}
                 name="price"
                 component={renderInput}
                 label="Price"
                 type="number"
+                step="0.01"
                 min={0}
               />
             </List.Content>
@@ -77,10 +80,12 @@ const Trade = ({
             <List.Content>
               <Field
                 disabled={strategy === "Market" && !selectedOrder}
+                format={displayNumber}
                 name="quantity"
                 component={renderInput}
                 label="Quantity"
                 type="number"
+                step="0.01"
                 min={0}
               />
             </List.Content>
@@ -89,10 +94,12 @@ const Trade = ({
             <List.Content>
               <Field
                 disabled={strategy === "Market" && !selectedOrder}
+                format={displayNumber}
                 name="total"
                 component={renderInput}
                 label="Total"
                 type="number"
+                step="0.01"
                 min={0}
               />
             </List.Content>

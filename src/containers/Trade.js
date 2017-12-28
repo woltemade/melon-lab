@@ -3,7 +3,7 @@ import { reduxForm, change } from "redux-form";
 import { actions } from "../actions/trade";
 import Trade from "../components/organisms/Trade";
 import { actions as fundActions } from "../actions/fund";
-import { multiply, divide } from "../utils/functionalBigNumber";
+import { multiply, divide, greaterThan } from "../utils/functionalBigNumber";
 import displayNumber from "../utils/displayNumber";
 
 const mapStateToProps = state => ({
@@ -39,15 +39,23 @@ const onChange = (values, dispatch, props, previousValues) => {
     const field = changed[0];
 
     if (field === "total") {
-      const quantity = divide(values.total, values.price);
+      if (greaterThan(values.total, values.maxTotal)) {
+        dispatch(change("trade", "total", values.maxTotal));
+      } else {
+        const quantity = divide(values.total, values.price);
 
-      if (values.quantity !== quantity)
-        dispatch(change("trade", "quantity", displayNumber(quantity)));
+        if (values.quantity !== quantity)
+          dispatch(change("trade", "quantity", displayNumber(quantity)));
+      }
     } else if (field === "quantity") {
-      const total = multiply(values.quantity, values.price);
+      if (greaterThan(values.quantity, values.maxQuantity)) {
+        dispatch(change("trade", "quantity", values.maxQuantity));
+      } else {
+        const total = multiply(values.quantity, values.price);
 
-      if (values.total !== total)
-        dispatch(change("trade", "total", displayNumber(total)));
+        if (values.total !== total)
+          dispatch(change("trade", "total", displayNumber(total)));
+      }
     }
   }
 };
