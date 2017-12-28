@@ -1,3 +1,4 @@
+import { types as actionTypes } from "../actions/modal";
 import { types as modalTypes } from "../components/pages/Modal";
 
 export const initialState = {
@@ -5,17 +6,21 @@ export const initialState = {
   modalType: modalTypes.INFO,
   title: "",
   body: "",
-  primaryActionText: "Ok",
-  secondaryActionText: ""
+  primaryAction: "Ok",
+  secondaryAction: "",
 };
 
 export const reducer = (state = initialState, action = {}) => {
   const { type, ...params } = action;
 
-  return {
-    ...state,
-    ...params
-  };
+  return Object.keys(actionTypes)
+    .map(key => actionTypes[key])
+    .includes(type)
+    ? {
+        ...state,
+        ...params,
+      }
+    : state;
 };
 
 export default reducer;

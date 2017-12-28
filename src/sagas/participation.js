@@ -3,7 +3,7 @@ import {
   subscribe,
   redeem,
   executeRequest,
-  decryptWallet
+  decryptWallet,
 } from "@melonproject/melon.js";
 import { types, actions } from "../actions/participation";
 import { actions as appActions } from "../actions/app";
@@ -15,8 +15,8 @@ function* subscribeSaga(action) {
     modalActions.confirm(
       `Do you really want to buy ${action.amount} shares for ${
         action.total
-      } MLN? If yes, please type your password below:`
-    )
+      } MLN? If yes, please type your password below:`,
+    ),
   );
   const { password } = yield take(modalTypes.CONFIRMED);
 
@@ -31,7 +31,7 @@ function* subscribeSaga(action) {
       decryptedWallet,
       fundAddress,
       action.amount,
-      action.total
+      action.total,
     );
     yield call(executeRequest, decryptedWallet, subscription.id, fundAddress);
     yield put(actions.subscribeSucceeded());
@@ -64,7 +64,7 @@ function* redeemSaga(action) {
       decryptedWallet,
       fundAddress,
       action.amount,
-      action.total
+      action.total,
     );
     yield call(executeRequest, decryptedWallet, redemption.id, fundAddress);
     yield put(actions.redeemSucceeded());

@@ -22,7 +22,7 @@ const mapOnboardingStateToMainContainer = {
   [onboardingPath.INSUFFICIENT_FUNDS]: InsufficientFunds,
   [onboardingPath.NO_FUND_CREATED]: SetupContainer,
   [onboardingPath.NOT_INVESTED_IN_OWN_FUND]: ParticipationContainer,
-  [onboardingPath.ONBOARDED]: FundContainer
+  [onboardingPath.ONBOARDED]: FundContainer,
 };
 
 const routeContainerMap = {
@@ -31,7 +31,7 @@ const routeContainerMap = {
   [types.ACCOUNT_RESTORE]: RestoreContainer,
   [types.ACCOUNT_CREATE]: AccountContainer,
   [types.ACCOUNT_ENCRYPT]: AccountContainer,
-  [types.FUND]: FundContainer
+  [types.FUND]: FundContainer,
 };
 
 const getMainComponent = ({
@@ -40,7 +40,7 @@ const getMainComponent = ({
   ethBalance,
   usersFund,
   walletAddress,
-  route
+  route,
 }) => {
   if (route === types.SETUP) {
     const Main = mapOnboardingStateToMainContainer[onboardingState];
@@ -62,7 +62,9 @@ const App = props => (
   <div className="App">
     <Container>
       <div className="App-header" style={{ margin: "2em" }}>
-        <Image src="./melon-logo.png" size="small" centered />
+        <a href="/">
+          <Image src="./melon-logo.png" size="small" centered />
+        </a>
       </div>
       {getMainComponent(props)}
     </Container>

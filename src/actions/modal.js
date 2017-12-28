@@ -7,26 +7,34 @@ export const types = {
   CONFIRM: "CONFIRM:modal:melon.fund",
   CONFIRMED: "CONFIRMED:modal:melon.fund",
   ERROR: "ERROR:modal:melon.fund",
-  LOADING: "LOADING:modal.melon.fund"
+  LOADING: "LOADING:modal.melon.fund",
+};
+
+// Actions bound to the buttons
+export const interactions = {
+  OK: "Ok",
+  CANCEL: "Cancel",
+  CONFIRM: "Confirm",
+  RETRY: "Retry",
 };
 
 export const actions = {
-  open: ({ title, body, primaryActionText, secondaryActionText }) => ({
+  open: ({ title, body, primaryInteraction, secondaryInteraction }) => ({
     type: types.OPEN,
     isOpen: true,
     modalType: modalTypes.INFO,
     title,
     body,
-    primaryActionText,
-    secondaryActionText
+    primaryInteraction,
+    secondaryInteraction,
   }),
   close: () => ({
     type: types.CLOSE,
-    isOpen: false
+    isOpen: false,
   }),
   cancel: () => ({
     type: types.CANCEL,
-    isOpen: false
+    isOpen: false,
   }),
   confirm: body => ({
     type: types.CONFIRM,
@@ -34,13 +42,13 @@ export const actions = {
     modalType: modalTypes.CONFIRM,
     title: "Confirm transaction",
     body,
-    primaryActionText: "Confirm",
-    secondaryActionText: "Cancel"
+    primaryInteraction: interactions.CONFIRM,
+    secondaryInteraction: interactions.CANCEL,
   }),
   confirmed: password => ({
     type: types.CONFIRMED,
     isOpen: false,
-    password
+    password,
   }),
   error: body => ({
     type: types.ERROR,
@@ -48,13 +56,14 @@ export const actions = {
     modalType: modalTypes.ERROR,
     title: "Transaction error",
     body,
-    primaryActionText: "Ok"
+    primaryInteraction: interactions.OK,
+    secondaryInteraction: "",
   }),
   loading: (body = "Sending transaction ...") => ({
     type: types.LOADING,
     isOpen: true,
     modalType: modalTypes.LOADING,
     title: "Please wait",
-    body
-  })
+    body,
+  }),
 };

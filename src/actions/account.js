@@ -16,6 +16,7 @@ export const types = {
 export const actions = {
   generateWallet: () => ({
     type: types.GENERATE_WALLET_REQUESTED,
+    loading: false,
   }),
   generateWalletFailed: reason => ({
     type: types.GENERATE_WALLET_FAILED,
@@ -30,6 +31,7 @@ export const actions = {
   encryptWallet: password => ({
     type: types.ENCRYPT_WALLET_REQUESTED,
     password,
+    loading: true,
   }),
   encryptWalletSucceeded: () => ({
     type: types.ENCRYPT_WALLET_SUCCEEDED,

@@ -4,7 +4,7 @@ import { Button } from "semantic-ui-react";
 
 import renderInput from "../../utils/renderInput";
 
-const Encrypt = ({ handleSubmit, error, submitting }) => (
+const Encrypt = ({ handleSubmit, error, loading }) => (
   <form onSubmit={handleSubmit}>
     <p>
       Now it is time to encrypt your wallet with a password of your choice. The
@@ -18,6 +18,7 @@ const Encrypt = ({ handleSubmit, error, submitting }) => (
     {error ? <div className="error">{error}</div> : null}
     <p>
       <Field
+        disabled={loading}
         label="Password"
         name="password"
         component={renderInput}
@@ -25,13 +26,20 @@ const Encrypt = ({ handleSubmit, error, submitting }) => (
       />
 
       <Field
+        disabled={loading}
         label="Repeat"
         name="repeat"
         component={renderInput}
         type="password"
       />
     </p>
-    <Button basic disabled={submitting} color="black" style={{ width: "100%" }}>
+    <Button
+      basic
+      disabled={loading}
+      color="black"
+      style={{ width: "100%" }}
+      loading={loading}
+    >
       Encrypt my wallet
     </Button>
   </form>
