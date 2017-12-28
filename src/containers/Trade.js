@@ -23,7 +23,7 @@ const mapStateToProps = state => ({
 });
 
 const onSubmit = (values, dispatch) => {
-  if (values.order.id) {
+  if (values.strategy === "Market") {
     dispatch(actions.takeOrder(values));
   } else {
     dispatch(actions.makeOrder(values));

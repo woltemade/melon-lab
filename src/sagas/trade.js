@@ -98,10 +98,11 @@ function* takeOrderSaga(action) {
 
     const matchedOrders = matchOrders(theirOrderType, priceThreshold, orders);
     const quantityAsked =
-      ourOrderType === "buy"
+      ourOrderType === "Buy"
         ? new BigNumber(action.values.quantity)
         : new BigNumber(action.values.total);
 
+    console.log(matchedOrders, managerAddress, fundAddress, quantityAsked);
     const marketOrder = yield call(
       takeMultipleOrders,
       decryptedWallet,
