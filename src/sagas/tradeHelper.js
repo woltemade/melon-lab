@@ -26,9 +26,20 @@ function* getTradeInfoSaga() {
       quoteTokenSymbol,
       fundAddress,
     );
-
+    const buyOrders = yield select(state => state.orderbook.buyOrders);
+    const sellOrders = yield select(state => state.orderbook.sellOrders);
+    const bid = buyOrders.length ? buyOrders[0].price : 0;
+    const ask = sellOrders.length ? sellOrders[0].price : 0;
+    const trades = yield select(state => state.recentTrades.trades);
+    const last = trades.length ? trades[trades.length - 1].price : 0;
     yield put(
-      actions.tradeInfoSucceeded({ baseTokenBalance, quoteTokenBalance }),
+      actions.tradeInfoSucceeded({
+        baseTokenBalance,
+        quoteTokenBalance,
+        bid,
+        ask,
+        last,
+      }),
     );
   } catch (err) {
     console.error(err);

@@ -1,6 +1,6 @@
 import { takeLatest, call, put, select, take } from "redux-saga/effects";
 import { getRanking } from "@melonproject/melon.js";
-import { actions } from "../actions/ranking";
+import { actions, types } from "../actions/ranking";
 import { types as ethereumTypes } from "../actions/ethereum";
 import { types as routeTypes } from "../actions/routes";
 
@@ -19,6 +19,7 @@ function* getRankingSaga() {
 
 function* ranking() {
   yield takeLatest(routeTypes.RANKING, getRankingSaga);
+  yield takeLatest(types.GET_RANKING_REQUESTED, getRankingSaga);
 }
 
 export default ranking;

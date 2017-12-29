@@ -3,13 +3,21 @@ import {
   getParticipation,
   getParticipationAuthorizations,
   performCalculations,
-  getFundForManager
+  getFundForManager,
 } from "@melonproject/melon.js";
 import { takeLatest, put, call, take, select } from "redux-saga/effects";
 import { actions, types } from "../actions/fund";
 import { types as ethereumTypes } from "../actions/ethereum";
 import { actions as appActions, types as appTypes } from "../actions/app";
 import { types as routeTypes } from "../actions/routes";
+import { types as orderbookTypes } from "../actions/orderbook";
+import { types as holdingsTypes } from "../actions/holdings";
+import { types as recentTradesTypes } from "../actions/recentTrades";
+import {
+  actions as rankingActions,
+  types as rankingTypes,
+} from "../actions/ranking";
+import { actions as tradeHelperActions } from "../actions/tradeHelper";
 
 function* requestInfo({ address }) {
   const isConnected = yield select(state => state.ethereum.isConnected);
@@ -21,21 +29,21 @@ function* requestInfo({ address }) {
     const calculations = yield call(performCalculations, address);
     const participationAuthorizations = yield call(
       getParticipationAuthorizations,
-      address
+      address,
     );
 
     const info = {
       ...fundInfo,
       ...calculations,
       ...participationAuthorizations,
-      address
+      address,
     };
 
     if (account) {
       const participation = yield call(
         getParticipation,
         fundInfo.fundAddress,
-        account
+        account,
       );
       info.personalStake = participation.personalStake;
     }
@@ -68,10 +76,35 @@ function* getUsersFund({ account }) {
   yield put(appActions.setUsersFund(fundAddress));
 }
 
+function* getRanking() {
+  yield put(rankingActions.getRanking());
+}
+
+function* tradeHelper() {
+  yield put(tradeHelperActions.tradeInfoRequested());
+}
+
+function* addRanking() {
+  const ranking = yield select(state => state.ranking.rankingList);
+  const fundAddress = yield select(state => state.fund.address);
+  const rank = ranking.length
+    ? ranking.findIndex(
+        f => f.address.toLowerCase() === fundAddress.toLowerCase(),
+      )
+    : "N/A";
+  const numberOfFunds = ranking.length ? ranking.length : "N/A";
+  yield put(actions.updateRanking({ rank, numberOfFunds }));
+}
+
 function* fund() {
   yield takeLatest(types.INFO_REQUESTED, requestInfo);
   yield takeLatest(routeTypes.FUND, checkAndLoad);
   yield takeLatest(ethereumTypes.ACCOUNT_CHANGED, getUsersFund);
+  yield takeLatest(orderbookTypes.GET_ORDERBOOK_SUCCEEDED, getRanking);
+  yield takeLatest(orderbookTypes.GET_ORDERBOOK_SUCCEEDED, tradeHelper);
+  yield takeLatest(holdingsTypes.GET_HOLDINGS_SUCCEEDED, tradeHelper);
+  yield takeLatest(recentTradesTypes.GET_RECENTTRADES_SUCCEEDED, tradeHelper);
+  yield takeLatest(rankingTypes.GET_RANKING_SUCCEEDED, addRanking);
 }
 
 export default fund;

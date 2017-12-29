@@ -19,6 +19,8 @@ export const initialState = {
   subscriptionAllowed: false,
   totalSupply: "0",
   unclaimedRewards: "0",
+  rank: "N/A",
+  numberOfFunds: "N/A",
 };
 
 const reducers = {
@@ -38,6 +40,7 @@ const mapActionToReducer = {
   [types.SETUP_SUCCEEDED]: reducers.merge,
   [types.INFO_SUCCEEDED]: reducers.merge,
   [types.INFO_REQUESTED]: reducers.merge,
+  [types.UPDATE_RANKING]: reducers.merge,
   [adminTypes.TOGGLE_SUBSCRIPTION_SUCCEEDED]: reducers.merge,
   [adminTypes.TOGGLE_REDEMPTION_SUCCEEDED]: reducers.merge,
 };
