@@ -40,7 +40,7 @@ const onSubmit = (values, dispatch) => {
   if (values.strategy === "Market") {
     dispatch(actions.takeOrder(values));
   } else {
-    dispatch(actions.makeOrder(values));
+    dispatch(actions.placeOrder(values));
   }
 };
 

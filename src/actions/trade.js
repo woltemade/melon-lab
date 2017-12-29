@@ -8,10 +8,9 @@ export const types = {
 };
 
 export const actions = {
-  placeOrder: ({ amount, total }) => ({
+  placeOrder: values => ({
     type: types.PLACE_ORDER_REQUESTED,
-    amount,
-    total,
+    values,
   }),
   placeOrderFailed: reason => ({
     type: types.PLACE_ORDER_FAILED,
