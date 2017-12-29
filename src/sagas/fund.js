@@ -3,13 +3,15 @@ import {
   getParticipation,
   getParticipationAuthorizations,
   performCalculations,
-  getFundForManager
+  getFundForManager,
 } from "@melonproject/melon.js";
 import { takeLatest, put, call, take, select } from "redux-saga/effects";
 import { actions, types } from "../actions/fund";
 import { types as ethereumTypes } from "../actions/ethereum";
 import { actions as appActions, types as appTypes } from "../actions/app";
 import { types as routeTypes } from "../actions/routes";
+import { types as orderbookTypes } from "../actions/orderbook";
+import { actions as rankingActions } from "../actions/ranking";
 
 function* requestInfo({ address }) {
   const isConnected = yield select(state => state.ethereum.isConnected);
@@ -21,21 +23,21 @@ function* requestInfo({ address }) {
     const calculations = yield call(performCalculations, address);
     const participationAuthorizations = yield call(
       getParticipationAuthorizations,
-      address
+      address,
     );
 
     const info = {
       ...fundInfo,
       ...calculations,
       ...participationAuthorizations,
-      address
+      address,
     };
 
     if (account) {
       const participation = yield call(
         getParticipation,
         fundInfo.fundAddress,
-        account
+        account,
       );
       info.personalStake = participation.personalStake;
     }
@@ -68,10 +70,15 @@ function* getUsersFund({ account }) {
   yield put(appActions.setUsersFund(fundAddress));
 }
 
+function* getRanking() {
+  yield put(rankingActions.getRanking());
+}
+
 function* fund() {
   yield takeLatest(types.INFO_REQUESTED, requestInfo);
   yield takeLatest(routeTypes.FUND, checkAndLoad);
   yield takeLatest(ethereumTypes.ACCOUNT_CHANGED, getUsersFund);
+  yield takeLatest(orderbookTypes.GET_ORDERBOOK_SUCCEEDED, getRanking);
 }
 
 export default fund;
