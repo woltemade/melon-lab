@@ -10,10 +10,21 @@ const Factsheet = ({
   personalStake,
   sharePrice,
   totalSupply,
+  tweetHref,
 }) => (
   <Card id="factsheet">
     <Card.Content>
-      <Card.Header>{name}</Card.Header>
+      <Card.Header>
+        {name}
+        <a
+          href={tweetHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ float: "right" }}
+        >
+          <img src="./twitter.png" alt="Tweet" height="15" />
+        </a>
+      </Card.Header>
       <List>
         <List.Item>
           <List.Content>Creation date: {creationDate}</List.Content>
