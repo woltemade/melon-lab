@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { reduxForm } from "redux-form";
+import { reduxForm, change } from "redux-form";
 import { actions } from "../actions/participation";
 import Participation from "../components/organisms/ParticipationForm";
 import { actions as fundActions } from "../actions/fund";
@@ -10,45 +10,52 @@ const mapStateToProps = state => ({
   onboardingState: state.app.onboardingState,
   usersFund: state.app.usersFund,
   fundAddress: state.fund.address,
-});
-
-const onSubmit = (values, dispatch) => {
-  if (values.type === "subscribe") {
-    dispatch(actions.subscribe(values));
-  } else {
-    dispatch(actions.redeem(values));
-  }
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  requestFund: fundAddress => dispatch(fundActions.infoRequested(fundAddress)),
-  onChange: (event, value) => {
-    if (event.target.name === "total") {
-      ownProps.change("amount", divide(value, ownProps.initialValues.price));
-    } else {
-      ownProps.change("total", multiply(value, ownProps.initialValues.price));
-    }
-  },
-});
-
-const ParticipationRedux = connect(mapStateToProps, mapDispatchToProps)(
-  Participation,
-);
-
-const ParticipationForm = reduxForm({
-  form: "participation",
-  enableReinitialize: true,
-  onSubmit,
-})(ParticipationRedux);
-
-// A bit hacky, but it brings in inital values
-const ParticipationFormRedux = connect(state => ({
   initialValues: {
-    type: "subscribe",
+    type: "Invest",
     amount: 1,
     price: state.fund.sharePrice,
     total: multiply(1, state.fund.sharePrice),
   },
-}))(ParticipationForm);
+});
 
-export default ParticipationFormRedux;
+const mapDispatchToProps = dispatch => ({
+  requestFund: fundAddress => dispatch(fundActions.infoRequested(fundAddress)),
+  onChange: (values, _dispatch, props, previousValues) => {
+    const changed = Object.keys(values).reduce(
+      (acc, key) => (values[key] !== previousValues[key] ? [key, ...acc] : acc),
+      [],
+    );
+
+    if (changed.includes("total")) {
+      const amount = divide(values.total, values.price);
+
+      if (values.amount !== amount)
+        dispatch(change("participation", "amount", amount));
+    }
+
+    if (changed.includes("amount")) {
+      const total = multiply(values.amount, values.price);
+
+      if (values.total !== total)
+        dispatch(change("participation", "total", total));
+    }
+  },
+  onSubmit: values => {
+    if (values.type === "Invest") {
+      dispatch(actions.subscribe(values));
+    } else {
+      dispatch(actions.redeem(values));
+    }
+  },
+});
+
+const ParticipationForm = reduxForm({
+  form: "participation",
+  enableReinitialize: true,
+})(Participation);
+
+const ParticipationRedux = connect(mapStateToProps, mapDispatchToProps)(
+  ParticipationForm,
+);
+
+export default ParticipationRedux;
