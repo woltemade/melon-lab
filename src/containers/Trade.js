@@ -17,7 +17,8 @@ const mapStateToProps = state => ({
   loading: state.app.transactionInProgress,
   baseTokenSymbol: state.app.assetPair.base,
   quoteTokenSymbol: state.app.assetPair.quote,
-  orderType: state.orderbook.selectedOrder ? selector(state, "type") : "Buy",
+  orderType: selector(state, "type"),
+  theirOrderType: selector(state, "type") === "Buy" ? "Sell" : "Buy",
   selectedOrder: state.orderbook.orders.find(
     o => o.id === state.orderbook.selectedOrder,
   ),
@@ -63,7 +64,6 @@ const onChange = (values, dispatch, props, previousValues) => {
 
     let maxTotal;
     let maxQuantity;
-
     if (values.strategy === "Market") {
       maxTotal =
         values.type === "Buy"
@@ -77,10 +77,11 @@ const onChange = (values, dispatch, props, previousValues) => {
       maxTotal = values.type === "Buy" ? props.quoteTokenBalance : Infinity;
       maxQuantity = values.type === "Sell" ? props.baseTokenBalance : Infinity;
     }
+
     if (field === "total") {
       if (greaterThan(values.total, maxTotal)) {
         dispatch(change("trade", "total", maxTotal));
-      } else {
+      } else if (values.price) {
         const quantity = divide(values.total, values.price);
 
         if (values.quantity !== quantity)
@@ -91,7 +92,7 @@ const onChange = (values, dispatch, props, previousValues) => {
     if (field === "quantity") {
       if (greaterThan(values.quantity, maxQuantity)) {
         dispatch(change("trade", "quantity", maxQuantity));
-      } else {
+      } else if (values.price) {
         const total = multiply(values.quantity, values.price);
         if (values.total !== total)
           dispatch(change("trade", "total", displayNumber(total)));

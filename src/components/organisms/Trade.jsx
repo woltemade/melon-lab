@@ -23,8 +23,38 @@ const orderStrategySelector = ({ input }) => (
   </div>
 );
 
+const orderTypeSelector = ({
+  input,
+  baseTokenSymbol,
+  quoteTokenSymbol,
+  theirOrderType,
+  disabled,
+}) => (
+  <button
+    disabled={disabled}
+    style={{ textAlign: "center", cursor: "pointer" }}
+    onClick={event => {
+      event.preventDefault();
+      input.onChange(theirOrderType);
+    }}
+  >
+    <Card.Meta>
+      {input.value} <strong>{baseTokenSymbol}</strong>
+    </Card.Meta>
+    <Image
+      src="./switch.svg"
+      width="18em"
+      centered
+      style={{ cursor: "pointer" }}
+    />
+
+    <Card.Meta>
+      {theirOrderType} <strong>{quoteTokenSymbol}</strong>
+    </Card.Meta>
+  </button>
+);
+
 const Trade = ({
-  switchSymbols,
   orderType,
   theirOrderType,
   baseTokenSymbol,
@@ -39,25 +69,14 @@ const Trade = ({
       <Card.Content>
         <Card.Header>Trade</Card.Header>
 
-        <button
-          style={{ textAlign: "center", cursor: "pointer" }}
-          onClick={switchSymbols}
-        >
-          <Card.Meta>
-            {orderType} <strong>{baseTokenSymbol}</strong>
-          </Card.Meta>
-          <Image
-            src="./switch.svg"
-            width="18em"
-            centered
-            style={{ cursor: "pointer" }}
-          />
-
-          <Card.Meta>
-            {theirOrderType} <strong>{quoteTokenSymbol}</strong>
-          </Card.Meta>
-        </button>
-
+        <Field
+          name="type"
+          component={orderTypeSelector}
+          baseTokenSymbol={baseTokenSymbol}
+          quoteTokenSymbol={quoteTokenSymbol}
+          theirOrderType={theirOrderType}
+          disabled={strategy === "Market"}
+        />
         <br />
         <Field name="strategy" component={orderStrategySelector} />
         {strategy === "Market" ? <p>Select from the orderbook</p> : null}

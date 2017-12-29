@@ -12,6 +12,7 @@ const TradeHelper = ({
   setTotal,
   baseTokenBalance,
   quoteTokenBalance,
+  strategy,
 }) => (
   <Card centered>
     <Card.Content>
@@ -21,24 +22,28 @@ const TradeHelper = ({
       <br />
       <List>
         <List.Item as="a">
-          <List.Content onClick={() => setPrice(last)}>
+          <List.Content onClick={() => setPrice(last, strategy)}>
             Last Price: {last}
           </List.Content>
         </List.Item>
         <List.Item as="a">
-          <List.Content onClick={() => setPrice(bid)}>Bid : {bid}</List.Content>
+          <List.Content onClick={() => setPrice(bid, strategy)}>
+            Bid : {bid}
+          </List.Content>
         </List.Item>
         <List.Item as="a">
-          <List.Content onClick={() => setPrice(ask)}>Ask: {ask}</List.Content>
+          <List.Content onClick={() => setPrice(ask, strategy)}>
+            Ask: {ask}
+          </List.Content>
         </List.Item>
         <Divider />
         <List.Item as="a">
-          <List.Content onClick={() => setQuantity(baseTokenBalance)}>
+          <List.Content onClick={() => setQuantity(baseTokenBalance, strategy)}>
             {baseTokenSymbol} Balance: {baseTokenBalance}
           </List.Content>
         </List.Item>
         <List.Item as="a">
-          <List.Content onClick={() => setTotal(quoteTokenBalance)}>
+          <List.Content onClick={() => setTotal(quoteTokenBalance, strategy)}>
             {quoteTokenSymbol} Balance: {quoteTokenBalance}
           </List.Content>
         </List.Item>
