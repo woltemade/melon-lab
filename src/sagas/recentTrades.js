@@ -28,8 +28,8 @@ function* getRecentTradesSaga() {
         trades,
       }),
     );
-    const last = trades.length ? trades[trades.length - 1].price : 0;
-    yield put(tradeHelperActions.updateTradeInfo({ last }));
+    // const last = trades.length ? trades[trades.length - 1].price : 0;
+    // yield put(tradeHelperActions.updateTradeInfo({ last }));
   } catch (err) {
     console.error(err);
     yield put(actions.getRecentTradesFailed(err));

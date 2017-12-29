@@ -11,7 +11,11 @@ import { types as ethereumTypes } from "../actions/ethereum";
 import { actions as appActions, types as appTypes } from "../actions/app";
 import { types as routeTypes } from "../actions/routes";
 import { types as orderbookTypes } from "../actions/orderbook";
+import { types as holdingsTypes } from "../actions/holdings";
+import { types as recentTradesTypes } from "../actions/recentTrades";
+
 import { actions as rankingActions } from "../actions/ranking";
+import { actions as tradeHelperActions } from "../actions/tradeHelper";
 
 function* requestInfo({ address }) {
   const isConnected = yield select(state => state.ethereum.isConnected);
@@ -74,11 +78,18 @@ function* getRanking() {
   yield put(rankingActions.getRanking());
 }
 
+function* tradeHelper() {
+  yield put(tradeHelperActions.tradeInfoRequested());
+}
+
 function* fund() {
   yield takeLatest(types.INFO_REQUESTED, requestInfo);
   yield takeLatest(routeTypes.FUND, checkAndLoad);
   yield takeLatest(ethereumTypes.ACCOUNT_CHANGED, getUsersFund);
   yield takeLatest(orderbookTypes.GET_ORDERBOOK_SUCCEEDED, getRanking);
+  yield takeLatest(orderbookTypes.GET_ORDERBOOK_SUCCEEDED, tradeHelper);
+  yield takeLatest(holdingsTypes.GET_HOLDINGS_SUCCEEDED, tradeHelper);
+  yield takeLatest(recentTradesTypes.GET_RECENTTRADES_SUCCEEDED, tradeHelper);
 }
 
 export default fund;
