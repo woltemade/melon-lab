@@ -8,7 +8,6 @@ import { change } from "redux-form";
 import BigNumber from "bignumber.js";
 import { types, actions } from "../actions/orderbook";
 import { types as ethereumTypes } from "../actions/ethereum";
-// import { actions as tradeHelperActions } from "../actions/tradeHelper";
 
 function* getOrderbookSaga() {
   const baseTokenSymbol = yield select(state => state.app.assetPair.base);
@@ -48,9 +47,6 @@ function* getOrderbookSaga() {
         totalBuyVolume,
       }),
     );
-    // const bid = buyOrders.length ? buyOrders[0].price : 0;
-    // const ask = sellOrders.length ? sellOrders[0].price : 0;
-    // yield put(tradeHelperActions.updateTradeInfo({ bid, ask }));
   } catch (err) {
     console.error(err);
     yield put(actions.getOrderbookFailed(err));

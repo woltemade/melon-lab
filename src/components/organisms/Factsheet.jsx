@@ -10,6 +10,8 @@ const Factsheet = ({
   personalStake,
   sharePrice,
   totalSupply,
+  rank,
+  numberOfFunds,
 }) => (
   <Card id="factsheet">
     <Card.Content>
@@ -24,6 +26,11 @@ const Factsheet = ({
         <List.Item>
           <List.Content href="#holdings">
             Share Price: {sharePrice} MLN/Share
+          </List.Content>
+        </List.Item>
+        <List.Item>
+          <List.Content>
+            Ranking: {rank} out of {numberOfFunds} Melon Funds
           </List.Content>
         </List.Item>
         <List.Item>

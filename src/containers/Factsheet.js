@@ -14,6 +14,8 @@ const mapStateToProps = state => ({
   personalStake: displayNumber(state.fund.personalStake),
   sharePrice: displayNumber(state.fund.sharePrice),
   totalSupply: displayNumber(state.fund.totalSupply),
+  rank: state.fund.rank,
+  numberOfFunds: state.fund.numberOfFunds,
 });
 
 const FactsheetContainter = connect(mapStateToProps)(Factsheet);

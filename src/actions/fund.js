@@ -6,6 +6,7 @@ export const types = {
   SETUP_REQUESTED: "SETUP_REQUESTED:fund:melon.fund",
   SETUP_SUCCEEDED: "SETUP_SUCCEEDED:fund:melon.fund",
   SETUP_FAILED: "SETUP_FAILED:fund:melon.fund",
+  UPDATE_RANKING: "UPDATE_RANKING:fund:melon.fund",
 };
 
 export const actions = {
@@ -70,5 +71,10 @@ export const actions = {
     subscriptionAllowed,
     totalSupply,
     unclaimedRewards,
+  }),
+  updateRanking: ({ rank, numberOfFunds }) => ({
+    type: types.UPDATE_RANKING,
+    rank,
+    numberOfFunds,
   }),
 };

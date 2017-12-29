@@ -13,8 +13,10 @@ import { types as routeTypes } from "../actions/routes";
 import { types as orderbookTypes } from "../actions/orderbook";
 import { types as holdingsTypes } from "../actions/holdings";
 import { types as recentTradesTypes } from "../actions/recentTrades";
-
-import { actions as rankingActions } from "../actions/ranking";
+import {
+  actions as rankingActions,
+  types as rankingTypes,
+} from "../actions/ranking";
 import { actions as tradeHelperActions } from "../actions/tradeHelper";
 
 function* requestInfo({ address }) {
@@ -82,6 +84,18 @@ function* tradeHelper() {
   yield put(tradeHelperActions.tradeInfoRequested());
 }
 
+function* addRanking() {
+  const ranking = yield select(state => state.ranking.rankingList);
+  const fundAddress = yield select(state => state.fund.address);
+  const rank = ranking.length
+    ? ranking.findIndex(
+        f => f.address.toLowerCase() === fundAddress.toLowerCase(),
+      )
+    : "N/A";
+  const numberOfFunds = ranking.length ? ranking.length : "N/A";
+  yield put(actions.updateRanking({ rank, numberOfFunds }));
+}
+
 function* fund() {
   yield takeLatest(types.INFO_REQUESTED, requestInfo);
   yield takeLatest(routeTypes.FUND, checkAndLoad);
@@ -90,6 +104,7 @@ function* fund() {
   yield takeLatest(orderbookTypes.GET_ORDERBOOK_SUCCEEDED, tradeHelper);
   yield takeLatest(holdingsTypes.GET_HOLDINGS_SUCCEEDED, tradeHelper);
   yield takeLatest(recentTradesTypes.GET_RECENTTRADES_SUCCEEDED, tradeHelper);
+  yield takeLatest(rankingTypes.GET_RANKING_SUCCEEDED, addRanking);
 }
 
 export default fund;
