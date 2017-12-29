@@ -11,7 +11,9 @@ const mapStateToProps = (state, ownProps) => ({
     !isSameAddress(state.ethereum.account, state.fund.owner),
   isManager:
     state.app.isReadyToInteract &&
-    isSameAddress(state.ethereum.account, state.fund.owner)
+    isSameAddress(state.ethereum.account, state.fund.owner),
+  canInvest: state.app.isReadyToInteract,
+  pendingRequest: state.fund.pendingRequest,
   // fundAddress: ownProps.match.params.fundAddress,
 });
 

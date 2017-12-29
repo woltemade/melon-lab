@@ -18,7 +18,7 @@ const mapStateToProps = state => ({
   },
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   requestFund: fundAddress => dispatch(fundActions.infoRequested(fundAddress)),
   onChange: (values, _dispatch, props, previousValues) => {
     const changed = Object.keys(values).reduce(
@@ -42,7 +42,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onSubmit: values => {
     if (values.type === "Invest") {
-      dispatch(actions.subscribe(values));
+      dispatch(
+        actions.subscribe({ ...values, directlyExecute: ownProps.setup }),
+      );
     } else {
       dispatch(actions.redeem(values));
     }

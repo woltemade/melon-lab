@@ -21,6 +21,8 @@ export const initialState = {
   unclaimedRewards: "0",
   rank: "N/A",
   numberOfFunds: "N/A",
+  pendingRequest: null,
+  readyToExecute: false,
 };
 
 const reducers = {
@@ -41,6 +43,7 @@ const mapActionToReducer = {
   [types.INFO_SUCCEEDED]: reducers.merge,
   [types.INFO_REQUESTED]: reducers.merge,
   [types.UPDATE_RANKING]: reducers.merge,
+  [types.SET_PENDING_REQUEST]: reducers.merge,
   [adminTypes.TOGGLE_SUBSCRIPTION_SUCCEEDED]: reducers.merge,
   [adminTypes.TOGGLE_REDEMPTION_SUCCEEDED]: reducers.merge,
 };
