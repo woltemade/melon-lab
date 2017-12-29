@@ -12,7 +12,7 @@ const interactionDispatchMap = {
   [interactions.CANCEL]: () => actions.close(),
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   interactionHandler: (event, interaction) => {
     // Hint: Submit is handled by the form, not as action. But we need to
     // prevent form submitting for the other actions.
@@ -21,6 +21,9 @@ const mapDispatchToProps = dispatch => ({
       event.preventDefault();
       dispatch(action());
     }
+  },
+  onAfterOpen: () => {
+    ownProps.reset();
   },
 });
 
