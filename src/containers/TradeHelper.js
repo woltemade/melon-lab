@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { change } from "redux-form";
 import { actions } from "../actions/tradeHelper";
 import { actions as appActions } from "../actions/app";
 import { lifecycle } from "recompose";
@@ -14,21 +15,21 @@ const mapStateToProps = state => ({
   quoteTokenSymbol: state.app.assetPair.quote,
   baseTokenBalance: displayNumber(state.tradeHelper.baseTokenBalance),
   quoteTokenBalance: displayNumber(state.tradeHelper.quoteTokenBalance),
+  strategy: state.form.trade.values.strategy,
 });
 
 const mapDispatchToProps = dispatch => ({
   getTradeHelper: () => {
     dispatch(actions.tradeInfoRequested());
   },
-  // To be linked up with trade form
-  setPrice: price => {
-    //   dispatch(tradeCreators.change({ price }));
+  setPrice: (price, strategy) => {
+    if (strategy === "Limit") dispatch(change("trade", "price", price));
   },
-  setQuantity: amount => {
-    //   dispatch(tradeCreators.change({ amount }));
+  setQuantity: (quantity, strategy) => {
+    if (strategy === "Limit") dispatch(change("trade", "quantity", quantity));
   },
-  setTotal: total => {
-    //   dispatch(tradeCreators.change({ total }));
+  setTotal: (total, strategy) => {
+    if (strategy === "Limit") dispatch(change("trade", "total", total));
   },
 });
 
