@@ -3,19 +3,31 @@ import { reduxForm, change } from "redux-form";
 import { actions } from "../actions/participation";
 import Participation from "../components/organisms/ParticipationForm";
 import { actions as fundActions } from "../actions/fund";
-import { multiply, divide } from "../utils/functionalBigNumber";
+import { multiply, divide, equals } from "../utils/functionalBigNumber";
+import displayNumber from "../utils/displayNumber";
+
+const calculateParticipationPrice = (sharePrice, type) => {
+  if (!equals(sharePrice, 1)) {
+    if (type === "Invest") {
+      return multiply(sharePrice, 1.05);
+    }
+    return multiply(sharePrice, 0.95);
+  }
+
+  return sharePrice;
+};
 
 const mapStateToProps = state => ({
-  loading: state.app.transactionInProgress,
   onboardingState: state.app.onboardingState,
   usersFund: state.app.usersFund,
   fundAddress: state.fund.address,
   initialValues: {
     type: "Invest",
     amount: 1,
-    price: state.fund.sharePrice,
-    total: multiply(1, state.fund.sharePrice),
+    price: calculateParticipationPrice(state.fund.sharePrice, "Invest"),
+    total: calculateParticipationPrice(state.fund.sharePrice, "Invest"),
   },
+  displayNumber,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -26,18 +38,25 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       [],
     );
 
-    if (changed.includes("total")) {
-      const amount = divide(values.total, values.price);
+    if (changed.includes("type")) {
+      const participationPrice = calculateParticipationPrice(
+        values.price,
+        values.type,
+      );
 
-      if (values.amount !== amount)
-        dispatch(change("participation", "amount", amount));
-    }
-
-    if (changed.includes("amount")) {
+      if (!equals(values.price, participationPrice)) {
+        dispatch(change("participation", "price", participationPrice));
+      }
+    } else if (changed.includes("amount") || changed.includes("price")) {
       const total = multiply(values.amount, values.price);
 
       if (values.total !== total)
         dispatch(change("participation", "total", total));
+    } else if (changed.includes("total") || changed.includes("price")) {
+      const amount = divide(values.total, values.price);
+
+      if (values.amount !== amount)
+        dispatch(change("participation", "amount", amount));
     }
   },
   onSubmit: values => {

@@ -22,7 +22,7 @@ const participationTypeSelector = ({ input: { onChange, value } }) => (
   </div>
 );
 
-const ParticipationForm = ({ setup, loading, handleSubmit }) => (
+const ParticipationForm = ({ setup, handleSubmit, displayNumber }) => (
   <form onSubmit={handleSubmit} name="participation">
     <Card id="participation" centered>
       <Card.Content>
@@ -38,6 +38,7 @@ const ParticipationForm = ({ setup, loading, handleSubmit }) => (
                 name="amount"
                 component={renderInput}
                 type="number"
+                format={displayNumber}
               />
             </List.Content>
           </List.Item>
@@ -48,6 +49,7 @@ const ParticipationForm = ({ setup, loading, handleSubmit }) => (
                 name="price"
                 component={renderInput}
                 type="number"
+                format={displayNumber}
                 disabled
               />
             </List.Content>
@@ -58,6 +60,7 @@ const ParticipationForm = ({ setup, loading, handleSubmit }) => (
                 label="Total"
                 name="total"
                 component={renderInput}
+                format={displayNumber}
                 type="number"
               />
             </List.Content>
@@ -68,9 +71,6 @@ const ParticipationForm = ({ setup, loading, handleSubmit }) => (
           Submit request
         </Button>
       </Card.Content>
-      <div className={`ui ${loading ? "active" : ""} inverted dimmer`}>
-        <div className="ui text loader">Processing transaction ...</div>
-      </div>
     </Card>
   </form>
 );

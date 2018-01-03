@@ -97,7 +97,7 @@ function* redeemSaga(action) {
   }
 }
 
-function* executeSaga(action) {
+function* executeSaga() {
   yield put(
     modalActions.confirm(
       `Type your password to execute your participation request:`,
