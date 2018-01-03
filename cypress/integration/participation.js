@@ -1,6 +1,6 @@
 import wallet from "../fixtures/walletReadyToTrade.json";
 
-xit("Invest after first investment during setup", () => {
+it("Invest after first investment during setup", () => {
   cy.visit("http://localhost:3000/");
   window.localStorage.setItem("wallet:melon.fund", JSON.stringify(wallet));
   cy.get("form[name='participation']").should("be.visible");
@@ -18,7 +18,7 @@ xit("Invest after first investment during setup", () => {
     .should("be.visible");
 });
 
-xit("Redeem after first investment during setup", () => {
+it("Redeem after first investment during setup", () => {
   cy.visit("http://localhost:3000/");
   window.localStorage.setItem("wallet:melon.fund", JSON.stringify(wallet));
   cy.get("form[name='participation']").should("be.visible");
