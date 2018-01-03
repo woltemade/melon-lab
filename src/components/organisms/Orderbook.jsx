@@ -62,6 +62,7 @@ const Orderbook = ({
             <Table.Body style={{ cursor: "pointer" }}>
               {buyOrders.map(order => (
                 <Table.Row
+                  id="SellOrders"
                   key={order.id}
                   style={getSellGradient(
                     order.cumulativeVolume,
@@ -97,6 +98,7 @@ const Orderbook = ({
             <Table.Body style={{ cursor: "pointer" }}>
               {sellOrders.map(order => (
                 <Table.Row
+                  id="BuyOrders"
                   key={order.id}
                   style={getBuyGradient(order.cumulativeVolume, totalBuyVolume)}
                   onMouseOver={onMouseOver}
