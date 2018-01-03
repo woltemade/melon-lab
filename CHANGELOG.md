@@ -27,6 +27,7 @@ and this project adheres to
 * parity and wallet folder in utils folder
 * getParityProvider function
 * getHoldingsAndPrices function
+* getOpenOrders
 
 ### Changed
 
