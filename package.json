@@ -1,5 +1,5 @@
 {
-  "name": "decentralized-portal",
+  "name": "ipfs-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -38,6 +38,7 @@
   "scripts": {
     "build": "npm run semantic:build && webpack",
     "cypress:open": "cypress open",
+    "cypress:run": "cypress run --record",
     "deploy": "ipfs add -r public",
     "eject": "react-scripts eject",
     "lint": "eslint ./",
@@ -54,13 +55,14 @@
     "@storybook/addon-knobs": "^3.2.17",
     "@storybook/react": "^3.2.17",
     "babel-preset-stage-2": "^6.24.1",
-    "cypress": "^1.4.0",
+    "cypress": "^1.4.1",
     "eslint": "^4.3.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-prettier": "^2.3.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
-    "semantic-ui": "^2.2.13"
+    "semantic-ui": "^2.2.13",
+    "wait-on": "^2.0.2"
   }
 }

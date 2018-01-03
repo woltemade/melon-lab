@@ -4,34 +4,31 @@ import { List, Button, Card, Menu } from "semantic-ui-react";
 
 import renderInput from "../utils/renderInput";
 
-const ParticipationForm = ({
-  setup,
-  loading,
-  handleSubmit,
-  setParticipationType,
-  participationType,
-  onChange,
-}) => (
-  <form onSubmit={handleSubmit}>
+const participationTypeSelector = ({ input: { onChange, value } }) => (
+  <div>
+    <Menu text style={{ display: "flex", justifyContent: "center" }}>
+      <Menu.Item
+        name="Invest"
+        active={value === "Invest"}
+        onClick={() => onChange("Invest")}
+      />
+      <div style={{ marginTop: "0.7em" }}>|</div>
+      <Menu.Item
+        name="Redeem"
+        active={value === "Redeem"}
+        onClick={() => onChange("Redeem")}
+      />
+    </Menu>
+  </div>
+);
+
+const ParticipationForm = ({ setup, handleSubmit, displayNumber }) => (
+  <form onSubmit={handleSubmit} name="participation">
     <Card id="participation" centered>
       <Card.Content>
         <Card.Header>Participation</Card.Header>
         {setup ? null : (
-          <div>
-            <Menu text style={{ display: "flex", justifyContent: "center" }}>
-              <Menu.Item
-                name="Invest"
-                active={participationType === "Invest"}
-                onClick={() => setParticipationType("Invest")}
-              />
-              <div style={{ marginTop: "0.7em" }}>|</div>
-              <Menu.Item
-                name="Redeem"
-                active={participationType === "Redeem"}
-                onClick={() => setParticipationType("Redeem")}
-              />
-            </Menu>
-          </div>
+          <Field name="type" component={participationTypeSelector} />
         )}
         <List>
           <List.Item>
@@ -40,8 +37,8 @@ const ParticipationForm = ({
                 label="Quantity"
                 name="amount"
                 component={renderInput}
-                onChange={onChange}
                 type="number"
+                format={displayNumber}
               />
             </List.Content>
           </List.Item>
@@ -51,8 +48,8 @@ const ParticipationForm = ({
                 label="Price"
                 name="price"
                 component={renderInput}
-                onChange={onChange}
                 type="number"
+                format={displayNumber}
                 disabled
               />
             </List.Content>
@@ -63,7 +60,7 @@ const ParticipationForm = ({
                 label="Total"
                 name="total"
                 component={renderInput}
-                onChange={onChange}
+                format={displayNumber}
                 type="number"
               />
             </List.Content>
@@ -74,9 +71,6 @@ const ParticipationForm = ({
           Submit request
         </Button>
       </Card.Content>
-      <div className={`ui ${loading ? "active" : ""} inverted dimmer`}>
-        <div className="ui text loader">Processing transaction ...</div>
-      </div>
     </Card>
   </form>
 );

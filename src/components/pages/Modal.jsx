@@ -93,8 +93,13 @@ const Modal = ({
   secondaryInteraction,
   interactionHandler,
   handleSubmit,
+  onAfterOpen,
 }) => (
-  <ReactModal isOpen={isOpen} style={type === types.ERROR ? errorStyle : style}>
+  <ReactModal
+    onAfterOpen={onAfterOpen}
+    isOpen={isOpen}
+    style={type === types.ERROR ? errorStyle : style}
+  >
     <Container>
       <Card centered style={{ backgroundColor: "#fffdf3", padding: 10 }}>
         <Card.Content>
@@ -106,13 +111,13 @@ const Modal = ({
             <p>{body}</p>
 
             {type === types.CONFIRM ? (
-              <p>
+              <div style={{ marginBottom: 10 }}>
                 <Field
                   name="password"
                   component={renderInput}
                   type="password"
                 />
-              </p>
+              </div>
             ) : null}
 
             {type !== types.LOADING ? (

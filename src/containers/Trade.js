@@ -2,13 +2,7 @@ import { connect } from "react-redux";
 import { reduxForm, change, formValueSelector } from "redux-form";
 import { actions } from "../actions/trade";
 import Trade from "../components/organisms/Trade";
-import { actions as fundActions } from "../actions/fund";
-import {
-  multiply,
-  divide,
-  greaterThan,
-  isZero,
-} from "../utils/functionalBigNumber";
+import { multiply, divide, greaterThan } from "../utils/functionalBigNumber";
 import displayNumber from "../utils/displayNumber";
 
 const selector = formValueSelector("trade");

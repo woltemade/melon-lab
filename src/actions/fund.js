@@ -7,6 +7,9 @@ export const types = {
   SETUP_SUCCEEDED: "SETUP_SUCCEEDED:fund:melon.fund",
   SETUP_FAILED: "SETUP_FAILED:fund:melon.fund",
   UPDATE_RANKING: "UPDATE_RANKING:fund:melon.fund",
+  SET_PENDING_REQUEST: "SET_PENDING_REQUEST:fund:melon.fund",
+  READY_TO_EXECUTE: "READY_TO_EXECUTE:fund:melon.fund",
+  SET_LOADING: "SET_LOADING:fund:melon.fund",
 };
 
 export const actions = {
@@ -76,5 +79,18 @@ export const actions = {
     type: types.UPDATE_RANKING,
     rank,
     numberOfFunds,
+  }),
+  setPendingRequest: pendingRequest => ({
+    type: types.SET_PENDING_REQUEST,
+    pendingRequest,
+    readyToExecute: false,
+  }),
+  setReadyToExecute: () => ({
+    type: types.READY_TO_EXECUTE,
+    readyToExecute: true,
+  }),
+  setLoading: address => ({
+    type: types.SET_LOADING,
+    address,
   }),
 };

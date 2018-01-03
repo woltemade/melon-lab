@@ -1,8 +1,8 @@
 import { types } from "../actions/fund";
 import { types as adminTypes } from "../actions/administration";
+import { types as participationTypes } from "../actions/participation";
 
-export const initialState = {
-  address: "",
+const loadingFund = {
   creationDate: 0,
   gav: "0",
   id: 0,
@@ -21,12 +21,28 @@ export const initialState = {
   unclaimedRewards: "0",
   rank: "N/A",
   numberOfFunds: "N/A",
+  pendingRequest: null,
+  readyToExecute: false,
+};
+
+export const initialState = {
+  address: "",
+  ...loadingFund,
 };
 
 const reducers = {
   setAddress: (state, { address }) => ({
     ...state,
     address,
+  }),
+  setLoading: (state, { address }) => ({
+    ...loadingFund,
+    address,
+  }),
+  resetPendingRequest: state => ({
+    ...state,
+    pendingRequest: null,
+    readyToExecute: false,
   }),
   merge: (state, params) => ({
     ...state,
@@ -41,6 +57,10 @@ const mapActionToReducer = {
   [types.INFO_SUCCEEDED]: reducers.merge,
   [types.INFO_REQUESTED]: reducers.merge,
   [types.UPDATE_RANKING]: reducers.merge,
+  [types.SET_PENDING_REQUEST]: reducers.merge,
+  [types.READY_TO_EXECUTE]: reducers.merge,
+  [types.SET_LOADING]: reducers.setLoading,
+  [participationTypes.EXECUTE_SUCCEEDED]: reducers.resetPendingRequest,
   [adminTypes.TOGGLE_SUBSCRIPTION_SUCCEEDED]: reducers.merge,
   [adminTypes.TOGGLE_REDEMPTION_SUCCEEDED]: reducers.merge,
 };
