@@ -59,6 +59,7 @@ function* checkAndLoad() {
   // HACK: We should use state.location.payload... but it seems to be broken
   const address = yield select(state => state.location.pathname.slice(1));
   let isReadyToVisit = yield select(state => state.app.isReadyToVisit);
+  yield put(actions.setLoading(address));
 
   while (!isReadyToVisit) {
     yield take(appTypes.SET_READY_STATE);

@@ -9,6 +9,7 @@ export const types = {
   UPDATE_RANKING: "UPDATE_RANKING:fund:melon.fund",
   SET_PENDING_REQUEST: "SET_PENDING_REQUEST:fund:melon.fund",
   READY_TO_EXECUTE: "READY_TO_EXECUTE:fund:melon.fund",
+  SET_LOADING: "SET_LOADING:fund:melon.fund",
 };
 
 export const actions = {
@@ -87,5 +88,9 @@ export const actions = {
   setReadyToExecute: () => ({
     type: types.READY_TO_EXECUTE,
     readyToExecute: true,
+  }),
+  setLoading: address => ({
+    type: types.SET_LOADING,
+    address,
   }),
 };

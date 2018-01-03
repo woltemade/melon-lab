@@ -40,7 +40,7 @@ const Factsheet = ({
           </List.Content>
         </List.Item>
         <List.Item>
-          <List.Content>
+          <List.Content as="a" href="#/ranking">
             Ranking: {rank} out of {numberOfFunds} Melon Funds
           </List.Content>
         </List.Item>
