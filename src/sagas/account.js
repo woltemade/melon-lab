@@ -17,7 +17,7 @@ function* encryptWalletSaga(wallet, password) {
   const encryptedWallet = yield call(encryptWallet, wallet, password);
   localStorage.setItem("wallet:melon.fund", encryptedWallet);
   yield put(actions.encryptWalletSucceeded());
-  yield put(ethereumActions.accountChanged(`0x${wallet.address}`));
+  yield put(ethereumActions.accountChanged(`${wallet.address}`));
   setup.wallet = JSON.parse(encryptedWallet);
   setup.defaultAccount = `0x${setup.wallet.address}`;
 }

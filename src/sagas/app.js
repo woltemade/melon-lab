@@ -1,4 +1,4 @@
-import { takeLatest, select, put, take } from "redux-saga/effects";
+import { takeLatest, select, put, take, call } from "redux-saga/effects";
 import { networks } from "@melonproject/melon.js";
 import { onboardingPath } from "../reducers/app";
 import { actions, types } from "../actions/app";
@@ -94,12 +94,18 @@ function* redirectSaga() {
   }
 }
 
+function* scrollTo({ id }) {
+  const target = document.getElementById(id);
+  yield call(window.scrollTo, 0, target.offsetTop);
+}
+
 const onlyMelonActions = action =>
   action.type !== types.SET_READY_STATE && action.type.includes("melon");
 
 function* appSaga() {
   yield takeLatest(routeTypes.ROOT, redirectSaga);
   yield takeLatest(onlyMelonActions, deriveReadyState);
+  yield takeLatest(types.SCROLL_TO, scrollTo);
 }
 
 export default appSaga;

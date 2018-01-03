@@ -13,6 +13,7 @@ const Factsheet = ({
   rank,
   numberOfFunds,
   tweetHref,
+  scrollTo,
 }) => (
   <Card id="factsheet">
     <Card.Content>
@@ -32,10 +33,12 @@ const Factsheet = ({
           <List.Content>Creation date: {creationDate}</List.Content>
         </List.Item>
         <List.Item>
-          <List.Content href="#holdings">AUM: {aum} MLN</List.Content>
+          <List.Content as="a" onClick={() => scrollTo("holdings")}>
+            AUM: {aum} MLN
+          </List.Content>
         </List.Item>
         <List.Item>
-          <List.Content href="#holdings">
+          <List.Content as="a" onClick={() => scrollTo("holdings")}>
             Share Price: {sharePrice} MLN/Share
           </List.Content>
         </List.Item>

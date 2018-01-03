@@ -140,6 +140,7 @@ function* takeOrderSaga(action) {
     if (err.name === "password") {
       yield put(modalActions.error("Wrong password"));
     } else if (err.name === "EnsureError") {
+      console.error(err)
       yield put(modalActions.error(err.message));
     } else {
       yield put(modalActions.error(err.message));

@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import Factsheet from "../components/organisms/Factsheet";
 import displayNumber from "../utils/displayNumber";
 
+import { actions as appActions } from "../actions/app";
+
 const buildTwitterUrl = (isOwner, fundAddress, fundName, sharePrice) => {
   const text = isOwner
     ? `My #MelonFund "${fundName}" has a share price currently of ${displayNumber(
@@ -45,6 +47,12 @@ const mapStateToProps = state => ({
   ),
 });
 
-const FactsheetContainter = connect(mapStateToProps)(Factsheet);
+const mapDispatchToProps = dispatch => ({
+  scrollTo: target => dispatch(appActions.scrollTo(target)),
+});
+
+const FactsheetContainter = connect(mapStateToProps, mapDispatchToProps)(
+  Factsheet,
+);
 
 export default FactsheetContainter;
