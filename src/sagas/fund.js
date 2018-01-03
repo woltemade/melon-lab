@@ -10,9 +10,21 @@ import { actions, types } from "../actions/fund";
 import { types as ethereumTypes } from "../actions/ethereum";
 import { actions as appActions, types as appTypes } from "../actions/app";
 import { types as routeTypes } from "../actions/routes";
-import { types as orderbookTypes } from "../actions/orderbook";
-import { types as holdingsTypes } from "../actions/holdings";
-import { types as recentTradesTypes } from "../actions/recentTrades";
+import {
+  types as orderbookTypes,
+  actions as orderbookActions,
+} from "../actions/orderbook";
+import {
+  types as holdingsTypes,
+  actions as holdingsActions,
+} from "../actions/holdings";
+import {
+  types as recentTradesTypes,
+  actions as recentTradesActions,
+} from "../actions/recentTrades";
+import { actions as tradeHistoryActions } from "../actions/tradeHistory";
+import { types as tradeTypes } from "../actions/trade";
+
 import {
   actions as rankingActions,
   types as rankingTypes,
@@ -92,8 +104,19 @@ function* addRanking() {
         f => f.address.toLowerCase() === fundAddress.toLowerCase(),
       )
     : "N/A";
-  const numberOfFunds = ranking.length ? ranking.length : "N/A";
-  yield put(actions.updateRanking({ rank, numberOfFunds }));
+  if (rank !== -1) {
+    const numberOfFunds = ranking.length ? ranking.length : "N/A";
+    yield put(actions.updateRanking({ rank, numberOfFunds }));
+  }
+}
+
+function* afterTradeUpdate() {
+  const fundAddress = yield select(state => state.fund.address);
+  yield put(orderbookActions.getOrderbook());
+  yield put(holdingsActions.getHoldings(fundAddress));
+  yield put(recentTradesActions.getRecentTrades());
+  yield put(tradeHistoryActions.getTradeHistory(fundAddress));
+  yield put(actions.infoRequested(fundAddress));
 }
 
 function* fund() {
@@ -105,6 +128,8 @@ function* fund() {
   yield takeLatest(holdingsTypes.GET_HOLDINGS_SUCCEEDED, tradeHelper);
   yield takeLatest(recentTradesTypes.GET_RECENTTRADES_SUCCEEDED, tradeHelper);
   yield takeLatest(rankingTypes.GET_RANKING_SUCCEEDED, addRanking);
+  yield takeLatest(tradeTypes.TAKE_ORDER_SUCCEEDED, afterTradeUpdate);
+  yield takeLatest(tradeTypes.PLACE_ORDER_SUCCEEDED, afterTradeUpdate);
 }
 
 export default fund;

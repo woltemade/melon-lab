@@ -14,13 +14,13 @@ function* getTradeHistorySaga() {
     const trades = rawTradeHistory.map(trade => ({
       // CAUTION: here we switch the order type to match the user terminology
       ...trade,
-      ourOrderType: trade.type === "buy" ? "Sell" : "Buy"
+      ourOrderType: trade.type === "buy" ? "Sell" : "Buy",
     }));
 
     yield put(
       actions.getTradeHistorySucceeded({
-        trades
-      })
+        trades,
+      }),
     );
   } catch (err) {
     console.error(err);
