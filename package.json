@@ -38,6 +38,7 @@
   "scripts": {
     "build": "npm run semantic:build && webpack",
     "cypress:open": "cypress open",
+    "cypress:run": "cypress run --record",
     "deploy": "ipfs add -r public",
     "eject": "react-scripts eject",
     "lint": "eslint ./",

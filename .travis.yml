@@ -1,2 +1,2 @@
 script:
-  - cypress run --record
+  - npm run cypress:run
