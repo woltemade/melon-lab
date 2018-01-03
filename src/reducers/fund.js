@@ -1,5 +1,6 @@
 import { types } from "../actions/fund";
 import { types as adminTypes } from "../actions/administration";
+import { types as participationTypes } from "../actions/participation";
 
 export const initialState = {
   address: "",
@@ -30,6 +31,11 @@ const reducers = {
     ...state,
     address,
   }),
+  resetPendingRequest: state => ({
+    ...state,
+    pendingRequest: null,
+    readyToExecute: false,
+  }),
   merge: (state, params) => ({
     ...state,
     ...params,
@@ -44,6 +50,8 @@ const mapActionToReducer = {
   [types.INFO_REQUESTED]: reducers.merge,
   [types.UPDATE_RANKING]: reducers.merge,
   [types.SET_PENDING_REQUEST]: reducers.merge,
+  [types.READY_TO_EXECUTE]: reducers.merge,
+  [participationTypes.EXECUTE_SUCCEEDED]: reducers.resetPendingRequest,
   [adminTypes.TOGGLE_SUBSCRIPTION_SUCCEEDED]: reducers.merge,
   [adminTypes.TOGGLE_REDEMPTION_SUCCEEDED]: reducers.merge,
 };

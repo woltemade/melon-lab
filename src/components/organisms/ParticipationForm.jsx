@@ -23,7 +23,7 @@ const participationTypeSelector = ({ input: { onChange, value } }) => (
 );
 
 const ParticipationForm = ({ setup, loading, handleSubmit }) => (
-  <form onSubmit={handleSubmit}>
+  <form onSubmit={handleSubmit} name="participation">
     <Card id="participation" centered>
       <Card.Content>
         <Card.Header>Participation</Card.Header>

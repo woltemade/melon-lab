@@ -81,6 +81,7 @@ function* redeemSaga(action) {
     );
     yield put(fundActions.setPendingRequest(redemption.id));
     yield put(actions.redeemSucceeded());
+    yield put(modalActions.close());
     yield put(fundActions.infoRequested(fundAddress));
   } catch (err) {
     if (err.name === "password") {
@@ -109,8 +110,11 @@ function* executeSaga(action) {
     const wallet = localStorage.getItem("wallet:melon.fund");
     const decryptedWallet = yield call(decryptWallet, wallet, password);
     const fundAddress = yield select(state => state.fund.address);
-    yield call(executeRequest, decryptedWallet, action.id, fundAddress);
+    const requestId = yield select(state => state.fund.pendingRequest);
+
+    yield call(executeRequest, decryptedWallet, requestId, fundAddress);
     yield put(actions.executeSucceeded());
+    yield put(modalActions.close());
     yield put(fundActions.infoRequested(fundAddress));
   } catch (err) {
     if (err.name === "password") {
@@ -128,6 +132,7 @@ function* executeSaga(action) {
 
 function* waitForExecute() {
   yield delay(4 * 60 * 1000);
+  // yield delay(1 * 20 * 1000);
   yield put(fundActions.setReadyToExecute());
 }
 
