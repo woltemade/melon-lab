@@ -13,17 +13,18 @@ const initialState = {
   syncing: true,
   isConnected: false,
   isUpToDate: false,
+  isDataValid: false, // Data Feed
 
   // derived state
-  networkName: null
+  networkName: null,
 };
 
 const reducers = {
   merge: (state, params) => ({
     ...state,
-    ...params
+    ...params,
   }),
-  default: state => ({ ...state })
+  default: state => ({ ...state }),
 };
 
 const mapActionToReducer = {
@@ -31,7 +32,7 @@ const mapActionToReducer = {
   [types.BLOCK_OVERDUE]: reducers.merge,
   [types.HAS_CONNECTED]: reducers.merge,
   [types.NEW_BLOCK]: reducers.merge,
-  [types.SET_PROVIDER]: reducers.merge
+  [types.SET_PROVIDER]: reducers.merge,
 };
 
 export const reducer = (state = initialState, action = {}) => {
@@ -41,12 +42,12 @@ export const reducer = (state = initialState, action = {}) => {
   const newState = matchedReducer(state, params);
 
   const derivedState = {
-    networkName: getNetworkName(newState.network)
+    networkName: getNetworkName(newState.network),
   };
 
   return {
     ...newState,
-    ...derivedState
+    ...derivedState,
   };
 };
 

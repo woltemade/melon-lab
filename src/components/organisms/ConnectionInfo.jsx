@@ -17,7 +17,7 @@ const colorTypeMap = {
   [statusTypes.GOOD]: "#5da05d",
 };
 
-const ConnectionInfo = ({
+export const ConnectionInfoComponent = ({
   account,
   mlnBalance,
   ethBalance,
@@ -46,4 +46,4 @@ const ConnectionInfo = ({
   </div>
 );
 
-export default ConnectionInfo;
+export default ConnectionInfoComponent;

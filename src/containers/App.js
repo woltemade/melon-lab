@@ -10,6 +10,7 @@ const getStatus = ({
   isReadyToVisit,
   isReadyToInvest,
   isReadyToInteract,
+  isDataValid,
 }) => {
   if (!isConnected)
     return { message: "Not connected to chain", type: statusTypes.ERROR };
@@ -18,6 +19,8 @@ const getStatus = ({
     return { message: "Block overdue", type: statusTypes.WARNING };
   if (!isReadyToVisit)
     return { message: "Not ready", type: statusTypes.WARNING };
+  if (!isDataValid)
+    return { message: "Price feed down", type: statusTypes.ERROR };
   if (!isReadyToInteract)
     return { message: "Insufficent ETH", type: statusTypes.WARNING };
   if (!isReadyToInvest)
