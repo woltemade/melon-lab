@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
   trades: state.tradeHistory.trades.map(trade => ({
     price: displayNumber(trade.price),
     quantity: displayNumber(trade.quantity),
-    timestamp: moment(trade.timeStamp).format("D. MMM YYYY HH:mm"),
+    timestamp: moment(trade.timestamp).format("D. MMM YYYY HH:mm"),
     type: trade.type,
     buyToken: trade.buyToken,
     sellToken: trade.sellToken,

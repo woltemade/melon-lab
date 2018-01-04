@@ -57,6 +57,7 @@ export const actions = {
     unclaimedRewards,
     subscriptionAllowed,
     redemptionAllowed,
+    inception,
   }) => ({
     type: types.INFO_SUCCEEDED,
     address,
@@ -74,6 +75,7 @@ export const actions = {
     subscriptionAllowed,
     totalSupply,
     unclaimedRewards,
+    inception,
   }),
   updateRanking: ({ rank, numberOfFunds }) => ({
     type: types.UPDATE_RANKING,
