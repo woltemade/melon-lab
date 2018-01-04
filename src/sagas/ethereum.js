@@ -68,8 +68,6 @@ function* init() {
   while (true) {
     const data = yield take(blockChannel);
 
-    console.log(data);
-
     if (data.onBlock) {
       yield put(ethereumActions.newBlock(data.onBlock));
     } else {
