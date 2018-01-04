@@ -4,7 +4,8 @@
     "browser": true
   },
   "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb", "prettier", "plugin:security/recommended"],
+  "plugins": ["security"],
   "rules": {
     "comma-dangle": [
       "error",
