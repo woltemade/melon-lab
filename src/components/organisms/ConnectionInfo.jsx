@@ -17,7 +17,7 @@ const colorTypeMap = {
   [statusTypes.GOOD]: "#5da05d",
 };
 
-export const ConnectionInfo = ({
+const ConnectionInfo = ({
   account,
   mlnBalance,
   ethBalance,
@@ -30,14 +30,19 @@ export const ConnectionInfo = ({
       top: 20,
       right: 20,
       backgroundColor: "#fffdf3",
-      border: "1px solid black",
+      fontSize: "0.8em",
+      zIndex: 100,
+      padding: 5,
     }}
   >
-    <a href={`https://kovan.etherscan.io/address/${account}`}>
-      {shortenAddress(account)}
+    <a href={`https://kovan.etherscan.io/address/${account}`} target="_blank">
+      {shortenAddress(account || "")}
     </a>{" "}
-    | Ⓜ {displayNumber(mlnBalance)} | Ξ {displayNumber(ethBalance)} |{" "}
-    <span style={{ color: colorTypeMap[statusType] }}>{statusMessage}</span>
+    |{" "}
+    <a href={`https://faucet.melon.network/${account}`} target="_blank">
+      Ⓜ {displayNumber(mlnBalance)} | Ξ {displayNumber(ethBalance)}
+    </a>{" "}
+    | <span style={{ color: colorTypeMap[statusType] }}>{statusMessage}</span>
   </div>
 );
 

@@ -1,17 +1,17 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
-import { boolean, withKnobs, text, select } from "@storybook/addon-knobs";
+import { withKnobs, text, select } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
-import { ConnectionInfo, statusTypes } from "./ConnectionInfo";
+import { ConnectionInfoComponent, statusTypes } from "./ConnectionInfo";
 
 storiesOf("ConnectionInfo", module)
   .addDecorator(withKnobs)
   .add(
     "Default",
     withInfo("Displays some important connection/account info concise")(() => (
-      <ConnectionInfo
+      <ConnectionInfoComponent
         account={text("account", "0xDeaDBeefbadA55")}
         mlnBalance={(text("mlnBalance"), "1.032424523")}
         ethBalance={(text("ethBalance"), "3.023414")}

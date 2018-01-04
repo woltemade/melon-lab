@@ -13,6 +13,7 @@ import AccountContainer from "../../containers/Account";
 import RestoreContainer from "../../containers/Restore";
 import Modal from "../../containers/Modal";
 import { types } from "../../actions/routes";
+import ConnectionInfo from "../organisms/ConnectionInfo";
 
 const mapOnboardingStateToMainContainer = {
   [onboardingPath.NO_PROVIDER]: NoMetamask,
@@ -60,6 +61,13 @@ const getMainComponent = ({
 
 const App = props => (
   <div className="App">
+    <ConnectionInfo
+      account={props.walletAddress}
+      mlnBalance={props.mlnBalance}
+      ethBalance={props.ethBalance}
+      statusType={props.statusType}
+      statusMessage={props.statusMessage}
+    />
     <Container>
       <div className="App-header" style={{ margin: "2em" }}>
         <a href="/">
