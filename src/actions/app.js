@@ -3,6 +3,7 @@ export const types = {
   SET_USERS_FUND: "SET_USERS_FUND:app:melon.fund",
   SET_READY_STATE: "SET_READY_STATE:app:melon.fund",
   UPDATE_ASSET_PAIR: "UPDATE_ASSET_PAIR:app:melon.fund",
+  SCROLL_TO: "SCROLL_TO:app:melon.fund",
 };
 
 export const actions = {
@@ -29,5 +30,9 @@ export const actions = {
   updateAssetPair: assetPair => ({
     type: types.UPDATE_ASSET_PAIR,
     ...assetPair,
+  }),
+  scrollTo: id => ({
+    type: types.SCROLL_TO,
+    id,
   }),
 };

@@ -31,6 +31,7 @@ const orderTypeSelector = ({
   disabled,
 }) => (
   <button
+    id="switchButton"
     disabled={disabled}
     style={{ textAlign: "center", cursor: "pointer" }}
     onClick={event => {
@@ -84,6 +85,7 @@ const Trade = ({
           <List.Item>
             <List.Content>
               <Field
+                id="trade-price"
                 disabled={strategy === "Market"}
                 format={displayNumber}
                 name="price"
@@ -98,6 +100,7 @@ const Trade = ({
           <List.Item>
             <List.Content>
               <Field
+                id="trade-quantity"
                 disabled={strategy === "Market" && !selectedOrder}
                 format={displayNumber}
                 name="quantity"
@@ -112,6 +115,7 @@ const Trade = ({
           <List.Item>
             <List.Content>
               <Field
+                id="trade-total"
                 disabled={strategy === "Market" && !selectedOrder}
                 format={displayNumber}
                 name="total"
@@ -127,6 +131,7 @@ const Trade = ({
 
         <Button
           basic
+          id="tradeButton"
           color="black"
           style={{ width: "100%" }}
           disabled={strategy === "Market" && !selectedOrder}

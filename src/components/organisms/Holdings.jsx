@@ -3,7 +3,7 @@ import BigNumber from "bignumber.js";
 
 import { Table } from "semantic-ui-react";
 
-const Holdings = ({ holdings, selectAsset }) => (
+const Holdings = ({ holdings, selectAsset, scrollTo }) => (
   <div id="holdings">
     <h3 className="App-intro">Fund Holdings</h3>
     <Table size={"small"}>

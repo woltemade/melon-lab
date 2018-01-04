@@ -33,6 +33,7 @@ const mapDispatchToProps = dispatch => ({
       dispatch(orderbookActions.getOrderbook());
       dispatch(recentTradesActions.getRecentTrades());
       dispatch(tradeHelperActions.tradeInfoRequested());
+      dispatch(appActions.scrollTo("trade"));
     }
   },
 });
