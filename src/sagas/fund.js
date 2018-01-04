@@ -50,7 +50,6 @@ function* requestInfo({ address }) {
       ...participationAuthorizations,
       address,
     };
-
     if (account) {
       const participation = yield call(
         getParticipation,

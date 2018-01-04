@@ -23,6 +23,7 @@ const loadingFund = {
   numberOfFunds: "N/A",
   pendingRequest: null,
   readyToExecute: false,
+  inception: "N/A",
 };
 
 export const initialState = {
