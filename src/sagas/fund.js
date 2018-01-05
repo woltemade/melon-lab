@@ -14,14 +14,8 @@ import {
   types as orderbookTypes,
   actions as orderbookActions,
 } from "../actions/orderbook";
-import {
-  types as holdingsTypes,
-  actions as holdingsActions,
-} from "../actions/holdings";
-import {
-  types as recentTradesTypes,
-  actions as recentTradesActions,
-} from "../actions/recentTrades";
+import { actions as holdingsActions } from "../actions/holdings";
+import { actions as recentTradesActions } from "../actions/recentTrades";
 import { actions as tradeHistoryActions } from "../actions/tradeHistory";
 import { types as tradeTypes } from "../actions/trade";
 
@@ -29,7 +23,6 @@ import {
   actions as rankingActions,
   types as rankingTypes,
 } from "../actions/ranking";
-import { actions as tradeHelperActions } from "../actions/tradeHelper";
 
 function* requestInfo({ address }) {
   const isConnected = yield select(state => state.ethereum.isConnected);
@@ -92,10 +85,6 @@ function* getRanking() {
   yield put(rankingActions.getRanking());
 }
 
-function* tradeHelper() {
-  yield put(tradeHelperActions.tradeInfoRequested());
-}
-
 function* addRanking() {
   const ranking = yield select(state => state.ranking.rankingList);
   const fundAddress = yield select(state => state.fund.address);
@@ -124,9 +113,6 @@ function* fund() {
   yield takeLatest(routeTypes.FUND, checkAndLoad);
   yield takeLatest(ethereumTypes.ACCOUNT_CHANGED, getUsersFund);
   yield takeLatest(orderbookTypes.GET_ORDERBOOK_SUCCEEDED, getRanking);
-  yield takeLatest(orderbookTypes.GET_ORDERBOOK_SUCCEEDED, tradeHelper);
-  yield takeLatest(holdingsTypes.GET_HOLDINGS_SUCCEEDED, tradeHelper);
-  yield takeLatest(recentTradesTypes.GET_RECENTTRADES_SUCCEEDED, tradeHelper);
   yield takeLatest(rankingTypes.GET_RANKING_SUCCEEDED, addRanking);
   yield takeLatest(tradeTypes.TAKE_ORDER_SUCCEEDED, afterTradeUpdate);
   yield takeLatest(tradeTypes.PLACE_ORDER_SUCCEEDED, afterTradeUpdate);
