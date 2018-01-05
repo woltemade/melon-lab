@@ -60,7 +60,7 @@ const Orderbook = ({
                 </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
-            <Table.Body style={{ cursor: "pointer" }}>
+            <Table.Body style={{ cursor: isReadyToTrade ? "pointer" : "auto" }}>
               {buyOrders.map(order => (
                 <Table.Row
                   id="SellOrders"
@@ -98,7 +98,7 @@ const Orderbook = ({
                 <Table.HeaderCell>Cum. Vol.</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
-            <Table.Body style={{ cursor: "pointer" }}>
+            <Table.Body style={{ cursor: isReadyToTrade ? "pointer" : "auto" }}>
               {sellOrders.map(order => (
                 <Table.Row
                   id="BuyOrders"
