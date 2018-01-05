@@ -24,7 +24,6 @@ import {
   types as rankingTypes,
 } from "../actions/ranking";
 
-import { actions as tradeHelperActions } from "../actions/tradeHelper";
 import { types as participationTypes } from "../actions/participation";
 
 function* requestInfo({ address }) {
