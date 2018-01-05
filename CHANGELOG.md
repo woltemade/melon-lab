@@ -66,6 +66,8 @@ and this project adheres to
 * #92
 * #94
 * #113
+* #129
+* #130
 
 ## [0.3.5]
 
