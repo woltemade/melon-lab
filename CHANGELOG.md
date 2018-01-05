@@ -28,6 +28,10 @@ and this project adheres to
 * getParityProvider function
 * getHoldingsAndPrices function
 * getOpenOrders
+* isRedeemRequestPermittedAndAllowed
+* isSubscribeRequestPermittedAndAllowed
+* isMakePermitted
+* isTakePermitted
 
 ### Changed
 
