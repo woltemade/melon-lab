@@ -13,9 +13,7 @@ import { actions as modalActions, types as modalTypes } from "../actions/modal";
 function* subscribeSaga(action) {
   yield put(
     modalActions.confirm(
-      `Do you really want to buy ${action.amount} shares for ${
-        action.total
-      } MLN? If yes, please type your password below:`,
+      `Do you really want to buy ${action.amount} shares for ${action.total} MLN? If yes, please type your password below:`,
     ),
   );
   const { password } = yield take(modalTypes.CONFIRMED);
@@ -41,7 +39,6 @@ function* subscribeSaga(action) {
     }
     yield put(actions.subscribeSucceeded());
     yield put(modalActions.close());
-    yield put(fundActions.infoRequested(fundAddress));
   } catch (err) {
     if (err.name === "password") {
       yield put(modalActions.error("Wrong password"));
@@ -59,9 +56,7 @@ function* subscribeSaga(action) {
 function* redeemSaga(action) {
   yield put(
     modalActions.confirm(
-      `Do you really want to sell ${action.amount} shares for ${
-        action.total
-      } MLN? If yes, please type your password below:`,
+      `Do you really want to sell ${action.amount} shares for ${action.total} MLN? If yes, please type your password below:`,
     ),
   );
   const { password } = yield take(modalTypes.CONFIRMED);
@@ -82,7 +77,6 @@ function* redeemSaga(action) {
     yield put(fundActions.setPendingRequest(redemption.id));
     yield put(actions.redeemSucceeded());
     yield put(modalActions.close());
-    yield put(fundActions.infoRequested(fundAddress));
   } catch (err) {
     if (err.name === "password") {
       yield put(modalActions.error("Wrong password"));
@@ -115,7 +109,6 @@ function* executeSaga() {
     yield call(executeRequest, decryptedWallet, requestId, fundAddress);
     yield put(actions.executeSucceeded());
     yield put(modalActions.close());
-    yield put(fundActions.infoRequested(fundAddress));
   } catch (err) {
     if (err.name === "password") {
       yield put(modalActions.error("Wrong password"));
