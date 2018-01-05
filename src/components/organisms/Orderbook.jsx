@@ -37,6 +37,7 @@ const Orderbook = ({
   baseTokenSymbol,
   quoteTokenSymbol,
   onClick,
+  isReadyToTrade,
 }) => (
   <div id="orderbook">
     <h3 className="App-intro">
@@ -59,7 +60,7 @@ const Orderbook = ({
                 </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
-            <Table.Body style={{ cursor: "pointer" }}>
+            <Table.Body style={{ cursor: isReadyToTrade ? "pointer" : "auto" }}>
               {buyOrders.map(order => (
                 <Table.Row
                   id="SellOrders"
@@ -70,7 +71,9 @@ const Orderbook = ({
                   )}
                   onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut}
-                  onClick={() => onClick(order.id)}
+                  onClick={() => {
+                    if (isReadyToTrade) onClick(order.id);
+                  }}
                 >
                   <Table.Cell style={{ textAlign: "right" }}>
                     {order.cumulativeVolume}
@@ -95,7 +98,7 @@ const Orderbook = ({
                 <Table.HeaderCell>Cum. Vol.</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
-            <Table.Body style={{ cursor: "pointer" }}>
+            <Table.Body style={{ cursor: isReadyToTrade ? "pointer" : "auto" }}>
               {sellOrders.map(order => (
                 <Table.Row
                   id="BuyOrders"
@@ -103,7 +106,9 @@ const Orderbook = ({
                   style={getBuyGradient(order.cumulativeVolume, totalBuyVolume)}
                   onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut}
-                  onClick={() => onClick(order.id)}
+                  onClick={() => {
+                    if (isReadyToTrade) onClick(order.id);
+                  }}
                 >
                   <Table.Cell>&nbsp;&nbsp;&nbsp;&nbsp;{order.price}</Table.Cell>
                   <Table.Cell>{order.howMuch}</Table.Cell>

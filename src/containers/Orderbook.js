@@ -22,6 +22,7 @@ const mapStateToProps = state => ({
   totalSellVolume: displayNumber(state.orderbook.totalSellVolume),
   baseTokenSymbol: state.app.assetPair.base,
   quoteTokenSymbol: state.app.assetPair.quote,
+  isReadyToTrade: state.app.isReadyToTrade,
 });
 
 const mapDispatchToProps = dispatch => ({
