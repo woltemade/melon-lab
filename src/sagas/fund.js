@@ -30,6 +30,7 @@ import {
   types as rankingTypes,
 } from "../actions/ranking";
 import { actions as tradeHelperActions } from "../actions/tradeHelper";
+import { types as participationTypes } from "../actions/participation";
 
 function* requestInfo({ address }) {
   const isConnected = yield select(state => state.ethereum.isConnected);
@@ -119,6 +120,12 @@ function* afterTradeUpdate() {
   yield put(actions.infoRequested(fundAddress));
 }
 
+function* afterParticipationUpdate() {
+  const fundAddress = yield select(state => state.fund.address);
+  yield put(actions.infoRequested(fundAddress));
+  yield put(holdingsActions.getHoldings(fundAddress));
+}
+
 function* fund() {
   yield takeLatest(types.INFO_REQUESTED, requestInfo);
   yield takeLatest(routeTypes.FUND, checkAndLoad);
@@ -130,6 +137,10 @@ function* fund() {
   yield takeLatest(rankingTypes.GET_RANKING_SUCCEEDED, addRanking);
   yield takeLatest(tradeTypes.TAKE_ORDER_SUCCEEDED, afterTradeUpdate);
   yield takeLatest(tradeTypes.PLACE_ORDER_SUCCEEDED, afterTradeUpdate);
+  yield takeLatest(
+    participationTypes.EXECUTE_SUCCEEDED,
+    afterParticipationUpdate,
+  );
 }
 
 export default fund;
