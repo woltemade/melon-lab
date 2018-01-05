@@ -101,15 +101,24 @@ function* addRanking() {
 
 function* afterTradeUpdate() {
   const fundAddress = yield select(state => state.fund.address);
-  yield put(orderbookActions.getOrderbook());
+  yield put(actions.sharePriceRequested());
   yield put(holdingsActions.getHoldings(fundAddress));
+  yield put(orderbookActions.getOrderbook());
   yield put(recentTradesActions.getRecentTrades());
   yield put(tradeHistoryActions.getTradeHistory(fundAddress));
-  yield put(actions.infoRequested(fundAddress));
+}
+
+function* requestSharePrice() {
+  const fundAddress = yield select(state => state.fund.address);
+  const calculations = yield call(performCalculations, fundAddress);
+  yield put(
+    actions.sharePriceSucceeded({ sharePrice: calculations.sharePrice }),
+  );
 }
 
 function* fund() {
   yield takeLatest(types.INFO_REQUESTED, requestInfo);
+  yield takeLatest(types.SHARE_PRICE_REQUESTED, requestSharePrice);
   yield takeLatest(routeTypes.FUND, checkAndLoad);
   yield takeLatest(ethereumTypes.ACCOUNT_CHANGED, getUsersFund);
   yield takeLatest(orderbookTypes.GET_ORDERBOOK_SUCCEEDED, getRanking);
