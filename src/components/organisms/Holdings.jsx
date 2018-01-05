@@ -3,10 +3,10 @@ import BigNumber from "bignumber.js";
 
 import { Table } from "semantic-ui-react";
 
-const Holdings = ({ holdings, selectAsset, scrollTo }) => (
+const Holdings = ({ holdings, selectAsset, scrollTo, isReadyToTrade }) => (
   <div id="holdings">
     <h3 className="App-intro">Fund Holdings</h3>
-    <Table size={"small"}>
+    <Table size="small">
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Asset</Table.HeaderCell>
@@ -25,12 +25,14 @@ const Holdings = ({ holdings, selectAsset, scrollTo }) => (
             <Table.Cell textAlign="right">{asset.price}</Table.Cell>
             <Table.Cell
               textAlign="right"
-              onClick={() => selectAsset(asset.name)}
+              onClick={() => selectAsset(asset.name, isReadyToTrade)}
             >
               {asset.name === "MLN-T" ? (
                 <div>❤</div>
-              ) : (
+              ) : isReadyToTrade ? (
                 <div className="interactive">Buy/Sell</div>
+              ) : (
+                <div className="interactive">See Orderbook</div>
               )}
             </Table.Cell>
           </Table.Row>

@@ -21,19 +21,24 @@ const mapStateToProps = state => ({
         .times(100),
     ),
   })),
+  isReadyToTrade: state.app.isReadyToTrade,
 });
 
 const mapDispatchToProps = dispatch => ({
   getHoldings: fundAddress => {
     dispatch(actions.getHoldings(fundAddress));
   },
-  selectAsset: asset => {
+  selectAsset: (asset, isReadyToTrade) => {
     if (asset !== "MLN-T") {
       dispatch(appActions.updateAssetPair({ base: asset, quote: "MLN-T" }));
       dispatch(orderbookActions.getOrderbook());
       dispatch(recentTradesActions.getRecentTrades());
-      dispatch(tradeHelperActions.tradeInfoRequested());
-      dispatch(appActions.scrollTo("trade"));
+      if (isReadyToTrade) {
+        dispatch(appActions.scrollTo("trade"));
+      } else {
+        dispatch(tradeHelperActions.tradeInfoRequested());
+        dispatch(appActions.scrollTo("orderbook"));
+      }
     }
   },
 });

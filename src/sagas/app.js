@@ -96,6 +96,7 @@ function* redirectSaga() {
 
 function* scrollTo({ id }) {
   const target = document.getElementById(id);
+
   yield call(window.scrollTo, 0, target.offsetTop);
 }
 

@@ -37,6 +37,7 @@ const Orderbook = ({
   baseTokenSymbol,
   quoteTokenSymbol,
   onClick,
+  isReadyToTrade,
 }) => (
   <div id="orderbook">
     <h3 className="App-intro">
@@ -70,7 +71,9 @@ const Orderbook = ({
                   )}
                   onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut}
-                  onClick={() => onClick(order.id)}
+                  onClick={() => {
+                    if (isReadyToTrade) onClick(order.id);
+                  }}
                 >
                   <Table.Cell style={{ textAlign: "right" }}>
                     {order.cumulativeVolume}
@@ -103,7 +106,9 @@ const Orderbook = ({
                   style={getBuyGradient(order.cumulativeVolume, totalBuyVolume)}
                   onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut}
-                  onClick={() => onClick(order.id)}
+                  onClick={() => {
+                    if (isReadyToTrade) onClick(order.id);
+                  }}
                 >
                   <Table.Cell>&nbsp;&nbsp;&nbsp;&nbsp;{order.price}</Table.Cell>
                   <Table.Cell>{order.howMuch}</Table.Cell>
