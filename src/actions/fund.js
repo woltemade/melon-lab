@@ -3,6 +3,9 @@ export const types = {
   INFO_REQUESTED: "INFO_REQUESTED:fund:melon.fund",
   INFO_SUCCEEDED: "INFO_SUCCEEDED:fund:melon.fund",
   INFO_FAILED: "INFO_FAILED:fund:melon.fund",
+  SHARE_PRICE_REQUESTED: "SHARE_PRICE_REQUESTED:fund:melon.fund",
+  SHARE_PRICE_SUCCEEDED: "SHARE_PRICE_SUCCEEDED:fund:melon.fund",
+  SHARE_PRICE_FAILED: "SHARE_PRICE_FAILED:fund:melon.fund",
   SETUP_REQUESTED: "SETUP_REQUESTED:fund:melon.fund",
   SETUP_SUCCEEDED: "SETUP_SUCCEEDED:fund:melon.fund",
   SETUP_FAILED: "SETUP_FAILED:fund:melon.fund",
@@ -76,6 +79,17 @@ export const actions = {
     totalSupply,
     unclaimedRewards,
     inception,
+  }),
+  sharePriceRequested: () => ({
+    type: types.SHARE_PRICE_REQUESTED,
+  }),
+  sharePriceFailed: ({ reason }) => ({
+    type: types.SHARE_PRICE_FAILED,
+    reason,
+  }),
+  sharePriceSucceeded: ({ sharePrice }) => ({
+    type: types.SHARE_PRICE_SUCCEEDED,
+    sharePrice,
   }),
   updateRanking: ({ rank, numberOfFunds }) => ({
     type: types.UPDATE_RANKING,

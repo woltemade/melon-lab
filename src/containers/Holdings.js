@@ -3,7 +3,6 @@ import { actions } from "../actions/holdings";
 import { actions as appActions } from "../actions/app";
 import { actions as orderbookActions } from "../actions/orderbook";
 import { actions as recentTradesActions } from "../actions/recentTrades";
-import { actions as tradeHelperActions } from "../actions/tradeHelper";
 
 import { lifecycle } from "recompose";
 import Holdings from "../components/organisms/Holdings";
@@ -36,7 +35,6 @@ const mapDispatchToProps = dispatch => ({
       if (isReadyToTrade) {
         dispatch(appActions.scrollTo("trade"));
       } else {
-        dispatch(tradeHelperActions.tradeInfoRequested());
         dispatch(appActions.scrollTo("orderbook"));
       }
     }

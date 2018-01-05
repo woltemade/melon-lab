@@ -9,7 +9,6 @@ import modal from "./modal";
 import orderbook from "./orderbook";
 import ranking from "./ranking";
 import recentTrades from "./recentTrades";
-import tradeHelper from "./tradeHelper";
 import tradeHistory from "./tradeHistory";
 
 const reducerMap = {
@@ -23,8 +22,7 @@ const reducerMap = {
   orderbook,
   ranking,
   recentTrades,
-  tradeHelper,
-  tradeHistory
+  tradeHistory,
 };
 
 export default reducerMap;
