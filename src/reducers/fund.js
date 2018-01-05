@@ -56,7 +56,7 @@ const mapActionToReducer = {
   [types.SET]: reducers.setAddress,
   [types.SETUP_SUCCEEDED]: reducers.merge,
   [types.INFO_SUCCEEDED]: reducers.merge,
-  [types.INFO_SHARE_PRICE]: reducers.merge,
+  [types.SHARE_PRICE_SUCCEEDED]: reducers.merge,
   [types.INFO_REQUESTED]: reducers.merge,
   [types.UPDATE_RANKING]: reducers.merge,
   [types.SET_PENDING_REQUEST]: reducers.merge,
