@@ -125,27 +125,50 @@ const zeroCursorPosition = ({ value, cursorPosition }, decimals) => {
   };
 };
 
-const NumberInput = ({ input, decimals = 4 }) => (
-  <Input
-    onChange={event => {
-      const init = {
-        value: event.target.value,
-        cursorPosition: event.target.selectionStart,
-      };
+const cleanNumber = (event, decimals = 4, onChange) => {
+  const init = {
+    value: event.target.value,
+    cursorPosition: event.target.selectionStart,
+  };
 
-      const cleanedDigix = digitsOnly(init);
-      const jumpPrevented = preventDecimalJump(cleanedDigix, decimals);
-      const cleanedPoints = cleanPoints(jumpPrevented);
-      const formatted = formatNumber(cleanedPoints, decimals);
-      const zeroPos = zeroCursorPosition(formatted, decimals);
+  const cleanedDigix = digitsOnly(init);
+  const jumpPrevented = preventDecimalJump(cleanedDigix, decimals);
+  const cleanedPoints = cleanPoints(jumpPrevented);
+  const formatted = formatNumber(cleanedPoints, decimals);
+  const zeroPos = zeroCursorPosition(formatted, decimals);
 
-      event.target.value = zeroPos.value;
-      event.target.setSelectionRange(
-        zeroPos.cursorPosition,
-        zeroPos.cursorPosition,
-      );
-    }}
-  />
-);
+  onChange(zeroPos.value);
+
+  // event.target.value = zeroPos.value;
+  event.persist();
+  window.setTimeout(() => {
+    event.target.setSelectionRange(
+      zeroPos.cursorPosition,
+      zeroPos.cursorPosition,
+    );
+  }, 10);
+};
+
+const NumberInput = ({
+  input,
+  placeholder,
+  disabled,
+  label,
+  id,
+  decimals = 4,
+}) => {
+  const { onChange, ...rest } = input;
+  return (
+    <Input
+      {...rest}
+      label={label}
+      disabled={disabled}
+      placeholder={placeholder || rest.name}
+      onChange={event => cleanNumber(event, decimals, onChange)}
+      style={{ width: "100%" }}
+      id={id}
+    />
+  );
+};
 
 export default NumberInput;
