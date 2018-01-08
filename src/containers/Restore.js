@@ -1,8 +1,6 @@
 import { connect } from "react-redux";
 import { reduxForm, SubmissionError } from "redux-form";
 import { importWalletFromMnemonic } from "@melonproject/melon.js";
-
-import { actions as routeActions } from "../actions/routes";
 import { actions } from "../actions/account";
 import Restore from "../components/organisms/account/Restore";
 

@@ -7,9 +7,7 @@ import {
   deserializeOrder,
   matchOrders,
 } from "@melonproject/melon.js";
-import BigNumber from "bignumber.js";
 import { types, actions } from "../actions/trade";
-import { actions as appActions } from "../actions/app";
 import { actions as fundActions } from "../actions/fund";
 import { actions as modalActions, types as modalTypes } from "../actions/modal";
 import displayNumber from "../utils/displayNumber";

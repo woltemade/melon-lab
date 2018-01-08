@@ -5,7 +5,6 @@ import {
   averagePrice,
 } from "@melonproject/melon.js";
 import { change } from "redux-form";
-import BigNumber from "bignumber.js";
 import { types, actions } from "../actions/orderbook";
 import { types as ethereumTypes } from "../actions/ethereum";
 

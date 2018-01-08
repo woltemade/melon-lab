@@ -9,7 +9,6 @@ import {
 } from "@melonproject/melon.js";
 
 import { types, actions } from "../actions/administration";
-import { actions as appActions } from "../actions/app";
 import { actions as modalActions, types as modalTypes } from "../actions/modal";
 
 function* toggleSubscriptionSaga() {
@@ -18,9 +17,9 @@ function* toggleSubscriptionSaga() {
   );
   yield put(
     modalActions.confirm(
-      `Do you really want to buy ${
-        subscriptionAllowed ? "disable" : "enable"
-      } subscriptions? If yes, please type your password below:`,
+      `Do you really want to buy ${subscriptionAllowed
+        ? "disable"
+        : "enable"} subscriptions? If yes, please type your password below:`,
     ),
   );
   const { password } = yield take(modalTypes.CONFIRMED);
@@ -53,9 +52,9 @@ function* toggleRedemptionSaga() {
   );
   yield put(
     modalActions.confirm(
-      `Do you really want to buy ${
-        redemptionAllowed ? "disable" : "enable"
-      } redemptions? If yes, please type your password below:`,
+      `Do you really want to buy ${redemptionAllowed
+        ? "disable"
+        : "enable"} redemptions? If yes, please type your password below:`,
     ),
   );
   const { password } = yield take(modalTypes.CONFIRMED);
@@ -87,9 +86,9 @@ function* convertUnclaimedRewardsSaga() {
   );
   yield put(
     modalActions.confirm(
-      `Do you really want to buy ${
-        redemptionAllowed ? "disable" : "enable"
-      } redemptions? If yes, please type your password below:`,
+      `Do you really want to buy ${redemptionAllowed
+        ? "disable"
+        : "enable"} redemptions? If yes, please type your password below:`,
     ),
   );
   const { password } = yield take(modalTypes.CONFIRMED);
@@ -122,9 +121,9 @@ function* shutDownFundSaga() {
   );
   yield put(
     modalActions.confirm(
-      `Do you really want to buy ${
-        redemptionAllowed ? "disable" : "enable"
-      } redemptions? If yes, please type your password below:`,
+      `Do you really want to buy ${redemptionAllowed
+        ? "disable"
+        : "enable"} redemptions? If yes, please type your password below:`,
     ),
   );
   const { password } = yield take(modalTypes.CONFIRMED);

@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import { change } from "redux-form";
-import { actions as appActions } from "../actions/app";
 import TradeHelper from "../components/organisms/TradeHelper";
 import displayNumber from "../utils/displayNumber";
 
@@ -35,9 +34,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  // getTradeHelper: () => {
-  //   dispatch(actions.tradeInfoRequested());
-  // },
   setPrice: (price, strategy) => {
     if (strategy === "Limit") dispatch(change("trade", "price", price));
   },
