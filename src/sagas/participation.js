@@ -9,6 +9,7 @@ import { delay } from "redux-saga";
 import { types, actions } from "../actions/participation";
 import { actions as fundActions, types as fundTypes } from "../actions/fund";
 import { actions as modalActions, types as modalTypes } from "../actions/modal";
+import { actions as routesActions } from "../actions/routes";
 
 function* subscribeSaga(action) {
   yield put(
@@ -39,6 +40,7 @@ function* subscribeSaga(action) {
     }
     yield put(actions.subscribeSucceeded());
     yield put(modalActions.close());
+    yield put(routesActions.fund(fundAddress));
   } catch (err) {
     if (err.name === "password") {
       yield put(modalActions.error("Wrong password"));
