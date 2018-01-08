@@ -1,8 +1,7 @@
 import React from "react";
 import { Field } from "redux-form";
 import { List, Button, Card, Menu } from "semantic-ui-react";
-
-import renderInput from "../utils/renderInput";
+import NumberInput from "../molecules/NumberInput";
 
 const participationTypeSelector = ({ input: { onChange, value } }) => (
   <div>
@@ -36,7 +35,7 @@ const ParticipationForm = ({ setup, handleSubmit, displayNumber }) => (
               <Field
                 label="Quantity"
                 name="amount"
-                component={renderInput}
+                component={NumberInput}
                 type="number"
                 format={displayNumber}
               />
@@ -47,7 +46,7 @@ const ParticipationForm = ({ setup, handleSubmit, displayNumber }) => (
               <Field
                 label="Price"
                 name="price"
-                component={renderInput}
+                component={NumberInput}
                 type="number"
                 format={displayNumber}
                 disabled
@@ -59,7 +58,7 @@ const ParticipationForm = ({ setup, handleSubmit, displayNumber }) => (
               <Field
                 label="Total"
                 name="total"
-                component={renderInput}
+                component={NumberInput}
                 format={displayNumber}
                 type="number"
               />
