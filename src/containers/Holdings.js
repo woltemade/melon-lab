@@ -3,7 +3,7 @@ import { actions } from "../actions/holdings";
 import { actions as appActions } from "../actions/app";
 import { actions as orderbookActions } from "../actions/orderbook";
 import { actions as recentTradesActions } from "../actions/recentTrades";
-
+import { reset } from "redux-form";
 import { lifecycle } from "recompose";
 import Holdings from "../components/organisms/Holdings";
 import displayNumber from "../utils/displayNumber";
@@ -32,6 +32,7 @@ const mapDispatchToProps = dispatch => ({
       dispatch(appActions.updateAssetPair({ base: asset, quote: "MLN-T" }));
       dispatch(orderbookActions.getOrderbook());
       dispatch(recentTradesActions.getRecentTrades());
+      dispatch(reset("trade"));
       if (isReadyToTrade) {
         dispatch(appActions.scrollTo("trade"));
       } else {
