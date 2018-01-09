@@ -35,12 +35,13 @@ function* subscribeSaga(action) {
 
     if (action.directlyExecute) {
       yield call(executeRequest, decryptedWallet, subscription.id, fundAddress);
+      yield put(routesActions.fund(fundAddress));
     } else {
       yield put(fundActions.setPendingRequest(subscription.id));
     }
     yield put(actions.subscribeSucceeded());
     yield put(modalActions.close());
-    yield put(routesActions.fund(fundAddress));
+
   } catch (err) {
     if (err.name === "password") {
       yield put(modalActions.error("Wrong password"));
