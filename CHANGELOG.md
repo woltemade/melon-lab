@@ -54,6 +54,7 @@ and this project adheres to
 * sortByPrice
 
 ### Deprecated
+* "from" argument in functions; now uses wallet.address
 
 ### Fixed
 * #69
@@ -68,6 +69,7 @@ and this project adheres to
 * #113
 * #129
 * #130
+* #131
 
 ## [0.3.5]
 
