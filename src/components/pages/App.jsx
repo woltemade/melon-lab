@@ -11,6 +11,7 @@ import FundContainer from "../../containers/Fund";
 import RankingContainer from "../../containers/Ranking";
 import AccountContainer from "../../containers/Account";
 import RestoreContainer from "../../containers/Restore";
+import MyAccountContainer from "../../containers/MyAccount";
 import Modal from "../../containers/Modal";
 import { types } from "../../actions/routes";
 import ConnectionInfo from "../organisms/ConnectionInfo";
@@ -33,6 +34,7 @@ const routeContainerMap = {
   [types.ACCOUNT_CREATE]: AccountContainer,
   [types.ACCOUNT_ENCRYPT]: AccountContainer,
   [types.FUND]: FundContainer,
+  [types.MY_ACCOUNT]: MyAccountContainer,
 };
 
 const getMainComponent = ({
