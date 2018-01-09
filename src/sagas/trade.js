@@ -10,6 +10,7 @@ import {
 import { types, actions } from "../actions/trade";
 import { actions as fundActions } from "../actions/fund";
 import { actions as modalActions, types as modalTypes } from "../actions/modal";
+import { reset } from "redux-form";
 import displayNumber from "../utils/displayNumber";
 
 function* placeOrderSaga(action) {
@@ -53,6 +54,7 @@ function* placeOrderSaga(action) {
     );
     yield put(actions.placeOrderSucceeded());
     yield put(modalActions.close());
+    yield put(reset("trade"));
   } catch (err) {
     if (err.name === "password") {
       yield put(modalActions.error("Wrong password"));
@@ -133,12 +135,13 @@ function* takeOrderSaga(action) {
     );
     yield put(actions.takeOrderSucceeded());
     yield put(modalActions.close());
+    yield put(reset("trade"));
     yield put(fundActions.infoRequested(fundAddress));
   } catch (err) {
     if (err.name === "password") {
       yield put(modalActions.error("Wrong password"));
     } else if (err.name === "EnsureError") {
-      console.error(err)
+      console.error(err);
       yield put(modalActions.error(err.message));
     } else {
       yield put(modalActions.error(err.message));
