@@ -35,10 +35,7 @@ export const ConnectionInfoComponent = ({
       padding: 5,
     }}
   >
-    <a href={`https://kovan.etherscan.io/address/${account}`} target="_blank">
-      {shortenAddress(account || "")}
-    </a>{" "}
-    |{" "}
+    <a href="/#/myaccount">{shortenAddress(account || "")}</a> |{" "}
     <a href={`https://faucet.melon.network/${account}`} target="_blank">
       Ⓜ {displayNumber(mlnBalance)} | Ξ {displayNumber(ethBalance)}
     </a>{" "}

@@ -11,6 +11,7 @@ export const types = {
   RESTORE_FROM_MNEMONIC_FAILED:
     "RESTORE_FROM_MNEMONIC_FAILED:newuser:melon.fund",
   I_SAVED: "I_SAVED:newuser:melon.fund",
+  DELETE_WALLET_REQUESTED: "DELETE_WALLET_REQUESTED:newuser:melon.fund",
 };
 
 export const actions = {
@@ -56,5 +57,8 @@ export const actions = {
   restoreFromMnemonicFailed: reason => ({
     type: types.RESTORE_FROM_MNEMONIC_FAILED,
     reason,
+  }),
+  deleteWallet: () => ({
+    type: types.DELETE_WALLET_REQUESTED,
   }),
 };

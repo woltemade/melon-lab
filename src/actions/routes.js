@@ -7,6 +7,7 @@ export const types = {
   ACCOUNT_RESTORE: "ACCOUNT_RESTORE:routes:melon.fund",
   ACCOUNT_CREATE: "ACCOUNT_CREATE:routes:melon.fund",
   ACCOUNT_ENCRYPT: "ACCOUNT_ENCRYPT:routes:melon.fund",
+  MY_ACCOUNT: "MY_ACCOUNT:routes:melon.fund",
   DONE: "DONE:routes:melon.fund",
   RESTORE: "RESTORE:routes:melon.fund",
 };
@@ -19,6 +20,7 @@ export const routeMap = {
   [types.ACCOUNT_RESTORE]: "/account/restore",
   [types.ACCOUNT_CREATE]: "/account/create",
   [types.ACCOUNT_ENCRYPT]: "/account/encrypt",
+  [types.MY_ACCOUNT]: "/myaccount",
   [types.DONE]: "/account/done",
   [types.FUND]: "/:address",
 };
@@ -42,5 +44,8 @@ export const actions = {
   }),
   account: () => ({
     type: types.ACCOUNT_SETUP,
+  }),
+  myAccount: () => ({
+    type: types.MY_ACCOUNT,
   }),
 };

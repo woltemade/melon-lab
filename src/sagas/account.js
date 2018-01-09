@@ -4,8 +4,9 @@ import {
   createWallet,
   encryptWallet,
   importWalletFromMnemonic,
+  decryptWallet,
 } from "@melonproject/melon.js";
-
+import { actions as modalActions, types as modalTypes } from "../actions/modal";
 import { types, actions } from "../actions/account";
 import {
   actions as ethereumActions,
@@ -50,9 +51,25 @@ function* importWalletSaga({ mnemonic }) {
   }
 }
 
+function* deleteWallet() {
+  yield put(
+    modalActions.confirm(
+      `Do you really want to erase your current wallet? If yes, please type your password below:`,
+    ),
+  );
+  const { password } = yield take(modalTypes.CONFIRMED);
+  yield put(modalActions.loading());
+  const wallet = localStorage.getItem("wallet:melon.fund");
+  yield call(decryptWallet, wallet, password);
+  localStorage.removeItem("wallet:melon.fund");
+  yield put(modalActions.close());
+  yield put(routeActions.ranking());
+}
+
 function* account() {
   yield takeLatest(types.GENERATE_WALLET_REQUESTED, generateWalletSaga);
   yield takeLatest(types.RESTORE_FROM_MNEMONIC_REQUESTED, importWalletSaga);
+  yield takeLatest(types.DELETE_WALLET_REQUESTED, deleteWallet);
 }
 
 export default account;
