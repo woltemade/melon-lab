@@ -1,6 +1,6 @@
 import React from "react";
 import BigNumber from "bignumber.js";
-import { Table, Grid } from "semantic-ui-react";
+import { Table, Grid, Image } from "semantic-ui-react";
 
 const getSellGradient = (cumulativeVolume, totalVolume) => {
   const percentage = new BigNumber(cumulativeVolume)
@@ -38,6 +38,7 @@ const Orderbook = ({
   quoteTokenSymbol,
   onClick,
   isReadyToTrade,
+  loading,
 }) => (
   <div id="orderbook">
     <h3 className="App-intro">
@@ -120,6 +121,13 @@ const Orderbook = ({
         </Grid.Column>
       </Grid.Row>
     </Grid>
+    {loading ? (
+      <div>
+        <Image src="./melon-spinner.gif" size="small" centered />
+      </div>
+    ) : (
+      <div />
+    )}
   </div>
 );
 
