@@ -13,6 +13,7 @@ const mapStateToProps = state => ({
     sharePrice: displayNumber(fund.sharePrice.toString()),
   })),
   getFundLinkAction: fundAddress => routeActions.fund(fundAddress),
+  loading: state.ranking.loading,
 });
 
 const mapDispatchToProps = dispatch => ({
