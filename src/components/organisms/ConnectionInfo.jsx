@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "redux-first-router-link";
 import displayNumber from "../../utils/displayNumber";
 
 const shortenAddress = address =>
@@ -23,6 +24,7 @@ export const ConnectionInfoComponent = ({
   ethBalance,
   statusMessage,
   statusType,
+  myAccount,
 }) => (
   <div
     style={{
@@ -35,7 +37,8 @@ export const ConnectionInfoComponent = ({
       padding: 5,
     }}
   >
-    <a href="/#/myaccount">{shortenAddress(account || "")}</a> |{" "}
+    <Link to={myAccount()}>{shortenAddress(account || "")}</Link>
+    |{" "}
     <a href={`https://faucet.melon.network/${account}`} target="_blank">
       Ⓜ {displayNumber(mlnBalance)} | Ξ {displayNumber(ethBalance)}
     </a>{" "}
