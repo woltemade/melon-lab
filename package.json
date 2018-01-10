@@ -26,7 +26,8 @@
     "semantic-ui-react": "^0.77.1"
   },
   "scripts": {
-    "build": "react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build && npm run-script build:postprocess",
     "build:postprocess": "npm run-script delete-maps && npm run-script rename-absolute-path",
     "delete-maps": "find ./build -name '*.map' -delete",
     "rename-absolute-path": "sed -i -e 's@/static/js@./static/js@g' ./build/index.html",
@@ -37,14 +38,12 @@
     "lint": "eslint ./",
     "semantic:build": "cd public/semantic && gulp build",
     "semantic:watch": "cd public/semantic && gulp",
-    "start": "npm run semantic:watch & react-scripts start",
     "storybook:build": "build-storybook -s public -o .out -c tests/storybook",
     "storybook": "start-storybook -p 9001 -c tests/storybook -s public",
     "test": "react-scripts test --env=jsdom",
     "check": "npm-check",
     "check:update": "npm-check -u "
   },
-
   "devDependencies": {
     "@storybook/addon-actions": "^3.3.3",
     "@storybook/addon-info": "^3.3.3",
