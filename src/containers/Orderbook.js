@@ -23,6 +23,7 @@ const mapStateToProps = state => ({
   baseTokenSymbol: state.app.assetPair.base,
   quoteTokenSymbol: state.app.assetPair.quote,
   isReadyToTrade: state.app.isReadyToTrade,
+  loading: state.orderbook.loading,
 });
 
 const mapDispatchToProps = dispatch => ({

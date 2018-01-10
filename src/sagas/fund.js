@@ -44,6 +44,7 @@ function* requestInfo({ address }) {
       ...calculations,
       ...participationAuthorizations,
       address,
+      loading: false,
     };
     if (account) {
       const participation = yield call(

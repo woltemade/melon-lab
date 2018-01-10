@@ -4,7 +4,7 @@ import isSameAddress from "../utils/isSameAddress";
 import Fund from "../components/pages/Fund";
 
 const mapStateToProps = (state, ownProps) => ({
-  loading: state.app.transactionInProgress,
+  loading: state.fund.loading,
   isVisitor: state.app.isReadyToVisit && !state.app.usersFund,
   isInvestor:
     state.app.isReadyToInteract &&

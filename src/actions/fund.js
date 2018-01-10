@@ -61,6 +61,7 @@ export const actions = {
     subscriptionAllowed,
     redemptionAllowed,
     inception,
+    loading,
   }) => ({
     type: types.INFO_SUCCEEDED,
     address,
@@ -79,6 +80,7 @@ export const actions = {
     totalSupply,
     unclaimedRewards,
     inception,
+    loading,
   }),
   sharePriceRequested: () => ({
     type: types.SHARE_PRICE_REQUESTED,

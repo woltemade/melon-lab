@@ -16,6 +16,16 @@ function* getOrderbookSaga() {
   if (!isConnected) yield take(ethereumTypes.HAS_CONNECTED);
 
   try {
+    yield put(
+      actions.setLoading({
+        loading: true,
+        orders: [],
+        buyOrders: [],
+        sellOrders: [],
+        totalBuyVolume: 0,
+        totalSellVolume: 0,
+      }),
+    );
     const rawOrderbook = yield call(
       getOrderbook,
       baseTokenSymbol,
@@ -37,6 +47,7 @@ function* getOrderbookSaga() {
     const totalBuyVolume = sellOrders.length
       ? sellOrders[sellOrders.length - 1].cumulativeVolume
       : 0;
+    yield put(actions.setLoading({ loading: false }));
     yield put(
       actions.getOrderbookSucceeded({
         orders,

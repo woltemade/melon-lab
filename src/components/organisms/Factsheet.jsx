@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Card, Divider } from "semantic-ui-react";
+import { List, Card, Divider, Image } from "semantic-ui-react";
 
 const Factsheet = ({
   aum,
@@ -14,6 +14,7 @@ const Factsheet = ({
   numberOfFunds,
   tweetHref,
   scrollTo,
+  loading,
 }) => (
   <Card id="factsheet">
     <Card.Content>
@@ -28,46 +29,52 @@ const Factsheet = ({
           <img src="./twitter.png" alt="Tweet" height="15" />
         </a>
       </Card.Header>
-      <List>
-        <List.Item>
-          <List.Content>Creation date: {creationDate}</List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Content as="a" onClick={() => scrollTo("holdings")}>
-            AUM: {aum} MLN
-          </List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Content as="a" onClick={() => scrollTo("holdings")}>
-            Share Price: {sharePrice} MLN/Share
-          </List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Content as="a" href="#/ranking">
-            Ranking: {rank} out of {numberOfFunds} Melon Funds
-          </List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Content>Total number of shares: {totalSupply}</List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Content>Shares owned by me: {personalStake}</List.Content>
-        </List.Item>
-        <Divider />
-        <List.Item>
-          <List.Content>Management Reward: {managementReward}%</List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Content>Performance Reward: {performanceReward}%</List.Content>
-        </List.Item>
+      {loading ? (
+        <Image src="./melon-spinner.gif" size="tiny" centered />
+      ) : (
+        <List>
+          <List.Item>
+            <List.Content>Creation date: {creationDate}</List.Content>
+          </List.Item>
+          <List.Item>
+            <List.Content as="a" onClick={() => scrollTo("holdings")}>
+              AUM: {aum} MLN
+            </List.Content>
+          </List.Item>
+          <List.Item>
+            <List.Content as="a" onClick={() => scrollTo("holdings")}>
+              Share Price: {sharePrice} MLN/Share
+            </List.Content>
+          </List.Item>
+          <List.Item>
+            <List.Content as="a" href="#/ranking">
+              Ranking: {rank} out of {numberOfFunds} Melon Funds
+            </List.Content>
+          </List.Item>
+          <List.Item>
+            <List.Content>Total number of shares: {totalSupply}</List.Content>
+          </List.Item>
+          <List.Item>
+            <List.Content>Shares owned by me: {personalStake}</List.Content>
+          </List.Item>
+          <Divider />
+          <List.Item>
+            <List.Content>Management Reward: {managementReward}%</List.Content>
+          </List.Item>
+          <List.Item>
+            <List.Content>
+              Performance Reward: {performanceReward}%
+            </List.Content>
+          </List.Item>
 
-        <Divider />
-        <List.Item>
-          <List.Content href="http://melon.email" target="_blank">
-            Contact Investors/Managers
-          </List.Content>
-        </List.Item>
-      </List>
+          <Divider />
+          <List.Item>
+            <List.Content href="http://melon.email" target="_blank">
+              Contact Investors/Managers
+            </List.Content>
+          </List.Item>
+        </List>
+      )}
     </Card.Content>
   </Card>
 );

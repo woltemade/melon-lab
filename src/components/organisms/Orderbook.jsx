@@ -1,6 +1,6 @@
 import React from "react";
 import BigNumber from "bignumber.js";
-import { Table, Grid } from "semantic-ui-react";
+import { Table, Grid, Image } from "semantic-ui-react";
 
 const getSellGradient = (cumulativeVolume, totalVolume) => {
   const percentage = new BigNumber(cumulativeVolume)
@@ -38,88 +38,106 @@ const Orderbook = ({
   quoteTokenSymbol,
   onClick,
   isReadyToTrade,
+  loading,
 }) => (
   <div id="orderbook">
     <h3 className="App-intro">
       Orderbook for {baseTokenSymbol}/{quoteTokenSymbol}
     </h3>
-    <Grid padded={false}>
-      <Grid.Row columns={2}>
-        <Grid.Column style={{ paddingRight: 0 }}>
-          <Table>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell style={{ textAlign: "right" }}>
-                  Cum. Vol.
-                </Table.HeaderCell>
-                <Table.HeaderCell style={{ textAlign: "right" }}>
-                  Vol.
-                </Table.HeaderCell>
-                <Table.HeaderCell style={{ textAlign: "right" }}>
-                  Bid
-                </Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body style={{ cursor: isReadyToTrade ? "pointer" : "auto" }}>
-              {buyOrders.map(order => (
-                <Table.Row
-                  id="SellOrders"
-                  key={order.id}
-                  style={getSellGradient(
-                    order.cumulativeVolume,
-                    totalSellVolume,
-                  )}
-                  onMouseOver={onMouseOver}
-                  onMouseOut={onMouseOut}
-                  onClick={() => {
-                    if (isReadyToTrade) onClick(order.id);
-                  }}
-                >
-                  <Table.Cell style={{ textAlign: "right" }}>
-                    {order.cumulativeVolume}
-                  </Table.Cell>
-                  <Table.Cell style={{ textAlign: "right" }}>
-                    {order.howMuch}
-                  </Table.Cell>
-                  <Table.Cell style={{ textAlign: "right" }}>
-                    {order.price}
-                  </Table.Cell>
+    {loading ? (
+      <div>
+        <Image src="./melon-spinner.gif" size="small" centered />
+      </div>
+    ) : (
+      <Grid padded={false}>
+        <Grid.Row columns={2}>
+          <Grid.Column style={{ paddingRight: 0 }}>
+            <Table>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell style={{ textAlign: "right" }}>
+                    Cum. Vol.
+                  </Table.HeaderCell>
+                  <Table.HeaderCell style={{ textAlign: "right" }}>
+                    Vol.
+                  </Table.HeaderCell>
+                  <Table.HeaderCell style={{ textAlign: "right" }}>
+                    Bid
+                  </Table.HeaderCell>
                 </Table.Row>
-              ))}
-            </Table.Body>
-          </Table>
-        </Grid.Column>
-        <Grid.Column style={{ paddingLeft: 0, marginLeft: -1 }}>
-          <Table>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>&nbsp;&nbsp;&nbsp;&nbsp;Ask</Table.HeaderCell>
-                <Table.HeaderCell>Vol.</Table.HeaderCell>
-                <Table.HeaderCell>Cum. Vol.</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body style={{ cursor: isReadyToTrade ? "pointer" : "auto" }}>
-              {sellOrders.map(order => (
-                <Table.Row
-                  id="BuyOrders"
-                  key={order.id}
-                  style={getBuyGradient(order.cumulativeVolume, totalBuyVolume)}
-                  onMouseOver={onMouseOver}
-                  onMouseOut={onMouseOut}
-                  onClick={() => {
-                    if (isReadyToTrade) onClick(order.id);
-                  }}
-                >
-                  <Table.Cell>&nbsp;&nbsp;&nbsp;&nbsp;{order.price}</Table.Cell>
-                  <Table.Cell>{order.howMuch}</Table.Cell>
-                  <Table.Cell>{order.cumulativeVolume}</Table.Cell>
+              </Table.Header>
+              <Table.Body
+                style={{ cursor: isReadyToTrade ? "pointer" : "auto" }}
+              >
+                {buyOrders.map(order => (
+                  <Table.Row
+                    id="SellOrders"
+                    key={order.id}
+                    style={getSellGradient(
+                      order.cumulativeVolume,
+                      totalSellVolume,
+                    )}
+                    onMouseOver={onMouseOver}
+                    onMouseOut={onMouseOut}
+                    onClick={() => {
+                      if (isReadyToTrade) onClick(order.id);
+                    }}
+                  >
+                    <Table.Cell style={{ textAlign: "right" }}>
+                      {order.cumulativeVolume}
+                    </Table.Cell>
+                    <Table.Cell style={{ textAlign: "right" }}>
+                      {order.howMuch}
+                    </Table.Cell>
+                    <Table.Cell style={{ textAlign: "right" }}>
+                      {order.price}
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table>
+          </Grid.Column>
+          <Grid.Column style={{ paddingLeft: 0, marginLeft: -1 }}>
+            <Table>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Ask
+                  </Table.HeaderCell>
+                  <Table.HeaderCell>Vol.</Table.HeaderCell>
+                  <Table.HeaderCell>Cum. Vol.</Table.HeaderCell>
                 </Table.Row>
-              ))}
-            </Table.Body>
-          </Table>
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
+              </Table.Header>
+              <Table.Body
+                style={{ cursor: isReadyToTrade ? "pointer" : "auto" }}
+              >
+                {sellOrders.map(order => (
+                  <Table.Row
+                    id="BuyOrders"
+                    key={order.id}
+                    style={getBuyGradient(
+                      order.cumulativeVolume,
+                      totalBuyVolume,
+                    )}
+                    onMouseOver={onMouseOver}
+                    onMouseOut={onMouseOut}
+                    onClick={() => {
+                      if (isReadyToTrade) onClick(order.id);
+                    }}
+                  >
+                    <Table.Cell>
+                      &nbsp;&nbsp;&nbsp;&nbsp;{order.price}
+                    </Table.Cell>
+                    <Table.Cell>{order.howMuch}</Table.Cell>
+                    <Table.Cell>{order.cumulativeVolume}</Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    )}
   </div>
 );
 

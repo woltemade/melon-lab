@@ -1,14 +1,8 @@
 import { types } from "../actions/ranking";
 
 export const initialState = {
-  rankingList: [
-    {
-      address: "0xBADASS",
-      name: "LOADING",
-      sharePrice: 0,
-      inception: "RIGHTNOW",
-    },
-  ],
+  rankingList: [],
+  loading: false,
 };
 
 const reducers = {
@@ -21,6 +15,7 @@ const reducers = {
 
 const mapActionToReducer = {
   [types.GET_RANKING_SUCCEEDED]: reducers.merge,
+  [types.SET_LOADING]: reducers.merge,
 };
 
 export const reducer = (state = initialState, action) => {
