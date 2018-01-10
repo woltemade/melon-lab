@@ -5,6 +5,7 @@
     "@melonproject/melon.js": "0.5.0-alpha.27",
     "babel-polyfill": "^6.23.0",
     "bignumber.js": "^5.0.0",
+    "bn.js": "^4.11.8",
     "ethers": "^2.1.3",
     "gulp": "^3.9.1",
     "history": "^4.7.2",
@@ -25,7 +26,11 @@
     "semantic-ui-react": "^0.77.1"
   },
   "scripts": {
-    "build": "npm run semantic:build && webpack",
+    "start": "react-scripts start",
+    "build": "react-scripts build && npm run-script build:postprocess",
+    "build:postprocess": "npm run-script delete-maps && npm run-script rename-absolute-path",
+    "delete-maps": "find ./build -name '*.map' -delete",
+    "rename-absolute-path": "sed -i -e 's@/static/js@./static/js@g' ./build/index.html",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --record",
     "deploy": "ipfs add -r public",
@@ -33,7 +38,6 @@
     "lint": "eslint ./",
     "semantic:build": "cd public/semantic && gulp build",
     "semantic:watch": "cd public/semantic && gulp",
-    "start": "npm run semantic:watch & react-scripts start",
     "storybook:build": "build-storybook -s public -o .out -c tests/storybook",
     "storybook": "start-storybook -p 9001 -c tests/storybook -s public",
     "test": "react-scripts test --env=jsdom",

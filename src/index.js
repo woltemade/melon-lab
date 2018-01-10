@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import ReactModal from "react-modal";
 // import { ConnectedRouter } from "react-router-redux";
 
-import "./index.css";
 import { configureStore } from "./config/configureStore";
 import AppContainer from "./containers/App";
 import registerServiceWorker from "./registerServiceWorker";
