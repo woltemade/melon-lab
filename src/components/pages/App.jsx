@@ -44,6 +44,7 @@ const getMainComponent = ({
   usersFund,
   walletAddress,
   route,
+  myAccount,
 }) => {
   if (route === types.SETUP) {
     const Main = mapOnboardingStateToMainContainer[onboardingState];
@@ -54,6 +55,7 @@ const getMainComponent = ({
         setup
         usersFund={usersFund}
         walletAddress={walletAddress}
+        myAccount={myAccount}
       />
     ) : null;
   }
@@ -69,6 +71,7 @@ const App = props => (
       ethBalance={props.ethBalance}
       statusType={props.statusType}
       statusMessage={props.statusMessage}
+      myAccount={props.myAccount}
     />
     <Container>
       <div className="App-header" style={{ margin: "2em" }}>

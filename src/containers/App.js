@@ -2,6 +2,7 @@ import BigNumber from "bignumber.js";
 import { connect } from "react-redux";
 import App from "../components/pages/App";
 import { statusTypes } from "../components/organisms/ConnectionInfo";
+import { actions as routeActions } from "../actions/routes";
 
 const getStatus = ({
   syncing,
@@ -47,6 +48,10 @@ const mapStateToProps = state => {
   };
 };
 
-const AppContainer = connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  myAccount: () => routeActions.myAccount(),
+});
+
+const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default AppContainer;
