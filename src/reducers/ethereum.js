@@ -10,7 +10,7 @@ const initialState = {
   lastUpdate: null,
   network: 0,
   provider: providers.NONE,
-  syncing: true,
+  syncing: false,
   isConnected: false,
   isUpToDate: false,
   isDataValid: false, // Data Feed
