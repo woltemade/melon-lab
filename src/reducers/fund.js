@@ -29,6 +29,7 @@ const loadingFund = {
 export const initialState = {
   address: "",
   ...loadingFund,
+  loading: false,
 };
 
 const reducers = {
@@ -38,6 +39,7 @@ const reducers = {
   }),
   setLoading: (state, { address }) => ({
     ...loadingFund,
+    loading: true,
     address,
   }),
   resetPendingRequest: state => ({

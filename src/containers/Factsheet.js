@@ -30,7 +30,6 @@ const buildTwitterUrl = (isOwner, fundAddress, fundName, sharePrice) => {
 const mapStateToProps = state => ({
   aum: displayNumber(state.fund.gav),
   creationDate: moment(state.fund.inception).format("D. MMM YYYY HH:mm"),
-  loading: state.app.transactionInProgress,
   managementReward: displayNumber(state.fund.managementReward),
   name: state.fund.name,
   performanceReward: displayNumber(state.fund.performanceReward),
@@ -45,14 +44,15 @@ const mapStateToProps = state => ({
     state.fund.name,
     state.fund.sharePrice,
   ),
+  loading: state.fund.loading,
 });
 
 const mapDispatchToProps = dispatch => ({
   scrollTo: target => dispatch(appActions.scrollTo(target)),
 });
 
-const FactsheetContainter = connect(mapStateToProps, mapDispatchToProps)(
+const FactsheetContainer = connect(mapStateToProps, mapDispatchToProps)(
   Factsheet,
 );
 
-export default FactsheetContainter;
+export default FactsheetContainer;
