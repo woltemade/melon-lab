@@ -19,7 +19,7 @@ const mapStateToProps = state => ({
         : displayNumber(
             asset.balance
               .times(asset.price)
-              .div(state.fund.nav)
+              .div(state.fund.nav || 1)
               .times(100),
           ),
   })),

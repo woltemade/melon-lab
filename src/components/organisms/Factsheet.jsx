@@ -1,5 +1,6 @@
 import React from "react";
 import { List, Card, Divider, Image } from "semantic-ui-react";
+import MaybeLoading from "../molecules/MaybeLoading";
 
 const Factsheet = ({
   aum,
@@ -19,7 +20,8 @@ const Factsheet = ({
   <Card id="factsheet">
     <Card.Content>
       <Card.Header>
-        {name}
+        <MaybeLoading>{name}</MaybeLoading>
+
         <a
           href={tweetHref}
           target="_blank"
@@ -34,36 +36,46 @@ const Factsheet = ({
       ) : (
         <List>
           <List.Item>
-            <List.Content>Creation date: {creationDate}</List.Content>
-          </List.Item>
-          <List.Item>
-            <List.Content as="a" onClick={() => scrollTo("holdings")}>
-              AUM: {aum} MLN
+            <List.Content>
+              Creation date: <MaybeLoading>{creationDate}</MaybeLoading>
             </List.Content>
           </List.Item>
           <List.Item>
             <List.Content as="a" onClick={() => scrollTo("holdings")}>
-              Share Price: {sharePrice} MLN/Share
+              AUM: <MaybeLoading>{aum}</MaybeLoading> MLN
+            </List.Content>
+          </List.Item>
+          <List.Item>
+            <List.Content as="a" onClick={() => scrollTo("holdings")}>
+              Share Price: <MaybeLoading>{sharePrice}</MaybeLoading> MLN/Share
             </List.Content>
           </List.Item>
           <List.Item>
             <List.Content as="a" href="#/ranking">
-              Ranking: {rank} out of {numberOfFunds} Melon Funds
+              Ranking: <MaybeLoading>{rank}</MaybeLoading> out of{" "}
+              <MaybeLoading>{numberOfFunds}</MaybeLoading> Melon Funds
             </List.Content>
           </List.Item>
           <List.Item>
-            <List.Content>Total number of shares: {totalSupply}</List.Content>
-          </List.Item>
-          <List.Item>
-            <List.Content>Shares owned by me: {personalStake}</List.Content>
-          </List.Item>
-          <Divider />
-          <List.Item>
-            <List.Content>Management Reward: {managementReward}%</List.Content>
+            <List.Content>
+              Total number of shares: <MaybeLoading>{totalSupply}</MaybeLoading>
+            </List.Content>
           </List.Item>
           <List.Item>
             <List.Content>
-              Performance Reward: {performanceReward}%
+              Shares owned by me: <MaybeLoading>{personalStake}</MaybeLoading>
+            </List.Content>
+          </List.Item>
+          <Divider />
+          <List.Item>
+            <List.Content>
+              Management Reward: <MaybeLoading>{managementReward}</MaybeLoading>%
+            </List.Content>
+          </List.Item>
+          <List.Item>
+            <List.Content>
+              Performance Reward:{" "}
+              <MaybeLoading>{performanceReward}</MaybeLoading>%
             </List.Content>
           </List.Item>
 
