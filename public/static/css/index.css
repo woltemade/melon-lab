@@ -1,0 +1,47 @@
+.ui.card > .content > .header,
+.ui.cards > .card > .content > .header {
+  position: relative;
+}
+.ui.card > .content > .header::after,
+.ui.cards > .card > .content > .header::after {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid rgba(34, 36, 38, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+input {
+  text-align: right !important;
+  background-color: transparent !important;
+  border-left-color: rgba(34, 36, 38, 0.15) !important;
+}
+
+.ui.labeled.input > .label {
+  width: 7em !important;
+  background-color: transparent;
+}
+
+h3 {
+  position: relative;
+}
+h3::after {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 33%;
+  border-top: 1px solid rgba(34, 36, 38, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+th:first-of-type,
+td:first-of-type {
+  padding-left: 0 !important;
+}
+
+.interactive {
+  cursor: pointer;
+}
