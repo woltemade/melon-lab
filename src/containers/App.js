@@ -6,6 +6,7 @@ import { actions as routeActions } from "../actions/routes";
 
 const getStatus = ({
   syncing,
+  blockNumber,
   isConnected,
   isUpToDate,
   isReadyToVisit,
@@ -16,6 +17,8 @@ const getStatus = ({
   if (!isConnected)
     return { message: "Not connected to chain", type: statusTypes.ERROR };
   if (syncing) return { message: "Node not synced", type: statusTypes.WARNING };
+  if (blockNumber === 0)
+    return { message: "Loading ...", type: statusTypes.NEUTRAL };
   if (!isUpToDate)
     return { message: "Block overdue", type: statusTypes.WARNING };
   if (!isReadyToVisit)
