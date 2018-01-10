@@ -22,6 +22,8 @@ function* getOrderbookSaga() {
         orders: [],
         buyOrders: [],
         sellOrders: [],
+        totalBuyVolume: 0,
+        totalSellVolume: 0,
       }),
     );
     const rawOrderbook = yield call(
