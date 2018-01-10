@@ -37,8 +37,7 @@ export const ConnectionInfoComponent = ({
       padding: 5,
     }}
   >
-    <Link to={myAccount()}>{shortenAddress(account || "")}</Link>
-    |{" "}
+    <Link to={myAccount()}>{shortenAddress(account || "")}</Link> |{" "}
     <a href={`https://faucet.melon.network/${account}`} target="_blank">
       Ⓜ {displayNumber(mlnBalance)} | Ξ {displayNumber(ethBalance)}
     </a>{" "}

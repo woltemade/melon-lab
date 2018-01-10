@@ -13,6 +13,7 @@ export const types = {
   SET_PENDING_REQUEST: "SET_PENDING_REQUEST:fund:melon.fund",
   READY_TO_EXECUTE: "READY_TO_EXECUTE:fund:melon.fund",
   SET_LOADING: "SET_LOADING:fund:melon.fund",
+  PROGRESSIVE_UPDATE: "PROGRESSIVE_UPDATE:fund:melon.fund",
 };
 
 export const actions = {
@@ -81,6 +82,11 @@ export const actions = {
     unclaimedRewards,
     inception,
     loading,
+  }),
+  progressiveUpdate: data => ({
+    type: types.PROGRESSIVE_UPDATE,
+    ...data,
+    loading: false,
   }),
   sharePriceRequested: () => ({
     type: types.SHARE_PRICE_REQUESTED,

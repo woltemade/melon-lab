@@ -24,8 +24,14 @@ const mapStateToProps = state => ({
   initialValues: {
     type: "Invest",
     amount: 1,
-    price: calculateParticipationPrice(state.fund.sharePrice, "Invest"),
-    total: calculateParticipationPrice(state.fund.sharePrice, "Invest"),
+    price:
+      state.fund.sharePrice === "..."
+        ? "..."
+        : calculateParticipationPrice(state.fund.sharePrice, "Invest"),
+    total:
+      state.fund.sharePrice === "..."
+        ? "..."
+        : calculateParticipationPrice(state.fund.sharePrice, "Invest"),
   },
   displayNumber,
 });

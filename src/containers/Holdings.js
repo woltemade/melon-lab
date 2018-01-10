@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
+import { reset } from "redux-form";
+import { lifecycle } from "recompose";
 import { actions } from "../actions/holdings";
 import { actions as appActions } from "../actions/app";
 import { actions as orderbookActions } from "../actions/orderbook";
 import { actions as recentTradesActions } from "../actions/recentTrades";
-import { reset } from "redux-form";
-import { lifecycle } from "recompose";
 import Holdings from "../components/organisms/Holdings";
 import displayNumber from "../utils/displayNumber";
 
@@ -13,12 +13,15 @@ const mapStateToProps = state => ({
     name: asset.name,
     balance: displayNumber(asset.balance),
     price: displayNumber(asset.price),
-    percentage: displayNumber(
-      asset.balance
-        .times(asset.price)
-        .div(state.fund.nav)
-        .times(100),
-    ),
+    percentage:
+      state.fund.nav === "..."
+        ? "..."
+        : displayNumber(
+            asset.balance
+              .times(asset.price)
+              .div(state.fund.nav)
+              .times(100),
+          ),
   })),
   isReadyToTrade: state.app.isReadyToTrade,
 });

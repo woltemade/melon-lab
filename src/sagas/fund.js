@@ -33,11 +33,16 @@ function* requestInfo({ address }) {
   try {
     const account = yield select(state => state.ethereum.account);
     const fundInfo = yield call(getFundInformations, address);
+    yield put(actions.progressiveUpdate({ ...fundInfo, address }));
     const calculations = yield call(performCalculations, address);
+    yield put(actions.progressiveUpdate(calculations));
+
     const participationAuthorizations = yield call(
       getParticipationAuthorizations,
       address,
     );
+
+    yield put(actions.progressiveUpdate(participationAuthorizations));
 
     const info = {
       ...fundInfo,
