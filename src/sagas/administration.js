@@ -10,6 +10,7 @@ import {
 
 import { types, actions } from "../actions/administration";
 import { actions as modalActions, types as modalTypes } from "../actions/modal";
+import { actions as routeActions } from "../actions/routes";
 
 function* toggleSubscriptionSaga() {
   const subscriptionAllowed = yield select(
@@ -17,9 +18,9 @@ function* toggleSubscriptionSaga() {
   );
   yield put(
     modalActions.confirm(
-      `Do you really want to buy ${subscriptionAllowed
-        ? "disable"
-        : "enable"} subscriptions? If yes, please type your password below:`,
+      `Do you really want to ${
+        subscriptionAllowed ? "disable" : "enable"
+      } subscriptions? If yes, please type your password below:`,
     ),
   );
   const { password } = yield take(modalTypes.CONFIRMED);
@@ -52,9 +53,9 @@ function* toggleRedemptionSaga() {
   );
   yield put(
     modalActions.confirm(
-      `Do you really want to buy ${redemptionAllowed
-        ? "disable"
-        : "enable"} redemptions? If yes, please type your password below:`,
+      `Do you really want to ${
+        redemptionAllowed ? "disable" : "enable"
+      } redemptions? If yes, please type your password below:`,
     ),
   );
   const { password } = yield take(modalTypes.CONFIRMED);
@@ -65,6 +66,7 @@ function* toggleRedemptionSaga() {
     const decryptedWallet = yield call(decryptWallet, wallet, password);
     const address = yield select(state => state.fund.address);
     yield call(toggleRedemption, decryptedWallet, address);
+    yield put(modalActions.close());
     yield put(actions.toggleRedemptionSucceeded(!redemptionAllowed));
   } catch (err) {
     if (err.name === "password") {
@@ -81,14 +83,9 @@ function* toggleRedemptionSaga() {
 }
 
 function* convertUnclaimedRewardsSaga() {
-  const redemptionAllowed = yield select(
-    state => state.fund.subscriptionAllowed,
-  );
   yield put(
     modalActions.confirm(
-      `Do you really want to buy ${redemptionAllowed
-        ? "disable"
-        : "enable"} redemptions? If yes, please type your password below:`,
+      `Do you really want to convert your unclaimed rewards? If yes, please type your password below:`,
     ),
   );
   const { password } = yield take(modalTypes.CONFIRMED);
@@ -100,6 +97,7 @@ function* convertUnclaimedRewardsSaga() {
     const address = yield select(state => state.fund.address);
     // TODO: Check if it succeeded
     yield call(convertUnclaimedRewards, decryptedWallet, address);
+    yield put(modalActions.close());
     yield put(actions.convertUnclaimedRewardsSucceeded());
   } catch (err) {
     if (err.name === "password") {
@@ -116,14 +114,9 @@ function* convertUnclaimedRewardsSaga() {
 }
 
 function* shutDownFundSaga() {
-  const redemptionAllowed = yield select(
-    state => state.fund.subscriptionAllowed,
-  );
   yield put(
     modalActions.confirm(
-      `Do you really want to buy ${redemptionAllowed
-        ? "disable"
-        : "enable"} redemptions? If yes, please type your password below:`,
+      `Do you really want to shut down your fund? If yes, please type your password below:`,
     ),
   );
   const { password } = yield take(modalTypes.CONFIRMED);
@@ -135,7 +128,9 @@ function* shutDownFundSaga() {
     const address = yield select(state => state.fund.address);
     // TODO: Check if it succeeded
     yield call(shutDownFund, decryptedWallet, address);
+    yield put(modalActions.close());
     yield put(actions.shutdownSucceeded());
+    yield put(routeActions.ranking());
   } catch (err) {
     if (err.name === "password") {
       yield put(modalActions.error("Wrong password"));
