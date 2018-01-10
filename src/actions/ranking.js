@@ -19,6 +19,6 @@ export const actions = {
   }),
   setLoading: loading => ({
     type: types.SET_LOADING,
-    loading,
+    ...loading,
   }),
 };
