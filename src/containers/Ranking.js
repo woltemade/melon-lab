@@ -12,6 +12,7 @@ const mapStateToProps = state => ({
     inception: moment(fund.inception).format("D. MMM YYYY HH:mm"),
     sharePrice: displayNumber(fund.sharePrice.toString()),
   })),
+  usersFund: state.app.usersFund,
   getFundLinkAction: fundAddress => routeActions.fund(fundAddress),
   loading: state.ranking.loading,
 });

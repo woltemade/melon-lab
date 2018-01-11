@@ -3,7 +3,7 @@ import { Image, Table } from "semantic-ui-react";
 import Link from "redux-first-router-link";
 import GetStarted from "../../containers/GetStarted";
 
-const Ranking = ({ rankingList, getFundLinkAction, loading }) => (
+const Ranking = ({ rankingList, getFundLinkAction, loading, usersFund }) => (
   <div>
     <GetStarted />
 
@@ -20,9 +20,15 @@ const Ranking = ({ rankingList, getFundLinkAction, loading }) => (
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {rankingList.map((fund, i) => (
-          <Table.Row key={i + 1}>
-            <Table.Cell>{i + 1}</Table.Cell>
+        {rankingList.map(fund => (
+          <Table.Row
+            key={fund.address}
+            style={{
+              backgroundColor:
+                usersFund === fund.address ? "rgba(0,0,0,0.05)" : "transparent",
+            }}
+          >
+            <Table.Cell>{fund.rank}</Table.Cell>
             <Table.Cell>
               <Link to={getFundLinkAction(fund.address)}>{fund.name}</Link>
             </Table.Cell>
