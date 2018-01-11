@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.5.0-alpha.29",
+  "version": "0.5.2",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/main.js",
   "esnext": "lib/main.js",
@@ -33,8 +33,6 @@
     "format":
       "prettier-eslint --write \"lib/**/*.js\" && prettier-eslint --write \"tests/**/*.js\"",
     "precommit": "lint-staged",
-    "preversion": "npm test",
-    "version": "npm run test",
     "postversion": "git push && git push --tags",
     "deploy": "npm version patch && npm publish",
     "deploy:alpha": "npm publish --tag alpha",
