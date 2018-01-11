@@ -7,6 +7,9 @@ import GetStarted from "../../containers/GetStarted";
 
 import renderInput from "../utils/renderInput";
 
+const activeStyle = { textDecoration: "underline", cursor: "pointer" };
+const inactiveStyle = { cursor: "pointer" };
+
 const Ranking = ({
   rankingList,
   getFundLinkAction,
@@ -14,6 +17,8 @@ const Ranking = ({
   usersFund,
   search,
   onFilterChange,
+  ordering,
+  setOrdering,
 }) => (
   <div>
     <GetStarted />
@@ -25,7 +30,17 @@ const Ranking = ({
     <Table>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>#</Table.HeaderCell>
+          <Table.HeaderCell
+            onClick={() =>
+              ordering === "+rank" ? setOrdering("-rank") : setOrdering("+rank")
+            }
+          >
+            {ordering === "+rank" || ordering === "-rank" ? (
+              <span style={activeStyle}>#</span>
+            ) : (
+              <span style={inactiveStyle}>#</span>
+            )}
+          </Table.HeaderCell>
           <Table.HeaderCell>
             <form id="ranking-search">
               <Field
@@ -37,8 +52,34 @@ const Ranking = ({
               />
             </form>
           </Table.HeaderCell>
-          <Table.HeaderCell textAlign="right">Share price</Table.HeaderCell>
-          <Table.HeaderCell textAlign="right">Inception date</Table.HeaderCell>
+          <Table.HeaderCell
+            textAlign="right"
+            onClick={() =>
+              ordering === "+price"
+                ? setOrdering("-price")
+                : setOrdering("+price")
+            }
+          >
+            {ordering === "+price" || ordering === "-price" ? (
+              <span style={activeStyle}>Share Price</span>
+            ) : (
+              <span style={inactiveStyle}>Share Price</span>
+            )}
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            textAlign="right"
+            onClick={() =>
+              ordering === "+inception"
+                ? setOrdering("-inception")
+                : setOrdering("+inception")
+            }
+          >
+            {ordering === "+inception" || ordering === "-inception" ? (
+              <span style={activeStyle}>Inception Date</span>
+            ) : (
+              <span style={inactiveStyle}>Inception Date</span>
+            )}
+          </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>

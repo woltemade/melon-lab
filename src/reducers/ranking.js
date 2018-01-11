@@ -5,7 +5,7 @@ export const initialState = {
   rankingList: [],
   loading: false,
   search: "",
-  ordering: "",
+  ordering: "+rank",
 };
 
 export const reducer = mergeReducer(initialState, types);
