@@ -1,7 +1,7 @@
 import moment from "moment";
 import { connect } from "react-redux";
 import { lifecycle } from "recompose";
-import Ranking from "../components/organisms/Ranking";
+import Ranking from "../components/pages/Ranking";
 import { actions } from "../actions/ranking";
 import displayNumber from "../utils/displayNumber";
 import { actions as routeActions } from "../actions/routes";

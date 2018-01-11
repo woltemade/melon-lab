@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, Table } from "semantic-ui-react";
 import Link from "redux-first-router-link";
-import GetStarted from "./GetStarted";
+import GetStarted from "../../containers/GetStarted";
 
 const Ranking = ({ rankingList, getFundLinkAction, loading }) => (
   <div>

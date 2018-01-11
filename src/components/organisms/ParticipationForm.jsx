@@ -22,10 +22,10 @@ const participationTypeSelector = ({ input: { onChange, value } }) => (
 );
 
 const ParticipationForm = ({ setup, handleSubmit, displayNumber }) => (
-  <form onSubmit={handleSubmit} name="participation">
-    <Card id="participation" centered>
-      <Card.Content>
-        <Card.Header>Participation</Card.Header>
+  <Card id="participation" centered>
+    <Card.Content>
+      <Card.Header>Participation</Card.Header>
+      <form onSubmit={handleSubmit} name="participation">
         {setup ? null : (
           <Field name="type" component={participationTypeSelector} />
         )}
@@ -69,9 +69,9 @@ const ParticipationForm = ({ setup, handleSubmit, displayNumber }) => (
         <Button basic color="black" style={{ width: "100%" }}>
           Submit request
         </Button>
-      </Card.Content>
-    </Card>
-  </form>
+      </form>
+    </Card.Content>
+  </Card>
 );
 
 export default ParticipationForm;

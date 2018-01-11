@@ -10,8 +10,8 @@ function* getRankingSaga() {
 
   try {
     yield put(actions.setLoading({ loading: true }));
-    const rankingList = yield call(getRanking);
-    yield put(actions.getRankingSucceeded(rankingList));
+    // const rankingList = yield call(getRanking);
+    // yield put(actions.getRankingSucceeded(rankingList));
     yield put(actions.setLoading({ loading: false }));
   } catch (err) {
     console.error(err);

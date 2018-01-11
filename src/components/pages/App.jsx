@@ -24,7 +24,6 @@ const mapOnboardingStateToMainContainer = {
   [onboardingPath.INSUFFICIENT_FUNDS]: InsufficientFunds,
   [onboardingPath.NO_FUND_CREATED]: SetupContainer,
   [onboardingPath.NOT_INVESTED_IN_OWN_FUND]: ParticipationContainer,
-  [onboardingPath.ONBOARDED]: FundContainer,
 };
 
 const routeContainerMap = {
