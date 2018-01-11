@@ -7,26 +7,19 @@ import Administration from "../../containers/Administration";
 import Orderbook from "../../containers/Orderbook";
 import RecentTrades from "../../containers/RecentTrades";
 import TradeHistory from "../../containers/TradeHistory";
-import GetStarted from "../organisms/GetStarted";
+import GetStarted from "../../containers/GetStarted";
 import Participation from "../../containers/Participation";
 import ExecuteRequest from "../../containers/ExecuteRequest";
 import TradeHelper from "../../containers/TradeHelper";
 import Trade from "../../containers/Trade";
 
-const Fund = ({
-  isVisitor,
-  isManager,
-  fundAddress,
-  canInvest,
-  pendingRequest,
-}) => (
+const Fund = ({ isManager, fundAddress, canInvest, pendingRequest }) => (
   <div className="App">
     <br />
     <div>
       <Card.Group>
         <Factsheet />
-        {isManager ? <Administration /> : <div />}
-        {isVisitor ? <GetStarted /> : <div />}
+        {isManager ? <Administration /> : <GetStarted />}
         {canInvest && !pendingRequest ? <Participation /> : <div />}
         {canInvest && pendingRequest ? <ExecuteRequest /> : <div />}
       </Card.Group>

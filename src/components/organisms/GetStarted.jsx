@@ -2,7 +2,7 @@ import React from "react";
 import Link from "redux-first-router-link";
 import { Card } from "semantic-ui-react";
 
-const GetStarted = () => (
+const GetStarted = ({ usersFund, getFundLinkAction, setupLinkAction }) => (
   <Card centered>
     <Card.Content>
       <p>
@@ -20,7 +20,11 @@ const GetStarted = () => (
       </p>
       <div style={{ textAlign: "left" }}>
         <h3>
-          <Link to={`/setup`}>Enter Melon</Link>
+          {usersFund ? (
+            <Link to={getFundLinkAction(usersFund)}>Go to your fund</Link>
+          ) : (
+            <Link to={setupLinkAction}>Get Started</Link>
+          )}
         </h3>
       </div>
       <br />

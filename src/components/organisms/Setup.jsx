@@ -21,7 +21,11 @@ const Setup = ({ loading, handleSubmit }) => (
         <List>
           <List.Item>
             <List.Content>
-              <Field name="name" component={renderInput} />
+              <Field
+                name="name"
+                component={renderInput}
+                className="left-input"
+              />
             </List.Content>
           </List.Item>
           <br />

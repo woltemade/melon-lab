@@ -1,4 +1,5 @@
 import { types } from "../actions/orderbook";
+import mergeReducer from "../utils/mergeReducer";
 
 export const initialState = {
   orders: [],
@@ -10,27 +11,6 @@ export const initialState = {
   loading: false,
 };
 
-const reducers = {
-  merge: (state, params) => ({
-    ...state,
-    ...params,
-  }),
-  default: state => ({ ...state }),
-};
-
-const mapActionToReducer = {
-  [types.GET_ORDERBOOK_SUCCEEDED]: reducers.merge,
-  [types.SELECT_ORDER]: reducers.merge,
-  [types.SET_LOADING]: reducers.merge,
-};
-
-export const reducer = (state = initialState, action) => {
-  const { type, ...params } = action;
-
-  const matchedReducer = mapActionToReducer[type] || reducers.default;
-  const newState = matchedReducer(state, params);
-
-  return newState;
-};
+export const reducer = mergeReducer(initialState, types);
 
 export default reducer;
