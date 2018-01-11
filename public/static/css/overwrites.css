@@ -19,6 +19,10 @@ input {
   border-left-color: rgba(34, 36, 38, 0.15) !important;
 }
 
+.left-input input {
+  text-align: left !important;
+}
+
 .ui.labeled.input > .label {
   width: 7em !important;
   background-color: transparent;

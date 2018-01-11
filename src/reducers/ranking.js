@@ -4,7 +4,7 @@ import mergeReducer from "../utils/mergeReducer";
 export const initialState = {
   rankingList: [],
   loading: false,
-  filter: "",
+  search: "",
   ordering: "",
 };
 
