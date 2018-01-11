@@ -173,9 +173,19 @@ By interacting with the smart contracts, we have 2 levels of testing:
 - Back to the terminal, make this new file executable by running: `chmod 755 run.sh`
 
 ### Configure integration tests to use your address
+[deprecated]
 Integration tests use [dotenv](https://github.com/motdotla/dotenv) files for 
 enviroment specific configurations. Duplicate `.env.example` to `.env` in the
 projects root folder and change the settings accordingly.
+
+To run the integration tests, you need to include in your directory an encryptedWallet.json file and a password.json file. They will be used to instantiate a wallet/custom signer, which will then be used to sign integration tests transactions. [!] Do not commit any of those files to git.
+For the password.json file, below is the expected format:
+
+{
+  "kovan": "YOUR_KOVAN_WALLET_PASSWORD",
+  "live": "YOUR_MAINNET_WALLET_PASSWORD"
+}
+
 
 
 

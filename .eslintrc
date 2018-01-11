@@ -6,6 +6,6 @@
     "jest": true
   },
   "rules": {
-    "max-params": ["warn", 3]
+    "max-params": ["warn", 8]
   }
 }

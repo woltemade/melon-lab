@@ -1,0 +1,1 @@
+[{"constant":true,"inputs":[],"name":"getFundsSharePrices","outputs":[{"name":"fundAddresses","type":"address[1024]"},{"name":"fundSharePrices","type":"uint256[1024]"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"ofVersion","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]

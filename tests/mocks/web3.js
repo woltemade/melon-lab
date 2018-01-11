@@ -5,9 +5,7 @@ let firstTimeout;
 let secondTimeout;
 
 const instance = {
-  version: {
-    network: 42,
-  },
+  networkId: 42,
   eth: {
     accounts: ["0xMANAGER"],
     getBlock: jest.fn((block, callback) =>

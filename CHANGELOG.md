@@ -10,15 +10,66 @@ and this project adheres to
 
 ### Refactored
 
+## Unreleased
+
+### Refactored
+
 ### Added
+
+* sendTransaction function
+* constructTransactionObject function
+* getPastEvents (unused as of now; prepared it for later)
+* getRankingContract function
+* getRanking function
+* createWallet function
+* importWallet function
+* signTermsAndConditions function
+* parity and wallet folder in utils folder
+* getParityProvider function
+* getHoldingsAndPrices function
+* getOpenOrders
+* isRedeemRequestPermittedAndAllowed
+* isSubscribeRequestPermittedAndAllowed
+* isMakePermitted
+* isTakePermitted
 
 ### Changed
 
+* Switch from web3 to parity.js (parityfy all transactions/calls to the contracts)
+* gasBoost function adjusted to parity.js
+* getRecentTrades for an asset pair and getFundRecentTrades, using rpc call getLogs
+* awaitDataFeedUpdate -used only for integration test
+* Upgrade to protocol v0.5.2-alpha.1
+* [labeling] Renamed 'creationDate' and 'timestamp' in setupFund an getFundInformations to 'inception'
+* [labeling] Renamed 'timestamp' in convertUnclaimedRewards to 'date'
+* [labeling] Harmonized in subscribe/redeem from atTimeStamp/atTimeStamp to timestamp
+* onBlock function adjusted to parity.js
 * getFundInformations also returns owner
+* Pass in decrypted wallet instance as first argument to ALL functions performing an on-chain transaction
+
+### Removed
+
+* depositAndApproveEther
+* filterByAssetPair
+* sortByPrice
 
 ### Deprecated
+* "from" argument in functions; now uses wallet.address
 
 ### Fixed
+* #69
+* #76
+* #86
+* #87
+* #89
+* #90
+* #91
+* #92
+* #94
+* #113
+* #129
+* #130
+* #131
 
 ## [0.3.5]
 
