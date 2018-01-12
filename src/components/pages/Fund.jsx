@@ -30,7 +30,10 @@ const Fund = ({ isManager, fundAddress, canInvest, pendingRequest }) => (
       {isManager ? (
         <div>
           {" "}
-          <Trade /> <TradeHelper />
+          <Card.Group centered>
+            <Trade />
+            <TradeHelper />
+          </Card.Group>
         </div>
       ) : (
         <div />

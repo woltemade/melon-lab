@@ -1,8 +1,15 @@
 import React from "react";
+import MaybeData from "../molecules/MaybeData";
 
 import { Table } from "semantic-ui-react";
 
-const Holdings = ({ holdings, selectAsset, scrollTo, isReadyToTrade }) => (
+const Holdings = ({
+  holdings,
+  selectAsset,
+  scrollTo,
+  isReadyToTrade,
+  dataValid,
+}) => (
   <div id="holdings">
     <h3 className="App-intro">Fund Holdings</h3>
     <Table size="small">
@@ -20,15 +27,21 @@ const Holdings = ({ holdings, selectAsset, scrollTo, isReadyToTrade }) => (
           <Table.Row key={asset.name}>
             <Table.Cell>{asset.name}</Table.Cell>
             <Table.Cell textAlign="right">{asset.balance}</Table.Cell>
-            <Table.Cell textAlign="right">{asset.percentage}%</Table.Cell>
-            <Table.Cell textAlign="right">{asset.price}</Table.Cell>
+            <Table.Cell textAlign="right">
+              <MaybeData dataAvailable={dataValid}>
+                {asset.percentage}%
+              </MaybeData>
+            </Table.Cell>
+            <Table.Cell textAlign="right">
+              <MaybeData dataAvailable={dataValid}>{asset.price}</MaybeData>
+            </Table.Cell>
             <Table.Cell
               textAlign="right"
               onClick={() => selectAsset(asset.name, isReadyToTrade)}
             >
               {asset.name === "MLN-T" ? (
                 <div>❤</div>
-              ) : isReadyToTrade ? (
+              ) : isReadyToTrade && dataValid ? (
                 <div className="interactive">Buy/Sell</div>
               ) : (
                 <div className="interactive">See Orderbook</div>

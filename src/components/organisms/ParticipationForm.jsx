@@ -21,7 +21,12 @@ const participationTypeSelector = ({ input: { onChange, value } }) => (
   </div>
 );
 
-const ParticipationForm = ({ setup, handleSubmit, displayNumber }) => (
+const ParticipationForm = ({
+  setup,
+  handleSubmit,
+  displayNumber,
+  dataValid,
+}) => (
   <Card id="participation" centered>
     <Card.Content>
       <Card.Header>Participation</Card.Header>
@@ -38,6 +43,7 @@ const ParticipationForm = ({ setup, handleSubmit, displayNumber }) => (
                 component={NumberInput}
                 type="number"
                 format={displayNumber}
+                disabled={!dataValid}
               />
             </List.Content>
           </List.Item>
@@ -61,12 +67,24 @@ const ParticipationForm = ({ setup, handleSubmit, displayNumber }) => (
                 component={NumberInput}
                 format={displayNumber}
                 type="number"
+                disabled={!dataValid}
               />
             </List.Content>
           </List.Item>
         </List>
 
-        <Button basic color="black" style={{ width: "100%" }}>
+        {!dataValid ? (
+          <p style={{ color: "rgb(209, 102, 102)" }}>
+            Invest/Redeem not possible when price feed down
+          </p>
+        ) : null}
+
+        <Button
+          basic
+          color="black"
+          style={{ width: "100%" }}
+          disabled={!dataValid}
+        >
           Submit request
         </Button>
       </form>

@@ -64,12 +64,12 @@ const Trade = ({
   loading,
   strategy,
   selectedOrder,
+  dataValid,
 }) => (
-  <form onSubmit={handleSubmit}>
-    <Card centered id="trade">
-      <Card.Content>
-        <Card.Header>Trade</Card.Header>
-
+  <Card centered id="trade">
+    <Card.Content>
+      <Card.Header>Trade</Card.Header>
+      <form onSubmit={handleSubmit}>
         <Field
           name="type"
           component={orderTypeSelector}
@@ -86,7 +86,7 @@ const Trade = ({
             <List.Content>
               <Field
                 id="trade-price"
-                disabled={strategy === "Market"}
+                disabled={strategy === "Market" || !dataValid}
                 format={displayNumber}
                 name="price"
                 component={NumberInput}
@@ -98,7 +98,9 @@ const Trade = ({
             <List.Content>
               <Field
                 id="trade-quantity"
-                disabled={strategy === "Market" && !selectedOrder}
+                disabled={
+                  (strategy === "Market" && !selectedOrder) || !dataValid
+                }
                 format={displayNumber}
                 name="quantity"
                 component={NumberInput}
@@ -110,7 +112,9 @@ const Trade = ({
             <List.Content>
               <Field
                 id="trade-total"
-                disabled={strategy === "Market" && !selectedOrder}
+                disabled={
+                  (strategy === "Market" && !selectedOrder) || !dataValid
+                }
                 format={displayNumber}
                 name="total"
                 component={NumberInput}
@@ -120,21 +124,27 @@ const Trade = ({
           </List.Item>
         </List>
 
+        {!dataValid ? (
+          <p style={{ color: "rgb(209, 102, 102)" }}>
+            Trading not possible when price feed down
+          </p>
+        ) : null}
+
         <Button
           basic
           id="tradeButton"
           color="black"
           style={{ width: "100%" }}
-          disabled={strategy === "Market" && !selectedOrder}
+          disabled={(strategy === "Market" && !selectedOrder) || !dataValid}
         >
           {orderType}
         </Button>
-      </Card.Content>
-      <div className={`ui ${loading ? "active" : ""} inverted dimmer`}>
-        <div className="ui text loader">Executing your order ...</div>
-      </div>
-    </Card>
-  </form>
+      </form>
+    </Card.Content>
+    <div className={`ui ${loading ? "active" : ""} inverted dimmer`}>
+      <div className="ui text loader">Executing your order ...</div>
+    </div>
+  </Card>
 );
 
 export default Trade;
