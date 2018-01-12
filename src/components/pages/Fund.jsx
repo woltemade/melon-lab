@@ -22,6 +22,7 @@ const Fund = ({ isManager, fundAddress, canInvest, pendingRequest }) => (
         {isManager ? <Administration /> : <GetStarted />}
         {canInvest && !pendingRequest ? <Participation /> : <div />}
         {canInvest && pendingRequest ? <ExecuteRequest /> : <div />}
+        {!canInvest ? <Card /> : <div />}
       </Card.Group>
       <br />
       <Holdings address={fundAddress} />

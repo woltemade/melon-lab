@@ -1,6 +1,7 @@
 import React from "react";
 import { List, Card, Divider, Image } from "semantic-ui-react";
 import MaybeLoading from "../molecules/MaybeLoading";
+import MaybeData from "../molecules/MaybeData";
 
 const Factsheet = ({
   aum,
@@ -16,6 +17,7 @@ const Factsheet = ({
   tweetHref,
   scrollTo,
   loading,
+  dataValid,
 }) => (
   <Card id="factsheet">
     <Card.Content>
@@ -42,12 +44,18 @@ const Factsheet = ({
           </List.Item>
           <List.Item>
             <List.Content as="a" onClick={() => scrollTo("holdings")}>
-              AUM: <MaybeLoading>{aum}</MaybeLoading> MLN
+              <MaybeData dataAvailable={dataValid}>
+                AUM: <MaybeLoading>{dataValid ? aum : "???"}</MaybeLoading> MLN
+              </MaybeData>
             </List.Content>
           </List.Item>
           <List.Item>
             <List.Content as="a" onClick={() => scrollTo("holdings")}>
-              Share Price: <MaybeLoading>{sharePrice}</MaybeLoading> MLN/Share
+              <MaybeData dataAvailable={dataValid}>
+                Share Price:{" "}
+                <MaybeLoading>{dataValid ? sharePrice : "???"}</MaybeLoading>{" "}
+                MLN/Share
+              </MaybeData>
             </List.Content>
           </List.Item>
           <List.Item>
