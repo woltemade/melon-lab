@@ -13,7 +13,7 @@ const initialState = {
   syncing: false,
   isConnected: false,
   isUpToDate: false,
-  isDataValid: false, // Data Feed
+  isDataValid: true, // Data Feed
 
   // derived state
   networkName: null,

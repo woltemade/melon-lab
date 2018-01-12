@@ -21,6 +21,7 @@ const mapStateToProps = state => ({
   onboardingState: state.app.onboardingState,
   usersFund: state.app.usersFund,
   fundAddress: state.fund.address,
+  dataValid: state.ethereum.dataValid,
   initialValues: {
     type: "Invest",
     amount: 1,
