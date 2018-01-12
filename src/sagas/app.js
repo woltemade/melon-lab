@@ -73,13 +73,12 @@ function* redirectSaga() {
 
   if (usersFund) {
     const fundInfoReceived = yield select(
-      state => !["", "-"].includes(state.fund.name),
+      state => !["", "-", "..."].includes(state.fund.name),
     );
 
     if (!fundInfoReceived) {
       yield put(fundActions.infoRequested(usersFund));
       yield take(fundTypes.INFO_SUCCEEDED);
-      yield take(types.SET_READY_STATE);
     }
 
     const isReadyToTrade = yield select(state => state.app.isReadyToTrade);
