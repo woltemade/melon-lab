@@ -1,4 +1,4 @@
-![Melon.js Logo](/docs/media/melonjs-500.png?raw=true)
+![Melon.js Logo](https://github.com/melonproject/branding/blob/master/melonjs/03_melonjs_logo.png?raw=true)
 
 Melon.js
 ========
