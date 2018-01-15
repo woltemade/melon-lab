@@ -7,7 +7,7 @@ import setup from "../../lib/utils/setup";
 /* eslint-enable */
 
 // const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-const provider = new Api.Provider.Http("http://localhost:8545");
+const provider = new Api.Provider.Http("https://kovan.melonport.com");
 const api = new Api(provider);
 
 try {
