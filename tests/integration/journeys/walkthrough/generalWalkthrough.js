@@ -25,17 +25,17 @@ import getParticipationAuthorizations from "../../../../lib/fund/calls/getPartic
 import makeOrderFromAccount from "../../../../lib/exchange/transactions/makeOrderFromAccount";
 import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
 import performCalculations from "../../../../lib/fund/calls/performCalculations";
-import redeem from "../../../../lib/participation/transactions/redeem";
-import getRecentTrades from "../../../../lib/exchange/calls/getRecentTrades";
-import getFundRecentTrades from "../../../../lib/exchange/calls/getFundRecentTrades";
-import getParityProvider from "../../../../lib/utils/parity/getParityProvider";
-import createWallet from "../../../../lib/utils/wallet/createWallet";
-import encryptWallet from "../../../../lib/utils/wallet/encryptWallet";
-import decryptWallet from "../../../../lib/utils/wallet/decryptWallet";
+// import redeem from "../../../../lib/participation/transactions/redeem";
+// import getRecentTrades from "../../../../lib/exchange/calls/getRecentTrades";
+// import getFundRecentTrades from "../../../../lib/exchange/calls/getFundRecentTrades";
+// import getParityProvider from "../../../../lib/utils/parity/getParityProvider";
+// import createWallet from "../../../../lib/utils/wallet/createWallet";
+// import encryptWallet from "../../../../lib/utils/wallet/encryptWallet";
+// import decryptWallet from "../../../../lib/utils/wallet/decryptWallet";
 import importWalletFromMnemonic from "../../../../lib/utils/wallet/importWalletFromMnemonic";
-import getRanking from "../../../../lib/version/calls/getRanking";
-import getHoldingsAndPrices from "../../../../lib/fund/calls/getHoldingsAndPrices";
-import cancelOrder from "../../../../lib/fund/transactions/cancelOrder";
+// import getRanking from "../../../../lib/version/calls/getRanking";
+// import getHoldingsAndPrices from "../../../../lib/fund/calls/getHoldingsAndPrices";
+// import cancelOrder from "../../../../lib/fund/transactions/cancelOrder";
 
 import getOpenOrders from "../../../../lib/fund/calls/getOpenOrders";
 import getRequestsHistory from "../../../../lib/fund/calls/getRequestsHistory";
@@ -152,105 +152,28 @@ fit(
     expect(shared.initialCalculations.sharePrice.toNumber()).toBe(1);
     expect(shared.initialCalculations.gav.toNumber()).toBe(0);
 
-    shared.subscriptionRequest = await subscribe(
-      wallet,
-      shared.vault.address,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
-      new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
-    );
+    // shared.subscriptionRequest = await subscribe(
+    //   wallet,
+    //   shared.vault.address,
+    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    //   new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
+    //   new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
+    // );
 
-    trace({
-      message: `Subscribe requested. shares: ${
-        shared.subscriptionRequest.numShares
-      }`,
-      data: shared,
-    });
+    // trace({
+    //   message: `Subscribe requested. shares: ${
+    //     shared.subscriptionRequest.numShares
+    //   }`,
+    //   data: shared,
+    // });
 
-    shared.executedSubscriptionRequest = await executeRequest(
-      wallet,
-      shared.subscriptionRequest.id,
-      shared.vault.address,
-      // 0,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    );
-
-    trace(`executedSubscriptionRequest ${shared.executedSubscriptionRequest}`);
-
-    shared.participation.invested = await getParticipation(
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      shared.vault.address,
-      setup.defaultAccount,
-    );
-
-    expect(shared.participation.invested.personalStake.toNumber()).toBe(
-      INITIAL_SUBSCRIBE_QUANTITY,
-    );
-    expect(shared.participation.invested.totalSupply.toNumber()).toBe(
-      INITIAL_SUBSCRIBE_QUANTITY,
-    );
-
-    trace({
-      message: `Subscribe request executed. Personal stake: ${
-        shared.participation.invested.personalStake
-      }`,
-    });
-
-    shared.midCalculations = await performCalculations(shared.vault.address);
-
-    trace({
-      message: `Mid calculations- GAV: ${shared.midCalculations.gav}, NAV: ${
-        shared.midCalculations.nav
-      }, Share Price: ${shared.midCalculations.sharePrice}, totalSupply: ${
-        shared.midCalculations.totalSupply
-      }`,
-      data: shared,
-    });
-
-    shared.redemptionRequest = await redeem(
-      wallet,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      shared.vault.address,
-      REDEEM_QUANTITY,
-      REDEEM_QUANTITY,
-    );
-
-    trace({
-      message: `Redeem requested. shares: ${
-        shared.redemptionRequest.numShares
-      }`,
-      data: shared,
-    });
-
-    await awaitDataFeedUpdates(2);
-
-    trace("Awaited two data feed updates");
-
-    shared.executedRedeemRequest = await executeRequest(
-      wallet,
-      shared.redemptionRequest.id,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      shared.vault.address,
-    );
-
-    shared.participation.invested = await getParticipation(
-      shared.vault.address,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      setup.defaultAccount,
-    );
-
-    expect(shared.participation.invested.personalStake.toNumber()).toBe(
-      INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
-    );
-    expect(shared.participation.invested.totalSupply.toNumber()).toBe(
-      INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
-    );
-
-    trace({
-      message: `Redeem request executed. Personal stake: ${
-        shared.participation.invested.personalStake
-      }`,
-    });
+    // shared.executedSubscriptionRequest = await executeRequest(
+    //   wallet,
+    //   shared.subscriptionRequest.id,
+    //   shared.vault.address,
+    //   // 0,
+    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    // );
 
     // shared.simpleOrder = await makeOrderFromAccount({
     //   wallet,
