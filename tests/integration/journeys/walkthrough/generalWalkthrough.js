@@ -30,6 +30,7 @@ import getRecentTrades from '../../../../lib/exchange/calls/getRecentTrades';
 import getFundRecentTrades from '../../../../lib/exchange/calls/getFundRecentTrades';
 import importWalletFromMnemonic from '../../../../lib/utils/wallet/importWalletFromMnemonic';
 // import cancelOrder from "../../../../lib/fund/transactions/cancelOrder";
+import getHoldingsAndPrices from '../../../../lib/fund/calls/getHoldingsAndPrices';
 
 const INITIAL_SUBSCRIBE_QUANTITY = 20;
 const REDEEM_QUANTITY = 5;
@@ -57,6 +58,10 @@ fit(
     // const wallet = importWalletFromMnemonic(
     //   "mule faint author gun sell carbon smile disorder shove toast gasp message",
     // );
+    const holdingsAndPrices = await getHoldingsAndPrices(
+      '0x9022e115DBd463A110493235395d74F026c2E52D',
+    );
+    console.log(holdingsAndPrices);
     const wallet = importWalletFromMnemonic(
       'dinosaur pulse rice lumber machine entry tackle off require draw edge almost',
     );
