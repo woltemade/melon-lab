@@ -28,7 +28,7 @@ const mapStateToProps = state => ({
     strategy: "Market",
     type: "Buy",
   },
-  dataValid: state.ethereum.dataValid,
+  dataValid: state.ethereum.isDataValid,
   strategy: selector(state, "strategy"),
 });
 
