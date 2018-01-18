@@ -301,11 +301,11 @@ fit(
       message: `Fund placed an order with id: ${shared.orderFromFund.id}`,
     });
 
-    await cancelOrder(wallet, shared.orderFromFund.id, shared.vault.address);
+    // await cancelOrder(wallet, shared.orderFromFund.id, shared.vault.address);
 
-    trace({
-      message: `Canceled order ${shared.orderFromFund.id}`,
-    });
+    // trace({
+    //   message: `Canceled order ${shared.orderFromFund.id}`,
+    // });
 
     shared.orderBook = await getOrderbook('MLN-T', 'ETH-T');
 
@@ -318,7 +318,8 @@ fit(
 
     shared.takenOrder = await takeOrder(
       wallet,
-      shared.simpleOrder.id,
+      // shared.simpleOrder.id,
+      hared.simpleOrder1.id,
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       new BigNumber(1.5),
