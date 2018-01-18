@@ -265,19 +265,19 @@ fit(
       message: `Regular account made order with id: ${shared.simpleOrder2.id}`,
     });
 
-    // shared.orderFromFund = await makeOrder(
-    //   wallet,
-    //   shared.vault.address,
-    //   // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
-    //   "MLN-T",
-    //   "ETH-T",
-    //   new BigNumber(8),
-    //   new BigNumber(1),
-    // );
+    shared.orderFromFund = await makeOrder(
+      wallet,
+      shared.vault.address,
+      // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
+      "MLN-T",
+      "ETH-T",
+      new BigNumber(5),
+      new BigNumber(1),
+    );
 
-    // trace({
-    //   message: `Fund placed an order with id: ${shared.orderFromFund.id}`,
-    // });
+    trace({
+      message: `Fund placed an order with id: ${shared.orderFromFund.id}`,
+    });
 
     shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
 
@@ -372,11 +372,8 @@ fit(
 
     shared.recentTrades = await getRecentTrades("ETH-T", "MLN-T");
     shared.fundRecentTrades = await getFundRecentTrades(shared.vault.address);
-    expect(shared.recentTrades.length).toBe(true);
-    expect(shared.fundRecentTrades.length).toBe(true);
-
-    console.log("RECENT TRADES ", shared.recentTrades);
-    console.log("FUND RECENT TRADES ", shared.fundRecentTrades);
+    expect(shared.recentTrades.length).toBeGreaterThan(1);
+    expect(shared.fundRecentTrades.length).toBeGreaterThan(1);
   },
   10 * 60 * 1000,
 );
