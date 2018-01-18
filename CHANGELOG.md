@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to
 [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [unreleased]
+
+### Changed
+
+* Use new datafeed.hasRecentPrice in onBlock instead of isValid
+
 ## [0.6.0]
 
 ### Refactored
@@ -51,9 +57,11 @@ and this project adheres to
 * sortByPrice
 
 ### Deprecated
+
 * "from" argument in functions; now uses wallet.address
 
 ### Fixed
+
 * #69
 * #76
 * #86
