@@ -29,7 +29,11 @@ import redeem from '../../../../lib/participation/transactions/redeem';
 import getRecentTrades from '../../../../lib/exchange/calls/getRecentTrades';
 import getFundRecentTrades from '../../../../lib/exchange/calls/getFundRecentTrades';
 import importWalletFromMnemonic from '../../../../lib/utils/wallet/importWalletFromMnemonic';
-// import cancelOrder from "../../../../lib/fund/transactions/cancelOrder";
+import cancelOrder from '../../../../lib/fund/transactions/cancelOrder';
+import getHoldingsAndPrices from '../../../../lib/fund/calls/getHoldingsAndPrices';
+import getVersionContract from '../../../../lib/version/contracts/getVersionContract';
+import getFundContract from '../../../../lib/fund/contracts/getFundContract';
+import shutDownFund from '../../../../lib/fund/transactions/shutDownFund';
 
 const INITIAL_SUBSCRIBE_QUANTITY = 20;
 const REDEEM_QUANTITY = 5;
@@ -57,6 +61,7 @@ fit(
     // const wallet = importWalletFromMnemonic(
     //   "mule faint author gun sell carbon smile disorder shove toast gasp message",
     // );
+
     const wallet = importWalletFromMnemonic(
       'dinosaur pulse rice lumber machine entry tackle off require draw edge almost',
     );
@@ -93,6 +98,23 @@ fit(
       } and datafeed at ${shared.config.dataFeedAddress}`,
       data: shared.config,
     });
+
+    const versionContract = await getVersionContract();
+    let managerToFunds = await versionContract.instance.managerToFunds.call(
+      {},
+      [wallet.address],
+    );
+
+    // If wallet already has a fund, need to shut it down before creating a new one -Only for integration purposes
+    if (managerToFunds !== '0x0000000000000000000000000000000000000000') {
+      console.log('Existing fund needs to be shut down: ', managerToFunds);
+      const fundContract = await getFundContract(managerToFunds);
+      await shutDownFund(wallet, managerToFunds);
+      console.log('Shutting down existing fund');
+      managerToFunds = await versionContract.instance.managerToFunds.call({}, [
+        wallet.address,
+      ]);
+    }
 
     const signature = await signTermsAndConditions(wallet);
     shared.vaultName = randomString();
@@ -277,6 +299,12 @@ fit(
 
     trace({
       message: `Fund placed an order with id: ${shared.orderFromFund.id}`,
+    });
+
+    await cancelOrder(wallet, shared.orderFromFund.id, shared.vault.address);
+
+    trace({
+      message: `Canceled order ${shared.orderFromFund.id}`,
     });
 
     shared.orderBook = await getOrderbook('MLN-T', 'ETH-T');
