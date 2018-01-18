@@ -1,11 +1,25 @@
 {
   "parser": "babel-eslint",
   "plugins": ["flowtype"],
-  "extends": ["airbnb", "plugin:flowtype/recommended", "prettier"],
+  "extends": [
+    "airbnb",
+    "plugin:prettier/recommended",
+    "plugin:flowtype/recommended"
+  ],
   "env": {
     "jest": true
   },
   "rules": {
-    "max-params": ["warn", 8]
+    "max-params": ["warn", 8],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "always-multiline"
+      }
+    ]
   }
 }
