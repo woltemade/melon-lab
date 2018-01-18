@@ -1,11 +1,7 @@
 {
   "parser": "babel-eslint",
   "plugins": ["flowtype"],
-  "extends": [
-    "airbnb",
-    "plugin:prettier/recommended",
-    "plugin:flowtype/recommended"
-  ],
+  "extends": ["airbnb", "plugin:prettier/recommended", "plugin:flowtype/recommended"],
   "env": {
     "jest": true
   },
@@ -20,6 +16,7 @@
         "exports": "always-multiline",
         "functions": "always-multiline"
       }
-    ]
+    ],
+    "flowtype/delimiter-dangle": ["error", "always-multiline"]
   }
 }
