@@ -1,13 +1,13 @@
 // import BigNumber from "bignumber.js";
 
-import setup from "../../../../lib/utils/setup";
-import trace from "../../../../lib/utils/generic/trace";
-import makeOrderFromAccount from "../../../../lib/exchange/transactions/makeOrderFromAccount";
-import cancelOrderFromAccount from "../../../../lib/exchange/transactions/cancelOrderFromAccount";
-import getOrder from "../../../../lib/exchange/calls/getOrder";
+import setup from '../../../../lib/utils/setup';
+import trace from '../../../../lib/utils/generic/trace';
+import makeOrderFromAccount from '../../../../lib/exchange/transactions/makeOrderFromAccount';
+import cancelOrderFromAccount from '../../../../lib/exchange/transactions/cancelOrderFromAccount';
+import getOrder from '../../../../lib/exchange/calls/getOrder';
 
 xit(
-  "make an order and cancel it",
+  'make an order and cancel it',
   async () => {
     trace({
       message: `Start make order and cancel with defaultAccount: ${
@@ -19,11 +19,11 @@ xit(
     const order = await makeOrderFromAccount({
       sell: {
         howMuch: new BigNumber(1),
-        symbol: "ETH-T",
+        symbol: 'ETH-T',
       },
       buy: {
         howMuch: new BigNumber(2),
-        symbol: "MLN-T",
+        symbol: 'MLN-T',
       },
     });
     trace({ message: `Made order with id: ${order.id}`, data: order });

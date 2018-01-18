@@ -1,13 +1,13 @@
-import BigNumber from "bignumber.js";
+import BigNumber from 'bignumber.js';
 
-import orders from "../../../fixtures/orderBook";
+import orders from '../../../fixtures/orderBook';
 
-import matchOrders from "../../../../lib/exchange/utils/matchOrders";
+import matchOrders from '../../../../lib/exchange/utils/matchOrders';
 
-test("matchOrders", () => {
-  const sellMelonOrders = orders.filter(o => o.sell.symbol === "MLN-T");
+test('matchOrders', () => {
+  const sellMelonOrders = orders.filter(o => o.sell.symbol === 'MLN-T');
   const matchedOrders = matchOrders(
-    "sell",
+    'sell',
     new BigNumber(0.4),
     sellMelonOrders,
   );

@@ -1,34 +1,34 @@
-import BigNumber from "bignumber.js";
-import Api from "@parity/api";
-import Wallet from "ethers-wallet";
-import Utils from "ethers-utils";
+import BigNumber from 'bignumber.js';
+import Api from '@parity/api';
+import Wallet from 'ethers-wallet';
+import Utils from 'ethers-utils';
 
-import setup from "../../../../lib/utils/setup";
-import encryptedWallet from "../../../../encryptedWallet.json";
-import password from "../../../../password.json";
-import getConfig from "../../../../lib/version/calls/getConfig";
-import trace from "../../../../lib/utils/generic/trace";
-import getBalance from "../../../../lib/assets/calls/getBalance";
+import setup from '../../../../lib/utils/setup';
+import encryptedWallet from '../../../../encryptedWallet.json';
+import password from '../../../../password.json';
+import getConfig from '../../../../lib/version/calls/getConfig';
+import trace from '../../../../lib/utils/generic/trace';
+import getBalance from '../../../../lib/assets/calls/getBalance';
 
-import signTermsAndConditions from "../../../../lib/version/transactions/signTermsAndConditions";
-import setupFund from "../../../../lib/version/transactions/setupFund";
-import getFundForManager from "../../../../lib/version/calls/getFundForManager";
-import getParticipation from "../../../../lib/participation/calls/getParticipation";
-import subscribe from "../../../../lib/participation/transactions/subscribe";
-import executeRequest from "../../../../lib/participation/transactions/executeRequest";
-import awaitDataFeedUpdates from "../../../../lib/pricefeeds/events/awaitDataFeedUpdates";
-import makeOrder from "../../../../lib/fund/transactions/makeOrder";
-import takeOrder from "../../../../lib/fund/transactions/takeOrder";
-import toggleSubscription from "../../../../lib/fund/transactions/toggleSubscription";
-import toggleRedemption from "../../../../lib/fund/transactions/toggleRedemption";
-import getParticipationAuthorizations from "../../../../lib/fund/calls/getParticipationAuthorizations";
-import makeOrderFromAccount from "../../../../lib/exchange/transactions/makeOrderFromAccount";
-import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
-import performCalculations from "../../../../lib/fund/calls/performCalculations";
-import redeem from "../../../../lib/participation/transactions/redeem";
-import getRecentTrades from "../../../../lib/exchange/calls/getRecentTrades";
-import getFundRecentTrades from "../../../../lib/exchange/calls/getFundRecentTrades";
-import importWalletFromMnemonic from "../../../../lib/utils/wallet/importWalletFromMnemonic";
+import signTermsAndConditions from '../../../../lib/version/transactions/signTermsAndConditions';
+import setupFund from '../../../../lib/version/transactions/setupFund';
+import getFundForManager from '../../../../lib/version/calls/getFundForManager';
+import getParticipation from '../../../../lib/participation/calls/getParticipation';
+import subscribe from '../../../../lib/participation/transactions/subscribe';
+import executeRequest from '../../../../lib/participation/transactions/executeRequest';
+import awaitDataFeedUpdates from '../../../../lib/pricefeeds/events/awaitDataFeedUpdates';
+import makeOrder from '../../../../lib/fund/transactions/makeOrder';
+import takeOrder from '../../../../lib/fund/transactions/takeOrder';
+import toggleSubscription from '../../../../lib/fund/transactions/toggleSubscription';
+import toggleRedemption from '../../../../lib/fund/transactions/toggleRedemption';
+import getParticipationAuthorizations from '../../../../lib/fund/calls/getParticipationAuthorizations';
+import makeOrderFromAccount from '../../../../lib/exchange/transactions/makeOrderFromAccount';
+import getOrderbook from '../../../../lib/exchange/calls/getOrderbook';
+import performCalculations from '../../../../lib/fund/calls/performCalculations';
+import redeem from '../../../../lib/participation/transactions/redeem';
+import getRecentTrades from '../../../../lib/exchange/calls/getRecentTrades';
+import getFundRecentTrades from '../../../../lib/exchange/calls/getFundRecentTrades';
+import importWalletFromMnemonic from '../../../../lib/utils/wallet/importWalletFromMnemonic';
 // import cancelOrder from "../../../../lib/fund/transactions/cancelOrder";
 
 const INITIAL_SUBSCRIBE_QUANTITY = 20;
@@ -42,9 +42,9 @@ const randomString = (length = 4) =>
     .substr(2, length);
 
 fit(
-  "Create fund, invest, take order, redeem",
+  'Create fund, invest, take order, redeem',
   async () => {
-    console.log("\n");
+    console.log('\n');
 
     // // 1 - instantiate wallet
     // const wallet = importWalletFromMnemonic(
@@ -58,7 +58,7 @@ fit(
     //   "mule faint author gun sell carbon smile disorder shove toast gasp message",
     // );
     const wallet = importWalletFromMnemonic(
-      "dinosaur pulse rice lumber machine entry tackle off require draw edge almost",
+      'dinosaur pulse rice lumber machine entry tackle off require draw edge almost',
     );
 
     // const wallet = importWalletFromMnemonic(
@@ -76,9 +76,9 @@ fit(
       message: `Start walkthrough with defaultAccount: ${setup.defaultAccount}`,
       data: setup,
     });
-    shared.etherBalance.initial = await getBalance("ETH-T");
+    shared.etherBalance.initial = await getBalance('ETH-T');
     trace({ message: `Etherbalance: Ξ${shared.etherBalance.initial} ` });
-    shared.melonBalance.initial = await getBalance("MLN-T");
+    shared.melonBalance.initial = await getBalance('MLN-T');
     trace({ message: `Melon Balance: Ⓜ  ${shared.melonBalance.initial} ` });
     expect(shared.melonBalance.initial.toFixed()).toBeGreaterThan(
       INITIAL_SUBSCRIBE_QUANTITY,
@@ -237,11 +237,11 @@ fit(
       wallet,
       sell: {
         howMuch: new BigNumber(1),
-        symbol: "ETH-T",
+        symbol: 'ETH-T',
       },
       buy: {
         howMuch: new BigNumber(4.7),
-        symbol: "MLN-T",
+        symbol: 'MLN-T',
       },
     });
 
@@ -253,11 +253,11 @@ fit(
       wallet,
       sell: {
         howMuch: new BigNumber(1),
-        symbol: "ETH-T",
+        symbol: 'ETH-T',
       },
       buy: {
         howMuch: new BigNumber(4.5),
-        symbol: "MLN-T",
+        symbol: 'MLN-T',
       },
     });
 
@@ -269,8 +269,8 @@ fit(
       wallet,
       shared.vault.address,
       // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
-      "MLN-T",
-      "ETH-T",
+      'MLN-T',
+      'ETH-T',
       new BigNumber(5),
       new BigNumber(1),
     );
@@ -279,7 +279,7 @@ fit(
       message: `Fund placed an order with id: ${shared.orderFromFund.id}`,
     });
 
-    shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
+    shared.orderBook = await getOrderbook('MLN-T', 'ETH-T');
 
     trace({
       message: `Got orderbook for MLN-T/ETH-T with length: ${
@@ -370,7 +370,7 @@ fit(
     expect(shared.participationAuthorizations.subscriptionAllowed).toBe(true);
     expect(shared.participationAuthorizations.redemptionAllowed).toBe(true);
 
-    shared.recentTrades = await getRecentTrades("ETH-T", "MLN-T");
+    shared.recentTrades = await getRecentTrades('ETH-T', 'MLN-T');
     shared.fundRecentTrades = await getFundRecentTrades(shared.vault.address);
     expect(shared.recentTrades.length).toBeGreaterThan(1);
     expect(shared.fundRecentTrades.length).toBeGreaterThan(1);
