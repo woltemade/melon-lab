@@ -11,6 +11,7 @@ and this project adheres to
 ### Changed
 
 * Use new datafeed.hasRecentPrice in onBlock instead of isValid
+* walkLib ' instead of "
 
 ## [0.6.0]
 
