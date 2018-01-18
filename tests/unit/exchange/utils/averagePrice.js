@@ -1,21 +1,21 @@
-import BigNumber from "bignumber.js";
+import BigNumber from 'bignumber.js';
 
-import matchedOrders from "../../../fixtures/matchedOrders";
+import matchedOrders from '../../../fixtures/matchedOrders';
 
 // MUT (Module under test)
-import averagePrice from "../../../../lib/exchange/utils/averagePrice";
+import averagePrice from '../../../../lib/exchange/utils/averagePrice';
 
-test("average price", () => {
-  expect(averagePrice("buy", matchedOrders)).toBeInstanceOf(BigNumber);
-  expect(averagePrice("buy", matchedOrders.slice(0, 1)).toNumber()).toEqual(
+test('average price', () => {
+  expect(averagePrice('buy', matchedOrders)).toBeInstanceOf(BigNumber);
+  expect(averagePrice('buy', matchedOrders.slice(0, 1)).toNumber()).toEqual(
     10 / 3,
   );
-  expect(averagePrice("sell", matchedOrders.slice(0, 1)).toNumber()).toEqual(
+  expect(averagePrice('sell', matchedOrders.slice(0, 1)).toNumber()).toEqual(
     0.3,
   );
 
-  expect(averagePrice("buy", matchedOrders).toNumber()).toEqual(
+  expect(averagePrice('buy', matchedOrders).toNumber()).toEqual(
     2.857142857142857,
   );
-  expect(averagePrice("sell", matchedOrders).toNumber()).toEqual(0.35);
+  expect(averagePrice('sell', matchedOrders).toNumber()).toEqual(0.35);
 });

@@ -1,6 +1,6 @@
 // import BigNumber from "bignumber.js";
 
-// import getPrice from "../../../../lib/datafeeds/calls/getPrice";
+// import getPrice from "../../../../lib/pricefeeds/calls/getPrice";
 
 // // This works, but price is 0 because the pricefeed isn't live yet
 // xit("getPrice", async () => {

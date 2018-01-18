@@ -6,11 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to
 [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## Unreleased
-
-### Refactored
-
-## Unreleased
+## [0.6.0]
 
 ### Refactored
 
@@ -46,6 +42,7 @@ and this project adheres to
 * onBlock function adjusted to parity.js
 * getFundInformations also returns owner
 * Pass in decrypted wallet instance as first argument to ALL functions performing an on-chain transaction
+* Integrate protocol 0.6.2-deploy.9
 
 ### Removed
 

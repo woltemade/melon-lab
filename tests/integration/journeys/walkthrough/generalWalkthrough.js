@@ -1,45 +1,35 @@
-import BigNumber from "bignumber.js";
-import Api from "@parity/api";
-import Wallet from "ethers-wallet";
-import Utils from "ethers-utils";
+import BigNumber from 'bignumber.js';
+import Api from '@parity/api';
+import Wallet from 'ethers-wallet';
+import Utils from 'ethers-utils';
 
-import setup from "../../../../lib/utils/setup";
-import encryptedWallet from "../../../../encryptedWallet.json";
-import password from "../../../../password.json";
-import getConfig from "../../../../lib/version/calls/getConfig";
-import trace from "../../../../lib/utils/generic/trace";
-import getBalance from "../../../../lib/assets/calls/getBalance";
+import setup from '../../../../lib/utils/setup';
+import encryptedWallet from '../../../../encryptedWallet.json';
+import password from '../../../../password.json';
+import getConfig from '../../../../lib/version/calls/getConfig';
+import trace from '../../../../lib/utils/generic/trace';
+import getBalance from '../../../../lib/assets/calls/getBalance';
 
-import signTermsAndConditions from "../../../../lib/version/transactions/signTermsAndConditions";
-import setupFund from "../../../../lib/version/transactions/setupFund";
-import getFundForManager from "../../../../lib/version/calls/getFundForManager";
-import getParticipation from "../../../../lib/participation/calls/getParticipation";
-import subscribe from "../../../../lib/participation/transactions/subscribe";
-import executeRequest from "../../../../lib/participation/transactions/executeRequest";
-import awaitDataFeedUpdates from "../../../../lib/datafeeds/events/awaitDataFeedUpdates";
-import makeOrder from "../../../../lib/fund/transactions/makeOrder";
-import takeOrder from "../../../../lib/fund/transactions/takeOrder";
-import toggleSubscription from "../../../../lib/fund/transactions/toggleSubscription";
-import toggleRedemption from "../../../../lib/fund/transactions/toggleRedemption";
-import getParticipationAuthorizations from "../../../../lib/fund/calls/getParticipationAuthorizations";
-import makeOrderFromAccount from "../../../../lib/exchange/transactions/makeOrderFromAccount";
-import getOrderbook from "../../../../lib/exchange/calls/getOrderbook";
-import performCalculations from "../../../../lib/fund/calls/performCalculations";
-import redeem from "../../../../lib/participation/transactions/redeem";
-import getRecentTrades from "../../../../lib/exchange/calls/getRecentTrades";
-import getFundRecentTrades from "../../../../lib/exchange/calls/getFundRecentTrades";
-import getParityProvider from "../../../../lib/utils/parity/getParityProvider";
-import createWallet from "../../../../lib/utils/wallet/createWallet";
-import encryptWallet from "../../../../lib/utils/wallet/encryptWallet";
-import decryptWallet from "../../../../lib/utils/wallet/decryptWallet";
-import importWalletFromMnemonic from "../../../../lib/utils/wallet/importWalletFromMnemonic";
-import getRanking from "../../../../lib/version/calls/getRanking";
-import getHoldingsAndPrices from "../../../../lib/fund/calls/getHoldingsAndPrices";
-import cancelOrder from "../../../../lib/fund/transactions/cancelOrder";
-
-import getOpenOrders from "../../../../lib/fund/calls/getOpenOrders";
-import getRequestsHistory from "../../../../lib/fund/calls/getRequestsHistory";
-import onBlock from "../../../../lib/utils/ethereum/onBlock";
+import signTermsAndConditions from '../../../../lib/version/transactions/signTermsAndConditions';
+import setupFund from '../../../../lib/version/transactions/setupFund';
+import getFundForManager from '../../../../lib/version/calls/getFundForManager';
+import getParticipation from '../../../../lib/participation/calls/getParticipation';
+import subscribe from '../../../../lib/participation/transactions/subscribe';
+import executeRequest from '../../../../lib/participation/transactions/executeRequest';
+import awaitDataFeedUpdates from '../../../../lib/pricefeeds/events/awaitDataFeedUpdates';
+import makeOrder from '../../../../lib/fund/transactions/makeOrder';
+import takeOrder from '../../../../lib/fund/transactions/takeOrder';
+import toggleSubscription from '../../../../lib/fund/transactions/toggleSubscription';
+import toggleRedemption from '../../../../lib/fund/transactions/toggleRedemption';
+import getParticipationAuthorizations from '../../../../lib/fund/calls/getParticipationAuthorizations';
+import makeOrderFromAccount from '../../../../lib/exchange/transactions/makeOrderFromAccount';
+import getOrderbook from '../../../../lib/exchange/calls/getOrderbook';
+import performCalculations from '../../../../lib/fund/calls/performCalculations';
+import redeem from '../../../../lib/participation/transactions/redeem';
+import getRecentTrades from '../../../../lib/exchange/calls/getRecentTrades';
+import getFundRecentTrades from '../../../../lib/exchange/calls/getFundRecentTrades';
+import importWalletFromMnemonic from '../../../../lib/utils/wallet/importWalletFromMnemonic';
+// import cancelOrder from "../../../../lib/fund/transactions/cancelOrder";
 
 const INITIAL_SUBSCRIBE_QUANTITY = 20;
 const REDEEM_QUANTITY = 5;
@@ -52,10 +42,9 @@ const randomString = (length = 4) =>
     .substr(2, length);
 
 fit(
-  "Create fund, invest, take order, redeem",
+  'Create fund, invest, take order, redeem',
   async () => {
-    console.log("\n");
-    // const api = new Api(setup.provider);
+    console.log('\n');
 
     // // 1 - instantiate wallet
     // const wallet = importWalletFromMnemonic(
@@ -69,8 +58,12 @@ fit(
     //   "mule faint author gun sell carbon smile disorder shove toast gasp message",
     // );
     const wallet = importWalletFromMnemonic(
-      "dinosaur pulse rice lumber machine entry tackle off require draw edge almost",
+      'dinosaur pulse rice lumber machine entry tackle off require draw edge almost',
     );
+
+    // const wallet = importWalletFromMnemonic(
+    //   "kidney ice gold impose trigger scene core axis rude expose become leopard",
+    // );
 
     // const jsonWallet = JSON.stringify(encryptedWallet);
     // const wallet = await decryptWallet(jsonWallet, password.kovan);
@@ -83,20 +76,21 @@ fit(
       message: `Start walkthrough with defaultAccount: ${setup.defaultAccount}`,
       data: setup,
     });
-    shared.etherBalance.initial = await getBalance("ETH-T");
+    shared.etherBalance.initial = await getBalance('ETH-T');
     trace({ message: `Etherbalance: Ξ${shared.etherBalance.initial} ` });
-    shared.melonBalance.initial = await getBalance("MLN-T");
+    shared.melonBalance.initial = await getBalance('MLN-T');
     trace({ message: `Melon Balance: Ⓜ  ${shared.melonBalance.initial} ` });
     expect(shared.melonBalance.initial.toFixed()).toBeGreaterThan(
       INITIAL_SUBSCRIBE_QUANTITY,
     );
 
     shared.config = await getConfig();
-
     trace({
-      message: `Got config w exchange at ${
-        shared.config.exchangeAddress
-      },and datafeed at ${shared.config.dataFeedAddress}`,
+      message: `Got config w exchange adapter at ${
+        shared.config.exchangeAdapterAddress
+      }, simple market at ${
+        shared.config.simpleMarketAddress
+      } and datafeed at ${shared.config.dataFeedAddress}`,
       data: shared.config,
     });
 
@@ -104,7 +98,6 @@ fit(
     shared.vaultName = randomString();
     shared.vault = await setupFund(wallet, shared.vaultName, signature);
     expect(shared.vault.name).toBe(shared.vaultName);
-    expect(shared.vault.id).toBeGreaterThanOrEqual(0);
     expect(shared.vault.address).toBeTruthy();
     expect(shared.vault.inception instanceof Date).toBeTruthy();
     trace({
@@ -195,60 +188,60 @@ fit(
       data: shared,
     });
 
-    shared.redemptionRequest = await redeem(
-      wallet,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      shared.vault.address,
-      REDEEM_QUANTITY,
-      REDEEM_QUANTITY,
-    );
+    // shared.redemptionRequest = await redeem(
+    //   wallet,
+    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    //   shared.vault.address,
+    //   REDEEM_QUANTITY,
+    //   REDEEM_QUANTITY,
+    // );
 
-    trace({
-      message: `Redeem requested. shares: ${
-        shared.redemptionRequest.numShares
-      }`,
-      data: shared,
-    });
+    // trace({
+    //   message: `Redeem requested. shares: ${
+    //     shared.redemptionRequest.numShares
+    //   }`,
+    //   data: shared,
+    // });
 
-    await awaitDataFeedUpdates(2);
+    // await awaitDataFeedUpdates(3);
 
-    trace("Awaited two data feed updates");
+    // trace("Awaited two data feed updates");
 
-    shared.executedRedeemRequest = await executeRequest(
-      wallet,
-      shared.redemptionRequest.id,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      shared.vault.address,
-    );
+    // shared.executedRedeemRequest = await executeRequest(
+    //   wallet,
+    //   shared.redemptionRequest.id,
+    //   // "0x75497EBbfFB55EED213529C76E4d0AEd40e9600f",
+    //   shared.vault.address,
+    // );
 
-    shared.participation.invested = await getParticipation(
-      shared.vault.address,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      setup.defaultAccount,
-    );
+    // shared.participation.invested = await getParticipation(
+    //   shared.vault.address,
+    //   // "0x75497EBbfFB55EED213529C76E4d0AEd40e9600f",
+    //   setup.defaultAccount,
+    // );
 
-    expect(shared.participation.invested.personalStake.toNumber()).toBe(
-      INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
-    );
-    expect(shared.participation.invested.totalSupply.toNumber()).toBe(
-      INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
-    );
+    // expect(shared.participation.invested.personalStake.toNumber()).toBe(
+    //   INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
+    // );
+    // expect(shared.participation.invested.totalSupply.toNumber()).toBe(
+    //   INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
+    // );
 
-    trace({
-      message: `Redeem request executed. Personal stake: ${
-        shared.participation.invested.personalStake
-      }`,
-    });
+    // trace({
+    //   message: `Redeem request executed. Personal stake: ${
+    //     shared.participation.invested.personalStake
+    //   }`,
+    // });
 
     shared.simpleOrder = await makeOrderFromAccount({
       wallet,
       sell: {
         howMuch: new BigNumber(1),
-        symbol: "ETH-T",
+        symbol: 'ETH-T',
       },
       buy: {
         howMuch: new BigNumber(4.7),
-        symbol: "MLN-T",
+        symbol: 'MLN-T',
       },
     });
 
@@ -260,11 +253,11 @@ fit(
       wallet,
       sell: {
         howMuch: new BigNumber(1),
-        symbol: "ETH-T",
+        symbol: 'ETH-T',
       },
       buy: {
         howMuch: new BigNumber(4.5),
-        symbol: "MLN-T",
+        symbol: 'MLN-T',
       },
     });
 
@@ -275,10 +268,10 @@ fit(
     shared.orderFromFund = await makeOrder(
       wallet,
       shared.vault.address,
-      // "0x3A7184B53BeCE866Df17d3B218D5962B86CCe541",
-      "MLN-T",
-      "ETH-T",
-      new BigNumber(4.7),
+      // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
+      'MLN-T',
+      'ETH-T',
+      new BigNumber(5),
       new BigNumber(1),
     );
 
@@ -286,7 +279,7 @@ fit(
       message: `Fund placed an order with id: ${shared.orderFromFund.id}`,
     });
 
-    shared.orderBook = await getOrderbook("MLN-T", "ETH-T");
+    shared.orderBook = await getOrderbook('MLN-T', 'ETH-T');
 
     trace({
       message: `Got orderbook for MLN-T/ETH-T with length: ${
@@ -377,13 +370,10 @@ fit(
     expect(shared.participationAuthorizations.subscriptionAllowed).toBe(true);
     expect(shared.participationAuthorizations.redemptionAllowed).toBe(true);
 
-    shared.recentTrades = await getRecentTrades("ETH-T", "MLN-T");
+    shared.recentTrades = await getRecentTrades('ETH-T', 'MLN-T');
     shared.fundRecentTrades = await getFundRecentTrades(shared.vault.address);
-    expect(shared.recentTrades.length).toBe(true);
-    expect(shared.fundRecentTrades.length).toBe(true);
-
-    console.log("RECENT TRADES ", shared.recentTrades);
-    console.log("FUND RECENT TRADES ", shared.fundRecentTrades);
+    expect(shared.recentTrades.length).toBeGreaterThan(1);
+    expect(shared.fundRecentTrades.length).toBeGreaterThan(1);
   },
   10 * 60 * 1000,
 );

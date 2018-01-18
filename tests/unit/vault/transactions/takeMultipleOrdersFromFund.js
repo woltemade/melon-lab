@@ -1,18 +1,18 @@
-import BigNumber from "bignumber.js";
+import BigNumber from 'bignumber.js';
 
-import matchedOrders from "../../../fixtures/matchedOrders";
+import matchedOrders from '../../../fixtures/matchedOrders';
 
-import takeMultipleOrdersFromFund from "../../../../lib/fund/transactions/takeMultipleOrdersFromFund";
+import takeMultipleOrdersFromFund from '../../../../lib/fund/transactions/takeMultipleOrdersFromFund';
 
 /* eslint-disable global-require */
-jest.mock("truffle-contract", () => require("../../../mocks/truffle-contract"));
+jest.mock('truffle-contract', () => require('../../../mocks/truffle-contract'));
 /* eslint-enable */
 
-test("buy 1.5 MLN from two orders: one full and one partial", async () => {
+test('buy 1.5 MLN from two orders: one full and one partial', async () => {
   const result = await takeMultipleOrdersFromFund(
     matchedOrders,
-    "0xMANAGER",
-    "0xVAULT",
+    '0xMANAGER',
+    '0xVAULT',
     new BigNumber(1.5),
   );
 

@@ -1,5 +1,5 @@
-import Web3 from "web3";
-import rawEvents from "../fixtures/dataUpdatedEvents";
+import Web3 from 'web3';
+import rawEvents from '../fixtures/dataUpdatedEvents';
 
 let firstTimeout;
 let secondTimeout;
@@ -7,7 +7,7 @@ let secondTimeout;
 const instance = {
   networkId: 42,
   eth: {
-    accounts: ["0xMANAGER"],
+    accounts: ['0xMANAGER'],
     getBlock: jest.fn((block, callback) =>
       callback(null, { number: 333333333333, gasLimit: 6986338 }),
     ),

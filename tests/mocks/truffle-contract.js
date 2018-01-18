@@ -1,7 +1,7 @@
-import BigNumber from "bignumber.js";
+import BigNumber from 'bignumber.js';
 
-import orderBook from "../fixtures/blockChainOrders";
-import recentTrades from "../fixtures/recentTrades";
+import orderBook from '../fixtures/blockChainOrders';
+import recentTrades from '../fixtures/recentTrades';
 
 const instance = {
   offers: jest.fn(
@@ -19,13 +19,13 @@ const instance = {
   takeOrder: jest.fn(
     () =>
       new Promise(resolve =>
-        resolve({ logs: [{ event: "OrderUpdated", args: { id: 1 } }] }),
+        resolve({ logs: [{ event: 'OrderUpdated', args: { id: 1 } }] }),
       ),
   ),
   makeOrder: jest.fn(
     () =>
       new Promise(resolve =>
-        resolve({ logs: [{ event: "OrderUpdated", args: { id: 1 } }] }),
+        resolve({ logs: [{ event: 'OrderUpdated', args: { id: 1 } }] }),
       ),
   ),
   balanceOf: jest.fn(
@@ -43,19 +43,19 @@ const instance = {
   transfer: jest.fn(
     (/* toAddress, quantity { from: fromAddress } */) =>
       new Promise(resolve => {
-        resolve({ logs: [{ event: "Transfer", args: { id: 1 } }] });
+        resolve({ logs: [{ event: 'Transfer', args: { id: 1 } }] });
       }),
   ),
   approve: jest.fn(
     (/* toAddress, quantity, { from: fromAddress } */) =>
       new Promise(resolve => {
-        resolve({ logs: [{ event: "Approval", args: { id: 1 } }] });
+        resolve({ logs: [{ event: 'Approval', args: { id: 1 } }] });
       }),
   ),
   transferFrom: jest.fn(
     (/* fromAddress, toAddress, quantity */) =>
       new Promise(resolve => {
-        resolve({ logs: [{ event: "Transfer", args: { id: 1 } }] });
+        resolve({ logs: [{ event: 'Transfer', args: { id: 1 } }] });
       }),
   ),
   allowance: jest.fn(
@@ -69,18 +69,18 @@ const instance = {
   numAssignedAssets: jest.fn(
     () => new Promise(resolve => resolve(new BigNumber(10))),
   ),
-  getMelonAsset: jest.fn(() => new Promise(resolve => resolve("0xMLN"))),
-  getReferenceAsset: jest.fn(() => new Promise(resolve => resolve("0xETH"))),
+  getMelonAsset: jest.fn(() => new Promise(resolve => resolve('0xMLN'))),
+  getReferenceAsset: jest.fn(() => new Promise(resolve => resolve('0xETH'))),
   assetAt: jest.fn(i => new Promise(resolve => resolve(`0xTOKEN_${i}`))),
-  exchangeAt: jest.fn(() => new Promise(resolve => resolve("0xEXCHANGE"))),
-  priceFeedAt: jest.fn(() => new Promise(resolve => resolve("0xPRICEFEED"))),
+  exchangeAt: jest.fn(() => new Promise(resolve => resolve('0xEXCHANGE'))),
+  priceFeedAt: jest.fn(() => new Promise(resolve => resolve('0xPRICEFEED'))),
   setupFund: jest.fn(
     () =>
       new Promise(resolve =>
         resolve({
           logs: [
             {
-              event: "FundUpdated",
+              event: 'FundUpdated',
               args: {
                 id: new BigNumber(1),
               },
@@ -89,8 +89,8 @@ const instance = {
         }),
       ),
   ),
-  getFundById: jest.fn(() => new Promise(resolve => resolve("0xVAULT"))),
-  getFundByManager: jest.fn(() => new Promise(resolve => resolve("0xVAULT"))),
+  getFundById: jest.fn(() => new Promise(resolve => resolve('0xVAULT'))),
+  getFundByManager: jest.fn(() => new Promise(resolve => resolve('0xVAULT'))),
   getLastOrderId: jest.fn(
     () => new Promise(resolve => resolve(new BigNumber(8))),
   ),
@@ -98,51 +98,51 @@ const instance = {
     get: jest.fn(callback => callback(null, recentTrades)),
   })),
   isActive: jest.fn(() => new Promise(resolve => resolve(true))),
-  getOwner: jest.fn(() => new Promise(resolve => resolve("0xMANAGER"))),
+  getOwner: jest.fn(() => new Promise(resolve => resolve('0xMANAGER'))),
   avatar: jest.fn(() => new Promise(resolve => resolve(true))),
   info: jest.fn(
     () =>
       new Promise(resolve =>
         resolve([
-          "0xMANAGER",
-          "Test Fund",
-          "MLN-T",
+          '0xMANAGER',
+          'Test Fund',
+          'MLN-T',
           new BigNumber(18),
           new BigNumber(1505292372),
           new BigNumber(0),
         ]),
       ),
   ),
-  getName: jest.fn(() => new Promise(resolve => resolve("TESTFUND"))),
+  getName: jest.fn(() => new Promise(resolve => resolve('TESTFUND'))),
   getDecimals: jest.fn(
     () => new Promise(resolve => resolve(new BigNumber(18))),
   ),
-  getDataFeed: jest.fn(() => new Promise(resolve => resolve("0xDATAFEED"))),
-  getExchange: jest.fn(() => new Promise(resolve => resolve("0xSIMPLEMARKET"))),
+  getDataFeed: jest.fn(() => new Promise(resolve => resolve('0xDATAFEED'))),
+  getExchange: jest.fn(() => new Promise(resolve => resolve('0xSIMPLEMARKET'))),
   getCreationTime: jest.fn(
     () => new Promise(resolve => resolve(new BigNumber(1505292372))),
   ),
   isShutDown: jest.fn(() => new Promise(resolve => resolve(false))),
-  owner: jest.fn(() => new Promise(resolve => resolve("0xMANAGER"))),
+  owner: jest.fn(() => new Promise(resolve => resolve('0xMANAGER'))),
   numRegisteredAssets: jest.fn(
     () => new Promise(resolve => resolve(new BigNumber(18))),
   ),
-  getRegisteredAssetAt: jest.fn(() => new Promise(resolve => resolve("0x"))),
+  getRegisteredAssetAt: jest.fn(() => new Promise(resolve => resolve('0x'))),
   information: jest.fn(
     () =>
       new Promise(resolve =>
         resolve([
-          "0x64C4406C58C512f326d83065a72F12884105520b",
-          "Status Network Token",
+          '0x64C4406C58C512f326d83065a72F12884105520b',
+          'Status Network Token',
           new BigNumber(18),
-          "https://status.im/",
+          'https://status.im/',
         ]),
       ),
   ),
   getQuoteAsset: jest.fn(
     () =>
       new Promise(resolve =>
-        resolve("0x2a20ff70596e431ab26C2365acab1b988DA8eCCF"),
+        resolve('0x2a20ff70596e431ab26C2365acab1b988DA8eCCF'),
       ),
   ),
 };
