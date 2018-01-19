@@ -319,7 +319,7 @@ fit(
     shared.takenOrder = await takeOrder(
       wallet,
       // shared.simpleOrder.id,
-      hared.simpleOrder1.id,
+      shared.simpleOrder.id,
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       new BigNumber(1.5),
