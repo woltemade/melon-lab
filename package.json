@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.6.10",
+  "version": "0.6.11",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/main.js",
   "esnext": "lib/main.js",
