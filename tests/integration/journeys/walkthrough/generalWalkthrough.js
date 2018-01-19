@@ -34,6 +34,7 @@ import getHoldingsAndPrices from '../../../../lib/fund/calls/getHoldingsAndPrice
 import getVersionContract from '../../../../lib/version/contracts/getVersionContract';
 import getFundContract from '../../../../lib/fund/contracts/getFundContract';
 import shutDownFund from '../../../../lib/fund/transactions/shutDownFund';
+import getFundInformations from '../../../../lib/fund/calls/getFundInformations';
 
 const INITIAL_SUBSCRIBE_QUANTITY = 20;
 const REDEEM_QUANTITY = 5;
@@ -287,19 +288,19 @@ fit(
       message: `Regular account made order with id: ${shared.simpleOrder2.id}`,
     });
 
-    shared.orderFromFund = await makeOrder(
-      wallet,
-      shared.vault.address,
-      // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
-      'MLN-T',
-      'ETH-T',
-      new BigNumber(5),
-      new BigNumber(1),
-    );
+    // shared.orderFromFund = await makeOrder(
+    //   wallet,
+    //   shared.vault.address,
+    //   // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
+    //   'MLN-T',
+    //   'ETH-T',
+    //   new BigNumber(5),
+    //   new BigNumber(1),
+    // );
 
-    trace({
-      message: `Fund placed an order with id: ${shared.orderFromFund.id}`,
-    });
+    // trace({
+    //   message: `Fund placed an order with id: ${shared.orderFromFund.id}`,
+    // });
 
     // await cancelOrder(wallet, shared.orderFromFund.id, shared.vault.address);
 
@@ -316,19 +317,20 @@ fit(
       data: shared,
     });
 
-    shared.orderBook2 = await getOrderbook('MLN-T', 'ANT-T');
-
+    shared.orderBook2 = await getOrderbook('MLN-T', 'XRP-T');
     trace({
-      message: `Got orderbook for MLN-T/ANT-T with length: ${
+      message: `Got orderbook for MLN-T/XRP-T with length: ${
         shared.orderBook2.length
       }`,
       data: shared,
     });
 
+    console.log(shared.orderBook2);
+
     shared.takenOrder = await takeOrder(
       wallet,
       // shared.simpleOrder.id,
-      shared.simpleOrder.id,
+      shared.orderBook2[shared.orderBook2.length - 1].id,
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       new BigNumber(1.5),
