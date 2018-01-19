@@ -36,7 +36,7 @@ import getFundContract from '../../../../lib/fund/contracts/getFundContract';
 import shutDownFund from '../../../../lib/fund/transactions/shutDownFund';
 import getFundInformations from '../../../../lib/fund/calls/getFundInformations';
 
-const INITIAL_SUBSCRIBE_QUANTITY = 20;
+const INITIAL_SUBSCRIBE_QUANTITY = 50;
 const REDEEM_QUANTITY = 5;
 
 const shared = { etherBalance: {}, participation: {}, melonBalance: {} };
