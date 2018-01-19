@@ -316,6 +316,15 @@ fit(
       data: shared,
     });
 
+    shared.orderBook2 = await getOrderbook('MLN-T', 'ANT-T');
+
+    trace({
+      message: `Got orderbook for MLN-T/ANT-T with length: ${
+        shared.orderBook2.length
+      }`,
+      data: shared,
+    });
+
     shared.takenOrder = await takeOrder(
       wallet,
       // shared.simpleOrder.id,
