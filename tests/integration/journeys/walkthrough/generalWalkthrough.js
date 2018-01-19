@@ -34,8 +34,9 @@ import getHoldingsAndPrices from '../../../../lib/fund/calls/getHoldingsAndPrice
 import getVersionContract from '../../../../lib/version/contracts/getVersionContract';
 import getFundContract from '../../../../lib/fund/contracts/getFundContract';
 import shutDownFund from '../../../../lib/fund/transactions/shutDownFund';
+import getFundInformations from '../../../../lib/fund/calls/getFundInformations';
 
-const INITIAL_SUBSCRIBE_QUANTITY = 20;
+const INITIAL_SUBSCRIBE_QUANTITY = 50;
 const REDEEM_QUANTITY = 5;
 
 const shared = { etherBalance: {}, participation: {}, melonBalance: {} };
@@ -316,9 +317,20 @@ fit(
       data: shared,
     });
 
+    // shared.orderBook2 = await getOrderbook('MLN-T', 'XRP-T');
+    // trace({
+    //   message: `Got orderbook for MLN-T/XRP-T with length: ${
+    //     shared.orderBook2.length
+    //   }`,
+    //   data: shared,
+    // });
+
+    // console.log(shared.orderBook2);
+
     shared.takenOrder = await takeOrder(
       wallet,
       shared.simpleOrder.id,
+      // shared.orderBook2[shared.orderBook2.length - 1].id,
       shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       new BigNumber(1.5),

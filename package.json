@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.6.5",
+  "version": "0.6.14",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/main.js",
   "esnext": "lib/main.js",
@@ -93,7 +93,7 @@
     "walk": "^2.3.9"
   },
   "dependencies": {
-    "@melonproject/protocol": "^0.6.2-deploy.9",
+    "@melonproject/protocol": "^0.6.2-deploy.14",
     "@parity/api": "^2.1.5",
     "bignumber.js": "^5.0.0",
     "bip39": "^2.4.0",
