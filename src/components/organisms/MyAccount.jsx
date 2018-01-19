@@ -47,9 +47,7 @@ const MyAccount = ({ currentAddress, associatedFund, deleteWallet }) => (
         </p>
         <p>
           If you do not wish to continue,{" "}
-          <a href="/" as="a">
-            click here to go back to your fund's page
-          </a>.
+          <Link to="/">click here to go back to your fund's page</Link>.
         </p>
         <br />
         <p>
