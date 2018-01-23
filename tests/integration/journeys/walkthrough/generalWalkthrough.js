@@ -22,6 +22,8 @@ import takeOrder from '../../../../lib/fund/transactions/takeOrder';
 import toggleSubscription from '../../../../lib/fund/transactions/toggleSubscription';
 import toggleRedemption from '../../../../lib/fund/transactions/toggleRedemption';
 import getParticipationAuthorizations from '../../../../lib/fund/calls/getParticipationAuthorizations';
+import getOpenOrders from '../../../../lib/fund/calls/getOpenOrders';
+
 import makeOrderFromAccount from '../../../../lib/exchange/transactions/makeOrderFromAccount';
 import getOrderbook from '../../../../lib/exchange/calls/getOrderbook';
 import performCalculations from '../../../../lib/fund/calls/performCalculations';
@@ -302,12 +304,6 @@ fit(
       message: `Fund placed an order with id: ${shared.orderFromFund.id}`,
     });
 
-    await cancelOrder(wallet, shared.orderFromFund.id, shared.vault.address);
-
-    trace({
-      message: `Canceled order ${shared.orderFromFund.id}`,
-    });
-
     shared.orderBook = await getOrderbook('MLN-T', 'ETH-T');
 
     trace({
@@ -356,6 +352,29 @@ fit(
         shared.takenOrder2.executedQuantity
       }`,
       data: shared,
+    });
+
+    shared.orderFromFund2 = await makeOrder(
+      wallet,
+      shared.vault.address,
+      // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
+      'ETH-T',
+      'MLN-T',
+      new BigNumber(1),
+      new BigNumber(5),
+    );
+
+    trace({
+      message: `Fund placed an order with id: ${shared.orderFromFund2.id}`,
+    });
+
+    shared.openOrders = await getOpenOrders(shared.vault.address);
+    console.log(shared.openOrders);
+
+    await cancelOrder(wallet, 0, shared.vault.address);
+
+    trace({
+      message: `Canceled order ${shared.orderFromFund.id}`,
     });
 
     shared.endCalculations = await performCalculations(shared.vault.address);
