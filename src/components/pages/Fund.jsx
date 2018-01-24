@@ -12,6 +12,7 @@ import Participation from "../../containers/Participation";
 import ExecuteRequest from "../../containers/ExecuteRequest";
 import TradeHelper from "../../containers/TradeHelper";
 import Trade from "../../containers/Trade";
+import OpenOrders from "../../containers/OpenOrders";
 
 const Fund = ({ isManager, fundAddress, canInvest, pendingRequest }) => (
   <div className="App">
@@ -44,6 +45,8 @@ const Fund = ({ isManager, fundAddress, canInvest, pendingRequest }) => (
       <RecentTrades />
       <br />
       <TradeHistory address={fundAddress} />
+      <br />
+      <OpenOrders address={fundAddress} />
     </div>
     <br />
   </div>

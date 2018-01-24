@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
 
-const OpenOrders = ({ openOrders }) => (
+const OpenOrders = ({ orders }) => (
   <div>
     <h3 id="history" className="App-intro">
       Open orders
@@ -20,7 +20,7 @@ const OpenOrders = ({ openOrders }) => (
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {openOrders.map((order, i) => (
+        {orders.map((order, i) => (
           <Table.Row key={i}>
             <Table.Cell>{order.timestamp}</Table.Cell>
             <Table.Cell>{order.id}</Table.Cell>
