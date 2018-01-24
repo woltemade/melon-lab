@@ -42,11 +42,11 @@ const Fund = ({ isManager, fundAddress, canInvest, pendingRequest }) => (
       <br />
       <Orderbook />
       <br />
+      <OpenOrders address={fundAddress} />
+      <br />
       <RecentTrades />
       <br />
       <TradeHistory address={fundAddress} />
-      <br />
-      <OpenOrders address={fundAddress} />
     </div>
     <br />
   </div>

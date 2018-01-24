@@ -17,11 +17,15 @@ const mapStateToProps = state => ({
     timestamp: moment(order.timestamp).format("D. MMM YYYY HH:mm"),
     type: order.type,
   })),
+  isReadyToTrade: state.app.isReadyToTrade,
 });
 
 const mapDispatchToProps = dispatch => ({
   getOpenOrders: () => {
     dispatch(actions.getOpenOrders());
+  },
+  onClick: (orderIndex, orderId) => {
+    dispatch(actions.cancelOrder(orderIndex, orderId));
   },
 });
 

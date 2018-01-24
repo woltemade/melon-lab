@@ -17,6 +17,7 @@ import {
 import { actions as holdingsActions } from "../actions/holdings";
 import { actions as recentTradesActions } from "../actions/recentTrades";
 import { actions as tradeHistoryActions } from "../actions/tradeHistory";
+import { actions as openOrdersActions } from "../actions/openOrders";
 import { types as tradeTypes } from "../actions/trade";
 
 import {
@@ -114,6 +115,7 @@ function* afterTradeUpdate() {
   yield put(orderbookActions.getOrderbook());
   yield put(recentTradesActions.getRecentTrades());
   yield put(tradeHistoryActions.getTradeHistory(fundAddress));
+  yield put(openOrdersActions.getOpenOrders());
 }
 
 function* requestSharePrice() {
@@ -138,6 +140,7 @@ function* fund() {
   yield takeLatest(orderbookTypes.GET_ORDERBOOK_SUCCEEDED, getRanking);
   yield takeLatest(rankingTypes.GET_RANKING_SUCCEEDED, addRanking);
   yield takeLatest(tradeTypes.TAKE_ORDER_SUCCEEDED, afterTradeUpdate);
+  yield takeLatest(tradeTypes.PLACE_ORDER_SUCCEEDED, afterTradeUpdate);
   yield takeLatest(tradeTypes.PLACE_ORDER_SUCCEEDED, afterTradeUpdate);
   yield takeLatest(
     participationTypes.EXECUTE_SUCCEEDED,

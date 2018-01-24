@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
 
-const OpenOrders = ({ orders }) => (
+const OpenOrders = ({ orders, onClick, isReadyToTrade }) => (
   <div>
     <h3 id="history" className="App-intro">
       Open orders
@@ -17,6 +17,7 @@ const OpenOrders = ({ orders }) => (
           <Table.HeaderCell textAlign="right">Price</Table.HeaderCell>
           <Table.HeaderCell textAlign="right">Buy Quantity</Table.HeaderCell>
           <Table.HeaderCell textAlign="right">Sell Quantity</Table.HeaderCell>
+          <Table.HeaderCell textAlign="right" />
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -30,6 +31,17 @@ const OpenOrders = ({ orders }) => (
             <Table.Cell textAlign="right">{order.price}</Table.Cell>
             <Table.Cell textAlign="right">{order.buyHowMuch}</Table.Cell>
             <Table.Cell textAlign="right">{order.sellHowMuch}</Table.Cell>
+            {{ isReadyToTrade } ? (
+              <Table.Cell
+                textAlign="right"
+                style={{ cursor: "pointer" }}
+                onClick={() => onClick(i, order.id)}
+              >
+                [x]
+              </Table.Cell>
+            ) : (
+              <div />
+            )}
           </Table.Row>
         ))}
       </Table.Body>
