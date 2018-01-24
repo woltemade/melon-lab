@@ -48,13 +48,11 @@ const mapStateToProps = state => {
     statusType: type,
     mlnBalance: new BigNumber(state.ethereum.mlnBalance || 0).toFixed(4),
     ethBalance: new BigNumber(state.ethereum.ethBalance || 0).toFixed(4),
+    rootAction: routeActions.root(),
+    accountAction: routeActions.myAccount(),
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  myAccount: () => routeActions.myAccount(),
-});
-
-const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
+const AppContainer = connect(mapStateToProps)(App);
 
 export default AppContainer;

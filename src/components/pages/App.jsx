@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, Container } from "semantic-ui-react";
+import Link from "redux-first-router-link";
 import WrongNetwork from "../organisms/WrongNetwork";
 import NoMetamask from "../organisms/NoMetamask";
 import LockedAccount from "../organisms/LockedAccount";
@@ -43,7 +44,6 @@ const getMainComponent = ({
   usersFund,
   walletAddress,
   route,
-  myAccount,
 }) => {
   if (route === types.SETUP) {
     const Main = mapOnboardingStateToMainContainer[onboardingState];
@@ -54,7 +54,6 @@ const getMainComponent = ({
         setup
         usersFund={usersFund}
         walletAddress={walletAddress}
-        myAccount={myAccount}
       />
     ) : null;
   }
@@ -70,17 +69,13 @@ const App = props => (
       ethBalance={props.ethBalance}
       statusType={props.statusType}
       statusMessage={props.statusMessage}
-      myAccount={props.myAccount}
+      accountAction={props.accountAction}
     />
     <Container>
       <div className="App-header" style={{ margin: "2em" }}>
-        <a
-          href="https://github.com/melonproject"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link to={props.rootAction}>
           <Image src="./melon-logo.png" size="small" centered />
-        </a>
+        </Link>
       </div>
       {getMainComponent(props)}
     </Container>
