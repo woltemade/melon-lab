@@ -45,12 +45,7 @@ function* cancelOrderSaga({ orderIndex, orderId }) {
     const wallet = localStorage.getItem("wallet:melon.fund");
     const decryptedWallet = yield call(decryptWallet, wallet, password);
 
-    const canceled = yield call(
-      cancelOrder,
-      decryptedWallet,
-      orderIndex,
-      fundAddress,
-    );
+    const canceled = yield call(cancelOrder, decryptedWallet, 0, fundAddress);
     yield put(actions.cancelOrderSucceeded());
     yield put(modalActions.close());
   } catch (err) {
