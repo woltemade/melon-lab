@@ -103,7 +103,7 @@ function* addRanking() {
     : "N/A";
   if (rank !== -1) {
     const numberOfFunds = ranking.length ? ranking.length : "N/A";
-    yield put(actions.updateRanking({ rank, numberOfFunds }));
+    yield put(actions.updateRanking({ rank: rank + 1, numberOfFunds }));
   }
 }
 

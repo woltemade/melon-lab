@@ -74,7 +74,11 @@ const App = props => (
     />
     <Container>
       <div className="App-header" style={{ margin: "2em" }}>
-        <a href="/">
+        <a
+          href="https://github.com/melonproject"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image src="./melon-logo.png" size="small" centered />
         </a>
       </div>

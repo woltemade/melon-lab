@@ -31,7 +31,9 @@ const ParticipationForm = ({
     <Card.Content>
       <Card.Header>Participation</Card.Header>
       <form onSubmit={handleSubmit} name="participation">
-        {setup ? null : (
+        {setup ? (
+          <p />
+        ) : (
           <Field name="type" component={participationTypeSelector} />
         )}
         <List>

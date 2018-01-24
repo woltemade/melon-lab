@@ -37,7 +37,7 @@ const mapStateToProps = state => ({
   sharePrice: displayNumber(state.fund.sharePrice),
   totalSupply: displayNumber(state.fund.totalSupply),
   rank: state.fund.rank,
-  dataValid: state.ethereum.dataValid,
+  dataValid: state.ethereum.isDataValid,
   numberOfFunds: state.fund.numberOfFunds,
   tweetHref: buildTwitterUrl(
     state.fund.owner === state.ethereum.account,

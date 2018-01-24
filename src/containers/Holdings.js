@@ -23,7 +23,7 @@ const mapStateToProps = state => ({
               .times(100),
           ),
   })),
-  dataValid: state.ethereum.dataValid,
+  dataValid: state.ethereum.isDataValid,
   isReadyToTrade: state.app.isReadyToTrade,
 });
 
