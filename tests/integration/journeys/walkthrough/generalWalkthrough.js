@@ -377,6 +377,8 @@ fit(
       message: `Canceled order ${shared.orderFromFund.id}`,
     });
 
+    shared.openOrders = await getOpenOrders(shared.vault.address);
+    console.log(shared.openOrders);
     shared.endCalculations = await performCalculations(shared.vault.address);
 
     trace({
