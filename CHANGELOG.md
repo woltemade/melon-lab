@@ -13,6 +13,10 @@ and this project adheres to
 * Use new datafeed.hasRecentPrice in onBlock instead of isValid
 * walkLib ' instead of "
 
+### Fixed
+
+* Changed promise detection in resolvePromiseObject to fix Firefox Bug: melonproject/ipfs-frontend#116
+
 ## [0.6.0]
 
 ### Refactored
