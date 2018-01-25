@@ -13,6 +13,7 @@ import tradeHistory from "./tradeHistory";
 import account from "./account";
 import participation from "./participation";
 import trade from "./trade";
+import tracker from "./tracker";
 
 function* rootSaga() {
   yield fork(administration);
@@ -28,6 +29,8 @@ function* rootSaga() {
   yield fork(account);
   yield fork(participation);
   yield fork(trade);
+
+  if (window.analytics) yield fork(tracker);
 }
 
 export default rootSaga;
