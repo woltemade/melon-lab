@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
   orders: state.openOrders.orders.map(order => ({
     buyHowMuch: displayNumber(order.buyHowMuch),
     buySymbol: order.buySymbol,
-    id: order.id.toNumber(),
+    id: order.id,
     price: displayNumber(order.price),
     sellHowMuch: displayNumber(order.sellHowMuch),
     sellSymbol: order.sellSymbol,
@@ -24,8 +24,8 @@ const mapDispatchToProps = dispatch => ({
   getOpenOrders: () => {
     dispatch(actions.getOpenOrders());
   },
-  onClick: (orderIndex, orderId) => {
-    dispatch(actions.cancelOrder(orderIndex, orderId));
+  onClick: orderId => {
+    dispatch(actions.cancelOrder(orderId));
   },
 });
 

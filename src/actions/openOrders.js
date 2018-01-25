@@ -20,9 +20,8 @@ export const actions = {
     type: types.GET_OPEN_ORDERS_SUCCEEDED,
     ...openOrders,
   }),
-  cancelOrder: (orderIndex, orderId) => ({
+  cancelOrder: orderId => ({
     type: types.CANCEL_ORDER_REQUESTED,
-    orderIndex,
     orderId,
   }),
   cancelOrderFailed: reason => ({

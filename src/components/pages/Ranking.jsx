@@ -32,8 +32,9 @@ const Ranking = ({
         <Table.Row>
           <Table.HeaderCell
             onClick={() =>
-              ordering === "+rank" ? setOrdering("-rank") : setOrdering("+rank")
-            }
+              ordering === "+rank"
+                ? setOrdering("-rank")
+                : setOrdering("+rank")}
           >
             {ordering === "+rank" || ordering === "-rank" ? (
               <span style={activeStyle}>#</span>
@@ -57,13 +58,12 @@ const Ranking = ({
             onClick={() =>
               ordering === "+price"
                 ? setOrdering("-price")
-                : setOrdering("+price")
-            }
+                : setOrdering("+price")}
           >
             {ordering === "+price" || ordering === "-price" ? (
-              <span style={activeStyle}>Share Price</span>
+              <span style={activeStyle}>Share price</span>
             ) : (
-              <span style={inactiveStyle}>Share Price</span>
+              <span style={inactiveStyle}>Share price</span>
             )}
           </Table.HeaderCell>
           <Table.HeaderCell
@@ -71,8 +71,7 @@ const Ranking = ({
             onClick={() =>
               ordering === "+inception"
                 ? setOrdering("-inception")
-                : setOrdering("+inception")
-            }
+                : setOrdering("+inception")}
           >
             {ordering === "+inception" || ordering === "-inception" ? (
               <span style={activeStyle}>Inception Date</span>

@@ -35,7 +35,7 @@ const OpenOrders = ({ orders, onClick, isReadyToTrade }) => (
               <Table.Cell
                 textAlign="right"
                 style={{ cursor: "pointer" }}
-                onClick={() => onClick(i, order.id)}
+                onClick={() => onClick(order.id)}
               >
                 [x]
               </Table.Cell>

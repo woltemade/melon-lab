@@ -28,7 +28,7 @@ function* getOpenOrdersSaga() {
   }
 }
 
-function* cancelOrderSaga({ orderIndex, orderId }) {
+function* cancelOrderSaga({ orderId }) {
   const isConnected = yield select(state => state.ethereum.isConnected);
   if (!isConnected) yield take(ethereumTypes.HAS_CONNECTED);
 
@@ -45,7 +45,12 @@ function* cancelOrderSaga({ orderIndex, orderId }) {
     const wallet = localStorage.getItem("wallet:melon.fund");
     const decryptedWallet = yield call(decryptWallet, wallet, password);
 
-    const canceled = yield call(cancelOrder, decryptedWallet, 0, fundAddress);
+    const canceled = yield call(
+      cancelOrder,
+      decryptedWallet,
+      orderId,
+      fundAddress,
+    );
     yield put(actions.cancelOrderSucceeded());
     yield put(modalActions.close());
   } catch (err) {
