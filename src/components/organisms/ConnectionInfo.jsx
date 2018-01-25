@@ -24,7 +24,7 @@ export const ConnectionInfoComponent = ({
   ethBalance,
   statusMessage,
   statusType,
-  myAccount,
+  accountAction,
 }) => (
   <div
     style={{
@@ -37,7 +37,7 @@ export const ConnectionInfoComponent = ({
       padding: 5,
     }}
   >
-    <Link to={myAccount()}>{shortenAddress(account || "")}</Link> |{" "}
+    <Link to={accountAction}>{shortenAddress(account || "")}</Link> |{" "}
     <a href={`https://faucet.melon.network/${account}`} target="_blank">
       Ⓜ {displayNumber(mlnBalance)} | Ξ {displayNumber(ethBalance)}
     </a>{" "}
