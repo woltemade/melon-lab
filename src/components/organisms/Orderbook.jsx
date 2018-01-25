@@ -119,7 +119,6 @@ const Orderbook = ({
               </Grid.Row>
               {buyOrders.map((order, index, { length }) => (
                 <Grid.Row
-                  container
                   style={getBuyRowStyle(
                     order.cumulativeVolume,
                     totalSellVolume,
@@ -160,7 +159,6 @@ const Orderbook = ({
 
               {sellOrders.map((order, index, { length }) => (
                 <Grid.Row
-                  container
                   style={getSellRowStyle(
                     order.cumulativeVolume,
                     totalBuyVolume,
