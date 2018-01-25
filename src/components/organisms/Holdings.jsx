@@ -1,15 +1,9 @@
 import React from "react";
+import { Table } from "semantic-ui-react";
+import MaybeLoading from "../molecules/MaybeLoading";
 import MaybeData from "../molecules/MaybeData";
 
-import { Table } from "semantic-ui-react";
-
-const Holdings = ({
-  holdings,
-  selectAsset,
-  scrollTo,
-  isReadyToTrade,
-  dataValid,
-}) => (
+const Holdings = ({ holdings, selectAsset, isReadyToTrade, dataValid }) => (
   <div id="holdings">
     <h3 className="App-intro">Fund Holdings</h3>
     <Table size="small">
@@ -29,11 +23,13 @@ const Holdings = ({
             <Table.Cell textAlign="right">{asset.balance}</Table.Cell>
             <Table.Cell textAlign="right">
               <MaybeData dataAvailable={dataValid}>
-                {asset.percentage}%
+                <MaybeLoading>{asset.percentage}</MaybeLoading>%
               </MaybeData>
             </Table.Cell>
             <Table.Cell textAlign="right">
-              <MaybeData dataAvailable={dataValid}>{asset.price}</MaybeData>
+              <MaybeData dataAvailable={dataValid}>
+                <MaybeLoading>{asset.price}</MaybeLoading>
+              </MaybeData>
             </Table.Cell>
             <Table.Cell
               textAlign="right"
