@@ -379,11 +379,11 @@ fit(
     trace({
       message: `Fund placed an order with id: ${shared.orderFromFund2.id}`,
     });
-    await cancelOrder(wallet, 0, shared.vault.address);
+    // await cancelOrder(wallet, 0, shared.vault.address);
 
-    trace({
-      message: `Canceled order ${shared.orderFromFund.id}`,
-    });
+    // trace({
+    //   message: `Canceled order ${shared.orderFromFund.id}`,
+    // });
 
     shared.openOrders = await getOpenOrders(shared.vault.address);
     console.log(shared.openOrders);
