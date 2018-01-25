@@ -17,6 +17,7 @@ import {
 import { actions as holdingsActions } from "../actions/holdings";
 import { actions as recentTradesActions } from "../actions/recentTrades";
 import { actions as tradeHistoryActions } from "../actions/tradeHistory";
+import { actions as openOrdersActions } from "../actions/openOrders";
 import { types as tradeTypes } from "../actions/trade";
 
 import {
@@ -114,6 +115,7 @@ function* afterTradeUpdate() {
   yield put(orderbookActions.getOrderbook());
   yield put(recentTradesActions.getRecentTrades());
   yield put(tradeHistoryActions.getTradeHistory(fundAddress));
+  yield put(openOrdersActions.getOpenOrders());
 }
 
 function* requestSharePrice() {
