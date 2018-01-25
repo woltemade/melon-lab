@@ -20,7 +20,7 @@ const getBuyRowStyle = (
   };
 };
 
-const get_SellRowStyle = (
+const getSellRowStyle = (
   cumulativeVolume,
   totalVolume,
   isReadyToTrade,
@@ -153,7 +153,7 @@ const Orderbook = ({
             {sellOrders.map((order, index, { length }) => (
               <Grid.Row
                 container
-                style={get_SellRowStyle(
+                style={getSellRowStyle(
                   order.cumulativeVolume,
                   totalBuyVolume,
                   isReadyToTrade,

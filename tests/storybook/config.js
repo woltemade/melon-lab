@@ -1,8 +1,8 @@
 import { configure, addDecorator } from "@storybook/react";
 import { setDefaults } from "@storybook/addon-info";
 import ContainerDecorator from "./decorators/Container";
-import "../../public/semantic/dist/semantic.min.css";
-import "../../src/index.css";
+import "../../public/static/css/semantic.min.css";
+import "../../public/static/css/overwrites.css";
 
 setDefaults({
   header: false,
