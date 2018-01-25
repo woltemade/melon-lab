@@ -52,7 +52,7 @@ const Factsheet = ({
           <List.Item>
             <List.Content as="a" onClick={() => scrollTo("holdings")}>
               <MaybeData dataAvailable={dataValid}>
-                Share Price: <MaybeLoading>{sharePrice}</MaybeLoading> MLN/Share
+                Share price: <MaybeLoading>{sharePrice}</MaybeLoading> MLN/Share
               </MaybeData>
             </List.Content>
           </List.Item>
@@ -75,7 +75,9 @@ const Factsheet = ({
           <Divider />
           <List.Item>
             <List.Content>
-              Management Reward: <MaybeLoading>{managementReward}</MaybeLoading>%
+              Management Reward: <MaybeLoading>
+                {managementReward}
+              </MaybeLoading>%
             </List.Content>
           </List.Item>
           <List.Item>
