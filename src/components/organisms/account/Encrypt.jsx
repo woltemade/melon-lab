@@ -16,7 +16,7 @@ const Encrypt = ({ handleSubmit, error, loading }) => (
     </h5>
     <h5>Enter a password: Do not forget it!</h5>
     {error ? <div className="error">{error}</div> : null}
-    <p>
+    <div>
       <Field
         disabled={loading}
         label="Password"
@@ -32,7 +32,7 @@ const Encrypt = ({ handleSubmit, error, loading }) => (
         component={renderInput}
         type="password"
       />
-    </p>
+    </div>
     <Button
       basic
       disabled={loading}
