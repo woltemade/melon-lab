@@ -38,7 +38,7 @@ import getFundContract from '../../../../lib/fund/contracts/getFundContract';
 import shutDownFund from '../../../../lib/fund/transactions/shutDownFund';
 import getFundInformations from '../../../../lib/fund/calls/getFundInformations';
 
-const INITIAL_SUBSCRIBE_QUANTITY = 5;
+const INITIAL_SUBSCRIBE_QUANTITY = 10;
 const REDEEM_QUANTITY = 5;
 
 const shared = { etherBalance: {}, participation: {}, melonBalance: {} };
@@ -354,20 +354,6 @@ fit(
     //   data: shared,
     // });
 
-    // shared.orderFromFund2 = await makeOrder(
-    //   wallet,
-    //   shared.vault.address,
-    //   // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
-    //   'ETH-T',
-    //   'MLN-T',
-    //   new BigNumber(1),
-    //   new BigNumber(5),
-    // );
-
-    // trace({
-    //   message: `Fund placed an order with id: ${shared.orderFromFund2.id}`,
-    // });
-
     shared.openOrders = await getOpenOrders(shared.vault.address);
     console.log(shared.openOrders);
 
@@ -379,6 +365,29 @@ fit(
 
     shared.openOrders = await getOpenOrders(shared.vault.address);
     console.log(shared.openOrders);
+
+    shared.orderFromFund2 = await makeOrder(
+      wallet,
+      shared.vault.address,
+      // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
+      'MLN-T',
+      'ETH-T',
+      new BigNumber(5),
+      new BigNumber(1),
+    );
+
+    trace({
+      message: `Fund placed an order with id: ${shared.orderFromFund2.id}`,
+    });
+    await cancelOrder(wallet, 0, shared.vault.address);
+
+    trace({
+      message: `Canceled order ${shared.orderFromFund.id}`,
+    });
+
+    shared.openOrders = await getOpenOrders(shared.vault.address);
+    console.log(shared.openOrders);
+
     shared.endCalculations = await performCalculations(shared.vault.address);
 
     trace({
