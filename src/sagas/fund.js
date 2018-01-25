@@ -141,7 +141,6 @@ function* fund() {
   yield takeLatest(rankingTypes.GET_RANKING_SUCCEEDED, addRanking);
   yield takeLatest(tradeTypes.TAKE_ORDER_SUCCEEDED, afterTradeUpdate);
   yield takeLatest(tradeTypes.PLACE_ORDER_SUCCEEDED, afterTradeUpdate);
-  yield takeLatest(tradeTypes.PLACE_ORDER_SUCCEEDED, afterTradeUpdate);
   yield takeLatest(
     participationTypes.EXECUTE_SUCCEEDED,
     afterParticipationUpdate,
