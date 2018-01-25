@@ -26,9 +26,11 @@ export const configureStore = preloadedState => {
   // TODO: For security reasons (intercepting passwords and stuff), disable
   // redux devtools on production!
   /* eslint-disable no-underscore-dangle */
-  const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
-    ? window.__REDUX_DEVTOOLS_EXTENSION__()
-    : f => f;
+  const devTools =
+    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    process.env.NODE_ENV === "development"
+      ? window.__REDUX_DEVTOOLS_EXTENSION__()
+      : f => f;
   /* eslint-enable */
 
   const enhanced = compose(enhancer, middlewares, devTools);
