@@ -95,87 +95,101 @@ const Orderbook = ({
         <Image src="./melon-spinner.gif" size="small" centered />
       </div>
     ) : (
-      <Grid padded={false} container columns={2} style={{ marginTop: 30 }}>
-        <Grid.Column id="SellOrders">
-          <Grid padded={false}>
-            <Grid.Row
-              columns={3}
-              style={{
-                padding: 0,
-                borderBottom: "1px solid rgba(34, 36, 38, 0.15)",
-              }}
-            >
-              <Grid.Column style={tableSellHeadCellStyle}>
-                Cum. Vol.
-              </Grid.Column>
-              <Grid.Column style={tableSellHeadCellStyle}>Vol.</Grid.Column>
-              <Grid.Column style={tableSellHeadCellStyle}>Bid</Grid.Column>
-            </Grid.Row>
-            {buyOrders.map((order, index, { length }) => (
+      <React.Fragment>
+        <Grid
+          padded={false}
+          container
+          columns={2}
+          style={{ marginTop: 30, marginBottom: 30 }}
+        >
+          <Grid.Column id="SellOrders">
+            <Grid padded={false}>
               <Grid.Row
-                container
-                style={getBuyRowStyle(
-                  order.cumulativeVolume,
-                  totalSellVolume,
-                  isReadyToTrade,
-                  index + 1 === length,
-                )}
-                {...getRowInteraction(order, onClick, isReadyToTrade)}
                 columns={3}
+                style={{
+                  padding: 0,
+                  borderBottom: "1px solid rgba(34, 36, 38, 0.15)",
+                }}
               >
-                <Grid.Column style={tableSellCellStyle}>
-                  {order.cumulativeVolume}
+                <Grid.Column style={tableSellHeadCellStyle}>
+                  Cum. Vol.
                 </Grid.Column>
-                <Grid.Column style={tableSellCellStyle}>
-                  {order.howMuch}
-                </Grid.Column>
-                <Grid.Column style={tableSellCellStyle}>
-                  {order.price}
+                <Grid.Column style={tableSellHeadCellStyle}>Vol.</Grid.Column>
+                <Grid.Column style={tableSellHeadCellStyle}>Bid</Grid.Column>
+              </Grid.Row>
+              {buyOrders.map((order, index, { length }) => (
+                <Grid.Row
+                  container
+                  style={getBuyRowStyle(
+                    order.cumulativeVolume,
+                    totalSellVolume,
+                    isReadyToTrade,
+                    index + 1 === length,
+                  )}
+                  {...getRowInteraction(order, onClick, isReadyToTrade)}
+                  columns={3}
+                >
+                  <Grid.Column style={tableSellCellStyle}>
+                    {order.cumulativeVolume}
+                  </Grid.Column>
+                  <Grid.Column style={tableSellCellStyle}>
+                    {order.howMuch}
+                  </Grid.Column>
+                  <Grid.Column style={tableSellCellStyle}>
+                    {order.price}
+                  </Grid.Column>
+                </Grid.Row>
+              ))}
+            </Grid>
+          </Grid.Column>
+          <Grid.Column id="BuyOrders" style={{ marginLeft: -1 }}>
+            <Grid padded={false}>
+              <Grid.Row
+                columns={3}
+                style={{
+                  padding: 0,
+                  borderBottom: "1px solid rgba(34, 36, 38, 0.15)",
+                }}
+              >
+                <Grid.Column style={tableBuyHeadCellStyle}>Ask</Grid.Column>
+                <Grid.Column style={tableBuyHeadCellStyle}>Vol.</Grid.Column>
+                <Grid.Column style={tableBuyHeadCellStyle}>
+                  Cum. Vol.
                 </Grid.Column>
               </Grid.Row>
-            ))}
-          </Grid>
-        </Grid.Column>
-        <Grid.Column id="BuyOrders" style={{ marginLeft: -1 }}>
-          <Grid padded={false}>
-            <Grid.Row
-              columns={3}
-              style={{
-                padding: 0,
-                borderBottom: "1px solid rgba(34, 36, 38, 0.15)",
-              }}
-            >
-              <Grid.Column style={tableBuyHeadCellStyle}>Ask</Grid.Column>
-              <Grid.Column style={tableBuyHeadCellStyle}>Vol.</Grid.Column>
-              <Grid.Column style={tableBuyHeadCellStyle}>Cum. Vol.</Grid.Column>
-            </Grid.Row>
 
-            {sellOrders.map((order, index, { length }) => (
-              <Grid.Row
-                container
-                style={getSellRowStyle(
-                  order.cumulativeVolume,
-                  totalBuyVolume,
-                  isReadyToTrade,
-                  index + 1 === length,
-                )}
-                {...getRowInteraction(order, onClick, isReadyToTrade)}
-                columns={3}
-              >
-                <Grid.Column style={tableBuyCellStyle}>
-                  {order.price}
-                </Grid.Column>
-                <Grid.Column style={tableBuyCellStyle}>
-                  {order.howMuch}
-                </Grid.Column>
-                <Grid.Column style={tableBuyCellStyle}>
-                  {order.price}
-                </Grid.Column>
-              </Grid.Row>
-            ))}
-          </Grid>
-        </Grid.Column>
-      </Grid>
+              {sellOrders.map((order, index, { length }) => (
+                <Grid.Row
+                  container
+                  style={getSellRowStyle(
+                    order.cumulativeVolume,
+                    totalBuyVolume,
+                    isReadyToTrade,
+                    index + 1 === length,
+                  )}
+                  {...getRowInteraction(order, onClick, isReadyToTrade)}
+                  columns={3}
+                >
+                  <Grid.Column style={tableBuyCellStyle}>
+                    {order.price}
+                  </Grid.Column>
+                  <Grid.Column style={tableBuyCellStyle}>
+                    {order.howMuch}
+                  </Grid.Column>
+                  <Grid.Column style={tableBuyCellStyle}>
+                    {order.price}
+                  </Grid.Column>
+                </Grid.Row>
+              ))}
+            </Grid>
+          </Grid.Column>
+        </Grid>
+        {sellOrders.length === 0 && buyOrders.length === 0 ? (
+          <h4 style={{ marginBottom: 50, color: "#f29954" }}>
+            No orders on the orderbook for this trading pair
+          </h4>
+        ) : null}
+      </React.Fragment>
     )}
   </div>
 );
