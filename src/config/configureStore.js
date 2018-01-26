@@ -19,7 +19,9 @@ export const configureStore = preloadedState => {
     createHistory,
   });
 
-  const sagaMiddleware = createSagaMiddleware();
+  const sagaMiddleware = createSagaMiddleware({
+    onError: window.Raven ? window.Raven.captureException : undefined,
+  });
 
   const middlewares = applyMiddleware(routerMiddleware, sagaMiddleware);
 
