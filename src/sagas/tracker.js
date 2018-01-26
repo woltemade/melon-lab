@@ -1,5 +1,5 @@
-import { takeLatest, takeEvery, call, select } from "redux-saga/effects";
-import flattenObject from "flatten-object";
+import { takeLatest, takeEvery, call, apply, select } from "redux-saga/effects";
+import flatten from "flat";
 
 import { types as appTypes } from "../actions/app";
 import { types as routeTypes } from "../actions/routes";
@@ -53,11 +53,14 @@ function* track(action) {
 function* logBreadcrumps(action) {
   const { type, ...payload } = action;
 
-  yield call(window.Raven.captureBreadcrumb, {
-    message: action.type,
-    category: "redux-action",
-    data: flattenObject(payload),
-  });
+  const flatPayload = flatten(payload, { delimiter: "_" });
+
+  if (window.Raven)
+    yield apply(window.Raven, window.Raven.captureBreadcrumb, {
+      message: action.type,
+      category: "redux-action",
+      data: flatPayload,
+    });
 }
 
 const selectBreadcrumps = action => action.type.includes("melon");

@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import ReactModal from "react-modal";
-// import { ConnectedRouter } from "react-router-redux";
+import melonJsPkg from "@melonproject/melon.js/package.json";
+import pkg from "../package.json";
 
 import { configureStore } from "./config/configureStore";
 import AppContainer from "./containers/App";
@@ -13,6 +14,10 @@ import { actions } from "./actions/browser";
 export const store = configureStore();
 
 ReactModal.setAppElement("#root");
+
+window.MELON_VERSIONS = `ipfs-frontend@${pkg.version} melon.js@${
+  melonJsPkg.version
+} ${process.env.NODE_ENV}`;
 
 window.addEventListener("load", () => {
   store.dispatch(actions.loaded());
@@ -44,7 +49,7 @@ ReactDOM.render(
   <Provider store={store}>
     <AppContainer />
   </Provider>,
-  document.getElementById("root")
+  document.getElementById("root"),
 );
 
 registerServiceWorker();
