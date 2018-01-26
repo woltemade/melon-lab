@@ -54,10 +54,6 @@
       e.src = "https://cdn.ravenjs.com/3.22.1/raven.min.js"
       e.crossOrigin = "anonymous"
 
-      e.addEventListener("load", function () {
-        Raven.config('https://14d859a5b75f4d4fbd79defb6d53129a@sentry.io/278024').install();
-      });
-
       var n = document.getElementsByTagName("script")[0];
       n.parentNode.insertBefore(e, n)
     }

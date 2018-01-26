@@ -17,10 +17,22 @@ ReactModal.setAppElement("#root");
 
 window.MELON_VERSIONS = `ipfs-frontend@${pkg.version} melon.js@${
   melonJsPkg.version
-} ${process.env.NODE_ENV}`;
+}`;
+
+window.ENVIRONMENT = process.env.NODE_ENV;
+
+if (window.Raven)
+  window.Raven.config(
+    "https://14d859a5b75f4d4fbd79defb6d53129a@sentry.io/278024",
+    {
+      release: window.MELON_VERSIONS,
+      environment: window.ENVIRONMENT,
+    },
+  ).install();
 
 window.addEventListener("load", () => {
   store.dispatch(actions.loaded());
+
   /*
   // TODO: Refactor this ino own saga
   const tracker = melonTracker.on("DataUpdated", "LogItemUpdate");
