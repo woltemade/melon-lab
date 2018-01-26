@@ -1,4 +1,5 @@
 import { takeLatest, takeEvery, call, apply, select } from "redux-saga/effects";
+import { omit } from "ramda";
 import flatten from "flat";
 
 import { types as appTypes } from "../actions/app";
@@ -11,6 +12,8 @@ import { types as tradeTypes } from "../actions/trade";
 
 const findKeyByValue = (obj, byValue) =>
   (Object.entries(obj).find(([, value]) => value === byValue) || [null])[0];
+
+const removeSensitiveData = omit(["mnemonic", "password", "wallet"]);
 
 function* identify() {
   const userAddress = yield select(state => state.ethereum.account);
@@ -47,13 +50,13 @@ const eventActionTypeMap = {
 function* track(action) {
   const { type, ...payload } = action;
   const name = findKeyByValue(eventActionTypeMap, action.type);
-  yield call(window.analytics.track, name, payload);
+  yield call(window.analytics.track, name, removeSensitiveData(payload));
 }
 
 function* logBreadcrumps(action) {
   const { type, ...payload } = action;
 
-  const flatPayload = flatten(payload, { delimiter: "_" });
+  const flatPayload = removeSensitiveData(flatten(payload, { delimiter: "_" }));
 
   if (window.Raven)
     yield apply(window.Raven, window.Raven.captureBreadcrumb, {
