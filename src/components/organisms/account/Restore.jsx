@@ -12,9 +12,9 @@ const Restore = ({ handleSubmit, error }) => (
     <form onSubmit={handleSubmit}>
       <p>Please type your 12-words mnemonic:</p>
       {error ? <div className="error">{error}</div> : null}
-      <p>
+      <div>
         <Field name="mnemonic" type="text" component={renderInput} />
-      </p>
+      </div>
       <p>
         <Button basic color="black" style={{ width: "100%" }}>
           Import
