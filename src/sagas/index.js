@@ -14,6 +14,8 @@ import account from "./account";
 import participation from "./participation";
 import trade from "./trade";
 import tracker from "./tracker";
+import openOrders from "./openOrders";
+
 
 function* rootSaga() {
   yield fork(administration);
@@ -29,6 +31,7 @@ function* rootSaga() {
   yield fork(account);
   yield fork(participation);
   yield fork(trade);
+  yield fork(openOrders);
 
   if (window.analytics) yield fork(tracker);
 }
