@@ -10,6 +10,7 @@ import orderbook from "./orderbook";
 import ranking from "./ranking";
 import recentTrades from "./recentTrades";
 import tradeHistory from "./tradeHistory";
+import openOrders from "./openOrders";
 
 const reducerMap = {
   account,
@@ -23,6 +24,7 @@ const reducerMap = {
   ranking,
   recentTrades,
   tradeHistory,
+  openOrders,
 };
 
 export default reducerMap;

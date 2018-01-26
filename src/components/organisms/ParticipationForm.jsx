@@ -7,8 +7,8 @@ const participationTypeSelector = ({ input: { onChange, value } }) => (
   <div>
     <Menu text style={{ display: "flex", justifyContent: "center" }}>
       <Menu.Item
-        name="Invest"
-        active={value === "Invest"}
+        name="Subscribe"
+        active={value === "Subscribe"}
         onClick={() => onChange("Invest")}
       />
       <div style={{ marginTop: "0.7em" }}>|</div>
