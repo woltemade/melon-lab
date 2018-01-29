@@ -24,7 +24,7 @@ const loadingFund = {
   pendingRequest: null,
   readyToExecute: false,
   inception: "...",
-  signed: false,
+  signature: undefined,
 };
 
 export const initialState = {

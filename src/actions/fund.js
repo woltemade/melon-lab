@@ -43,9 +43,9 @@ export const actions = {
   signRequested: () => ({
     type: types.SIGN_REQUESTED,
   }),
-  signSucceeded: () => ({
+  signSucceeded: signature => ({
     type: types.SIGN_SUCCEEDED,
-    signed: true,
+    signature,
   }),
   signFailed: ({ reason }) => ({
     type: types.SIGN_FAILED,

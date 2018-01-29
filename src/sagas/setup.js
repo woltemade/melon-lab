@@ -26,8 +26,8 @@ function* sign() {
     yield put(modalActions.loading());
     const wallet = localStorage.getItem("wallet:melon.fund");
     const decryptedWallet = yield call(decryptWallet, wallet, password);
-    yield call(signTermsAndConditions, decryptedWallet);
-    yield put(actions.signSucceeded());
+    const signature = yield call(signTermsAndConditions, decryptedWallet);
+    yield put(actions.signSucceeded(signature));
     yield put(modalActions.close());
   } catch (err) {
     if (err.name === "password") {
@@ -55,7 +55,7 @@ function* createFund({ name }) {
     yield put(modalActions.loading());
     const wallet = localStorage.getItem("wallet:melon.fund");
     const decryptedWallet = yield call(decryptWallet, wallet, password);
-    const signature = yield call(signTermsAndConditions, decryptedWallet);
+    const signature = yield select(state => state.fund.signature);
     const fund = yield call(setupFund, decryptedWallet, name, signature);
     yield put(
       actions.setupSucceeded({ ...fund, owner: melonJsSetup.defaultAccount }),
