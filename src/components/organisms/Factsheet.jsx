@@ -45,14 +45,15 @@ const Factsheet = ({
           <List.Item>
             <List.Content as="a" onClick={() => scrollTo("holdings")}>
               <MaybeData dataAvailable={dataValid}>
-                AUM: <MaybeLoading>{aum}</MaybeLoading> MLN
+                AUM: <MaybeLoading>{aum}</MaybeLoading> MLN-T
               </MaybeData>
             </List.Content>
           </List.Item>
           <List.Item>
             <List.Content as="a" onClick={() => scrollTo("holdings")}>
               <MaybeData dataAvailable={dataValid}>
-                Share price: <MaybeLoading>{sharePrice}</MaybeLoading> MLN/Share
+                Share price: <MaybeLoading>{sharePrice}</MaybeLoading>{" "}
+                MLN-T/Share
               </MaybeData>
             </List.Content>
           </List.Item>
