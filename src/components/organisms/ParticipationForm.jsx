@@ -40,7 +40,7 @@ const ParticipationForm = ({
           <List.Item>
             <List.Content>
               <Field
-                label="Quantity"
+                label="Quantity (Shares)"
                 name="amount"
                 component={NumberInput}
                 type="number"
@@ -52,7 +52,7 @@ const ParticipationForm = ({
           <List.Item>
             <List.Content>
               <Field
-                label="Price"
+                label="Price (MLN-T)"
                 name="price"
                 component={NumberInput}
                 type="number"
@@ -64,7 +64,7 @@ const ParticipationForm = ({
           <List.Item>
             <List.Content>
               <Field
-                label="Total"
+                label="Total (MLN-T)"
                 name="total"
                 component={NumberInput}
                 format={displayNumber}

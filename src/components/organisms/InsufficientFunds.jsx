@@ -10,9 +10,9 @@ const InsufficientFunds = ({ mlnBalance, ethBalance, walletAddress }) => (
         <br />
         <p>
           {" "}
-          You don't have enough MLN or ETH. Current balances: {
-            mlnBalance
-          } MLN, {ethBalance} ETH
+          You don't have enough Kovan test melon tokens (MLN-T) or Kovan test
+          ether tokens (ETH-T). Current balances: {mlnBalance} MLN-T,{" "}
+          {ethBalance} ETH-T
         </p>
         <p className="App-intro">
           To get started, head to our{" "}
@@ -28,7 +28,7 @@ const InsufficientFunds = ({ mlnBalance, ethBalance, walletAddress }) => (
           to receive Kovan Ether and Kovan Melon
         </p>
         <p className="App-intro">
-          Once you have received k-ETH and k-MLN, go ahead and create your Melon
+          Once you have received ETH-T and MLN-T, go ahead and create your Melon
           fund.
         </p>
         <Button

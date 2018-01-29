@@ -5,7 +5,7 @@ import Link from "redux-first-router-link";
 const Generate = ({ generateWallet, restoreWalletAction }) => (
   <div>
     <p>
-      Before you can set up your fund, you need to create or restore wallet.
+      Before you can set up your fund, you need to create or restore a wallet.
     </p>
     <p>
       The standard bip39 is used to generate a mnemonic phrase, from which your

@@ -30,7 +30,11 @@ const Setup = ({ loading, handleSubmit }) => (
           </List.Item>
           <br />
           <h4>Melon Default Configuration:</h4>
-
+          <p>
+            For this version, the modules that your fund will use are predefined
+            ie. you do not need to choose a module. For your record, below are
+            the predefined modules for this version.
+          </p>
           <List.Item>
             <List.Content>Performance fee: 0%</List.Content>
           </List.Item>
@@ -54,7 +58,7 @@ const Setup = ({ loading, handleSubmit }) => (
             target="_blank"
           >
             <List.Content>
-              DataFeed: <strong>Thomson Reuters Datafeed</strong>
+              Pricefeed: <strong>Thomson Reuters Pricefeed</strong>
             </List.Content>
           </List.Item>
 
@@ -77,7 +81,11 @@ const Setup = ({ loading, handleSubmit }) => (
               href="https://github.com/melonproject/protocol/blob/0.3.8-alpha.5/contracts/riskmgmt/RMMakeOrders.sol"
               target="_blank"
             >
-              Risk Management: <strong>Make/Take order permitted</strong>
+              Risk Management:{" "}
+              <strong>
+                Make/Take order permitted with 10% deviation from the reference
+                price provided by above pricefeed.
+              </strong>
             </List.Content>
           </List.Item>
         </List>
