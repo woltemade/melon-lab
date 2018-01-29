@@ -7,7 +7,7 @@ const TermsAndConditions = ({ sign }) => (
     <h4>
       Please read carefully and make sure to understand the following before
       pressing the below button that will generate a cryptographic signature of
-      manifesting yur understanding and agreement to the conditions of use of
+      manifesting your understanding and agreement to the conditions of use of
       this software.
     </h4>
     <p>
