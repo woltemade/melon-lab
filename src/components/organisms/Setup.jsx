@@ -83,9 +83,9 @@ const Setup = ({ loading, handleSubmit }) => (
             >
               Risk Management:{" "}
               <strong>
-                Make/Take order permitted with 10% deviation from the reference
-                price provided by above pricefeed.
-              </strong>
+                Make/Take order permitted with 10% deviation{" "}
+              </strong>{" "}
+              from the reference price provided by above pricefeed.
             </List.Content>
           </List.Item>
         </List>
