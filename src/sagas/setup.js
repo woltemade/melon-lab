@@ -14,6 +14,35 @@ import {
   actions as routeActions,
 } from "../actions/routes";
 
+function* sign() {
+  yield put(
+    modalActions.confirm(
+      `Please enter your password below to sign the terms and conditions:`,
+    ),
+  );
+  const { password } = yield take(modalTypes.CONFIRMED);
+
+  try {
+    yield put(modalActions.loading());
+    const wallet = localStorage.getItem("wallet:melon.fund");
+    const decryptedWallet = yield call(decryptWallet, wallet, password);
+    const signature = yield call(signTermsAndConditions, decryptedWallet);
+    yield put(actions.signSucceeded(signature));
+    yield put(modalActions.close());
+  } catch (err) {
+    if (err.name === "password") {
+      yield put(modalActions.error("Wrong password"));
+    } else if (err.name === "EnsureError") {
+      yield put(modalActions.error(err.message));
+    } else {
+      yield put(modalActions.error(err.message));
+      console.error(err);
+      console.log(JSON.stringify(err, null, 4));
+    }
+    yield put(actions.signFailed(err));
+  }
+}
+
 function* createFund({ name }) {
   yield put(
     modalActions.confirm(
@@ -26,7 +55,7 @@ function* createFund({ name }) {
     yield put(modalActions.loading());
     const wallet = localStorage.getItem("wallet:melon.fund");
     const decryptedWallet = yield call(decryptWallet, wallet, password);
-    const signature = yield call(signTermsAndConditions, decryptedWallet);
+    const signature = yield select(state => state.fund.signature);
     const fund = yield call(setupFund, decryptedWallet, name, signature);
     yield put(
       actions.setupSucceeded({ ...fund, owner: melonJsSetup.defaultAccount }),
@@ -63,6 +92,7 @@ function* loadFundOnSetup() {
 }
 
 function* setup() {
+  yield takeLatest(types.SIGN_REQUESTED, sign);
   yield takeLatest(types.SETUP_REQUESTED, createFund);
   yield takeLatest(routeTypes.SETUP, loadFundOnSetup);
 }
