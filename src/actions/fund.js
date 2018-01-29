@@ -6,6 +6,9 @@ export const types = {
   SHARE_PRICE_REQUESTED: "SHARE_PRICE_REQUESTED:fund:melon.fund",
   SHARE_PRICE_SUCCEEDED: "SHARE_PRICE_SUCCEEDED:fund:melon.fund",
   SHARE_PRICE_FAILED: "SHARE_PRICE_FAILED:fund:melon.fund",
+  SIGN_REQUESTED: "SIGN_REQUESTED:fund:melon.fund",
+  SIGN_SUCCEEDED: "SIGN_SUCCEEDED:fund:melon.fund",
+  SIGN_FAILED: "SIGN_FAILED:fund:melon.fund",
   SETUP_REQUESTED: "SETUP_REQUESTED:fund:melon.fund",
   SETUP_SUCCEEDED: "SETUP_SUCCEEDED:fund:melon.fund",
   SETUP_FAILED: "SETUP_FAILED:fund:melon.fund",
@@ -35,6 +38,17 @@ export const actions = {
   }),
   setupFailed: ({ reason }) => ({
     type: types.SETUP_FAILED,
+    reason,
+  }),
+  signRequested: () => ({
+    type: types.SIGN_REQUESTED,
+  }),
+  signSucceeded: () => ({
+    type: types.SIGN_SUCCEEDED,
+    signed: true,
+  }),
+  signFailed: ({ reason }) => ({
+    type: types.SIGN_FAILED,
     reason,
   }),
   infoRequested: address => ({

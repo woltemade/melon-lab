@@ -24,6 +24,7 @@ const loadingFund = {
   pendingRequest: null,
   readyToExecute: false,
   inception: "...",
+  signed: false,
 };
 
 export const initialState = {
@@ -57,6 +58,7 @@ const reducers = {
 const mapActionToReducer = {
   [types.SET]: reducers.setAddress,
   [types.SETUP_SUCCEEDED]: reducers.merge,
+  [types.SIGN_SUCCEEDED]: reducers.merge,
   [types.INFO_SUCCEEDED]: reducers.merge,
   [types.SHARE_PRICE_SUCCEEDED]: reducers.merge,
   [types.INFO_REQUESTED]: reducers.merge,

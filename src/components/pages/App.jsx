@@ -5,6 +5,7 @@ import WrongNetwork from "../organisms/WrongNetwork";
 import NoMetamask from "../organisms/NoMetamask";
 import LockedAccount from "../organisms/LockedAccount";
 import InsufficientFunds from "../organisms/InsufficientFunds";
+import TermsAndConditionsContainer from "../../containers/TermsAndConditions";
 import SetupContainer from "../../containers/Setup";
 import ParticipationContainer from "../../containers/Participation";
 import { onboardingPath } from "../../reducers/app";
@@ -23,6 +24,7 @@ const mapOnboardingStateToMainContainer = {
   [onboardingPath.WRONG_NETWORK]: WrongNetwork,
   [onboardingPath.LOCKED_ACCOUNT]: LockedAccount,
   [onboardingPath.INSUFFICIENT_FUNDS]: InsufficientFunds,
+  [onboardingPath.NOT_SIGNED]: TermsAndConditionsContainer,
   [onboardingPath.NO_FUND_CREATED]: SetupContainer,
   [onboardingPath.NOT_INVESTED_IN_OWN_FUND]: ParticipationContainer,
 };

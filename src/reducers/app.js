@@ -7,6 +7,7 @@ export const onboardingPath = {
   WRONG_NETWORK: "Wrong network",
   NO_ACCOUNT: "No account",
   INSUFFICIENT_FUNDS: "Insufficent Funds",
+  NOT_SIGNED: "T&Cs not signed ",
   NO_FUND_CREATED: "No fund created ",
   NOT_INVESTED_IN_OWN_FUND: "Not invested in own fund",
   ONBOARDED: "Onboarded",
