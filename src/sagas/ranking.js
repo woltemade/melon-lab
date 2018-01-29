@@ -1,10 +1,15 @@
 import { takeLatest, call, put, select, take } from "redux-saga/effects";
-import { getRanking } from "@melonproject/melon.js";
 import { actions, types } from "../actions/ranking";
 import { types as ethereumTypes } from "../actions/ethereum";
 import { types as routeTypes } from "../actions/routes";
 
 // import rankingMock from "../utils/mocks/ranking.json";
+
+function getRanking() {
+  return fetch("https://ranking.melon.fund", { method: "GET" }).then(resp =>
+    resp.json().then(json => json),
+  );
+}
 
 function* getRankingSaga() {
   const isConnected = yield select(state => state.ethereum.isConnected);
