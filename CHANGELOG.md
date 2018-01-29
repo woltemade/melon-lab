@@ -16,6 +16,7 @@ and this project adheres to
 ### Fixed
 
 * Changed promise detection in resolvePromiseObject to fix Firefox Bug: melonproject/ipfs-frontend#116
+* Catch last order from new fund --> Added isValidId helper
 
 ## [0.6.0]
 
