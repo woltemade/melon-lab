@@ -7,7 +7,6 @@ import pkg from "../package.json";
 
 import { configureStore } from "./config/configureStore";
 import AppContainer from "./containers/App";
-import registerServiceWorker from "./registerServiceWorker";
 
 import { actions } from "./actions/browser";
 
@@ -63,5 +62,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root"),
 );
-
-registerServiceWorker();
