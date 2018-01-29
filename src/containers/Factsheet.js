@@ -29,7 +29,10 @@ const buildTwitterUrl = (isOwner, fundAddress, fundName, sharePrice) => {
 
 const mapStateToProps = state => ({
   aum: displayNumber(state.fund.gav),
-  creationDate: moment(state.fund.inception).format("D. MMM YYYY HH:mm"),
+  creationDate:
+    state.fund.inception && state.fund.inception !== "..."
+      ? moment(state.fund.inception).format("D. MMM YYYY HH:mm")
+      : "...",
   managementReward: displayNumber(state.fund.managementReward),
   name: state.fund.name,
   performanceReward: displayNumber(state.fund.performanceReward),
