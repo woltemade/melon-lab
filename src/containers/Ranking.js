@@ -22,15 +22,14 @@ const mapStateToProps = state => ({
     }))
     .sort((a, b) => {
       const { ordering } = state.ranking;
-
       if (ordering === "+rank") {
         return greaterThan(a.rank, b.rank) ? 1 : -1;
       } else if (ordering === "-rank") {
         return greaterThan(b.rank, a.rank) ? 1 : -1;
       } else if (ordering === "+price") {
-        return greaterThan(a.price, b.price) ? 1 : -1;
+        return greaterThan(a.sharePrice, b.sharePrice) ? 1 : -1;
       } else if (ordering === "-price") {
-        return greaterThan(b.price, a.price) ? 1 : -1;
+        return greaterThan(b.sharePrice, a.sharePrice) ? 1 : -1;
       } else if (ordering === "+inception") {
         return new Date(a.inception) > new Date(b.inception) ? 1 : -1;
       } else if (ordering === "-inception") {
