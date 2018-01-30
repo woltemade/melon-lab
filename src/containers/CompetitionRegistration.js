@@ -9,6 +9,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   doneWithRegistration: () => dispatch(actions.showedRegistration()),
+  redirectToSignCompetitionTerms: () => dispatch(actions.needsToRegister()),
 });
 
 const CompetitionRegistrationRedux = connect(

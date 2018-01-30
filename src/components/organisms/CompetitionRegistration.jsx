@@ -1,7 +1,11 @@
 import React from "react";
 import { Card, Header, Button } from "semantic-ui-react";
 
-const CompetitionRegistration = ({ fundAddress, doneWithRegistration }) => (
+const CompetitionRegistration = ({
+  fundAddress,
+  doneWithRegistration,
+  redirectToSignCompetitionTerms,
+}) => (
   <Card centered>
     <Card.Content>
       <Header as="h2">Competition registration</Header>
@@ -26,18 +30,19 @@ const CompetitionRegistration = ({ fundAddress, doneWithRegistration }) => (
           completing the registration, come back here and click the "Continue"
           button.
         </p>
-        <p>If do not wish to register now, click the "Continue" button.</p>
+        <p>
+          If do not wish to register now -or are already registered, click the
+          "Continue" button.
+        </p>
         <br />
-        <Button basic color="black" style={{ width: "100%" }}>
+        <Button
+          basic
+          color="black"
+          style={{ width: "100%" }}
+          onClick={redirectToSignCompetitionTerms}
+        >
           {" "}
-          <h4>
-            <a
-              href={`http://competition.melon.fund/${fundAddress}`}
-              target="_blank"
-            >
-              REGISTER (Recommended)
-            </a>
-          </h4>
+          <h4>REGISTER (Recommended) </h4>
         </Button>
         <br />
         <br />

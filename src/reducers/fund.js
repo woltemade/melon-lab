@@ -26,6 +26,8 @@ const loadingFund = {
   inception: "...",
   signature: undefined,
   showedRegistration: undefined,
+  competitionSignature: undefined,
+  needsToRegister: false,
 };
 
 export const initialState = {
@@ -60,7 +62,10 @@ const mapActionToReducer = {
   [types.SET]: reducers.setAddress,
   [types.SETUP_SUCCEEDED]: reducers.merge,
   [types.SIGN_SUCCEEDED]: reducers.merge,
+  [types.SIGN_COMPETITION_SUCCEEDED]: reducers.merge,
   [types.SHOWED_REGISTRATION]: reducers.merge,
+  [types.NEEDS_TO_REGISTER]: reducers.merge,
+  [types.IS_REGISTERED]: reducers.merge,
   [types.INFO_SUCCEEDED]: reducers.merge,
   [types.SHARE_PRICE_SUCCEEDED]: reducers.merge,
   [types.INFO_REQUESTED]: reducers.merge,

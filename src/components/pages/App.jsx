@@ -15,6 +15,7 @@ import AccountContainer from "../../containers/Account";
 import RestoreContainer from "../../containers/Restore";
 import MyAccountContainer from "../../containers/MyAccount";
 import CompetitionRegistrationContainer from "../../containers/CompetitionRegistration";
+import SignCompetitionTermsContainer from "../../containers/SignCompetitionTerms";
 
 import Modal from "../../containers/Modal";
 import { types } from "../../actions/routes";
@@ -29,6 +30,7 @@ const mapOnboardingStateToMainContainer = {
   [onboardingPath.NOT_SIGNED]: TermsAndConditionsContainer,
   [onboardingPath.NO_FUND_CREATED]: SetupContainer,
   [onboardingPath.REGISTRATION]: CompetitionRegistrationContainer,
+  [onboardingPath.SIGN_COMPETITION_TERMS]: SignCompetitionTermsContainer,
   [onboardingPath.NOT_INVESTED_IN_OWN_FUND]: ParticipationContainer,
 };
 

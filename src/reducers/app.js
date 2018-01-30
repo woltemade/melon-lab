@@ -10,6 +10,7 @@ export const onboardingPath = {
   NOT_SIGNED: "T&Cs not signed ",
   NO_FUND_CREATED: "No fund created ",
   REGISTRATION: "Competition registration",
+  SIGN_COMPETITION_TERMS: "Sign competition terms",
   NOT_INVESTED_IN_OWN_FUND: "Not invested in own fund",
   ONBOARDED: "Onboarded",
 };
