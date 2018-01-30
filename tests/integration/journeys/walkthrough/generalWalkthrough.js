@@ -11,6 +11,7 @@ import trace from '../../../../lib/utils/generic/trace';
 import getBalance from '../../../../lib/assets/calls/getBalance';
 
 import signTermsAndConditions from '../../../../lib/version/transactions/signTermsAndConditions';
+import signCompetitionTermsAndConditions from '../../../../lib/version/transactions/signCompetitionTermsAndConditions';
 import setupFund from '../../../../lib/version/transactions/setupFund';
 import getFundForManager from '../../../../lib/version/calls/getFundForManager';
 import getParticipation from '../../../../lib/participation/calls/getParticipation';
@@ -103,9 +104,10 @@ fit(
       data: shared.config,
     });
 
-    const ranking = await getRanking();
-    console.log(ranking);
-
+    const sig = await signTermsAndConditions(wallet);
+    console.log(sig);
+    const sig2 = await signCompetitionTermsAndConditions(wallet);
+    console.log(sig2);
     // const versionContract = await getVersionContract();
     // let managerToFunds = await versionContract.instance.managerToFunds.call(
     //   {},
