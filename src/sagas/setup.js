@@ -1,4 +1,6 @@
 import { takeLatest, call, put, take, select } from "redux-saga/effects";
+import slugify from "slugify";
+
 import {
   setupFund,
   setup as melonJsSetup,
@@ -10,6 +12,10 @@ import { actions as modalActions, types as modalTypes } from "../actions/modal";
 
 import { types, actions } from "../actions/fund";
 import { actions as appActions, types as appTypes } from "../actions/app";
+import {
+  actions as rankingActions,
+  types as rankingTypes,
+} from "../actions/ranking";
 import {
   types as routeTypes,
   actions as routeActions,
@@ -77,11 +83,28 @@ function* signCompetition() {
 }
 
 function* createFund({ name }) {
+  const rankingLoaded = yield select(
+    state => state.ranking.rankingList.length > 0,
+  );
+
+  if (!rankingLoaded) {
+    yield put(rankingActions.getRanking());
+    yield take(rankingTypes.GET_RANKING_SUCCEEDED);
+  }
+
+  const ranking = yield select(state => state.ranking.rankingList);
+
+  if (ranking.find(fund => slugify(fund.name) === slugify(name))) {
+    yield put(modalActions.error("Fund with similar name already registered"));
+    return;
+  }
+
   yield put(
     modalActions.confirm(
       `Please enter your password below to setup your fund with the name ${name} and to sign our terms and conditions:`,
     ),
   );
+
   const { password } = yield take(modalTypes.CONFIRMED);
 
   try {
