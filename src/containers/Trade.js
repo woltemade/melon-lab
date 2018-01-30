@@ -2,7 +2,13 @@ import { connect } from "react-redux";
 import { reduxForm, change, formValueSelector } from "redux-form";
 import { actions } from "../actions/trade";
 import Trade from "../components/organisms/Trade";
-import { multiply, divide, greaterThan } from "../utils/functionalBigNumber";
+import {
+  multiply,
+  divide,
+  greaterThan,
+  max,
+  min,
+} from "../utils/functionalBigNumber";
 import displayNumber from "../utils/displayNumber";
 
 const selector = formValueSelector("trade");
@@ -62,11 +68,11 @@ const onChange = (values, dispatch, props, previousValues) => {
     if (values.strategy === "Market") {
       maxTotal =
         values.type === "Buy"
-          ? Math.min(props.quoteTokenBalance, values.total)
+          ? min(props.quoteTokenBalance, values.total)
           : values.total;
       maxQuantity =
         values.type === "Sell"
-          ? Math.min(props.baseTokenBalance, values.quantity)
+          ? max(props.baseTokenBalance, values.quantity)
           : values.quantity;
     } else if (values.strategy === "Limit") {
       maxTotal = values.type === "Buy" ? props.quoteTokenBalance : Infinity;
