@@ -12,6 +12,15 @@ import { actions } from "./actions/browser";
 
 export const store = configureStore();
 
+console.log(
+  "%c👋🤓",
+  "background: rgba(0,0,0,.87); color: #fffdf3; font-size: 30px",
+);
+console.log(
+  "%cHello nerd. Checking out the internals of the ipfs-frontend? We like that! If you want to work with us, send us a message: team@melonport.com.",
+  "background: rgba(0,0,0,.87); color: #fffdf3; font-size: 12px",
+);
+
 ReactModal.setAppElement("#root");
 
 window.MELON_VERSIONS = `ipfs-frontend@${pkg.version} melon.js@${
