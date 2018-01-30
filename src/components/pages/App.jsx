@@ -14,6 +14,8 @@ import RankingContainer from "../../containers/Ranking";
 import AccountContainer from "../../containers/Account";
 import RestoreContainer from "../../containers/Restore";
 import MyAccountContainer from "../../containers/MyAccount";
+import CompetitionRegistrationContainer from "../../containers/CompetitionRegistration";
+
 import Modal from "../../containers/Modal";
 import { types } from "../../actions/routes";
 import ConnectionInfo from "../organisms/ConnectionInfo";
@@ -26,6 +28,7 @@ const mapOnboardingStateToMainContainer = {
   [onboardingPath.INSUFFICIENT_FUNDS]: InsufficientFunds,
   [onboardingPath.NOT_SIGNED]: TermsAndConditionsContainer,
   [onboardingPath.NO_FUND_CREATED]: SetupContainer,
+  [onboardingPath.REGISTRATION]: CompetitionRegistrationContainer,
   [onboardingPath.NOT_INVESTED_IN_OWN_FUND]: ParticipationContainer,
 };
 

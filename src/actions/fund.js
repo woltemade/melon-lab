@@ -9,6 +9,7 @@ export const types = {
   SIGN_REQUESTED: "SIGN_REQUESTED:fund:melon.fund",
   SIGN_SUCCEEDED: "SIGN_SUCCEEDED:fund:melon.fund",
   SIGN_FAILED: "SIGN_FAILED:fund:melon.fund",
+  SHOWED_REGISTRATION: "SHOWED_REGISTRATION:fund:melon.fund",
   SETUP_REQUESTED: "SETUP_REQUESTED:fund:melon.fund",
   SETUP_SUCCEEDED: "SETUP_SUCCEEDED:fund:melon.fund",
   SETUP_FAILED: "SETUP_FAILED:fund:melon.fund",
@@ -50,6 +51,10 @@ export const actions = {
   signFailed: ({ reason }) => ({
     type: types.SIGN_FAILED,
     reason,
+  }),
+  showedRegistration: () => ({
+    type: types.SHOWED_REGISTRATION,
+    showedRegistration: true,
   }),
   infoRequested: address => ({
     type: types.INFO_REQUESTED,
