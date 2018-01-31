@@ -95,13 +95,21 @@
   "dependencies": {
     "@melonproject/protocol": "^0.6.4-competition",
     "@parity/api": "^2.1.5",
+    "assert": "^1.4.1",
     "bignumber.js": "^5.0.0",
     "bip39": "^2.4.0",
+    "bn.js": "^4.11.8",
+    "create-hash": "^1.1.3",
     "ethers-utils": "^2.1.8",
     "ethers-wallet": "^2.1.6",
+    "ethjs-util": "^0.1.4",
     "fs": "0.0.1-security",
+    "keccak": "^1.4.0",
     "pify": "^3.0.0",
     "ramda": "^0.25.0",
+    "rlp": "^2.0.0",
+    "safe-buffer": "^5.1.1",
+    "secp256k1": "^3.5.0",
     "truffle-contract": "^3.0.2",
     "web3": "^0.20.4"
   }
