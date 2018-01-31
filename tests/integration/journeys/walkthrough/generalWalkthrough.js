@@ -5,6 +5,7 @@ import Utils from 'ethers-utils';
 
 import setup from '../../../../lib/utils/setup';
 import encryptedWallet from '../../../../encryptedWallet.json';
+import decryptWallet from '../../../../lib/utils/wallet/decryptWallet';
 import password from '../../../../password.json';
 import getConfig from '../../../../lib/version/calls/getConfig';
 import trace from '../../../../lib/utils/generic/trace';
@@ -72,14 +73,14 @@ fit(
     //   'dinosaur pulse rice lumber machine entry tackle off require draw edge almost',
     // );
 
-    const wallet = importWalletFromMnemonic(
-      'kidney ice gold impose trigger scene core axis rude expose become leopard',
-    );
+    // const wallet = importWalletFromMnemonic(
+    //   'kidney ice gold impose trigger scene core axis rude expose become leopard',
+    // );
 
-    // const jsonWallet = JSON.stringify(encryptedWallet);
-    // const wallet = await decryptWallet(jsonWallet, password.kovan);
+    const jsonWallet = JSON.stringify(encryptedWallet);
+    const wallet = await decryptWallet(jsonWallet, password.kovan);
 
-    console.log(wallet);
+    // console.log(wallet);
 
     setup.wallet = wallet;
     setup.defaultAccount = wallet.address;
@@ -94,6 +95,22 @@ fit(
     expect(shared.melonBalance.initial.toFixed()).toBeGreaterThan(
       INITIAL_SUBSCRIBE_QUANTITY,
     );
+
+    shared.simpleOrder = await makeOrderFromAccount({
+      wallet,
+      buy: {
+        howMuch: new BigNumber(1),
+        symbol: 'ETH-T',
+      },
+      sell: {
+        howMuch: new BigNumber(4.7),
+        symbol: 'MLN-T',
+      },
+    });
+
+    trace({
+      message: `Regular account made order with id: ${shared.simpleOrder.id}`,
+    });
 
     // shared.config = await getConfig();
     // trace({
@@ -114,8 +131,8 @@ fit(
     // console.log('Tranfered');
     // const sig = await signTermsAndConditions(wallet);
     // console.log(sig);
-    const sig2 = await signCompetitionTermsAndConditions(wallet);
-    console.log(sig2);
+    // const sig2 = await signCompetitionTermsAndConditions(wallet);
+    // console.log(sig2);
     // const versionContract = await getVersionContract();
     // let managerToFunds = await versionContract.instance.managerToFunds.call(
     //   {},
