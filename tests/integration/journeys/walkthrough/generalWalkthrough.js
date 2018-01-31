@@ -108,7 +108,7 @@ fit(
     await transferTo(
       wallet,
       'MLN-T',
-      '0xE946Bb0E2909C999D9D54e5c667a24C01C27FF97',
+      '0x04d4aD0F757Dd6F5bAeEC1362773bd5d18fa6C5E',
       100,
     );
     console.log('Tranfered');
