@@ -3,6 +3,7 @@ import {
   setupFund,
   setup as melonJsSetup,
   signTermsAndConditions,
+  signCompetitionTermsAndConditions,
   decryptWallet,
 } from "@melonproject/melon.js";
 import { actions as modalActions, types as modalTypes } from "../actions/modal";
@@ -40,6 +41,38 @@ function* sign() {
       console.log(JSON.stringify(err, null, 4));
     }
     yield put(actions.signFailed(err));
+  }
+}
+
+function* signCompetition() {
+  yield put(
+    modalActions.confirm(
+      `Please enter your password below to sign the competition terms and conditions:`,
+    ),
+  );
+  const { password } = yield take(modalTypes.CONFIRMED);
+
+  try {
+    yield put(modalActions.loading());
+    const wallet = localStorage.getItem("wallet:melon.fund");
+    const decryptedWallet = yield call(decryptWallet, wallet, password);
+    const competitionSignature = yield call(
+      signCompetitionTermsAndConditions,
+      decryptedWallet,
+    );
+    yield put(actions.signCompetitionSucceeded(competitionSignature));
+    yield put(modalActions.close());
+  } catch (err) {
+    if (err.name === "password") {
+      yield put(modalActions.error("Wrong password"));
+    } else if (err.name === "EnsureError") {
+      yield put(modalActions.error(err.message));
+    } else {
+      yield put(modalActions.error(err.message));
+      console.error(err);
+      console.log(JSON.stringify(err, null, 4));
+    }
+    yield put(actions.signCompetitionFailed(err));
   }
 }
 
@@ -93,6 +126,7 @@ function* loadFundOnSetup() {
 
 function* setup() {
   yield takeLatest(types.SIGN_REQUESTED, sign);
+  yield takeLatest(types.SIGN_COMPETITION_REQUESTED, signCompetition);
   yield takeLatest(types.SETUP_REQUESTED, createFund);
   yield takeLatest(routeTypes.SETUP, loadFundOnSetup);
 }

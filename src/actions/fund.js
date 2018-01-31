@@ -9,6 +9,12 @@ export const types = {
   SIGN_REQUESTED: "SIGN_REQUESTED:fund:melon.fund",
   SIGN_SUCCEEDED: "SIGN_SUCCEEDED:fund:melon.fund",
   SIGN_FAILED: "SIGN_FAILED:fund:melon.fund",
+  SIGN_COMPETITION_REQUESTED: "SIGN_COMPETITION_REQUESTED:fund:melon.fund",
+  SIGN_COMPETITION_SUCCEEDED: "SIGN_COMPETITION_SUCCEEDED:fund:melon.fund",
+  SIGN_COMPETITION_FAILED: "SIGN_COMPETITION_FAILED:fund:melon.fund",
+  SHOWED_REGISTRATION: "SHOWED_REGISTRATION:fund:melon.fund",
+  NEEDS_TO_REGISTER: "NEEDS_TO_REGISTER:fund:melon.fund",
+  IS_REGISTERED: "IS_REGISTERED:fund:melon.fund",
   SETUP_REQUESTED: "SETUP_REQUESTED:fund:melon.fund",
   SETUP_SUCCEEDED: "SETUP_SUCCEEDED:fund:melon.fund",
   SETUP_FAILED: "SETUP_FAILED:fund:melon.fund",
@@ -49,6 +55,31 @@ export const actions = {
   }),
   signFailed: ({ reason }) => ({
     type: types.SIGN_FAILED,
+    reason,
+  }),
+  showedRegistration: () => ({
+    type: types.SHOWED_REGISTRATION,
+    showedRegistration: true,
+  }),
+  needsToRegister: () => ({
+    type: types.NEEDS_TO_REGISTER,
+    needsToRegister: true,
+    showedRegistration: true,
+  }),
+  isRegistered: () => ({
+    type: types.IS_REGISTERED,
+    needsToRegister: false,
+    showedRegistration: true,
+  }),
+  signCompetitionRequested: () => ({
+    type: types.SIGN_COMPETITION_REQUESTED,
+  }),
+  signCompetitionSucceeded: competitionSignature => ({
+    type: types.SIGN_COMPETITION_SUCCEEDED,
+    competitionSignature,
+  }),
+  signCompetitionFailed: ({ reason }) => ({
+    type: types.SIGN_COMPETITION_FAILED,
     reason,
   }),
   infoRequested: address => ({

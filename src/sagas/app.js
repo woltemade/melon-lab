@@ -20,8 +20,34 @@ const getOnboardingState = ({ ethereum, app, fund }) => {
     return onboardingPath.NOT_SIGNED;
   if (!app.usersFund) return onboardingPath.NO_FUND_CREATED;
   if (
-    (isSameAddress(ethereum.account, fund.owner) && isZero(fund.totalSupply)) ||
-    (!!app.usersFund && !fund.address)
+    (isSameAddress(ethereum.account, fund.owner) &&
+      isZero(fund.totalSupply) &&
+      fund.showedRegistration === undefined) ||
+    (!!app.usersFund && !fund.address && fund.showedRegistration === undefined)
+  ) {
+    return onboardingPath.REGISTRATION;
+  }
+  if (
+    (isSameAddress(ethereum.account, fund.owner) &&
+      isZero(fund.totalSupply) &&
+      fund.showedRegistration === true &&
+      fund.needsToRegister === true) ||
+    (!!app.usersFund &&
+      !fund.address &&
+      fund.showedRegistration === true &&
+      fund.needsToRegister === true)
+  ) {
+    return onboardingPath.SIGN_COMPETITION_TERMS;
+  }
+  if (
+    (isSameAddress(ethereum.account, fund.owner) &&
+      isZero(fund.totalSupply) &&
+      fund.showedRegistration === true &&
+      fund.needsToRegister === false) ||
+    (!!app.usersFund &&
+      !fund.address &&
+      fund.showedRegistration === true &&
+      fund.needsToRegister === false)
   ) {
     // State does not change to OT_INVESTED_IN_OWN_FUND after fund setup; need reload atm
     return onboardingPath.NOT_INVESTED_IN_OWN_FUND;
