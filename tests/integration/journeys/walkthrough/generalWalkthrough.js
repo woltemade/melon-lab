@@ -68,13 +68,13 @@ fit(
     //   "mule faint author gun sell carbon smile disorder shove toast gasp message",
     // );
 
-    const wallet = importWalletFromMnemonic(
-      'dinosaur pulse rice lumber machine entry tackle off require draw edge almost',
-    );
-
     // const wallet = importWalletFromMnemonic(
-    //   "kidney ice gold impose trigger scene core axis rude expose become leopard",
+    //   'dinosaur pulse rice lumber machine entry tackle off require draw edge almost',
     // );
+
+    const wallet = importWalletFromMnemonic(
+      'kidney ice gold impose trigger scene core axis rude expose become leopard',
+    );
 
     // const jsonWallet = JSON.stringify(encryptedWallet);
     // const wallet = await decryptWallet(jsonWallet, password.kovan);
@@ -95,27 +95,27 @@ fit(
       INITIAL_SUBSCRIBE_QUANTITY,
     );
 
-    shared.config = await getConfig();
-    trace({
-      message: `Got config w exchange adapter at ${
-        shared.config.exchangeAdapterAddress
-      }, simple market at ${
-        shared.config.simpleMarketAddress
-      } and datafeed at ${shared.config.dataFeedAddress}`,
-      data: shared.config,
-    });
+    // shared.config = await getConfig();
+    // trace({
+    //   message: `Got config w exchange adapter at ${
+    //     shared.config.exchangeAdapterAddress
+    //   }, simple market at ${
+    //     shared.config.simpleMarketAddress
+    //   } and datafeed at ${shared.config.dataFeedAddress}`,
+    //   data: shared.config,
+    // });
 
-    await transferTo(
-      wallet,
-      'MLN-T',
-      '0x04d4aD0F757Dd6F5bAeEC1362773bd5d18fa6C5E',
-      100,
-    );
-    console.log('Tranfered');
+    // await transferTo(
+    //   wallet,
+    //   'MLN-T',
+    //   '0xc02920a5bF868e71DC6659f4E7C2B61cF86A6E49',
+    //   100,
+    // );
+    // console.log('Tranfered');
     // const sig = await signTermsAndConditions(wallet);
     // console.log(sig);
-    // const sig2 = await signCompetitionTermsAndConditions(wallet);
-    // console.log(sig2);
+    const sig2 = await signCompetitionTermsAndConditions(wallet);
+    console.log(sig2);
     // const versionContract = await getVersionContract();
     // let managerToFunds = await versionContract.instance.managerToFunds.call(
     //   {},
