@@ -25,7 +25,7 @@ export const isZero = number => toBigNumber(number).eq(0);
 
 export const greaterThan = (a, b) => toBigNumber(a).gt(b || 0);
 
-export const equals = (a, b) => toBigNumber(a).eq(b);
+export const equals = (a, b) => toBigNumber(a).eq(b || 0);
 
 export const max = (a, b) => (greaterThan(a, b) ? a : b);
 

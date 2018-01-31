@@ -6,11 +6,13 @@ import { utils } from "ethers";
 import { types as browserTypes } from "../actions/browser";
 import { actions as ethereumActions } from "../actions/ethereum";
 import { actions as fundActions } from "../actions/fund";
+import { equals } from "../utils/functionalBigNumber";
 
-const MAX_BLOCK_TIME = 20 * 1000;
+const BLOCK_POLLING_INTERVAL = 4 * 1000;
+const MAX_INTERVAL_BETWEEN_BLOCKS = 5;
 
 function* init() {
-  const { provider, providerType, api } = getParityProvider();
+  const { provider, providerType, api } = getParityProvider(-1);
 
   setup.init({
     provider,
@@ -42,26 +44,42 @@ function* init() {
   }
 
   const blockChannel = eventChannel(emitter => {
-    let blockTimeout;
-
-    const setBlockOverdue = () => {
-      emitter({ blockOverdue: true });
-    };
+    let lastBlockNumber;
+    let intervalsSinceLastBlock = 0;
 
     // Immediately get infos from the latest block before watching new blocks
-    onBlock().then(data => emitter({ onBlock: data })); // ;
-
-    blockTimeout = window.setTimeout(setBlockOverdue, MAX_BLOCK_TIME);
-
-    const sub = api.subscribe("eth_blockNumber", () => {
-      onBlock().then(data => emitter({ onBlock: data }));
-      window.clearTimeout(blockTimeout);
-      blockTimeout = window.setTimeout(setBlockOverdue, MAX_BLOCK_TIME);
+    onBlock().then(data => {
+      lastBlockNumber = data.blockNumber;
+      emitter({ onBlock: data });
     });
 
+    const blockInterval = window.setInterval(async () => {
+      try {
+        const blockNumber = await api.eth
+          .getBlockByNumber()
+          .then(block => block.number);
+
+        if (!equals(blockNumber, lastBlockNumber)) {
+          const data = await onBlock();
+          emitter({ onBlock: data });
+          lastBlockNumber = blockNumber;
+          intervalsSinceLastBlock = 0;
+        } else {
+          intervalsSinceLastBlock += 1;
+        }
+
+        if (intervalsSinceLastBlock > MAX_INTERVAL_BETWEEN_BLOCKS) {
+          emitter({ blockOverdue: true });
+        }
+      } catch (e) {
+        emitter({ blockOverdue: true });
+        console.error(e);
+      }
+    }, BLOCK_POLLING_INTERVAL);
+
     return () => {
-      console.error("Cannot stop this atm", sub);
-      // filter.stopWatching();
+      console.log("stop");
+      window.clearInterval(blockInterval);
     };
   });
 
