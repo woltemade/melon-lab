@@ -11,7 +11,7 @@ const SignCompetitionTerms = ({
   competitionSignature,
   isRegistered,
 }) => (
-  <div centered>
+  <div>
     {competitionSignature ? (
       <div>
         <p>
@@ -29,13 +29,15 @@ const SignCompetitionTerms = ({
           back to this page and click on "Registration Done"
         </p>
 
-        <Button basic color="black" style={{ width: "100%" }}>
-          <a
-            href={`https://ipfs.io/ipns/competition.melon.fund/#${fundAddress}/${managerAddress}/${r}/${s}/${v}`}
-            target="_blank"
-          >
-            Pursue registration
-          </a>
+        <Button
+          basic
+          color="black"
+          style={{ width: "100%" }}
+          href={`https://ipfs.io/ipns/competition.melon.fund/#${fundAddress}/${managerAddress}/${r}/${s}/${v}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Pursue registration
         </Button>
         <br />
         <br />
@@ -58,6 +60,7 @@ const SignCompetitionTerms = ({
             as="a"
             href="https://ipfs.io/ipfs/QmQ7DqjpxmTDbaxcH5qwv8QmGvJY7rhb8UV2QRfCEFBp8V"
             target="_blank"
+            rel="noopener noreferrer"
           >
             QmQ7DqjpxmTDbaxcH5qwv8QmGvJY7rhb8UV2QRfCEFBp8V
           </a>

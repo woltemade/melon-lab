@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 
 import { actions } from "../actions/account";
+import { actions as routeActions } from "../actions/routes";
 import MyAccount from "../components/organisms/MyAccount";
 
 const mapStateToProps = state => ({
@@ -10,6 +11,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   deleteWallet: () => dispatch(actions.deleteWallet()),
+  gotoAccount: () => dispatch(routeActions.account()),
 });
 
 const MyAccountRedux = connect(mapStateToProps, mapDispatchToProps)(MyAccount);

@@ -2,7 +2,12 @@ import React from "react";
 import { Button, Card, Header } from "semantic-ui-react";
 import Link from "redux-first-router-link";
 
-const MyAccount = ({ currentAddress, associatedFund, deleteWallet }) => (
+const MyAccount = ({
+  currentAddress,
+  associatedFund,
+  deleteWallet,
+  gotoAccount,
+}) => (
   <div>
     <Card centered>
       <Card.Content>
@@ -51,8 +56,13 @@ const MyAccount = ({ currentAddress, associatedFund, deleteWallet }) => (
         </p>
         <br />
         <p>
-          <Button basic color="black" style={{ width: "100%" }}>
-            <Link to="/account">Create new wallet or restore existing one</Link>
+          <Button
+            basic
+            color="black"
+            style={{ width: "100%" }}
+            onClick={gotoAccount}
+          >
+            Create new wallet or restore existing one
           </Button>
         </p>
         <p>
