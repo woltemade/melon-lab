@@ -31,7 +31,7 @@ const SignCompetitionTerms = ({
 
         <Button basic color="black" style={{ width: "100%" }}>
           <a
-            href={`http://competition.melon.fund/#${fundAddress}/${managerAddress}/${r}/${s}/${v}`}
+            href={`https://ipfs.io/ipns/competition.melon.fund/#${fundAddress}/${managerAddress}/${r}/${s}/${v}`}
             target="_blank"
           >
             Pursue registration
