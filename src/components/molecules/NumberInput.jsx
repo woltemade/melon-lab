@@ -1,4 +1,5 @@
 import React from "react";
+import { curry, pipe, __ } from "ramda";
 
 import { Input } from "semantic-ui-react";
 
@@ -17,7 +18,7 @@ const digitsOnly = ({ value, cursorPosition }) => {
  * Fix if somebody tries to delete the point:
  * 123.|4568 -> (Backspace) -> 123|.4568
  */
-const preventDecimalJump = ({ value, cursorPosition }, decimals) => {
+const preventDecimalJump = ({ value, cursorPosition }, decimals = 4) => {
   if (value.indexOf(".") === -1 && value.length > decimals) {
     return {
       value: `${value.slice(0, -decimals)}.${value.slice(-decimals)}`,
@@ -47,7 +48,6 @@ const cleanPoints = ({ value, cursorPosition }) => {
     ...copyPasteRest
   ] = value.split(".");
 
-  // Step 1: Remove multiple points
   if (afterSecondPoint !== undefined) {
     if (pointPosition + 1 < cursorPosition) {
       return {
@@ -87,7 +87,7 @@ const cleanPoints = ({ value, cursorPosition }) => {
  * 0.|0123 => 4 => 0.4|000
  * 0.1234| => 5 => 0.1235|
  */
-const formatNumber = ({ value, cursorPosition }, decimals) => {
+const formatNumber = ({ value, cursorPosition }, decimals = 4) => {
   const [ints, decs] = value.split(".");
   const newInts = parseInt(ints || 0, 10);
   const slicedDecs =
@@ -114,14 +114,21 @@ const formatNumber = ({ value, cursorPosition }, decimals) => {
   };
 };
 
-const zeroCursorPosition = ({ value, cursorPosition }, decimals) => {
+/**
+ * Fixes some edge-cases around zeros
+ *
+ * |0.0000 => 0 => 0|.0000
+ * 0|.0000 => . => 0.|0000
+ */
+const zeroCursorPosition = ({ value, cursorPosition }, decimals = 4) => {
   const decs = Array(decimals)
     .fill("0")
     .join("");
 
   return {
     value,
-    cursorPosition: value === `0.${decs}` ? 1 : cursorPosition,
+    cursorPosition:
+      value === `0.${decs}` && cursorPosition === 0 ? 1 : cursorPosition,
   };
 };
 
@@ -131,22 +138,22 @@ const cleanNumber = (event, decimals = 4, onChange) => {
     cursorPosition: event.target.selectionStart,
   };
 
-  const cleanedDigix = digitsOnly(init);
-  const jumpPrevented = preventDecimalJump(cleanedDigix, decimals);
-  const cleanedPoints = cleanPoints(jumpPrevented);
-  const formatted = formatNumber(cleanedPoints, decimals);
-  const zeroPos = zeroCursorPosition(formatted, decimals);
+  const cleanPipe = [
+    digitsOnly,
+    curry(preventDecimalJump)(__, decimals),
+    cleanPoints,
+    curry(formatNumber)(__, decimals),
+    curry(zeroCursorPosition)(__, decimals),
+  ];
 
-  onChange(zeroPos.value);
+  const piped = pipe(...cleanPipe)(init);
 
-  // event.target.value = zeroPos.value;
+  onChange(piped.value);
+
   event.persist();
   window.setTimeout(() => {
-    event.target.setSelectionRange(
-      zeroPos.cursorPosition,
-      zeroPos.cursorPosition,
-    );
-  }, 10);
+    event.target.setSelectionRange(piped.cursorPosition, piped.cursorPosition);
+  }, 0);
 };
 
 const NumberInput = ({

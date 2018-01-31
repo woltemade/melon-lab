@@ -27,21 +27,6 @@ const GetStarted = ({ usersFund, getFundLinkAction, setupLinkAction }) => (
           )}
         </h3>
       </div>
-      <br />
-      <div style={{ fontSize: 10, lineHeight: 1 }}>
-        <a
-          href="https://en.wikipedia.org/wiki/Do_Not_Track"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          We detected that you have the browser flag "Do Not Track"{" "}
-          {window.doNotTrack ? (
-            <span>enabled and wont track you.</span>
-          ) : (
-            <span>disabled and will collect anonymous usage data.</span>
-          )}
-        </a>
-      </div>
     </Card.Content>
   </Card>
 );

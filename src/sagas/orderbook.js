@@ -7,6 +7,7 @@ import {
 import { change } from "redux-form";
 import { types, actions } from "../actions/orderbook";
 import { types as ethereumTypes } from "../actions/ethereum";
+import { min } from "../utils/functionalBigNumber";
 
 function* getOrderbookSaga() {
   const baseTokenSymbol = yield select(state => state.app.assetPair.base);
@@ -68,11 +69,21 @@ function* selectOrderSaga() {
   const selectedOrder = yield select(state =>
     state.orderbook.orders.find(o => o.id === selectedOrderId),
   );
+
+  const sellTokenSymbol = selectedOrder.buy.symbol;
+  const sellTokenBalance = yield select(
+    state =>
+      state.holdings.holdings.find(h => h.name === sellTokenSymbol).balance,
+  );
+
   try {
     let index;
     let subsetOfOrders;
-    let average;
     let orderType;
+    let amount;
+    let price;
+    let total;
+
     if (selectedOrder.type === "buy") {
       orderType = "Sell";
       const buyOrders = yield select(state => state.orderbook.buyOrders);
@@ -81,7 +92,9 @@ function* selectOrderSaga() {
       );
       index = deserializedBuyOrders.indexOf(selectedOrder);
       subsetOfOrders = deserializedBuyOrders.slice(0, index + 1);
-      average = averagePrice("buy", subsetOfOrders);
+      price = averagePrice("buy", subsetOfOrders);
+      amount = min(sellTokenBalance, selectedOrder.cumulativeVolume);
+      total = price.times(amount);
     } else if (selectedOrder.type === "sell") {
       orderType = "Buy";
       const sellOrders = yield select(state => state.orderbook.sellOrders);
@@ -90,13 +103,13 @@ function* selectOrderSaga() {
       );
       index = deserializedSellOrders.indexOf(selectedOrder);
       subsetOfOrders = deserializedSellOrders.slice(0, index + 1);
-      average = averagePrice("sell", subsetOfOrders);
+      price = averagePrice("sell", subsetOfOrders);
+      total = min(
+        sellTokenBalance,
+        price.times(selectedOrder.cumulativeVolume),
+      );
+      amount = total.div(price);
     }
-
-    const total = average.times(selectedOrder.cumulativeVolume);
-
-    const amount = selectedOrder.cumulativeVolume;
-    const price = average;
 
     yield put(change("trade", "strategy", "Market"));
     yield put(change("trade", "quantity", amount));

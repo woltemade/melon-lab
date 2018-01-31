@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "semantic-ui-react";
 
 const TermsAndConditions = ({ sign }) => (
-  <div centered>
+  <div>
     <h4>TERMS AND CONDITIONS</h4>
     <p>
       The following terms and conditions have been deployed to IPFS and resolve
@@ -11,6 +11,7 @@ const TermsAndConditions = ({ sign }) => (
         as="a"
         href="https://ipfs.io/ipfs/QmQrY13NWoSwK2Ani5eBwiyo1gsNa4xLQYfS8zBuHro8Lm"
         target="_blank"
+        rel="noopener noreferrer"
       >
         QmQrY13NWoSwK2Ani5eBwiyo1gsNa4xLQYfS8zBuHro8Lm
       </a>
