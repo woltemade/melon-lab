@@ -1,4 +1,4 @@
-import { take, put, takeLatest, select, apply } from "redux-saga/effects";
+import { take, put, takeLatest, select, apply, call } from "redux-saga/effects";
 import { eventChannel } from "redux-saga";
 import { setup, onBlock, getParityProvider } from "@melonproject/melon.js";
 import { utils } from "ethers";
@@ -12,11 +12,10 @@ const BLOCK_POLLING_INTERVAL = 4 * 1000;
 const MAX_INTERVAL_BETWEEN_BLOCKS = 5;
 
 function* init() {
-  const { provider, providerType, api } = getParityProvider(-1);
+  const { provider, providerType, api } = yield call(getParityProvider, -1);
 
   setup.init({
     provider,
-    daemonAddress: "0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd",
   });
 
   yield put(ethereumActions.setProvider(providerType));
