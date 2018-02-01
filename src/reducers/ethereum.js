@@ -1,5 +1,6 @@
-import { providers, getNetworkName } from "@melonproject/melon.js";
+import { providers } from "@melonproject/melon.js";
 import { types } from "../actions/ethereum";
+import mergeReducer from "../utils/mergeReducer";
 
 const initialState = {
   // observed state
@@ -14,41 +15,8 @@ const initialState = {
   isConnected: false,
   isUpToDate: false,
   isDataValid: true, // Data Feed
-
-  // derived state
-  networkName: null,
 };
 
-const reducers = {
-  merge: (state, params) => ({
-    ...state,
-    ...params,
-  }),
-  default: state => ({ ...state }),
-};
-
-const mapActionToReducer = {
-  [types.ACCOUNT_CHANGED]: reducers.merge,
-  [types.BLOCK_OVERDUE]: reducers.merge,
-  [types.HAS_CONNECTED]: reducers.merge,
-  [types.NEW_BLOCK]: reducers.merge,
-  [types.SET_PROVIDER]: reducers.merge,
-};
-
-export const reducer = (state = initialState, action = {}) => {
-  const { type, ...params } = action;
-
-  const matchedReducer = mapActionToReducer[type] || reducers.default;
-  const newState = matchedReducer(state, params);
-
-  const derivedState = {
-    networkName: getNetworkName(newState.network),
-  };
-
-  return {
-    ...newState,
-    ...derivedState,
-  };
-};
+export const reducer = mergeReducer(initialState, types);
 
 export default reducer;
