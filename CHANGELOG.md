@@ -10,6 +10,12 @@ and this project adheres to
 
 ### Changed
 
+* Breaking: getParityProvider is now async and tries to connect to local node first
+
+## [0.6.37]
+
+### Changed
+
 * Use new datafeed.hasRecentPrice in onBlock instead of isValid
 * walkLib ' instead of "
 
