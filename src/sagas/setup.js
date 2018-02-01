@@ -117,6 +117,7 @@ function* createFund({ name }) {
       actions.setupSucceeded({ ...fund, owner: melonJsSetup.defaultAccount }),
     );
     yield put(appActions.setUsersFund(fund.address));
+    yield put(routeActions.competition(fund.address));
     yield put(modalActions.close());
     yield put(actions.infoRequested(fund.address));
   } catch (err) {
