@@ -11,6 +11,7 @@ and this project adheres to
 ### Changed
 
 * Breaking: getParityProvider is now async and tries to connect to local node first
+* onBlock does not query the blocknumber anymore. See ipfs-frontend#212
 
 ## [0.6.37]
 
