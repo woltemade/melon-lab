@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.6.28",
+  "version": "0.6.37",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/main.js",
   "esnext": "lib/main.js",
@@ -97,8 +97,6 @@
     "@parity/api": "^2.1.5",
     "bignumber.js": "^5.0.0",
     "bip39": "^2.4.0",
-    "eth-sig-util": "^1.4.0",
-    "ethereumjs-util": "^5.1.2",
     "ethers-utils": "^2.1.8",
     "ethers-wallet": "^2.1.6",
     "fs": "0.0.1-security",
