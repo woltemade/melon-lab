@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 import { actions } from "../actions/fund";
-import { actions as routesActions } from "../actions/routes";
+import { actions as routeActions } from "../actions/routes";
 
 import CompetitionRegistration from "../components/organisms/CompetitionRegistration";
 
@@ -24,10 +24,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  skipRegistration: () => dispatch(routesActions.root()),
+  skipRegistration: () => dispatch(routeActions.root()),
   continueToSignCompetitionTerms: () => dispatch(actions.needsToRegister()),
   sign: () => dispatch(actions.signCompetitionRequested()),
-  isRegistered: () => dispatch(routesActions.root()),
+  isRegistered: () => dispatch(routeActions.root()),
 });
 
 const CompetitionRegistrationRedux = connect(
