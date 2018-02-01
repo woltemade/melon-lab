@@ -23,7 +23,6 @@ it("Not ready on main net", () => {
   const newState = reducer(oldState);
 
   expectObservedStateToBeUnchanged(oldState, newState);
-  expect(newState.networkName).toBe("MAIN");
 });
 
 it("Ready to trade on Kovan with account", () => {
@@ -40,7 +39,6 @@ it("Ready to trade on Kovan with account", () => {
   const newState = reducer(oldState);
 
   expectObservedStateToBeUnchanged(oldState, newState);
-  expect(newState.networkName).toBe("KOVAN");
 });
 
 it("Ready to visit", () => {

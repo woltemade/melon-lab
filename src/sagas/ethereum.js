@@ -46,21 +46,13 @@ function* init() {
     let lastBlockNumber;
     let intervalsSinceLastBlock = 0;
 
-    // Immediately get infos from the latest block before watching new blocks
-    onBlock().then(data => {
-      lastBlockNumber = data.blockNumber;
-      emitter({ onBlock: data });
-    });
-
-    const blockInterval = window.setInterval(async () => {
+    const pollBlock = async () => {
       try {
-        const blockNumber = await api.eth
-          .getBlockByNumber()
-          .then(block => block.number);
+        const blockNumber = await api.eth.blockNumber();
 
         if (!equals(blockNumber, lastBlockNumber)) {
           const data = await onBlock();
-          emitter({ onBlock: data });
+          emitter({ onBlock: { ...data, blockNumber } });
           lastBlockNumber = blockNumber;
           intervalsSinceLastBlock = 0;
         } else {
@@ -71,13 +63,15 @@ function* init() {
           emitter({ blockOverdue: true });
         }
       } catch (e) {
-        emitter({ blockOverdue: true });
+        emitter({ blockError: true });
         console.error(e);
       }
-    }, BLOCK_POLLING_INTERVAL);
+    };
+
+    pollBlock();
+    const blockInterval = window.setInterval(pollBlock, BLOCK_POLLING_INTERVAL);
 
     return () => {
-      console.log("stop");
       window.clearInterval(blockInterval);
     };
   });
@@ -87,8 +81,10 @@ function* init() {
 
     if (data.onBlock) {
       yield put(ethereumActions.newBlock(data.onBlock));
-    } else {
+    } else if (data.blockOverdue) {
       yield put(ethereumActions.blockOverdue());
+    } else {
+      yield put(ethereumActions.blockError());
     }
   }
 }
