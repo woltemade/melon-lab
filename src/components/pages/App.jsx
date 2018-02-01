@@ -15,7 +15,6 @@ import AccountContainer from "../../containers/Account";
 import RestoreContainer from "../../containers/Restore";
 import MyAccountContainer from "../../containers/MyAccount";
 import CompetitionRegistrationContainer from "../../containers/CompetitionRegistration";
-import SignCompetitionTermsContainer from "../../containers/SignCompetitionTerms";
 
 import Modal from "../../containers/Modal";
 import { types } from "../../actions/routes";
@@ -29,8 +28,6 @@ const mapOnboardingStateToMainContainer = {
   [onboardingPath.INSUFFICIENT_FUNDS]: InsufficientFunds,
   [onboardingPath.NOT_SIGNED]: TermsAndConditionsContainer,
   [onboardingPath.NO_FUND_CREATED]: SetupContainer,
-  [onboardingPath.REGISTRATION]: CompetitionRegistrationContainer,
-  [onboardingPath.SIGN_COMPETITION_TERMS]: SignCompetitionTermsContainer,
   [onboardingPath.NOT_INVESTED_IN_OWN_FUND]: ParticipationContainer,
 };
 
@@ -42,6 +39,7 @@ const routeContainerMap = {
   [types.ACCOUNT_ENCRYPT]: AccountContainer,
   [types.FUND]: FundContainer,
   [types.MY_ACCOUNT]: MyAccountContainer,
+  [types.COMPETITION]: CompetitionRegistrationContainer,
 };
 
 const getMainComponent = ({
@@ -63,6 +61,8 @@ const getMainComponent = ({
         walletAddress={walletAddress}
       />
     ) : null;
+  } else if (route === types.COMPETITION) {
+    return <CompetitionRegistrationContainer />;
   }
   const Main = routeContainerMap[route];
   return Main ? <Main /> : <div />;
