@@ -1,60 +1,48 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import Web3 from "web3";
-import { setup, melonTracker } from "@melonproject/melon.js";
-import store from "./store";
-import "./index.css";
-import AppContainer from "./components/app/container";
-import registerServiceWorker from "./registerServiceWorker";
+import ReactModal from "react-modal";
+import melonJsPkg from "@melonproject/melon.js/package.json";
+import pkg from "../package.json";
 
-import { creators as orderbookCreators } from "./components/orderbook/duck";
-import { creators as fundHoldingsCreators } from "./components/fundHoldings/duck";
+import { configureStore } from "./config/configureStore";
+import AppContainer from "./containers/App";
 
-import {
-  creators as web3Creators,
-  connectionModes,
-} from "./components/web3/duck";
+import { actions } from "./actions/browser";
 
-const getWeb3 = (web3 = window.web3) => {
-  let connectionMode;
+export const store = configureStore();
 
-  if (web3) {
-    if (web3.currentProvider.isMetaMask) {
-      connectionMode = connectionModes.METAMASK;
-    } else {
-      connectionMode = connectionModes.UNKNOWN_INJECTED;
-    }
-    return { web3: new Web3(web3.currentProvider), connectionMode };
-  }
+console.log(
+  "%c👋🤓",
+  "background: rgba(0,0,0,.87); color: #fffdf3; font-size: 30px",
+);
+console.log(
+  "%cHello nerd. Checking out the internals of the ipfs-frontend? We like that! If you want to work with us, send us a message: team@melonport.com.",
+  "background: rgba(0,0,0,.87); color: #fffdf3; font-size: 12px",
+);
 
-  let provider = new Web3.providers.HttpProvider("http://localhost:8545");
+ReactModal.setAppElement("#root");
 
-  if (provider.isConnected()) {
-    connectionMode = connectionModes.LOCAL;
-  } else {
-    provider = new Web3.providers.HttpProvider("https://kovan.melonport.com");
+window.MELON_VERSIONS = `ipfs-frontend@${pkg.version} melon.js@${
+  melonJsPkg.version
+}`;
 
-    if (provider.isConnected()) {
-      connectionMode = connectionModes.HOSTED;
-    } else {
-      connectionMode = connectionModes.NOT_CONNECTED;
-    }
-  }
+window.ENVIRONMENT = process.env.NODE_ENV;
 
-  return { web3: new Web3(provider), connectionMode };
-};
+if (window.Raven)
+  window.Raven.config(
+    "https://14d859a5b75f4d4fbd79defb6d53129a@sentry.io/278024",
+    {
+      release: window.MELON_VERSIONS,
+      environment: window.ENVIRONMENT,
+    },
+  ).install();
 
 window.addEventListener("load", () => {
-  const { web3, connectionMode } = getWeb3();
+  store.dispatch(actions.loaded());
 
-  setup.init({
-    web3,
-    daemonAddress: "0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd",
-  });
-
-  store.dispatch(web3Creators.setConnection(connectionMode));
-
+  /*
+  // TODO: Refactor this ino own saga
   const tracker = melonTracker.on("DataUpdated", "LogItemUpdate");
 
   tracker(type => {
@@ -74,6 +62,7 @@ window.addEventListener("load", () => {
       default:
     }
   });
+  */
 });
 
 ReactDOM.render(
@@ -82,5 +71,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root"),
 );
-
-registerServiceWorker();

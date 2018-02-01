@@ -7,7 +7,68 @@
   <meta name="theme-color" content="#000000">
   <link rel="manifest" href="./manifest.json">
   <link rel="shortcut icon" href="./favicon.png?v=2">
-  <link rel="stylesheet" href="./semantic/dist/semantic.min.css"></link>
+  <link rel="stylesheet" href="./static/css/semantic.min.css">
+  <link rel="stylesheet" href="./static/css/overwrites.css">
+
+  <script type="text/javascript">
+    function loadAnalytics() {
+      var analytics = window.analytics = window.analytics || [];
+      if (!analytics.initialize)
+        if (analytics.invoked) window.console && console.error && console.error("Segment snippet included twice.");
+        else {
+          analytics.invoked = !0;
+          analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset",
+            "group", "track", "ready", "alias", "debug", "page", "once", "off", "on"
+          ];
+          analytics.factory = function (t) {
+            return function () {
+              var e = Array.prototype.slice.call(arguments);
+              e.unshift(t);
+              analytics.push(e);
+              return analytics
+            }
+          };
+          for (var t = 0; t < analytics.methods.length; t++) {
+            var e = analytics.methods[t];
+            analytics[e] = analytics.factory(e)
+          }
+          analytics.load = function (t) {
+            var e = document.createElement("script");
+            e.type = "text/javascript";
+            e.async = !0;
+            e.src = ("https:" === document.location.protocol ? "https://" : "http://") +
+              "cdn.segment.com/analytics.js/v1/" + t + "/analytics.min.js";
+            var n = document.getElementsByTagName("script")[0];
+            n.parentNode.insertBefore(e, n)
+          };
+          analytics.SNIPPET_VERSION = "4.0.0";
+          analytics.load("2Tb5ZXEvXFu67Ab6brgI9rYNCgjYiqrg");
+
+          analytics.page();
+        }
+    };
+
+    function loadRaven() {
+      var e = document.createElement("script");
+      e.type = "text/javascript";
+      e.src = "https://cdn.ravenjs.com/3.22.1/raven.min.js"
+      e.crossOrigin = "anonymous"
+
+      var n = document.getElementsByTagName("script")[0];
+      n.parentNode.insertBefore(e, n)
+    }
+
+    window.doNotTrack = navigator.doNotTrack == "yes" || navigator.doNotTrack == "1" || navigator.msDoNotTrack == "1" ||
+      window.doNotTrack;
+
+
+    if (!window.doNotTrack) {
+      loadRaven();
+      loadAnalytics();
+    }
+
+  </script>
+
 
   <title>Melon on IPFS</title>
 </head>
@@ -17,12 +78,12 @@
     You need to enable JavaScript to run this app.
   </noscript>
   <div id="root"></div>
-  <script type="text/javascript" src="./bundle.js"></script>
 
   <div style="text-align: center; margin-top: 2em; margin-bottom: 2em">
-    Hosted with ❤ on IPFS | <a href="https://github.com/melonproject/ipfs-frontend/issues" target="_blank">Report an issue</a>    | <a href="https://www.melonport.com" target="_blank">Melonport</a>
+    Hosted with ❤ on IPFS |
+    <a href="https://github.com/melonproject/ipfs-frontend/issues" target="_blank">Report an issue</a> |
+    <a href="https://www.melonport.com" target="_blank">Melonport</a>
   </div>
-
 </body>
 
 </html>
