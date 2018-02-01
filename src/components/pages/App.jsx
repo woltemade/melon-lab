@@ -2,7 +2,7 @@ import React from "react";
 import { Image, Container } from "semantic-ui-react";
 import Link from "redux-first-router-link";
 import WrongNetwork from "../organisms/WrongNetwork";
-import NoMetamask from "../organisms/NoMetamask";
+import NoConnection from "../organisms/NoConnection";
 import LockedAccount from "../organisms/LockedAccount";
 import InsufficientFunds from "../organisms/InsufficientFunds";
 import TermsAndConditionsContainer from "../../containers/TermsAndConditions";
@@ -22,8 +22,8 @@ import { types } from "../../actions/routes";
 import ConnectionInfo from "../organisms/ConnectionInfo";
 
 const mapOnboardingStateToMainContainer = {
-  [onboardingPath.NO_PROVIDER]: NoMetamask,
-  [onboardingPath.NO_CONNECTION]: NoMetamask,
+  [onboardingPath.NO_PROVIDER]: NoConnection,
+  [onboardingPath.NO_CONNECTION]: NoConnection,
   [onboardingPath.WRONG_NETWORK]: WrongNetwork,
   [onboardingPath.LOCKED_ACCOUNT]: LockedAccount,
   [onboardingPath.INSUFFICIENT_FUNDS]: InsufficientFunds,
