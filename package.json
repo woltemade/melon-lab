@@ -31,9 +31,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && npm run-script build:postprocess",
-    "build:postprocess": "npm run-script delete-maps && npm run-script rename-absolute-path",
+    "build:postprocess":
+      "npm run-script delete-maps && npm run-script rename-absolute-path",
     "delete-maps": "find ./build -name '*.map' -delete",
-    "rename-absolute-path": "sed -i -e 's@/static/js@./static/js@g' ./build/index.html",
+    "rename-absolute-path":
+      "sed -i -e 's@/static/js@./static/js@g' ./build/index.html",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --record",
     "deploy": "ipfs add -r public",
@@ -63,7 +65,7 @@
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.5.1",
     "eslint-plugin-security": "^1.4.0",
     "npm-check": "^5.5.2",
