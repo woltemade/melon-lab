@@ -4,7 +4,7 @@ import { Table } from "semantic-ui-react";
 
 const TradeHistory = ({ trades }) => (
   <div>
-    <h3 className="App-intro">Fund Trading History</h3>
+    <h3 className="App-intro">Fund Trading History (Last 24 hours)</h3>
 
     <Table>
       <Table.Header>
