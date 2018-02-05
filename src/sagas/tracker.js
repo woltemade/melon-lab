@@ -11,7 +11,7 @@ import { types as participationTypes } from "../actions/participation";
 import { types as tradeTypes } from "../actions/trade";
 
 const findKeyByValue = (obj, byValue) =>
-  (Object.entries(obj).find(([, value]) => value === byValue) || [null])[0];
+  Object.keys(obj).find(key => obj[key] === byValue);
 
 const removeSensitiveData = omit(["mnemonic", "password", "wallet"]);
 
@@ -50,6 +50,7 @@ const eventActionTypeMap = {
 function* track(action) {
   const { type, ...payload } = action;
   const name = findKeyByValue(eventActionTypeMap, action.type);
+  console.log(name);
   yield call(window.analytics.track, name, removeSensitiveData(payload));
 }
 
