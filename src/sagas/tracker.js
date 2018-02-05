@@ -13,6 +13,8 @@ import { types as tradeTypes } from "../actions/trade";
 const findKeyByValue = (obj, byValue) =>
   Object.keys(obj).find(key => obj[key] === byValue);
 
+const getValues = obj => Object.keys(obj).map(key => obj[key]);
+
 const removeSensitiveData = omit(["mnemonic", "password", "wallet"]);
 
 function* identify() {
@@ -71,8 +73,8 @@ const selectBreadcrumps = action => action.type.includes("melon");
 
 function* tracker() {
   yield takeLatest(appTypes.SET_USERS_FUND, identify);
-  yield takeLatest(Object.values(routeTypes), route);
-  yield takeEvery(Object.values(eventActionTypeMap), track);
+  yield takeLatest(getValues(routeTypes), route);
+  yield takeEvery(getValues(eventActionTypeMap), track);
   yield takeEvery(selectBreadcrumps, logBreadcrumps);
 }
 
