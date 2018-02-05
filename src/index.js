@@ -12,8 +12,6 @@ import AppContainer from "./containers/App";
 
 import { actions } from "./actions/browser";
 
-export const store = configureStore();
-
 console.log(
   "%c👋🤓",
   "background: rgba(0,0,0,.87); color: #fffdf3; font-size: 30px",
@@ -25,17 +23,22 @@ console.log(
 
 ReactModal.setAppElement("#root");
 
-window.MELON_VERSIONS = `ipfs-frontend@${pkg.version} melon.js@${melonJsPkg.version} protocol@${melonProtocolPkg.version}`;
+window.MELON_VERSIONS = `ipfs-frontend@${pkg.version} melon.js@${
+  melonJsPkg.version
+} protocol@${melonProtocolPkg.version}`;
 
 window.ENVIRONMENT = process.env.NODE_ENV;
 
 if (window.Raven)
-  window.Raven
-    .config("https://14d859a5b75f4d4fbd79defb6d53129a@sentry.io/278024", {
+  window.Raven.config(
+    "https://14d859a5b75f4d4fbd79defb6d53129a@sentry.io/278024",
+    {
       release: window.MELON_VERSIONS,
       environment: window.ENVIRONMENT,
-    })
-    .install();
+    },
+  ).install();
+
+export const store = configureStore();
 
 window.addEventListener("load", () => {
   store.dispatch(actions.loaded());
