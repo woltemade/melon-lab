@@ -20,7 +20,6 @@ const mapStateToProps = state => ({
   v: state.fund.competitionSignature
     ? state.fund.competitionSignature.v
     : undefined,
-  needsToRegister: state.fund.needsToRegister,
 });
 
 const mapDispatchToProps = dispatch => ({

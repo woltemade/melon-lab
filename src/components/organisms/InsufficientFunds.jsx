@@ -10,8 +10,8 @@ const InsufficientFunds = ({ mlnBalance, ethBalance, walletAddress }) => (
         <br />
         <p>
           {" "}
-          You don't have enough Kovan test melon tokens (MLN-T) or Kovan test
-          ether tokens (ETH-T). Current balances: {mlnBalance} MLN-T,{" "}
+          You don&#39;t have enough Kovan test melon tokens (MLN-T) or Kovan
+          test ether tokens (ETH-T). Current balances: {mlnBalance} MLN-T,{" "}
           {ethBalance} ETH-T
         </p>
         <p className="App-intro">

@@ -52,7 +52,7 @@ const MyAccount = ({
         </p>
         <p>
           If you do not wish to continue,{" "}
-          <Link to="/">click here to go back to your fund's page</Link>.
+          <Link to="/">click here to go back to your fund&#39;s page</Link>.
         </p>
         <br />
         <p>

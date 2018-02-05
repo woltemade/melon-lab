@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import isSameAddress from "../utils/isSameAddress";
 import Fund from "../components/pages/Fund";
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   loading: state.fund.loading,
   isVisitor: state.app.isReadyToVisit && !state.app.usersFund,
   isInvestor:

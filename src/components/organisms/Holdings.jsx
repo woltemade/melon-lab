@@ -35,9 +35,8 @@ const Holdings = ({ holdings, selectAsset, isReadyToTrade, dataValid }) => (
               textAlign="right"
               onClick={() => selectAsset(asset.name, isReadyToTrade)}
             >
-              {asset.name === "MLN-T" ? (
-                <div>❤</div>
-              ) : isReadyToTrade && dataValid ? (
+              {asset.name === "MLN-T" ? <div>❤</div> : null}
+              {asset.name !== "MLN-T" && isReadyToTrade && dataValid ? (
                 <div className="interactive">Buy/Sell</div>
               ) : (
                 <div className="interactive">See Orderbook</div>
