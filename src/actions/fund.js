@@ -133,10 +133,12 @@ export const actions = {
     type: types.SHARE_PRICE_SUCCEEDED,
     sharePrice,
   }),
-  updateRanking: ({ rank, numberOfFunds }) => ({
+  updateRanking: ({ rank, numberOfFunds, expectedPrize, isCompeting }) => ({
     type: types.UPDATE_RANKING,
     rank,
     numberOfFunds,
+    expectedPrize,
+    isCompeting,
   }),
   setPendingRequest: pendingRequest => ({
     type: types.SET_PENDING_REQUEST,

@@ -2,7 +2,7 @@
   "name": "ipfs-frontend",
   "version": "0.6.0",
   "dependencies": {
-    "@melonproject/melon.js": "0.6.40",
+    "@melonproject/melon.js": "0.6.41",
     "babel-polyfill": "^6.23.0",
     "bignumber.js": "^5.0.0",
     "bn.js": "^4.11.8",

@@ -14,7 +14,10 @@ const getOnboardingState = ({ ethereum, app, fund }) => {
   if (!ethereum.isConnected) return onboardingPath.NO_CONNECTION;
   if (ethereum.network !== networks.KOVAN) return onboardingPath.WRONG_NETWORK;
   if (!ethereum.account) return onboardingPath.NO_ACCOUNT;
-  if (isZero(ethereum.ethBalance) || isZero(ethereum.mlnBalance))
+  if (
+    isZero(ethereum.ethBalance) ||
+    (isZero(ethereum.mlnBalance) && !app.usersFund)
+  )
     return onboardingPath.INSUFFICIENT_FUNDS;
   if (fund.signature === undefined && !app.usersFund)
     return onboardingPath.NOT_SIGNED;

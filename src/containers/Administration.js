@@ -10,6 +10,7 @@ const mapStateToProps = state => ({
   redemptionAllowed: state.fund.redemptionAllowed,
   loading: state.app.transactionInProgress,
   fundAddress: state.fund.address,
+  isCompeting: state.fund.isCompeting,
 });
 
 const mapDispatchToProps = dispatch => ({

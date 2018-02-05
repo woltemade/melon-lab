@@ -100,14 +100,17 @@ function* getRanking() {
 function* addRanking() {
   const ranking = yield select(state => state.ranking.rankingList);
   const fundAddress = yield select(state => state.fund.address);
-  const rank = ranking.length
-    ? ranking.findIndex(
-        f => f.address.toLowerCase() === fundAddress.toLowerCase(),
-      )
-    : "N/A";
-  if (rank !== -1) {
+  const fund = ranking.find(r => r.address === fundAddress);
+  if (fund) {
     const numberOfFunds = ranking.length ? ranking.length : "N/A";
-    yield put(actions.updateRanking({ rank: rank + 1, numberOfFunds }));
+    yield put(
+      actions.updateRanking({
+        rank: fund.rank,
+        numberOfFunds,
+        expectedPrize: fund.expectedPrize,
+        isCompeting: fund.isCompeting,
+      }),
+    );
   }
 }
 

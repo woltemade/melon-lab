@@ -18,6 +18,8 @@ const Factsheet = ({
   scrollTo,
   loading,
   dataValid,
+  expectedPrize,
+  isCompeting,
 }) => (
   <Card id="factsheet">
     <Card.Content>
@@ -63,6 +65,17 @@ const Factsheet = ({
               <MaybeLoading>{numberOfFunds}</MaybeLoading> Melon Funds
             </List.Content>
           </List.Item>
+          {isCompeting ? (
+            <List.Item>
+              <List.Content as="a" href="#/ranking">
+                Expected Prize:
+                <MaybeLoading> {expectedPrize}</MaybeLoading> MLN
+              </List.Content>
+            </List.Item>
+          ) : (
+            ""
+          )}
+
           <List.Item>
             <List.Content>
               Total number of shares: <MaybeLoading>{totalSupply}</MaybeLoading>
@@ -78,7 +91,7 @@ const Factsheet = ({
             <List.Content>
               Management Reward: <MaybeLoading>
                 {managementReward}
-              </MaybeLoading>%
+                                 </MaybeLoading>%
             </List.Content>
           </List.Item>
           <List.Item>

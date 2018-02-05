@@ -20,6 +20,8 @@ const loadingFund = {
   totalSupply: "...",
   unclaimedRewards: "...",
   rank: "...",
+  expectedPrize: "...",
+  isCompeting: false,
   numberOfFunds: "...",
   pendingRequest: null,
   readyToExecute: false,
