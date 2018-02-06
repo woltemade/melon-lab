@@ -10,7 +10,7 @@ const LockedAccount = () => (
         <br />
         <p>
           You are almost ready to use Melon! It seems like you have Metamask set
-          on the Kovan Network: that's wonderful!{" "}
+          on the Kovan Network: that&#39;s wonderful!{" "}
         </p>
         <p>
           <strong>

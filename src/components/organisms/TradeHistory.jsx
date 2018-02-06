@@ -4,7 +4,7 @@ import { Table } from "semantic-ui-react";
 
 const TradeHistory = ({ trades }) => (
   <div>
-    <h3 className="App-intro">Fund Trading History</h3>
+    <h3 className="App-intro">Fund Trading History (Last 24 hours)</h3>
 
     <Table>
       <Table.Header>
@@ -18,8 +18,8 @@ const TradeHistory = ({ trades }) => (
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {trades.map((trade, i) => (
-          <Table.Row key={i}>
+        {trades.map(trade => (
+          <Table.Row key={trade.id}>
             <Table.Cell>{trade.timestamp}</Table.Cell>
             <Table.Cell>{trade.type}</Table.Cell>
             <Table.Cell textAlign="right">

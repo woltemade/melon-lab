@@ -100,15 +100,16 @@ function* getRanking() {
 function* addRanking() {
   const ranking = yield select(state => state.ranking.rankingList);
   const fundAddress = yield select(state => state.fund.address);
-  const fund = ranking.find(r => r.address === fundAddress);
-  if (fund) {
+  const fundRanking = ranking.find(r => r.address === fundAddress);
+
+  if (fundRanking) {
     const numberOfFunds = ranking.length ? ranking.length : "N/A";
     yield put(
       actions.updateRanking({
-        rank: fund.rank,
+        rank: fundRanking.rank,
         numberOfFunds,
-        expectedPrize: fund.expectedPrize,
-        isCompeting: fund.isCompeting,
+        expectedPrize: fundRanking.expectedPrize,
+        isCompeting: fundRanking.isCompeting,
       }),
     );
   }

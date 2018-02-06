@@ -7,10 +7,10 @@ import {
   deserializeOrder,
   matchOrders,
 } from "@melonproject/melon.js";
+import { reset } from "redux-form";
 import { types, actions } from "../actions/trade";
 import { actions as fundActions } from "../actions/fund";
 import { actions as modalActions, types as modalTypes } from "../actions/modal";
-import { reset } from "redux-form";
 import displayNumber from "../utils/displayNumber";
 
 function* placeOrderSaga(action) {

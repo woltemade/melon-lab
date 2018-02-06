@@ -11,7 +11,9 @@ import { types as participationTypes } from "../actions/participation";
 import { types as tradeTypes } from "../actions/trade";
 
 const findKeyByValue = (obj, byValue) =>
-  (Object.entries(obj).find(([, value]) => value === byValue) || [null])[0];
+  Object.keys(obj).find(key => obj[key] === byValue);
+
+const getValues = obj => Object.keys(obj).map(key => obj[key]);
 
 const removeSensitiveData = omit(["mnemonic", "password", "wallet"]);
 
@@ -50,6 +52,7 @@ const eventActionTypeMap = {
 function* track(action) {
   const { type, ...payload } = action;
   const name = findKeyByValue(eventActionTypeMap, action.type);
+  console.log(name);
   yield call(window.analytics.track, name, removeSensitiveData(payload));
 }
 
@@ -70,8 +73,8 @@ const selectBreadcrumps = action => action.type.includes("melon");
 
 function* tracker() {
   yield takeLatest(appTypes.SET_USERS_FUND, identify);
-  yield takeLatest(Object.values(routeTypes), route);
-  yield takeEvery(Object.values(eventActionTypeMap), track);
+  yield takeLatest(getValues(routeTypes), route);
+  yield takeEvery(getValues(eventActionTypeMap), track);
   yield takeEvery(selectBreadcrumps, logBreadcrumps);
 }
 

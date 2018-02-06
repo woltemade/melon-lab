@@ -4,12 +4,12 @@ const isBigNumber = candidate =>
   candidate.s !== undefined;
 
 const serialize = obj =>
-  Object.entries(obj)
-    .map(([key, value]) => [key, isBigNumber(value) ? value.toString() : value])
+  Object.keys(obj)
+    .map(key => [key, isBigNumber(obj[key]) ? obj[key].toString() : obj[key]])
     .reduce(
-      (acc, [key, value]) => ({
+      (acc, key) => ({
         ...acc,
-        [key]: value,
+        [key]: obj[key],
       }),
       {},
     );

@@ -59,8 +59,8 @@ function* deriveReadyState() {
     onboardingState: getOnboardingState({ app, ethereum, fund }),
   };
 
-  const hasChanged = Object.entries(readyState).reduce(
-    (acc, [key, value]) => acc || value !== app[key],
+  const hasChanged = Object.keys(readyState).reduce(
+    (acc, key) => acc || readyState[key] !== app[key],
     false,
   );
 
