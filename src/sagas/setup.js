@@ -7,6 +7,7 @@ import {
   signTermsAndConditions,
   signCompetitionTermsAndConditions,
   decryptWallet,
+  getEnvironment,
 } from "@melonproject/melon.js";
 import { actions as modalActions, types as modalTypes } from "../actions/modal";
 
@@ -22,18 +23,24 @@ import {
 } from "../actions/routes";
 
 function* sign() {
+  /*
   yield put(
     modalActions.confirm(
       `Please enter your password below to sign the terms and conditions:`,
     ),
   );
   const { password } = yield take(modalTypes.CONFIRMED);
+  */
 
   try {
     yield put(modalActions.loading());
-    const wallet = localStorage.getItem("wallet:melon.fund");
-    const decryptedWallet = yield call(decryptWallet, wallet, password);
-    const signature = yield call(signTermsAndConditions, decryptedWallet);
+
+    const environment = getEnvironment();
+
+    // const wallet = localStorage.getItem("wallet:melon.fund");
+    // const decryptedWallet = yield call(decryptWallet, wallet, password);
+
+    const signature = yield call(signTermsAndConditions, environment);
     yield put(actions.signSucceeded(signature));
     yield put(modalActions.close());
   } catch (err) {
@@ -99,20 +106,30 @@ function* createFund({ name }) {
     return;
   }
 
-  yield put(
-    modalActions.confirm(
-      `Please enter your password below to setup your fund with the name ${name} and to sign our terms and conditions:`,
-    ),
-  );
+  // yield put(
+  //   modalActions.confirm(
+  //     `Please enter your password below to setup your fund with the name ${name} and to sign our terms and conditions:`,
+  //   ),
+  // );
 
-  const { password } = yield take(modalTypes.CONFIRMED);
+  // const { password } = yield take(modalTypes.CONFIRMED);
 
   try {
-    yield put(modalActions.loading());
-    const wallet = localStorage.getItem("wallet:melon.fund");
-    const decryptedWallet = yield call(decryptWallet, wallet, password);
+    // yield put(modalActions.loading());
+    // const wallet = localStorage.getItem("wallet:melon.fund");
+
+    // &cmm@w8XmG9*A3utskdKsKMgr8xPW5RT
+
+    // const decryptedWallet = yield call(decryptWallet, wallet, password);
+    const environment = getEnvironment();
+
+    const address = yield select(state => state.ethereum.account);
+    const decryptedWallet = {
+      address,
+    };
+
     const signature = yield select(state => state.fund.signature);
-    const fund = yield call(setupFund, decryptedWallet, name, signature);
+    const fund = yield call(setupFund, environment, { name, signature });
     yield put(
       actions.setupSucceeded({ ...fund, owner: melonJsSetup.defaultAccount }),
     );
