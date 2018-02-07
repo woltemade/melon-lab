@@ -12,6 +12,7 @@ and this project adheres to
 
 * Breaking: getParityProvider is now async and tries to connect to local node first
 * onBlock does not query the blocknumber anymore. See ipfs-frontend#212
+* getParityProvider tries to use the injected providers from Parity UI/Chrome extension first
 
 ## [0.6.37]
 
