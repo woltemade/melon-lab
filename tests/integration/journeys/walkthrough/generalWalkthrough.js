@@ -101,15 +101,15 @@ fit(
       }`,
       data: setup,
     });
-    shared.etherBalance.initial = await getBalance(
-      'ETH-T',
-      environment.account.address,
-    );
+    shared.etherBalance.initial = await getBalance(environment, {
+      tokenSymbol: 'ETH-T',
+      ofAddress: environment.account.address,
+    });
     trace({ message: `Etherbalance: Ξ${shared.etherBalance.initial} ` });
-    shared.melonBalance.initial = await getBalance(
-      'MLN-T',
-      environment.account.address,
-    );
+    shared.melonBalance.initial = await getBalance(environment, {
+      tokenSymbol: 'MLN-T',
+      ofAddress: environment.account.address,
+    });
     trace({ message: `Melon Balance: Ⓜ  ${shared.melonBalance.initial} ` });
     expect(shared.melonBalance.initial.toFixed()).toBeGreaterThan(
       INITIAL_SUBSCRIBE_QUANTITY,
@@ -241,102 +241,108 @@ fit(
       data: shared,
     });
 
-    // // // shared.redemptionRequest = await redeem(
-    // // //   wallet,
-    // // //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    // // //   shared.vault.address,
-    // // //   REDEEM_QUANTITY,
-    // // //   REDEEM_QUANTITY,
-    // // // );
-
-    // // // trace({
-    // // //   message: `Redeem requested. shares: ${
-    // // //     shared.redemptionRequest.numShares
-    // // //   }`,
-    // // //   data: shared,
-    // // // });
-
-    // // // await awaitDataFeedUpdates(3);
-
-    // // // trace('Awaited two data feed updates');
-
-    //  shared.executedRedeemRequest = await executeRequest(
+    // shared.redemptionRequest = await redeem(
     //   environment,
-    // {
-    //    requestId: shared.redemptionRequest.id,
-    //   // "0x75497EBbfFB55EED213529C76E4d0AEd40e9600f",
-    //  fundAddress: shared.vault.address,
-    // }
-    // );
-
-    // shared.participation.invested = await getParticipation(
-    //   environment, {
-    //   shared.vault.address,
-    // // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    //   environment.account.address,
-    //   }
-    // );
-
-    // // // expect(shared.participation.invested.personalStake.toNumber()).toBe(
-    // // //   INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
-    // // // );
-    // // // expect(shared.participation.invested.totalSupply.toNumber()).toBe(
-    // // //   INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
-    // // // );
-
-    // // // trace({
-    // // //   message: `Redeem request executed. Personal stake: ${
-    // // //     shared.participation.invested.personalStake
-    // // //   }`,
-    // // // });
-
-    // shared.simpleOrder = await makeOrderFromAccount({
-    //   environment,
-    //   {sell: {
-    //     howMuch: new BigNumber(1),
-    //     symbol: 'ETH-T',
+    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    //   {
+    //     fundAddress: shared.vault.address,
+    //     numShares: REDEEM_QUANTITY,
+    //     requestedValue: REDEEM_QUANTITY,
     //   },
-    //   buy: {
-    //     howMuch: new BigNumber(5),
-    //     symbol: 'MLN-T',
-    //   },}
-    // });
+    // );
 
     // trace({
-    //   message: `Regular account made order with id: ${shared.simpleOrder.id}`,
+    //   message: `Redeem requested. shares: ${
+    //     shared.redemptionRequest.numShares
+    //   }`,
+    //   data: shared,
     // });
 
-    // shared.simpleOrder2 = await makeOrderFromAccount({
-    //   environment,
-    //   {sell: {
+    // await awaitDataFeedUpdates(environment, 3);
+
+    // trace('Awaited two data feed updates');
+
+    // shared.executedRedeemRequest = await executeRequest(environment, {
+    //   requestId: shared.redemptionRequest.id,
+    //   fundAddress: shared.vault.address,
+    //   // "0x75497EBbfFB55EED213529C76E4d0AEd40e9600f",
+    // });
+
+    // shared.participation.invested = await getParticipation(environment, {
+    //   fundAddress: shared.vault.address,
+    //   investorAddress: environment.account.address,
+    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    // });
+
+    // expect(shared.participation.invested.personalStake.toNumber()).toBe(
+    //   INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
+    // );
+    // expect(shared.participation.invested.totalSupply.toNumber()).toBe(
+    //   INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
+    // );
+
+    // trace({
+    //   message: `Redeem request executed. Personal stake: ${
+    //     shared.participation.invested.personalStake
+    //   }`,
+    // });
+
+    shared.simpleOrder = await makeOrderFromAccount(environment, {
+      sell: {
+        howMuch: new BigNumber(1),
+        symbol: 'ETH-T',
+      },
+      buy: {
+        howMuch: new BigNumber(7),
+        symbol: 'MLN-T',
+      },
+    });
+
+    trace({
+      message: `Regular account made order with id: ${shared.simpleOrder.id}`,
+    });
+
+    // shared.simpleOrder2 = await makeOrderFromAccount(environment, {
+    //   sell: {
     //     howMuch: new BigNumber(1),
     //     symbol: 'ETH-T',
     //   },
     //   buy: {
     //     howMuch: new BigNumber(7.9),
     //     symbol: 'MLN-T',
-    //   },}
+    //   },
     // });
 
     // trace({
     //   message: `Regular account made order with id: ${shared.simpleOrder2.id}`,
     // });
 
-    // shared.orderFromFund = await makeOrder(
-    //   wallet,
-    //   shared.vault.address,
-    //   // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
-    //   'MLN-T',
-    //   'ETH-T',
-    //   new BigNumber(7),
-    //   new BigNumber(1),
-    // );
+    shared.orderFromFund = await makeOrder(environment, {
+      fundAddress: shared.vault.address,
+      // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
+      sellWhichToken: 'MLN-T',
+      buyWhichToken: 'ETH-T',
+      sellHowMuch: new BigNumber(7),
+      buyHowMuch: new BigNumber(1),
+    });
 
-    // trace({
-    //   message: `Fund placed an order with id: ${shared.orderFromFund.id}`,
+    trace({
+      message: `Fund placed an order with id: ${shared.orderFromFund.id}`,
+    });
+
+    await cancelOrder(environment, {
+      orderIndex: 0,
+      fundAddress: shared.vault.address,
+    });
+
+    trace({
+      message: `Canceled order ${shared.orderFromFund.id}`,
+    });
+
+    // shared.orderBook = await getOrderbook(environment, {
+    //   baseTokenSymbol: 'MLN-T',
+    //   quoteTokenSymbol: 'ETH-T',
     // });
-
-    // shared.orderBook = await getOrderbook(environment, {'MLN-T', 'ETH-T'});
 
     // trace({
     //   message: `Got orderbook for MLN-T/ETH-T with length: ${
@@ -345,7 +351,10 @@ fit(
     //   data: shared,
     // });
 
-    // shared.orderBook2 = await getOrderbook(environment, {'MLN-T', 'XRP-T'});
+    // shared.orderBook2 = await getOrderbook(environment, {
+    //   baseTokenSymbol: 'MLN-T',
+    //   quoteTokenSymbol: 'XRP-T',
+    // });
     // trace({
     //   message: `Got orderbook for MLN-T/XRP-T with length: ${
     //     shared.orderBook2.length
@@ -353,58 +362,58 @@ fit(
     //   data: shared,
     // });
 
-    // shared.takenOrder = await takeOrder(
-    //   wallet,
-    //   shared.simpleOrder2.id,
-    //   // shared.orderBook2[shared.orderBook2.length - 1].id,
-    //   shared.vault.address,
-    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    //   new BigNumber(1),
-    // );
+    shared.takenOrder = await takeOrder(environment, {
+      id: shared.simpleOrder.id,
+      // shared.orderBook2[shared.orderBook2.length - 1].id,
+      fundAddress: shared.vault.address,
+      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      quantityAsked: new BigNumber(1),
+    });
 
-    // trace({
-    //   message: `Fund took order; executed quantity: ${
-    //     shared.takenOrder.executedQuantity
-    //   }`,
-    //   data: shared,
-    // });
+    trace({
+      message: `Fund took order; executed quantity: ${
+        shared.takenOrder.executedQuantity
+      }`,
+      data: shared,
+    });
 
-    // shared.openOrders = await getOpenOrders(shared.vault.address);
+    shared.openOrders = await getOpenOrders(environment, {
+      fundAddress: shared.vault.address,
+    });
 
-    // await cancelOrder(wallet, 0, shared.vault.address);
-
-    // trace({
-    //   message: `Canceled order ${shared.orderFromFund.id}`,
-    // });
-
-    // shared.orderFromFund2 = await makeOrder(
-    //   wallet,
-    //   shared.vault.address,
+    // shared.orderFromFund2 = await makeOrder(environment, {
+    //   fundAddress: shared.vault.address,
     //   // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
-    //   'MLN-T',
-    //   'ETH-T',
-    //   new BigNumber(7.94),
-    //   new BigNumber(1),
-    // );
+    //   sellWhichToken: 'MLN-T',
+    //   buyWhichToken: 'ETH-T',
+    //   sellHowMuch: new BigNumber(7.94),
+    //   buyHowMuch: new BigNumber(1),
+    // });
 
-    // shared.openOrders = await getOpenOrders(shared.vault.address);
+    // shared.openOrders = await getOpenOrders(environment, {
+    //   fundAddress: shared.vault.address,
+    // });
 
     // trace({
     //   message: `Fund placed an order with id: ${shared.orderFromFund2.id}`,
     // });
 
-    // shared.openOrders = await getOpenOrders(shared.vault.address);
-
-    // shared.endCalculations = await performCalculations(shared.vault.address);
-
-    // trace({
-    //   message: `End calculations- GAV: ${shared.endCalculations.gav}\n NAV: ${
-    //     shared.endCalculations.nav
-    //   }, Share Price: ${shared.endCalculations.sharePrice}, totalSupply: ${
-    //     shared.endCalculations.totalSupply
-    //   }`,
-    //   data: shared,
+    // shared.openOrders = await getOpenOrders(environment, {
+    //   fundAddress: shared.vault.address,
     // });
+
+    shared.endCalculations = await performCalculations(environment, {
+      fundAddress: shared.vault.address,
+    });
+
+    trace({
+      message: `End calculations- GAV: ${shared.endCalculations.gav}\n NAV: ${
+        shared.endCalculations.nav
+      }, Share Price: ${shared.endCalculations.sharePrice}, totalSupply: ${
+        shared.endCalculations.totalSupply
+      }`,
+      data: shared,
+    });
 
     // shared.toggledSubscription = await toggleSubscription(
     //   wallet,
