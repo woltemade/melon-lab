@@ -415,51 +415,49 @@ fit(
       data: shared,
     });
 
-    // shared.toggledSubscription = await toggleSubscription(
-    //   wallet,
-    //   shared.vault.address,
-    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    //   setup.defaultAccount,
-    // );
+    shared.toggledSubscription = await toggleSubscription(environment, {
+      fundAddress: shared.vault.address,
+      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    });
 
-    // expect(shared.toggledSubscription).toBe(false);
+    expect(shared.toggledSubscription).toBe(false);
 
-    // shared.toggledSubscription = await toggleSubscription(
-    //   wallet,
-    //   shared.vault.address,
-    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    //   setup.defaultAccount,
-    // );
+    shared.toggledSubscription = await toggleSubscription(environment, {
+      fundAddress: shared.vault.address,
+      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    });
 
-    // expect(shared.toggledSubscription).toBe(true);
+    expect(shared.toggledSubscription).toBe(true);
 
-    // shared.toggledRedemption = await toggleRedemption(
-    //   wallet,
-    //   shared.vault.address,
-    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    //   setup.defaultAccount,
-    // );
+    shared.toggledRedemption = await toggleRedemption(environment, {
+      fundAddress: shared.vault.address,
+      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    });
 
-    // expect(shared.toggledRedemption).toBe(false);
-    // shared.toggledRedemption = await toggleRedemption(
-    //   wallet,
-    //   shared.vault.address,
-    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    //   setup.defaultAccount,
-    // );
-    // expect(shared.toggledRedemption).toBe(true);
+    expect(shared.toggledRedemption).toBe(false);
+    shared.toggledRedemption = await toggleRedemption(environment, {
+      fundAddress: shared.vault.address,
+      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    });
+    expect(shared.toggledRedemption).toBe(true);
 
-    // shared.participationAuthorizations = await getParticipationAuthorizations(
-    //   shared.vault.address,
-    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    // );
-    // expect(shared.participationAuthorizations.subscriptionAllowed).toBe(true);
-    // expect(shared.participationAuthorizations.redemptionAllowed).toBe(true);
+    shared.participationAuthorizations = await getParticipationAuthorizations(
+      environment,
+      { fundAddress: shared.vault.address },
+      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    );
+    expect(shared.participationAuthorizations.subscriptionAllowed).toBe(true);
+    expect(shared.participationAuthorizations.redemptionAllowed).toBe(true);
 
-    // shared.recentTrades = await getRecentTrades('ETH-T', 'MLN-T');
-    // shared.fundRecentTrades = await getFundRecentTrades(shared.vault.address);
-    // expect(shared.recentTrades.length).toBeGreaterThan(1);
-    // expect(shared.fundRecentTrades.length).toBeGreaterThan(1);
+    shared.recentTrades = await getRecentTrades(environment, {
+      baseTokenSymbol: 'ETH-T',
+      quoteTokenSymbol: 'MLN-T',
+    });
+    shared.fundRecentTrades = await getFundRecentTrades(environment, {
+      fundAddress: shared.vault.address,
+    });
+    expect(shared.recentTrades.length).toBeGreaterThan(1);
+    expect(shared.fundRecentTrades.length).toBeGreaterThan(1);
   },
   10 * 60 * 1000,
 );
