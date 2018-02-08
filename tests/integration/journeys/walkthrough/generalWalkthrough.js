@@ -170,10 +170,10 @@ fit(
     expect(shared.participation.initial.personalStake.toNumber()).toBe(0);
     expect(shared.participation.initial.totalSupply.toNumber()).toBe(0);
 
-    shared.initialCalculations = await performCalculations(
-      shared.vault.address,
+    shared.initialCalculations = await performCalculations(environment, {
+      fundAddress: shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    );
+    });
 
     trace({
       message: `Initial calculations- GAV: ${
@@ -186,64 +186,60 @@ fit(
     expect(shared.initialCalculations.sharePrice.toNumber()).toBe(1);
     expect(shared.initialCalculations.gav.toNumber()).toBe(0);
 
-    // shared.subscriptionRequest = await subscribe(
-    //   wallet,
-    //   shared.vault.address,
-    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    //   new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
-    //   new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
-    // );
+    shared.subscriptionRequest = await subscribe(environment, {
+      fundAddress: shared.vault.address,
+      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      numShares: new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
+      offeredValue: new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
+    });
 
-    // trace({
-    //   message: `Subscribe requested. shares: ${
-    //     shared.subscriptionRequest.numShares
-    //   }`,
-    //   data: shared,
-    // });
+    trace({
+      message: `Subscribe requested. shares: ${
+        shared.subscriptionRequest.numShares
+      }`,
+      data: shared,
+    });
 
-    // shared.executedSubscriptionRequest = await executeRequest(
-    //   environment, {
-    //   requestId: shared.subscriptionRequest.id,
-    //   fundAddress: shared.vault.address,
-    //   // 0,
-    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    shared.executedSubscriptionRequest = await executeRequest(environment, {
+      requestId: shared.subscriptionRequest.id,
+      fundAddress: shared.vault.address,
+      // 0,
+      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    });
 
-    // }
-    // );
+    trace(`executedSubscriptionRequest ${shared.executedSubscriptionRequest}`);
 
-    // trace(`executedSubscriptionRequest ${shared.executedSubscriptionRequest}`);
+    shared.participation.invested = await getParticipation(environment, {
+      fundAddress: shared.vault.address,
+      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      investorAddress: environment.account.address,
+    });
 
-    // shared.participation.invested = await getParticipation(
-    //   environment, {
-    //   shared.vault.address,
-    // // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    //   environment.account.address,
-    //   }
-    // );
+    expect(shared.participation.invested.personalStake.toNumber()).toBe(
+      INITIAL_SUBSCRIBE_QUANTITY,
+    );
+    expect(shared.participation.invested.totalSupply.toNumber()).toBe(
+      INITIAL_SUBSCRIBE_QUANTITY,
+    );
 
-    // expect(shared.participation.invested.personalStake.toNumber()).toBe(
-    //   INITIAL_SUBSCRIBE_QUANTITY,
-    // );
-    // expect(shared.participation.invested.totalSupply.toNumber()).toBe(
-    //   INITIAL_SUBSCRIBE_QUANTITY,
-    // );
+    trace({
+      message: `Subscribe request executed. Personal stake: ${
+        shared.participation.invested.personalStake
+      }`,
+    });
 
-    // trace({
-    //   message: `Subscribe request executed. Personal stake: ${
-    //     shared.participation.invested.personalStake
-    //   }`,
-    // });
+    shared.midCalculations = await performCalculations(environment, {
+      fundAddress: shared.vault.address,
+    });
 
-    // shared.midCalculations = await performCalculations(shared.vault.address);
-
-    // trace({
-    //   message: `Mid calculations- GAV: ${shared.midCalculations.gav}, NAV: ${
-    //     shared.midCalculations.nav
-    //   }, Share Price: ${shared.midCalculations.sharePrice}, totalSupply: ${
-    //     shared.midCalculations.totalSupply
-    //   }`,
-    //   data: shared,
-    // });
+    trace({
+      message: `Mid calculations- GAV: ${shared.midCalculations.gav}, NAV: ${
+        shared.midCalculations.nav
+      }, Share Price: ${shared.midCalculations.sharePrice}, totalSupply: ${
+        shared.midCalculations.totalSupply
+      }`,
+      data: shared,
+    });
 
     // // // shared.redemptionRequest = await redeem(
     // // //   wallet,
