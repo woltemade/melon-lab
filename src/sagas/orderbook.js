@@ -3,6 +3,7 @@ import {
   getOrderbook,
   deserializeOrder,
   averagePrice,
+  getEnvironment,
 } from "@melonproject/melon.js";
 import { change } from "redux-form";
 import { types, actions } from "../actions/orderbook";
@@ -15,7 +16,7 @@ function* getOrderbookSaga() {
 
   const isConnected = yield select(state => state.ethereum.isConnected);
   if (!isConnected) yield take(ethereumTypes.HAS_CONNECTED);
-
+  const environment = getEnvironment();
   try {
     yield put(
       actions.setLoading({
@@ -27,11 +28,10 @@ function* getOrderbookSaga() {
         totalSellVolume: 0,
       }),
     );
-    const rawOrderbook = yield call(
-      getOrderbook,
+    const rawOrderbook = yield call(getOrderbook, environment, {
       baseTokenSymbol,
       quoteTokenSymbol,
-    );
+    });
     const orders = rawOrderbook.map(order => {
       const result = order;
       result.price = order.price.toString();

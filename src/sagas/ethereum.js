@@ -18,7 +18,6 @@ const MAX_INTERVAL_BETWEEN_BLOCKS = 5;
 
 function* init() {
   const { providerType, api } = yield call(getParityProvider, -1);
-
   // TODO: add tracer
   setEnvironment({ api });
 
@@ -26,6 +25,7 @@ function* init() {
 
   // Reading the fund address from the URL
   const fund = yield select(state => state.fund);
+
   const networkId = yield apply(api, api.net.version);
 
   yield put(ethereumActions.hasConnected(networkId));

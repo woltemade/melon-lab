@@ -58,20 +58,21 @@ function* sign() {
 }
 
 function* signCompetition() {
-  yield put(
-    modalActions.confirm(
-      `Please enter your password below to sign the competition terms and conditions:`,
-    ),
-  );
-  const { password } = yield take(modalTypes.CONFIRMED);
+  // yield put(
+  //   modalActions.confirm(
+  //     `Please enter your password below to sign the competition terms and conditions:`,
+  //   ),
+  // );
+  // const { password } = yield take(modalTypes.CONFIRMED);
 
   try {
     yield put(modalActions.loading());
-    const wallet = localStorage.getItem("wallet:melon.fund");
-    const decryptedWallet = yield call(decryptWallet, wallet, password);
+    const environment = getEnvironment();
+    // const wallet = localStorage.getItem("wallet:melon.fund");
+    // const decryptedWallet = yield call(decryptWallet, wallet, password);
     const competitionSignature = yield call(
       signCompetitionTermsAndConditions,
-      decryptedWallet,
+      environment,
     );
     yield put(actions.signCompetitionSucceeded(competitionSignature));
     yield put(modalActions.close());
@@ -115,18 +116,18 @@ function* createFund({ name }) {
   // const { password } = yield take(modalTypes.CONFIRMED);
 
   try {
+    const environment = getEnvironment();
     // yield put(modalActions.loading());
     // const wallet = localStorage.getItem("wallet:melon.fund");
 
     // &cmm@w8XmG9*A3utskdKsKMgr8xPW5RT
 
     // const decryptedWallet = yield call(decryptWallet, wallet, password);
-    const environment = getEnvironment();
 
-    const address = yield select(state => state.ethereum.account);
-    const decryptedWallet = {
-      address,
-    };
+    // const address = yield select(state => state.ethereum.account);
+    // const decryptedWallet = {
+    //   address,
+    // };
 
     const signature = yield select(state => state.fund.signature);
     const fund = yield call(setupFund, environment, { name, signature });

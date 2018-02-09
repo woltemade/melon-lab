@@ -3,6 +3,7 @@ import {
   decryptWallet,
   getOpenOrders,
   cancelOrder,
+  getEnvironment,
 } from "@melonproject/melon.js";
 import { actions, types } from "../actions/openOrders";
 import { types as ethereumTypes } from "../actions/ethereum";
@@ -14,8 +15,10 @@ function* getOpenOrdersSaga() {
 
   const fundAddress = yield select(state => state.fund.address);
 
+  const environment = getEnvironment();
+
   try {
-    const orders = yield call(getOpenOrders, fundAddress);
+    const orders = yield call(getOpenOrders, environment, { fundAddress });
 
     yield put(
       actions.getOpenOrdersSucceeded({
@@ -33,19 +36,19 @@ function* cancelOrderSaga({ orderId }) {
   if (!isConnected) yield take(ethereumTypes.HAS_CONNECTED);
 
   const fundAddress = yield select(state => state.fund.address);
-
+  const environment = getEnvironment();
   try {
-    yield put(
-      modalActions.confirm(
-        `Do you really want to cancel the following limit order #${orderId} ?`,
-      ),
-    );
-    const { password } = yield take(modalTypes.CONFIRMED);
+    // yield put(
+    //   modalActions.confirm(
+    //     `Do you really want to cancel the following limit order #${orderId} ?`,
+    //   ),
+    // );
+    // const { password } = yield take(modalTypes.CONFIRMED);
     yield put(modalActions.loading());
-    const wallet = localStorage.getItem("wallet:melon.fund");
-    const decryptedWallet = yield call(decryptWallet, wallet, password);
+    // const wallet = localStorage.getItem("wallet:melon.fund");
+    // const decryptedWallet = yield call(decryptWallet, wallet, password);
 
-    yield call(cancelOrder, decryptedWallet, orderId, fundAddress);
+    yield call(cancelOrder, environment, { orderIndex: orderId, fundAddress });
     yield put(actions.cancelOrderSucceeded());
     yield put(modalActions.close());
   } catch (err) {

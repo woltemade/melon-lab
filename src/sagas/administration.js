@@ -6,6 +6,7 @@ import {
   convertUnclaimedRewards,
   shutDownFund,
   decryptWallet,
+  getEnvironment,
 } from "@melonproject/melon.js";
 
 import { types, actions } from "../actions/administration";
@@ -16,21 +17,22 @@ function* toggleSubscriptionSaga() {
   const subscriptionAllowed = yield select(
     state => state.fund.subscriptionAllowed,
   );
-  yield put(
-    modalActions.confirm(
-      `Do you really want to ${
-        subscriptionAllowed ? "disable" : "enable"
-      } subscriptions? If yes, please type your password below:`,
-    ),
-  );
-  const { password } = yield take(modalTypes.CONFIRMED);
+  // yield put(
+  //   modalActions.confirm(
+  //     `Do you really want to ${subscriptionAllowed
+  //       ? "disable"
+  //       : "enable"} subscriptions? If yes, please type your password below:`,
+  //   ),
+  // );
+  // const { password } = yield take(modalTypes.CONFIRMED);
 
   try {
     yield put(modalActions.loading());
-    const wallet = localStorage.getItem("wallet:melon.fund");
-    const decryptedWallet = yield call(decryptWallet, wallet, password);
-    const address = yield select(state => state.fund.address);
-    yield call(toggleSubscription, decryptedWallet, address);
+    const environment = getEnvironment();
+    // const wallet = localStorage.getItem("wallet:melon.fund");
+    // const decryptedWallet = yield call(decryptWallet, wallet, password);
+    const fundAddress = yield select(state => state.fund.address);
+    yield call(toggleSubscription, environment, { fundAddress });
     yield put(modalActions.close());
     yield put(actions.toggleSubscriptionSucceeded(!subscriptionAllowed));
   } catch (err) {
@@ -51,21 +53,22 @@ function* toggleRedemptionSaga() {
   const redemptionAllowed = yield select(
     state => state.fund.subscriptionAllowed,
   );
-  yield put(
-    modalActions.confirm(
-      `Do you really want to ${
-        redemptionAllowed ? "disable" : "enable"
-      } redemptions? If yes, please type your password below:`,
-    ),
-  );
-  const { password } = yield take(modalTypes.CONFIRMED);
+  // yield put(
+  //   modalActions.confirm(
+  //     `Do you really want to ${redemptionAllowed
+  //       ? "disable"
+  //       : "enable"} redemptions? If yes, please type your password below:`,
+  //   ),
+  // );
+  // const { password } = yield take(modalTypes.CONFIRMED);
 
   try {
     yield put(modalActions.loading());
-    const wallet = localStorage.getItem("wallet:melon.fund");
-    const decryptedWallet = yield call(decryptWallet, wallet, password);
-    const address = yield select(state => state.fund.address);
-    yield call(toggleRedemption, decryptedWallet, address);
+    const environment = getEnvironment();
+    // const wallet = localStorage.getItem("wallet:melon.fund");
+    // const decryptedWallet = yield call(decryptWallet, wallet, password);
+    const fundAddress = yield select(state => state.fund.address);
+    yield call(toggleRedemption, environment, { fundAddress });
     yield put(modalActions.close());
     yield put(actions.toggleRedemptionSucceeded(!redemptionAllowed));
   } catch (err) {
@@ -83,20 +86,22 @@ function* toggleRedemptionSaga() {
 }
 
 function* convertUnclaimedRewardsSaga() {
-  yield put(
-    modalActions.confirm(
-      `Do you really want to convert your unclaimed rewards? If yes, please type your password below:`,
-    ),
-  );
-  const { password } = yield take(modalTypes.CONFIRMED);
+  // yield put(
+  //   modalActions.confirm(
+  //     `Do you really want to convert your unclaimed rewards? If yes, please type your password below:`,
+  //   ),
+  // );
+  // const { password } = yield take(modalTypes.CONFIRMED);
 
   try {
     yield put(modalActions.loading());
-    const wallet = localStorage.getItem("wallet:melon.fund");
-    const decryptedWallet = yield call(decryptWallet, wallet, password);
-    const address = yield select(state => state.fund.address);
+    const environment = getEnvironment();
+
+    // const wallet = localStorage.getItem("wallet:melon.fund");
+    // const decryptedWallet = yield call(decryptWallet, wallet, password);
+    const fundAddress = yield select(state => state.fund.address);
     // TODO: Check if it succeeded
-    yield call(convertUnclaimedRewards, decryptedWallet, address);
+    yield call(convertUnclaimedRewards, environment, { fundAddress });
     yield put(modalActions.close());
     yield put(actions.convertUnclaimedRewardsSucceeded());
   } catch (err) {
@@ -114,20 +119,21 @@ function* convertUnclaimedRewardsSaga() {
 }
 
 function* shutDownFundSaga() {
-  yield put(
-    modalActions.confirm(
-      `Do you really want to shut down your fund? If yes, please type your password below:`,
-    ),
-  );
-  const { password } = yield take(modalTypes.CONFIRMED);
+  // yield put(
+  //   modalActions.confirm(
+  //     `Do you really want to shut down your fund? If yes, please type your password below:`,
+  //   ),
+  // );
+  // const { password } = yield take(modalTypes.CONFIRMED);
 
   try {
     yield put(modalActions.loading());
-    const wallet = localStorage.getItem("wallet:melon.fund");
-    const decryptedWallet = yield call(decryptWallet, wallet, password);
-    const address = yield select(state => state.fund.address);
+    const environment = getEnvironment();
+    // const wallet = localStorage.getItem("wallet:melon.fund");
+    // const decryptedWallet = yield call(decryptWallet, wallet, password);
+    const fundAddress = yield select(state => state.fund.address);
     // TODO: Check if it succeeded
-    yield call(shutDownFund, decryptedWallet, address);
+    yield call(shutDownFund, environment, { fundAddress });
     yield put(modalActions.close());
     yield put(actions.shutdownSucceeded());
     yield put(routeActions.ranking());

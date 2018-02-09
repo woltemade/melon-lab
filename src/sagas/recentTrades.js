@@ -1,5 +1,5 @@
 import { takeLatest, call, put, select, take } from "redux-saga/effects";
-import { getRecentTrades } from "@melonproject/melon.js";
+import { getRecentTrades, getEnvironment } from "@melonproject/melon.js";
 import { actions, types } from "../actions/recentTrades";
 import { types as ethereumTypes } from "../actions/ethereum";
 
@@ -10,12 +10,13 @@ function* getRecentTradesSaga() {
   const baseTokenSymbol = yield select(state => state.app.assetPair.base);
   const quoteTokenSymbol = yield select(state => state.app.assetPair.quote);
 
+  const environment = getEnvironment();
+
   try {
-    const rawRecentTrades = yield call(
-      getRecentTrades,
+    const rawRecentTrades = yield call(getRecentTrades, environment, {
       baseTokenSymbol,
       quoteTokenSymbol,
-    );
+    });
     const trades = rawRecentTrades.map(trade => ({
       // CAUTION: here we switch the order type to match the user terminology
       ...trade,

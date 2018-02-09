@@ -6,14 +6,15 @@ import {
   decryptWallet,
   deserializeOrder,
   matchOrders,
+  getEnvironment,
 } from "@melonproject/melon.js";
 import { reset } from "redux-form";
 import { types, actions } from "../actions/trade";
 import { actions as fundActions } from "../actions/fund";
 import { actions as modalActions, types as modalTypes } from "../actions/modal";
-import displayNumber from "../utils/displayNumber";
 
 function* placeOrderSaga(action) {
+  const environment = getEnvironment();
   try {
     const fundAddress = yield select(state => state.fund.address);
     let buyHowMuch;
@@ -33,25 +34,23 @@ function* placeOrderSaga(action) {
       sellWhichToken = yield select(state => state.app.assetPair.base);
     }
 
-    yield put(
-      modalActions.confirm(
-        `Do you really want to place the following limit order:  BUY ${buyHowMuch} ${buyWhichToken} and SELL ${sellHowMuch} ${sellWhichToken}? If yes, please type your password below:`,
-      ),
-    );
-    const { password } = yield take(modalTypes.CONFIRMED);
+    // yield put(
+    //   modalActions.confirm(
+    //     `Do you really want to place the following limit order:  BUY ${buyHowMuch} ${buyWhichToken} and SELL ${sellHowMuch} ${sellWhichToken}? If yes, please type your password below:`,
+    //   ),
+    // );
+    // const { password } = yield take(modalTypes.CONFIRMED);
     yield put(modalActions.loading());
-    const wallet = localStorage.getItem("wallet:melon.fund");
-    const decryptedWallet = yield call(decryptWallet, wallet, password);
+    // const wallet = localStorage.getItem("wallet:melon.fund");
+    // const decryptedWallet = yield call(decryptWallet, wallet, password);
 
-    yield call(
-      makeOrder,
-      decryptedWallet,
+    yield call(makeOrder, environment, {
       fundAddress,
       sellWhichToken,
       buyWhichToken,
       sellHowMuch,
       buyHowMuch,
-    );
+    });
     yield put(actions.placeOrderSucceeded());
     yield put(modalActions.close());
     yield put(reset("trade"));
@@ -70,6 +69,7 @@ function* placeOrderSaga(action) {
 }
 
 function* takeOrderSaga(action) {
+  const environment = getEnvironment();
   try {
     const fundAddress = yield select(state => state.fund.address);
     const managerAddress = yield select(state => state.ethereum.account);
@@ -111,28 +111,26 @@ function* takeOrderSaga(action) {
     const matchedOrders = matchOrders(theirOrderType, priceThreshold, orders);
     const quantityAsked = buyHowMuch;
 
-    yield put(
-      modalActions.confirm(
-        `Do you really want to place the following market order:  BUY ${displayNumber(
-          buyHowMuch,
-        )} ${buyWhichToken} and SELL ${displayNumber(
-          sellHowMuch,
-        )} ${sellWhichToken}? If yes, please type your password below:`,
-      ),
-    );
-    const { password } = yield take(modalTypes.CONFIRMED);
+    // yield put(
+    //   modalActions.confirm(
+    //     `Do you really want to place the following market order:  BUY ${displayNumber(
+    //       buyHowMuch,
+    //     )} ${buyWhichToken} and SELL ${displayNumber(
+    //       sellHowMuch,
+    //     )} ${sellWhichToken}? If yes, please type your password below:`,
+    //   ),
+    // );
+    // const { password } = yield take(modalTypes.CONFIRMED);
     yield put(modalActions.loading());
-    const wallet = localStorage.getItem("wallet:melon.fund");
-    const decryptedWallet = yield call(decryptWallet, wallet, password);
+    // const wallet = localStorage.getItem("wallet:melon.fund");
+    // const decryptedWallet = yield call(decryptWallet, wallet, password);
 
-    yield call(
-      takeMultipleOrders,
-      decryptedWallet,
-      matchedOrders,
+    yield call(takeMultipleOrders, environment, {
+      orders: matchedOrders,
       managerAddress,
       fundAddress,
-      quantityAsked,
-    );
+      totalQuantityAsked: quantityAsked,
+    });
     yield put(actions.takeOrderSucceeded());
     yield put(modalActions.close());
     yield put(reset("trade"));
