@@ -161,6 +161,7 @@ fit(
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       numShares: new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
       offeredValue: new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
+      isNativeAsset: true,
     });
 
     trace({
@@ -258,11 +259,11 @@ fit(
     // });
 
     shared.simpleOrder = await makeOrderFromAccount(environment, {
-      sell: {
+      buy: {
         howMuch: new BigNumber(1),
         symbol: 'ETH-T-M',
       },
-      buy: {
+      sell: {
         howMuch: new BigNumber(7),
         symbol: 'MLN-T-M',
       },
@@ -290,10 +291,10 @@ fit(
     shared.orderFromFund = await makeOrder(environment, {
       fundAddress: shared.vault.address,
       // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
-      sellWhichToken: 'MLN-T-M',
-      buyWhichToken: 'ETH-T-M',
-      sellHowMuch: new BigNumber(7.7),
-      buyHowMuch: new BigNumber(1),
+      buyWhichToken: 'MLN-T-M',
+      sellWhichToken: 'ETH-T-M',
+      buyHowMuch: new BigNumber(7.7),
+      sellHowMuch: new BigNumber(1),
     });
 
     trace({
@@ -332,6 +333,16 @@ fit(
     //   data: shared,
     // });
 
+    shared.simpleOrder = await makeOrderFromAccount(environment, {
+      buy: {
+        howMuch: new BigNumber(1),
+        symbol: 'ETH-T-M',
+      },
+      sell: {
+        howMuch: new BigNumber(10),
+        symbol: 'MLN-T-M',
+      },
+    });
     shared.takenOrder = await takeOrder(environment, {
       id: shared.simpleOrder.id,
       // shared.orderBook2[shared.orderBook2.length - 1].id,
