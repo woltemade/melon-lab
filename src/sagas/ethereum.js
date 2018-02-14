@@ -5,6 +5,7 @@ import {
   getParityProvider,
   providers,
   setEnvironment,
+  getEnvironment,
 } from "@melonproject/melon.js";
 import { utils } from "ethers";
 
@@ -18,6 +19,7 @@ const MAX_INTERVAL_BETWEEN_BLOCKS = 5;
 
 function* init() {
   const { providerType, api } = yield call(getParityProvider, -1);
+
   // TODO: add tracer
   setEnvironment({ api });
 
@@ -60,7 +62,8 @@ function* init() {
         const blockNumber = await api.eth.blockNumber();
 
         if (!equals(blockNumber, lastBlockNumber)) {
-          const data = await onBlock();
+          const environment = getEnvironment();
+          const data = await onBlock(environment);
           emitter({ onBlock: { ...data, blockNumber } });
           lastBlockNumber = blockNumber;
           intervalsSinceLastBlock = 0;

@@ -65,6 +65,7 @@ function* toggleRedemptionSaga() {
   try {
     yield put(modalActions.loading());
     const environment = getEnvironment();
+    console.log("from admin saga ", environment);
     // const wallet = localStorage.getItem("wallet:melon.fund");
     // const decryptedWallet = yield call(decryptWallet, wallet, password);
     const fundAddress = yield select(state => state.fund.address);

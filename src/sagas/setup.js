@@ -3,7 +3,6 @@ import slugify from "slugify";
 
 import {
   setupFund,
-  setup as melonJsSetup,
   signTermsAndConditions,
   signCompetitionTermsAndConditions,
   decryptWallet,
@@ -132,7 +131,7 @@ function* createFund({ name }) {
     const signature = yield select(state => state.fund.signature);
     const fund = yield call(setupFund, environment, { name, signature });
     yield put(
-      actions.setupSucceeded({ ...fund, owner: melonJsSetup.defaultAccount }),
+      actions.setupSucceeded({ ...fund, owner: environment.account.address }),
     );
     yield put(appActions.setUsersFund(fund.address));
     yield put(routeActions.competition(fund.address));
