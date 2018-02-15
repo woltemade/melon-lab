@@ -21,7 +21,7 @@ function* init() {
   const { providerType, api } = yield call(getParityProvider, -1);
 
   // TODO: add tracer
-  setEnvironment({ api });
+  setEnvironment({ api, providerType });
 
   yield put(ethereumActions.setProvider(providerType));
 

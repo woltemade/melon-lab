@@ -7,6 +7,7 @@ import {
   signCompetitionTermsAndConditions,
   decryptWallet,
   getEnvironment,
+  isExternalSigner,
 } from "@melonproject/melon.js";
 import { actions as modalActions, types as modalTypes } from "../actions/modal";
 
@@ -22,23 +23,22 @@ import {
 } from "../actions/routes";
 
 function* sign() {
-  /*
-  yield put(
-    modalActions.confirm(
-      `Please enter your password below to sign the terms and conditions:`,
-    ),
-  );
-  const { password } = yield take(modalTypes.CONFIRMED);
-  */
-
   try {
     yield put(modalActions.loading());
 
     const environment = getEnvironment();
 
-    // const wallet = localStorage.getItem("wallet:melon.fund");
-    // const decryptedWallet = yield call(decryptWallet, wallet, password);
-
+    if (!isExternalSigner(environment)) {
+      yield put(
+        modalActions.confirm(
+          `Please enter your password below to sign the terms and conditions:`,
+        ),
+      );
+      const { password } = yield take(modalTypes.CONFIRMED);
+      const wallet = localStorage.getItem("wallet:melon.fund");
+      const decryptedWallet = yield call(decryptWallet, wallet, password);
+      environment.account = decryptedWallet;
+    }
     const signature = yield call(signTermsAndConditions, environment);
     yield put(actions.signSucceeded(signature));
     yield put(modalActions.close());

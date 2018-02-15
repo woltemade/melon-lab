@@ -31,7 +31,7 @@ const getStatus = ({
     return { message: "Insufficent ETH", type: statusTypes.WARNING };
   if (!isReadyToInvest)
     return { message: "Insufficent MLN", type: statusTypes.WARNING };
-  if (provider === providers.PARITY || providers.INJECTED) {
+  if ([providers.PARITY, providers.INJECTED].includes(provider)) {
     return { message: "Local node", type: statusTypes.GOOD };
   }
   return { message: "Melon Node", type: statusTypes.NEUTRAL };
