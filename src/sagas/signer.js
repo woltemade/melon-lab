@@ -8,18 +8,17 @@ import { actions as modalActions, types as modalTypes } from "../actions/modal";
 
 function* signer(modalSentence, transaction, failureAction) {
   try {
-    yield put(modalActions.loading());
     const environment = getEnvironment();
-
+    yield put(modalActions.loading());
     if (!isExternalSigner(environment)) {
       yield put(modalActions.confirm(modalSentence));
       const { password } = yield take(modalTypes.CONFIRMED);
+      yield put(modalActions.loading());
       const wallet = localStorage.getItem("wallet:melon.fund");
       const decryptedWallet = yield call(decryptWallet, wallet, password);
       environment.account = decryptedWallet;
     }
     yield call(transaction, environment);
-    yield put(modalActions.close());
   } catch (err) {
     if (err.name === "password") {
       yield put(modalActions.error("Wrong password"));

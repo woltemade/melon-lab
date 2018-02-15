@@ -5,11 +5,8 @@ import {
   setupFund,
   signTermsAndConditions,
   signCompetitionTermsAndConditions,
-  decryptWallet,
-  getEnvironment,
-  isExternalSigner,
 } from "@melonproject/melon.js";
-import { actions as modalActions, types as modalTypes } from "../actions/modal";
+import { actions as modalActions } from "../actions/modal";
 
 import { types, actions } from "../actions/fund";
 import { actions as appActions, types as appTypes } from "../actions/app";
@@ -27,6 +24,7 @@ function* sign() {
   function* transaction(environment) {
     const signature = yield call(signTermsAndConditions, environment);
     yield put(actions.signSucceeded(signature));
+    yield put(modalActions.close());
   }
   yield call(
     signer,
@@ -37,36 +35,21 @@ function* sign() {
 }
 
 function* signCompetition() {
-  // yield put(
-  //   modalActions.confirm(
-  //     `Please enter your password below to sign the competition terms and conditions:`,
-  //   ),
-  // );
-  // const { password } = yield take(modalTypes.CONFIRMED);
-
-  try {
-    yield put(modalActions.loading());
-    const environment = getEnvironment();
-    // const wallet = localStorage.getItem("wallet:melon.fund");
-    // const decryptedWallet = yield call(decryptWallet, wallet, password);
+  function* transaction(environment) {
     const competitionSignature = yield call(
       signCompetitionTermsAndConditions,
       environment,
     );
     yield put(actions.signCompetitionSucceeded(competitionSignature));
     yield put(modalActions.close());
-  } catch (err) {
-    if (err.name === "password") {
-      yield put(modalActions.error("Wrong password"));
-    } else if (err.name === "EnsureError") {
-      yield put(modalActions.error(err.message));
-    } else {
-      yield put(modalActions.error(err.message));
-      console.error(err);
-      console.log(JSON.stringify(err, null, 4));
-    }
-    yield put(actions.signCompetitionFailed(err));
   }
+
+  yield call(
+    signer,
+    `Please enter your password below to sign the competition terms and conditions:`,
+    transaction,
+    actions.signCompetitionFailed,
+  );
 }
 
 function* createFund({ name }) {
@@ -86,28 +69,7 @@ function* createFund({ name }) {
     return;
   }
 
-  // yield put(
-  //   modalActions.confirm(
-  //     `Please enter your password below to setup your fund with the name ${name} and to sign our terms and conditions:`,
-  //   ),
-  // );
-
-  // const { password } = yield take(modalTypes.CONFIRMED);
-
-  try {
-    const environment = getEnvironment();
-    // yield put(modalActions.loading());
-    // const wallet = localStorage.getItem("wallet:melon.fund");
-
-    // &cmm@w8XmG9*A3utskdKsKMgr8xPW5RT
-
-    // const decryptedWallet = yield call(decryptWallet, wallet, password);
-
-    // const address = yield select(state => state.ethereum.account);
-    // const decryptedWallet = {
-    //   address,
-    // };
-
+  function* transaction(environment) {
     const signature = yield select(state => state.fund.signature);
     const fund = yield call(setupFund, environment, { name, signature });
     yield put(
@@ -117,18 +79,14 @@ function* createFund({ name }) {
     yield put(routeActions.competition(fund.address));
     yield put(modalActions.close());
     yield put(actions.infoRequested(fund.address));
-  } catch (err) {
-    if (err.name === "password") {
-      yield put(modalActions.error("Wrong password"));
-    } else if (err.name === "EnsureError") {
-      yield put(modalActions.error(err.message));
-    } else {
-      yield put(modalActions.error(err.message));
-      console.error(err);
-      console.log(JSON.stringify(err, null, 4));
-    }
-    yield put(actions.setupFailed(err));
   }
+
+  yield call(
+    signer,
+    `Please enter your password below to setup your fund with the name ${name} and to sign our terms and conditions:`,
+    transaction,
+    actions.setupFailed,
+  );
 }
 
 function* loadFundOnSetup() {
