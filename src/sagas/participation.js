@@ -1,15 +1,9 @@
-import { takeLatest, take, select, call, put } from "redux-saga/effects";
-import {
-  subscribe,
-  redeem,
-  executeRequest,
-  decryptWallet,
-  getEnvironment,
-} from "@melonproject/melon.js";
+import { takeLatest, select, call, put } from "redux-saga/effects";
+import { subscribe, redeem, executeRequest } from "@melonproject/melon.js";
 import { delay } from "redux-saga";
 import { types, actions } from "../actions/participation";
 import { actions as fundActions, types as fundTypes } from "../actions/fund";
-import { actions as modalActions, types as modalTypes } from "../actions/modal";
+import { actions as modalActions } from "../actions/modal";
 import { actions as routesActions } from "../actions/routes";
 import signer from "./signer";
 
@@ -75,8 +69,8 @@ function* executeSaga() {
 
   yield call(
     signer,
-    transaction,
     `Type your password to execute your participation request:`,
+    transaction,
     actions.executeFailed,
   );
 }

@@ -1,17 +1,15 @@
-import { takeLatest, take, select, call, put } from "redux-saga/effects";
+import { takeLatest, select, call, put } from "redux-saga/effects";
 import {
   makeOrder,
   takeMultipleOrders,
   getPrices,
-  decryptWallet,
   deserializeOrder,
   matchOrders,
-  getEnvironment,
 } from "@melonproject/melon.js";
 import { reset } from "redux-form";
 import { types, actions } from "../actions/trade";
 import { actions as fundActions } from "../actions/fund";
-import { actions as modalActions, types as modalTypes } from "../actions/modal";
+import { actions as modalActions } from "../actions/modal";
 import displayNumber from "../utils/displayNumber";
 import signer from "./signer";
 

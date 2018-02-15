@@ -1,15 +1,14 @@
-import { takeLatest, call, put, select, take } from "redux-saga/effects";
+import { takeLatest, call, put, select } from "redux-saga/effects";
 
 import {
   toggleSubscription,
   toggleRedemption,
   convertUnclaimedRewards,
   shutDownFund,
-  getEnvironment,
 } from "@melonproject/melon.js";
 
 import { types, actions } from "../actions/administration";
-import { actions as modalActions, types as modalTypes } from "../actions/modal";
+import { actions as modalActions } from "../actions/modal";
 import { actions as routeActions } from "../actions/routes";
 import signer from "./signer";
 
