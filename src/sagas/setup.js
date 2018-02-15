@@ -21,39 +21,19 @@ import {
   types as routeTypes,
   actions as routeActions,
 } from "../actions/routes";
+import signer from "./signer";
 
 function* sign() {
-  try {
-    yield put(modalActions.loading());
-
-    const environment = getEnvironment();
-
-    if (!isExternalSigner(environment)) {
-      yield put(
-        modalActions.confirm(
-          `Please enter your password below to sign the terms and conditions:`,
-        ),
-      );
-      const { password } = yield take(modalTypes.CONFIRMED);
-      const wallet = localStorage.getItem("wallet:melon.fund");
-      const decryptedWallet = yield call(decryptWallet, wallet, password);
-      environment.account = decryptedWallet;
-    }
+  function* transaction(environment) {
     const signature = yield call(signTermsAndConditions, environment);
     yield put(actions.signSucceeded(signature));
-    yield put(modalActions.close());
-  } catch (err) {
-    if (err.name === "password") {
-      yield put(modalActions.error("Wrong password"));
-    } else if (err.name === "EnsureError") {
-      yield put(modalActions.error(err.message));
-    } else {
-      yield put(modalActions.error(err.message));
-      console.error(err);
-      console.log(JSON.stringify(err, null, 4));
-    }
-    yield put(actions.signFailed(err));
   }
+  yield call(
+    signer,
+    `Please enter your password below to sign the terms and conditions:`,
+    transaction,
+    actions.signFailed,
+  );
 }
 
 function* signCompetition() {
