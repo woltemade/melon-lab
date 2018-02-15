@@ -11,143 +11,83 @@ import {
 import { types, actions } from "../actions/administration";
 import { actions as modalActions, types as modalTypes } from "../actions/modal";
 import { actions as routeActions } from "../actions/routes";
+import signer from "./signer";
 
 function* toggleSubscriptionSaga() {
   const subscriptionAllowed = yield select(
     state => state.fund.subscriptionAllowed,
   );
-  // yield put(
-  //   modalActions.confirm(
-  //     `Do you really want to ${subscriptionAllowed
-  //       ? "disable"
-  //       : "enable"} subscriptions? If yes, please type your password below:`,
-  //   ),
-  // );
-  // const { password } = yield take(modalTypes.CONFIRMED);
 
-  try {
-    yield put(modalActions.loading());
-    const environment = getEnvironment();
-    // const wallet = localStorage.getItem("wallet:melon.fund");
-    // const decryptedWallet = yield call(decryptWallet, wallet, password);
+  function* transaction(environment) {
     const fundAddress = yield select(state => state.fund.address);
     yield call(toggleSubscription, environment, { fundAddress });
     yield put(modalActions.close());
     yield put(actions.toggleSubscriptionSucceeded(!subscriptionAllowed));
-  } catch (err) {
-    if (err.name === "password") {
-      yield put(modalActions.error("Wrong password"));
-    } else if (err.name === "EnsureError") {
-      yield put(modalActions.error(err.message));
-    } else {
-      yield put(modalActions.error(err.message));
-      console.error(err);
-      console.log(JSON.stringify(err, null, 4));
-    }
-    yield put(actions.toggleSubscriptionFailed(err));
   }
+
+  yield call(
+    signer,
+    `Do you really want to ${subscriptionAllowed
+      ? "disable"
+      : "enable"} subscriptions? If yes, please type your password below:`,
+    transaction,
+    actions.toggleSubscriptionFailed,
+  );
 }
 
 function* toggleRedemptionSaga() {
   const redemptionAllowed = yield select(
     state => state.fund.subscriptionAllowed,
   );
-  // yield put(
-  //   modalActions.confirm(
-  //     `Do you really want to ${redemptionAllowed
-  //       ? "disable"
-  //       : "enable"} redemptions? If yes, please type your password below:`,
-  //   ),
-  // );
-  // const { password } = yield take(modalTypes.CONFIRMED);
 
-  try {
-    yield put(modalActions.loading());
-    const environment = getEnvironment();
-    // const wallet = localStorage.getItem("wallet:melon.fund");
-    // const decryptedWallet = yield call(decryptWallet, wallet, password);
+  function* transaction(environment) {
     const fundAddress = yield select(state => state.fund.address);
     yield call(toggleRedemption, environment, { fundAddress });
     yield put(modalActions.close());
     yield put(actions.toggleRedemptionSucceeded(!redemptionAllowed));
-  } catch (err) {
-    if (err.name === "password") {
-      yield put(modalActions.error("Wrong password"));
-    } else if (err.name === "EnsureError") {
-      yield put(modalActions.error(err.message));
-    } else {
-      yield put(modalActions.error(err.message));
-      console.error(err);
-      console.log(JSON.stringify(err, null, 4));
-    }
-    yield put(actions.toggleRedemptionFailed(err));
   }
+
+  yield call(
+    signer,
+    `Do you really want to ${redemptionAllowed
+      ? "disable"
+      : "enable"} redemptions? If yes, please type your password below:`,
+    transaction,
+    actions.toggleRedemptionFailed,
+  );
 }
 
 function* convertUnclaimedRewardsSaga() {
-  // yield put(
-  //   modalActions.confirm(
-  //     `Do you really want to convert your unclaimed rewards? If yes, please type your password below:`,
-  //   ),
-  // );
-  // const { password } = yield take(modalTypes.CONFIRMED);
-
-  try {
-    yield put(modalActions.loading());
-    const environment = getEnvironment();
-
-    // const wallet = localStorage.getItem("wallet:melon.fund");
-    // const decryptedWallet = yield call(decryptWallet, wallet, password);
+  function* transaction(environment) {
     const fundAddress = yield select(state => state.fund.address);
-    // TODO: Check if it succeeded
     yield call(convertUnclaimedRewards, environment, { fundAddress });
     yield put(modalActions.close());
     yield put(actions.convertUnclaimedRewardsSucceeded());
-  } catch (err) {
-    if (err.name === "password") {
-      yield put(modalActions.error("Wrong password"));
-    } else if (err.name === "EnsureError") {
-      yield put(modalActions.error(err.message));
-    } else {
-      yield put(modalActions.error(err.message));
-      console.error(err);
-      console.log(JSON.stringify(err, null, 4));
-    }
-    yield put(actions.convertUnclaimedRewardsFailed(err));
   }
+
+  yield call(
+    signer,
+    `Do you really want to convert your unclaimed rewards? If yes, please type your password below:`,
+    transaction,
+    actions.convertUnclaimedRewardsFailed,
+  );
 }
 
 function* shutDownFundSaga() {
-  // yield put(
-  //   modalActions.confirm(
-  //     `Do you really want to shut down your fund? If yes, please type your password below:`,
-  //   ),
-  // );
-  // const { password } = yield take(modalTypes.CONFIRMED);
-
-  try {
-    yield put(modalActions.loading());
-    const environment = getEnvironment();
-    // const wallet = localStorage.getItem("wallet:melon.fund");
-    // const decryptedWallet = yield call(decryptWallet, wallet, password);
+  function* transaction(environment) {
     const fundAddress = yield select(state => state.fund.address);
-    // TODO: Check if it succeeded
     yield call(shutDownFund, environment, { fundAddress });
     yield put(modalActions.close());
     yield put(actions.shutdownSucceeded());
     yield put(routeActions.ranking());
-  } catch (err) {
-    if (err.name === "password") {
-      yield put(modalActions.error("Wrong password"));
-    } else if (err.name === "EnsureError") {
-      yield put(modalActions.error(err.message));
-    } else {
-      yield put(modalActions.error(err.message));
-      console.error(err);
-      console.log(JSON.stringify(err, null, 4));
-    }
-    yield put(actions.shutdownFailed(err));
   }
+
+  yield call(
+    signer,
+    `Do you really want to shut down your fund? If yes, please type your password below:`,
+    transaction,
+    actions.shutdownFailed,
+  );
 }
 
 function* administration() {
