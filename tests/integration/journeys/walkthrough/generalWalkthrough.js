@@ -4,6 +4,10 @@ import Wallet from 'ethers-wallet';
 import Utils from 'ethers-utils';
 
 import setup from '../../../../lib/utils/setup';
+import getParityProvider from '../../../../lib/utils/parity/getParityProvider';
+import providers from '../../../../lib/utils/constants/providers';
+import setEnvironment from '../../../../lib/utils/environment/setEnvironment';
+import getEnvironment from '../../../../lib/utils/environment/getEnvironment';
 import encryptedWallet from '../../../../encryptedWallet.json';
 import decryptWallet from '../../../../lib/utils/wallet/decryptWallet';
 import password from '../../../../password.json';
@@ -57,6 +61,8 @@ fit(
   async () => {
     console.log('\n');
 
+    const { providerType, api } = await getParityProvider(-1);
+
     // // 1 - instantiate wallet
     // const wallet = importWalletFromMnemonic(
     //   'ability ensure nasty lazy final guess private electric eyebrow oil noise ritual',
@@ -69,50 +75,47 @@ fit(
     //   "mule faint author gun sell carbon smile disorder shove toast gasp message",
     // );
 
-    // const wallet = importWalletFromMnemonic(
-    //   'dinosaur pulse rice lumber machine entry tackle off require draw edge almost',
-    // );
+    const wallet = importWalletFromMnemonic(
+      'dinosaur pulse rice lumber machine entry tackle off require draw edge almost',
+    );
 
+    setEnvironment({ api, account: wallet });
+
+    const environment = getEnvironment();
     // const wallet = importWalletFromMnemonic(
     //   'kidney ice gold impose trigger scene core axis rude expose become leopard',
     // );
 
-    const jsonWallet = JSON.stringify(encryptedWallet);
-    const wallet = await decryptWallet(jsonWallet, password.kovan);
+    // const jsonWallet = JSON.stringify(encryptedWallet);
+    // const wallet = await decryptWallet(jsonWallet, password.kovan);
 
-    console.log(wallet);
+    // const wallet = {
+    //   address: '0x00036da4ddcec2b38e668823f201fa2f8260e939',
+    // };
 
-    setup.wallet = wallet;
-    setup.defaultAccount = wallet.address;
+    // setup.wallet = wallet;
+    // setup.defaultAccount = wallet.address;
     trace({
-      message: `Start walkthrough with defaultAccount: ${setup.defaultAccount}`,
+      message: `Start walkthrough with defaultAccount: ${
+        environment.account.address
+      }`,
       data: setup,
     });
-    shared.etherBalance.initial = await getBalance('ETH-T');
+    shared.etherBalance.initial = await getBalance(environment, {
+      tokenSymbol: 'ETH-T',
+      ofAddress: environment.account.address,
+    });
     trace({ message: `Etherbalance: Ξ${shared.etherBalance.initial} ` });
-    shared.melonBalance.initial = await getBalance('MLN-T');
+    shared.melonBalance.initial = await getBalance(environment, {
+      tokenSymbol: 'MLN-T',
+      ofAddress: environment.account.address,
+    });
     trace({ message: `Melon Balance: Ⓜ  ${shared.melonBalance.initial} ` });
     expect(shared.melonBalance.initial.toFixed()).toBeGreaterThan(
       INITIAL_SUBSCRIBE_QUANTITY,
     );
 
-    shared.simpleOrder = await makeOrderFromAccount({
-      wallet,
-      buy: {
-        howMuch: new BigNumber(1),
-        symbol: 'ETH-T',
-      },
-      sell: {
-        howMuch: new BigNumber(4.7),
-        symbol: 'MLN-T',
-      },
-    });
-
-    trace({
-      message: `Regular account made order with id: ${shared.simpleOrder.id}`,
-    });
-
-    shared.config = await getConfig();
+    shared.config = await getConfig(environment);
     trace({
       message: `Got config w exchange adapter at ${
         shared.config.exchangeAdapterAddress
@@ -122,26 +125,29 @@ fit(
       data: shared.config,
     });
 
-    const versionContract = await getVersionContract();
+    const versionContract = await getVersionContract(environment);
     let managerToFunds = await versionContract.instance.managerToFunds.call(
       {},
       [wallet.address],
     );
 
-    // If wallet already has a fund, need to shut it down before creating a new one -Only for integration purposes
+    // // If wallet already has a fund, need to shut it down before creating a new one -Only for integration purposes
     if (managerToFunds !== '0x0000000000000000000000000000000000000000') {
       console.log('Existing fund needs to be shut down: ', managerToFunds);
-      const fundContract = await getFundContract(managerToFunds);
-      await shutDownFund(wallet, managerToFunds);
+      const fundContract = await getFundContract(environment, managerToFunds);
+      await shutDownFund(environment, { fundAddress: managerToFunds });
       console.log('Shutting down existing fund');
       managerToFunds = await versionContract.instance.managerToFunds.call({}, [
-        wallet.address,
+        environment.account.address,
       ]);
     }
 
-    const signature = await signTermsAndConditions(wallet);
+    const signature = await signTermsAndConditions(environment);
     shared.vaultName = randomString();
-    shared.vault = await setupFund(wallet, shared.vaultName, signature);
+    shared.vault = await setupFund(environment, {
+      name: shared.vaultName,
+      signature,
+    });
     expect(shared.vault.name).toBe(shared.vaultName);
     expect(shared.vault.address).toBeTruthy();
     expect(shared.vault.inception instanceof Date).toBeTruthy();
@@ -152,20 +158,22 @@ fit(
       data: shared,
     });
 
-    const fundCreatedByManager = await getFundForManager(setup.defaultAccount);
+    const fundCreatedByManager = await getFundForManager(environment, {
+      managerAddress: environment.account.address,
+    });
     expect(fundCreatedByManager).toBe(shared.vault.address);
 
-    shared.participation.initial = await getParticipation(
-      shared.vault.address,
-      setup.defaultAccount,
-    );
+    shared.participation.initial = await getParticipation(environment, {
+      fundAddress: shared.vault.address,
+      investorAddress: environment.account.address,
+    });
     expect(shared.participation.initial.personalStake.toNumber()).toBe(0);
     expect(shared.participation.initial.totalSupply.toNumber()).toBe(0);
 
-    shared.initialCalculations = await performCalculations(
-      shared.vault.address,
+    shared.initialCalculations = await performCalculations(environment, {
+      fundAddress: shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    );
+    });
 
     trace({
       message: `Initial calculations- GAV: ${
@@ -178,13 +186,12 @@ fit(
     expect(shared.initialCalculations.sharePrice.toNumber()).toBe(1);
     expect(shared.initialCalculations.gav.toNumber()).toBe(0);
 
-    shared.subscriptionRequest = await subscribe(
-      wallet,
-      shared.vault.address,
+    shared.subscriptionRequest = await subscribe(environment, {
+      fundAddress: shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
-      new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
-    );
+      numShares: new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
+      offeredValue: new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
+    });
 
     trace({
       message: `Subscribe requested. shares: ${
@@ -193,21 +200,20 @@ fit(
       data: shared,
     });
 
-    shared.executedSubscriptionRequest = await executeRequest(
-      wallet,
-      shared.subscriptionRequest.id,
-      shared.vault.address,
+    shared.executedSubscriptionRequest = await executeRequest(environment, {
+      requestId: shared.subscriptionRequest.id,
+      fundAddress: shared.vault.address,
       // 0,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    );
+    });
 
     trace(`executedSubscriptionRequest ${shared.executedSubscriptionRequest}`);
 
-    shared.participation.invested = await getParticipation(
+    shared.participation.invested = await getParticipation(environment, {
+      fundAddress: shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      shared.vault.address,
-      setup.defaultAccount,
-    );
+      investorAddress: environment.account.address,
+    });
 
     expect(shared.participation.invested.personalStake.toNumber()).toBe(
       INITIAL_SUBSCRIBE_QUANTITY,
@@ -222,7 +228,9 @@ fit(
       }`,
     });
 
-    shared.midCalculations = await performCalculations(shared.vault.address);
+    shared.midCalculations = await performCalculations(environment, {
+      fundAddress: shared.vault.address,
+    });
 
     trace({
       message: `Mid calculations- GAV: ${shared.midCalculations.gav}, NAV: ${
@@ -234,11 +242,13 @@ fit(
     });
 
     // shared.redemptionRequest = await redeem(
-    //   wallet,
+    //   environment,
     //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    //   shared.vault.address,
-    //   REDEEM_QUANTITY,
-    //   REDEEM_QUANTITY,
+    //   {
+    //     fundAddress: shared.vault.address,
+    //     numShares: REDEEM_QUANTITY,
+    //     requestedValue: REDEEM_QUANTITY,
+    //   },
     // );
 
     // trace({
@@ -248,22 +258,21 @@ fit(
     //   data: shared,
     // });
 
-    // await awaitDataFeedUpdates(3);
+    // await awaitDataFeedUpdates(environment, 3);
 
     // trace('Awaited two data feed updates');
 
-    // shared.executedRedeemRequest = await executeRequest(
-    //   wallet,
-    //   shared.redemptionRequest.id,
+    // shared.executedRedeemRequest = await executeRequest(environment, {
+    //   requestId: shared.redemptionRequest.id,
+    //   fundAddress: shared.vault.address,
     //   // "0x75497EBbfFB55EED213529C76E4d0AEd40e9600f",
-    //   shared.vault.address,
-    // );
+    // });
 
-    // shared.participation.invested = await getParticipation(
-    //   shared.vault.address,
-    //   // "0x75497EBbfFB55EED213529C76E4d0AEd40e9600f",
-    //   setup.defaultAccount,
-    // );
+    // shared.participation.invested = await getParticipation(environment, {
+    //   fundAddress: shared.vault.address,
+    //   investorAddress: environment.account.address,
+    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    // });
 
     // expect(shared.participation.invested.personalStake.toNumber()).toBe(
     //   INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
@@ -278,14 +287,13 @@ fit(
     //   }`,
     // });
 
-    shared.simpleOrder = await makeOrderFromAccount({
-      wallet,
+    shared.simpleOrder = await makeOrderFromAccount(environment, {
       sell: {
         howMuch: new BigNumber(1),
         symbol: 'ETH-T',
       },
       buy: {
-        howMuch: new BigNumber(4.7),
+        howMuch: new BigNumber(7),
         symbol: 'MLN-T',
       },
     });
@@ -294,63 +302,73 @@ fit(
       message: `Regular account made order with id: ${shared.simpleOrder.id}`,
     });
 
-    shared.simpleOrder2 = await makeOrderFromAccount({
-      wallet,
-      sell: {
-        howMuch: new BigNumber(1),
-        symbol: 'ETH-T',
-      },
-      buy: {
-        howMuch: new BigNumber(5),
-        symbol: 'MLN-T',
-      },
-    });
+    // shared.simpleOrder2 = await makeOrderFromAccount(environment, {
+    //   sell: {
+    //     howMuch: new BigNumber(1),
+    //     symbol: 'ETH-T',
+    //   },
+    //   buy: {
+    //     howMuch: new BigNumber(7.9),
+    //     symbol: 'MLN-T',
+    //   },
+    // });
 
-    trace({
-      message: `Regular account made order with id: ${shared.simpleOrder2.id}`,
-    });
+    // trace({
+    //   message: `Regular account made order with id: ${shared.simpleOrder2.id}`,
+    // });
 
-    shared.orderFromFund = await makeOrder(
-      wallet,
-      shared.vault.address,
+    shared.orderFromFund = await makeOrder(environment, {
+      fundAddress: shared.vault.address,
       // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
-      'MLN-T',
-      'ETH-T',
-      new BigNumber(5),
-      new BigNumber(1),
-    );
+      sellWhichToken: 'MLN-T',
+      buyWhichToken: 'ETH-T',
+      sellHowMuch: new BigNumber(7),
+      buyHowMuch: new BigNumber(1),
+    });
 
     trace({
       message: `Fund placed an order with id: ${shared.orderFromFund.id}`,
     });
 
-    shared.orderBook = await getOrderbook('MLN-T', 'ETH-T');
-
-    trace({
-      message: `Got orderbook for MLN-T/ETH-T with length: ${
-        shared.orderBook.length
-      }`,
-      data: shared,
+    await cancelOrder(environment, {
+      orderIndex: 0,
+      fundAddress: shared.vault.address,
     });
 
-    shared.orderBook2 = await getOrderbook('MLN-T', 'XRP-T');
     trace({
-      message: `Got orderbook for MLN-T/XRP-T with length: ${
-        shared.orderBook2.length
-      }`,
-      data: shared,
+      message: `Canceled order ${shared.orderFromFund.id}`,
     });
 
-    console.log(shared.orderBook2);
+    // shared.orderBook = await getOrderbook(environment, {
+    //   baseTokenSymbol: 'MLN-T',
+    //   quoteTokenSymbol: 'ETH-T',
+    // });
 
-    shared.takenOrder = await takeOrder(
-      wallet,
-      shared.simpleOrder.id,
+    // trace({
+    //   message: `Got orderbook for MLN-T/ETH-T with length: ${
+    //     shared.orderBook.length
+    //   }`,
+    //   data: shared,
+    // });
+
+    // shared.orderBook2 = await getOrderbook(environment, {
+    //   baseTokenSymbol: 'MLN-T',
+    //   quoteTokenSymbol: 'XRP-T',
+    // });
+    // trace({
+    //   message: `Got orderbook for MLN-T/XRP-T with length: ${
+    //     shared.orderBook2.length
+    //   }`,
+    //   data: shared,
+    // });
+
+    shared.takenOrder = await takeOrder(environment, {
+      id: shared.simpleOrder.id,
       // shared.orderBook2[shared.orderBook2.length - 1].id,
-      shared.vault.address,
+      fundAddress: shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      new BigNumber(1.5),
-    );
+      quantityAsked: new BigNumber(1),
+    });
 
     trace({
       message: `Fund took order; executed quantity: ${
@@ -359,56 +377,34 @@ fit(
       data: shared,
     });
 
-    shared.takenOrder2 = await takeOrder(
-      wallet,
-      shared.simpleOrder2.id,
-      shared.vault.address,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      new BigNumber(2),
-    );
-
-    trace({
-      message: `Fund took order; executed quantity: ${
-        shared.takenOrder2.executedQuantity
-      }`,
-      data: shared,
+    shared.openOrders = await getOpenOrders(environment, {
+      fundAddress: shared.vault.address,
     });
 
-    shared.openOrders = await getOpenOrders(shared.vault.address);
-    console.log(shared.openOrders);
+    // shared.orderFromFund2 = await makeOrder(environment, {
+    //   fundAddress: shared.vault.address,
+    //   // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
+    //   sellWhichToken: 'MLN-T',
+    //   buyWhichToken: 'ETH-T',
+    //   sellHowMuch: new BigNumber(7.94),
+    //   buyHowMuch: new BigNumber(1),
+    // });
 
-    await cancelOrder(wallet, 0, shared.vault.address);
+    // shared.openOrders = await getOpenOrders(environment, {
+    //   fundAddress: shared.vault.address,
+    // });
 
-    trace({
-      message: `Canceled order ${shared.orderFromFund.id}`,
+    // trace({
+    //   message: `Fund placed an order with id: ${shared.orderFromFund2.id}`,
+    // });
+
+    // shared.openOrders = await getOpenOrders(environment, {
+    //   fundAddress: shared.vault.address,
+    // });
+
+    shared.endCalculations = await performCalculations(environment, {
+      fundAddress: shared.vault.address,
     });
-
-    shared.orderFromFund2 = await makeOrder(
-      wallet,
-      shared.vault.address,
-      // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
-      'MLN-T',
-      'ETH-T',
-      new BigNumber(5),
-      new BigNumber(1),
-    );
-
-    shared.openOrders = await getOpenOrders(shared.vault.address);
-    console.log(shared.openOrders);
-
-    trace({
-      message: `Fund placed an order with id: ${shared.orderFromFund2.id}`,
-    });
-    await cancelOrder(wallet, 3, shared.vault.address);
-
-    trace({
-      message: `Canceled order ${shared.orderFromFund.id}`,
-    });
-
-    shared.openOrders = await getOpenOrders(shared.vault.address);
-    console.log(shared.openOrders);
-
-    shared.endCalculations = await performCalculations(shared.vault.address);
 
     trace({
       message: `End calculations- GAV: ${shared.endCalculations.gav}\n NAV: ${
@@ -419,50 +415,47 @@ fit(
       data: shared,
     });
 
-    shared.toggledSubscription = await toggleSubscription(
-      wallet,
-      shared.vault.address,
+    shared.toggledSubscription = await toggleSubscription(environment, {
+      fundAddress: shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      setup.defaultAccount,
-    );
+    });
 
     expect(shared.toggledSubscription).toBe(false);
 
-    shared.toggledSubscription = await toggleSubscription(
-      wallet,
-      shared.vault.address,
+    shared.toggledSubscription = await toggleSubscription(environment, {
+      fundAddress: shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      setup.defaultAccount,
-    );
+    });
 
     expect(shared.toggledSubscription).toBe(true);
 
-    shared.toggledRedemption = await toggleRedemption(
-      wallet,
-      shared.vault.address,
+    shared.toggledRedemption = await toggleRedemption(environment, {
+      fundAddress: shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      setup.defaultAccount,
-    );
+    });
 
     expect(shared.toggledRedemption).toBe(false);
-    shared.toggledRedemption = await toggleRedemption(
-      wallet,
-      shared.vault.address,
+    shared.toggledRedemption = await toggleRedemption(environment, {
+      fundAddress: shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-      setup.defaultAccount,
-    );
+    });
     expect(shared.toggledRedemption).toBe(true);
 
     shared.participationAuthorizations = await getParticipationAuthorizations(
-      shared.vault.address,
+      environment,
+      { fundAddress: shared.vault.address },
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
     );
     expect(shared.participationAuthorizations.subscriptionAllowed).toBe(true);
     expect(shared.participationAuthorizations.redemptionAllowed).toBe(true);
 
-    shared.recentTrades = await getRecentTrades('ETH-T', 'MLN-T');
-    console.log(shared.recentTrades);
-    shared.fundRecentTrades = await getFundRecentTrades(shared.vault.address);
+    shared.recentTrades = await getRecentTrades(environment, {
+      baseTokenSymbol: 'ETH-T',
+      quoteTokenSymbol: 'MLN-T',
+    });
+    shared.fundRecentTrades = await getFundRecentTrades(environment, {
+      fundAddress: shared.vault.address,
+    });
     expect(shared.recentTrades.length).toBeGreaterThan(1);
     expect(shared.fundRecentTrades.length).toBeGreaterThan(1);
   },
