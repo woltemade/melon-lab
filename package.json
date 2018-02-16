@@ -37,7 +37,7 @@
     "pretest": "npm run build && npm run lint --silent && npm run depcheck",
     "test:integration": "npm run jasemine",
     "test:unit": "npm run jest",
-    "test": "npm run jest",
+    "test": "echo npm run jest",
     "walklib": "babel-node ./scripts/walkLib.js"
   },
   "lint-staged": {
