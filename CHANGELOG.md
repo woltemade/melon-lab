@@ -8,6 +8,9 @@ and this project adheres to
 
 ## [unreleased]
 
+
+## [0.6.43]
+
 ### Added
 
 * Introduction of the environment concept: All interaction with the blockchain needs an argument "environment" explicitely instead of the global setup.
