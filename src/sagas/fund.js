@@ -4,6 +4,7 @@ import {
   getParticipationAuthorizations,
   performCalculations,
   getFundForManager,
+  getEnvironment,
 } from "@melonproject/melon.js";
 import { takeLatest, put, call, take, select } from "redux-saga/effects";
 import { actions, types } from "../actions/fund";
@@ -36,14 +37,20 @@ function* requestInfo({ address }) {
 
   try {
     const account = yield select(state => state.ethereum.account);
-    const fundInfo = yield call(getFundInformations, address);
+    const environment = getEnvironment();
+    const fundInfo = yield call(getFundInformations, environment, {
+      fundAddress: address,
+    });
     yield put(actions.progressiveUpdate({ ...fundInfo, address }));
-    const calculations = yield call(performCalculations, address);
+    const calculations = yield call(performCalculations, environment, {
+      fundAddress: address,
+    });
     yield put(actions.progressiveUpdate(calculations));
 
     const participationAuthorizations = yield call(
       getParticipationAuthorizations,
-      address,
+      environment,
+      { fundAddress: address },
     );
 
     yield put(actions.progressiveUpdate(participationAuthorizations));
@@ -56,11 +63,10 @@ function* requestInfo({ address }) {
       loading: false,
     };
     if (account) {
-      const participation = yield call(
-        getParticipation,
-        fundInfo.fundAddress,
-        account,
-      );
+      const participation = yield call(getParticipation, environment, {
+        fundAddress: fundInfo.fundAddress,
+        investorAddress: account,
+      });
       info.personalStake = participation.personalStake;
     }
 
@@ -87,7 +93,11 @@ function* checkAndLoad() {
 
 function* getUsersFund({ account }) {
   if (!account) put(appActions.setUsersFund());
-  const fundAddress = yield call(getFundForManager, account);
+  const environment = getEnvironment();
+
+  const fundAddress = yield call(getFundForManager, environment, {
+    managerAddress: account,
+  });
   // Even if fundAddress is undefined (i.e. user hasnt a fund yet), we dispatch
   // this action to signal that we tried to get the users fund
   yield put(appActions.setUsersFund(fundAddress));
@@ -127,7 +137,10 @@ function* afterTradeUpdate() {
 
 function* requestSharePrice() {
   const fundAddress = yield select(state => state.fund.address);
-  const calculations = yield call(performCalculations, fundAddress);
+  const environment = getEnvironment();
+  const calculations = yield call(performCalculations, environment, {
+    fundAddress,
+  });
   yield put(
     actions.sharePriceSucceeded({ sharePrice: calculations.sharePrice }),
   );
