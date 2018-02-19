@@ -1,16 +1,8 @@
 import BigNumber from 'bignumber.js';
-import Api from '@parity/api';
-import Wallet from 'ethers-wallet';
-import Utils from 'ethers-utils';
-
-import setup from '../../../../lib/utils/setup';
 import getParityProvider from '../../../../lib/utils/parity/getParityProvider';
-import providers from '../../../../lib/utils/constants/providers';
 import setEnvironment from '../../../../lib/utils/environment/setEnvironment';
 import getEnvironment from '../../../../lib/utils/environment/getEnvironment';
-import encryptedWallet from '../../../../encryptedWallet.json';
-import decryptWallet from '../../../../lib/utils/wallet/decryptWallet';
-import password from '../../../../password.json';
+import mnemonicWallets from '../../../../mnemonicWallets.json';
 import getConfig from '../../../../lib/version/calls/getConfig';
 import trace from '../../../../lib/utils/generic/trace';
 import getBalance from '../../../../lib/assets/calls/getBalance';
@@ -38,13 +30,10 @@ import getRecentTrades from '../../../../lib/exchange/calls/getRecentTrades';
 import getFundRecentTrades from '../../../../lib/exchange/calls/getFundRecentTrades';
 import importWalletFromMnemonic from '../../../../lib/utils/wallet/importWalletFromMnemonic';
 import cancelOrder from '../../../../lib/fund/transactions/cancelOrder';
-import getHoldingsAndPrices from '../../../../lib/fund/calls/getHoldingsAndPrices';
 import getVersionContract from '../../../../lib/version/contracts/getVersionContract';
 import getFundContract from '../../../../lib/fund/contracts/getFundContract';
 import shutDownFund from '../../../../lib/fund/transactions/shutDownFund';
 import getFundInformations from '../../../../lib/fund/calls/getFundInformations';
-import getRanking from '../../../../lib/version/calls/getRanking';
-import transferTo from '../../../../lib/assets/transactions/transferTo';
 
 const INITIAL_SUBSCRIBE_QUANTITY = 50;
 const REDEEM_QUANTITY = 5;
@@ -64,28 +53,8 @@ fit(
     const { providerType, api } = await getParityProvider(-1);
 
     // // 1 - instantiate wallet
-    // const wallet = importWalletFromMnemonic(
-    //   'ability ensure nasty lazy final guess private electric eyebrow oil noise ritual',
-    // );
-    // const wallet = importWalletFromMnemonic(
-    //   'liquid summer daring situate raccoon result juice over kiwi cherry grief short',
-    // );
 
-    // const wallet = importWalletFromMnemonic(
-    //   "mule faint author gun sell carbon smile disorder shove toast gasp message",
-    // );
-
-    const wallet = importWalletFromMnemonic(
-      'dinosaur pulse rice lumber machine entry tackle off require draw edge almost',
-    );
-
-    setEnvironment({ api, account: wallet });
-
-    const environment = getEnvironment();
-    // const wallet = importWalletFromMnemonic(
-    //   'kidney ice gold impose trigger scene core axis rude expose become leopard',
-    // );
-
+    const wallet = importWalletFromMnemonic(mnemonicWallets['mnemonic-kovan']);
     // const jsonWallet = JSON.stringify(encryptedWallet);
     // const wallet = await decryptWallet(jsonWallet, password.kovan);
 
@@ -93,13 +62,14 @@ fit(
     //   address: '0x00036da4ddcec2b38e668823f201fa2f8260e939',
     // };
 
-    // setup.wallet = wallet;
-    // setup.defaultAccount = wallet.address;
+    setEnvironment({ api, account: wallet });
+
+    const environment = getEnvironment();
+
     trace({
       message: `Start walkthrough with defaultAccount: ${
         environment.account.address
       }`,
-      data: setup,
     });
     shared.etherBalance.initial = await getBalance(environment, {
       tokenSymbol: 'ETH-T',

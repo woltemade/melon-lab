@@ -26,59 +26,60 @@ A convenient Javascript interface to the Melon protocol Ethereum smart contracts
 
 ## Usage
 
-To use melon.js, you need to set it up with web3 and the daemon address. For now,
-examples are for a Meteor setup. But it's similar on other setups.
+To use melon.js, you need to set it up with a Parity provider (either local or hosted node). Below is an example of how to setup Melon.js inside the saga of a React application.
 
-### Server
+### Setting up Melon.js
 
 Be sure that the following lines are executed before any other usage of
 melon.js
 
 ```javascript
-// /imports/startup/server/index.js
-import Web3 from 'web3';
-import { setup } from '@melonproject/melon.js';
+import {
+  getParityProvider,
+  providers,
+  setEnvironment,
+  getEnvironment,
+} from "@melonproject/melon.js";
 
-const web3 = new Web3(
-  new Web3.providers.HttpProvider(Meteor.settings.private.JSON_RPC_URL),
-);
 
-// before Meteor.startup
-setup.init({ web3, daemonAddress: Meteor.settings.public.DAEMON_ADDRESS });
+function* yourSaga() {
+  const { providerType, api } = yield call(getParityProvider, -1);
+
+  setEnvironment({ api, providerType });
+
+  if (providerType !== providers.INJECTED) {
+   // you are using the ethers-wallet signer (in-browser strategy)
+  } else {
+    // you are using an external signer, such as the Parity signer or an unlocked node
+  }
+  // you then need to add your wallet address on the account key of the environment object
+  setEnvironment({ account: { address: "YOUR_WALLET_ADDRESS" } });
+}
 ```
 
-### Client
+### Calling functions in Melon.js
 
-On the client, it is a bit more tricky. The setup should be executed after
-web3.js is injected but before other usage of melon.js:
+All the functions that interact with the blockchain (read or write) follow the same pattern. You need to pass in the `environment` object (as set up above) as the first argument, and the arguments to the smart contract function as a second argument in an object. Below is an example of calling the `setupFund` function in the saga of a React application.
 
 ```javascript
-// /imports/startup/client/config.js
-import Web3 from 'web3';
-import { setup } from '@melonproject/melon.js';
+import {
+  setupFund,
+  getEnvironment,
+} from "@melonproject/melon.js";
 
-Meteor.startup(() => {
-  // as first statement inside Meteor.startup
-  setup.init({ web3, daemonAddress: Meteor.settings.public.DAEMON_ADDRESS });
-  
-  // ... other setup commands
-});
+
+function* yourSaga() {
+  const environment = getEnvironment();
+  const fund = yield call(setupFund, environment, { name, signature });
+}
 ```
 
-### Error logging / Tracing
-It is possible to setup error logging with the tracing functionality. Here is an example for sentry/raven:
+Worth noting: If you are trying to perform a transaction and are using the Ethers-wallet signer, you need to add the decrypted version of your wallet instance to the environment object before passing the environment object as the first argument of your function. In the above example, you would do the following before callibg `setupFund`: 
 
 ```javascript
-import flatten from 'flat';
-import raven from 'raven';
-import { setup } from '@melonproject/melon.js';
-
-Raven.config(SENTRY_DSN).install();
-
-setup.init({ web3, tracer: ({ timestamp, message, category, data }) => {
-  Raven.captureBreadcrumb({ message, category, data: flatten(data)})
-}});
-```
+      const decryptedWallet = yield call(decryptWallet, wallet, password);
+      environment.account = decryptedWallet;
+ ```
 
 ### Link dev build
 
@@ -173,12 +174,10 @@ By interacting with the smart contracts, we have 2 levels of testing:
 - Back to the terminal, make this new file executable by running: `chmod 755 run.sh`
 
 ### Configure integration tests to use your address
-[deprecated]
-Integration tests use [dotenv](https://github.com/motdotla/dotenv) files for 
-enviroment specific configurations. Duplicate `.env.example` to `.env` in the
-projects root folder and change the settings accordingly.
 
-To run the integration tests, you need to include in your directory an encryptedWallet.json file and a password.json file. They will be used to instantiate a wallet/custom signer, which will then be used to sign integration tests transactions. [!] Do not commit any of those files to git.
+To run the integration tests, you can: 
+
+- Use the encrypted json file of the wallet you want to use. Include in your directory an encryptedWallet.json file and a password.json file. They will be used to instantiate a wallet/custom signer, which will then be used to sign integration tests transactions. [!] Do not commit any of those files to git.
 For the password.json file, below is the expected format:
 
 {
@@ -186,7 +185,13 @@ For the password.json file, below is the expected format:
   "live": "YOUR_MAINNET_WALLET_PASSWORD"
 }
 
+- Instantiate your integration test wallet using the function `importWalletFromMnemonic("your mnemonic phrase")`. Include in your directory a mnemonicWallets.json file (not commited to git). 
+{
+  "mnemonic-kovan": "YOUR_KOVAN_MNEMONIC",
+  "mnemonic-live": "YOUR_MAINNET_MNEMONIC"
+}
 
+- Run an unlocked node. 
 
 
 [gitter-badge]: https://img.shields.io/gitter/room/melonproject/general.js.svg?style=flat-square
