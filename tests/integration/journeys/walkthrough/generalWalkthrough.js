@@ -62,7 +62,7 @@ fit(
     //   address: '0x00036da4ddcec2b38e668823f201fa2f8260e939',
     // };
 
-    setEnvironment({ api, account: wallet });
+    setEnvironment({ api, account: wallet, providerType });
 
     const environment = getEnvironment();
 
