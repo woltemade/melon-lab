@@ -8,12 +8,24 @@ and this project adheres to
 
 ## [unreleased]
 
+
+## [0.6.43]
+
+### Added
+
+* Introduction of the environment concept: All interaction with the blockchain needs an argument "environment" explicitely instead of the global setup.
+* isValidEnvironment helper
+
+### Removed
+
+* cacheAwait - I don't know why, but this tool made problems in Parity UI Dapp mode.
+  Get config holds its own cache now
+
 ### Changed
 
 * Breaking: getParityProvider is now async and tries to connect to local node first
 * onBlock does not query the blocknumber anymore. See ipfs-frontend#212
 * getParityProvider tries to use the injected providers from Parity UI/Chrome extension first
-* Introduction of the environment concept: All interaction with the blockchain needs an argument "environment" explicitely instead of the global setup.
 * Don't run unit tests on `npm test` anymore since they are broken. See #142
 
 ## [0.6.37]
