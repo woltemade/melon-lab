@@ -8,6 +8,7 @@ import getParityProvider from '../../../../lib/utils/parity/getParityProvider';
 import providers from '../../../../lib/utils/constants/providers';
 import setEnvironment from '../../../../lib/utils/environment/setEnvironment';
 import getEnvironment from '../../../../lib/utils/environment/getEnvironment';
+import mnemonicWallets from '../../../../mnemonicWallets.json';
 import encryptedWallet from '../../../../encryptedWallet.json';
 import decryptWallet from '../../../../lib/utils/wallet/decryptWallet';
 import password from '../../../../password.json';
@@ -64,28 +65,8 @@ fit(
     const { providerType, api } = await getParityProvider(-1);
 
     // // 1 - instantiate wallet
-    // const wallet = importWalletFromMnemonic(
-    //   'ability ensure nasty lazy final guess private electric eyebrow oil noise ritual',
-    // );
-    // const wallet = importWalletFromMnemonic(
-    //   'liquid summer daring situate raccoon result juice over kiwi cherry grief short',
-    // );
 
-    // const wallet = importWalletFromMnemonic(
-    //   "mule faint author gun sell carbon smile disorder shove toast gasp message",
-    // );
-
-    const wallet = importWalletFromMnemonic(
-      'dinosaur pulse rice lumber machine entry tackle off require draw edge almost',
-    );
-
-    setEnvironment({ api, account: wallet });
-
-    const environment = getEnvironment();
-    // const wallet = importWalletFromMnemonic(
-    //   'kidney ice gold impose trigger scene core axis rude expose become leopard',
-    // );
-
+    const wallet = importWalletFromMnemonic(mnemonicWallets['mnemonic-kovan']);
     // const jsonWallet = JSON.stringify(encryptedWallet);
     // const wallet = await decryptWallet(jsonWallet, password.kovan);
 
@@ -93,8 +74,10 @@ fit(
     //   address: '0x00036da4ddcec2b38e668823f201fa2f8260e939',
     // };
 
-    // setup.wallet = wallet;
-    // setup.defaultAccount = wallet.address;
+    setEnvironment({ api, account: wallet });
+
+    const environment = getEnvironment();
+
     trace({
       message: `Start walkthrough with defaultAccount: ${
         environment.account.address
