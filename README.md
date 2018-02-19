@@ -77,8 +77,8 @@ function* yourSaga() {
 Worth noting: If you are trying to perform a transaction and are using the Ethers-wallet signer, you need to add the decrypted version of your wallet instance to the environment object before passing the environment object as the first argument of your function. In the above example, you would do the following before callibg `setupFund`: 
 
 ```javascript
-      const decryptedWallet = yield call(decryptWallet, wallet, password);
-      environment.account = decryptedWallet;
+const decryptedWallet = yield call(decryptWallet, wallet, password);
+environment.account = decryptedWallet;
  ```
 
 ### Link dev build
