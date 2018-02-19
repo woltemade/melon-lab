@@ -17,7 +17,7 @@ import executeRequest from '../../../../lib/participation/transactions/executeRe
 import awaitDataFeedUpdates from '../../../../lib/pricefeeds/events/awaitDataFeedUpdates';
 import makeOrder from '../../../../lib/fund/transactions/makeOrder';
 import takeOrder from '../../../../lib/fund/transactions/takeOrder';
-import toggleSubscription from '../../../../lib/fund/transactions/toggleSubscription';
+import toggleInvestment from '../../../../lib/fund/transactions/toggleInvestment';
 import toggleRedemption from '../../../../lib/fund/transactions/toggleRedemption';
 import getParticipationAuthorizations from '../../../../lib/fund/calls/getParticipationAuthorizations';
 import getOpenOrders from '../../../../lib/fund/calls/getOpenOrders';
@@ -292,7 +292,7 @@ fit(
       // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
       sellWhichToken: 'MLN-T-M',
       buyWhichToken: 'ETH-T-M',
-      sellHowMuch: new BigNumber(7),
+      sellHowMuch: new BigNumber(7.7),
       buyHowMuch: new BigNumber(1),
     });
 
@@ -385,14 +385,14 @@ fit(
       data: shared,
     });
 
-    shared.toggledSubscription = await toggleSubscription(environment, {
+    shared.toggledSubscription = await toggleInvestment(environment, {
       fundAddress: shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
     });
 
     expect(shared.toggledSubscription).toBe(false);
 
-    shared.toggledSubscription = await toggleSubscription(environment, {
+    shared.toggledSubscription = await toggleInvestment(environment, {
       fundAddress: shared.vault.address,
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
     });
