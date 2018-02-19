@@ -1,17 +1,8 @@
 import BigNumber from 'bignumber.js';
-import Api from '@parity/api';
-import Wallet from 'ethers-wallet';
-import Utils from 'ethers-utils';
-
-import setup from '../../../../lib/utils/setup';
 import getParityProvider from '../../../../lib/utils/parity/getParityProvider';
-import providers from '../../../../lib/utils/constants/providers';
 import setEnvironment from '../../../../lib/utils/environment/setEnvironment';
 import getEnvironment from '../../../../lib/utils/environment/getEnvironment';
 import mnemonicWallets from '../../../../mnemonicWallets.json';
-import encryptedWallet from '../../../../encryptedWallet.json';
-import decryptWallet from '../../../../lib/utils/wallet/decryptWallet';
-import password from '../../../../password.json';
 import getConfig from '../../../../lib/version/calls/getConfig';
 import trace from '../../../../lib/utils/generic/trace';
 import getBalance from '../../../../lib/assets/calls/getBalance';
@@ -39,13 +30,10 @@ import getRecentTrades from '../../../../lib/exchange/calls/getRecentTrades';
 import getFundRecentTrades from '../../../../lib/exchange/calls/getFundRecentTrades';
 import importWalletFromMnemonic from '../../../../lib/utils/wallet/importWalletFromMnemonic';
 import cancelOrder from '../../../../lib/fund/transactions/cancelOrder';
-import getHoldingsAndPrices from '../../../../lib/fund/calls/getHoldingsAndPrices';
 import getVersionContract from '../../../../lib/version/contracts/getVersionContract';
 import getFundContract from '../../../../lib/fund/contracts/getFundContract';
 import shutDownFund from '../../../../lib/fund/transactions/shutDownFund';
 import getFundInformations from '../../../../lib/fund/calls/getFundInformations';
-import getRanking from '../../../../lib/version/calls/getRanking';
-import transferTo from '../../../../lib/assets/transactions/transferTo';
 
 const INITIAL_SUBSCRIBE_QUANTITY = 50;
 const REDEEM_QUANTITY = 5;
@@ -82,7 +70,6 @@ fit(
       message: `Start walkthrough with defaultAccount: ${
         environment.account.address
       }`,
-      data: setup,
     });
     shared.etherBalance.initial = await getBalance(environment, {
       tokenSymbol: 'ETH-T',

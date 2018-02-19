@@ -59,7 +59,7 @@ function* yourSaga() {
 
 ### Calling functions in Melon.js
 
-All the functions that interact with the blockchain (read or write) follow the same pattern. You need to pass in the `environment` (as set up above) as the first argument, and the arguments to the smart contract function as a second argument in an object. Below is an example of calling the `setupFund` function in the saga of a React application.
+All the functions that interact with the blockchain (read or write) follow the same pattern. You need to pass in the `environment` object (as set up above) as the first argument, and the arguments to the smart contract function as a second argument in an object. Below is an example of calling the `setupFund` function in the saga of a React application.
 
 ```javascript
 import {
@@ -80,23 +80,6 @@ Worth noting: If you are trying to perform a transaction and are using the Ether
       const decryptedWallet = yield call(decryptWallet, wallet, password);
       environment.account = decryptedWallet;
  ```
-
-
-
-### Error logging / Tracing
-It is possible to setup error logging with the tracing functionality. Here is an example for sentry/raven:
-
-```javascript
-import flatten from 'flat';
-import raven from 'raven';
-import { setup } from '@melonproject/melon.js';
-
-Raven.config(SENTRY_DSN).install();
-
-setup.init({ web3, tracer: ({ timestamp, message, category, data }) => {
-  Raven.captureBreadcrumb({ message, category, data: flatten(data)})
-}});
-```
 
 ### Link dev build
 
