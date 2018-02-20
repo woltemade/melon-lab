@@ -163,16 +163,6 @@ By interacting with the smart contracts, we have 2 levels of testing:
   syntax, some test-expectations (`expect(asdf).to...`) can be isolated in 
   separate functions and shared.
 
-### Set up unlocked parity account
-- run `parity account new --chain kovan`
-- Type a password; don't forget to store that password carefully, along with the generated account address.
-- Create a new file called "account" and paste the password in.
-- In the same folder, create a file called "run.sh". Copy and paste the following command in this file, and replace accordingly with your account address.
-
-`parity --chain kovan --author YOURACCOUNTADDRESS --unlock YOURACCOUNTADDRESS --password ./account --auto-update=all --geth --force-ui`
-
-- Back to the terminal, make this new file executable by running: `chmod 755 run.sh`
-
 ### Configure integration tests to use your address
 
 To run the integration tests, you can: 
@@ -191,7 +181,17 @@ For the password.json file, below is the expected format:
   "mnemonic-live": "YOUR_MAINNET_MNEMONIC"
 }
 
-- Run an unlocked node. 
+- Run an unlocked node (see instructions below). 
+
+### Set up unlocked parity account
+- run `parity account new --chain kovan`
+- Type a password; don't forget to store that password carefully, along with the generated account address.
+- Create a new file called "account" and paste the password in.
+- In the same folder, create a file called "run.sh". Copy and paste the following command in this file, and replace accordingly with your account address.
+
+`parity --chain kovan --author YOURACCOUNTADDRESS --unlock YOURACCOUNTADDRESS --password ./account --auto-update=all --geth --force-ui`
+
+- Back to the terminal, make this new file executable by running: `chmod 755 run.sh`
 
 
 [gitter-badge]: https://img.shields.io/gitter/room/melonproject/general.js.svg?style=flat-square
