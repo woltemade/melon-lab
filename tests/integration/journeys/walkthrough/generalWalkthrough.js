@@ -212,51 +212,51 @@ fit(
       data: shared,
     });
 
-    // shared.redemptionRequest = await redeem(
-    //   environment,
-    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    //   {
-    //     fundAddress: shared.vault.address,
-    //     numShares: REDEEM_QUANTITY,
-    //     requestedValue: REDEEM_QUANTITY,
-    //   },
-    // );
+    shared.redemptionRequest = await redeem(
+      environment,
+      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+      {
+        fundAddress: shared.vault.address,
+        numShares: REDEEM_QUANTITY,
+        requestedValue: REDEEM_QUANTITY,
+      },
+    );
 
-    // trace({
-    //   message: `Redeem requested. shares: ${
-    //     shared.redemptionRequest.numShares
-    //   }`,
-    //   data: shared,
-    // });
+    trace({
+      message: `Redeem requested. shares: ${
+        shared.redemptionRequest.numShares
+      }`,
+      data: shared,
+    });
 
-    // await awaitDataFeedUpdates(environment, 3);
+    await awaitDataFeedUpdates(environment, 3);
 
-    // trace('Awaited two data feed updates');
+    trace('Awaited two data feed updates');
 
-    // shared.executedRedeemRequest = await executeRequest(environment, {
-    //   requestId: shared.redemptionRequest.id,
-    //   fundAddress: shared.vault.address,
-    //   // "0x75497EBbfFB55EED213529C76E4d0AEd40e9600f",
-    // });
+    shared.executedRedeemRequest = await executeRequest(environment, {
+      requestId: shared.redemptionRequest.id,
+      fundAddress: shared.vault.address,
+      // "0x75497EBbfFB55EED213529C76E4d0AEd40e9600f",
+    });
 
-    // shared.participation.invested = await getParticipation(environment, {
-    //   fundAddress: shared.vault.address,
-    //   investorAddress: environment.account.address,
-    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    // });
+    shared.participation.invested = await getParticipation(environment, {
+      fundAddress: shared.vault.address,
+      investorAddress: environment.account.address,
+      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
+    });
 
-    // expect(shared.participation.invested.personalStake.toNumber()).toBe(
-    //   INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
-    // );
-    // expect(shared.participation.invested.totalSupply.toNumber()).toBe(
-    //   INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
-    // );
+    expect(shared.participation.invested.personalStake.toNumber()).toBe(
+      INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
+    );
+    expect(shared.participation.invested.totalSupply.toNumber()).toBe(
+      INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
+    );
 
-    // trace({
-    //   message: `Redeem request executed. Personal stake: ${
-    //     shared.participation.invested.personalStake
-    //   }`,
-    // });
+    trace({
+      message: `Redeem request executed. Personal stake: ${
+        shared.participation.invested.personalStake
+      }`,
+    });
 
     shared.simpleOrder = await makeOrderFromAccount(environment, {
       buy: {
