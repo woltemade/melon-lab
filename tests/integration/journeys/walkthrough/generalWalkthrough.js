@@ -161,7 +161,7 @@ fit(
       // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       numShares: new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
       offeredValue: new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
-      isNativeAsset: true,
+      isNativeAsset: false,
     });
 
     trace({
