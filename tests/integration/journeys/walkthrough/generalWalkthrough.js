@@ -219,6 +219,7 @@ fit(
         fundAddress: shared.vault.address,
         numShares: REDEEM_QUANTITY,
         requestedValue: REDEEM_QUANTITY,
+        isNativeAsset: false,
       },
     );
 
