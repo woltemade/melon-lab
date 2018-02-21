@@ -340,7 +340,17 @@ fit(
         symbol: 'ETH-T-M',
       },
       buy: {
-        howMuch: new BigNumber(6),
+        howMuch: new BigNumber(7),
+        symbol: 'MLN-T-M',
+      },
+    });
+    shared.simpleOrder = await makeOrderFromAccount(environment, {
+      sell: {
+        howMuch: new BigNumber(1),
+        symbol: 'ETH-T-M',
+      },
+      buy: {
+        howMuch: new BigNumber(7),
         symbol: 'MLN-T-M',
       },
     });
