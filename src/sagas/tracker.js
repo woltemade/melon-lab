@@ -42,7 +42,7 @@ const eventActionTypeMap = {
   UnclaimedRewardsConverted:
     administrationTypes.CONVERT_UNCLAIMED_REWARDS_SUCCEEDED,
   FundShutdown: administrationTypes.SHUTDOWN_SUCCEEDED,
-  Subscribed: participationTypes.SUBSCRIBE_SUCCEEDED,
+  Subscribed: participationTypes.INVEST_SUCCEEDED,
   Redeemed: participationTypes.REDEEM_SUCCEEDED,
   ParticipationRequestExecuted: participationTypes.EXECUTE_SUCCEEDED,
   OrderPlaced: tradeTypes.PLACE_ORDER_SUCCEEDED,

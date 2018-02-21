@@ -68,9 +68,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   onSubmit: values => {
     if (values.type === "Invest") {
-      dispatch(
-        actions.subscribe({ ...values, directlyExecute: ownProps.setup }),
-      );
+      dispatch(actions.invest({ ...values, directlyExecute: ownProps.setup }));
     } else {
       dispatch(actions.redeem(values));
     }
