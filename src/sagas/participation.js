@@ -8,8 +8,6 @@ import { actions as routesActions } from "../actions/routes";
 import signer from "./signer";
 
 function* investSaga(action) {
-  console.log(invest, signer, executeRequest);
-
   function* transaction(environment) {
     const fundAddress = yield select(state => state.fund.address);
     const subscription = yield call(invest, environment, {
