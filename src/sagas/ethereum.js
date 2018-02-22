@@ -91,7 +91,13 @@ function* init() {
     const data = yield take(blockChannel);
 
     if (data.onBlock) {
-      yield put(ethereumActions.newBlock(data.onBlock));
+      yield put(
+        ethereumActions.newBlock({
+          ...data.onBlock,
+          mlnBalance: data.onBlock.quoteBalance,
+          ethBalance: data.onBlock.nativeBalance,
+        }),
+      );
     } else if (data.blockOverdue) {
       yield put(ethereumActions.blockOverdue());
     } else {
