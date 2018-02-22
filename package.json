@@ -37,6 +37,7 @@
     "postversion": "git push && git push --tags",
     "precommit": "lint-staged",
     "pretest": "npm run build && npm run lint --silent && npm run depcheck",
+    "scratchpad": "babel-node tests/scratchpad/run",
     "test:integration": "npm run jasemine",
     "test:unit": "npm run jest",
     "test": "echo npm run jest",
