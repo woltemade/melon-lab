@@ -8,6 +8,11 @@ and this project adheres to
 
 ## [unreleased]
 
+### Added 
+* getWhiteListedAssets function
+
+### Changed
+* [label] ConvertUnclaimedRewards -> calcSharePriceAndConvertFees
 
 ## [0.6.43]
 
@@ -27,6 +32,7 @@ and this project adheres to
 * onBlock does not query the blocknumber anymore. See ipfs-frontend#212
 * getParityProvider tries to use the injected providers from Parity UI/Chrome extension first
 * Don't run unit tests on `npm test` anymore since they are broken. See #142
+
 
 ## [0.6.37]
 
