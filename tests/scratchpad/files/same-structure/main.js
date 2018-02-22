@@ -1,4 +1,6 @@
 import getQuoteAsset from '../../../../lib/pricefeeds/calls/getQuoteAsset';
+import getPrice from '../../../../lib/pricefeeds/calls/getPrice';
+import hasRecentPrice from '../../../../lib/pricefeeds/calls/hasRecentPrice';
 import getParityProvider from '../../../../lib/utils/parity/getParityProvider';
 
 it('Scratchpad', async () => {
@@ -7,5 +9,9 @@ it('Scratchpad', async () => {
 
   const result = await getQuoteAsset(environment);
 
-  console.log(result);
+  const price = await getPrice(environment, result);
+
+  const rcp = await hasRecentPrice(environment);
+
+  console.log(result, price.toString(), rcp);
 });
