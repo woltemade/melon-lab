@@ -1,4 +1,4 @@
-import getQuoteAsset from '../../../../lib/pricefeeds/calls/getQuoteAsset';
+import getQuoteAssetSymbol from '../../../../lib/pricefeeds/calls/getQuoteAssetSymbol';
 import getPrice from '../../../../lib/pricefeeds/calls/getPrice';
 import getConfig from '../../../../lib/version/calls/getConfig';
 
@@ -9,7 +9,7 @@ it('Scratchpad', async () => {
   console.log('Starting scratchpad ... \n\n');
   const environment = await getParityProvider(-1);
 
-  const result = await getQuoteAsset(environment);
+  const result = await getQuoteAssetSymbol(environment);
 
   const price = await getPrice(environment, result);
 

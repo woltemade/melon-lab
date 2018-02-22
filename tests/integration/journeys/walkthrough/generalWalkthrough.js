@@ -6,6 +6,7 @@ import mnemonicWallets from '../../../../mnemonicWallets.json';
 import getConfig from '../../../../lib/version/calls/getConfig';
 import trace from '../../../../lib/utils/generic/trace';
 import getBalance from '../../../../lib/assets/calls/getBalance';
+import toReadable from '../../../../lib/assets/utils/toReadable';
 
 import signTermsAndConditions from '../../../../lib/version/transactions/signTermsAndConditions';
 import signCompetitionTermsAndConditions from '../../../../lib/version/transactions/signCompetitionTermsAndConditions';
@@ -15,6 +16,8 @@ import getParticipation from '../../../../lib/participation/calls/getParticipati
 import invest from '../../../../lib/participation/transactions/invest';
 import executeRequest from '../../../../lib/participation/transactions/executeRequest';
 import awaitDataFeedUpdates from '../../../../lib/pricefeeds/events/awaitDataFeedUpdates';
+import getQuoteAssetSymbol from '../../../../lib/pricefeeds/calls/getQuoteAssetSymbol';
+import getNativeAssetSymbol from '../../../../lib/version/calls/getNativeAssetSymbol';
 import makeOrder from '../../../../lib/fund/transactions/makeOrder';
 import takeOrder from '../../../../lib/fund/transactions/takeOrder';
 import toggleInvestment from '../../../../lib/fund/transactions/toggleInvestment';
@@ -66,18 +69,21 @@ fit(
 
     const environment = getEnvironment();
 
+    const quoteAssetSymbol = await getQuoteAssetSymbol(environment);
+    const nativeAssetSymbol = await getNativeAssetSymbol(environment);
+
     trace({
       message: `Start walkthrough with defaultAccount: ${
         environment.account.address
       }`,
     });
-    shared.etherBalance.initial = await getBalance(environment, {
-      tokenSymbol: 'ETH-T-M',
-      ofAddress: environment.account.address,
-    });
+    shared.etherBalance.initial = await environment.api.eth
+      .getBalance(environment.account.address)
+      .then(balance => toReadable(balance));
     trace({ message: `Etherbalance: Ξ${shared.etherBalance.initial} ` });
+
     shared.melonBalance.initial = await getBalance(environment, {
-      tokenSymbol: 'MLN-T-M',
+      tokenSymbol: quoteAssetSymbol,
       ofAddress: environment.account.address,
     });
     trace({ message: `Melon Balance: Ⓜ  ${shared.melonBalance.initial} ` });
@@ -262,11 +268,11 @@ fit(
     // shared.simpleOrder = await makeOrderFromAccount(environment, {
     //   sell: {
     //     howMuch: new BigNumber(1),
-    //     symbol: 'ETH-T-M',
+    //     symbol: nativeAssetSymbol,
     //   },
     //   buy: {
     //     howMuch: new BigNumber(7),
-    //     symbol: 'MLN-T-M',
+    //     symbol: quoteAssetSymbol,
     //   },
     // });
 
@@ -277,11 +283,11 @@ fit(
     // shared.simpleOrder2 = await makeOrderFromAccount(environment, {
     //   sell: {
     //     howMuch: new BigNumber(1),
-    //     symbol: 'ETH-T-M',
+    //     symbol: nativeAssetSymbol,
     //   },
     //   buy: {
     //     howMuch: new BigNumber(7.9),
-    //     symbol: 'MLN-T-M',
+    //     symbol: quoteAssetSymbol,
     //   },
     // });
 
@@ -292,8 +298,8 @@ fit(
     // shared.orderFromFund = await makeOrder(environment, {
     //   fundAddress: shared.vault.address,
     //   // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
-    //   sellWhichToken: 'MLN-T-M',
-    //   buyWhichToken: 'ETH-T-M',
+    //   sellWhichToken: quoteAssetSymbol,
+    //   buyWhichToken: nativeAssetSymbol,
     //   buyHowMuch: new BigNumber(7.7),
     //   sellHowMuch: new BigNumber(1),
     // });
@@ -312,19 +318,19 @@ fit(
     // });
 
     // shared.orderBook = await getOrderbook(environment, {
-    //   baseTokenSymbol: 'MLN-T-M',
-    //   quoteTokenSymbol: 'ETH-T-M',
+    //   baseTokenSymbol: quoteAssetSymbol,
+    //   quoteTokenSymbol: nativeAssetSymbol,
     // });
 
     // trace({
-    //   message: `Got orderbook for MLN-T/ETH-T-M with length: ${
+    //   message: `Got orderbook for MLN-T/nativeAssetSymbol with length: ${
     //     shared.orderBook.length
     //   }`,
     //   data: shared,
     // });
 
     // shared.orderBook2 = await getOrderbook(environment, {
-    //   baseTokenSymbol: 'MLN-T-M',
+    //   baseTokenSymbol: quoteAssetSymbol,
     //   quoteTokenSymbol: 'XRP-T',
     // });
     // trace({
@@ -337,21 +343,21 @@ fit(
     shared.simpleOrder = await makeOrderFromAccount(environment, {
       sell: {
         howMuch: new BigNumber(1),
-        symbol: 'ETH-T-M',
+        symbol: nativeAssetSymbol,
       },
       buy: {
         howMuch: new BigNumber(7),
-        symbol: 'MLN-T-M',
+        symbol: quoteAssetSymbol,
       },
     });
     shared.simpleOrder = await makeOrderFromAccount(environment, {
       sell: {
         howMuch: new BigNumber(1),
-        symbol: 'ETH-T-M',
+        symbol: nativeAssetSymbol,
       },
       buy: {
         howMuch: new BigNumber(7),
-        symbol: 'MLN-T-M',
+        symbol: quoteAssetSymbol,
       },
     });
 
@@ -381,8 +387,8 @@ fit(
     // shared.orderFromFund2 = await makeOrder(environment, {
     //   fundAddress: shared.vault.address,
     //   // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
-    //   sellWhichToken: 'MLN-T-M',
-    //   buyWhichToken: 'ETH-T-M',
+    //   sellWhichToken: quoteAssetSymbol,
+    //   buyWhichToken: nativeAssetSymbol,
     //   sellHowMuch: new BigNumber(7.94),
     //   buyHowMuch: new BigNumber(1),
     // });
@@ -447,8 +453,8 @@ fit(
     expect(shared.participationAuthorizations.redemptionAllowed).toBe(true);
 
     shared.recentTrades = await getRecentTrades(environment, {
-      baseTokenSymbol: 'ETH-T-M',
-      quoteTokenSymbol: 'MLN-T-M',
+      baseTokenSymbol: nativeAssetSymbol,
+      quoteTokenSymbol: quoteAssetSymbol,
     });
     shared.fundRecentTrades = await getFundRecentTrades(environment, {
       fundAddress: shared.vault.address,
