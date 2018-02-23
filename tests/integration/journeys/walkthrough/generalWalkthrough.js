@@ -1,3 +1,4 @@
+/* eslint-disable */
 import BigNumber from 'bignumber.js';
 import getParityProvider from '../../../../lib/utils/parity/getParityProvider';
 import setEnvironment from '../../../../lib/utils/environment/setEnvironment';
@@ -68,6 +69,7 @@ fit(
     setEnvironment({ api, account: wallet, providerType });
 
     const environment = getEnvironment();
+    const config = getConfig(environment);
 
     const quoteAssetSymbol = await getQuoteAssetSymbol(environment);
     const nativeAssetSymbol = await getNativeAssetSymbol(environment);
@@ -79,7 +81,7 @@ fit(
     });
     shared.etherBalance.initial = await environment.api.eth
       .getBalance(environment.account.address)
-      .then(balance => toReadable(balance));
+      .then(balance => toReadable(config, balance, config.nativeAssetSymbol));
     trace({ message: `Etherbalance: Ξ${shared.etherBalance.initial} ` });
 
     shared.melonBalance.initial = await getBalance(environment, {

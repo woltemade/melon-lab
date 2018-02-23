@@ -9,6 +9,8 @@ it('Scratchpad', async () => {
   console.log('Starting scratchpad ... \n\n');
   const environment = await getParityProvider(-1);
 
+  // console.log({ environment });
+
   const result = await getQuoteAssetSymbol(environment);
 
   const price = await getPrice(environment, result);
