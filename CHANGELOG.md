@@ -6,13 +6,38 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to
 [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [unreleased]
+## [Unreleased]
 
-### Added 
+...
+
+## [0.6.44]
+
+### Added
+
 * getWhiteListedAssets function
+* Flow Types for environment
 
 ### Changed
+
 * [label] ConvertUnclaimedRewards -> calcSharePriceAndConvertFees
+* Made getConfig more streamlined and the new single source of truth
+* Cleaned up generalWalkthrough
+* In-Browser wallet not available on Mainnet
+
+### Refactored
+
+* All asset related functions (getSymbol, toProcessable) have now `config` as
+  first parameter
+
+### Fixed
+
+* Eslint and depcheck runs
+
+### Removed
+
+* Some unused functions
+* All unit tests (they don't run anymore and if we redo them, we can look at
+  the history)
 
 ## [0.6.43]
 
@@ -32,7 +57,6 @@ and this project adheres to
 * onBlock does not query the blocknumber anymore. See ipfs-frontend#212
 * getParityProvider tries to use the injected providers from Parity UI/Chrome extension first
 * Don't run unit tests on `npm test` anymore since they are broken. See #142
-
 
 ## [0.6.37]
 
