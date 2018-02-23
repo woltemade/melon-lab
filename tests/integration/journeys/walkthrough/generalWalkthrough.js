@@ -69,16 +69,23 @@ fit(
     setEnvironment({ api, account: wallet, providerType });
 
     const environment = getEnvironment();
-    const config = getConfig(environment);
+    const config = await getConfig(environment);
 
     const quoteAssetSymbol = await getQuoteAssetSymbol(environment);
     const nativeAssetSymbol = await getNativeAssetSymbol(environment);
+
+    trace(
+      `ProviderType: ${
+        environment.providerType
+      }, quoteAssetSymbol: ${quoteAssetSymbol}, nativeAssetSymbol: ${nativeAssetSymbol}`,
+    );
 
     trace({
       message: `Start walkthrough with defaultAccount: ${
         environment.account.address
       }`,
     });
+
     shared.etherBalance.initial = await environment.api.eth
       .getBalance(environment.account.address)
       .then(balance => toReadable(config, balance, config.nativeAssetSymbol));
@@ -97,9 +104,9 @@ fit(
     trace({
       message: `Got config w exchange adapter at ${
         shared.config.exchangeAdapterAddress
-      }, simple market at ${
-        shared.config.simpleMarketAddress
-      } and datafeed at ${shared.config.dataFeedAddress}`,
+      }, exchange at ${shared.config.exchangeAddress} and priceFeed at ${
+        shared.config.priceFeedAddress
+      }`,
       data: shared.config,
     });
 
