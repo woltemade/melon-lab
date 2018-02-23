@@ -18,7 +18,6 @@ import getVersionContract from '../../../../lib/version/contracts/getVersionCont
 import importWalletFromMnemonic from '../../../../lib/utils/wallet/importWalletFromMnemonic';
 import invest from '../../../../lib/participation/transactions/invest';
 import makeOrderFromAccount from '../../../../lib/exchange/transactions/makeOrderFromAccount';
-import mnemonicWallets from '../../../../mnemonicWallets.json';
 import performCalculations from '../../../../lib/fund/calls/performCalculations';
 import setEnvironment from '../../../../lib/utils/environment/setEnvironment';
 import setupFund from '../../../../lib/version/transactions/setupFund';
@@ -48,7 +47,9 @@ fit(
 
     // // 1 - instantiate wallet
 
-    const wallet = importWalletFromMnemonic(mnemonicWallets['mnemonic-kovan']);
+    const wallet = importWalletFromMnemonic(
+      'dinosaur pulse rice lumber machine entry tackle off require draw edge almost',
+    );
 
     setEnvironment({ api, account: wallet, providerType });
 
