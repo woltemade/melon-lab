@@ -59,12 +59,6 @@ fit(
     // // 1 - instantiate wallet
 
     const wallet = importWalletFromMnemonic(mnemonicWallets['mnemonic-kovan']);
-    // const jsonWallet = JSON.stringify(encryptedWallet);
-    // const wallet = await decryptWallet(jsonWallet, password.kovan);
-
-    // const wallet = {
-    //   address: '0x00036da4ddcec2b38e668823f201fa2f8260e939',
-    // };
 
     setEnvironment({ api, account: wallet, providerType });
 
@@ -157,7 +151,6 @@ fit(
 
     shared.initialCalculations = await performCalculations(environment, {
       fundAddress: shared.vault.address,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
     });
 
     trace({
@@ -173,7 +166,6 @@ fit(
 
     shared.subscriptionRequest = await invest(environment, {
       fundAddress: shared.vault.address,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       numShares: new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
       offeredValue: new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
       isNativeAsset: false,
@@ -190,14 +182,12 @@ fit(
       requestId: shared.subscriptionRequest.id,
       fundAddress: shared.vault.address,
       // 0,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
     });
 
     trace(`executedSubscriptionRequest ${shared.executedSubscriptionRequest}`);
 
     shared.participation.invested = await getParticipation(environment, {
       fundAddress: shared.vault.address,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       investorAddress: environment.account.address,
     });
 
@@ -226,128 +216,6 @@ fit(
       }`,
       data: shared,
     });
-
-    // shared.redemptionRequest = await redeem(
-    //   environment,
-    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    //   {
-    //     fundAddress: shared.vault.address,
-    //     numShares: REDEEM_QUANTITY,
-    //     requestedValue: REDEEM_QUANTITY,
-    //     isNativeAsset: false,
-    //   },
-    // );
-
-    // trace({
-    //   message: `Redeem requested. shares: ${
-    //     shared.redemptionRequest.numShares
-    //   }`,
-    //   data: shared,
-    // });
-
-    // await awaitDataFeedUpdates(environment, 3);
-
-    // trace('Awaited two data feed updates');
-
-    // shared.executedRedeemRequest = await executeRequest(environment, {
-    //   requestId: shared.redemptionRequest.id,
-    //   fundAddress: shared.vault.address,
-    //   // "0x75497EBbfFB55EED213529C76E4d0AEd40e9600f",
-    // });
-
-    // shared.participation.invested = await getParticipation(environment, {
-    //   fundAddress: shared.vault.address,
-    //   investorAddress: environment.account.address,
-    //   // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
-    // });
-
-    // expect(shared.participation.invested.personalStake.toNumber()).toBe(
-    //   INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
-    // );
-    // expect(shared.participation.invested.totalSupply.toNumber()).toBe(
-    //   INITIAL_SUBSCRIBE_QUANTITY - REDEEM_QUANTITY,
-    // );
-
-    // trace({
-    //   message: `Redeem request executed. Personal stake: ${
-    //     shared.participation.invested.personalStake
-    //   }`,
-    // });
-
-    // shared.simpleOrder = await makeOrderFromAccount(environment, {
-    //   sell: {
-    //     howMuch: new BigNumber(1),
-    //     symbol: nativeAssetSymbol,
-    //   },
-    //   buy: {
-    //     howMuch: new BigNumber(7),
-    //     symbol: quoteAssetSymbol,
-    //   },
-    // });
-
-    // trace({
-    //   message: `Regular account made order with id: ${shared.simpleOrder.id}`,
-    // });
-
-    // shared.simpleOrder2 = await makeOrderFromAccount(environment, {
-    //   sell: {
-    //     howMuch: new BigNumber(1),
-    //     symbol: nativeAssetSymbol,
-    //   },
-    //   buy: {
-    //     howMuch: new BigNumber(7.9),
-    //     symbol: quoteAssetSymbol,
-    //   },
-    // });
-
-    // trace({
-    //   message: `Regular account made order with id: ${shared.simpleOrder2.id}`,
-    // });
-
-    // shared.orderFromFund = await makeOrder(environment, {
-    //   fundAddress: shared.vault.address,
-    //   // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
-    //   sellWhichToken: quoteAssetSymbol,
-    //   buyWhichToken: nativeAssetSymbol,
-    //   buyHowMuch: new BigNumber(7.7),
-    //   sellHowMuch: new BigNumber(1),
-    // });
-
-    // trace({
-    //   message: `Fund placed an order with id: ${shared.orderFromFund.id}`,
-    // });
-
-    // await cancelOrder(environment, {
-    //   orderIndex: 0,
-    //   fundAddress: shared.vault.address,
-    // });
-
-    // trace({
-    //   message: `Canceled order ${shared.orderFromFund.id}`,
-    // });
-
-    // shared.orderBook = await getOrderbook(environment, {
-    //   baseTokenSymbol: quoteAssetSymbol,
-    //   quoteTokenSymbol: nativeAssetSymbol,
-    // });
-
-    // trace({
-    //   message: `Got orderbook for MLN-T/nativeAssetSymbol with length: ${
-    //     shared.orderBook.length
-    //   }`,
-    //   data: shared,
-    // });
-
-    // shared.orderBook2 = await getOrderbook(environment, {
-    //   baseTokenSymbol: quoteAssetSymbol,
-    //   quoteTokenSymbol: 'XRP-T',
-    // });
-    // trace({
-    //   message: `Got orderbook for MLN-T/XRP-T with length: ${
-    //     shared.orderBook2.length
-    //   }`,
-    //   data: shared,
-    // });
 
     shared.simpleOrder = await makeOrderFromAccount(environment, {
       sell: {
@@ -378,7 +246,6 @@ fit(
       id: shared.simpleOrder.id,
       // shared.orderBook2[shared.orderBook2.length - 1].id,
       fundAddress: shared.vault.address,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
       quantityAsked: new BigNumber(1),
     });
 
@@ -392,27 +259,6 @@ fit(
     shared.openOrders = await getOpenOrders(environment, {
       fundAddress: shared.vault.address,
     });
-
-    // shared.orderFromFund2 = await makeOrder(environment, {
-    //   fundAddress: shared.vault.address,
-    //   // "0x09B5fc7eCB6B06773d8d7D956a7c84afB1Bb89c0",
-    //   sellWhichToken: quoteAssetSymbol,
-    //   buyWhichToken: nativeAssetSymbol,
-    //   sellHowMuch: new BigNumber(7.94),
-    //   buyHowMuch: new BigNumber(1),
-    // });
-
-    // shared.openOrders = await getOpenOrders(environment, {
-    //   fundAddress: shared.vault.address,
-    // });
-
-    // trace({
-    //   message: `Fund placed an order with id: ${shared.orderFromFund2.id}`,
-    // });
-
-    // shared.openOrders = await getOpenOrders(environment, {
-    //   fundAddress: shared.vault.address,
-    // });
 
     shared.endCalculations = await performCalculations(environment, {
       fundAddress: shared.vault.address,
@@ -429,34 +275,29 @@ fit(
 
     shared.toggledSubscription = await toggleInvestment(environment, {
       fundAddress: shared.vault.address,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
     });
 
     expect(shared.toggledSubscription).toBe(false);
 
     shared.toggledSubscription = await toggleInvestment(environment, {
       fundAddress: shared.vault.address,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
     });
 
     expect(shared.toggledSubscription).toBe(true);
 
     shared.toggledRedemption = await toggleRedemption(environment, {
       fundAddress: shared.vault.address,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
     });
 
     expect(shared.toggledRedemption).toBe(false);
     shared.toggledRedemption = await toggleRedemption(environment, {
       fundAddress: shared.vault.address,
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
     });
     expect(shared.toggledRedemption).toBe(true);
 
     shared.participationAuthorizations = await getParticipationAuthorizations(
       environment,
       { fundAddress: shared.vault.address },
-      // "0xF12a16B9C268211EEa7B48D29d52DEd5f91E4b30",
     );
     expect(shared.participationAuthorizations.subscriptionAllowed).toBe(true);
     expect(shared.participationAuthorizations.redemptionAllowed).toBe(true);
@@ -469,7 +310,9 @@ fit(
       fundAddress: shared.vault.address,
     });
     expect(shared.recentTrades.length).toBeGreaterThan(1);
-    expect(shared.fundRecentTrades.length).toBeGreaterThan(1);
+    expect(shared.fundRecentTrades.length).toBe(1);
+
+    return true;
   },
   10 * 60 * 1000,
 );
