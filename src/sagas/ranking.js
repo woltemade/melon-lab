@@ -1,3 +1,5 @@
+import { getRanking, getEnvironment } from "@melonproject/melon.js";
+
 import { takeLatest, call, put, select, take } from "redux-saga/effects";
 import { actions, types } from "../actions/ranking";
 import { types as ethereumTypes } from "../actions/ethereum";
@@ -5,10 +7,14 @@ import { types as routeTypes } from "../actions/routes";
 import { add, greaterThan, divide, equals } from "../utils/functionalBigNumber";
 // import rankingMock from "../utils/mocks/ranking.json";
 
-function getRanking() {
+function* loadRanking() {
+  /*
   return fetch("https://ranking.melon.fund", { method: "GET" }).then(resp =>
     resp.json().then(json => json),
   );
+  */
+  const environment = getEnvironment();
+  return yield call(getRanking, environment);
 }
 
 function* getRankingSaga() {
@@ -17,7 +23,7 @@ function* getRankingSaga() {
 
   try {
     yield put(actions.setLoading({ loading: true }));
-    const rankingList = yield call(getRanking);
+    const rankingList = yield call(loadRanking);
     const bigNumberifyRanking = rankingList.map(fund => ({
       ...fund,
       sharePrice: fund.sharePrice.toString(),

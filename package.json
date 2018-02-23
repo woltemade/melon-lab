@@ -1,8 +1,8 @@
 {
   "name": "ipfs-frontend",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "dependencies": {
-    "@melonproject/melon.js": "0.6.43",
+    "@melonproject/melon.js": "0.6.44",
     "babel-polyfill": "^6.23.0",
     "bignumber.js": "^5.0.0",
     "bn.js": "^4.11.8",
@@ -32,9 +32,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build && npm run-script build:postprocess",
     "build:dev": "react-scripts build && npm run rename-absolute-path",
-    "build:postprocess": "npm run-script delete-maps && npm run-script rename-absolute-path",
+    "build:postprocess":
+      "npm run-script delete-maps && npm run-script rename-absolute-path",
     "delete-maps": "find ./build -name '*.map' -delete",
-    "rename-absolute-path": "sed -i -e 's@/static/js@./static/js@g' ./build/index.html",
+    "rename-absolute-path":
+      "sed -i -e 's@/static/js@./static/js@g' ./build/index.html",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --record",
     "deploy": "ipfs add -r public",
