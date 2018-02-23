@@ -1,46 +1,36 @@
-/* eslint-disable */
 import BigNumber from 'bignumber.js';
-import getParityProvider from '../../../../lib/utils/parity/getParityProvider';
-import setEnvironment from '../../../../lib/utils/environment/setEnvironment';
-import getEnvironment from '../../../../lib/utils/environment/getEnvironment';
-import mnemonicWallets from '../../../../mnemonicWallets.json';
-import getConfig from '../../../../lib/version/calls/getConfig';
-import trace from '../../../../lib/utils/generic/trace';
-import getBalance from '../../../../lib/assets/calls/getBalance';
-import toReadable from '../../../../lib/assets/utils/toReadable';
 
-import signTermsAndConditions from '../../../../lib/version/transactions/signTermsAndConditions';
-import signCompetitionTermsAndConditions from '../../../../lib/version/transactions/signCompetitionTermsAndConditions';
-import setupFund from '../../../../lib/version/transactions/setupFund';
-import getFundForManager from '../../../../lib/version/calls/getFundForManager';
-import getParticipation from '../../../../lib/participation/calls/getParticipation';
-import invest from '../../../../lib/participation/transactions/invest';
 import executeRequest from '../../../../lib/participation/transactions/executeRequest';
-import awaitDataFeedUpdates from '../../../../lib/pricefeeds/events/awaitDataFeedUpdates';
-import getQuoteAssetSymbol from '../../../../lib/pricefeeds/calls/getQuoteAssetSymbol';
+import getBalance from '../../../../lib/assets/calls/getBalance';
+import getConfig from '../../../../lib/version/calls/getConfig';
+import getEnvironment from '../../../../lib/utils/environment/getEnvironment';
+import getFundForManager from '../../../../lib/version/calls/getFundForManager';
+import getFundRecentTrades from '../../../../lib/exchange/calls/getFundRecentTrades';
 import getNativeAssetSymbol from '../../../../lib/version/calls/getNativeAssetSymbol';
-import makeOrder from '../../../../lib/fund/transactions/makeOrder';
+import getOpenOrders from '../../../../lib/fund/calls/getOpenOrders';
+import getParityProvider from '../../../../lib/utils/parity/getParityProvider';
+import getParticipation from '../../../../lib/participation/calls/getParticipation';
+import getParticipationAuthorizations from '../../../../lib/fund/calls/getParticipationAuthorizations';
+import getQuoteAssetSymbol from '../../../../lib/pricefeeds/calls/getQuoteAssetSymbol';
+import getRanking from '../../../../lib/version/calls/getRanking';
+import getRecentTrades from '../../../../lib/exchange/calls/getRecentTrades';
+import getVersionContract from '../../../../lib/version/contracts/getVersionContract';
+import importWalletFromMnemonic from '../../../../lib/utils/wallet/importWalletFromMnemonic';
+import invest from '../../../../lib/participation/transactions/invest';
+import makeOrderFromAccount from '../../../../lib/exchange/transactions/makeOrderFromAccount';
+import mnemonicWallets from '../../../../mnemonicWallets.json';
+import performCalculations from '../../../../lib/fund/calls/performCalculations';
+import setEnvironment from '../../../../lib/utils/environment/setEnvironment';
+import setupFund from '../../../../lib/version/transactions/setupFund';
+import shutDownFund from '../../../../lib/fund/transactions/shutDownFund';
+import signTermsAndConditions from '../../../../lib/version/transactions/signTermsAndConditions';
 import takeOrder from '../../../../lib/fund/transactions/takeOrder';
 import toggleInvestment from '../../../../lib/fund/transactions/toggleInvestment';
 import toggleRedemption from '../../../../lib/fund/transactions/toggleRedemption';
-import getParticipationAuthorizations from '../../../../lib/fund/calls/getParticipationAuthorizations';
-import getOpenOrders from '../../../../lib/fund/calls/getOpenOrders';
-
-import makeOrderFromAccount from '../../../../lib/exchange/transactions/makeOrderFromAccount';
-import getOrderbook from '../../../../lib/exchange/calls/getOrderbook';
-import performCalculations from '../../../../lib/fund/calls/performCalculations';
-import redeem from '../../../../lib/participation/transactions/redeem';
-import getRecentTrades from '../../../../lib/exchange/calls/getRecentTrades';
-import getFundRecentTrades from '../../../../lib/exchange/calls/getFundRecentTrades';
-import importWalletFromMnemonic from '../../../../lib/utils/wallet/importWalletFromMnemonic';
-import cancelOrder from '../../../../lib/fund/transactions/cancelOrder';
-import getVersionContract from '../../../../lib/version/contracts/getVersionContract';
-import getFundContract from '../../../../lib/fund/contracts/getFundContract';
-import shutDownFund from '../../../../lib/fund/transactions/shutDownFund';
-import getFundInformations from '../../../../lib/fund/calls/getFundInformations';
+import toReadable from '../../../../lib/assets/utils/toReadable';
+import trace from '../../../../lib/utils/generic/trace';
 
 const INITIAL_SUBSCRIBE_QUANTITY = 10;
-const REDEEM_QUANTITY = 5;
 
 const shared = { etherBalance: {}, participation: {}, melonBalance: {} };
 
@@ -113,7 +103,6 @@ fit(
     // // If wallet already has a fund, need to shut it down before creating a new one -Only for integration purposes
     if (managerToFunds !== '0x0000000000000000000000000000000000000000') {
       console.log('Existing fund needs to be shut down: ', managerToFunds);
-      const fundContract = await getFundContract(environment, managerToFunds);
       await shutDownFund(environment, { fundAddress: managerToFunds });
       console.log('Shutting down existing fund');
       managerToFunds = await versionContract.instance.managerToFunds.call({}, [
@@ -311,6 +300,16 @@ fit(
     });
     expect(shared.recentTrades.length).toBeGreaterThan(1);
     expect(shared.fundRecentTrades.length).toBe(1);
+
+    shared.ranking = await getRanking(environment);
+    expect(shared.ranking.length).toBeGreaterThanOrEqual(1);
+    expect(
+      shared.ranking.find(
+        ({ address, name }) =>
+          address.toLowerCase() === shared.vault.address.toLowerCase() &&
+          name === shared.vaultName,
+      ),
+    ).toBeTruthy();
 
     return true;
   },
