@@ -55,6 +55,7 @@ const mapStateToProps = state => {
     ethBalance: new BigNumber(state.ethereum.ethBalance || 0).toFixed(4),
     rootAction: routeActions.root(),
     accountAction: routeActions.myAccount(),
+    network: state.ethereum.network,
   };
 };
 

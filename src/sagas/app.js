@@ -12,7 +12,8 @@ import { isZero } from "../utils/functionalBigNumber";
 
 const getOnboardingState = ({ ethereum, app, fund }) => {
   if (!ethereum.isConnected) return onboardingPath.NO_CONNECTION;
-  if (ethereum.network !== networks.KOVAN) return onboardingPath.WRONG_NETWORK;
+  if (ethereum.network !== networks.KOVAN && ethereum.network !== networks.LIVE)
+    return onboardingPath.WRONG_NETWORK;
   if (!ethereum.account) return onboardingPath.NO_ACCOUNT;
   if (
     isZero(ethereum.ethBalance) ||
@@ -35,7 +36,7 @@ const getOnboardingState = ({ ethereum, app, fund }) => {
 function* deriveReadyState() {
   const { app, ethereum, fund } = yield select(state => state);
 
-  const isReadyToVisit = ethereum.network === "42";
+  const isReadyToVisit = ethereum.network === "42" || ethereum.network === "1";
 
   const isReadyToInteract =
     isReadyToVisit &&
