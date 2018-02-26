@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.6.43",
+  "version": "0.6.44",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/main.js",
   "esnext": "lib/main.js",
@@ -22,7 +22,7 @@
     "babel": "babel lib -d build",
     "build": "npm run walklib && npm run babel",
     "depcheck:json": "depcheck --ignores=husky --json",
-    "depcheck": "depcheck --ignores=husky,eslint-config-plugin:flowtype,debug",
+    "depcheck": "depcheck --ignores=husky,debug,eslint-config-prettier,eslint-plugin-prettier,prettier",
     "deploy:alpha": "npm version prerelease --git-tag-version false && npm publish --tag alpha ",
     "deploy": "npm version patch && npm publish",
     "docs": "documentation build lib/** -f html -o docs --sort-order alpha",
@@ -35,6 +35,7 @@
     "postversion": "git push && git push --tags",
     "precommit": "lint-staged",
     "pretest": "npm run build && npm run lint --silent && npm run depcheck",
+    "scratchpad": "babel-node tests/scratchpad/run",
     "test:integration": "npm run jasemine",
     "test:unit": "npm run jest",
     "test": "echo npm run jest",
@@ -74,7 +75,6 @@
     "debug": "^3.1.0",
     "depcheck": "^0.6.7",
     "documentation": "^5.3.3",
-    "dotenv": "^4.0.0",
     "eslint": "^4.3.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -83,7 +83,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "^2.5.0",
     "eslint-plugin-react": "^7.1.0",
-    "flow-bin": "^0.63.1",
+    "flow-bin": "^0.66.0",
     "husky": "^0.14.3",
     "jasmine": "^2.7.0",
     "jest": "^22.1.2",
@@ -93,15 +93,14 @@
     "walk": "^2.3.9"
   },
   "dependencies": {
-    "@melonproject/protocol": "^0.6.4-competition",
+    "@melonproject/protocol": "0.7.0-alpha.1",
     "@parity/api": "^2.1.5",
     "bignumber.js": "^5.0.0",
     "bip39": "^2.4.0",
+    "dotenv": "^5.0.0",
     "ethers-utils": "^2.1.8",
     "ethers-wallet": "^2.1.6",
-    "pify": "^3.0.0",
     "ramda": "^0.25.0",
-    "truffle-contract": "^3.0.2",
     "web3": "^0.20.4"
   }
 }
