@@ -93,10 +93,11 @@
     "walk": "^2.3.9"
   },
   "dependencies": {
-    "@melonproject/protocol": "^0.6.6-alpha.15",
+    "@melonproject/protocol": "0.7.0-alpha.1",
     "@parity/api": "^2.1.5",
     "bignumber.js": "^5.0.0",
     "bip39": "^2.4.0",
+    "dotenv": "^5.0.0",
     "ethers-utils": "^2.1.8",
     "ethers-wallet": "^2.1.6",
     "ramda": "^0.25.0",

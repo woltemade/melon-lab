@@ -217,16 +217,6 @@ fit(
         symbol: quoteAssetSymbol,
       },
     });
-    shared.simpleOrder = await makeOrderFromAccount(environment, {
-      sell: {
-        howMuch: new BigNumber(1),
-        symbol: nativeAssetSymbol,
-      },
-      buy: {
-        howMuch: new BigNumber(7),
-        symbol: quoteAssetSymbol,
-      },
-    });
 
     trace({
       message: `Regular account made order with id: ${shared.simpleOrder.id}`,
@@ -299,7 +289,7 @@ fit(
     shared.fundRecentTrades = await getFundRecentTrades(environment, {
       fundAddress: shared.vault.address,
     });
-    expect(shared.recentTrades.length).toBeGreaterThan(1);
+    expect(shared.recentTrades.length).toBeGreaterThanOrEqual(1);
     expect(shared.fundRecentTrades.length).toBe(1);
 
     shared.ranking = await getRanking(environment);
