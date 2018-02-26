@@ -25,6 +25,7 @@ const mapStateToProps = state => ({
   })),
   dataValid: state.ethereum.isDataValid,
   isReadyToTrade: state.app.isReadyToTrade,
+  quoteAsset: state.app.assetPair.quote,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -33,7 +34,7 @@ const mapDispatchToProps = dispatch => ({
   },
   selectAsset: (asset, isReadyToTrade) => {
     if (asset !== "MLN-T") {
-      dispatch(appActions.updateAssetPair({ base: asset, quote: "MLN-T" }));
+      dispatch(appActions.updateAssetPair({ base: asset }));
       dispatch(orderbookActions.getOrderbook());
       dispatch(recentTradesActions.getRecentTrades());
       dispatch(reset("trade"));

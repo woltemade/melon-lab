@@ -3,7 +3,13 @@ import { Table } from "semantic-ui-react";
 import MaybeLoading from "../molecules/MaybeLoading";
 import MaybeData from "../molecules/MaybeData";
 
-const Holdings = ({ holdings, selectAsset, isReadyToTrade, dataValid }) => (
+const Holdings = ({
+  holdings,
+  selectAsset,
+  isReadyToTrade,
+  dataValid,
+  quoteAsset,
+}) => (
   <div id="holdings">
     <h3 className="App-intro">Fund Holdings</h3>
     <Table size="small">
@@ -35,8 +41,8 @@ const Holdings = ({ holdings, selectAsset, isReadyToTrade, dataValid }) => (
               textAlign="right"
               onClick={() => selectAsset(asset.name, isReadyToTrade)}
             >
-              {asset.name === "MLN-T" ? <div>❤</div> : null}
-              {asset.name !== "MLN-T" && isReadyToTrade && dataValid ? (
+              {asset.name === quoteAsset ? <div>❤</div> : null}
+              {asset.name !== quoteAsset && isReadyToTrade && dataValid ? (
                 <div className="interactive">Buy/Sell</div>
               ) : (
                 <div className="interactive">See Orderbook</div>

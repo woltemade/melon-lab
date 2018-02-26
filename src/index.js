@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import ReactModal from "react-modal";
 import melonJsPkg from "@melonproject/melon.js/package.json";
 import melonProtocolPkg from "@melonproject/protocol/package.json";
+import addressBook from "@melonproject/protocol/addressBook.json";
 
 import pkg from "../package.json";
 
@@ -26,6 +27,8 @@ ReactModal.setAppElement("#root");
 window.MELON_VERSIONS = `ipfs-frontend@${pkg.version} melon.js@${
   melonJsPkg.version
 } protocol@${melonProtocolPkg.version}`;
+
+window.MELON_ADDRESSBOOK = addressBook;
 
 window.ENVIRONMENT = process.env.NODE_ENV;
 

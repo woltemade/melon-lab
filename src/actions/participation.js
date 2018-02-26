@@ -1,7 +1,7 @@
 export const types = {
-  SUBSCRIBE_REQUESTED: "SUBSCRIBE_REQUESTED:participation:melon.fund",
-  SUBSCRIBE_SUCCEEDED: "SUBSCRIBE_SUCCEEDED:participation:melon.fund",
-  SUBSCRIBE_FAILED: "SUBSCRIBE_FAILED:participation:melon.fund",
+  INVEST_REQUESTED: "INVEST_REQUESTED:participation:melon.fund",
+  INVEST_SUCCEEDED: "INVEST_SUCCEEDED:participation:melon.fund",
+  INVEST_FAILED: "INVEST_FAILED:participation:melon.fund",
   REDEEM_REQUESTED: "REDEEM_REQUESTED:participation:melon.fund",
   REDEEM_SUCCEEDED: "REDEEM_SUCCEEDED:participation:melon.fund",
   REDEEM_FAILED: "REDEEM_FAILED:participation:melon.fund",
@@ -11,18 +11,18 @@ export const types = {
 };
 
 export const actions = {
-  subscribe: ({ amount, total, directlyExecute }) => ({
-    type: types.SUBSCRIBE_REQUESTED,
+  invest: ({ amount, total, directlyExecute }) => ({
+    type: types.INVEST_REQUESTED,
     amount,
     total,
     directlyExecute,
   }),
-  subscribeFailed: reason => ({
-    type: types.SUBSCRIBE_FAILED,
+  investFailed: reason => ({
+    type: types.INVEST_FAILED,
     reason,
   }),
-  subscribeSucceeded: () => ({
-    type: types.SUBSCRIBE_SUCCEEDED,
+  investSucceeded: () => ({
+    type: types.INVEST_SUCCEEDED,
   }),
   redeem: ({ amount, total }) => ({
     type: types.REDEEM_REQUESTED,

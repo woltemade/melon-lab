@@ -1,5 +1,5 @@
 import { takeLatest, select, call, put } from "redux-saga/effects";
-import { subscribe, redeem, executeRequest } from "@melonproject/melon.js";
+import { invest, redeem, executeRequest } from "@melonproject/melon.js";
 import { delay } from "redux-saga";
 import { types, actions } from "../actions/participation";
 import { actions as fundActions, types as fundTypes } from "../actions/fund";
@@ -7,10 +7,10 @@ import { actions as modalActions } from "../actions/modal";
 import { actions as routesActions } from "../actions/routes";
 import signer from "./signer";
 
-function* subscribeSaga(action) {
+function* investSaga(action) {
   function* transaction(environment) {
     const fundAddress = yield select(state => state.fund.address);
-    const subscription = yield call(subscribe, environment, {
+    const subscription = yield call(invest, environment, {
       fundAddress,
       numShares: action.amount,
       offeredValue: action.total,
@@ -25,14 +25,17 @@ function* subscribeSaga(action) {
     } else {
       yield put(fundActions.setPendingRequest(subscription.id));
     }
-    yield put(actions.subscribeSucceeded());
+    yield put(actions.investSucceeded());
     yield put(modalActions.close());
   }
+
   yield call(
     signer,
-    `Do you really want to buy ${action.amount} shares for ${action.total} MLN? If yes, please type your password below:`,
+    `Do you really want to buy ${action.amount} shares for ${
+      action.total
+    } MLN? If yes, please type your password below:`,
     transaction,
-    actions.subscribeFailed,
+    actions.investFailed,
   );
 }
 
@@ -51,7 +54,9 @@ function* redeemSaga(action) {
 
   yield call(
     signer,
-    `Do you really want to sell ${action.amount} shares for ${action.total} MLN? If yes, please type your password below:`,
+    `Do you really want to sell ${action.amount} shares for ${
+      action.total
+    } MLN? If yes, please type your password below:`,
     transaction,
     actions.redeemFailed,
   );
@@ -82,7 +87,7 @@ function* waitForExecute() {
 }
 
 function* participation() {
-  yield takeLatest(types.SUBSCRIBE_REQUESTED, subscribeSaga);
+  yield takeLatest(types.INVEST_REQUESTED, investSaga);
   yield takeLatest(types.REDEEM_REQUESTED, redeemSaga);
   yield takeLatest(types.EXECUTE_REQUESTED, executeSaga);
   yield takeLatest(fundTypes.SET_PENDING_REQUEST, waitForExecute);
