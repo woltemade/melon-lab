@@ -5,14 +5,16 @@ import { getRanking } from '../../../../lib/main';
 
 import hasRecentPrice from '../../../../lib/pricefeeds/calls/hasRecentPrice';
 import getParityProvider from '../../../../lib/utils/parity/getParityProvider';
+import getOrderbook from '../../../../lib/exchange/calls/getOrderbook';
+import getActiveOrders from '../../../../lib/exchange/calls/getActiveOrders';
 
 it('Scratchpad', async () => {
   console.log('Starting scratchpad ... \n\n');
   const environment = await getParityProvider(-1);
 
-  const ranking = await getRanking(environment);
+  // const ranking = await getRanking(environment);
 
-  console.log(ranking);
+  // console.log(ranking);
 
   console.log(environment.providerType);
 
@@ -28,4 +30,10 @@ it('Scratchpad', async () => {
   const rcp = await hasRecentPrice(environment);
 
   console.log(result, price.toString(), rcp);
+
+  const orderbook = await getOrderbook(environment, {
+    baseTokenSymbol: 'W-ETH',
+    quoteTokenSymbol: 'MLN',
+  });
+  console.log(orderbook);
 });
