@@ -8,13 +8,12 @@ import { add, greaterThan, divide, equals } from "../utils/functionalBigNumber";
 // import rankingMock from "../utils/mocks/ranking.json";
 
 function* loadRanking() {
-  /*
   return fetch("https://ranking.melon.fund", { method: "GET" }).then(resp =>
     resp.json().then(json => json),
   );
-  */
-  const environment = getEnvironment();
-  return yield call(getRanking, environment);
+
+  // const environment = getEnvironment();
+  // return yield call(getRanking, environment);
 }
 
 function* getRankingSaga() {
