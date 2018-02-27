@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to
 [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+* Add dust check for makeOrder and makeOrderFromAccount (order size limit on OasisDex)
+* Add exchange check isActive for getOpenOrders
+* Fix offset in getActiveOrders
+
 ## [0.7.0]
 
 ### Changed
