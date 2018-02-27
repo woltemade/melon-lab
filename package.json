@@ -22,12 +22,15 @@
     "babel": "babel lib -d build",
     "build": "npm run walklib && npm run babel",
     "depcheck:json": "depcheck --ignores=husky --json",
-    "depcheck": "depcheck --ignores=husky,debug,eslint-config-prettier,eslint-plugin-prettier,prettier",
-    "deploy:alpha": "npm version prerelease --git-tag-version false && npm publish --tag alpha ",
+    "depcheck":
+      "depcheck --ignores=husky,debug,eslint-config-prettier,eslint-plugin-prettier,prettier",
+    "deploy:alpha":
+      "npm version prerelease --git-tag-version false && npm publish --tag alpha ",
     "deploy": "npm version patch && npm publish",
     "docs": "documentation build lib/** -f html -o docs --sort-order alpha",
     "flow": "flow",
-    "format": "prettier-eslint --write \"lib/**/*.js\" && prettier-eslint --write \"tests/**/*.js\"",
+    "format":
+      "prettier-eslint --write \"lib/**/*.js\" && prettier-eslint --write \"tests/**/*.js\"",
     "jasemine": "babel-node tests/integration/run",
     "jest:watch": "jest --config tests/unit/jest.config.json --watch",
     "jest": "jest --config tests/unit/jest.config.json --coverage",
@@ -42,22 +45,13 @@
     "walklib": "babel-node ./scripts/walkLib.js"
   },
   "lint-staged": {
-    "*.js": [
-      "npm run format",
-      "git add"
-    ]
+    "*.js": ["npm run format", "git add"]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/melonproject/melon.js.git"
   },
-  "keywords": [
-    "melon",
-    "melonproject",
-    "javascript",
-    "ethereum",
-    "api"
-  ],
+  "keywords": ["melon", "melonproject", "javascript", "ethereum", "api"],
   "author": "Simon Emanuel Schmid <simon@melonport.com>",
   "license": "GPL-3.0",
   "bugs": {
@@ -93,7 +87,7 @@
     "walk": "^2.3.9"
   },
   "dependencies": {
-    "@melonproject/protocol": "^0.7.0",
+    "@melonproject/protocol": "0.7.0",
     "@parity/api": "^2.1.5",
     "bignumber.js": "^5.0.0",
     "bip39": "^2.4.0",
