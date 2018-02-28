@@ -8,7 +8,19 @@ and this project adheres to
 
 ## [Unreleased]
 
-...
+### Changed
+
+* Add dust check for makeOrder and makeOrderFromAccount (order size limit on OasisDex)
+* Add exchange check isActive for getOpenOrders
+* Fix offset in getActiveOrders
+
+## [0.7.0]
+
+### Changed
+
+* MAIN -> LIVE in lib/utils/constants/networks.js
+* Get the exchange address from exchangeInfo file exposed in protocol pkg in getConfig
+* Protocol version bump to 0.7.0
 
 ## [0.6.44]
 
