@@ -5,6 +5,8 @@ import { actions } from "../actions/fund";
 
 const mapStateToProps = state => ({
   loading: state.app.transactionInProgress,
+  networkId: state.ethereum.network,
+  config: state.fund.config,
 });
 
 const onSubmit = (values, dispatch) => {

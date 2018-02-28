@@ -21,6 +21,7 @@ export const types = {
   READY_TO_EXECUTE: "READY_TO_EXECUTE:fund:melon.fund",
   SET_LOADING: "SET_LOADING:fund:melon.fund",
   PROGRESSIVE_UPDATE: "PROGRESSIVE_UPDATE:fund:melon.fund",
+  SET_CONFIG: "SET_CONFIG:fund:melon.fund",
 };
 
 export const actions = {
@@ -152,5 +153,9 @@ export const actions = {
   setLoading: address => ({
     type: types.SET_LOADING,
     address,
+  }),
+  setConfig: config => ({
+    type: types.SET_CONFIG,
+    config,
   }),
 };

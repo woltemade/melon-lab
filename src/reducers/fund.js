@@ -79,6 +79,7 @@ const mapActionToReducer = {
   [participationTypes.EXECUTE_SUCCEEDED]: reducers.resetPendingRequest,
   [adminTypes.TOGGLE_SUBSCRIPTION_SUCCEEDED]: reducers.merge,
   [adminTypes.TOGGLE_REDEMPTION_SUCCEEDED]: reducers.merge,
+  [types.SET_CONFIG]: reducers.merge,
 };
 
 export const reducer = (state = initialState, action) => {

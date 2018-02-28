@@ -28,7 +28,7 @@ function* init() {
 
   const config = yield call(getConfig, { api, providerType });
   window.MELON_PROTOCOL_CONFIG = config;
-
+  yield put(fundActions.setConfig(config));
   yield put(
     appActions.updateAssetPair({
       base: config.nativeAssetSymbol,
