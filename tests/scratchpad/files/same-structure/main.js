@@ -1,12 +1,10 @@
 import getQuoteAssetSymbol from '../../../../lib/pricefeeds/calls/getQuoteAssetSymbol';
 import getPrice from '../../../../lib/pricefeeds/calls/getPrice';
 import getConfig from '../../../../lib/version/calls/getConfig';
-import { getRanking } from '../../../../lib/main';
 
 import hasRecentPrice from '../../../../lib/pricefeeds/calls/hasRecentPrice';
 import getParityProvider from '../../../../lib/utils/parity/getParityProvider';
 import getOrderbook from '../../../../lib/exchange/calls/getOrderbook';
-import getActiveOrders from '../../../../lib/exchange/calls/getActiveOrders';
 
 it('Scratchpad', async () => {
   console.log('Starting scratchpad ... \n\n');
