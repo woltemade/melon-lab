@@ -36,7 +36,7 @@ const ExecuteRequest = ({ onExecute, readyToExecute }) => (
             <div>
               Remaining waiting time before request execution:
               <Countdown
-                targetDate={new Date(Date.now() + 4 * 60 * 1000)}
+                targetDate={new Date(Date.now() + 120 * 60 * 1000)}
                 startDelay={100}
                 interval={1000}
                 timeSeparator=":"
