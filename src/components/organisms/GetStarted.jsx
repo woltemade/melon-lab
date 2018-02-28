@@ -12,7 +12,7 @@ const GetStarted = ({
     <Card.Content>
       {networkId === "1" ? (
         <div>
-          <h2> You are accessing Melon Live on the Ethereum main network.</h2>
+          <h2> You are accessing Melon on the Ethereum main network.</h2>
           <p>
             AT THE END OF THE TESTING PERIOD OR AT ANY ARBITRARY POINT IN TIME
             AS DEFINED BY MELONPORT AG, THE SMART CONTRACT SYSTEM WILL BE CLOSED
