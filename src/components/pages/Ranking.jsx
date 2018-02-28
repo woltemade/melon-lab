@@ -79,9 +79,6 @@ const Ranking = ({
               <span style={inactiveStyle}>Inception Date</span>
             )}
           </Table.HeaderCell>
-          <Table.HeaderCell textAlign="right">
-            Expected Prize (MLN)
-          </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -101,13 +98,6 @@ const Ranking = ({
             </Table.Cell>
             <Table.Cell textAlign="right">{fund.sharePrice}</Table.Cell>
             <Table.Cell textAlign="right">{fund.inception}</Table.Cell>
-            <Table.Cell textAlign="right">
-              {fund.isCompeting ? (
-                `${displayNumber(fund.expectedPrize)}`
-              ) : (
-                <span />
-              )}
-            </Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>
