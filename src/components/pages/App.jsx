@@ -50,6 +50,7 @@ const getMainComponent = ({
   walletAddress,
   route,
   network,
+  networkName,
 }) => {
   if (route === types.SETUP) {
     const Main = mapOnboardingStateToMainContainer[onboardingState];
@@ -79,6 +80,7 @@ const App = props => (
       statusType={props.statusType}
       statusMessage={props.statusMessage}
       accountAction={props.accountAction}
+      networkName={props.networkName}
     />
     <Container>
       <div className="App-header" style={{ margin: "2em" }}>

@@ -1,10 +1,10 @@
 import { takeLatest, call, put, take } from "redux-saga/effects";
 import {
-  setup,
   createWallet,
   encryptWallet,
   importWalletFromMnemonic,
   decryptWallet,
+  setEnvironment,
 } from "@melonproject/melon.js";
 import { actions as modalActions, types as modalTypes } from "../actions/modal";
 import { types, actions } from "../actions/account";
@@ -19,8 +19,7 @@ function* encryptWalletSaga(wallet, password) {
   localStorage.setItem("wallet:melon.fund", encryptedWallet);
   yield put(actions.encryptWalletSucceeded());
   yield put(ethereumActions.accountChanged(`${wallet.address}`));
-  setup.wallet = JSON.parse(encryptedWallet);
-  setup.defaultAccount = `0x${setup.wallet.address}`;
+  setEnvironment({ account: JSON.parse(encryptedWallet) });
 }
 
 function* generateWalletSaga() {
