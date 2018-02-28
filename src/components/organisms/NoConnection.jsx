@@ -13,7 +13,7 @@ const NoConnection = () => (
           <strong>
             It seems like you are not connected to the ethereum network. Check
             your internet connection. If you are running your own node, make
-            sure you are running on Kovan and you are syncend and have enough
+            sure you are running on Kovan and you are synced and have enough
             peers connected.
           </strong>
         </p>
