@@ -49,6 +49,7 @@ const getMainComponent = ({
   usersFund,
   walletAddress,
   route,
+  network,
 }) => {
   if (route === types.SETUP) {
     const Main = mapOnboardingStateToMainContainer[onboardingState];
@@ -59,6 +60,7 @@ const getMainComponent = ({
         setup
         usersFund={usersFund}
         walletAddress={walletAddress}
+        network={network}
       />
     ) : null;
   } else if (route === types.COMPETITION) {

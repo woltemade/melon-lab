@@ -24,7 +24,6 @@ function* init() {
 
   // TODO: add tracer
   setEnvironment({ api, providerType });
-
   yield put(ethereumActions.setProvider(providerType));
 
   const config = yield call(getConfig, { api, providerType });
@@ -42,7 +41,6 @@ function* init() {
   const networkId = yield apply(api, api.net.version);
 
   yield put(ethereumActions.hasConnected(networkId));
-
   if (providerType !== providers.INJECTED) {
     const wallet = localStorage.getItem("wallet:melon.fund");
 
