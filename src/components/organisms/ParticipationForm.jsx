@@ -26,6 +26,7 @@ const ParticipationForm = ({
   handleSubmit,
   displayNumber,
   dataValid,
+  quoteAsset,
 }) => (
   <Card id="participation" centered>
     <Card.Content>
@@ -52,7 +53,7 @@ const ParticipationForm = ({
           <List.Item>
             <List.Content>
               <Field
-                label="Price (MLN-T)"
+                label={`Price (${quoteAsset})`}
                 name="price"
                 component={NumberInput}
                 type="number"
@@ -64,7 +65,7 @@ const ParticipationForm = ({
           <List.Item>
             <List.Content>
               <Field
-                label="Total (MLN-T)"
+                label={`"Total (${quoteAsset})`}
                 name="total"
                 component={NumberInput}
                 format={displayNumber}

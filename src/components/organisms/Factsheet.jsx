@@ -20,6 +20,7 @@ const Factsheet = ({
   dataValid,
   expectedPrize,
   isCompeting,
+  quoteAsset,
 }) => (
   <Card id="factsheet">
     <Card.Content>
@@ -47,7 +48,7 @@ const Factsheet = ({
           <List.Item>
             <List.Content as="a" onClick={() => scrollTo("holdings")}>
               <MaybeData dataAvailable={dataValid}>
-                AUM: <MaybeLoading>{aum}</MaybeLoading> MLN-T
+                AUM: <MaybeLoading>{aum}</MaybeLoading> {quoteAsset}
               </MaybeData>
             </List.Content>
           </List.Item>
@@ -55,7 +56,7 @@ const Factsheet = ({
             <List.Content as="a" onClick={() => scrollTo("holdings")}>
               <MaybeData dataAvailable={dataValid}>
                 Share price: <MaybeLoading>{sharePrice}</MaybeLoading>{" "}
-                MLN-T/Share
+                {quoteAsset}/Share
               </MaybeData>
             </List.Content>
           </List.Item>
@@ -91,7 +92,7 @@ const Factsheet = ({
             <List.Content>
               Management Reward: <MaybeLoading>
                 {managementReward}
-                                 </MaybeLoading>%
+              </MaybeLoading>%
             </List.Content>
           </List.Item>
           <List.Item>

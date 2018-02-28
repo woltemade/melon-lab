@@ -11,6 +11,7 @@ const mapStateToProps = state => ({
   loading: state.app.transactionInProgress,
   fundAddress: state.fund.address,
   isCompeting: state.fund.isCompeting,
+  quoteAsset: state.app.assetPair.quote,
 });
 
 const mapDispatchToProps = dispatch => ({

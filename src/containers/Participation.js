@@ -35,6 +35,7 @@ const mapStateToProps = state => ({
         : calculateParticipationPrice(state.fund.sharePrice, "Invest"),
   },
   displayNumber,
+  quoteAsset: state.app.assetPair.quote,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

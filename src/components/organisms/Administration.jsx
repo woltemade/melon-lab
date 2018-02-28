@@ -12,6 +12,7 @@ const Administration = ({
   registerForCompetition,
   fundAddress,
   isCompeting,
+  quoteAsset,
 }) => (
   <Card centered id="settings">
     <Card.Content>
@@ -36,16 +37,16 @@ const Administration = ({
 
         {redemptionAllowed ? (
           <List.Item as="a" onClick={toggleRedemption}>
-            <List.Content>Disable redemption in MLN</List.Content>
+            <List.Content>Disable redemption in {quoteAsset}</List.Content>
           </List.Item>
         ) : (
           <List.Item as="a" onClick={toggleRedemption}>
-            <List.Content>Enable redemption in MLN</List.Content>
+            <List.Content>Enable redemption in {quoteAsset}</List.Content>
           </List.Item>
         )}
 
         <List.Item as="a" onClick={convertUnclaimedRewards}>
-          <List.Content>Convert unclaimed rewards: 0 MLN</List.Content>
+          <List.Content>Convert unclaimed rewards: 0 {quoteAsset}</List.Content>
         </List.Item>
         <List.Item as="a" onClick={shutdown}>
           <List.Content>Irreversibly shut down fund</List.Content>

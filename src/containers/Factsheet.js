@@ -51,6 +51,7 @@ const mapStateToProps = state => ({
   loading: state.fund.loading,
   expectedPrize: displayNumber(state.fund.expectedPrize),
   isCompeting: state.fund.isCompeting,
+  quoteAsset: state.app.assetPair.quote,
 });
 
 const mapDispatchToProps = dispatch => ({
