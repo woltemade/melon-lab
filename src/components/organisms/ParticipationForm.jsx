@@ -3,19 +3,28 @@ import { Field } from "redux-form";
 import { List, Button, Card, Menu } from "semantic-ui-react";
 import NumberInput from "../molecules/NumberInput";
 
-const participationTypeSelector = ({ input: { onChange, value } }) => (
+const participationTypeSelector = ({
+  input: { onChange, value },
+  quoteAsset,
+}) => (
   <div>
     <Menu text style={{ display: "flex", justifyContent: "center" }}>
       <Menu.Item
-        name="Subscribe"
-        active={value === "Subscribe"}
+        name="Invest"
+        active={value === "Invest"}
         onClick={() => onChange("Invest")}
       />
       <div style={{ marginTop: "0.7em" }}>|</div>
       <Menu.Item
-        name="Redeem"
+        name={`Redeem ${quoteAsset}`}
         active={value === "Redeem"}
         onClick={() => onChange("Redeem")}
+      />
+      <div style={{ marginTop: "0.7em" }}>|</div>
+      <Menu.Item
+        name="Slice redeem"
+        active={value === "Slices"}
+        onClick={() => onChange("Slices")}
       />
     </Menu>
   </div>
@@ -27,6 +36,7 @@ const ParticipationForm = ({
   displayNumber,
   dataValid,
   quoteAsset,
+  participationType,
 }) => (
   <Card id="participation" centered>
     <Card.Content>
@@ -35,7 +45,11 @@ const ParticipationForm = ({
         {setup ? (
           <p />
         ) : (
-          <Field name="type" component={participationTypeSelector} />
+          <Field
+            name="type"
+            component={participationTypeSelector}
+            quoteAsset={quoteAsset}
+          />
         )}
         <List>
           <List.Item>
@@ -50,30 +64,36 @@ const ParticipationForm = ({
               />
             </List.Content>
           </List.Item>
-          <List.Item>
-            <List.Content>
-              <Field
-                label={`Price (${quoteAsset})`}
-                name="price"
-                component={NumberInput}
-                type="number"
-                format={displayNumber}
-                disabled
-              />
-            </List.Content>
-          </List.Item>
-          <List.Item>
-            <List.Content>
-              <Field
-                label={`"Total (${quoteAsset})`}
-                name="total"
-                component={NumberInput}
-                format={displayNumber}
-                type="number"
-                disabled={!dataValid}
-              />
-            </List.Content>
-          </List.Item>
+          {participationType === "Slices" ? (
+            <div />
+          ) : (
+            <div>
+              <List.Item>
+                <List.Content>
+                  <Field
+                    label={`Price (${quoteAsset})`}
+                    name="price"
+                    component={NumberInput}
+                    type="number"
+                    format={displayNumber}
+                    disabled
+                  />
+                </List.Content>
+              </List.Item>
+              <List.Item>
+                <List.Content>
+                  <Field
+                    label={`Total (${quoteAsset})`}
+                    name="total"
+                    component={NumberInput}
+                    format={displayNumber}
+                    type="number"
+                    disabled={!dataValid}
+                  />
+                </List.Content>
+              </List.Item>
+            </div>
+          )}
         </List>
 
         {!dataValid ? (

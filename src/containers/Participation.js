@@ -36,6 +36,9 @@ const mapStateToProps = state => ({
   },
   displayNumber,
   quoteAsset: state.app.assetPair.quote,
+  participationType: state.form.participation
+    ? state.form.participation.values.type
+    : "Invest",
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -70,8 +73,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   onSubmit: values => {
     if (values.type === "Invest") {
       dispatch(actions.invest({ ...values, directlyExecute: ownProps.setup }));
-    } else {
+    } else if (values.type === "Redeem") {
       dispatch(actions.redeem(values));
+    } else if (values.type === "Slices") {
+      dispatch(actions.redeemAllOwnedAssets(values));
     }
   },
 });

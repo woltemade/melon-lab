@@ -171,6 +171,10 @@ function* fund() {
     afterParticipationUpdate,
   );
   yield takeLatest(
+    participationTypes.REDEEM_ALL_OWNED_ASSETS_SUCCEEDED,
+    afterParticipationUpdate,
+  );
+  yield takeLatest(
     openOrdersTypes.CANCEL_ORDER_SUCCEEDED,
     afterCancelOrderUpdate,
   );
