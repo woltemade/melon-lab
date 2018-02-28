@@ -4,7 +4,7 @@ import { importWalletFromMnemonic } from "@melonproject/melon.js";
 import { actions } from "../actions/account";
 import Restore from "../components/organisms/account/Restore";
 
-const mapStateToProps = state => ({});
+const mapStateToProps = () => ({});
 
 const onSubmit = (values, dispatch) => {
   try {

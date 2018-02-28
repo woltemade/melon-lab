@@ -12,44 +12,22 @@ import { isZero } from "../utils/functionalBigNumber";
 
 const getOnboardingState = ({ ethereum, app, fund }) => {
   if (!ethereum.isConnected) return onboardingPath.NO_CONNECTION;
-  if (ethereum.network !== networks.KOVAN) return onboardingPath.WRONG_NETWORK;
+  if (ethereum.network !== networks.KOVAN && ethereum.network !== networks.LIVE)
+    return onboardingPath.WRONG_NETWORK;
   if (!ethereum.account) return onboardingPath.NO_ACCOUNT;
-  if (isZero(ethereum.ethBalance) || isZero(ethereum.mlnBalance))
+  if (
+    isZero(ethereum.ethBalance) ||
+    (isZero(ethereum.mlnBalance) && !app.usersFund)
+  )
     return onboardingPath.INSUFFICIENT_FUNDS;
   if (fund.signature === undefined && !app.usersFund)
     return onboardingPath.NOT_SIGNED;
   if (!app.usersFund) return onboardingPath.NO_FUND_CREATED;
   if (
-    (isSameAddress(ethereum.account, fund.owner) &&
-      isZero(fund.totalSupply) &&
-      fund.showedRegistration === undefined) ||
-    (!!app.usersFund && !fund.address && fund.showedRegistration === undefined)
+    (isSameAddress(ethereum.account, fund.owner) && isZero(fund.totalSupply)) ||
+    (!!app.usersFund && !fund.address)
   ) {
-    return onboardingPath.REGISTRATION;
-  }
-  if (
-    (isSameAddress(ethereum.account, fund.owner) &&
-      isZero(fund.totalSupply) &&
-      fund.showedRegistration === true &&
-      fund.needsToRegister === true) ||
-    (!!app.usersFund &&
-      !fund.address &&
-      fund.showedRegistration === true &&
-      fund.needsToRegister === true)
-  ) {
-    return onboardingPath.SIGN_COMPETITION_TERMS;
-  }
-  if (
-    (isSameAddress(ethereum.account, fund.owner) &&
-      isZero(fund.totalSupply) &&
-      fund.showedRegistration === true &&
-      fund.needsToRegister === false) ||
-    (!!app.usersFund &&
-      !fund.address &&
-      fund.showedRegistration === true &&
-      fund.needsToRegister === false)
-  ) {
-    // State does not change to OT_INVESTED_IN_OWN_FUND after fund setup; need reload atm
+    // State does not change to TO_INVESTED_IN_OWN_FUND after fund setup; need reload atm
     return onboardingPath.NOT_INVESTED_IN_OWN_FUND;
   }
   return onboardingPath.ONBOARDED;
@@ -58,7 +36,7 @@ const getOnboardingState = ({ ethereum, app, fund }) => {
 function* deriveReadyState() {
   const { app, ethereum, fund } = yield select(state => state);
 
-  const isReadyToVisit = ethereum.network === "42";
+  const isReadyToVisit = ethereum.network === "42" || ethereum.network === "1";
 
   const isReadyToInteract =
     isReadyToVisit &&
@@ -82,8 +60,8 @@ function* deriveReadyState() {
     onboardingState: getOnboardingState({ app, ethereum, fund }),
   };
 
-  const hasChanged = Object.entries(readyState).reduce(
-    (acc, [key, value]) => acc || value !== app[key],
+  const hasChanged = Object.keys(readyState).reduce(
+    (acc, key) => acc || readyState[key] !== app[key],
     false,
   );
 

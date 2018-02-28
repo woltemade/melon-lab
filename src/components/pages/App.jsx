@@ -2,7 +2,7 @@ import React from "react";
 import { Image, Container } from "semantic-ui-react";
 import Link from "redux-first-router-link";
 import WrongNetwork from "../organisms/WrongNetwork";
-import NoMetamask from "../organisms/NoMetamask";
+import NoConnection from "../organisms/NoConnection";
 import LockedAccount from "../organisms/LockedAccount";
 import InsufficientFunds from "../organisms/InsufficientFunds";
 import TermsAndConditionsContainer from "../../containers/TermsAndConditions";
@@ -15,22 +15,19 @@ import AccountContainer from "../../containers/Account";
 import RestoreContainer from "../../containers/Restore";
 import MyAccountContainer from "../../containers/MyAccount";
 import CompetitionRegistrationContainer from "../../containers/CompetitionRegistration";
-import SignCompetitionTermsContainer from "../../containers/SignCompetitionTerms";
 
 import Modal from "../../containers/Modal";
 import { types } from "../../actions/routes";
 import ConnectionInfo from "../organisms/ConnectionInfo";
 
 const mapOnboardingStateToMainContainer = {
-  [onboardingPath.NO_PROVIDER]: NoMetamask,
-  [onboardingPath.NO_CONNECTION]: NoMetamask,
+  [onboardingPath.NO_PROVIDER]: NoConnection,
+  [onboardingPath.NO_CONNECTION]: NoConnection,
   [onboardingPath.WRONG_NETWORK]: WrongNetwork,
   [onboardingPath.LOCKED_ACCOUNT]: LockedAccount,
   [onboardingPath.INSUFFICIENT_FUNDS]: InsufficientFunds,
   [onboardingPath.NOT_SIGNED]: TermsAndConditionsContainer,
   [onboardingPath.NO_FUND_CREATED]: SetupContainer,
-  [onboardingPath.REGISTRATION]: CompetitionRegistrationContainer,
-  [onboardingPath.SIGN_COMPETITION_TERMS]: SignCompetitionTermsContainer,
   [onboardingPath.NOT_INVESTED_IN_OWN_FUND]: ParticipationContainer,
 };
 
@@ -42,6 +39,7 @@ const routeContainerMap = {
   [types.ACCOUNT_ENCRYPT]: AccountContainer,
   [types.FUND]: FundContainer,
   [types.MY_ACCOUNT]: MyAccountContainer,
+  [types.COMPETITION]: CompetitionRegistrationContainer,
 };
 
 const getMainComponent = ({
@@ -51,6 +49,8 @@ const getMainComponent = ({
   usersFund,
   walletAddress,
   route,
+  network,
+  networkName,
 }) => {
   if (route === types.SETUP) {
     const Main = mapOnboardingStateToMainContainer[onboardingState];
@@ -61,8 +61,11 @@ const getMainComponent = ({
         setup
         usersFund={usersFund}
         walletAddress={walletAddress}
+        network={network}
       />
     ) : null;
+  } else if (route === types.COMPETITION) {
+    return <CompetitionRegistrationContainer />;
   }
   const Main = routeContainerMap[route];
   return Main ? <Main /> : <div />;
@@ -77,6 +80,7 @@ const App = props => (
       statusType={props.statusType}
       statusMessage={props.statusMessage}
       accountAction={props.accountAction}
+      networkName={props.networkName}
     />
     <Container>
       <div className="App-header" style={{ margin: "2em" }}>

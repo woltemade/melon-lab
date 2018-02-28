@@ -12,9 +12,7 @@ export const types = {
   SIGN_COMPETITION_REQUESTED: "SIGN_COMPETITION_REQUESTED:fund:melon.fund",
   SIGN_COMPETITION_SUCCEEDED: "SIGN_COMPETITION_SUCCEEDED:fund:melon.fund",
   SIGN_COMPETITION_FAILED: "SIGN_COMPETITION_FAILED:fund:melon.fund",
-  SHOWED_REGISTRATION: "SHOWED_REGISTRATION:fund:melon.fund",
   NEEDS_TO_REGISTER: "NEEDS_TO_REGISTER:fund:melon.fund",
-  IS_REGISTERED: "IS_REGISTERED:fund:melon.fund",
   SETUP_REQUESTED: "SETUP_REQUESTED:fund:melon.fund",
   SETUP_SUCCEEDED: "SETUP_SUCCEEDED:fund:melon.fund",
   SETUP_FAILED: "SETUP_FAILED:fund:melon.fund",
@@ -23,6 +21,7 @@ export const types = {
   READY_TO_EXECUTE: "READY_TO_EXECUTE:fund:melon.fund",
   SET_LOADING: "SET_LOADING:fund:melon.fund",
   PROGRESSIVE_UPDATE: "PROGRESSIVE_UPDATE:fund:melon.fund",
+  SET_CONFIG: "SET_CONFIG:fund:melon.fund",
 };
 
 export const actions = {
@@ -57,18 +56,9 @@ export const actions = {
     type: types.SIGN_FAILED,
     reason,
   }),
-  showedRegistration: () => ({
-    type: types.SHOWED_REGISTRATION,
-    showedRegistration: true,
-  }),
   needsToRegister: () => ({
     type: types.NEEDS_TO_REGISTER,
     needsToRegister: true,
-    showedRegistration: true,
-  }),
-  isRegistered: () => ({
-    type: types.IS_REGISTERED,
-    needsToRegister: false,
     showedRegistration: true,
   }),
   signCompetitionRequested: () => ({
@@ -144,10 +134,12 @@ export const actions = {
     type: types.SHARE_PRICE_SUCCEEDED,
     sharePrice,
   }),
-  updateRanking: ({ rank, numberOfFunds }) => ({
+  updateRanking: ({ rank, numberOfFunds, expectedPrize, isCompeting }) => ({
     type: types.UPDATE_RANKING,
     rank,
     numberOfFunds,
+    expectedPrize,
+    isCompeting,
   }),
   setPendingRequest: pendingRequest => ({
     type: types.SET_PENDING_REQUEST,
@@ -161,5 +153,9 @@ export const actions = {
   setLoading: address => ({
     type: types.SET_LOADING,
     address,
+  }),
+  setConfig: config => ({
+    type: types.SET_CONFIG,
+    config,
   }),
 };

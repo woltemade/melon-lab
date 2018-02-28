@@ -1,8 +1,9 @@
 {
   "name": "ipfs-frontend",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "dependencies": {
-    "@melonproject/melon.js": "0.6.35",
+    "@melonproject/melon.js": "0.7.5",
+    "@melonproject/protocol": "0.7.2-alpha.1",
     "babel-polyfill": "^6.23.0",
     "bignumber.js": "^5.0.0",
     "bn.js": "^4.11.8",
@@ -31,12 +32,16 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && npm run-script build:postprocess",
-    "build:postprocess": "npm run-script delete-maps && npm run-script rename-absolute-path",
+    "build:dev": "react-scripts build && npm run rename-absolute-path",
+    "build:postprocess":
+      "npm run-script delete-maps && npm run-script rename-absolute-path",
     "delete-maps": "find ./build -name '*.map' -delete",
-    "rename-absolute-path": "sed -i -e 's@/static/js@./static/js@g' ./build/index.html",
+    "rename-absolute-path":
+      "sed -i -e 's@/static/js@./static/js@g' ./build/index.html",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --record",
     "deploy": "ipfs add -r public",
+    "deploy:gh-pages": "npm run build:dev && gh-pages -d build",
     "eject": "react-scripts eject",
     "lint": "eslint ./",
     "semantic:build": "cd public/semantic && gulp build",
@@ -63,9 +68,10 @@
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.5.1",
     "eslint-plugin-security": "^1.4.0",
+    "gh-pages": "^1.1.0",
     "npm-check": "^5.5.2",
     "snyk": "^1.68.0",
     "wait-on": "^2.0.2"

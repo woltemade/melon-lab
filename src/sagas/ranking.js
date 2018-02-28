@@ -1,14 +1,19 @@
+import { getRanking, getEnvironment } from "@melonproject/melon.js";
+
 import { takeLatest, call, put, select, take } from "redux-saga/effects";
 import { actions, types } from "../actions/ranking";
 import { types as ethereumTypes } from "../actions/ethereum";
 import { types as routeTypes } from "../actions/routes";
-
+import { add, greaterThan, divide, equals } from "../utils/functionalBigNumber";
 // import rankingMock from "../utils/mocks/ranking.json";
 
-function getRanking() {
-  return fetch("https://ranking.melon.fund", { method: "GET" }).then(resp =>
-    resp.json().then(json => json),
-  );
+function* loadRanking() {
+  // return fetch("https://ranking.melon.fund", { method: "GET" }).then(resp =>
+  //   resp.json().then(json => json),
+  // );
+
+  const environment = getEnvironment();
+  return yield call(getRanking, environment);
 }
 
 function* getRankingSaga() {
@@ -17,12 +22,17 @@ function* getRankingSaga() {
 
   try {
     yield put(actions.setLoading({ loading: true }));
-    const rankingList = yield call(getRanking);
-    const withRank = rankingList.map((fund, i) => ({
+    const rankingList = yield call(loadRanking);
+    const bigNumberifyRanking = rankingList.map(fund => ({
       ...fund,
-      rank: i + 1,
+      sharePrice: fund.sharePrice.toString(),
     }));
-    yield put(actions.getRankingSucceeded(withRank));
+    const sortedRanking = bigNumberifyRanking.sort((a, b) => {
+      if (equals(a.sharePrice, 1) && equals(b.sharePrice, 1))
+        return a.inception < b.inception ? -1 : 1;
+      return greaterThan(a.sharePrice, b.sharePrice) ? -1 : 1;
+    });
+    yield put(actions.getRankingSucceeded(sortedRanking));
     yield put(actions.setLoading({ loading: false }));
   } catch (err) {
     console.error(err);

@@ -24,7 +24,7 @@ const initialState = {
   transactionInProgress: false,
   usersFundChecked: false,
   usersFund: "",
-  assetPair: { base: "ETH-T", quote: "MLN-T" },
+  assetPair: { base: "...", quote: "..." },
 };
 
 const reducers = {
@@ -47,7 +47,8 @@ const reducers = {
   }),
   updateAssetPair: (state, assetPair) => ({
     ...state,
-    assetPair,
+    // Hint: Usually only the quoteAsset gets updated
+    assetPair: { ...state.assetPair, ...assetPair },
   }),
   default: state => ({ ...state }),
 };

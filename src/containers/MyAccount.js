@@ -7,6 +7,7 @@ import MyAccount from "../components/organisms/MyAccount";
 const mapStateToProps = state => ({
   currentAddress: state.ethereum.account,
   associatedFund: state.app.usersFund,
+  networkId: state.ethereum.network,
 });
 
 const mapDispatchToProps = dispatch => ({

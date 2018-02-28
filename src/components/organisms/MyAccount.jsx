@@ -7,6 +7,7 @@ const MyAccount = ({
   associatedFund,
   deleteWallet,
   gotoAccount,
+  networkId,
 }) => (
   <div>
     <Card centered>
@@ -16,7 +17,9 @@ const MyAccount = ({
           Your ethereum address:{" "}
           <strong>
             <a
-              href={`https://kovan.etherscan.io/address/${currentAddress}`}
+              href={`https://${networkId === "42"
+                ? "kovan."
+                : ""}etherscan.io/address/${currentAddress}`}
               target="_blank"
             >
               {" "}
@@ -28,7 +31,9 @@ const MyAccount = ({
           Associated fund address:{" "}
           <strong>
             <a
-              href={`https://kovan.etherscan.io/address/${associatedFund}`}
+              href={`https://${networkId === "42"
+                ? "kovan."
+                : ""}etherscan.io/address/${associatedFund}`}
               target="_blank"
             >
               {associatedFund}
@@ -36,45 +41,51 @@ const MyAccount = ({
           </strong>
         </p>
         <br />
-        <p>
-          <strong> [IMPORTANT] - Please read carefully</strong>{" "}
-        </p>
-        <br />
-        <p>
-          Careful, both below actions have <strong> irreversible</strong>{" "}
-          effects. If you do not have a backup of the mnemonic phrase that
-          generated your current address,
-          <strong>
-            {" "}
-            you will never be able to access your current account again{" "}
-          </strong>{" "}
-          after performing one of the below actions.
-        </p>
-        <p>
-          If you do not wish to continue,{" "}
-          <Link to="/">click here to go back to your fund's page</Link>.
-        </p>
-        <br />
-        <p>
-          <Button
-            basic
-            color="black"
-            style={{ width: "100%" }}
-            onClick={gotoAccount}
-          >
-            Create new wallet or restore existing one
-          </Button>
-        </p>
-        <p>
-          <Button
-            basic
-            color="black"
-            style={{ width: "100%" }}
-            onClick={deleteWallet}
-          >
-            Delete account
-          </Button>
-        </p>
+        {networkId === "42" ? (
+          <div>
+            <p>
+              <strong> [IMPORTANT] - Please read carefully</strong>{" "}
+            </p>
+            <br />
+            <p>
+              Careful, both below actions have <strong> irreversible</strong>{" "}
+              effects. If you do not have a backup of the mnemonic phrase that
+              generated your current address,
+              <strong>
+                {" "}
+                you will never be able to access your current account again{" "}
+              </strong>{" "}
+              after performing one of the below actions.
+            </p>
+            <p>
+              If you do not wish to continue,{" "}
+              <Link to="/">click here to go back to your fund&#39;s page</Link>.
+            </p>
+            <br />
+            <p>
+              <Button
+                basic
+                color="black"
+                style={{ width: "100%" }}
+                onClick={gotoAccount}
+              >
+                Create new wallet or restore existing one
+              </Button>
+            </p>
+            <p>
+              <Button
+                basic
+                color="black"
+                style={{ width: "100%" }}
+                onClick={deleteWallet}
+              >
+                Delete account
+              </Button>
+            </p>
+          </div>
+        ) : (
+          <div />
+        )}
       </Card.Content>
     </Card>
   </div>

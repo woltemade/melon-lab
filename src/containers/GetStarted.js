@@ -6,6 +6,7 @@ const mapStateToProps = state => ({
   usersFund: state.app.usersFund,
   getFundLinkAction: fundAddress => routeActions.fund(fundAddress),
   setupLinkAction: routeActions.setup(),
+  networkId: state.ethereum.network,
 });
 
 const GetStartedContainer = connect(mapStateToProps)(GetStarted);

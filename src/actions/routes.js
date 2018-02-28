@@ -10,6 +10,7 @@ export const types = {
   MY_ACCOUNT: "MY_ACCOUNT:routes:melon.fund",
   DONE: "DONE:routes:melon.fund",
   RESTORE: "RESTORE:routes:melon.fund",
+  COMPETITION: "COMPETITION:routes:melon.fund",
 };
 
 export const routeMap = {
@@ -23,6 +24,7 @@ export const routeMap = {
   [types.MY_ACCOUNT]: "/myaccount",
   [types.DONE]: "/account/done",
   [types.FUND]: "/:address",
+  [types.COMPETITION]: "/:address/competition",
 };
 
 export const actions = {
@@ -50,5 +52,9 @@ export const actions = {
   }),
   myAccount: () => ({
     type: types.MY_ACCOUNT,
+  }),
+  competition: address => ({
+    type: types.COMPETITION,
+    payload: { address },
   }),
 };

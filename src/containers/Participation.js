@@ -35,6 +35,10 @@ const mapStateToProps = state => ({
         : calculateParticipationPrice(state.fund.sharePrice, "Invest"),
   },
   displayNumber,
+  quoteAsset: state.app.assetPair.quote,
+  participationType: state.form.participation
+    ? state.form.participation.values.type
+    : "Invest",
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -68,11 +72,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   onSubmit: values => {
     if (values.type === "Invest") {
-      dispatch(
-        actions.subscribe({ ...values, directlyExecute: ownProps.setup }),
-      );
-    } else {
+      dispatch(actions.invest({ ...values, directlyExecute: ownProps.setup }));
+    } else if (values.type === "Redeem") {
       dispatch(actions.redeem(values));
+    } else if (values.type === "Slices") {
+      dispatch(actions.redeemAllOwnedAssets(values));
     }
   },
 });

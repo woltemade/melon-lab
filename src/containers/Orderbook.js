@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import { actions } from "../actions/orderbook";
 import { lifecycle } from "recompose";
+import { actions } from "../actions/orderbook";
 import Orderbook from "../components/organisms/Orderbook";
 import displayNumber from "../utils/displayNumber";
 

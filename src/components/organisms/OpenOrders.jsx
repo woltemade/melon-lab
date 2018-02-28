@@ -21,8 +21,8 @@ const OpenOrders = ({ orders, onClick, isReadyToTrade }) => (
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {orders.map((order, i) => (
-          <Table.Row key={i}>
+        {orders.map(order => (
+          <Table.Row key={order.id}>
             <Table.Cell>{order.timestamp}</Table.Cell>
             <Table.Cell>{order.id}</Table.Cell>
             <Table.Cell>{order.type}</Table.Cell>

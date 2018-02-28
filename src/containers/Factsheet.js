@@ -49,6 +49,9 @@ const mapStateToProps = state => ({
     state.fund.sharePrice,
   ),
   loading: state.fund.loading,
+  expectedPrize: displayNumber(state.fund.expectedPrize),
+  isCompeting: state.fund.isCompeting,
+  quoteAsset: state.app.assetPair.quote,
 });
 
 const mapDispatchToProps = dispatch => ({

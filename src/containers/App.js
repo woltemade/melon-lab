@@ -1,5 +1,6 @@
 import BigNumber from "bignumber.js";
 import { connect } from "react-redux";
+import { providers, getNetworkName } from "@melonproject/melon.js";
 import App from "../components/pages/App";
 import { statusTypes } from "../components/organisms/ConnectionInfo";
 import { actions as routeActions } from "../actions/routes";
@@ -13,6 +14,7 @@ const getStatus = ({
   isReadyToInvest,
   isReadyToInteract,
   isDataValid,
+  provider,
 }) => {
   if (!isConnected)
     return { message: "Not connected to chain", type: statusTypes.ERROR };
@@ -29,7 +31,10 @@ const getStatus = ({
     return { message: "Insufficent ETH", type: statusTypes.WARNING };
   if (!isReadyToInvest)
     return { message: "Insufficent MLN", type: statusTypes.WARNING };
-  return { message: "Ready", type: statusTypes.GOOD };
+  if ([providers.PARITY, providers.INJECTED].includes(provider)) {
+    return { message: "Local node", type: statusTypes.GOOD };
+  }
+  return { message: "Melon Node", type: statusTypes.NEUTRAL };
 };
 
 const mapStateToProps = state => {
@@ -50,6 +55,8 @@ const mapStateToProps = state => {
     ethBalance: new BigNumber(state.ethereum.ethBalance || 0).toFixed(4),
     rootAction: routeActions.root(),
     accountAction: routeActions.myAccount(),
+    network: state.ethereum.network,
+    networkName: getNetworkName(state.ethereum.network),
   };
 };
 

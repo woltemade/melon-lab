@@ -18,6 +18,10 @@ const colorTypeMap = {
   [statusTypes.GOOD]: "#5da05d",
 };
 
+const networkColorTypeMap = {
+  live: "#f29954",
+};
+
 export const ConnectionInfoComponent = ({
   account,
   mlnBalance,
@@ -25,6 +29,7 @@ export const ConnectionInfoComponent = ({
   statusMessage,
   statusType,
   accountAction,
+  networkName,
 }) => (
   <div
     style={{
@@ -41,6 +46,10 @@ export const ConnectionInfoComponent = ({
     <a href={`https://faucet.melon.network/${account}`} target="_blank">
       Ⓜ {displayNumber(mlnBalance)} | Ξ {displayNumber(ethBalance)}
     </a>{" "}
+    |{" "}
+    <span style={{ color: networkColorTypeMap[networkName] }}>
+      {networkName}{" "}
+    </span>
     | <span style={{ color: colorTypeMap[statusType] }}>{statusMessage}</span>
   </div>
 );

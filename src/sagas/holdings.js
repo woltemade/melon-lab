@@ -1,5 +1,5 @@
 import { takeLatest, call, put, select, take } from "redux-saga/effects";
-import { getHoldingsAndPrices } from "@melonproject/melon.js";
+import { getHoldingsAndPrices, getEnvironment } from "@melonproject/melon.js";
 import { types, actions } from "../actions/holdings";
 import { types as ethereumTypes } from "../actions/ethereum";
 import { types as fundTypes } from "../actions/fund";
@@ -14,8 +14,12 @@ function* getHoldingsSaga() {
     fundAddress = yield select(state => state.fund.address);
   }
 
+  const environment = getEnvironment();
+
   try {
-    const fundHoldings = yield call(getHoldingsAndPrices, fundAddress);
+    const fundHoldings = yield call(getHoldingsAndPrices, environment, {
+      fundAddress,
+    });
     yield put(actions.getHoldingsSucceeded(fundHoldings));
   } catch (err) {
     console.error(err);

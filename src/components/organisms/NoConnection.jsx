@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "semantic-ui-react";
 
-const LockedAccount = () => (
+const NoConnection = () => (
   <div>
     <Card centered>
       <Card.Content>
@@ -9,20 +9,18 @@ const LockedAccount = () => (
         <br />
         <br />
         <p>
-          You are almost ready to use Melon! It seems like you have Metamask set
-          on the Kovan Network: that&#39;s wonderful!{" "}
-        </p>
-        <p>
+          {" "}
           <strong>
-            Last thing you need to do is unlock your account by entering your
-            password.{" "}
+            It seems like you are not connected to the ethereum network. Check
+            your internet connection. If you are running your own node, make
+            sure you are running on Kovan and you are synced and have enough
+            peers connected.
           </strong>
         </p>
-
         <br />
       </Card.Content>
     </Card>
   </div>
 );
 
-export default LockedAccount;
+export default NoConnection;
