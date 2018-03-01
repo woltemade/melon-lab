@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.7.2",
+  "version": "0.7.5",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/main.js",
   "esnext": "lib/main.js",
@@ -24,7 +24,7 @@
     "depcheck:json": "depcheck --ignores=husky --json",
     "depcheck": "depcheck --ignores=husky,debug,eslint-config-prettier,eslint-plugin-prettier,prettier",
     "deploy:alpha": "npm version prerelease --git-tag-version false && npm publish --tag alpha ",
-    "deploy": "npm version patch && npm publish",
+    "deploy": "npm run build && npm version patch && npm publish",
     "docs": "documentation build lib/** -f html -o docs --sort-order alpha",
     "flow": "flow",
     "format": "prettier-eslint --write \"lib/**/*.js\" && prettier-eslint --write \"tests/**/*.js\"",
