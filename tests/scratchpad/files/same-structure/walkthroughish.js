@@ -86,16 +86,6 @@ fit(
       INITIAL_SUBSCRIBE_QUANTITY,
     );
 
-    shared.config = await getConfig(environment);
-    trace({
-      message: `Got config w exchange adapter at ${
-        shared.config.exchangeAdapterAddress
-      }, exchange at ${shared.config.exchangeAddress} and priceFeed at ${
-        shared.config.priceFeedAddress
-      }`,
-      data: shared.config,
-    });
-
     const versionContract = await getVersionContract(environment);
     let managerToFunds = await versionContract.instance.managerToFunds.call(
       {},
@@ -128,33 +118,6 @@ fit(
       data: shared,
     });
 
-    const fundCreatedByManager = await getFundForManager(environment, {
-      managerAddress: environment.account.address,
-    });
-    expect(fundCreatedByManager).toBe(shared.vault.address);
-
-    shared.participation.initial = await getParticipation(environment, {
-      fundAddress: shared.vault.address,
-      investorAddress: environment.account.address,
-    });
-    expect(shared.participation.initial.personalStake.toNumber()).toBe(0);
-    expect(shared.participation.initial.totalSupply.toNumber()).toBe(0);
-
-    shared.initialCalculations = await performCalculations(environment, {
-      fundAddress: shared.vault.address,
-    });
-
-    trace({
-      message: `Initial calculations- GAV: ${
-        shared.initialCalculations.gav
-      }, NAV: ${shared.initialCalculations.nav}, Share Price: ${
-        shared.initialCalculations.sharePrice
-      }, totalSupply: ${shared.initialCalculations.totalSupply}`,
-      data: shared,
-    });
-    expect(shared.initialCalculations.sharePrice.toNumber()).toBe(1);
-    expect(shared.initialCalculations.gav.toNumber()).toBe(0);
-
     shared.subscriptionRequest = await invest(environment, {
       fundAddress: shared.vault.address,
       numShares: new BigNumber(INITIAL_SUBSCRIBE_QUANTITY),
@@ -169,146 +132,12 @@ fit(
       data: shared,
     });
 
-    shared.lastRequest = await getLastRequest(environment, {
+    const lastRequest = await getLastRequest(environment, {
       fundAddress: shared.vault.address,
       investorAddress: environment.account.address,
     });
 
-    expect(shared.lastRequest.maxRemainingWaitSeconds).toBe(0);
-
-    shared.executedSubscriptionRequest = await executeRequest(environment, {
-      requestId: shared.subscriptionRequest.id,
-      fundAddress: shared.vault.address,
-      // 0,
-    });
-
-    trace(`executedSubscriptionRequest ${shared.executedSubscriptionRequest}`);
-
-    shared.participation.invested = await getParticipation(environment, {
-      fundAddress: shared.vault.address,
-      investorAddress: environment.account.address,
-    });
-
-    expect(shared.participation.invested.personalStake.toNumber()).toBe(
-      INITIAL_SUBSCRIBE_QUANTITY,
-    );
-    expect(shared.participation.invested.totalSupply.toNumber()).toBe(
-      INITIAL_SUBSCRIBE_QUANTITY,
-    );
-
-    trace({
-      message: `Subscribe request executed. Personal stake: ${
-        shared.participation.invested.personalStake
-      }`,
-    });
-
-    shared.midCalculations = await performCalculations(environment, {
-      fundAddress: shared.vault.address,
-    });
-
-    trace({
-      message: `Mid calculations- GAV: ${shared.midCalculations.gav}, NAV: ${
-        shared.midCalculations.nav
-      }, Share Price: ${shared.midCalculations.sharePrice}, totalSupply: ${
-        shared.midCalculations.totalSupply
-      }`,
-      data: shared,
-    });
-
-    shared.simpleOrder = await makeOrderFromAccount(environment, {
-      sell: {
-        howMuch: new BigNumber(1),
-        symbol: nativeAssetSymbol,
-      },
-      buy: {
-        howMuch: new BigNumber(7),
-        symbol: quoteAssetSymbol,
-      },
-    });
-
-    trace({
-      message: `Regular account made order with id: ${shared.simpleOrder.id}`,
-    });
-
-    shared.takenOrder = await takeOrder(environment, {
-      id: shared.simpleOrder.id,
-      // shared.orderBook2[shared.orderBook2.length - 1].id,
-      fundAddress: shared.vault.address,
-      quantityAsked: new BigNumber(1),
-    });
-
-    trace({
-      message: `Fund took order; executed quantity: ${
-        shared.takenOrder.executedQuantity
-      }`,
-      data: shared,
-    });
-
-    shared.openOrders = await getOpenOrders(environment, {
-      fundAddress: shared.vault.address,
-    });
-
-    shared.endCalculations = await performCalculations(environment, {
-      fundAddress: shared.vault.address,
-    });
-
-    trace({
-      message: `End calculations- GAV: ${shared.endCalculations.gav}\n NAV: ${
-        shared.endCalculations.nav
-      }, Share Price: ${shared.endCalculations.sharePrice}, totalSupply: ${
-        shared.endCalculations.totalSupply
-      }`,
-      data: shared,
-    });
-
-    shared.toggledSubscription = await toggleInvestment(environment, {
-      fundAddress: shared.vault.address,
-    });
-
-    expect(shared.toggledSubscription).toBe(false);
-
-    shared.toggledSubscription = await toggleInvestment(environment, {
-      fundAddress: shared.vault.address,
-    });
-
-    expect(shared.toggledSubscription).toBe(true);
-
-    shared.toggledRedemption = await toggleRedemption(environment, {
-      fundAddress: shared.vault.address,
-    });
-
-    expect(shared.toggledRedemption).toBe(false);
-    shared.toggledRedemption = await toggleRedemption(environment, {
-      fundAddress: shared.vault.address,
-    });
-    expect(shared.toggledRedemption).toBe(true);
-
-    shared.participationAuthorizations = await getParticipationAuthorizations(
-      environment,
-      { fundAddress: shared.vault.address },
-    );
-    expect(shared.participationAuthorizations.subscriptionAllowed).toBe(true);
-    expect(shared.participationAuthorizations.redemptionAllowed).toBe(true);
-
-    shared.recentTrades = await getRecentTrades(environment, {
-      baseTokenSymbol: nativeAssetSymbol,
-      quoteTokenSymbol: quoteAssetSymbol,
-    });
-    shared.fundRecentTrades = await getFundRecentTrades(environment, {
-      fundAddress: shared.vault.address,
-    });
-    expect(shared.recentTrades.length).toBeGreaterThanOrEqual(1);
-    expect(shared.fundRecentTrades.length).toBe(1);
-
-    shared.ranking = await getRanking(environment);
-    expect(shared.ranking.length).toBeGreaterThanOrEqual(1);
-    expect(
-      shared.ranking.find(
-        ({ address, name }) =>
-          address.toLowerCase() === shared.vault.address.toLowerCase() &&
-          name === shared.vaultName,
-      ),
-    ).toBeTruthy();
+    console.log('last rewquest', lastRequest);
 
     return true;
   },

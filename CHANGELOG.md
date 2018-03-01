@@ -11,6 +11,7 @@ and this project adheres to
 ### Added
 
 * `toDate` method to harmonize date parsing from the blockchain
+* `getLastRequest` function enhanced with maxWaitingTime
 
 ### Changed
 
