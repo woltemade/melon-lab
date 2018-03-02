@@ -20,6 +20,7 @@ import importWalletFromMnemonic from '../../../../lib/utils/wallet/importWalletF
 import invest from '../../../../lib/participation/transactions/invest';
 import makeOrderFromAccount from '../../../../lib/exchange/transactions/makeOrderFromAccount';
 import performCalculations from '../../../../lib/fund/calls/performCalculations';
+import makeOrder from '../../../../lib/fund/transactions/makeOrder';
 import setEnvironment from '../../../../lib/utils/environment/setEnvironment';
 import setupFund from '../../../../lib/version/transactions/setupFund';
 import shutDownFund from '../../../../lib/fund/transactions/shutDownFund';
@@ -213,6 +214,18 @@ fit(
         shared.midCalculations.totalSupply
       }`,
       data: shared,
+    });
+
+    shared.fundOrder = await makeOrder(environment, {
+      fundAddress: shared.vault.address,
+      sellWhichToken: quoteAssetSymbol,
+      buyWhichToken: nativeAssetSymbol,
+      sellHowMuch: new BigNumber(7),
+      buyHowMuch: new BigNumber(1),
+    });
+
+    trace({
+      message: `Fund made order with id: ${shared.fundOrder.id}`,
     });
 
     shared.simpleOrder = await makeOrderFromAccount(environment, {
