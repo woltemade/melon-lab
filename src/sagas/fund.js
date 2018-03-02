@@ -1,10 +1,12 @@
 import {
+  getEnvironment,
+  getFundForManager,
   getFundInformations,
+  getLastRequest,
   getParticipation,
   getParticipationAuthorizations,
   performCalculations,
-  getFundForManager,
-  getEnvironment,
+  requestStatus,
 } from "@melonproject/melon.js";
 import { takeLatest, put, call, take, select } from "redux-saga/effects";
 import { actions, types } from "../actions/fund";
@@ -68,6 +70,12 @@ function* requestInfo({ address }) {
         investorAddress: account,
       });
       info.personalStake = participation.personalStake;
+    }
+
+    const lastRequest = yield call(getLastRequest, environment, fundInfo);
+
+    if (lastRequest.status === requestStatus.ACTIVE) {
+      yield put(actions.setPendingRequest(lastRequest));
     }
 
     yield put(actions.infoSucceeded(info));

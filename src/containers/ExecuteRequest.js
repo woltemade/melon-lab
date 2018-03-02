@@ -4,11 +4,15 @@ import { actions } from "../actions/participation";
 
 const mapStateToProps = state => ({
   readyToExecute: state.fund.readyToExecute,
+  targetDate: new Date(
+    Date.now() + state.fund.pendingRequest.canBeExecutedInMs,
+  ),
+  requestId: state.fund.pendingRequest.id,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onExecute: () => {
-    dispatch(actions.execute());
+  onExecute: requestId => {
+    dispatch(actions.execute(requestId));
   },
 });
 

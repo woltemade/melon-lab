@@ -4,6 +4,7 @@ import {
   redeem,
   executeRequest,
   redeemAllOwnedAssets,
+  getLastRequest,
 } from "@melonproject/melon.js";
 import { delay } from "redux-saga";
 import { types, actions } from "../actions/participation";
@@ -28,7 +29,10 @@ function* investSaga(action) {
       });
       yield put(routesActions.fund(fundAddress));
     } else {
-      yield put(fundActions.setPendingRequest(subscription.id));
+      const pendingRequest = yield call(getLastRequest, environment, {
+        fundAddress,
+      });
+      yield put(fundActions.setPendingRequest(pendingRequest));
     }
     yield put(actions.investSucceeded());
     yield put(modalActions.close());
@@ -36,7 +40,9 @@ function* investSaga(action) {
 
   yield call(
     signer,
-    `Do you really want to buy ${action.amount} shares for ${action.total} MLN? If yes, please type your password below:`,
+    `Do you really want to buy ${action.amount} shares for ${
+      action.total
+    } MLN? If yes, please type your password below:`,
     transaction,
     actions.investFailed,
   );
@@ -45,19 +51,24 @@ function* investSaga(action) {
 function* redeemSaga(action) {
   function* transaction(environment) {
     const fundAddress = yield select(state => state.fund.address);
-    const redemption = yield call(redeem, environment, {
+    yield call(redeem, environment, {
       fundAddress,
       numShares: action.amount,
       requestedValue: action.total,
     });
-    yield put(fundActions.setPendingRequest(redemption.id));
+    const pendingRequest = yield call(getLastRequest, environment, {
+      fundAddress,
+    });
+    yield put(fundActions.setPendingRequest(pendingRequest));
     yield put(actions.redeemSucceeded());
     yield put(modalActions.close());
   }
 
   yield call(
     signer,
-    `Do you really want to sell ${action.amount} shares for ${action.total} MLN? If yes, please type your password below:`,
+    `Do you really want to sell ${action.amount} shares for ${
+      action.total
+    } MLN? If yes, please type your password below:`,
     transaction,
     actions.redeemFailed,
   );
@@ -76,18 +87,19 @@ function* redeemAllOwnedAssetsSaga(action) {
 
   yield call(
     signer,
-    `Do you really want to immediately redeem ${action.amount} shares? You will receive a subset of the current fund holdings, proportionally to your requested number of shares. If yes, please type your password below:`,
+    `Do you really want to immediately redeem ${
+      action.amount
+    } shares? You will receive a subset of the current fund holdings, proportionally to your requested number of shares. If yes, please type your password below:`,
     transaction,
     actions.redeemAllOwnedAssetsFailed,
   );
 }
 
-function* executeSaga() {
+function* executeSaga({ id }) {
   function* transaction(environment) {
     const fundAddress = yield select(state => state.fund.address);
-    const requestId = yield select(state => state.fund.pendingRequest);
 
-    yield call(executeRequest, environment, { requestId, fundAddress });
+    yield call(executeRequest, environment, { id, fundAddress });
     yield put(actions.executeSucceeded());
     yield put(modalActions.close());
   }
@@ -100,9 +112,8 @@ function* executeSaga() {
   );
 }
 
-function* waitForExecute() {
-  yield delay(4 * 60 * 1000);
-  // yield delay(1 * 20 * 1000);
+function* waitForExecute({ pendingRequest: { canBeExecutedInMs } }) {
+  yield delay(canBeExecutedInMs);
   yield put(fundActions.setReadyToExecute());
 }
 

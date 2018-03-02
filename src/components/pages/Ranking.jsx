@@ -4,7 +4,6 @@ import { Image, Table } from "semantic-ui-react";
 import Link from "redux-first-router-link";
 import Highlight from "react-highlighter";
 import GetStarted from "../../containers/GetStarted";
-import displayNumber from "../../utils/displayNumber";
 import renderInput from "../utils/renderInput";
 
 const activeStyle = { textDecoration: "underline", cursor: "pointer" };
