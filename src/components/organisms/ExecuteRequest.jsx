@@ -2,7 +2,12 @@ import React from "react";
 import { List, Button, Card } from "semantic-ui-react";
 import Countdown from "react-cntdwn";
 
-const ExecuteRequest = ({ onExecute, readyToExecute }) => (
+const ExecuteRequest = ({
+  onExecute,
+  readyToExecute,
+  targetDate,
+  requestId,
+}) => (
   <div>
     <div className="ui segment">
       <br />
@@ -28,7 +33,7 @@ const ExecuteRequest = ({ onExecute, readyToExecute }) => (
         <Card.Content extra>
           {readyToExecute ? (
             <div className="ui two buttons">
-              <Button basic color="black" onClick={onExecute}>
+              <Button basic color="black" onClick={() => onExecute(requestId)}>
                 Execute my request!
               </Button>
             </div>
@@ -36,7 +41,7 @@ const ExecuteRequest = ({ onExecute, readyToExecute }) => (
             <div>
               Remaining waiting time before request execution:
               <Countdown
-                targetDate={new Date(Date.now() + 120 * 60 * 1000)}
+                targetDate={targetDate}
                 startDelay={100}
                 interval={1000}
                 timeSeparator=":"

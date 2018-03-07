@@ -4,7 +4,7 @@ import { takeLatest, call, put, select, take } from "redux-saga/effects";
 import { actions, types } from "../actions/ranking";
 import { types as ethereumTypes } from "../actions/ethereum";
 import { types as routeTypes } from "../actions/routes";
-import { add, greaterThan, divide, equals } from "../utils/functionalBigNumber";
+import { greaterThan, equals } from "../utils/functionalBigNumber";
 // import rankingMock from "../utils/mocks/ranking.json";
 
 function* loadRanking() {
