@@ -175,10 +175,10 @@ fit(
       investorAddress: environment.account.address,
     });
 
-    expect(shared.lastRequest.maxRemainingWaitSeconds).toBe(0);
+    expect(shared.lastRequest.canBeExecutedInMs).toBe(0);
 
     shared.executedSubscriptionRequest = await executeRequest(environment, {
-      requestId: shared.subscriptionRequest.id,
+      id: shared.subscriptionRequest.id,
       fundAddress: shared.vault.address,
       // 0,
     });
@@ -243,19 +243,19 @@ fit(
       message: `Regular account made order with id: ${shared.simpleOrder.id}`,
     });
 
-    shared.takenOrder = await takeOrder(environment, {
-      id: shared.simpleOrder.id,
-      // shared.orderBook2[shared.orderBook2.length - 1].id,
-      fundAddress: shared.vault.address,
-      quantityAsked: new BigNumber(1),
-    });
+    // shared.takenOrder = await takeOrder(environment, {
+    //   id: shared.simpleOrder.id,
+    //   // shared.orderBook2[shared.orderBook2.length - 1].id,
+    //   fundAddress: shared.vault.address,
+    //   quantityAsked: new BigNumber(1),
+    // });
 
-    trace({
-      message: `Fund took order; executed quantity: ${
-        shared.takenOrder.executedQuantity
-      }`,
-      data: shared,
-    });
+    // trace({
+    //   message: `Fund took order; executed quantity: ${
+    //     shared.takenOrder.executedQuantity
+    //   }`,
+    //   data: shared,
+    // });
 
     shared.openOrders = await getOpenOrders(environment, {
       fundAddress: shared.vault.address,
