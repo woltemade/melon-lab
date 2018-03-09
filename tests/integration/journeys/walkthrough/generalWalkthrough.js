@@ -25,7 +25,7 @@ import setEnvironment from '../../../../lib/utils/environment/setEnvironment';
 import setupFund from '../../../../lib/version/transactions/setupFund';
 import shutDownFund from '../../../../lib/fund/transactions/shutDownFund';
 import signTermsAndConditions from '../../../../lib/version/transactions/signTermsAndConditions';
-import takeOrder from '../../../../lib/fund/transactions/takeOrder';
+// import takeOrder from '../../../../lib/fund/transactions/takeOrder';
 import toggleInvestment from '../../../../lib/fund/transactions/toggleInvestment';
 import toggleRedemption from '../../../../lib/fund/transactions/toggleRedemption';
 import toReadable from '../../../../lib/assets/utils/toReadable';
@@ -311,7 +311,7 @@ fit(
       fundAddress: shared.vault.address,
     });
     expect(shared.recentTrades.length).toBeGreaterThanOrEqual(1);
-    expect(shared.fundRecentTrades.length).toBe(1);
+    // expect(shared.fundRecentTrades.length).toBe(1);
 
     shared.ranking = await getRanking(environment);
     expect(shared.ranking.length).toBeGreaterThanOrEqual(1);
