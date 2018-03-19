@@ -21,10 +21,9 @@ function* investSaga(action) {
       numShares: action.amount,
       offeredValue: action.total,
     });
-
     if (action.directlyExecute) {
       yield call(executeRequest, environment, {
-        requestId: subscription.id,
+        id: subscription.id,
         fundAddress,
       });
       yield put(routesActions.fund(fundAddress));
@@ -40,9 +39,7 @@ function* investSaga(action) {
 
   yield call(
     signer,
-    `Do you really want to buy ${action.amount} shares for ${
-      action.total
-    } MLN? If yes, please type your password below:`,
+    `Do you really want to buy ${action.amount} shares for ${action.total} MLN? If yes, please type your password below:`,
     transaction,
     actions.investFailed,
   );
@@ -66,9 +63,7 @@ function* redeemSaga(action) {
 
   yield call(
     signer,
-    `Do you really want to sell ${action.amount} shares for ${
-      action.total
-    } MLN? If yes, please type your password below:`,
+    `Do you really want to sell ${action.amount} shares for ${action.total} MLN? If yes, please type your password below:`,
     transaction,
     actions.redeemFailed,
   );
@@ -87,9 +82,7 @@ function* redeemAllOwnedAssetsSaga(action) {
 
   yield call(
     signer,
-    `Do you really want to immediately redeem ${
-      action.amount
-    } shares? You will receive a subset of the current fund holdings, proportionally to your requested number of shares. If yes, please type your password below:`,
+    `Do you really want to immediately redeem ${action.amount} shares? You will receive a subset of the current fund holdings, proportionally to your requested number of shares. If yes, please type your password below:`,
     transaction,
     actions.redeemAllOwnedAssetsFailed,
   );

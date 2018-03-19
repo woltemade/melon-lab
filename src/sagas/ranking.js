@@ -32,7 +32,11 @@ function* getRankingSaga() {
         return a.inception < b.inception ? -1 : 1;
       return greaterThan(a.sharePrice, b.sharePrice) ? -1 : 1;
     });
-    yield put(actions.getRankingSucceeded(sortedRanking));
+    const withRank = sortedRanking.map((fund, i) => ({
+      ...fund,
+      rank: i + 1,
+    }));
+    yield put(actions.getRankingSucceeded(withRank));
     yield put(actions.setLoading({ loading: false }));
   } catch (err) {
     console.error(err);
