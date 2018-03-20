@@ -76,7 +76,7 @@ function* createFund({ name }) {
       actions.setupSucceeded({ ...fund, owner: environment.account.address }),
     );
     yield put(appActions.setUsersFund(fund.address));
-    yield put(routeActions.fund(fund.address));
+    yield put(routeActions.setup());
     yield put(modalActions.close());
     yield put(actions.infoRequested(fund.address));
   }
