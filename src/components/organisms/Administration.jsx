@@ -18,13 +18,13 @@ const Administration = ({
     <Card.Content>
       <Card.Header>Fund Administration</Card.Header>
       <List>
-        {!isCompeting ? (
+        {/* {!isCompeting ? (
           <List.Item as="a" onClick={() => registerForCompetition(fundAddress)}>
             <List.Content>Register for competition</List.Content>
           </List.Item>
         ) : (
           ""
-        )}
+        )} */}
         {subscriptionAllowed ? (
           <List.Item as="a" onClick={toggleSubscription}>
             <List.Content>Disable subscription</List.Content>

@@ -73,8 +73,9 @@ function* requestInfo({ address }) {
     }
 
     const lastRequest = yield call(getLastRequest, environment, fundInfo);
+    const existsRequest = lastRequest.id.toString() !== "1.157920892373162e+77";
 
-    if (lastRequest.status === requestStatus.ACTIVE) {
+    if (lastRequest.status === requestStatus.ACTIVE && existsRequest) {
       yield put(actions.setPendingRequest(lastRequest));
     }
 

@@ -7,13 +7,10 @@ import { types as routeTypes } from "../actions/routes";
 import { greaterThan, equals } from "../utils/functionalBigNumber";
 // import rankingMock from "../utils/mocks/ranking.json";
 
-function* loadRanking() {
-  // return fetch("https://ranking.melon.fund", { method: "GET" }).then(resp =>
-  //   resp.json().then(json => json),
-  // );
-
-  const environment = getEnvironment();
-  return yield call(getRanking, environment);
+function loadRanking() {
+  return fetch("https://ranking.melon.fund", { method: "GET" }).then(resp =>
+    resp.json().then(json => json),
+  );
 }
 
 function* getRankingSaga() {
@@ -32,7 +29,11 @@ function* getRankingSaga() {
         return a.inception < b.inception ? -1 : 1;
       return greaterThan(a.sharePrice, b.sharePrice) ? -1 : 1;
     });
-    yield put(actions.getRankingSucceeded(sortedRanking));
+    const withRank = sortedRanking.map((fund, i) => ({
+      ...fund,
+      rank: i + 1,
+    }));
+    yield put(actions.getRankingSucceeded(withRank));
     yield put(actions.setLoading({ loading: false }));
   } catch (err) {
     console.error(err);

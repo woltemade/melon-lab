@@ -175,7 +175,7 @@ const Orderbook = ({
                     {order.howMuch}
                   </Grid.Column>
                   <Grid.Column style={tableBuyCellStyle}>
-                    {order.price}
+                    {order.cumulativeVolume}
                   </Grid.Column>
                 </Grid.Row>
               ))}
