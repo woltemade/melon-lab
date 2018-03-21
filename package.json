@@ -4,14 +4,23 @@
   "description": "Short description of your awesome repository",
   "sign-git-tag": true,
   "scripts": {
+    "depcheck":
+      "depcheck --ignores=husky,eslint-config-prettier,eslint-plugin-prettier,prettier,flow-bin,prettier-eslint,eslint-config-plugin:prettier,eslint-config-plugin:flowtype",
+    "format": "prettier-eslint --write **/*.js",
+    "flow": "flow",
     "lint": "eslint .",
-    "pretext": "npm run lint"
+    "precommit": "lint-staged",
+    "pretest": "npm run lint && npm run flow && npm run depcheck",
+    "test": "echo NO TESTS YET"
+  },
+  "lint-staged": {
+    "*.{js,json,md}": ["prettier-eslint --write", "git add"]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/melonproject/XXXX.git"
   },
-  "keywords": ["melon", "melonproject", "ethereum", "blockchain"],
+  "keywords": ["blockchain", "ethereum", "melon", "melonproject"],
   "author": "XXX YOUR NAME <team@melonport.com>",
   "license": "AGPL-3.0",
   "bugs": {
@@ -19,6 +28,21 @@
   },
   "homepage": "https://github.com/melonproject/XXXX#readme",
   "devDependencies": {
-    "eslint": "*"
+    "babel-eslint": "*",
+    "depcheck": "*",
+    "eslint": "*",
+    "eslint-config-airbnb": "*",
+    "eslint-config-prettier": "*",
+    "eslint-plugin-flowtype": "*",
+    "eslint-plugin-prettier": "*",
+    "eslint-plugin-import": "*",
+    "eslint-plugin-jsx-a11y": "*",
+    "eslint-plugin-react": "*",
+    "flow-bin": "*",
+    "husky": "*",
+    "lint-staged": "*",
+    "prettier": "*",
+    "prettier-eslint": "*",
+    "prettier-eslint-cli": "*"
   }
 }
