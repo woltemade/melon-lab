@@ -1,0 +1,24 @@
+{
+  "name": "@melonproject/XXXX",
+  "version": "0.0.0",
+  "description": "Short description of your awesome repository",
+  "sign-git-tag": true,
+  "scripts": {
+    "lint": "eslint .",
+    "pretext": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melonproject/XXXX.git"
+  },
+  "keywords": ["melon", "melonproject", "ethereum", "blockchain"],
+  "author": "XXX YOUR NAME <team@melonport.com>",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/melonproject/XXXX/issues"
+  },
+  "homepage": "https://github.com/melonproject/XXXX#readme",
+  "devDependencies": {
+    "eslint": "*"
+  }
+}
