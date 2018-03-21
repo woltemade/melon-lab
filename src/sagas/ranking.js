@@ -7,13 +7,10 @@ import { types as routeTypes } from "../actions/routes";
 import { greaterThan, equals } from "../utils/functionalBigNumber";
 // import rankingMock from "../utils/mocks/ranking.json";
 
-function* loadRanking() {
-  // return fetch("https://ranking.melon.fund", { method: "GET" }).then(resp =>
-  //   resp.json().then(json => json),
-  // );
-
-  const environment = getEnvironment();
-  return yield call(getRanking, environment);
+function loadRanking() {
+  return fetch("https://ranking.melon.fund", { method: "GET" }).then(resp =>
+    resp.json().then(json => json),
+  );
 }
 
 function* getRankingSaga() {
