@@ -1,12 +1,11 @@
 {
-  "name": "@melonproject/XXXX",
+  "name": "@melonproject/frontend-lab",
   "version": "0.0.0",
   "description": "Short description of your awesome repository",
   "sign-git-tag": true,
   "scripts": {
     "build": "babel src/ -d build/",
-    "depcheck":
-      "depcheck --ignores=husky,eslint-config-prettier,eslint-plugin-prettier,prettier,flow-bin,prettier-eslint,eslint-config-plugin:prettier,eslint-config-plugin:flowtype",
+    "depcheck": "depcheck --ignores=husky,eslint-config-prettier,eslint-plugin-prettier,prettier,flow-bin,prettier-eslint,eslint-config-plugin:prettier,eslint-config-plugin:flowtype",
     "format": "prettier-eslint --write src/**/*.js",
     "flow": "flow",
     "lint": "eslint .",
@@ -20,15 +19,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/melonproject/XXXX.git"
+    "url": "git+https://github.com/melonproject/frontend-lab.git"
   },
   "keywords": ["blockchain", "ethereum", "melon", "melonproject"],
   "author": "XXX YOUR NAME <team@melonport.com>",
   "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://github.com/melonproject/XXXX/issues"
+    "url": "https://github.com/melonproject/frontend-lab/issues"
   },
-  "homepage": "https://github.com/melonproject/XXXX#readme",
+  "homepage": "https://github.com/melonproject/frontend-lab#readme",
   "devDependencies": {
     "babel-cli": "*",
     "babel-eslint": "*",
