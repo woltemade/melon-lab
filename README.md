@@ -16,4 +16,6 @@
   - http://cssinjs.org/
   - Summary: https://risingstars.js.org/2017/en/#section-css-in-js
 - [ ] Data layer: https://github.com/orbitdb/orbit-db / https://pouchdb.com/
-- [ ] ...
+- [ ] Styleguide: https://react-styleguidist.js.org/ or https://storybook.js.org/
+- [ ] 
+- ...
