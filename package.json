@@ -5,7 +5,8 @@
   "sign-git-tag": true,
   "scripts": {
     "build": "babel src/ -d build/",
-    "depcheck": "depcheck --ignores=husky,eslint-config-prettier,eslint-plugin-prettier,prettier,flow-bin,prettier-eslint,eslint-config-plugin:prettier,eslint-config-plugin:flowtype",
+    "depcheck":
+      "depcheck --ignores=husky,eslint-config-prettier,eslint-plugin-prettier,prettier,flow-bin,prettier-eslint,eslint-config-plugin:prettier,eslint-config-plugin:flowtype",
     "format": "prettier-eslint --write src/**/*.js",
     "flow": "flow",
     "lint": "eslint .",
@@ -15,21 +16,13 @@
     "test": "echo NO TESTS YET"
   },
   "lint-staged": {
-    "*.{js,json,md}": [
-      "prettier-eslint --write",
-      "git add"
-    ]
+    "*.{js,json,md}": ["prettier-eslint --write", "git add"]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/melonproject/frontend-lab.git"
   },
-  "keywords": [
-    "blockchain",
-    "ethereum",
-    "melon",
-    "melonproject"
-  ],
+  "keywords": ["blockchain", "ethereum", "melon", "melonproject"],
   "author": "XXX YOUR NAME <team@melonport.com>",
   "license": "AGPL-3.0",
   "bugs": {
