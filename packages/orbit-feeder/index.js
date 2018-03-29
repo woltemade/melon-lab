@@ -18,6 +18,7 @@ const ipfs = new IPFS(ipfsOptions);
 ipfs.on('error', console.error);
 ipfs.on('ready', async () => {
   const environment = await getParityProvider();
+  console.log(environment.providerType);
   const config = await getConfig(environment);
   const mlnAddress = getAddress(config, 'ETH-T-M');
   const pricefeed = await getPriceFeedContract(environment);
