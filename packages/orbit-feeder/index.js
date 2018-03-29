@@ -9,6 +9,7 @@ import {
 } from '@melonproject/melon.js';
 
 const ipfsOptions = {
+  start: true,
   EXPERIMENTAL: {
     pubsub: true,
   },
@@ -31,12 +32,18 @@ ipfs.on('ready', async () => {
   console.log(db.address.toString());
 
   pricefeed.instance.PriceUpdated.subscribe({}, async (err, res) => {
+    if (err) console.error(err);
     const [isRecent, price, decimals] = await pricefeed.instance.getPrice.call(
       {},
       [mlnAddress],
     );
     const hash = await db.add(price.toString());
-    console.log(err, res, toReadable(config, price, 'ETH-T-M'), hash);
+    console.log(
+      'UPDATE',
+      new Date(),
+      toReadable(config, price, 'ETH-T-M').toString(),
+      hash,
+    );
   });
 
   /*
