@@ -9,7 +9,7 @@ import {
 } from '@melonproject/melon.js';
 
 const ipfsOptions = {
-  start: true,
+  // start: true,
   EXPERIMENTAL: {
     pubsub: true,
   },
@@ -27,7 +27,8 @@ ipfs.on('ready', async () => {
 
   // console.log(JSON.stringify({ config, mlnAddress }, null, 4));
 
-  const db = await orbitDB.log(`melon:PriceFeed:${mlnAddress}`);
+  // const db = await orbitDB.log(`melon:PriceFeed:${mlnAddress}`);
+  const db = await orbitDB.eventlog(`melontest`, { overwrite: true });
 
   console.log(db.address.toString());
 
@@ -37,7 +38,7 @@ ipfs.on('ready', async () => {
       {},
       [mlnAddress],
     );
-    const hash = await db.add(price.toString());
+    const hash = await db.add({ price: price.toString() });
     console.log(
       'UPDATE',
       new Date(),
