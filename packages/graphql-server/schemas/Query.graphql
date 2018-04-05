@@ -1,0 +1,5 @@
+#import "./Vault.graphql"
+
+type Query {
+  getVaults(ids: [Int]!): [Vault]
+}

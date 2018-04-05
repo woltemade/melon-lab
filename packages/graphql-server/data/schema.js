@@ -1,39 +1,12 @@
 import { makeExecutableSchema } from 'graphql-tools';
 import resolvers from './resolvers';
+import Order from '../schemas/Order.graphql';
+import Vault from '../schemas/Vault.graphql';
+import Query from '../schemas/Query.graphql';
 
-// TODO: add address (may with own scalar type)
-const typeDefs = `
-  type Vault {
-    id: Int,
-    address: String,
-    owner: String,
-    name: String,
-    symbol: String,
-    decimals: Int,
-    isActive: Boolean,
-    universeAddress: String,
-    referenceAsset: String,
-    gav: String,
-    managementFee: String,
-    performanceFee: String,
-    unclaimedFees: String,
-    nav: String,
-    sharePrice: String,
-  }
-
-  type Order {
-    id: Int,
-    buySymbol: String,
-    buyHowMuch: String,
-    sellSymbol: String,
-    sellHowMuch: String,
-  }
-
-  type Query {
-    getVaults(ids: [Int]!): [Vault]
-  }
-`;
-
-const schema = makeExecutableSchema({ typeDefs, resolvers });
+const schema = makeExecutableSchema({
+  typeDefs: [Order, Vault, Query],
+  resolvers,
+});
 
 export default schema;
