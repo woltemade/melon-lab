@@ -3,10 +3,15 @@ import resolvers from './resolvers';
 import Order from '../schemas/Order.graphql';
 import Vault from '../schemas/Vault.graphql';
 import Query from '../schemas/Query.graphql';
+import Asset from '../schemas/Asset.graphql';
+
+console.log(Query);
 
 const schema = makeExecutableSchema({
-  typeDefs: [Order, Vault, Query],
+  typeDefs: [Order, Vault, Asset, Query],
   resolvers,
 });
 
 export default schema;
+
+//.

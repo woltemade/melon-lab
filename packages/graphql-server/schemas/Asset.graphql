@@ -1,0 +1,6 @@
+type Asset {
+  address: String
+  name: String
+  symbol: String
+  decimals: String
+}

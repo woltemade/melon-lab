@@ -29,6 +29,9 @@
     "url": "https://github.com/melonproject/frontend-lab/issues"
   },
   "homepage": "https://github.com/melonproject/frontend-lab#readme",
+  "dependencies": {
+    "@melonproject/melon.js": "0.7.6"
+  },
   "devDependencies": {
     "babel-cli": "*",
     "babel-eslint": "*",
