@@ -1,14 +1,10 @@
 {
   "name": "@melonproject/graphql-schema",
   "version": "0.0.0",
-  "main": "index.js",
   "license": "AGPL-v3",
   "dependencies": {
     "@melonproject/melon.js": "^0.7.6",
     "graphql": "^0.13.2",
     "graphql-subscriptions": "^0.5.8"
-  },
-  "devDependencies": {
-    "babel-preset-env": "^1.6.1"
   }
 }

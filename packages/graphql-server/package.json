@@ -1,18 +1,20 @@
 {
   "name": "@melonproject/graphql-server",
   "version": "0.0.0",
-  "main": "index.js",
   "license": "AGPL-v3",
   "scripts": {
     "dev": "nodemon --watch index.js index.js"
   },
+  "author": "Simon Emanuel Schmid <simon@schmid.io>",
+  "contributors": [
+    "Sebastian Siemssen <fubhy@fubhy.com>"
+  ],
   "dependencies": {
     "@melonproject/graphql-schema": "^0.0.0",
     "@melonproject/melon.js": "^0.7.6",
     "graphql": "^0.13.2",
     "graphql-subscriptions": "^0.5.8",
-    "graphql-yoga": "^1.7.1",
-    "nodemon": "^1.17.3"
+    "graphql-yoga": "^1.7.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
