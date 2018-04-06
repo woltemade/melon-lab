@@ -1,16 +1,16 @@
 import React from 'react';
-import { Query } from 'react-apollo';
+import { Subscription } from 'react-apollo';
 import withApollo from '../withApollo';
 import query from './query.gql';
 
 const Home = () => (
-  <Query ssr={false} query={query} variables={{ symbol: "ETH-T-M" }}>
-    {({ data }) => (
+  <Subscription ssr={false} subscription={query} variables={{ symbol: "ETH-T-M" }}>
+    {(props) => console.log(props) || (
       <div>
-        {data.price}
+        {props.loading ? 'Loading price' : `Price: ${props.data && props.data.price}`}
       </div>
     )}
-  </Query>
+  </Subscription>
 );
 
 export default withApollo(Home);

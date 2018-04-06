@@ -1,5 +1,11 @@
 import { GraphQLScalarType, Kind } from 'graphql';
+import { PubSub } from 'graphql-subscriptions';
 import { getParityProvider, getPrice } from '@melonproject/melon.js';
+
+export const pubsub = new PubSub();
+export const context = {
+  pubsub,
+};
 
 export const typeDefs = `
   type Query {
@@ -49,12 +55,12 @@ export const resolvers = {
         const channel = 'timestamp';
         setInterval(
           () =>
-            context.pubSub.publish(channel, {
+            context.pubsub.publish(channel, {
               timer: Date.now(),
             }),
           1000,
         );
-        return context.pubSub.asyncIterator(channel);
+        return context.pubsub.asyncIterator(channel);
       },
     },
     price: {
@@ -63,11 +69,11 @@ export const resolvers = {
         setInterval(async () => {
           const environment = await getParityProvider();
           const price = await getPrice(environment, args.symbol);
-          context.pubSub.publish(channel, {
+          context.pubsub.publish(channel, {
             price,
           });
-        }, 1000);
-        return context.pubSub.asyncIterator(channel);
+        }, 10000);
+        return context.pubsub.asyncIterator(channel);
       },
     },
   },

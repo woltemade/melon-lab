@@ -1,5 +1,9 @@
 require('babel-register')({
-  presets: ['env'],
+  presets: [['env', {
+    targets: {
+      node: 'current',
+    },
+  }]],
 });
 
 require('./server.js');

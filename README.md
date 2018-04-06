@@ -9,7 +9,6 @@
 
 # TODO
 
-- [ ] Research base/bundler. Options: Create react app/next.js/[parcel](https://parceljs.org/), ...
 - [ ] Research styling solution. Options: 
   - http://css-blocks.com/
   - https://github.com/css-modules/css-modules
