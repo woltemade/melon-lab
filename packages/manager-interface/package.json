@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "next src",
     "build": "next build src",
+    "export": "next export src -o export",
     "start": "next start src"
   },
   "author": "Simon Emanuel Schmid <simon@schmid.io>",
