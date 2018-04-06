@@ -4,6 +4,7 @@ import { getParityProvider, getPrice } from '@melonproject/melon.js';
 export const typeDefs = `
   type Query {
     hello(name: String): String!
+    price(symbol: Symbol!): String!
   }
 
   scalar Symbol
@@ -36,6 +37,11 @@ export const resolvers = {
   }),
   Query: {
     hello: (_, { name }) => `Hello ${name || 'World'}`,
+    price: async (parent, args, context) => {
+      const environment = await getParityProvider();
+      const price = await getPrice(environment, args.symbol);
+      return price;
+    }
   },
   Subscription: {
     timer: {

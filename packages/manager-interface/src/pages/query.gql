@@ -1,0 +1,3 @@
+query PriceQuery($symbol: Symbol!) {
+  price(symbol: $symbol)
+}
