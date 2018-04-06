@@ -54,5 +54,6 @@
     "prettier": "*",
     "prettier-eslint": "*",
     "prettier-eslint-cli": "*"
-  }
+  },
+  "workspaces": ["packages/*"]
 }

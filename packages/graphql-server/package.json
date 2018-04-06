@@ -7,6 +7,7 @@
     "start": "babel-node index.js"
   },
   "dependencies": {
+    "@melonproject/melon.js": "^0.7.6",
     "graphql-yoga": "^1.7.1"
   }
 }

@@ -1,0 +1,19 @@
+{
+  "name": "manager-interface",
+  "version": "0.0.0",
+  "description": "The Melon Manager Interface",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "author": "Simon Emanuel Schmid <simon@schmid.io>",
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "@melonproject/melon.js": "^0.7.6",
+    "next": "^5.1.0",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1"
+  }
+}
