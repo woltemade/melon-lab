@@ -4,11 +4,19 @@
   "main": "index.js",
   "license": "AGPL-v3",
   "scripts": {
-    "start": "babel-node index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "@melonproject/graphql-schema": "^0.0.0",
     "@melonproject/melon.js": "^0.7.6",
+    "graphql": "^0.13.2",
+    "graphql-subscriptions": "^0.5.8",
     "graphql-yoga": "^1.7.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0"
   }
 }

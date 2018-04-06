@@ -1,5 +1,5 @@
 {
-  "name": "@melonproject/graphql-server",
+  "name": "@melonproject/graphql-server-old",
   "version": "0.0.1",
   "description": "Readonly GraphQL interface to the Melon protocol",
   "scripts": {
