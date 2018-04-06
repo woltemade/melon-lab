@@ -35,7 +35,7 @@ const Vault = {
       totalSupply: vaultInstance.totalSupply,
     };
     const promises = Object.keys(detailsLookupMap).map(key =>
-      detailsLookupMap[key]().then(value => ({ [key]: value }))
+      detailsLookupMap[key]().then(value => ({ [key]: value })),
     );
     const resolvedCollection = await Promise.all(promises);
     const mergedDetails = R.mergeAll(resolvedCollection);
@@ -47,7 +47,14 @@ const Vault = {
       nav,
       sharePrice,
     ] = mergedDetails.calculations;
-    const calculations = { gav, managementFee, performanceFee, unclaimedFees, nav, sharePrice };
+    const calculations = {
+      gav,
+      managementFee,
+      performanceFee,
+      unclaimedFees,
+      nav,
+      sharePrice,
+    };
 
     return R.omit(['calculations'], {
       ...mergedDetails,

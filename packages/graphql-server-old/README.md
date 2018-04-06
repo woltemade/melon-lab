@@ -1,8 +1,8 @@
 # Melon GraphQL Server
+
 Deployed at: https://melon-graphql-server.now.sh/graphiql
 
 Based on the great [apollo-starter-kit](https://github.com/apollostack/apollo-starter-kit)
-
 
 ## Getting started
 
@@ -41,9 +41,9 @@ and hit the play button (cmd-return), then you should get this on the right side
         "address": "0x85d1e14a23ec0e2cac5fafeb13b0a69738c7bae6",
         "symbol": "MLN-P",
         "nav": "10000000000000000000"
-      },
+      }
       // ...
     ]
   }
 }
-```  
+```
