@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "description": "Readonly GraphQL interface to the Melon protocol",
   "scripts": {
-    "start":
-      "rimraf ./node_modules/.cache/babel-loader && nodemon ./server.js --exec babel-node",
+    "start": "rimraf ./node_modules/.cache/babel-loader && nodemon ./server.js --exec babel-node",
     "lint": "eslint .",
     "deploy": "now && now alias"
   },
@@ -30,6 +29,7 @@
   },
   "homepage": "https://github.com/melonproject/graphql-server#readme",
   "dependencies": {
+    "@melonproject/graphql-schema": "^0.0.0",
     "@melonproject/melon.js": "0.7.6",
     "bignumber.js": "^6.0.0",
     "body-parser": "^1.17.2",
@@ -59,7 +59,10 @@
   },
   "eslintConfig": {
     "parser": "babel-eslint",
-    "extends": ["airbnb/base", "plugin:import/errors"],
+    "extends": [
+      "airbnb/base",
+      "plugin:import/errors"
+    ],
     "rules": {
       "no-use-before-define": 0,
       "arrow-body-style": 0,

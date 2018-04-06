@@ -3,18 +3,7 @@
   "version": "0.0.0",
   "description": "Short description of your awesome repository",
   "sign-git-tag": true,
-  "scripts": {
-    "build": "babel src/ -d build/",
-    "depcheck":
-      "depcheck --ignores=husky,eslint-config-prettier,eslint-plugin-prettier,prettier,flow-bin,prettier-eslint,eslint-config-plugin:prettier,eslint-config-plugin:flowtype",
-    "format": "prettier-eslint --write src/**/*.js",
-    "flow": "flow",
-    "lint": "eslint .",
-    "prepublish": "npm run build",
-    "precommit": "lint-staged",
-    "pretest": "npm run lint && npm run flow && npm run depcheck",
-    "test": "echo NO TESTS YET"
-  },
+  "scripts": {},
   "lint-staged": {
     "*.{js,json,md}": ["prettier-eslint --write", "git add"]
   },
