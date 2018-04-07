@@ -16,9 +16,13 @@ const withComposedConfig = R.compose(
 
 module.exports = withComposedConfig({
   webWorkers: /\/graphql\/worker\.ts$/,
-  linkedDependencies: ['@melonproject/graphql-schema'],
+  linkedDependencies: [
+    '@melonproject/graphql-schema',
+    '@melonproject/manager-components'
+  ],
   resolveAliases: {
     '@melonproject/graphql-schema': '@melonproject/graphql-schema/src',
+    '@melonproject/manager-components': '@melonproject/manager-components/src',
   },
   distDir: '../dist',
   exportPathMap: () => ({

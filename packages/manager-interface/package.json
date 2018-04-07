@@ -1,6 +1,7 @@
 {
   "name": "@melonproject/manager-interface",
   "version": "0.0.0",
+  "private": true,
   "license": "AGPL-3.0",
   "scripts": {
     "clean": "rimraf coverage export dist",
@@ -9,7 +10,7 @@
     "export": "NODE_ENV=production node --require dotenv-extended/config $(yarn bin)/next export src -o export",
     "start": "NODE_ENV=production node --require dotenv-extended/config $(yarn bin)/next start src",
     "lint": "tslint -p tsconfig.build.json",
-    "format": "prettier --write \"src/**/*.ts\"",
+    "format": "prettier --write \"{src,tests}/**/*.{ts,tsx}\"",
     "test": "jest"
   },
   "author": "Simon Emanuel Schmid <simon@schmid.io>",
