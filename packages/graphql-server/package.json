@@ -2,8 +2,14 @@
   "name": "@melonproject/graphql-server",
   "version": "0.0.0",
   "license": "AGPL-v3",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
-    "dev": "nodemon --watch index.js index.js"
+    "dev": "nodemon src/index.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "tslint -p tsconfig.build.json",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "test": "jest"
   },
   "author": "Simon Emanuel Schmid <simon@schmid.io>",
   "contributors": [
@@ -11,16 +17,47 @@
   ],
   "dependencies": {
     "@melonproject/graphql-schema": "^0.0.0",
-    "@melonproject/melon.js": "^0.7.6",
-    "graphql": "^0.13.2",
+    "dotenv-extended": "^2.0.1",
     "graphql-subscriptions": "^0.5.8",
     "graphql-yoga": "^1.7.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-register": "^6.26.0",
-    "nodemon": "^1.17.3"
+    "jest": "^22.4.3",
+    "jest-cli": "^22.4.3",
+    "nodemon": "^1.17.3",
+    "prettier": "^1.11.1",
+    "ts-jest": "^22.4.2",
+    "ts-node": "^5.0.1",
+    "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.10.0",
+    "typescript": "^2.8.1"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/tests/config/jest.setup"
+    ],
+    "transform": {
+      "^.+\\.(jsx?|tsx?)$": "ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!@melonproject/)"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleDirectories": [
+      "node_modules/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig.build.json"
+      }
+    }
   }
 }

@@ -1,27 +1,7 @@
-import { GraphQLScalarType, Kind } from 'graphql';
-import { PubSub } from 'graphql-subscriptions';
 import { getParityProvider, getPrice } from '@melonproject/melon.js';
+import { GraphQLScalarType, Kind } from 'graphql';
 
-export const pubsub = new PubSub();
-export const context = {
-  pubsub,
-};
-
-export const typeDefs = `
-  type Query {
-    hello(name: String): String!
-    price(symbol: Symbol!): String!
-  }
-
-  scalar Symbol
-
-  type Subscription {
-    timer: String!
-    price(symbol: Symbol!): String!
-  }
-`;
-
-export const resolvers = {
+const resolvers = {
   Symbol: new GraphQLScalarType({
     name: 'Symbol',
     parseValue(value) {
@@ -42,7 +22,6 @@ export const resolvers = {
     },
   }),
   Query: {
-    hello: (_, { name }) => `Hello ${name || 'World'}`,
     price: async (parent, args, context) => {
       const environment = await getParityProvider();
       const price = await getPrice(environment, args.symbol);
@@ -50,19 +29,6 @@ export const resolvers = {
     }
   },
   Subscription: {
-    timer: {
-      subscribe: (parent, args, context, info) => {
-        const channel = 'timestamp';
-        setInterval(
-          () =>
-            context.pubsub.publish(channel, {
-              timer: Date.now(),
-            }),
-          1000,
-        );
-        return context.pubsub.asyncIterator(channel);
-      },
-    },
     price: {
       subscribe: (parent, args, context) => {
         const channel = `price:${args.symbol}`;
@@ -73,8 +39,11 @@ export const resolvers = {
             price,
           });
         }, 10000);
+
         return context.pubsub.asyncIterator(channel);
       },
     },
   },
 };
+
+export default resolvers;

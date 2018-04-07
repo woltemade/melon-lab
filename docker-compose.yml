@@ -1,0 +1,34 @@
+version: "3.4"
+
+services:
+  graphql-server-development:
+    build:
+      context: ./packages/graphql-server
+      target: development
+    volumes:
+      # - ./dist:/app/dist
+      # - ./src:/app/src
+      # - ./tests:/app/tests
+      # - ./.babelrc:/app/.babelrc
+      # - ./.env:/app/.env
+      # - ./.env.defaults:/app/.env.defaults
+      # - ./package.json:/app/package.json
+      # - ./tsconfig.json:/app/tsconfig.json
+      # - ./tslint.json:/app/tslint.json
+      # - ./yarn.lock:/app/yarn.lock
+    ports:
+      - "3030:3030"
+    networks:
+      - melonproject
+
+  # this service is not really meant to be spinned up. it's here, to take
+  # advantage of cached intermediate layers, as they are not shared between
+  # docker-compose and docker.
+  graphql-server-production:
+    build:
+      context: ./packages/graphql-server
+    image: melonproject/graphql-server:latest
+
+networks:
+  melonproject:
+    external: true

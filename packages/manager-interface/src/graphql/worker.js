@@ -1,6 +1,10 @@
 import { createWorker, handleSubscriptions } from 'apollo-link-webworker';
-import { context, pubsub } from '@melonproject/graphql-schema';
+import { PubSub } from 'graphql-subscriptions';
+import { makeContext } from '@melonproject/graphql-schema';
 import schema from './schema';
+
+const pubsub = new PubSub();
+const context = makeContext(pubsub);
 
 createWorker({
   schema,
