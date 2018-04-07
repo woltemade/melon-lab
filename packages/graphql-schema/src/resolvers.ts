@@ -26,7 +26,7 @@ const resolvers = {
       const environment = await getParityProvider();
       const price = await getPrice(environment, args.symbol);
       return price;
-    }
+    },
   },
   Subscription: {
     price: {

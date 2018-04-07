@@ -1,6 +1,7 @@
 {
   "name": "@melonproject/manager-interface",
   "version": "0.0.0",
+  "license": "AGPL-3.0",
   "scripts": {
     "clean": "rimraf coverage export dist",
     "dev": "NODE_ENV=development node --require dotenv-extended/config $(yarn bin)/next src",
@@ -15,7 +16,6 @@
   "contributors": [
     "Sebastian Siemssen <fubhy@fubhy.com>"
   ],
-  "license": "AGPL-3.0",
   "dependencies": {
     "@melonproject/graphql-schema": "^0.0.0",
     "@melonproject/melon.js": "^0.7.6",

@@ -7,8 +7,8 @@ import { SchemaLink } from 'apollo-link-schema';
 import { createWebWorkerLink } from 'apollo-link-webworker';
 import { WebSocketLink } from 'apollo-link-ws';
 import withApollo from 'next-with-apollo';
-import schema from './graphql/schema';
 import context from './graphql/context';
+import schema from './graphql/schema';
 import WebWorker from './graphql/worker';
 
 export default withApollo({
