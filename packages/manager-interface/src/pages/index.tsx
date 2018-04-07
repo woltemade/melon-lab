@@ -4,7 +4,7 @@ import withApollo from '../withApollo';
 import query from './query.gql';
 
 const Home = () => (
-  <Subscription ssr={false} subscription={query} variables={{ symbol: "ETH-T-M" }}>
+  <Subscription subscription={query} variables={{ symbol: "ETH-T-M" }}>
     {(props) => (
       <div>
         {props.loading ? 'Loading price' : `Price: ${props.data && props.data.price}`}

@@ -3,13 +3,13 @@ import {
   IntrospectionFragmentMatcher,
 } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
-import { WebSocketLink } from 'apollo-link-ws';
 import { SchemaLink } from 'apollo-link-schema';
 import { createWebWorkerLink } from 'apollo-link-webworker';
-import { context } from '@melonproject/graphql-schema';
-import WebWorker from './graphql/worker';
+import { WebSocketLink } from 'apollo-link-ws';
 import withApollo from 'next-with-apollo';
 import schema from './graphql/schema';
+import context from './graphql/context';
+import WebWorker from './graphql/worker';
 
 export default withApollo({
   link: {

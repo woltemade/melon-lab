@@ -4,7 +4,7 @@ module.exports = (nextConfig = {}) => {
   // Generate custom include/exclude config for our module loaders.
   // These allow us to transpile code from specific linked packages
   // like our styleguide without having to pre-compile it elsewhere.
-  const includes = nextConfig.linkedDependencies.map(module => {
+  const includes = (nextConfig.linkedDependencies || []).map(module => {
     const relative = path.relative(
       process.cwd(),
       path.dirname(require.resolve(`${module}/package.json`))
@@ -13,7 +13,7 @@ module.exports = (nextConfig = {}) => {
     return new RegExp(`${relative}(?!.*node_modules)`);
   });
 
-  const excludes = nextConfig.linkedDependencies.map(
+  const excludes = (nextConfig.linkedDependencies || []).map(
     module => new RegExp(`node_modules(?!\/${module}(?!.*node_modules))`)
   );
 

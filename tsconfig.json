@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./packages",
     "paths": {
-      "@melonproject/*": ["*/src"]
+      "@melonproject/graphql-schema": ["graphql-schema/src"]
     }
   }
 }
