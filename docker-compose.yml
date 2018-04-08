@@ -88,10 +88,12 @@ services:
   # advantage of cached intermediate layers, as they are not shared between
   # docker-compose and docker.
   manager-interface-production:
-      build:
-        context: .
-        dockerfile: ./packages/manager-interface/Dockerfile
-      image: melonproject/manager-interface:latest
+    build:
+      context: .
+      dockerfile: ./packages/manager-interface/Dockerfile
+    image: melonproject/manager-interface:latest
+    # ports:
+      # - "80:80"
 
 networks:
   melonproject:
