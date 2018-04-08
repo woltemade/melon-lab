@@ -4,9 +4,6 @@
 !package.json
 !tsconfig.json
 !tslint.json
-!nodemon.json
-!.env.defaults
-!.env
 !/src/
 !/tests/
 !/typings/

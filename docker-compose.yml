@@ -29,6 +29,7 @@ services:
       - ./packages/graphql-server/typings:/app/packages/graphql-server/typings
       - ./packages/graphql-server/package.json:/app/packages/graphql-server/package.json
       - ./packages/graphql-server/tsconfig.json:/app/packages/graphql-server/tsconfig.json
+      - ./packages/graphql-server/tsconfig.build.json:/app/packages/graphql-server/tsconfig.build.json
       - ./packages/graphql-server/tslint.json:/app/packages/graphql-server/tslint.json
       - ./packages/graphql-server/nodemon.json:/app/packages/graphql-server/nodemon.json
       - ./packages/graphql-server/.env.defaults:/app/packages/graphql-server/.env.defaults
