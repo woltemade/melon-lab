@@ -4,6 +4,7 @@
 # For some reason we have to do this.
 !packages/graphql-server/Dockerfile
 !packages/manager-interface/Dockerfile
+!packages/manager-components/Dockerfile
 
 # White-list workspace root.
 !yarn.lock

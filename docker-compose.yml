@@ -60,6 +60,30 @@ services:
     networks:
       - melonproject
 
+  manager-components-development:
+    build:
+      context: .
+      dockerfile: ./packages/manager-components/Dockerfile
+      target: development
+    volumes:
+      - ./packages/manager-components/src:/app/packages/manager-components/src
+      - ./packages/manager-components/config:/app/packages/manager-components/config
+      - ./packages/manager-components/tests:/app/packages/manager-components/tests
+      # - ./packages/manager-components/typings:/app/packages/manager-components/typings
+      - ./packages/manager-components/package.json:/app/packages/manager-components/package.json
+      - ./packages/manager-components/tsconfig.json:/app/packages/manager-components/tsconfig.json
+      - ./packages/manager-components/tslint.json:/app/packages/manager-components/tslint.json
+      - ./packages/manager-components/.env.defaults:/app/packages/manager-components/.env.defaults
+      # - ./packages/manager-components/.env:/app/packages/manager-components/.env
+
+      # Required workspace root files. Delegated for performance.
+      - ./.prettierrc:/app/.prettierrc:delegated
+      - ./tsconfig.json:/app/tsconfig.json:delegated
+    ports:
+      - "3060:3060"
+    networks:
+      - melonproject
+
 networks:
   melonproject:
     external: true

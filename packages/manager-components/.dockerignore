@@ -1,0 +1,13 @@
+# Ignore as many files as possible. This keeps the build context small.
+*
+
+!yarn.lock
+!package.json
+!tsconfig.json
+!tslint.json
+!.env.defaults
+!.env
+!/src/
+!/tests/
+!/config/
+!/typings/
