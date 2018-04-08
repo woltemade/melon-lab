@@ -4,6 +4,7 @@ services:
   - docker
 
 script:
+  - make bootstrap
   - make lint
   - make test
   - make build
