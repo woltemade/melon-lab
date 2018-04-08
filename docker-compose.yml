@@ -84,6 +84,15 @@ services:
     networks:
       - melonproject
 
+  # this service is not really meant to be spinned up. it's here, to take
+  # advantage of cached intermediate layers, as they are not shared between
+  # docker-compose and docker.
+  manager-interface-production:
+      build:
+        context: .
+        dockerfile: ./packages/manager-interface/Dockerfile
+      image: melonproject/manager-interface:latest
+
 networks:
   melonproject:
     external: true
