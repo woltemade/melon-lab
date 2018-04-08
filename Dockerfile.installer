@@ -1,0 +1,17 @@
+# -----------------------------------------------------------------------------
+# installer
+# -----------------------------------------------------------------------------
+FROM melonproject/node:latest
+
+# copy the package.json and yarn.lock file of the workspace root.
+COPY package.json yarn.lock /app/
+
+# copy the package.json of each individual workspace.
+COPY packages/graphql-schema/package.json /app/packages/graphql-schema/
+COPY packages/graphql-server/package.json /app/packages/graphql-server/
+COPY packages/manager-components/package.json /app/packages/manager-components/
+COPY packages/manager-interface/package.json /app/packages/manager-interface/
+
+# install production dependencies first and and set them aside for later.
+RUN yarn install --ignore-engines --frozen-lockfile --production --modules-folder node_modules_production
+RUN yarn install --ignore-engines --modules-folder node_modules

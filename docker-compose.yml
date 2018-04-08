@@ -3,31 +3,62 @@ version: "3.4"
 services:
   graphql-server-development:
     build:
-      context: ./packages/graphql-server
+      context: .
+      dockerfile: ./packages/graphql-server/Dockerfile
       target: development
     volumes:
-      # - ./dist:/app/dist
-      # - ./src:/app/src
-      # - ./tests:/app/tests
-      # - ./.babelrc:/app/.babelrc
-      # - ./.env:/app/.env
-      # - ./.env.defaults:/app/.env.defaults
-      # - ./package.json:/app/package.json
-      # - ./tsconfig.json:/app/tsconfig.json
-      # - ./tslint.json:/app/tslint.json
-      # - ./yarn.lock:/app/yarn.lock
+      - ./packages/graphql-server/src:/app/packages/graphql-server/src
+      - ./packages/graphql-server/tests:/app/packages/graphql-server/tests
+      - ./packages/graphql-server/typings:/app/packages/graphql-server/typings
+      - ./packages/graphql-server/package.json:/app/packages/graphql-server/package.json
+      - ./packages/graphql-server/tsconfig.json:/app/packages/graphql-server/tsconfig.json
+      - ./packages/graphql-server/tslint.json:/app/packages/graphql-server/tslint.json
+      - ./packages/graphql-server/nodemon.json:/app/packages/graphql-server/nodemon.json
+      - ./packages/graphql-server/.env.defaults:/app/packages/graphql-server/.env.defaults
+      # - ./packages/graphql-server/.env:/app/packages/graphql-server/.env
+
+      # Required linked packages and workspace files. Delegated for performance.
+      - ./packages/graphql-schema/src:/app/packages/graphql-schema/src:delegated
+      - ./packages/graphql-schema/package.json:/app/packages/graphql-schema/package.json:delegated
+
+      # Required workspace root files. Delegated for performance.
+      - ./.prettierrc:/app/.prettierrc:delegated
+      - ./tsconfig.json:/app/tsconfig.json:delegated
     ports:
       - "3030:3030"
     networks:
       - melonproject
 
-  # this service is not really meant to be spinned up. it's here, to take
-  # advantage of cached intermediate layers, as they are not shared between
-  # docker-compose and docker.
-  graphql-server-production:
+  manager-interface-development:
     build:
-      context: ./packages/graphql-server
-    image: melonproject/graphql-server:latest
+      context: .
+      dockerfile: ./packages/manager-interface/Dockerfile
+      target: development
+    volumes:
+      - ./packages/manager-interface/src:/app/packages/manager-interface/src
+      - ./packages/manager-interface/config:/app/packages/manager-interface/config
+      - ./packages/manager-interface/tests:/app/packages/manager-interface/tests
+      # - ./packages/manager-interface/typings:/app/packages/manager-interface/typings
+      - ./packages/manager-interface/package.json:/app/packages/manager-interface/package.json
+      - ./packages/manager-interface/tsconfig.json:/app/packages/manager-interface/tsconfig.json
+      - ./packages/manager-interface/tslint.json:/app/packages/manager-interface/tslint.json
+      - ./packages/manager-interface/next.config.js:/app/packages/manager-interface/next.config.js
+      - ./packages/manager-interface/.env.defaults:/app/packages/manager-interface/.env.defaults
+      # - ./packages/manager-interface/.env:/app/packages/manager-interface/.env
+
+      # Required linked packages. Delegated for performance.
+      - ./packages/graphql-schema/src:/app/packages/graphql-schema/src:delegated
+      - ./packages/graphql-schema/package.json:/app/packages/graphql-schema/package.json:delegated
+      - ./packages/manager-components/src:/app/packages/manager-components/src:delegated
+      - ./packages/manager-components/package.json:/app/packages/manager-components/package.json:delegated
+
+      # Required workspace root files. Delegated for performance.
+      - ./.prettierrc:/app/.prettierrc:delegated
+      - ./tsconfig.json:/app/tsconfig.json:delegated
+    ports:
+      - "3000:3000"
+    networks:
+      - melonproject
 
 networks:
   melonproject:

@@ -1,6 +1,6 @@
+import Example from '@melonproject/manager-components/Example';
 import React from 'react';
 import { Subscription } from 'react-apollo';
-import Example from '@melonproject/manager-components/Example';
 import withApollo from '../withApollo';
 import query from './query.gql';
 

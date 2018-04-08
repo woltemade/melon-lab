@@ -9,7 +9,7 @@
     "build": "NODE_ENV=production node --require dotenv-extended/config $(yarn bin)/next build src",
     "export": "NODE_ENV=production node --require dotenv-extended/config $(yarn bin)/next export src -o export",
     "start": "NODE_ENV=production node --require dotenv-extended/config $(yarn bin)/next start src",
-    "lint": "tslint -p tsconfig.build.json",
+    "lint": "tslint -p tsconfig.json",
     "format": "prettier --write \"{src,tests}/**/*.{ts,tsx}\"",
     "test": "jest"
   },
@@ -79,7 +79,7 @@
     ],
     "globals": {
       "ts-jest": {
-        "tsConfigFile": "tsconfig.build.json"
+        "tsConfigFile": "tsconfig.json"
       }
     }
   }

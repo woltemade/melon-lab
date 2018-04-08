@@ -2,6 +2,7 @@
   "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
   "rules": {
     "object-literal-sort-keys": [false],
-    "no-implicit-dependencies": [false]
+    "no-implicit-dependencies": [false],
+    "no-submodule-imports": [true, "@melonproject/manager-components"]
   }
 }

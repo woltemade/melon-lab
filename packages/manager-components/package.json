@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "license": "AGPL-3.0",
+  "main": "src",
   "scripts": {
     "clean": "rimraf coverage",
     "dev": "start-storybook -p 3060 -c config",

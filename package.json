@@ -4,11 +4,11 @@
     "packages/*"
   ],
   "scripts": {
-    "clean": "lerna exec --parallel -- yarn clean",
-    "lint": "lerna exec --parallel -- yarn lint",
-    "format": "lerna exec --parallel -- yarn format",
-    "test": "lerna exec --parallel -- yarn test",
-    "build": "lerna exec --stream -- yarn build"
+    "clean": "lerna run --parallel clean",
+    "lint": "lerna run --parallel lint",
+    "format": "lerna run --parallel format",
+    "test": "lerna run --parallel test",
+    "build": "lerna run --stream build"
   },
   "devDependencies": {
     "lerna": "^2.9.1"

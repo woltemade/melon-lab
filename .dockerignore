@@ -1,6 +1,16 @@
+# Ignore as many files as possible. This keeps the build context small.
 *
+
+# For some reason we have to do this.
+!packages/graphql-server/Dockerfile
+!packages/manager-interface/Dockerfile
+
+# White-list workspace root.
 !yarn.lock
 !package.json
-!tsconfig.base.json
-!tsconfig.json
-!/packages/
+
+# White-list package.json of workspace packages.
+!packages/graphql-schema/package.json
+!packages/graphql-server/package.json
+!packages/manager-components/package.json
+!packages/manager-interface/package.json

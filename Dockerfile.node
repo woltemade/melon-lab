@@ -1,0 +1,8 @@
+# -----------------------------------------------------------------------------
+# node
+# -----------------------------------------------------------------------------
+FROM node:9.7.0-alpine
+WORKDIR /app
+
+# install system dependencies.
+RUN apk add --update git && rm -rf /var/cache/apk/*

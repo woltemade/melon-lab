@@ -8,8 +8,8 @@
   "scripts": {
     "clean": "rimraf coverage dist",
     "dev": "nodemon src/index.ts",
-    "build": "tsc -p tsconfig.build.json",
-    "lint": "tslint -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.json",
+    "lint": "tslint -p tsconfig.json",
     "format": "prettier --write \"{src,tests}/**/*.ts\"",
     "test": "jest"
   },
@@ -60,7 +60,7 @@
     ],
     "globals": {
       "ts-jest": {
-        "tsConfigFile": "tsconfig.build.json"
+        "tsConfigFile": "tsconfig.json"
       }
     }
   }

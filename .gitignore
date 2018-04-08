@@ -3,7 +3,6 @@ node_modules/
 
 # Generated files
 dist/
-build/
 coverage/
 
 # Environment variables
