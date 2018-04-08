@@ -26,16 +26,16 @@ build:
 .PHONY: lint
 lint:
 	@docker-compose run --rm graphql-server-development yarn lint
-	# @docker-compose run --rm graphql-schema-development yarn lint
-	# @docker-compose run --rm manager-interface-development yarn lint
-	# @docker-compose run --rm manager-components-development yarn lint
+	@docker-compose run --rm graphql-schema-development yarn lint
+	@docker-compose run --rm manager-interface-development yarn lint
+	@docker-compose run --rm manager-components-development yarn lint
 
 .PHONY: test
 test:
 	@docker-compose run --rm graphql-server-development yarn test
-	# @docker-compose run --rm graphql-schema-development yarn test
-	# @docker-compose run --rm manager-interface-development yarn test
-	# @docker-compose run --rm manager-components-development yarn test
+	@docker-compose run --rm graphql-schema-development yarn test
+	@docker-compose run --rm manager-interface-development yarn test
+	@docker-compose run --rm manager-components-development yarn test
 
 # -----------------------------------------------------------------------------
 # DEVELOPMENT

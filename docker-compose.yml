@@ -1,6 +1,23 @@
 version: "3.4"
 
 services:
+  graphql-schema-development:
+    build:
+      context: .
+      dockerfile: ./packages/graphql-schema/Dockerfile
+      target: development
+    volumes:
+      - ./packages/graphql-schema/src:/app/packages/graphql-schema/src
+      - ./packages/graphql-schema/tests:/app/packages/graphql-schema/tests
+      - ./packages/graphql-schema/typings:/app/packages/graphql-schema/typings
+      - ./packages/graphql-schema/package.json:/app/packages/graphql-schema/package.json
+      - ./packages/graphql-schema/tsconfig.json:/app/packages/graphql-schema/tsconfig.json
+      - ./packages/graphql-schema/tslint.json:/app/packages/graphql-schema/tslint.json
+
+      # Required workspace root files. Delegated for performance.
+      - ./.prettierrc:/app/.prettierrc:delegated
+      - ./tsconfig.json:/app/tsconfig.json:delegated
+
   graphql-server-development:
     build:
       context: .
