@@ -90,8 +90,6 @@ services:
       - ./packages/manager-components/package.json:/app/packages/manager-components/package.json
       - ./packages/manager-components/tsconfig.json:/app/packages/manager-components/tsconfig.json
       - ./packages/manager-components/tslint.json:/app/packages/manager-components/tslint.json
-      - ./packages/manager-components/.env.defaults:/app/packages/manager-components/.env.defaults
-      # - ./packages/manager-components/.env:/app/packages/manager-components/.env
 
       # Required workspace root files. Delegated for performance.
       - ./.prettierrc:/app/.prettierrc:delegated
@@ -101,8 +99,8 @@ services:
     networks:
       - melonproject
 
-  # this service is not really meant to be spinned up. it's here, to take
-  # advantage of cached intermediate layers, as they are not shared between
+  # These services are not really meant to be spinned up. They are here to take
+  # advantage of cached intermediate layers as they are not shared between
   # docker-compose and docker.
   manager-interface-production:
     build:
@@ -110,7 +108,15 @@ services:
       dockerfile: ./packages/manager-interface/Dockerfile
     image: melonproject/manager-interface:latest
     # ports:
-      # - "80:80"
+    #   - "80:80"
+
+  grapqhl-server-production:
+    build:
+      context: .
+      dockerfile: ./packages/graphql-server/Dockerfile
+    image: melonproject/graphql-server:latest
+    # ports:
+    #   - "3030:3030"
 
 networks:
   melonproject:

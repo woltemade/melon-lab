@@ -12,12 +12,6 @@
     "noImplicitAny": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./packages",
-    "paths": {
-      "@melonproject/graphql-schema": ["graphql-schema/src"],
-      "@melonproject/graphql-server": ["graphql-server/src"],
-      "@melonproject/manager-interface": ["manager-interface/src"],
-      "@melonproject/manager-components": ["manager-components/src"]
-    }
+    "allowSyntheticDefaultImports": true
   }
 }

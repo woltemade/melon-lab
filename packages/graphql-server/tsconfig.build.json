@@ -3,9 +3,6 @@
   "include": ["src/**/*"],
   "compilerOptions": {
     "outDir": "dist",
-    "baseUrl": ".",
-    "paths": {
-      "@melonproject/graphql-schema": ["../graphql-schema/src"]
-    }
+    "declaration": false
   }
 }

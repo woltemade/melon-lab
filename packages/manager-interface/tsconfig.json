@@ -6,6 +6,10 @@
     "target": "esnext",
     "module": "esnext",
     "jsx": "preserve",
-    "allowSyntheticDefaultImports": true
+    "baseUrl": ".",
+    "paths": {
+      "@melonproject/graphql-schema": ["../graphql-schema/src"],
+      "@melonproject/manager-components": ["../manager-components/src"]
+    }
   }
 }

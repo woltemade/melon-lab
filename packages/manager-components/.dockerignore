@@ -5,8 +5,6 @@
 !package.json
 !tsconfig.json
 !tslint.json
-!.env.defaults
-!.env
 !/src/
 !/tests/
 !/config/

@@ -4,7 +4,6 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "jsx": "preserve",
-    "allowSyntheticDefaultImports": true
+    "jsx": "preserve"
   }
 }
