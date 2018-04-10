@@ -5,4 +5,29 @@
 ![Dependencies](https://img.shields.io/david/melonproject/frontend-lab.svg?style=flat-square)
 ![Development Dependencies](https://img.shields.io/david/dev/melonproject/frontend-lab.svg?style=flat-square)
 
-![Melon project](https://raw.githubusercontent.com/melonproject/branding/master/melon/03_M_logo.jpg "Melon project")
+<img src = "https://github.com/melonproject/branding/blob/master/melon/03_M_logo.jpg" width = "25%" align="right">
+
+
+# Getting started
+
+## Prerequisites
+
+- yarn
+- node >= v8.11.1
+- docker >= 18.0.2
+
+## Quickstart
+
+```bash
+git checkout git@github.com:melonproject/frontend-lab.git
+cd frontend-lab
+yarn run bootstrap
+yarn run dev
+```
+
+## With Docker
+
+```bash
+make bootstrap
+make start
+```

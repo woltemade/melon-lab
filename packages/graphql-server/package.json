@@ -12,8 +12,9 @@
     "format": "prettier --write \"{src,tests}/**/*.ts\"",
     "test": "jest"
   },
-  "author": "Simon Emanuel Schmid <simon@schmid.io>",
+  "author": "Melonport <team@melonport.com>",
   "contributors": [
+    "Simon Emanuel Schmid <simon@schmid.io>",
     "Sebastian Siemssen <fubhy@fubhy.com>"
   ],
   "dependencies": {
