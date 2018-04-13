@@ -24,7 +24,7 @@ RUN yarn build
 # -----------------------------------------------------------------------------
 FROM melonproject/node:latest
 
-COPY --from=installer /app/node_modules_production /app/node_modules
+COPY --from=installer /app/node_modules /app/node_modules
 COPY --from=installer /app/packages/graphql-server/node_modules /app/packages/graphql-server/node_modules
 COPY --from=build /app/packages/graphql-server/dist /app/packages/graphql-server/dist
 COPY packages/graphql-server/package.json packages/graphql-server/.env.defaults /app/packages/graphql-server/

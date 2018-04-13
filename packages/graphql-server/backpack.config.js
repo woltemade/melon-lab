@@ -5,16 +5,16 @@ const fs = require('fs');
 const externals = require('webpack-node-externals');
 
 // Retrieve the absolute path of the linked package.
-const resolveWorkspace = name => {
+const resolveWorkspace = (name, directory) => {
   const [, package] = name.split('/');
-  return path.resolve(__dirname, '..', package, 'src');
+  return path.resolve(__dirname, '..', package, directory);
 };
 
-const resolveWorkspaces = (names) => {
-  const workspaces = names.reduce((carry, current) => {
+const resolveWorkspaces = (pairs) => {
+  const workspaces = pairs.reduce((carry, [name, directory]) => {
     return ({
       ...carry,
-      [current]: resolveWorkspace(current),
+      [name]: resolveWorkspace(name, directory),
     });
   }, {});
 
@@ -23,13 +23,14 @@ const resolveWorkspaces = (names) => {
 
 module.exports = {
   webpack: (config, options, webpack) => {
-    config.entry.main = ['./src/index.ts'];
     config.output.path = path.resolve(process.cwd(), 'dist');
+    config.entry = { index: './src/index.ts' };
 
     config.resolve.extensions.push('.ts');
     config.resolve.alias = resolveWorkspaces([
-      '@melonproject/graphql-schema',
-      '@melonproject/exchange-aggregator',
+      ['@melonproject/melon.js', 'lib'],
+      ['@melonproject/graphql-schema', 'src'],
+      ['@melonproject/exchange-aggregator', 'src'],
     ]);
 
     config.module.rules.push({
@@ -55,10 +56,7 @@ module.exports = {
 
     config.externals = externals({
       modulesDir: path.resolve(process.cwd(), '..', '..', 'node_modules'),
-      whitelist: [
-        '@melonproject/graphql-schema',
-        '@melonproject/exchange-aggregator',
-      ],
+      whitelist: [/^@melonproject\//],
     });
 
     return config;

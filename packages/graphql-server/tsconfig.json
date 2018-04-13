@@ -5,6 +5,7 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
+      "@melonproject/melon.js": ["../melon.js/lib"],
       "@melonproject/graphql-schema": ["../graphql-schema/src"],
       "@melonproject/exchange-aggregator": ["../exchange-aggregator/src"]
     }

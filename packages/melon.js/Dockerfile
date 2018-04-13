@@ -6,7 +6,6 @@ FROM melonproject/installer:latest AS installer
 FROM melonproject/node:latest as development
 
 COPY --from=installer /app/node_modules /app/node_modules
-COPY --from=installer /app/packages/ipfs-frontend/node_modules /app/packages/ipfs-frontend/node_modules
+COPY --from=installer /app/packages/melon.js/node_modules /app/packages/melon.js/node_modules
 
-WORKDIR /app/packages/ipfs-frontend
-CMD ["yarn", "dev"]
+WORKDIR /app/packages/melon.js

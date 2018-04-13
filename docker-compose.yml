@@ -9,7 +9,7 @@ services:
     volumes:
       - ./packages/graphql-schema/src:/app/packages/graphql-schema/src
       - ./packages/graphql-schema/tests:/app/packages/graphql-schema/tests
-      - ./packages/graphql-schema/typings:/app/packages/graphql-schema/typings
+      # - ./packages/graphql-schema/typings:/app/packages/graphql-schema/typings
       - ./packages/graphql-schema/package.json:/app/packages/graphql-schema/package.json
       - ./packages/graphql-schema/tsconfig.json:/app/packages/graphql-schema/tsconfig.json
       - ./packages/graphql-schema/tslint.json:/app/packages/graphql-schema/tslint.json
@@ -17,6 +17,10 @@ services:
       # Required workspace root files. Delegated for performance.
       - ./.prettierrc:/app/.prettierrc:delegated
       - ./tsconfig.json:/app/tsconfig.json:delegated
+
+      # Required linked packages and workspace files. Delegated for performance.
+      - ./packages/melon.js/lib:/app/packages/melon.js/lib:delegated
+      - ./packages/melon.js/package.json:/app/packages/melon.js/package.json:delegated
 
   graphql-server:
     build:
@@ -36,6 +40,9 @@ services:
       # - ./packages/graphql-server/.env:/app/packages/graphql-server/.env
 
       # Required linked packages and workspace files. Delegated for performance.
+      - ./packages/melon.js/lib:/app/packages/melon.js/lib:delegated
+      - ./packages/melon.js/package.json:/app/packages/melon.js/package.json:delegated
+      - ./packages/melon.js/.babelrc:/app/packages/melon.js/.babelrc:delegated
       - ./packages/graphql-schema/src:/app/packages/graphql-schema/src:delegated
       - ./packages/graphql-schema/package.json:/app/packages/graphql-schema/package.json:delegated
       - ./packages/exchange-aggregator/src:/app/packages/exchange-aggregator/src:delegated
@@ -67,6 +74,8 @@ services:
       # - ./packages/manager-interface/.env:/app/packages/manager-interface/.env
 
       # Required linked packages. Delegated for performance.
+      - ./packages/melon.js/lib:/app/packages/melon.js/lib:delegated
+      - ./packages/melon.js/package.json:/app/packages/melon.js/package.json:delegated
       - ./packages/graphql-schema/src:/app/packages/graphql-schema/src:delegated
       - ./packages/graphql-schema/package.json:/app/packages/graphql-schema/package.json:delegated
       - ./packages/manager-components/src:/app/packages/manager-components/src:delegated

@@ -15,16 +15,16 @@ const withComposedConfig = R.compose(
 );
 
 // Retrieve the absolute path of the linked package.
-const resolveWorkspace = name => {
+const resolveWorkspace = (name, directory) => {
   const [, package] = name.split('/');
-  return path.resolve(__dirname, '..', package, 'src');
+  return path.resolve(__dirname, '..', package, directory);
 };
 
-const resolveWorkspaces = (names) => {
-  const workspaces = names.reduce((carry, current) => {
+const resolveWorkspaces = (pairs) => {
+  const workspaces = pairs.reduce((carry, [name, directory]) => {
     return ({
       ...carry,
-      [current]: resolveWorkspace(current),
+      [name]: resolveWorkspace(name, directory),
     });
   }, {});
 
@@ -41,14 +41,16 @@ module.exports = withComposedConfig({
     configFile: path.resolve(__dirname, 'tsconfig.json'),
   },
   linkedDependencies: [
-    '@melonproject/graphql-schema',
-    '@melonproject/manager-components',
-    '@melonproject/exchange-aggregator',
+    ['@melonproject/melon.js', 'lib'],
+    ['@melonproject/graphql-schema', 'src'],
+    ['@melonproject/manager-components', 'src'],
+    ['@melonproject/exchange-aggregator', 'src'],
   ],
   resolveAliases: resolveWorkspaces([
-    '@melonproject/graphql-schema',
-    '@melonproject/manager-components',
-    '@melonproject/exchange-aggregator',
+    ['@melonproject/melon.js', 'lib'],
+    ['@melonproject/graphql-schema', 'src'],
+    ['@melonproject/manager-components', 'src'],
+    ['@melonproject/exchange-aggregator', 'src'],
   ]),
   distDir: '../dist',
   exportPathMap: () => ({

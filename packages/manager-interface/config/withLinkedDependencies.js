@@ -1,18 +1,28 @@
 const path = require('path');
 
-// Resolve the absolute path for a linked packages.
-const resolveWorkspace = name => {
+// Retrieve the absolute path of the linked package.
+const resolveWorkspace = (name, directory) => {
   const [, package] = name.split('/');
-  return path.resolve(__dirname, '..', package, 'src');
+  return path.resolve(__dirname, '..', '..', package, directory);
+};
+
+const resolveWorkspaces = (pairs) => {
+  const workspaces = pairs.reduce((carry, [name, directory]) => {
+    return ({
+      ...carry,
+      [name]: resolveWorkspace(name, directory),
+    });
+  }, {});
+
+  return workspaces;
 };
 
 module.exports = (nextConfig = {}) => {
   const links = nextConfig.linkedDependencies || [];
-  if (!links || !links.length) {
+  const includes = Object.values(resolveWorkspaces(links));
+  if (!links.length) {
     return nextConfig;
   }
-
-  const includes = links.map(resolveWorkspace);
 
   return Object.assign({}, nextConfig, {
     webpack: (config, options) => {
@@ -32,7 +42,7 @@ module.exports = (nextConfig = {}) => {
           // We only need to add them if the original definition specified
           // any include rules itself. Rules without any defined "includes"
           // apply globally anyways.
-          rule.include.push(includes);
+          rule.include = rule.include.concat(includes);
         }
 
         return rule;
