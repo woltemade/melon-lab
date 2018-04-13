@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "license": "AGPL-3.0",
-  "main": "src",
   "scripts": {
     "clean": "rimraf coverage dist",
     "lint": "tslint -p tsconfig.json",

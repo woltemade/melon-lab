@@ -5,7 +5,8 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@melonproject/graphql-schema": ["../graphql-schema/src"]
+      "@melonproject/graphql-schema": ["../graphql-schema/src"],
+      "@melonproject/exchange-aggregator": ["../exchange-aggregator/src"]
     }
   }
 }

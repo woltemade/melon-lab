@@ -5,8 +5,16 @@ const types = `
 
   scalar Symbol
 
+  type Order {
+    id: String!
+    owner: String!
+    isActive: Boolean!
+    type: String!
+  }
+
   type Subscription {
     price(symbol: Symbol!): String!
+    aggregatedOrderbook(baseTokenAddress: String!, quoteTokenAddress: String!): [Order]
   }
 `;
 

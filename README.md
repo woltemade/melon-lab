@@ -21,6 +21,7 @@
 ```bash
 git checkout git@github.com:melonproject/frontend-lab.git
 cd frontend-lab
+yarn install
 yarn run bootstrap
 yarn run dev
 ```

@@ -9,7 +9,8 @@
     "baseUrl": ".",
     "paths": {
       "@melonproject/graphql-schema": ["../graphql-schema/src"],
-      "@melonproject/manager-components": ["../manager-components/src"]
+      "@melonproject/manager-components": ["../manager-components/src"],
+      "@melonproject/exchange-aggregator": ["../exchange-aggregator/src"]
     }
   }
 }
