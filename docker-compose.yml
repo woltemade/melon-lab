@@ -1,7 +1,7 @@
 version: "3.4"
 
 services:
-  graphql-schema-development:
+  graphql-schema:
     build:
       context: .
       dockerfile: ./packages/graphql-schema/Dockerfile
@@ -18,7 +18,7 @@ services:
       - ./.prettierrc:/app/.prettierrc:delegated
       - ./tsconfig.json:/app/tsconfig.json:delegated
 
-  graphql-server-development:
+  graphql-server:
     build:
       context: .
       dockerfile: ./packages/graphql-server/Dockerfile
@@ -31,13 +31,15 @@ services:
       - ./packages/graphql-server/tsconfig.json:/app/packages/graphql-server/tsconfig.json
       - ./packages/graphql-server/tsconfig.build.json:/app/packages/graphql-server/tsconfig.build.json
       - ./packages/graphql-server/tslint.json:/app/packages/graphql-server/tslint.json
-      - ./packages/graphql-server/nodemon.json:/app/packages/graphql-server/nodemon.json
+      - ./packages/graphql-server/backpack.config.js:/app/packages/graphql-server/backpack.config.js
       - ./packages/graphql-server/.env.defaults:/app/packages/graphql-server/.env.defaults
       # - ./packages/graphql-server/.env:/app/packages/graphql-server/.env
 
       # Required linked packages and workspace files. Delegated for performance.
       - ./packages/graphql-schema/src:/app/packages/graphql-schema/src:delegated
       - ./packages/graphql-schema/package.json:/app/packages/graphql-schema/package.json:delegated
+      - ./packages/exchange-aggregator/src:/app/packages/exchange-aggregator/src:delegated
+      - ./packages/exchange-aggregator/package.json:/app/packages/exchange-aggregator/package.json:delegated
 
       # Required workspace root files. Delegated for performance.
       - ./.prettierrc:/app/.prettierrc:delegated
@@ -47,7 +49,7 @@ services:
     networks:
       - melonproject
 
-  manager-interface-development:
+  manager-interface:
     build:
       context: .
       dockerfile: ./packages/manager-interface/Dockerfile
@@ -69,6 +71,8 @@ services:
       - ./packages/graphql-schema/package.json:/app/packages/graphql-schema/package.json:delegated
       - ./packages/manager-components/src:/app/packages/manager-components/src:delegated
       - ./packages/manager-components/package.json:/app/packages/manager-components/package.json:delegated
+      - ./packages/exchange-aggregator/src:/app/packages/exchange-aggregator/src:delegated
+      - ./packages/exchange-aggregator/package.json:/app/packages/exchange-aggregator/package.json:delegated
 
       # Required workspace root files. Delegated for performance.
       - ./.prettierrc:/app/.prettierrc:delegated
@@ -78,7 +82,7 @@ services:
     networks:
       - melonproject
 
-  manager-components-development:
+  manager-components:
     build:
       context: .
       dockerfile: ./packages/manager-components/Dockerfile
@@ -99,25 +103,6 @@ services:
       - "3060:3060"
     networks:
       - melonproject
-
-  # These services are not really meant to be spinned up. They are here to take
-  # advantage of cached intermediate layers as they are not shared between
-  # docker-compose and docker.
-  manager-interface-production:
-    build:
-      context: .
-      dockerfile: ./packages/manager-interface/Dockerfile
-    image: melonproject/manager-interface:latest
-    # ports:
-    #   - "80:80"
-
-  grapqhl-server-production:
-    build:
-      context: .
-      dockerfile: ./packages/graphql-server/Dockerfile
-    image: melonproject/graphql-server:latest
-    # ports:
-    #   - "3030:3030"
 
 networks:
   melonproject:

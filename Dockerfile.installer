@@ -7,6 +7,7 @@ FROM melonproject/node:latest
 COPY package.json yarn.lock /app/
 
 # copy the package.json of each individual workspace.
+COPY packages/exchange-aggregator/package.json /app/packages/exchange-aggregator/
 COPY packages/graphql-schema/package.json /app/packages/graphql-schema/
 COPY packages/graphql-server/package.json /app/packages/graphql-server/
 COPY packages/manager-components/package.json /app/packages/manager-components/

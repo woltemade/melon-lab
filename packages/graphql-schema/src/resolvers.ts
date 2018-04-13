@@ -1,8 +1,8 @@
 import { getAggregatedObservable } from '@melonproject/exchange-aggregator';
-import * as Rx from 'rxjs';
 import { getParityProvider, getPrice } from '@melonproject/melon.js';
 import { GraphQLScalarType, Kind } from 'graphql';
 import { $$asyncIterator } from 'iterall';
+import * as Rx from 'rxjs';
 
 export const withUnsubscribe = (iterator, callback) => ({
   next() {

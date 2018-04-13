@@ -14,10 +14,10 @@ const withComposedConfig = R.compose(
   withTypeScript,
 );
 
-// Retrieve the relative path of the linked package.
+// Retrieve the absolute path of the linked package.
 const resolveWorkspace = name => {
-  const package = path.dirname(require.resolve(`${name}/package.json`));
-  return path.resolve(package, 'src');
+  const [, package] = name.split('/');
+  return path.resolve(__dirname, '..', package, 'src');
 };
 
 const resolveWorkspaces = (names) => {

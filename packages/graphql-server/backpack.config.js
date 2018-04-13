@@ -4,10 +4,10 @@ const path = require('path');
 const fs = require('fs');
 const externals = require('webpack-node-externals');
 
-// Retrieve the relative path of the linked package.
+// Retrieve the absolute path of the linked package.
 const resolveWorkspace = name => {
-  const module = path.dirname(require.resolve(`${name}/package.json`));
-  return path.resolve(module, 'src');
+  const [, package] = name.split('/');
+  return path.resolve(__dirname, '..', package, 'src');
 };
 
 const resolveWorkspaces = (names) => {

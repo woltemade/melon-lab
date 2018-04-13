@@ -5,6 +5,7 @@
 !packages/
 
 # For some reason we have to do this.
+!packages/exchange-aggregator/Dockerfile
 !packages/graphql-schema/Dockerfile
 !packages/graphql-server/Dockerfile
 !packages/manager-interface/Dockerfile

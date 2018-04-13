@@ -1,16 +1,18 @@
 const path = require('path');
 
+// Resolve the absolute path for a linked packages.
+const resolveWorkspace = name => {
+  const [, package] = name.split('/');
+  return path.resolve(__dirname, '..', package, 'src');
+};
+
 module.exports = (nextConfig = {}) => {
   const links = nextConfig.linkedDependencies || [];
   if (!links || !links.length) {
     return nextConfig;
   }
 
-  // Resolve the absolute path for all linked packages.
-  const includes = links.map(name => {
-    const module = path.dirname(require.resolve(`${name}/package.json`));
-    return path.resolve(module);
-  });
+  const includes = links.map(resolveWorkspace);
 
   return Object.assign({}, nextConfig, {
     webpack: (config, options) => {
