@@ -10,6 +10,7 @@
     "jest": true
   },
   "rules": {
+    "no-unused-vars": 0,
     "max-params": ["warn", 8],
     "comma-dangle": [
       "error",
