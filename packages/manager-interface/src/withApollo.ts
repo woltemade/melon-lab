@@ -2,10 +2,8 @@ import {
   InMemoryCache,
   IntrospectionFragmentMatcher,
 } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
 import { SchemaLink } from 'apollo-link-schema';
 import { createWebWorkerLink } from 'apollo-link-webworker';
-import { WebSocketLink } from 'apollo-link-ws';
 import withApollo from 'next-with-apollo';
 import context from './graphql/context';
 import schema from './graphql/schema';

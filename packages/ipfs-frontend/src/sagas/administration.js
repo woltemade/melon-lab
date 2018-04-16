@@ -1,9 +1,9 @@
 import { takeLatest, call, put, select } from "redux-saga/effects";
 
 import {
-  toggleSubscription,
+  toggleInvestment,
   toggleRedemption,
-  convertUnclaimedRewards,
+  calcSharePriceAndConvertFees,
   shutDownFund,
 } from "@melonproject/melon.js";
 
@@ -19,7 +19,7 @@ function* toggleSubscriptionSaga() {
 
   function* transaction(environment) {
     const fundAddress = yield select(state => state.fund.address);
-    yield call(toggleSubscription, environment, { fundAddress });
+    yield call(toggleInvestment, environment, { fundAddress });
     yield put(modalActions.close());
     yield put(actions.toggleSubscriptionSucceeded(!subscriptionAllowed));
   }
@@ -59,7 +59,7 @@ function* toggleRedemptionSaga() {
 function* convertUnclaimedRewardsSaga() {
   function* transaction(environment) {
     const fundAddress = yield select(state => state.fund.address);
-    yield call(convertUnclaimedRewards, environment, { fundAddress });
+    yield call(calcSharePriceAndConvertFees, environment, { fundAddress });
     yield put(modalActions.close());
     yield put(actions.convertUnclaimedRewardsSucceeded());
   }

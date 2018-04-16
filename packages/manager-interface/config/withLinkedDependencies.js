@@ -17,10 +17,35 @@ const resolveWorkspaces = (pairs) => {
   return workspaces;
 };
 
+const addIncludes = (includes) => {
+  const addIncludesRecursive = (rule) => {
+    if (rule.loader === 'hot-self-accept-loader') {
+      return rule;
+    }
+
+    if (rule.include && rule.include.length) {
+      // Add our custom include rules including linked node modules.
+      // We only need to add them if the original definition specified
+      // any include rules itself. Rules without any defined "includes"
+      // apply globally anyways.
+      rule.include = typeof rule.include === 'string' ? [rule.include] : rule.include;
+      rule.include = rule.include.concat(includes);
+    }
+
+    if (rule.oneOf && rule.oneOf.length) {
+      rule.oneOf = rule.oneOf.map(addIncludesRecursive);
+    }
+
+    return rule;
+  };
+
+  return addIncludesRecursive;
+};
+
 module.exports = (nextConfig = {}) => {
-  const links = nextConfig.linkedDependencies || [];
-  const includes = Object.values(resolveWorkspaces(links));
-  if (!links.length) {
+  const links = resolveWorkspaces(nextConfig.linkedDependencies || {});
+  const includes = Object.values(links);
+  if (!includes.length) {
     return nextConfig;
   }
 
@@ -31,22 +56,12 @@ module.exports = (nextConfig = {}) => {
         config = nextConfig.webpack(config, options);
       }
 
-      // Properly resolve symlinks.
-      config.module.rules.map(rule => {
-        if (rule.loader === 'hot-self-accept-loader') {
-          return rule;
-        }
+      config.resolve.alias = {
+        ...links,
+        ...(config.resolve.alias || {}),
+      };
 
-        if (rule.include && rule.include.length) {
-          // Add our custom include rules including linked node modules.
-          // We only need to add them if the original definition specified
-          // any include rules itself. Rules without any defined "includes"
-          // apply globally anyways.
-          rule.include = rule.include.concat(includes);
-        }
-
-        return rule;
-      });
+      config.module.rules.map(addIncludes(includes));
 
       return config;
     },

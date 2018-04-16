@@ -14,15 +14,11 @@ module.exports = (nextConfig = {}) => {
       config.module.rules.push({
         test: nextConfig.webWorkers,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: 'worker-loader',
-            options: {
-              name: 'static/[name].[hash].js',
-              publicPath: `/_next/`,
-            }
-          },
-        ],
+        loader: 'worker-loader',
+        options: {
+          name: 'static/[name].[hash].js',
+          publicPath: `/_next/`,
+        },
       });
 
       return config;

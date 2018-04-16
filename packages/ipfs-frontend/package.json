@@ -2,11 +2,12 @@
   "name": "@melonproject/ipfs-frontend",
   "version": "0.0.0",
   "private": true,
-  "license": "AGPL-3.0",  
+  "license": "AGPL-3.0",
+
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && npm run-script build:postprocess",
-    "build:dev": "react-scripts build && npm run rename-absolute-path",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build && npm run-script build:postprocess",
+    "build:dev": "react-app-rewired build && npm run rename-absolute-path",
     "build:postprocess": "npm run-script delete-maps && npm run-script rename-absolute-path",
     "delete-maps": "find ./build -name '*.map' -delete",
     "rename-absolute-path": "sed -i -e 's@/static/js@./static/js@g' ./build/index.html",
@@ -14,13 +15,12 @@
     "cypress:run": "cypress run --record",
     "deploy": "ipfs add -r public",
     "deploy:gh-pages": "npm run build:dev && gh-pages -d build",
-    "eject": "react-scripts eject",
     "lint": "eslint ./",
     "semantic:build": "cd public/semantic && gulp build",
     "semantic:watch": "cd public/semantic && gulp",
     "storybook:build": "build-storybook -s public -o .out -c tests/storybook",
     "storybook": "start-storybook -p 9001 -c tests/storybook -s public",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-app-rewired test --env=jsdom",
     "check": "npm-check",
     "check:update": "npm-check -u ",
     "snyk-protect": "snyk protect"
@@ -32,8 +32,15 @@
     "Jenna Zenk <jenna@melonport.com>"
   ],
   "dependencies": {
-    "@melonproject/melon.js": "0.7.6",
+    "@melonproject/graphql-schema": "^0.0.0",
+    "@melonproject/melon.js": "^0.7.6",
     "@melonproject/protocol": "0.7.2-alpha.1",
+    "apollo": "^0.2.2",
+    "apollo-cache-inmemory": "^1.1.12",
+    "apollo-client": "^2.2.8",
+    "apollo-link-schema": "^1.1.0",
+    "apollo-link-webworker": "^0.1.3",
+    "apollo-react": "^0.7.1",
     "babel-polyfill": "^6.23.0",
     "bignumber.js": "^5.0.0",
     "bn.js": "^4.11.8",
@@ -78,8 +85,10 @@
     "eslint-plugin-security": "^1.4.0",
     "gh-pages": "^1.1.0",
     "npm-check": "^5.5.2",
+    "react-app-rewired": "^1.5.0",
     "snyk": "^1.68.0",
-    "wait-on": "^2.0.2"
+    "wait-on": "^2.0.2",
+    "worker-loader": "^1.1.1"
   },
   "snyk": true
 }

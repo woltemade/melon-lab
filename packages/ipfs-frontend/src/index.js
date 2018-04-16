@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import ReactModal from "react-modal";
-import melonJsPkg from "@melonproject/melon.js/package.json";
+import melonJsPkg from "@melonproject/melon.js/../package.json";
 import melonProtocolPkg from "@melonproject/protocol/package.json";
 import addressBook from "@melonproject/protocol/addressBook.json";
 
