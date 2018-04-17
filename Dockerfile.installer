@@ -1,11 +1,19 @@
 # -----------------------------------------------------------------------------
 # installer
 # -----------------------------------------------------------------------------
-FROM melonproject/node:latest
+FROM node:9.7.0-alpine
+WORKDIR /app
 
 # Copy whole workspace into the container. This seems crazy but
 # is actually more efficient than copying each package.json
 # individually.
 COPY . /app
 
-RUN yarn install --ignore-engines --frozen-lockfile --pure-lockfile
+# Install system and node dependencies and clean up afterwards.
+RUN \
+  apk add --update --no-cache --virtual .apk git && \
+  yarn install --ignore-engines --frozen-lockfile --pure-lockfile --production && \
+  cp -R node_modules node_modules_production && \
+  yarn install --ignore-engines --frozen-lockfile --pure-lockfile && \
+  yarn cache clean && \
+  apk del .apk

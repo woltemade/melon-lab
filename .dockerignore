@@ -1,15 +1,15 @@
 # Ignore as many files as possible. This keeps the build context small.
 *
 
-# White list package directories.
-!packages/
-
-# For some reason we have to do this.
-!packages/graphql-server/Dockerfile
-!packages/manager-interface/Dockerfile
-!packages/manager-components/Dockerfile
+# White-list packages.
+!packages/exchange-aggregator/package.json
+!packages/graphql-schema/package.json
+!packages/graphql-server/package.json
+!packages/ipfs-frontend/package.json
+!packages/manager-components/package.json
+!packages/manager-interface/package.json
+!packages/melon.js/package.json
 
 # White-list workspace root.
 !yarn.lock
 !package.json
-!tsconfig.json

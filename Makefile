@@ -3,7 +3,6 @@
 # -----------------------------------------------------------------------------
 .PHONY: setup
 setup:
-	@docker build -f Dockerfile.node -t melonproject/node:latest .
 	@docker build -f Dockerfile.installer -t melonproject/installer:latest .
 
 .PHONY: network
