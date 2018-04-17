@@ -1,5 +1,3 @@
-import { getRanking, getEnvironment } from "@melonproject/melon.js";
-
 import { takeLatest, call, put, select, take } from "redux-saga/effects";
 import { actions, types } from "../actions/ranking";
 import { types as ethereumTypes } from "../actions/ethereum";

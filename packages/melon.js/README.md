@@ -153,10 +153,6 @@ to the contracts. But you can be certain: Calls are free.
 
 By interacting with the smart contracts, we have 2 levels of testing:
 
-- `tests/unit/` Jest Unit-tests: Each function as isolated as possible with mocks.
-  We are not super strict here and allow that one unit depends on another as
-  long as the interaction with the smart contracts is mocked. The unit test
-  directory reflects the structure of the lib directory.
 - `tests/integration/` Jasemine Integration tests: Interact with real smart contracts.
   Be careful with those: They connect to a real unlocked node that you need to set up (see below).
 - `tests/shared/` Shared expectations. Since Jest & Jasemine have very similar 

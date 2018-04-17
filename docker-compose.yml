@@ -36,8 +36,10 @@ services:
       dockerfile: ./packages/exchange-aggregator/Dockerfile
     volumes: 
       - *workspace-prettier
+      - *workspace-tsconfig
       - ./packages/exchange-aggregator/src:/app/packages/exchange-aggregator/src
       - ./packages/exchange-aggregator/package.json:/app/packages/exchange-aggregator/package.json
+      - ./packages/exchange-aggregator/tsconfig.json:/app/packages/exchange-aggregator/tsconfig.json
 
   graphql-schema:
     build:

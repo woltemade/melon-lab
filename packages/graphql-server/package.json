@@ -42,6 +42,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "jest": {
+    "testEnvironment": "node",
     "setupFiles": [
       "<rootDir>/tests/config/jest.setup"
     ],

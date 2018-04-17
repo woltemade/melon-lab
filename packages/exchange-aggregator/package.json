@@ -23,10 +23,41 @@
     "websocket": "^1.0.25"
   },
   "devDependencies": {
+    "jest": "^22.4.3",
+    "jest-cli": "^22.4.3",
     "prettier": "^1.11.1",
     "rimraf": "^2.6.2",
     "ts-jest": "^22.4.2",
     "tslint": "^5.9.1",
     "typescript": "^2.8.1"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "setupFiles": [
+      "<rootDir>/tests/config/jest.setup"
+    ],
+    "transform": {
+      "^.+\\.(jsx?|tsx?)$": "ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!@melonproject/)"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleDirectories": [
+      "node_modules/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig.json"
+      }
+    }
   }
 }

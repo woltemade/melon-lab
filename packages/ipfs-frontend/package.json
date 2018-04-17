@@ -3,7 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "license": "AGPL-3.0",
-
+  "workspaces": {
+    "nohoist": [
+      "react-scripts",
+      "react-scripts/**"
+    ]
+  },
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build && npm run-script build:postprocess",
@@ -13,16 +18,12 @@
     "rename-absolute-path": "sed -i -e 's@/static/js@./static/js@g' ./build/index.html",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --record",
-    "deploy": "ipfs add -r public",
-    "deploy:gh-pages": "npm run build:dev && gh-pages -d build",
     "lint": "eslint ./",
     "semantic:build": "cd public/semantic && gulp build",
     "semantic:watch": "cd public/semantic && gulp",
     "storybook:build": "build-storybook -s public -o .out -c tests/storybook",
     "storybook": "start-storybook -p 9001 -c tests/storybook -s public",
     "test": "react-app-rewired test --env=jsdom",
-    "check": "npm-check",
-    "check:update": "npm-check -u ",
     "snyk-protect": "snyk protect"
   },
   "author": "Melonport <team@melonport.com>",
@@ -32,7 +33,6 @@
     "Jenna Zenk <jenna@melonport.com>"
   ],
   "dependencies": {
-    "@melonproject/graphql-schema": "^0.0.0",
     "@melonproject/melon.js": "^0.7.6",
     "@melonproject/protocol": "0.7.2-alpha.1",
     "apollo": "^0.2.2",
@@ -51,6 +51,7 @@
     "moment": "^2.20.1",
     "ramda": "^0.25.0",
     "react": "^16.2.0",
+    "react-app-rewired": "^1.0.17",
     "react-cntdwn": "^0.3.0",
     "react-dom": "^16.2.0",
     "react-highlighter": "^0.4.2",
@@ -71,24 +72,23 @@
     "@storybook/addon-info": "^3.3.14",
     "@storybook/addon-knobs": "^3.3.14",
     "@storybook/react": "^3.3.14",
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "eslint": "^4.3.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-prettier": "^2.6.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0",
-    "eslint-plugin-security": "^1.4.0",
     "gh-pages": "^1.1.0",
-    "npm-check": "^5.5.2",
-    "react-app-rewired": "^1.5.0",
     "snyk": "^1.68.0",
     "wait-on": "^2.0.2",
     "worker-loader": "^1.1.1"
   },
-  "snyk": true
+  "snyk": true,
+  "browserslist": {
+    "development": [
+      "last 2 chrome versions",
+      "last 2 firefox versions",
+      "last 2 edge versions"
+    ],
+    "production": [
+      ">1%",
+      "last 4 versions",
+      "Firefox ESR",
+      "not ie < 11"
+    ]
+  }
 }

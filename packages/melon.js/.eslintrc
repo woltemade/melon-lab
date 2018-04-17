@@ -1,14 +1,11 @@
 {
   "parser": "babel-eslint",
-  "plugins": ["flowtype"],
+  "plugins": ["flowtype", "prettier"],
   "extends": [
-    "airbnb",
+    "airbnb-base",
     "plugin:prettier/recommended",
     "plugin:flowtype/recommended"
   ],
-  "env": {
-    "jest": true
-  },
   "rules": {
     "no-unused-vars": 0,
     "max-params": ["warn", 8],

@@ -1,16 +1,12 @@
 # -----------------------------------------------------------------------------
 # SETUP
 # -----------------------------------------------------------------------------
-.PHONY: setup
-setup:
-	@docker build -f Dockerfile.installer -t melonproject/installer:latest .
-
 .PHONY: network
 network:
 	@docker network create melonproject > /dev/null 2> /dev/null || true
 
 .PHONY: bootstrap
-bootstrap: setup network
+bootstrap: network
 
 # -----------------------------------------------------------------------------
 # BUILD
@@ -20,21 +16,30 @@ all: setup build lint test
 
 .PHONY: build
 build:
+	@docker build -f Dockerfile.installer -t melonproject/installer:latest .
 	@docker-compose build
 
 .PHONY: lint
 lint:
-	@docker-compose run --rm graphql-server-development yarn lint
-	@docker-compose run --rm manager-interface-development yarn lint
-	@docker-compose run --rm manager-components-development yarn lint
-	# TODO: Add remaining packages.
+	@docker-compose run --rm exchange-aggregator yarn lint
+	@docker-compose run --rm graphql-server yarn lint
+	@docker-compose run --rm graphql-schema yarn lint
+	@docker-compose run --rm manager-interface yarn lint
+	@docker-compose run --rm manager-components yarn lint
+	# TODO: Fix tests and linting in imported projects.
+	# @docker-compose run --rm melon-js yarn lint
+	# @docker-compose run --rm ipfs-frontend yarn lint
 
 .PHONY: test
 test:
-	@docker-compose run --rm graphql-server-development yarn test
-	@docker-compose run --rm manager-interface-development yarn test
-	@docker-compose run --rm manager-components-development yarn test
-	# TODO: Add remaining packages.
+	@docker-compose run --rm exchange-aggregator yarn test
+	@docker-compose run --rm graphql-server yarn test
+	@docker-compose run --rm graphql-schema yarn test
+	@docker-compose run --rm manager-interface yarn test
+	@docker-compose run --rm manager-components yarn test
+	# TODO: Fix tests and linting in imported projects.
+	# @docker-compose run --rm melon-js yarn test
+	# @docker-compose run --rm ipfs-frontend yarn test
 
 # -----------------------------------------------------------------------------
 # DEVELOPMENT

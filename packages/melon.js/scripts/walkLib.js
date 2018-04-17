@@ -33,7 +33,7 @@ walker.on('end', () => {
 
   fs.appendFileSync(fd, '\n// Export named functions.\n');
   fs.appendFileSync(fd, 'export {\n');
-  functions.forEach((f) => {
+  functions.forEach(f => {
     fs.appendFileSync(fd, `  ${f.name},\n`);
   });
   fs.appendFileSync(fd, '};\n');

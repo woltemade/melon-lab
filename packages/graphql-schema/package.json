@@ -30,6 +30,7 @@
     "typescript": "^2.8.1"
   },
   "jest": {
+    "testEnvironment": "node",
     "setupFiles": [
       "<rootDir>/tests/config/jest.setup"
     ],
