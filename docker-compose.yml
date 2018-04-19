@@ -2,6 +2,7 @@ version: "3.4"
 
 # Volume definitions for common workspace root dependencies.
 x-workspace-prettier: &workspace-prettier ./.prettierrc:/app/.prettierrc:delegated
+x-workspace-modules: &workspace-modules ./node_modules:/app/node_modules:delegated
 x-workspace-tsconfig: &workspace-tsconfig ./tsconfig.json:/app/tsconfig.json:delegated
 
 # Volume definitions for common linked packages.
@@ -17,7 +18,7 @@ services:
     build:
       context: .
       dockerfile: ./packages/melon.js/Dockerfile
-    volumes: 
+    volumes:
       - *workspace-prettier
       - ./packages/melon.js/lib:/app/packages/melon.js/lib
       - ./packages/melon.js/scripts:/app/packages/melon.js/scripts
@@ -34,7 +35,7 @@ services:
     build:
       context: .
       dockerfile: ./packages/exchange-aggregator/Dockerfile
-    volumes: 
+    volumes:
       - *workspace-prettier
       - *workspace-tsconfig
       - ./packages/exchange-aggregator/src:/app/packages/exchange-aggregator/src
@@ -45,7 +46,7 @@ services:
     build:
       context: .
       dockerfile: ./packages/graphql-schema/Dockerfile
-    volumes: 
+    volumes:
       - *workspace-prettier
       - *workspace-tsconfig
       - *package-melon-js
@@ -64,6 +65,7 @@ services:
       target: development
     volumes:
       - *workspace-prettier
+      - *workspace-modules
       - *workspace-tsconfig
       - *package-melon-js
       - *package-graphql-schema
