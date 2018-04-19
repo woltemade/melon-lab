@@ -93,7 +93,7 @@
     "walk": "^2.3.9"
   },
   "dependencies": {
-    "@melonproject/protocol": "0.7.2-alpha.1",
+    "@melonproject/protocol": "0.8.0-alpha.1",
     "@parity/api": "^2.1.5",
     "bignumber.js": "^5.0.0",
     "bip39": "^2.4.0",
