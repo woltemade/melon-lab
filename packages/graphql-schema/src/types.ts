@@ -5,11 +5,21 @@ const types = `
 
   scalar Symbol
 
+  type HowMuchOfAsset {
+    symbol: Symbol!
+    howMuch: String!
+  }
+
   type Order {
     id: String!
     owner: String!
     isActive: Boolean!
     type: String!
+    buy: HowMuchOfAsset!
+    sell: HowMuchOfAsset!
+    price: String!
+    exchangeContractAddress: String!
+    exchange: String!
   }
 
   type Subscription {
