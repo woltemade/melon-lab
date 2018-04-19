@@ -5,17 +5,36 @@ import getObservableEtherDelta from './etherdelta/getObservableEtherDelta';
 import getObservableRelayer from './0x/getObservableRelayer';
 import getExchangeEndpoint from '../getExchangeEndpoint';
 
-const getAggregatedObservable = (baseTokenAddress, quoteTokenAddress) => {
-  const aggregatedObservables = Rx.Observable.merge(
+type ExchangeEnum = 'RADAR_RELAY' | 'ETHER_DELTA';
+
+type ExchangeCreator = (
+  baseTokenAddress: string,
+  quoteTokenAddress: string,
+) => Rx.Observable<any>;
+
+const exchangeToCreatorFunction: { [P in ExchangeEnum]: ExchangeCreator } = {
+  RADAR_RELAY: (baseTokenAddress, quoteTokenAddress) =>
     getObservableRelayer(
       getExchangeEndpoint.live.radarRelay(),
       baseTokenAddress,
       quoteTokenAddress,
     ),
+  ETHER_DELTA: (baseTokenAddress, quoteTokenAddress) =>
     getObservableEtherDelta(
       getExchangeEndpoint.live.etherDelta(baseTokenAddress),
     ),
+};
+
+const getAggregatedObservable = (
+  baseTokenAddress,
+  quoteTokenAddress,
+  exchanges: ExchangeEnum[],
+) => {
+  const selectedExchanges = exchanges.map(name =>
+    exchangeToCreatorFunction[name](baseTokenAddress, quoteTokenAddress),
   );
+
+  const aggregatedObservables = Rx.Observable.merge(...selectedExchanges);
 
   const scanned = aggregatedObservables.scan(
     (currentCombinedOrderbook, observedUpdatedOrderbook) => {

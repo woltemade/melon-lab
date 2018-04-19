@@ -49,13 +49,12 @@ const resolvers = {
   },
   Subscription: {
     price: {
-      resolve: (price) => price,
+      resolve: price => price,
       subscribe: async (parent, args, context, info) => {
         const channel = `price:${args.symbol}`;
         const environment = await getParityProvider();
 
-        const observable = Rx.Observable
-          .interval(2000)
+        const observable = Rx.Observable.interval(2000)
           .startWith(-1)
           .flatMap(() => {
             const price = getPrice(environment, args.symbol);
@@ -63,9 +62,13 @@ const resolvers = {
           });
 
         const iterator = context.pubsub.asyncIterator(channel);
-        const subscription = observable.subscribe((price) => {
-          context.pubsub.publish(channel, price);
-        }, iterator.throw, iterator.return);
+        const subscription = observable.subscribe(
+          price => {
+            context.pubsub.publish(channel, price);
+          },
+          iterator.throw,
+          iterator.return,
+        );
 
         return withUnsubscribe(iterator, () => {
           subscription.unsubscribe();
@@ -73,7 +76,7 @@ const resolvers = {
       },
     },
     aggregatedOrderbook: {
-      resolve: (orderbook) => orderbook,
+      resolve: orderbook => orderbook,
       subscribe: (parent, args, context, info) => {
         const channel = `orderbook:${args.baseTokenAddress}/${
           args.quoteTokenAddress
@@ -82,17 +85,22 @@ const resolvers = {
         const observable = getAggregatedObservable(
           args.baseTokenAddress,
           args.quoteTokenAddress,
+          args.exchanges,
         );
 
         const iterator = context.pubsub.asyncIterator(channel);
-        const subscription = observable.subscribe((orderbook) => {
-          context.pubsub.publish(channel, orderbook);
-        }, iterator.throw, iterator.return);
+        const subscription = observable.subscribe(
+          orderbook => {
+            context.pubsub.publish(channel, orderbook);
+          },
+          iterator.throw,
+          iterator.return,
+        );
 
         return withUnsubscribe(iterator, () => {
           subscription.unsubscribe();
         });
-      }
+      },
     },
   },
 };
