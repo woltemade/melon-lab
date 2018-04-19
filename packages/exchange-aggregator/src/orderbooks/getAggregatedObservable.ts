@@ -3,9 +3,10 @@ import { mapAccum } from 'ramda';
 import * as BigNumber from 'bignumber.js';
 import getObservableEtherDelta from './etherdelta/getObservableEtherDelta';
 import getObservableRelayer from './0x/getObservableRelayer';
+import getObservableOasisDex from './oasisDex/getObservableOasisDex';
 import getExchangeEndpoint from '../getExchangeEndpoint';
 
-type ExchangeEnum = 'RADAR_RELAY' | 'ETHER_DELTA';
+type ExchangeEnum = 'RADAR_RELAY' | 'ETHER_DELTA' | 'OASIS_DEX';
 
 type ExchangeCreator = (
   baseTokenAddress: string,
@@ -23,6 +24,8 @@ const exchangeToCreatorFunction: { [P in ExchangeEnum]: ExchangeCreator } = {
     getObservableEtherDelta(
       getExchangeEndpoint.live.etherDelta(baseTokenAddress),
     ),
+  OASIS_DEX: (baseTokenAddress, quoteTokenAddress) =>
+    getObservableOasisDex(baseTokenAddress, quoteTokenAddress),
 };
 
 const getAggregatedObservable = (
