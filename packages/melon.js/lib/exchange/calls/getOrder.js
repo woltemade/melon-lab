@@ -35,15 +35,14 @@ const getOrder = async (environment: Environment, { id }): Promise<Order> => {
   const enhancedOrder = {
     id,
     owner,
-    isActive,
+    isActive:
+      isActive &&
+      sellWhichToken !== '0x0000000000000000000000000000000000000000' &&
+      buyWhichToken !== '0x0000000000000000000000000000000000000000',
   };
 
   // inactive orders have token set to 0x0000... so only enhance active orders
-  if (
-    isActive &&
-    sellWhichToken !== '0x0000000000000000000000000000000000000000' &&
-    buyWhichToken !== '0x0000000000000000000000000000000000000000'
-  ) {
+  if (isActive) {
     const sellSymbol = getSymbol(config, sellWhichToken);
     const buySymbol = getSymbol(config, buyWhichToken);
 
