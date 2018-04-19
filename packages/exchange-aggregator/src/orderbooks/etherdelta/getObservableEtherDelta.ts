@@ -31,9 +31,8 @@ const toReadable = (quantity, tokenSymbol) => {
 
 const getEtherDeltaOrderbook = async endpoint => {
   const response = await axios(endpoint);
-  const rawOrderbook = await response.json();
 
-  const bids = rawOrderbook.buys.map(order => ({
+  const bids = response.data.buys.map(order => ({
     id: order.id,
     owner: order.user,
     isActive: true,
@@ -52,7 +51,7 @@ const getEtherDeltaOrderbook = async endpoint => {
     exchangeContractAddress: '0x8d12A197cB00D4747a1fe03395095ce2A5CC6819',
     exchange: 'ETHER_DELTA',
   }));
-  const asks = rawOrderbook.sells.map(order => ({
+  const asks = response.data.sells.map(order => ({
     id: order.id,
     owner: order.user,
     isActive: true,
