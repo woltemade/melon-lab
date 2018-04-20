@@ -5,6 +5,10 @@
 network:
 	@docker network create melonproject > /dev/null 2> /dev/null || true
 
+.PHONY: install
+install:
+	@docker build -f Dockerfile.installer -t melonproject/installer:latest .
+
 .PHONY: bootstrap
 bootstrap: network
 
@@ -12,11 +16,10 @@ bootstrap: network
 # BUILD
 # -----------------------------------------------------------------------------
 .PHONY: all
-all: setup build lint test
+all: install build lint test
 
 .PHONY: build
 build:
-	@docker build -f Dockerfile.installer -t melonproject/installer:latest .
 	@docker-compose build
 
 .PHONY: lint
