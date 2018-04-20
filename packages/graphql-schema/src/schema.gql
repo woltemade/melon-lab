@@ -1,0 +1,22 @@
+#import "./types/Symbol.gql"
+#import "./types/Order.gql"
+#import "./types/ExchangeEnum.gql"
+#import "./types/HowMuchOfAsset.gql"
+
+type Query {
+  price(symbol: Symbol!): String!
+}
+
+type Subscription {
+  price(symbol: Symbol!): String!
+  aggregatedOrderbook(
+    baseTokenAddress: String!
+    quoteTokenAddress: String!
+    exchanges: [ExchangeEnum]
+  ): [Order]
+}
+
+schema {
+  query: Query
+  subscription: Subscription
+}

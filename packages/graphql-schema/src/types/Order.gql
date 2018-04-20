@@ -1,8 +1,3 @@
-type HowMuchOfAsset {
-  symbol: Symbol!
-  howMuch: String!
-}
-
 type Order {
   id: String!
   owner: String!
@@ -11,7 +6,6 @@ type Order {
   buy: HowMuchOfAsset!
   sell: HowMuchOfAsset!
   price: String!
-
   exchangeContractAddress: String
   exchange: String
   cumulativeVolume: String

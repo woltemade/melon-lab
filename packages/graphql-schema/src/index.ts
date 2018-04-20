@@ -1,19 +1,19 @@
 import { GraphQLSchema } from 'graphql';
+import { PubSub } from 'graphql-subscriptions';
 import { makeExecutableSchema } from 'graphql-tools';
 import resolvers from './resolvers';
+import * as typeDefs from './schema.gql';
 
-import * as Order from './types/Order.gql';
-import * as Query from './types/Query.gql';
-import * as Schema from './types/Schema.gql';
-import * as Subscription from './types/Subscription.gql';
-import * as Symbol from './types/Symbol.gql';
+export interface IContext {
+  pubsub: PubSub;
+}
 
-export const makeContext = pubsub => ({
+export const makeContext = (pubsub: PubSub): IContext => ({
   pubsub,
 });
 
 export const makeSchema = (): GraphQLSchema =>
   makeExecutableSchema({
-    typeDefs: [Symbol, Order, Query, Schema, Subscription],
+    typeDefs,
     resolvers,
   });

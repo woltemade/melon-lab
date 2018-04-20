@@ -74,16 +74,13 @@ const getEtherDeltaOrderbook = async endpoint => {
   return orderbook;
 };
 
-const getObservableEtherDelta = endpoint =>
-  Rx.Observable.create(async observer => {
-    observer.next(await getEtherDeltaOrderbook(endpoint));
+const getObservableEtherDelta = endpoint => {
+  const promiseOrderbook = () =>
+    Rx.Observable.fromPromise(getEtherDeltaOrderbook(endpoint));
 
-    const interval = setInterval(
-      async () => observer.next(await getEtherDeltaOrderbook(endpoint)),
-      10 * 1000,
-    );
-
-    return () => clearInterval(interval);
-  });
+  return Rx.Observable.interval(10000)
+    .startWith(-1)
+    .flatMap(promiseOrderbook);
+};
 
 export default getObservableEtherDelta;

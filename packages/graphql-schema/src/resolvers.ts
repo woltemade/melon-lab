@@ -1,47 +1,29 @@
 import { getAggregatedObservable } from '@melonproject/exchange-aggregator';
 import { getParityProvider, getPrice } from '@melonproject/melon.js';
 import { GraphQLScalarType, Kind } from 'graphql';
-import { $$asyncIterator } from 'iterall';
 import * as Rx from 'rxjs';
-
-export const withUnsubscribe = (iterator, callback) => ({
-  next() {
-    return iterator.next();
-  },
-  return() {
-    callback();
-    return iterator.return();
-  },
-  throw(error) {
-    return iterator.throw(error);
-  },
-  [$$asyncIterator]() {
-    return this;
-  },
-});
+import { IContext } from './index';
+import withUnsubscribe from './utils/withUnsubscribe';
 
 const resolvers = {
   Symbol: new GraphQLScalarType({
     name: 'Symbol',
-    parseValue(value) {
-      return value;
-    },
-    serialize(value) {
-      return value.toString();
-    },
-    parseLiteral(ast) {
+    parseValue: value => value,
+    serialize: value => value.toString(),
+    parseLiteral: ast => {
       if (ast.kind === Kind.STRING) {
         if (ast.value.length > 10) {
-          throw new TypeError('Literal: Symbols are shorter than 6 chars');
+          throw new TypeError('Symbols have to be shorter than 6 characters.');
         } else {
           return ast.value.toString();
         }
       }
+
       return null;
     },
   }),
   Query: {
-    price: async (parent, args, context) => {
+    price: async (parent, args, context: IContext) => {
       const environment = await getParityProvider();
       const price = await getPrice(environment, args.symbol);
       return price;
@@ -49,35 +31,34 @@ const resolvers = {
   },
   Subscription: {
     price: {
-      resolve: price => price,
-      subscribe: async (parent, args, context, info) => {
+      resolve: (price: number): number => price,
+      subscribe: (parent, args, context: IContext) => {
         const channel = `price:${args.symbol}`;
-        const environment = await getParityProvider();
 
-        const observable = Rx.Observable.interval(2000)
-          .startWith(-1)
-          .flatMap(() => {
-            const price = getPrice(environment, args.symbol);
-            return Rx.Observable.fromPromise(price);
-          });
+        const promisePrice = environment => () =>
+          Rx.Observable.fromPromise(getPrice(environment, args.symbol));
 
-        const iterator = context.pubsub.asyncIterator(channel);
+        const pollPrice = environment =>
+          Rx.Observable.interval(10000)
+            .startWith(-1)
+            .flatMap(promisePrice(environment));
+
+        const usingEnvironment = Rx.Observable.fromPromise(getParityProvider());
+        const observable = usingEnvironment.switchMap(pollPrice);
+
+        const iterator = context.pubsub.asyncIterator<number>(channel);
         const subscription = observable.subscribe(
-          price => {
-            context.pubsub.publish(channel, price);
-          },
+          price => context.pubsub.publish(channel, price),
           iterator.throw,
           iterator.return,
         );
 
-        return withUnsubscribe(iterator, () => {
-          subscription.unsubscribe();
-        });
+        return withUnsubscribe(iterator, subscription.unsubscribe);
       },
     },
     aggregatedOrderbook: {
       resolve: orderbook => orderbook,
-      subscribe: (parent, args, context, info) => {
+      subscribe: (parent, args, context: IContext) => {
         const channel = `orderbook:${args.baseTokenAddress}/${
           args.quoteTokenAddress
         }`;
@@ -90,16 +71,12 @@ const resolvers = {
 
         const iterator = context.pubsub.asyncIterator(channel);
         const subscription = observable.subscribe(
-          orderbook => {
-            context.pubsub.publish(channel, orderbook);
-          },
+          orderbook => context.pubsub.publish(channel, orderbook),
           iterator.throw,
           iterator.return,
         );
 
-        return withUnsubscribe(iterator, () => {
-          subscription.unsubscribe();
-        });
+        return withUnsubscribe(iterator, subscription.unsubscribe);
       },
     },
   },
