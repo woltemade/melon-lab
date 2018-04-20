@@ -1,6 +1,8 @@
-import React from "react";
-import BigNumber from "bignumber.js";
-import { Grid, Image } from "semantic-ui-react";
+import React from 'react';
+import BigNumber from 'bignumber.js';
+import { Grid, Image } from 'semantic-ui-react';
+import { Subscription } from 'react-apollo';
+import gql from 'graphql-tag';
 
 const getBuyRowStyle = (
   cumulativeVolume,
@@ -14,9 +16,9 @@ const getBuyRowStyle = (
   const reverse = new BigNumber(100).minus(percentage);
   return {
     background: `linear-gradient(to right, rgba(201, 88, 88,0) 0%, rgba(201, 88, 88,0) ${reverse}%, rgba(201, 88, 88,0.3) ${reverse}%, rgba(201, 88, 88,0.3) 100%)`,
-    cursor: isReadyToTrade ? "pointer" : "auto",
+    cursor: isReadyToTrade ? 'pointer' : 'auto',
     padding: 0,
-    borderBottom: isLast ? "none" : "1px solid rgba(34, 36, 38, 0.15)",
+    borderBottom: isLast ? 'none' : '1px solid rgba(34, 36, 38, 0.15)',
   };
 };
 
@@ -31,18 +33,18 @@ const getSellRowStyle = (
     .times(100);
   return {
     background: `linear-gradient(to right, rgba(71, 161, 71,0.3) 0%, rgba(71, 161, 71,0.3) ${percentage}%, rgba(71, 161, 71,0) ${percentage}%, rgba(71, 161, 71,0) 100%)`,
-    cursor: isReadyToTrade ? "pointer" : "auto",
+    cursor: isReadyToTrade ? 'pointer' : 'auto',
     padding: 0,
-    borderBottom: isLast ? "none" : "1px solid rgba(34, 36, 38, 0.15)",
+    borderBottom: isLast ? 'none' : '1px solid rgba(34, 36, 38, 0.15)',
   };
 };
 
 const onMouseOver = e => {
-  e.currentTarget.style.backgroundColor = "rgb(240, 240, 240)";
+  e.currentTarget.style.backgroundColor = 'rgb(240, 240, 240)';
 };
 
 const onMouseOut = e => {
-  e.currentTarget.style.backgroundColor = "initial";
+  e.currentTarget.style.backgroundColor = 'initial';
 };
 
 const getRowInteraction = (order, onClick, isReadyToTrade) => ({
@@ -55,14 +57,14 @@ const getRowInteraction = (order, onClick, isReadyToTrade) => ({
 });
 
 const tableBuyHeadCellStyle = {
-  fontWeight: "bold",
+  fontWeight: 'bold',
   marginTop: 5,
   marginBottom: 5,
 };
 
 const tableSellHeadCellStyle = {
   ...tableBuyHeadCellStyle,
-  textAlign: "right",
+  textAlign: 'right',
 };
 
 const tableBuyCellStyle = {
@@ -72,8 +74,14 @@ const tableBuyCellStyle = {
 
 const tableSellCellStyle = {
   ...tableBuyCellStyle,
-  textAlign: "right",
+  textAlign: 'right',
 };
+
+const query = gql`
+  subscription PriceQuery($symbol: Symbol!) {
+    price(symbol: $symbol)
+  }
+`;
 
 const Orderbook = ({
   buyOrders,
@@ -90,6 +98,15 @@ const Orderbook = ({
     <h3 className="App-intro">
       Orderbook for {baseTokenSymbol}/{quoteTokenSymbol}
     </h3>
+    <Subscription subscription={query} variables={{ symbol: 'ETH-T-M' }}>
+      {props => (
+        <div>
+          {props.loading
+            ? 'Loading price'
+            : `Price: ${props.data && props.data.price}`}
+        </div>
+      )}
+    </Subscription>
     {loading ? (
       <div>
         <Image src="./melon-spinner.gif" size="small" centered />
@@ -108,7 +125,7 @@ const Orderbook = ({
                 columns={3}
                 style={{
                   padding: 0,
-                  borderBottom: "1px solid rgba(34, 36, 38, 0.15)",
+                  borderBottom: '1px solid rgba(34, 36, 38, 0.15)',
                 }}
               >
                 <Grid.Column style={tableSellHeadCellStyle}>
@@ -147,7 +164,7 @@ const Orderbook = ({
                 columns={3}
                 style={{
                   padding: 0,
-                  borderBottom: "1px solid rgba(34, 36, 38, 0.15)",
+                  borderBottom: '1px solid rgba(34, 36, 38, 0.15)',
                 }}
               >
                 <Grid.Column style={tableBuyHeadCellStyle}>Ask</Grid.Column>
@@ -183,7 +200,7 @@ const Orderbook = ({
           </Grid.Column>
         </Grid>
         {sellOrders.length === 0 && buyOrders.length === 0 ? (
-          <h4 style={{ marginBottom: 50, color: "#f29954" }}>
+          <h4 style={{ marginBottom: 50, color: '#f29954' }}>
             No orders on the orderbook for this trading pair
           </h4>
         ) : null}

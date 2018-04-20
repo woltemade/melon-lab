@@ -1,3 +1,5 @@
+import { $$asyncIterator } from 'iterall';
+
 function withUnsubscribe<T>(
   iterator: AsyncIterator<T>,
   unsubscribe,
@@ -12,7 +14,9 @@ function withUnsubscribe<T>(
       unsubscribe();
       return iterator.throw(error);
     },
-    [Symbol.asyncIterator]: () => this,
+    [$$asyncIterator]() {
+      return this;
+    },
   };
 }
 

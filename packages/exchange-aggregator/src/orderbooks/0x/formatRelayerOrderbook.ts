@@ -1,4 +1,4 @@
-import * as BigNumber from 'bignumber.js';
+import BigNumber from 'bignumber.js';
 import * as tokenInfo from '@melonproject/protocol/utils/info/tokenInfo';
 
 const getTokenInfoByAddress = address =>

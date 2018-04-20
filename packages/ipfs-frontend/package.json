@@ -73,6 +73,7 @@
     "@storybook/addon-knobs": "^3.3.14",
     "@storybook/react": "^3.3.14",
     "gh-pages": "^1.1.0",
+    "graphql-tag": "^2.9.1",
     "snyk": "^1.68.0",
     "wait-on": "^2.0.2",
     "worker-loader": "^1.1.1"
