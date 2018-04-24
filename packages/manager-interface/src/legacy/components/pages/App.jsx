@@ -15,7 +15,7 @@ import AccountContainer from '../../containers/Account';
 import RestoreContainer from '../../containers/Restore';
 import MyAccountContainer from '../../containers/MyAccount';
 import CompetitionRegistrationContainer from '../../containers/CompetitionRegistration';
-
+import OlympiadPlaceholderContainer from '../../containers/OlympiadPlaceholder';
 import Modal from '../../containers/Modal';
 import { types } from '../../actions/routes';
 import ConnectionInfo from '../organisms/ConnectionInfo';
@@ -52,36 +52,27 @@ const getMainComponent = ({
   network,
   networkName,
 }) => {
-  if (route === types.SETUP) {
-    const Main = mapOnboardingStateToMainContainer[onboardingState];
-    return Main ? (
-      <Main
-        mlnBalance={mlnBalance}
-        ethBalance={ethBalance}
-        setup
-        usersFund={usersFund}
-        walletAddress={walletAddress}
-        network={network}
-      />
-    ) : null;
-  } else if (route === types.COMPETITION) {
-    return <CompetitionRegistrationContainer />;
-  }
-  const Main = routeContainerMap[route];
-  return Main ? <Main /> : <div />;
+  // if (route === types.SETUP) {
+  //   const Main = mapOnboardingStateToMainContainer[onboardingState];
+  //   return Main ? (
+  //     <Main
+  //       mlnBalance={mlnBalance}
+  //       ethBalance={ethBalance}
+  //       setup
+  //       usersFund={usersFund}
+  //       walletAddress={walletAddress}
+  //       network={network}
+  //     />
+  //   ) : null;
+  // } else if (route === types.COMPETITION) {
+  //   return <CompetitionRegistrationContainer />;
+  // }
+  // const Main = routeContainerMap[route];
+  return <OlympiadPlaceholderContainer />;
 };
 
 const App = props => (
   <div className="App">
-    <ConnectionInfo
-      account={props.walletAddress}
-      mlnBalance={props.mlnBalance}
-      ethBalance={props.ethBalance}
-      statusType={props.statusType}
-      statusMessage={props.statusMessage}
-      accountAction={props.accountAction}
-      networkName={props.networkName}
-    />
     <Container>
       <div className="App-header" style={{ margin: '2em' }}>
         <Link to={props.rootAction}>
