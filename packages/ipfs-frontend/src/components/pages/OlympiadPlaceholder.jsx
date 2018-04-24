@@ -41,27 +41,37 @@ const OlympiadPlaceholder = ({
       {' '}
       <strong>
         The Melon Olympiad is a series of blockchain-based asset management
-        challenges composed of several rounds. Each of the rounds will set a
+        competitions composed of several rounds. Each of the rounds will set a
         clear goal for participants, and will issue a defined number of Melon
         tokens.
       </strong>{' '}
       At the end of the Melon Olympiad, all remaining Melon tokens shall have
-      been issued to the public or burned. {' '}
+      been issued to the public. {' '}
     </p>
     <p>
-      <i> The first round of the Melon Olympiad is referred to as Paros.</i>
+      <i>
+        {' '}
+        Each round of the Melon Olympiad will be named after Greek islands. The
+        first round of the Melon Olympiad is referred to as Paros.
+      </i>
     </p>
     <h2>Melon Olympiad, first round: Paros</h2>
     <p>
-      A participant who wishes to contribute efforts in testing the software and
-      be rewarded for this effort will have to create a fund on this website and
-      contribute ether to participate to the Olympiad contract. In return, the
-      Olympiad contract will invest the equivalent amount in MLN (+ a bonus)
-      into the participant’s fund. The participant will have to manage his fund
-      for a defined period of time (1 month) with the goal being capital
-      appreciation. At the end of the defined management period, the participant
-      will be able to trigger the redemption of the fund’s assets, thus
-      receiving the fund’s AUM as a reward for his effort.{' '}
+      Participants who wishes to engage in testing and help us improve the
+      software will be rewarded for this effort. Participants will have to
+      create a fund on this website and contribute ether to the Olympiad
+      contract. In return, the Olympiad contract will invest the equivalent
+      amount in MLN (+ a bonus) into the participant’s fund. The participant
+      will have to manage his fund for a defined period of time (1 month) with
+      the goal being capital appreciation. At the end of the defined management
+      period, the participant will be able to trigger the redemption of the
+      fund’s assets, thus receiving the fund’s AUM as a reward for his effort.{' '}
+    </p>
+    <p>
+      For the Paros round, the participant compensation is as follows: for each
+      ether contributed, the participant will receive the equivalent of 2 ethers
+      in Melon tokens. The conversion rate of ether to Melon will be retrieved
+      from the Pricefeed contract.
     </p>
     <h2> Instructions on how to participate</h2>
     <p>
@@ -102,32 +112,36 @@ const OlympiadPlaceholder = ({
       contribute with.  After this point, you need to wait until the official
       beginning of the challenge which will be announced shortly.
     </p>
-    <h4>Step 5 </h4>{' '}
-    <p>
-       Official start of the Melon Olympiad, PAROS. Come back to this website
-      olympiad.melon.fund. You will be guided to create your fund.
-    </p>
+    <h4>Step 5 </h4> <p> Official start of the Melon Olympiad, PAROS.</p>
     <h4>Step 6  </h4>{' '}
     <p>
-       After creating your fund, you will be asked to enter the amount you wish
+      Come back to this website olympiad.melon.fund. You will be guided to
+      create your fund. After creating your fund, you will be asked to enter the
+      amount you wish to contribute with. Once you confirm that transaction, the
+      amount of Ether will be transferred from you wallet to the Olympiad
+      contract. In return, the Olympiad contract will invest the equivalent
+      amount in MLN into your fund.
+    </p>
+    <h4>Step 7  </h4>{' '}
+    <p>
+      After creating your fund, you will be asked to enter the amount you wish
       to contribute with. Once you confirm that transaction, the amount of Ether
       will be transferred from you wallet to the Olympiad contract. In return,
       the Olympiad contract will invest the equivalent amount in MLN into your
       fund.
     </p>
-    <h4>Step 7 </h4>{' '}
+    <h4>Step 8 </h4>{' '}
     <p>
-      Congratulations. You made it here. Now is time to show off your asset
-      management skills. You have 1 month to manage your fund and grow your
+      Congratulations. You made it here. Now its time to proof your asset
+      management skill. You have 1 month to manage your fund and grow your
       capital.
     </p>
-    <h4>Step 8  </h4>{' '}
+    <h4>Step 9  </h4>{' '}
     <p>
-       At the end of the round, and only at the end, you will have the option on
-      your fund’s page to trigger the redemption of the shares and therefore to
-      retrieve your earned assets. This will trigger the redemption of the
-      shares owned by the Olympiad contract into your fund, and will transfer
-      the assets under management to your wallet address .{' '}
+       At the end of the round, and only at the end, you, and only you, will
+      have the option on your fund’s page to trigger the redemption of the
+      shares and therefore to retrieve your earned assets using the wallet you
+      generated in step 1.
     </p>
     <p>
       The terms and conditions are being finalized and will be published on this
@@ -139,7 +153,7 @@ const OlympiadPlaceholder = ({
     <h2>Generate your wallet</h2>
     <p>
       The wallet you generate here will be the wallet you will use to create a
-      fund when the challenge starts (referred to as manager address). It will
+      fund when the competition starts (referred to as manager address). It will
       be the wallet you will use to contribute ether to the Olympiad contract.
       It is also the wallet to which your compensation will be transferred to at
       the end of the period. Please make sure you carefully read the warnings
