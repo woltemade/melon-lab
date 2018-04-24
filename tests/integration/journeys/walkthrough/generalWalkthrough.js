@@ -118,6 +118,7 @@ fit(
     shared.vault = await setupFund(environment, {
       name: shared.vaultName,
       signature,
+      echangeNames: ['MatchingMarket', 'ZeroExExchange'],
     });
     expect(shared.vault.name).toBe(shared.vaultName);
     expect(shared.vault.address).toBeTruthy();
