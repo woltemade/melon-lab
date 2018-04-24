@@ -26,6 +26,7 @@
     "graphql-yoga": "^1.7.1"
   },
   "devDependencies": {
+    "@types/ramda": "^0.25.24",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "backpack-core": "^0.7.0",

@@ -5,8 +5,6 @@ import Vault from '../schemas/Vault.graphql';
 import Query from '../schemas/Query.graphql';
 import Asset from '../schemas/Asset.graphql';
 
-console.log(Query);
-
 const schema = makeExecutableSchema({
   typeDefs: [Order, Vault, Asset, Query],
   resolvers,

@@ -33,50 +33,35 @@ const resolvers = {
     price: {
       resolve: (price: number): number => price,
       subscribe: (parent, args, context: IContext) => {
-        const channel = `price:${args.symbol}`;
-
-        const promisePrice = environment => () =>
+        const fetchPrice = environment =>
           Rx.Observable.fromPromise(getPrice(environment, args.symbol));
 
-        const pollPrice = environment =>
-          Rx.Observable.interval(10000)
-            .startWith(-1)
-            .flatMap(promisePrice(environment));
+        const environment$ = Rx.Observable.fromPromise(getParityProvider());
+        const price$ = environment$
+          .switchMap(fetchPrice)
+          .repeatWhen(Rx.operators.delay(10000));
 
-        const usingEnvironment = Rx.Observable.fromPromise(getParityProvider());
-        const observable = usingEnvironment.switchMap(pollPrice);
-
-        const iterator = context.pubsub.asyncIterator<number>(channel);
-        const subscription = observable.subscribe(
-          price => context.pubsub.publish(channel, price),
-          iterator.throw,
-          iterator.return,
-        );
-
-        return withUnsubscribe(iterator, subscription.unsubscribe);
+        const channel = `price:${args.symbol}`;
+        const iterator = context.pubsub.asyncIterator(channel);
+        const publish = value => context.pubsub.publish(channel, value);
+        return withUnsubscribe(price$, iterator, publish);
       },
     },
     aggregatedOrderbook: {
       resolve: orderbook => orderbook,
       subscribe: (parent, args, context: IContext) => {
-        const channel = `orderbook:${args.baseTokenAddress}/${
-          args.quoteTokenAddress
-        }`;
+        const { baseTokenAddress, quoteTokenAddress, exchanges } = args;
 
-        const observable = getAggregatedObservable(
-          args.baseTokenAddress,
-          args.quoteTokenAddress,
-          args.exchanges,
+        const orderbook$ = getAggregatedObservable(
+          baseTokenAddress,
+          quoteTokenAddress,
+          exchanges,
         );
 
+        const channel = `orderbook:${baseTokenAddress}/${quoteTokenAddress}`;
         const iterator = context.pubsub.asyncIterator(channel);
-        const subscription = observable.subscribe(
-          orderbook => context.pubsub.publish(channel, orderbook),
-          iterator.throw,
-          iterator.return,
-        );
-
-        return withUnsubscribe(iterator, subscription.unsubscribe);
+        const publish = value => context.pubsub.publish(channel, value);
+        return withUnsubscribe(orderbook$, iterator, publish);
       },
     },
   },
