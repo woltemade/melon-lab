@@ -4,11 +4,11 @@ import { makeExecutableSchema } from 'graphql-tools';
 import resolvers from './resolvers';
 import * as typeDefs from './schema.gql';
 
-export interface IContext {
+export interface Context {
   pubsub: PubSub;
 }
 
-export const makeContext = (pubsub: PubSub): IContext => ({
+export const makeContext = (pubsub: PubSub): Context => ({
   pubsub,
 });
 
