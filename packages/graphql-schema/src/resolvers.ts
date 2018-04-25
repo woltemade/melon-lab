@@ -2,7 +2,7 @@ import { getAggregatedObservable } from '@melonproject/exchange-aggregator';
 import { getParityProvider, getPrice } from '@melonproject/melon.js';
 import { GraphQLScalarType, Kind } from 'graphql';
 import * as Rx from 'rxjs';
-import { IContext } from './index';
+import { Context } from './index';
 import withUnsubscribe from './utils/withUnsubscribe';
 
 const resolvers = {
@@ -23,7 +23,7 @@ const resolvers = {
     },
   }),
   Query: {
-    price: async (parent, args, context: IContext) => {
+    price: async (parent, args, context: Context) => {
       const environment = await getParityProvider();
       const price = await getPrice(environment, args.symbol);
       return price;
@@ -32,7 +32,7 @@ const resolvers = {
   Subscription: {
     price: {
       resolve: (price: number): number => price,
-      subscribe: (parent, args, context: IContext) => {
+      subscribe: (parent, args, context: Context) => {
         const fetchPrice = environment =>
           Rx.Observable.fromPromise(getPrice(environment, args.symbol));
 
@@ -49,7 +49,7 @@ const resolvers = {
     },
     aggregatedOrderbook: {
       resolve: orderbook => orderbook,
-      subscribe: (parent, args, context: IContext) => {
+      subscribe: (parent, args, context: Context) => {
         const { baseTokenAddress, quoteTokenAddress, exchanges } = args;
 
         const orderbook$ = getAggregatedObservable(
