@@ -90,7 +90,7 @@ const accumulateOrdersFn = R.cond([
 const getAggregatedObservable = (
   baseTokenAddress: string,
   quoteTokenAddress: string,
-  exchanges: ExchangeEnum[],
+  exchanges: ExchangeEnum[] = ['ETHER_DELTA', 'OASIS_DEX'],
 ) => {
   const exchanges$ = Rx.Observable.from<ExchangeEnum>(exchanges);
   const orderbooks$ = exchanges$

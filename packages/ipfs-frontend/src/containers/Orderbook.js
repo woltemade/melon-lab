@@ -1,6 +1,5 @@
-// import { connect } from "react-redux";
-// import { lifecycle } from "recompose";
-// import { actions } from "../actions/orderbook";
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 // import displayNumber from "../utils/displayNumber";
 
 import Orderbook from '../components/organisms/Orderbook';
@@ -49,18 +48,41 @@ import gql from 'graphql-tag';
 //   OrderbookLifecycle,
 // );
 
-const query = gql`
-  subscription PriceQuery($symbol: Symbol!) {
-    price(symbol: $symbol)
+const subscription = gql`
+  subscription OrderbookQuery($baseToken: String!, $quoteToken: String!) {
+    orderbook(baseTokenAddress: $baseToken, quoteTokenAddress: $quoteToken) {
+      type
+      price
+      exchange
+      cumulativeVolume
+    }
   }
 `;
 
-const OrderbookContainer = BaseComponent => baseProps => (
-  <Subscription subscription={query} variables={{ symbol: 'ETH-T-M' }}>
+// @TODO: Why is the "empty" value for this "..."?
+const withState = connect(state => ({
+  baseToken: state.app.assetPair.base,
+  quoteToken: state.app.assetPair.quote,
+  state: state,
+}));
+
+const withSubscription = BaseComponent => baseProps => (
+  <Subscription
+    subscription={subscription}
+    variables={{
+      baseToken: baseProps.baseToken,
+      quoteToken: baseProps.quoteToken,
+    }}
+    skip={baseProps.baseToken === '...' || baseProps.quoteToken === '...'}
+  >
     {props => (
-      <BaseComponent {...baseProps} data={props.data} loading={props.loading} />
+      <BaseComponent
+        {...baseProps}
+        orderbook={props.data && props.data.orderbook}
+        loading={props.loading}
+      />
     )}
   </Subscription>
 );
 
-export default OrderbookContainer(Orderbook);
+export default compose(withState, withSubscription)(Orderbook);
