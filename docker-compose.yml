@@ -39,8 +39,8 @@ services:
       - ./packages/melon.js/package.json:/app/packages/melon.js/package.json
 
       # Mount the node modules of this package with the .cache directory mounted into a volume.
-      - ./packages/melon-js/node_modules:/app/packages/melon-js/node_modules:delegated
-      - node_modules_cache:/app/packages/melon-js/node_modules/.cache
+      - ./packages/melon.js/node_modules:/app/packages/melon.js/node_modules:delegated
+      - node_modules_cache:/app/packages/melon.js/node_modules/.cache
 
   exchange-aggregator:
     build:
@@ -189,8 +189,6 @@ services:
       - ./packages/ipfs-frontend/package.json:/app/packages/ipfs-frontend/package.json
       - ./packages/ipfs-frontend/.eslintrc:/app/packages/ipfs-frontend/.eslintrc
       - ./packages/ipfs-frontend/.eslintignore:/app/packages/ipfs-frontend/.eslintignore
-      - ./packages/ipfs-frontend/.npmignore:/app/packages/ipfs-frontend/.npmignore
-      - ./packages/ipfs-frontend/.flowconfig:/app/packages/ipfs-frontend/.flowconfig
       - ./packages/ipfs-frontend/.snyk:/app/packages/ipfs-frontend/.snyk
 
       # Mount the node modules of this package with the .cache directory mounted into a volume.
