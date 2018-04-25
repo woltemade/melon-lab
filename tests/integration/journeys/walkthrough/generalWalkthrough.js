@@ -20,12 +20,12 @@ import importWalletFromMnemonic from '../../../../lib/utils/wallet/importWalletF
 import invest from '../../../../lib/participation/transactions/invest';
 import makeOrderFromAccount from '../../../../lib/exchange/transactions/makeOrderFromAccount';
 import performCalculations from '../../../../lib/fund/calls/performCalculations';
-import makeOrder from '../../../../lib/fund/transactions/makeOrder';
+import delegateMakeOrder from '../../../../lib/fund/transactions/delegateMakeOrder';
 import setEnvironment from '../../../../lib/utils/environment/setEnvironment';
 import setupFund from '../../../../lib/version/transactions/setupFund';
 import shutDownFund from '../../../../lib/fund/transactions/shutDownFund';
 import signTermsAndConditions from '../../../../lib/version/transactions/signTermsAndConditions';
-// import takeOrder from '../../../../lib/fund/transactions/takeOrder';
+import delegateTakeOrder from '../../../../lib/fund/transactions/delegateTakeOrder';
 import toggleInvestment from '../../../../lib/fund/transactions/toggleInvestment';
 import toggleRedemption from '../../../../lib/fund/transactions/toggleRedemption';
 import toReadable from '../../../../lib/assets/utils/toReadable';
@@ -118,7 +118,7 @@ fit(
     shared.vault = await setupFund(environment, {
       name: shared.vaultName,
       signature,
-      echangeNames: ['MatchingMarket', 'ZeroExExchange'],
+      exchangeNames: ['MatchingMarket', 'ZeroExExchange'],
     });
     expect(shared.vault.name).toBe(shared.vaultName);
     expect(shared.vault.address).toBeTruthy();
@@ -217,12 +217,19 @@ fit(
       data: shared,
     });
 
-    shared.fundOrder = await makeOrder(environment, {
+    shared.fundOrder = await delegateMakeOrder(environment, {
       fundAddress: shared.vault.address,
-      sellWhichToken: quoteAssetSymbol,
-      buyWhichToken: nativeAssetSymbol,
-      sellHowMuch: new BigNumber(7),
-      buyHowMuch: new BigNumber(1),
+      exchangeAddress: '0x53669697a7dbB47986a7F95F04a5414f0CacE5B2', // MATCHING MARKET
+      orderAddresses: [
+        shared.vault.address,
+        '0x0',
+        quoteAssetSymbol,
+        nativeAssetSymbol,
+        0,
+      ],
+      orderValues: [new BigNumber(7), new BigNumber(1), 0, 0, 0, '0x0', 0, 0],
+      identifier: 0,
+      signature: {},
     });
 
     trace({
@@ -244,19 +251,29 @@ fit(
       message: `Regular account made order with id: ${shared.simpleOrder.id}`,
     });
 
-    // shared.takenOrder = await takeOrder(environment, {
-    //   id: shared.simpleOrder.id,
-    //   // shared.orderBook2[shared.orderBook2.length - 1].id,
-    //   fundAddress: shared.vault.address,
-    //   quantityAsked: new BigNumber(1),
-    // });
+    shared.takenOrder = await delegateTakeOrder(environment, {
+      fundAddress: shared.vault.address,
+      exchangeAddress: '0x53669697a7dbB47986a7F95F04a5414f0CacE5B2', // MATCHING MARKET,
+      orderAddresses: ['0x0', '0x0', quoteAssetSymbol, nativeAssetSymbol, 0],
+      orderValues: [
+        new BigNumber(7),
+        new BigNumber(1),
+        0,
+        0,
+        0,
+        '0x0',
+        new BigNumber(0.5),
+      ],
+      identifier: shared.simpleOrder.id,
+      signature: {},
+    });
 
-    // trace({
-    //   message: `Fund took order; executed quantity: ${
-    //     shared.takenOrder.executedQuantity
-    //   }`,
-    //   data: shared,
-    // });
+    trace({
+      message: `Fund took order; executed quantity: ${
+        shared.takenOrder.executedQuantity
+      }`,
+      data: shared,
+    });
 
     shared.openOrders = await getOpenOrders(environment, {
       fundAddress: shared.vault.address,
