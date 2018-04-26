@@ -1,5 +1,5 @@
-import * as Rx from 'rxjs';
 import { getOrderbook, getParityProvider } from '@melonproject/melon.js';
+import * as Rx from 'rxjs';
 
 const labelOrder = order => ({ ...order, exchange: 'OASIS_DEX' });
 const labelOrders = orders => orders.map(labelOrder);

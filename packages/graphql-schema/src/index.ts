@@ -2,7 +2,7 @@ import { GraphQLSchema } from 'graphql';
 import { PubSub } from 'graphql-subscriptions';
 import { makeExecutableSchema } from 'graphql-tools';
 import resolvers from './resolvers';
-import * as typeDefs from './schema.gql';
+import * as schema from './schema.gql';
 
 export interface Context {
   pubsub: PubSub;
@@ -14,6 +14,6 @@ export const makeContext = (pubsub: PubSub): Context => ({
 
 export const makeSchema = (): GraphQLSchema =>
   makeExecutableSchema({
-    typeDefs,
+    typeDefs: schema,
     resolvers,
   });

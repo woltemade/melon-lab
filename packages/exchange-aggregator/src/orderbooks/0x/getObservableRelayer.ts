@@ -1,10 +1,8 @@
+import { getPrices } from '@melonproject/melon.js';
 import * as Rx from 'rxjs';
 import * as WebSocket from 'websocket';
-
-import { getPrices } from "@melonproject/melon.js";
-
-import formatRelayerOrderbook from './formatRelayerOrderbook';
 import formatNewOrder from './formatNewOrder';
+import formatRelayerOrderbook from './formatRelayerOrderbook';
 
 const getObservableRelayer = (endpoint, baseTokenAddress, quoteTokenAddress) =>
   Rx.Observable.create(observer => {

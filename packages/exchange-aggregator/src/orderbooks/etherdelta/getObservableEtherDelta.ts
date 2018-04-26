@@ -1,8 +1,8 @@
-import * as R from 'ramda';
-import * as Rx from 'rxjs';
+import * as tokenInfo from '@melonproject/protocol/utils/info/tokenInfo';
 import axios from 'axios';
 import BigNumber from 'bignumber.js';
-import * as tokenInfo from '@melonproject/protocol/utils/info/tokenInfo';
+import * as R from 'ramda';
+import * as Rx from 'rxjs';
 
 // TODO: delete following 6 functions when ready to be used in dynamic way
 const getTokenInfoByAddress = address =>

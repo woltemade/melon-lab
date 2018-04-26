@@ -1,41 +1,23 @@
-import * as Rx from 'rxjs';
-import * as R from 'ramda';
 import BigNumber from 'bignumber.js';
-import getObservableEtherDelta from './etherdelta/getObservableEtherDelta';
-import getObservableRelayer from './0x/getObservableRelayer';
-import getObservableOasisDex from './oasisDex/getObservableOasisDex';
+import * as R from 'ramda';
+import * as Rx from 'rxjs';
 import getExchangeEndpoint from '../getExchangeEndpoint';
+import getObservableRelayer from './0x/getObservableRelayer';
+import getObservableEtherDelta from './etherdelta/getObservableEtherDelta';
+import getObservableOasisDex from './oasisDex/getObservableOasisDex';
 
-export type OrderTypeEnum = 'sell' | 'buy';
-
-// @TODO: Properly define the order type.
-export interface IOrder {
-  price: BigNumber;
-  type: OrderTypeEnum;
-}
-
-export interface IOrderBuy extends IOrder {
-  buy: {
-    howMuch: BigNumber;
-  };
-}
-
-export interface IOrderSell extends IOrder {
-  sell: {
-    howMuch: BigNumber;
-  };
-}
-
-export interface IOrderWithCumulativeVolume extends IOrder {
-  cumulativeVolume: BigNumber;
-}
-
-export type ExchangeEnum = 'RADAR_RELAY' | 'ETHER_DELTA' | 'OASIS_DEX';
+import {
+  ExchangeEnum,
+  Order,
+  OrderBuy,
+  OrderSell,
+  OrderWithCumulativeVolume,
+} from '../index';
 
 export type ExchangeCreator = (
   baseTokenAddress: string,
   quoteTokenAddress: string,
-) => Rx.Observable<IOrder[][]>;
+) => Rx.Observable<Order[][]>;
 
 const exchangeToCreatorFunction: { [P in ExchangeEnum]: ExchangeCreator } = {
   RADAR_RELAY: (baseTokenAddress, quoteTokenAddress) =>
@@ -52,9 +34,9 @@ const exchangeToCreatorFunction: { [P in ExchangeEnum]: ExchangeCreator } = {
     getObservableOasisDex(baseTokenAddress, quoteTokenAddress),
 };
 
-const concatOrderbooks = R.reduce<IOrder[], IOrder[]>(R.concat, []);
+const concatOrderbooks = R.reduce<Order[], Order[]>(R.concat, []);
 
-const sortOrderBooks = R.sort<IOrder>((a, b) => {
+const sortOrderBooks = R.sort<Order>((a, b) => {
   if (a.type === b.type) {
     return b.price.minus(a.price).toNumber();
   }
@@ -62,23 +44,23 @@ const sortOrderBooks = R.sort<IOrder>((a, b) => {
   return a.type === 'buy' ? 1 : -1;
 });
 
-const filterSellOrders = <(orders: IOrder[]) => IOrderSell[]>R.filter(
-  R.propEq('type', 'sell'),
-);
+const filterSellOrders = R.filter(R.propEq('type', 'sell')) as (
+  orders: Order[],
+) => OrderSell[];
 
-const totalSellVolume = R.reduce<IOrderSell, BigNumber>(
+const totalSellVolume = R.reduce<OrderSell, BigNumber>(
   (carry, order) => carry.plus(order.sell.howMuch),
   new BigNumber(0),
 );
 
-const accumulateSells = (accumulator: BigNumber, order: IOrderSell) => [
+const accumulateSells = (accumulator: BigNumber, order: OrderSell) => [
   accumulator.minus(order.sell.howMuch),
-  Object.assign({}, { cumulativeVolume: accumulator }, order),
+  { ...order, cumulativeVolume: accumulator },
 ];
 
-const accumulateBuys = (accumulator: BigNumber, order: IOrderBuy) => [
+const accumulateBuys = (accumulator: BigNumber, order: OrderBuy) => [
   accumulator.plus(order.buy.howMuch),
-  Object.assign({}, { cumulativeVolume: accumulator }, order),
+  { ...order, cumulativeVolume: accumulator },
 ];
 
 // Retrieves the appropriate projection function for sell/buy orders.
@@ -96,7 +78,7 @@ const getAggregatedObservable = (
   const orderbooks$ = exchanges$
     .map(name => exchangeToCreatorFunction[name])
     .map(create => create(baseTokenAddress, quoteTokenAddress))
-    .combineAll<Rx.Observable<IOrder[][]>, IOrder[][]>()
+    .combineAll<Rx.Observable<Order[][]>, Order[][]>()
     .distinctUntilChanged();
 
   // Concat and sort orders across all order books.
@@ -109,7 +91,7 @@ const getAggregatedObservable = (
     R.compose(totalSellVolume, filterSellOrders),
   );
 
-  return Rx.Observable.combineLatest<IOrderWithCumulativeVolume>(
+  return Rx.Observable.combineLatest<OrderWithCumulativeVolume>(
     [sellVolume$, allOrders$],
     R.compose(R.last, R.mapAccum(accumulateOrdersFn)),
   );

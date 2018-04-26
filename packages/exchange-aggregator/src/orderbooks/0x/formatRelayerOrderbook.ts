@@ -1,5 +1,5 @@
-import BigNumber from 'bignumber.js';
 import * as tokenInfo from '@melonproject/protocol/utils/info/tokenInfo';
+import BigNumber from 'bignumber.js';
 
 const getTokenInfoByAddress = address =>
   tokenInfo.live.find(t => t.address.toLowerCase() === address.toLowerCase()) ||
