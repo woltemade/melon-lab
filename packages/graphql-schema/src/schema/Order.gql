@@ -8,5 +8,4 @@ type Order {
   price: String!
   exchangeContractAddress: String
   exchange: String
-  cumulativeVolume: String
 }

@@ -1,8 +1,12 @@
 import {
   getAggregatedObservable,
-  OrderWithCumulativeVolume,
+  Order,
+  OrderBuy,
+  OrderSell,
 } from '@melonproject/exchange-aggregator';
 import { getParityProvider, getPrice } from '@melonproject/melon.js';
+import BigNumber from 'bignumber.js';
+import * as R from 'ramda';
 import * as Rx from 'rxjs';
 import { Context } from '../index';
 import withUnsubscribe from '../utils/withUnsubscribe';
@@ -28,29 +32,64 @@ export const price = {
   },
 };
 
-export const aggregatedOrderbook = {
-  resolve: value => value,
+const filterBuyOrders = R.filter(R.propEq('type', 'buy')) as (
+  orders: Order[],
+) => OrderBuy[];
+
+const filterSellOrders = R.filter(R.propEq('type', 'sell')) as (
+  orders: Order[],
+) => OrderSell[];
+
+const accumulateSells = (accumulator: BigNumber, order: OrderSell) => {
+  const volume = accumulator.plus(order.sell.howMuch);
+  return [volume, { order, volume }];
+};
+
+const accumulateBuys = (accumulator: BigNumber, order: OrderBuy) => {
+  const volume = accumulator.plus(order.buy.howMuch);
+  return [volume, { order, volume }];
+};
+
+export const orderbook = {
+  resolve: (orders: Order[]) => {
+    const [totalBuyVolume, buyEntries] = R.compose(
+      R.mapAccum(accumulateBuys, new BigNumber(0)),
+      filterBuyOrders,
+    )(orders);
+
+    const [totalSellVolume, sellEntries] = R.compose(
+      R.mapAccum(accumulateSells, new BigNumber(0)),
+      filterSellOrders,
+    )(orders);
+
+    return {
+      allOrders: orders,
+      buyEntries,
+      sellEntries,
+      totalSellVolume,
+      totalBuyVolume,
+    };
+  },
   subscribe: (parent, args, context: Context) => {
     const { pubsub } = context;
-    const { baseTokenAddress, quoteTokenAddress, exchanges } = args;
+    const { baseTokenSymbol, quoteTokenSymbol, exchanges } = args;
 
     const orderbook$ = getAggregatedObservable(
-      baseTokenAddress,
-      quoteTokenAddress,
+      baseTokenSymbol,
+      quoteTokenSymbol,
       exchanges,
     );
 
-    const channel = `orderbook:${baseTokenAddress}/${quoteTokenAddress}`;
+    const channel = `orderbook:${baseTokenSymbol}/${quoteTokenSymbol}`;
     const iterator = pubsub.asyncIterator(channel);
     const publish = value => pubsub.publish(channel, value);
     return withUnsubscribe(orderbook$, iterator, publish);
   },
 };
 
-// @TODO: https://github.com/Microsoft/TypeScript/issues/9944
-export { OrderWithCumulativeVolume };
+export { Order };
 
 export default {
   price,
-  aggregatedOrderbook,
+  orderbook,
 };

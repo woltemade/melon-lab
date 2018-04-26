@@ -1,8 +1,8 @@
 type Subscription {
   price(symbol: Symbol!): String!
-  aggregatedOrderbook(
-    baseTokenAddress: String!
-    quoteTokenAddress: String!
+  orderbook(
+    baseTokenSymbol: Symbol!
+    quoteTokenSymbol: Symbol!
     exchanges: [ExchangeEnum]
-  ): [Order]
+  ): Orderbook
 }

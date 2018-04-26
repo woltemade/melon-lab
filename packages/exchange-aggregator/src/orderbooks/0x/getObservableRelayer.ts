@@ -1,11 +1,34 @@
 import { getPrices } from '@melonproject/melon.js';
+import * as tokenInfo from '@melonproject/protocol/utils/info/tokenInfo';
+import * as R from 'ramda';
 import * as Rx from 'rxjs';
 import * as WebSocket from 'websocket';
 import formatNewOrder from './formatNewOrder';
 import formatRelayerOrderbook from './formatRelayerOrderbook';
 
-const getObservableRelayer = (endpoint, baseTokenAddress, quoteTokenAddress) =>
-  Rx.Observable.create(observer => {
+const getStemmedSymbol = R.compose(
+  R.cond([[R.equals('ETH'), R.always('W-ETH')], [R.T, R.identity]]),
+  R.nth(0),
+  R.split('-'),
+);
+
+const findBySymbol = symbol => {
+  const result = R.find(
+    value => value.symbol === symbol,
+    R.prop('live', tokenInfo),
+  );
+
+  return R.prop('address', result);
+};
+
+const getObservableRelayer = (endpoint, baseTokenSymbol, quoteTokenSymbol) => {
+  const stemmedBaseTokenSymbol = getStemmedSymbol(baseTokenSymbol);
+  const stemmedQuoteTokenSymbol = getStemmedSymbol(quoteTokenSymbol);
+
+  const baseTokenAddress = findBySymbol(stemmedBaseTokenSymbol);
+  const quoteTokenAddress = findBySymbol(stemmedQuoteTokenSymbol);
+
+  return Rx.Observable.create(observer => {
     let state = [];
     let interval;
     let hoistedConnection;
@@ -15,6 +38,7 @@ const getObservableRelayer = (endpoint, baseTokenAddress, quoteTokenAddress) =>
     client.on('connectFailed', error => {
       console.log(`Connect Error: ${error.toString()}`);
     });
+
     client.on('connect', connection => {
       hoistedConnection = connection;
       console.log('Connected to Server...');
@@ -34,6 +58,7 @@ const getObservableRelayer = (endpoint, baseTokenAddress, quoteTokenAddress) =>
       // (i) defining if an update is new order/cancel order/update order? (might not be necessary)
       // (ii) formatting the orders to our standardized order format
       observable.subscribe(message => {
+        console.log(message);
         if (message.type === 'utf8') {
           const jsonResponse = JSON.parse(message.utf8Data);
           if (jsonResponse.channel === 'orderbook') {
@@ -125,5 +150,6 @@ const getObservableRelayer = (endpoint, baseTokenAddress, quoteTokenAddress) =>
       hoistedConnection.close();
     };
   });
+};
 
 export default getObservableRelayer;
