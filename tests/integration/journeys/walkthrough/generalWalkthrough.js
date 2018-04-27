@@ -19,6 +19,7 @@ import getVersionContract from '../../../../lib/version/contracts/getVersionCont
 import importWalletFromMnemonic from '../../../../lib/utils/wallet/importWalletFromMnemonic';
 import invest from '../../../../lib/participation/transactions/invest';
 import makeOrderFromAccount from '../../../../lib/exchange/transactions/makeOrderFromAccount';
+import make0xOffChainOrder from '../../../../lib/exchange/transactions/make0xOffChainOrder';
 import performCalculations from '../../../../lib/fund/calls/performCalculations';
 import delegateMakeOrder from '../../../../lib/fund/transactions/delegateMakeOrder';
 import setEnvironment from '../../../../lib/utils/environment/setEnvironment';
@@ -218,68 +219,110 @@ fit(
       data: shared,
     });
 
-    shared.fundOrder = await delegateMakeOrder(environment, {
-      fundAddress: shared.vault.address,
-      exchangeAddress: config.matchingMarketAddress,
-      orderAddresses: [
-        shared.vault.address,
-        '0x0',
-        'MLN-T',
-        nativeAssetSymbol,
-        '0x0',
-      ],
-      orderValues: [new BigNumber(9), new BigNumber(1), 0, 0, 0, '0x0', 0, 0],
-      identifier: '0x0',
-      signature: {},
-    });
+    // shared.fundOrder = await delegateMakeOrder(environment, {
+    //   fundAddress: shared.vault.address,
+    //   exchangeAddress: config.matchingMarketAddress,
+    //   orderAddresses: [
+    //     shared.vault.address,
+    //     '0x0',
+    //     'MLN-T',
+    //     nativeAssetSymbol,
+    //     '0x0',
+    //   ],
+    //   orderValues: [new BigNumber(9), new BigNumber(1), 0, 0, 0, '0x0', 0, 0],
+    //   identifier: '0x0',
+    //   signature: {},
+    // });
 
+    // trace({
+    //   message: `Fund made order with id: ${shared.fundOrder.id}`,
+    // });
+
+    // shared.simpleOrder = await makeOrderFromAccount(environment, {
+    //   sell: {
+    //     howMuch: new BigNumber(1),
+    //     symbol: nativeAssetSymbol,
+    //   },
+    //   buy: {
+    //     howMuch: new BigNumber(7),
+    //     symbol: 'MLN-T',
+    //   },
+    // });
+
+    // trace({
+    //   message: `Regular account made order with id: ${shared.simpleOrder.id}`,
+    // });
+
+    // shared.takenOrder = await delegateTakeOrder(environment, {
+    //   fundAddress: shared.vault.address,
+    //   exchangeAddress: config.matchingMarketAddress, // MATCHING MARKET,
+    //   orderAddresses: ['0x0', '0x0', nativeAssetSymbol, 'MLN-T', '0x0'],
+    //   orderValues: [
+    //     new BigNumber(1),
+    //     new BigNumber(7),
+    //     0,
+    //     0,
+    //     0,
+    //     '0x0',
+    //     new BigNumber(5),
+    //   ],
+    //   identifier: shared.simpleOrder.id,
+    //   signature: {},
+    // });
+
+    // trace({
+    //   message: `Fund took order with id: ${shared.takenOrder.id}`,
+    //   data: shared,
+    // });
+    // shared.openOrders = await getOpenOrders(environment, {
+    //   fundAddress: shared.vault.address,
+    // });
+    // console.log(shared.openOrders);
+
+    shared.offChainOrder = await make0xOffChainOrder(
+      environment,
+      config,
+      'WHATEVER',
+      'KOVAN',
+      'WETH-T',
+      'MLN-T',
+      1,
+      5,
+    );
+    console.log(shared.offChainOrder);
     trace({
-      message: `Fund made order with id: ${shared.fundOrder.id}`,
-    });
-
-    shared.simpleOrder = await makeOrderFromAccount(environment, {
-      sell: {
-        howMuch: new BigNumber(1),
-        symbol: nativeAssetSymbol,
-      },
-      buy: {
-        howMuch: new BigNumber(7),
-        symbol: 'MLN-T',
-      },
-    });
-
-    trace({
-      message: `Regular account made order with id: ${shared.simpleOrder.id}`,
-    });
-
-    shared.takenOrder = await delegateTakeOrder(environment, {
-      fundAddress: shared.vault.address,
-      exchangeAddress: config.matchingMarketAddress, // MATCHING MARKET,
-      orderAddresses: ['0x0', '0x0', nativeAssetSymbol, 'MLN-T', '0x0'],
-      orderValues: [
-        new BigNumber(1),
-        new BigNumber(7),
-        0,
-        0,
-        0,
-        '0x0',
-        new BigNumber(0.5),
-      ],
-      identifier: shared.simpleOrder.id.toString(),
-      signature: {},
-    });
-
-    trace({
-      message: `Fund took order; executed quantity: ${
-        shared.takenOrder.executedQuantity
+      message: `Regular account made order on 0x with orderHash: ${
+        shared.offChainOrder.orderHash
       }`,
+    });
+
+    shared.taken0xOrder = await delegateTakeOrder(environment, {
+      fundAddress: shared.vault.address,
+      exchangeAddress: config.zeroExV1Address, // MATCHING MARKET,
+      orderAddresses: [
+        shared.offChainOrder.maker,
+        '0x0',
+        'WETH-T',
+        'MLN-T',
+        '0x0',
+      ],
+      orderValues: [
+        shared.offChainOrder.makerTokenAmount,
+        shared.offChainOrder.takerTokenAmount,
+        0,
+        0,
+        shared.offChainOrder.expirationUnixTimestampSec,
+        shared.offChainOrder.salt,
+        new BigNumber(5),
+      ],
+      identifier: '0x0',
+      signature: shared.offChainOrder.ecSignature,
+    });
+
+    trace({
+      message: `Fund took order with id: ${shared.offChainOrder.orderHash}`,
       data: shared,
     });
-
-    shared.openOrders = await getOpenOrders(environment, {
-      fundAddress: shared.vault.address,
-    });
-    console.log(shared.openOrders);
 
     // shared.endCalculations = await performCalculations(environment, {
     //   fundAddress: shared.vault.address,
