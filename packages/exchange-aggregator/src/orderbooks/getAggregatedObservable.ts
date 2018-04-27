@@ -29,7 +29,13 @@ const concatOrderbooks = R.reduce<Order[], Order[]>(R.concat, []);
 
 const sortOrderBooks = R.sort<Order>((a, b) => {
   if (a.type === b.type) {
-    return b.price.minus(a.price).toNumber();
+    if (a.type === 'buy') {
+      return b.price.minus(a.price).toNumber();
+    }
+
+    if (a.type === 'sell') {
+      return a.price.minus(b.price).toNumber();
+    }
   }
 
   return a.type === 'buy' ? 1 : -1;
