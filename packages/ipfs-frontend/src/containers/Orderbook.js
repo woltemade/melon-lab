@@ -5,54 +5,9 @@ import React from 'react';
 import { Subscription } from 'react-apollo';
 import gql from 'graphql-tag';
 
-// const mapStateToProps = state => ({
-//   ...state.orderbook,
-//   buyOrders: state.orderbook.buyOrders.map(order => ({
-//     id: order.id,
-//     price: displayNumber(order.price),
-//     cumulativeVolume: displayNumber(order.cumulativeVolume),
-//     howMuch: displayNumber(order.buy.howMuch),
-//   })),
-//   sellOrders: state.orderbook.sellOrders.map(order => ({
-//     id: order.id,
-//     price: displayNumber(order.price),
-//     cumulativeVolume: displayNumber(order.cumulativeVolume),
-//     howMuch: displayNumber(order.sell.howMuch),
-//   })),
-//   totalBuyVolume: displayNumber(state.orderbook.totalBuyVolume),
-//   totalSellVolume: displayNumber(state.orderbook.totalSellVolume),
-//   baseTokenSymbol: state.app.assetPair.base,
-//   quoteTokenSymbol: state.app.assetPair.quote,
-//   isReadyToTrade: state.app.isReadyToTrade,
-//   loading: state.orderbook.loading,
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   getOrderbook: () => {
-//     dispatch(actions.getOrderbook());
-//   },
-//   onClick: orderId => {
-//     dispatch(actions.selectOrder(orderId));
-//   },
-// });
-
-// const OrderbookLifecycle = lifecycle({
-//   componentDidMount() {
-//     this.props.getOrderbook();
-//   },
-// })(Orderbook);
-
-// const OrderbookContainer = connect(mapStateToProps, mapDispatchToProps)(
-//   OrderbookLifecycle,
-// );
-
 const subscription = gql`
   subscription OrderbookQuery($baseToken: Symbol!, $quoteToken: Symbol!) {
-    orderbook(
-      baseTokenSymbol: $baseToken
-      quoteTokenSymbol: $quoteToken
-      exchanges: [RADAR_RELAY]
-    ) {
+    orderbook(baseTokenSymbol: $baseToken, quoteTokenSymbol: $quoteToken) {
       totalBuyVolume
       totalSellVolume
       buyEntries {
@@ -80,31 +35,29 @@ const subscription = gql`
   }
 `;
 
-// @TODO: Why is the "empty" value for this "..."?
 const withState = connect(state => ({
   baseToken: state.app.assetPair.base,
   quoteToken: state.app.assetPair.quote,
-  state: state,
+  isReadyToTrade: state.app.isReadyToTrade,
 }));
 
-const withSubscription = BaseComponent => baseProps =>
-  console.log(baseProps) || (
-    <Subscription
-      subscription={subscription}
-      variables={{
-        baseToken: baseProps.baseToken,
-        quoteToken: baseProps.quoteToken,
-      }}
-      skip={baseProps.baseToken === '...' || baseProps.quoteToken === '...'}
-    >
-      {props => (
-        <BaseComponent
-          {...baseProps}
-          orderbook={props.data && props.data.orderbook}
-          loading={props.loading}
-        />
-      )}
-    </Subscription>
-  );
+const withSubscription = BaseComponent => baseProps => (
+  <Subscription
+    subscription={subscription}
+    variables={{
+      // @TODO: Why is the "empty" value for this "..."?
+      baseToken: baseProps.baseToken !== '...' && baseProps.baseToken,
+      quoteToken: baseProps.quoteToken !== '...' && baseProps.quoteToken,
+    }}
+  >
+    {props => (
+      <BaseComponent
+        {...baseProps}
+        orderbook={props.data && props.data.orderbook}
+        loading={props.loading}
+      />
+    )}
+  </Subscription>
+);
 
 export default compose(withState, withSubscription)(Orderbook);

@@ -1,5 +1,4 @@
 enum ExchangeEnum {
   RADAR_RELAY
-  ETHER_DELTA
   OASIS_DEX
 }

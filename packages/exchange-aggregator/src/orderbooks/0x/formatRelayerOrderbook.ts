@@ -87,6 +87,7 @@ const formatRelayerOrderbook = (bids, asks) => {
     ...order,
     price: order.type === 'buy' ? getPrices(order).buy : getPrices(order).sell,
   }));
+
   return orderbook;
 };
 

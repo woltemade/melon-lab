@@ -82,15 +82,15 @@ const Orderbook = ({
   sellOrders = [],
   totalSellVolume,
   totalBuyVolume,
-  baseTokenSymbol,
-  quoteTokenSymbol,
+  baseToken,
+  quoteToken,
   onClick,
   isReadyToTrade,
   loading,
 }) => (
   <div id="orderbook">
     <h3 className="App-intro">
-      Orderbook for {baseTokenSymbol}/{quoteTokenSymbol}
+      Orderbook for {baseToken}/{quoteToken}
     </h3>
     {loading ? (
       <div>

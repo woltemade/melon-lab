@@ -1,8 +1,6 @@
 import {
   getAggregatedObservable,
   Order,
-  OrderBuy,
-  OrderSell,
 } from '@melonproject/exchange-aggregator';
 import { getParityProvider, getPrice } from '@melonproject/melon.js';
 import BigNumber from 'bignumber.js';
@@ -32,20 +30,15 @@ export const price = {
   },
 };
 
-const filterBuyOrders = R.filter(R.propEq('type', 'buy')) as (
-  orders: Order[],
-) => OrderBuy[];
+const filterBuyOrders = R.filter<Order>(R.propEq('type', 'buy'));
+const filterSellOrders = R.filter<Order>(R.propEq('type', 'sell'));
 
-const filterSellOrders = R.filter(R.propEq('type', 'sell')) as (
-  orders: Order[],
-) => OrderSell[];
-
-const accumulateSells = (accumulator: BigNumber, order: OrderSell) => {
+const accumulateSells = (accumulator: BigNumber, order: Order) => {
   const volume = accumulator.plus(order.sell.howMuch);
   return [volume, { order, volume }];
 };
 
-const accumulateBuys = (accumulator: BigNumber, order: OrderBuy) => {
+const accumulateBuys = (accumulator: BigNumber, order: Order) => {
   const volume = accumulator.plus(order.buy.howMuch);
   return [volume, { order, volume }];
 };
