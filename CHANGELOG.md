@@ -6,6 +6,69 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to
 [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.8]
+
+### Added
+* preflightMakeOrder
+* preflightTakeOrder
+
+### Changed
+* setupFund signature: (
+  environment: Environment,
+  { name, signature, exchangeNames },
+)
+* `makeOrder` signature: (
+  environment: Environment,
+  {
+    fundAddress,
+    exchangeAddress,
+    orderAddresses: [
+      maker,
+      taker,
+      makerAsset,
+      takerAsset,
+      feeRecipient,
+    ],
+    orderValues: [
+      makerQuantity,
+      takerQuantity,
+      makerFee,
+      takerFee,
+      timestamp,
+      salt,
+      fillTakerTokenAmount,
+      dexySignatureMode,
+    ],
+    identifier,
+    signature,
+  })
+  * `takeOrder` signature: (
+  environment: Environment,
+  {
+    fundAddress,
+    exchangeAddress,
+    orderAddresses: [maker, taker, makerAsset, takerAsset, feeRecipient],
+    orderValues: [
+      makerQuantity,
+      takerQuantity,
+      makerFee,
+      takerFee,
+      timestamp,
+      salt,
+      fillTakerTokenAmount,
+      dexySignatureMode,
+    ],
+    identifier = '0x0',
+    signature,
+  },
+)
+**Notable change**: Before this release, when taking an order we used to pass in the makerQuantity we wanted to fill. Now, the client needs to pass in the takerQuantity he wishes to fill. 
+* Investment/Redemption can happen in MLN or ETH by default. If isNativeAsset (passed to the function `invest` or `redeem` is true, investment/redemption happens in ETH. If false, it happens in MLN
+
+
+### Deleted
+
+
 ## [0.7.6]
 
 ### Added

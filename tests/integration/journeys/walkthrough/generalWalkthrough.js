@@ -18,6 +18,8 @@ import getRecentTrades from '../../../../lib/exchange/calls/getRecentTrades';
 import getVersionContract from '../../../../lib/version/contracts/getVersionContract';
 import importWalletFromMnemonic from '../../../../lib/utils/wallet/importWalletFromMnemonic';
 import invest from '../../../../lib/participation/transactions/invest';
+import redeem from '../../../../lib/participation/transactions/redeem';
+import awaitDataFeedUpdates from '../../../../lib/pricefeeds/events/awaitDataFeedUpdates';
 import makeOrderFromAccount from '../../../../lib/exchange/transactions/makeOrderFromAccount';
 import make0xOffChainOrder from '../../../../lib/exchange/transactions/make0xOffChainOrder';
 import performCalculations from '../../../../lib/fund/calls/performCalculations';
@@ -279,64 +281,135 @@ fit(
     // });
     // console.log(shared.openOrders);
 
-    shared.offChainOrder = await make0xOffChainOrder(
-      environment,
-      config,
-      'WHATEVER',
-      'KOVAN',
-      'WETH-T',
-      'MLN-T',
-      1,
-      5,
-    );
-    console.log(shared.offChainOrder);
+    // shared.offChainOrder = await make0xOffChainOrder(
+    //   environment,
+    //   config,
+    //   'WHATEVER',
+    //   'KOVAN',
+    //   'WETH-T',
+    //   'MLN-T',
+    //   1,
+    //   5,
+    // );
+    // console.log(shared.offChainOrder);
+    shared.offChainOrder = {
+      maker: '0x00360d2b7d240ec0643b6d819ba81a09e40e5bcd',
+      taker: '0x0000000000000000000000000000000000000000',
+      feeRecipient: '0x0000000000000000000000000000000000000000',
+      makerTokenAddress: '0xa27af8713623fcc239d49108b1a7b187c133e88b',
+      takerTokenAddress: '0xdc5fc5dab642f688bc5bb58bef6e0d452d7ae123',
+      exchangeContractAddress: '0xb34761bee0788100919106e3d59184fb7c0d5421',
+      salt: '613993',
+      makerFee: '0',
+      takerFee: '0',
+      makerTokenAmount: new BigNumber('380179538776789952').times(
+        Math.pow(10, -18),
+      ),
+      takerTokenAmount: new BigNumber('3735408424271252864').times(
+        Math.pow(10, -18),
+      ),
+      expirationUnixTimestampSec: '1525139211841',
+      ecSignature: {
+        v: 28,
+        r: '0x421ce77a512aba0496c48610760cb5c7609c6fd4f4dbcf620dd7cdc9069c181d',
+        s: '0x4ca0d4d39155744a57dc3e25e6a51fccd6f8c593963df5ea22637b24de562f8a',
+      },
+    };
+
     trace({
       message: `Regular account made order on 0x with orderHash: ${
         shared.offChainOrder.orderHash
       }`,
     });
+    // BigNumber.config({ ERRORS: false });
 
-    shared.taken0xOrder = await delegateTakeOrder(environment, {
-      fundAddress: shared.vault.address,
-      exchangeAddress: config.zeroExV1Address, // MATCHING MARKET,
-      orderAddresses: [
-        shared.offChainOrder.maker,
-        '0x0',
-        'WETH-T',
-        'MLN-T',
-        '0x0',
-      ],
-      orderValues: [
-        shared.offChainOrder.makerTokenAmount,
-        shared.offChainOrder.takerTokenAmount,
-        0,
-        0,
-        shared.offChainOrder.expirationUnixTimestampSec,
-        shared.offChainOrder.salt,
-        new BigNumber(5),
-      ],
-      identifier: '0x0',
-      signature: shared.offChainOrder.ecSignature,
-    });
-
-    trace({
-      message: `Fund took order with id: ${shared.offChainOrder.orderHash}`,
-      data: shared,
-    });
-
-    // shared.endCalculations = await performCalculations(environment, {
+    // shared.taken0xOrder = await delegateTakeOrder(environment, {
     //   fundAddress: shared.vault.address,
+    //   exchangeAddress: config.zeroExV1Address, // MATCHING MARKET,
+    //   orderAddresses: [
+    //     shared.offChainOrder.maker,
+    //     shared.offChainOrder.taker,
+    //     'WETH-T',
+    //     'MLN-T',
+    //     shared.offChainOrder.feeRecipient,
+    //   ],
+    //   orderValues: [
+    //     shared.offChainOrder.makerTokenAmount,
+    //     shared.offChainOrder.takerTokenAmount,
+    //     shared.offChainOrder.makerFee,
+    //     shared.offChainOrder.takerFee,
+    //     shared.offChainOrder.expirationUnixTimestampSec,
+    //     shared.offChainOrder.salt,
+    //     shared.offChainOrder.takerTokenAmount,
+    //   ],
+    //   identifier: '0x0',
+    //   signature: shared.offChainOrder.ecSignature,
     // });
 
     // trace({
-    //   message: `End calculations- GAV: ${shared.endCalculations.gav}\n NAV: ${
-    //     shared.endCalculations.nav
-    //   }, Share Price: ${shared.endCalculations.sharePrice}, totalSupply: ${
-    //     shared.endCalculations.totalSupply
-    //   }`,
+    //   message: `Fund took order with id: ${shared.offChainOrder.orderHash}`,
     //   data: shared,
     // });
 
+    shared.fundEtherBalance = await getBalance(environment, {
+      tokenSymbol: 'WETH-T',
+      ofAddress: shared.vault.address,
+    });
+
+    trace({ message: `Fund WETH balance: ${shared.fundEtherBalance}` });
+    shared.endCalculations = await performCalculations(environment, {
+      fundAddress: shared.vault.address,
+    });
+
+    trace({
+      message: `End calculations- GAV: ${shared.endCalculations.gav}\n NAV: ${
+        shared.endCalculations.nav
+      }, Share Price: ${shared.endCalculations.sharePrice}, totalSupply: ${
+        shared.endCalculations.totalSupply
+      }`,
+      data: shared,
+    });
+
+    shared.RedemptionRequest = await redeem(environment, {
+      fundAddress: shared.vault.address,
+      numShares: new BigNumber(1),
+      requestedValue: shared.endCalculations.sharePrice,
+      isNativeAsset: false,
+    });
+
+    trace({
+      message: `Redemption requested. shares: ${
+        shared.RedemptionRequest.numShares
+      }`,
+      data: shared,
+    });
+
+    shared.lastRequest = await getLastRequest(environment, {
+      fundAddress: shared.vault.address,
+      investorAddress: environment.account.address,
+    });
+
+    await awaitDataFeedUpdates(environment, 2);
+
+    shared.executedRedemptionRequest = await executeRequest(environment, {
+      id: shared.RedemptionRequest.id,
+      fundAddress: shared.vault.address,
+      isNativeAsset: true,
+      // 0,
+    });
+
+    trace(`executedRedemptionRequest ${shared.executedRedemptionRequest}`);
+
+    shared.participation.invested = await getParticipation(environment, {
+      fundAddress: shared.vault.address,
+      investorAddress: environment.account.address,
+    });
+
+    trace({
+      message: `Redemption request executed. Personal stake: ${
+        shared.participation.invested.personalStake
+      }`,
+    });
     // shared.toggledSubscription = await toggleInvestment(environment, {
     //   fundAddress: shared.vault.address,
     // });
