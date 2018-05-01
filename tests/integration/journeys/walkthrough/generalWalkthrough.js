@@ -24,7 +24,7 @@ import makeOrderFromAccount from '../../../../lib/exchange/transactions/makeOrde
 import make0xOffChainOrder from '../../../../lib/exchange/transactions/make0xOffChainOrder';
 import performCalculations from '../../../../lib/fund/calls/performCalculations';
 import makeOrder from '../../../../lib/fund/transactions/makeOrder';
-import delegateCancelOrder from '../../../../lib/fund/transactions/delegateCancelOrder';
+import cancelOrder from '../../../../lib/fund/transactions/cancelOrder';
 import setEnvironment from '../../../../lib/utils/environment/setEnvironment';
 import setupFund from '../../../../lib/version/transactions/setupFund';
 import shutDownFund from '../../../../lib/fund/transactions/shutDownFund';
@@ -93,9 +93,9 @@ fit(
 
     shared.config = await getConfig(environment);
     trace({
-      message: `Got config w exchange adapter at ${
-        shared.config.exchangeAdapterAddress
-      }, exchange at ${shared.config.exchangeAddress} and priceFeed at ${
+      message: `Got config w OasisDex exchange at ${
+        shared.config.matchingMarketAddress
+      }, 0x exchange at ${shared.config.zeroExV1Address} and priceFeed at ${
         shared.config.canonicalPriceFeedAddress
       }`,
       data: shared.config,
@@ -222,6 +222,20 @@ fit(
       data: shared,
     });
 
+    shared.simpleOrder = await makeOrderFromAccount(environment, {
+      sell: {
+        howMuch: new BigNumber(1),
+        symbol: nativeAssetSymbol,
+      },
+      buy: {
+        howMuch: new BigNumber(7),
+        symbol: 'MLN-T',
+      },
+    });
+
+    trace({
+      message: `Regular account made order with id: ${shared.simpleOrder.id}`,
+    });
     shared.fundOrder = await makeOrder(environment, {
       fundAddress: shared.vault.address,
       exchangeAddress: config.matchingMarketAddress,
@@ -246,66 +260,20 @@ fit(
       message: `Fund made order with id: ${shared.fundOrder.id}`,
     });
 
-    shared.cancelOrder = await delegateCancelOrder(environment, {
+    shared.openOrders = await getOpenOrders(environment, {
+      fundAddress: shared.vault.address,
+    });
+    console.log(shared.openOrders);
+
+    shared.cancelOrder = await cancelOrder(environment, {
       fundAddress: shared.vault.address,
       exchangeAddress: config.matchingMarketAddress,
       makerAssetSymbol: 'MLN-T',
       takerAssetSymbol: 'WETH-T',
       identifier: shared.fundOrder.id,
     });
+    console.log(shared.cancelOrder);
 
-    // shared.simpleOrder = await makeOrderFromAccount(environment, {
-    //   sell: {
-    //     howMuch: new BigNumber(1),
-    //     symbol: nativeAssetSymbol,
-    //   },
-    //   buy: {
-    //     howMuch: new BigNumber(7),
-    //     symbol: 'MLN-T',
-    //   },
-    // });
-
-    // trace({
-    //   message: `Regular account made order with id: ${shared.simpleOrder.id}`,
-    // });
-
-    // shared.takenOrder = await delegateTakeOrder(environment, {
-    //   fundAddress: shared.vault.address,
-    //   exchangeAddress: config.matchingMarketAddress, // MATCHING MARKET,
-    //   orderAddresses: ['0x0', '0x0', nativeAssetSymbol, 'MLN-T', '0x0'],
-    //   orderValues: [
-    //     new BigNumber(1),
-    //     new BigNumber(7),
-    //     0,
-    //     0,
-    //     0,
-    //     '0x0',
-    //     new BigNumber(5),
-    //   ],
-    //   identifier: shared.simpleOrder.id,
-    //   signature: {},
-    // });
-
-    // trace({
-    //   message: `Fund took order with id: ${shared.takenOrder.id}`,
-    //   data: shared,
-    // });
-    // shared.openOrders = await getOpenOrders(environment, {
-    //   fundAddress: shared.vault.address,
-    // });
-    // console.log(shared.openOrders);
-
-    // shared.offChainOrder = await make0xOffChainOrder(
-    //   environment,
-    //   config,
-    //   'WHATEVER',
-    //   'KOVAN',
-    //   'WETH-T',
-    //   'MLN-T',
-    //   1,
-    //   5,
-    // );
-    // console.log(shared.offChainOrder);
     shared.offChainOrder = {
       maker: '0x00360d2b7d240ec0643b6d819ba81a09e40e5bcd',
       taker: '0x0000000000000000000000000000000000000000',
@@ -335,7 +303,7 @@ fit(
         shared.offChainOrder.orderHash
       }`,
     });
-    // BigNumber.config({ ERRORS: false });
+    BigNumber.config({ ERRORS: false });
 
     shared.taken0xOrder = await takeOrder(environment, {
       fundAddress: shared.vault.address,
@@ -356,10 +324,10 @@ fit(
       signature: shared.offChainOrder.ecSignature,
     });
 
-    // trace({
-    //   message: `Fund took order with id: ${shared.offChainOrder.orderHash}`,
-    //   data: shared,
-    // });
+    trace({
+      message: `Fund took order with id: ${shared.offChainOrder.orderHash}`,
+      data: shared,
+    });
 
     shared.fundEtherBalance = await getBalance(environment, {
       tokenSymbol: 'WETH-T',
@@ -381,46 +349,46 @@ fit(
     });
 
     // Redemption in ETH
-    // shared.RedemptionRequest = await redeem(environment, {
-    //   fundAddress: shared.vault.address,
-    //   numShares: new BigNumber(1),
-    //   requestedValue: shared.endCalculations.sharePrice,
-    //   isNativeAsset: false,
-    // });
+    shared.RedemptionRequest = await redeem(environment, {
+      fundAddress: shared.vault.address,
+      numShares: new BigNumber(1),
+      requestedValue: shared.endCalculations.sharePrice,
+      isNativeAsset: false,
+    });
 
-    // trace({
-    //   message: `Redemption requested. shares: ${
-    //     shared.RedemptionRequest.numShares
-    //   }`,
-    //   data: shared,
-    // });
+    trace({
+      message: `Redemption requested. shares: ${
+        shared.RedemptionRequest.numShares
+      }`,
+      data: shared,
+    });
 
-    // shared.lastRequest = await getLastRequest(environment, {
-    //   fundAddress: shared.vault.address,
-    //   investorAddress: environment.account.address,
-    // });
+    shared.lastRequest = await getLastRequest(environment, {
+      fundAddress: shared.vault.address,
+      investorAddress: environment.account.address,
+    });
 
-    // await awaitDataFeedUpdates(environment, 2);
+    await awaitDataFeedUpdates(environment, 2);
 
-    // shared.executedRedemptionRequest = await executeRequest(environment, {
-    //   id: shared.RedemptionRequest.id,
-    //   fundAddress: shared.vault.address,
-    //   isNativeAsset: true,
-    //   // 0,
-    // });
+    shared.executedRedemptionRequest = await executeRequest(environment, {
+      id: shared.RedemptionRequest.id,
+      fundAddress: shared.vault.address,
+      isNativeAsset: true,
+      // 0,
+    });
 
-    // trace(`executedRedemptionRequest ${shared.executedRedemptionRequest}`);
+    trace(`executedRedemptionRequest ${shared.executedRedemptionRequest}`);
 
-    // shared.participation.invested = await getParticipation(environment, {
-    //   fundAddress: shared.vault.address,
-    //   investorAddress: environment.account.address,
-    // });
+    shared.participation.invested = await getParticipation(environment, {
+      fundAddress: shared.vault.address,
+      investorAddress: environment.account.address,
+    });
 
-    // trace({
-    //   message: `Redemption request executed. Personal stake: ${
-    //     shared.participation.invested.personalStake
-    //   }`,
-    // });
+    trace({
+      message: `Redemption request executed. Personal stake: ${
+        shared.participation.invested.personalStake
+      }`,
+    });
 
     // shared.toggledSubscription = await toggleInvestment(environment, {
     //   fundAddress: shared.vault.address,
