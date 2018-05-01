@@ -9,64 +9,110 @@ and this project adheres to
 ## [0.8]
 
 ### Added
-* preflightMakeOrder
-* preflightTakeOrder
+* `preflightMakeOrder` function
+* `preflightTakeOrder` function
+* `callOnExchange`function (called both in makeOrder and takeOrder)
+* `make0xOffChainOrder` function: order signature with ethers-wallet is not validated by 0x yet. This is a non blocking issue for the integration since we do not need to make orders. Still investigating this issue. 
+* `getExchangeList`function
+* `getExchangeName`function
+* `getExchangeIndex` function
+* `getMethodNameSignature` function
+* `getOperators` function
+* `getPriceByPriceFeed` function
+* `getPriceFeedsByOwner` function 
+* `getRegisteredAssets` function
+* `getStakersAndAmounts` function
+* `getStakingPriceFeedOwner` function
+* `getStakingToken` function
+* `getTotalStaked` function
+* `getTotalStakedByAddr` function
+* `getUpdateInterval` function
+* `getStakingPriceFeedContract` function
+* `collectAndUpdate` function
+* `depositStake` function
+* `withdrawStake` function
+* `setupPriceFeed` function
+* `updatePriceFeed` function
 
 ### Changed
-* setupFund signature: (
+* setupFund signature: `(
   environment: Environment,
   { name, signature, exchangeNames },
-)
-* `makeOrder` signature: (
+)`
+* `makeOrder` signature: `(
   environment: Environment,
   {
     fundAddress,
     exchangeAddress,
-    orderAddresses: [
-      maker,
-      taker,
-      makerAsset,
-      takerAsset,
-      feeRecipient,
-    ],
-    orderValues: [
-      makerQuantity,
-      takerQuantity,
-      makerFee,
-      takerFee,
-      timestamp,
-      salt,
-      fillTakerTokenAmount,
-      dexySignatureMode,
-    ],
-    identifier,
-    signature,
-  })
-  * `takeOrder` signature: (
-  environment: Environment,
-  {
-    fundAddress,
-    exchangeAddress,
-    orderAddresses: [maker, taker, makerAsset, takerAsset, feeRecipient],
-    orderValues: [
-      makerQuantity,
-      takerQuantity,
-      makerFee,
-      takerFee,
-      timestamp,
-      salt,
-      fillTakerTokenAmount,
-      dexySignatureMode,
-    ],
+    maker,
+    taker,
+    makerAssetSymbol,
+    takerAssetSymbol,
+    feeRecipient = '0x0',
+    makerQuantity,
+    takerQuantity,
+    makerFee = 0,
+    takerFee = 0,
+    timestamp = 0,
+    salt = '0x0',
+    fillTakerTokenAmount = 0,
+    dexySignatureMode = 0,
     identifier = '0x0',
-    signature,
+    signature = {},
   },
-)
+)`
+  * `takeOrder` signature: `(
+  environment: Environment,
+  {
+    fundAddress,
+    exchangeAddress,
+    maker,
+    taker,
+    makerAssetSymbol,
+    takerAssetSymbol,
+    feeRecipient,
+    makerQuantity,
+    takerQuantity,
+    makerFee,
+    takerFee,
+    timestamp,
+    salt,
+    fillTakerTokenAmount,
+    dexySignatureMode = 0,
+    identifier = '0x0',
+    signature = {},
+  },
+)`
 **Notable change**: Before this release, when taking an order we used to pass in the makerQuantity we wanted to fill. Now, the client needs to pass in the takerQuantity he wishes to fill. 
+* `cancelOrder` signature: `(
+  environment: Environment,
+  {
+    fundAddress,
+    exchangeAddress,
+    makerAssetSymbol,
+    takerAssetSymbol,
+    identifier,
+  },
+)`
+* getConfig returns now: `{
+  assets: Array<AssetConfig>,
+  complianceAddress: Address,
+  matchingMarketAddress: Address,
+  matchingMarketAdapter: Address,
+  zeroExV1Address: Address,
+  zeroExV1AdapterAddress: Address,
+  nativeAssetSymbol: TokenSymbol,
+  canonicalPriceFeedAddress: Address,
+  stakingPriceFeedAddress: Address,
+  quoteAssetSymbol: TokenSymbol,
+  rankingAddress: Address,
+  riskManagementAddress: Address,
+  versionAddress: Address,
+  governanceAddress: Address,
+}`;
 * Investment/Redemption can happen in MLN or ETH by default. If isNativeAsset (passed to the function `invest` or `redeem` is true, investment/redemption happens in ETH. If false, it happens in MLN
-
-
-### Deleted
+* [label change] getPriceFeedContract -> getCanonicalPriceFeedContract
+* toProcessable: inserted a third optional parameter "hack" to which we'll need to find a better solution. This hack is intended to help handle quantities coming from an off chain orders with more than 15 digits. It essentially prevent the rounding step (if number is rounded, order hash is different and then not validated by 0x contract)
 
 
 ## [0.7.6]
