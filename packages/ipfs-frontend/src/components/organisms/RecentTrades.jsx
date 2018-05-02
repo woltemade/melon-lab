@@ -1,5 +1,5 @@
-import React from "react";
-import { Table } from "semantic-ui-react";
+import React from 'react';
+import { Table } from 'semantic-ui-react';
 
 const RecentTrades = ({ baseTokenSymbol, quoteTokenSymbol, trades }) => (
   <div>
@@ -20,8 +20,8 @@ const RecentTrades = ({ baseTokenSymbol, quoteTokenSymbol, trades }) => (
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {trades.map(trade => (
-          <Table.Row key={trade.id}>
+        {trades.map((trade, index) => (
+          <Table.Row key={index}>
             <Table.Cell>{trade.timestamp}</Table.Cell>
             <Table.Cell>{trade.type}</Table.Cell>
             <Table.Cell textAlign="right">{trade.price}</Table.Cell>

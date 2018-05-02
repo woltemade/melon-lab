@@ -10,12 +10,12 @@ const resolveWorkspace = (name, directory) => {
   return path.resolve(__dirname, '..', package, directory);
 };
 
-const resolveWorkspaces = (pairs) => {
+const resolveWorkspaces = pairs => {
   const workspaces = pairs.reduce((carry, [name, directory]) => {
-    return ({
+    return {
       ...carry,
       [name]: resolveWorkspace(name, directory),
-    });
+    };
   }, {});
 
   return workspaces;
@@ -33,26 +33,33 @@ module.exports = {
       ['@melonproject/exchange-aggregator', 'src'],
     ]);
 
-    config.module.rules.push({
-      test: /\.ts$/,
-      exclude: /node_modules/,
-      use: [
-        {
-          loader: 'babel-loader',
-          options: {
-            babelrc: true,
-            cacheDirectory: true,
+    config.module.rules.push(
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              babelrc: true,
+              cacheDirectory: true,
+            },
           },
-        },
-        {
-          loader: 'ts-loader',
-          options: {
-            configFile: 'tsconfig.build.json',
-            transpileOnly: true,
+          {
+            loader: 'ts-loader',
+            options: {
+              configFile: 'tsconfig.build.json',
+              transpileOnly: true,
+            },
           },
-        },
-      ],
-    });
+        ],
+      },
+      {
+        test: /\.gql$/,
+        exclude: /node_modules/,
+        loader: 'graphql-tag/loader',
+      },
+    );
 
     config.externals = externals({
       modulesDir: path.resolve(process.cwd(), '..', '..', 'node_modules'),

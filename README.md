@@ -7,14 +7,13 @@
 
 <img src = "https://github.com/melonproject/branding/blob/master/melon/03_M_logo.jpg" width = "25%" align="right">
 
-
 # Getting started
 
 ## Prerequisites
 
-- yarn
-- node >= v8.11.1
-- docker >= 18.0.2
+* yarn
+* node >= v8.11.1
+* docker >= 18.0.2
 
 ## Quickstart
 
@@ -29,6 +28,13 @@ yarn run dev
 ## With Docker
 
 ```bash
-make bootstrap
+make build
 make start
 ```
+
+## Exposed Interfaces
+
+* IPFS Frontend: http://localhost:3001/
+* Manager Interface (To-be-successor of IPFS Frontend): http://localhost:3000/
+* GraphQL Server/Playground: http://localhost:3030/
+* Components Storybook: http://localhost:3060/

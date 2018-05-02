@@ -1,79 +1,61 @@
+import * as R from 'ramda';
 import * as Rx from 'rxjs';
-import { mapAccum } from 'ramda';
-import * as BigNumber from 'bignumber.js';
-import getObservableEtherDelta from './etherdelta/getObservableEtherDelta';
-import getObservableRelayer from './0x/getObservableRelayer';
 import getExchangeEndpoint from '../getExchangeEndpoint';
+import getObservableRelayer from './0x/getObservableRelayer';
+import getObservableOasisDex from './oasisDex/getObservableOasisDex';
 
-const getAggregatedObservable = (baseTokenAddress, quoteTokenAddress) => {
-  const aggregatedObservables = Rx.Observable.merge(
+import { ExchangeEnum, Order } from '../index';
+
+const debug = require('debug')('exchange-aggregator');
+debug.enabled = true;
+
+export type ExchangeCreator = (
+  baseTokenAddress: string,
+  quoteTokenSymbol: string,
+) => Rx.Observable<Order[]>;
+
+const exchangeToCreatorFunction: { [P in ExchangeEnum]: ExchangeCreator } = {
+  RADAR_RELAY: (baseTokenSymbol, quoteTokenSymbol) =>
     getObservableRelayer(
       getExchangeEndpoint.live.radarRelay(),
-      baseTokenAddress,
-      quoteTokenAddress,
+      baseTokenSymbol,
+      quoteTokenSymbol,
     ),
-    getObservableEtherDelta(
-      getExchangeEndpoint.live.etherDelta(baseTokenAddress),
-    ),
-  );
+  OASIS_DEX: (baseTokenSymbol, quoteTokenSymbol) =>
+    getObservableOasisDex(baseTokenSymbol, quoteTokenSymbol),
+};
 
-  const scanned = aggregatedObservables.scan(
-    (currentCombinedOrderbook, observedUpdatedOrderbook) => {
-      if (observedUpdatedOrderbook.length) {
-        const { exchange } = observedUpdatedOrderbook[0];
+const concatOrderbooks = R.reduce<Order[], Order[]>(R.concat, []);
 
-        const cleanedCurrentOrderbook = currentCombinedOrderbook.filter(
-          order => order.exchange !== exchange,
-        );
+const sortOrderBooks = R.sort<Order>((a, b) => {
+  if (a.type === b.type) {
+    if (a.type === 'buy') {
+      return b.price.minus(a.price).toNumber();
+    }
 
-        const aggregatedAndSortedOrderbook = cleanedCurrentOrderbook
-          .concat(observedUpdatedOrderbook)
-          .sort((a, b) => {
-            if (a.type === b.type) return b.price.minus(a.price).toNumber();
-            return a.type === 'buy' ? 1 : -1;
-          });
+    if (a.type === 'sell') {
+      return a.price.minus(b.price).toNumber();
+    }
+  }
 
-        const totalSellCumulativeVolume = aggregatedAndSortedOrderbook.reduce(
-          (previousVolume, currentOrder) =>
-            currentOrder.type === 'sell'
-              ? previousVolume.plus(currentOrder.sell.howMuch)
-              : previousVolume,
-          new BigNumber(0),
-        );
+  return a.type === 'buy' ? 1 : -1;
+});
 
-        const orderbook = mapAccum(
-          (accumulator, currentOrder) => {
-            const enhancedOrder = Object.assign({}, currentOrder);
+const getAggregatedObservable = (
+  baseTokenSymbol: string,
+  quoteTokenSymbol: string,
+  exchanges: ExchangeEnum[] = ['RADAR_RELAY', 'OASIS_DEX'],
+) => {
+  const exchanges$ = Rx.Observable.from<ExchangeEnum>(exchanges);
+  const orderbooks$ = exchanges$
+    .map(name => exchangeToCreatorFunction[name])
+    .map(create => create(baseTokenSymbol, quoteTokenSymbol))
+    .combineAll<Rx.Observable<Order[]>, Order[][]>()
+    .do(value => debug('Emitting combined order book.', value))
+    .distinctUntilChanged();
 
-            if (enhancedOrder.type === 'sell') {
-              enhancedOrder.cumulativeVolume = accumulator;
-              return [
-                accumulator.minus(enhancedOrder.sell.howMuch),
-                enhancedOrder,
-              ];
-            } else if (enhancedOrder.type === 'buy') {
-              enhancedOrder.cumulativeVolume = accumulator.plus(
-                enhancedOrder.buy.howMuch,
-              );
-              return [enhancedOrder.cumulativeVolume, enhancedOrder];
-            }
-
-            throw new Error(
-              `Order type must be specified ${JSON.stringify(enhancedOrder)}`,
-            );
-          },
-          totalSellCumulativeVolume,
-          aggregatedAndSortedOrderbook,
-        )[1];
-        return orderbook;
-      }
-
-      return currentCombinedOrderbook;
-    },
-    [],
-  );
-
-  return scanned;
+  // Concat and sort orders across all order books.
+  return orderbooks$.map(R.compose(sortOrderBooks, concatOrderbooks));
 };
 
 export default getAggregatedObservable;

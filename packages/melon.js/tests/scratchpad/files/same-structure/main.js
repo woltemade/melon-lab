@@ -6,7 +6,7 @@ import hasRecentPrice from '../../../../lib/pricefeeds/calls/hasRecentPrice';
 import getParityProvider from '../../../../lib/utils/parity/getParityProvider';
 import getOrderbook from '../../../../lib/exchange/calls/getOrderbook';
 
-xit('Scratchpad', async () => {
+it('Scratchpad', async () => {
   console.log('Starting scratchpad ... \n\n');
   const environment = await getParityProvider(-1);
 
@@ -30,8 +30,8 @@ xit('Scratchpad', async () => {
   console.log(result, price.toString(), rcp);
 
   const orderbook = await getOrderbook(environment, {
-    baseTokenSymbol: 'W-ETH',
-    quoteTokenSymbol: 'MLN',
+    baseTokenSymbol: 'MKR-T-M',
+    quoteTokenSymbol: 'MLN-T-M',
   });
   console.log(orderbook);
 });

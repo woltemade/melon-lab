@@ -10,7 +10,7 @@ install:
 	@docker build -f Dockerfile.installer -t melonproject/installer:latest .
 
 .PHONY: bootstrap
-bootstrap: network
+bootstrap: network install
 
 # -----------------------------------------------------------------------------
 # BUILD
