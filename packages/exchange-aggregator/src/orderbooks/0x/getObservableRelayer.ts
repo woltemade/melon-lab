@@ -9,7 +9,6 @@ import formatRelayerOrderbook from './formatRelayerOrderbook';
 import WebSocket = require('isomorphic-ws');
 
 const debug = require('debug')('exchange-aggregator:0x');
-debug.enabled = true;
 
 interface TokenInfo {
   address: string;

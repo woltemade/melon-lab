@@ -7,7 +7,6 @@ import getObservableOasisDex from './oasisDex/getObservableOasisDex';
 import { ExchangeEnum, Order } from '../index';
 
 const debug = require('debug')('exchange-aggregator');
-debug.enabled = true;
 
 export type ExchangeCreator = (
   baseTokenAddress: string,
