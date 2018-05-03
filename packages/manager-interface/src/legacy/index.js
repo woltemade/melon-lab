@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ApolloProvider } from 'react-apollo';
 import ReactModal from 'react-modal';
 import melonJsPkg from '@melonproject/melon.js/../package.json';
 import melonProtocolPkg from '@melonproject/protocol/package.json';
 import addressBook from '@melonproject/protocol/addressBook.json';
-import apolloClient from './graphql/client';
 import pkg from '../../package.json';
 import { configureStore } from './config/configureStore';
 import AppContainer from './containers/App';
@@ -75,9 +73,7 @@ if (typeof window !== 'undefined') {
 }
 
 export default () => (
-  <ApolloProvider client={apolloClient}>
-    <Provider store={store}>
-      <AppContainer />
-    </Provider>
-  </ApolloProvider>
+  <Provider store={store}>
+    <AppContainer />
+  </Provider>
 );

@@ -13,7 +13,7 @@ const withComposedConfig = R.compose(
 );
 
 module.exports = withComposedConfig({
-  webWorkers: /\/graphql\/worker\.js$/,
+  webWorkers: /\/graphql\/local\/worker\.ts$/,
   typescriptLoaderOptions: {
     // We have to specify this explicitly so the ts-loader does
     // not incorrectly use one of the linked package's tsconfig.json
@@ -31,4 +31,14 @@ module.exports = withComposedConfig({
   exportPathMap: () => ({
     '/': { page: '/' },
   }),
+  webpack: (config, options) => {
+    const graphql = process.env.GRAPHQL || 'local';
+
+    config.resolve.alias = Object.assign({}, config.resolve.alias || {}, {
+      '~/graphql': path.resolve(__dirname, 'src', 'shared', 'graphql', graphql),
+      '~/shared': path.resolve(__dirname, 'src', 'shared'),
+    });
+
+    return config;
+  },
 });

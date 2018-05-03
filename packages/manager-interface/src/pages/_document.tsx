@@ -1,17 +1,16 @@
-import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
+import React from 'react';
 
 export default class MyDocument extends Document {
-  static async getInitialProps(context) {
+  public static async getInitialProps(context) {
     const initialProps = await Document.getInitialProps(context);
     return { ...initialProps };
   }
 
-  render() {
+  public render() {
     return (
       <html lang="en">
         <Head>
-          <meta charset="utf-8" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -19,8 +18,8 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content="#000000" />
           <link rel="manifest" href="/static/manifest.json" />
           <link rel="shortcut icon" href="/static/favicon.png?v=2" />
-          <link rel="stylesheet" href="/static/static/css/semantic.min.css" />
-          <link rel="stylesheet" href="/static/static/css/overwrites.css" />
+          <link rel="stylesheet" href="/static/css/semantic.min.css" />
+          <link rel="stylesheet" href="/static/css/overwrites.css" />
           <script src="/static/tracking.js" />
           <title>Melon on IPFS</title>
         </Head>

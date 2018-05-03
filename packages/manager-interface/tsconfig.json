@@ -13,7 +13,9 @@
       "@melonproject/melon.js": ["../melon.js/lib"],
       "@melonproject/graphql-schema": ["../graphql-schema/src"],
       "@melonproject/manager-components": ["../manager-components/src"],
-      "@melonproject/exchange-aggregator": ["../exchange-aggregator/src"]
+      "@melonproject/exchange-aggregator": ["../exchange-aggregator/src"],
+      "~/shared/*": ["./src/shared/$1"],
+      "~/graphql": ["./src/shared/graphql/local", "./src/shared/graphql/hosted"]
     }
   }
 }
