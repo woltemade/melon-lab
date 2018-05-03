@@ -236,6 +236,7 @@ fit(
     trace({
       message: `Regular account made order with id: ${shared.simpleOrder.id}`,
     });
+    // shared.vault = { address: '0xAecaFE82AfB48DD0b23B2D8622c1f393B780a220' };
     shared.fundOrder = await makeOrder(environment, {
       fundAddress: shared.vault.address,
       exchangeAddress: config.matchingMarketAddress,
@@ -272,8 +273,11 @@ fit(
       takerAssetSymbol: 'WETH-T',
       identifier: shared.fundOrder.id,
     });
-    console.log(shared.cancelOrder);
-
+    trace({
+      message: `Fund canceled its open order with id: ${
+        shared.cancelOrder.id
+      } on ${shared.cancelOrder.exchange} exchange`,
+    });
     shared.offChainOrder = {
       maker: '0x00360d2b7d240ec0643b6d819ba81a09e40e5bcd',
       taker: '0x0000000000000000000000000000000000000000',
@@ -335,9 +339,10 @@ fit(
     // });
 
     // trace({ message: `Fund WETH balance: ${shared.fundEtherBalance}` });
-    // shared.endCalculations = await performCalculations(environment, {
-    //   fundAddress: shared.vault.address,
-    // });
+
+    shared.endCalculations = await performCalculations(environment, {
+      fundAddress: shared.vault.address,
+    });
 
     trace({
       message: `End calculations- GAV: ${shared.endCalculations.gav}\n NAV: ${
@@ -390,54 +395,54 @@ fit(
       }`,
     });
 
-    // shared.toggledSubscription = await toggleInvestment(environment, {
-    //   fundAddress: shared.vault.address,
-    // });
+    shared.toggledSubscription = await toggleInvestment(environment, {
+      fundAddress: shared.vault.address,
+    });
 
-    // expect(shared.toggledSubscription).toBe(false);
+    expect(shared.toggledSubscription).toBe(false);
 
-    // shared.toggledSubscription = await toggleInvestment(environment, {
-    //   fundAddress: shared.vault.address,
-    // });
+    shared.toggledSubscription = await toggleInvestment(environment, {
+      fundAddress: shared.vault.address,
+    });
 
-    // expect(shared.toggledSubscription).toBe(true);
+    expect(shared.toggledSubscription).toBe(true);
 
-    // shared.toggledRedemption = await toggleRedemption(environment, {
-    //   fundAddress: shared.vault.address,
-    // });
+    shared.toggledRedemption = await toggleRedemption(environment, {
+      fundAddress: shared.vault.address,
+    });
 
-    // expect(shared.toggledRedemption).toBe(false);
-    // shared.toggledRedemption = await toggleRedemption(environment, {
-    //   fundAddress: shared.vault.address,
-    // });
-    // expect(shared.toggledRedemption).toBe(true);
+    expect(shared.toggledRedemption).toBe(false);
+    shared.toggledRedemption = await toggleRedemption(environment, {
+      fundAddress: shared.vault.address,
+    });
+    expect(shared.toggledRedemption).toBe(true);
 
-    // shared.participationAuthorizations = await getParticipationAuthorizations(
-    //   environment,
-    //   { fundAddress: shared.vault.address },
-    // );
-    // expect(shared.participationAuthorizations.subscriptionAllowed).toBe(true);
-    // expect(shared.participationAuthorizations.redemptionAllowed).toBe(true);
+    shared.participationAuthorizations = await getParticipationAuthorizations(
+      environment,
+      { fundAddress: shared.vault.address },
+    );
+    expect(shared.participationAuthorizations.subscriptionAllowed).toBe(true);
+    expect(shared.participationAuthorizations.redemptionAllowed).toBe(true);
 
-    // shared.recentTrades = await getRecentTrades(environment, {
-    //   baseTokenSymbol: nativeAssetSymbol,
-    //   quoteTokenSymbol: quoteAssetSymbol,
-    // });
-    // shared.fundRecentTrades = await getFundRecentTrades(environment, {
-    //   fundAddress: shared.vault.address,
-    // });
-    // expect(shared.recentTrades.length).toBeGreaterThanOrEqual(1);
-    // // expect(shared.fundRecentTrades.length).toBe(1);
+    shared.recentTrades = await getRecentTrades(environment, {
+      baseTokenSymbol: nativeAssetSymbol,
+      quoteTokenSymbol: quoteAssetSymbol,
+    });
+    shared.fundRecentTrades = await getFundRecentTrades(environment, {
+      fundAddress: shared.vault.address,
+    });
+    expect(shared.recentTrades.length).toBeGreaterThanOrEqual(1);
+    // expect(shared.fundRecentTrades.length).toBe(1);
 
-    // shared.ranking = await getRanking(environment);
-    // expect(shared.ranking.length).toBeGreaterThanOrEqual(1);
-    // expect(
-    //   shared.ranking.find(
-    //     ({ address, name }) =>
-    //       address.toLowerCase() === shared.vault.address.toLowerCase() &&
-    //       name === shared.vaultName,
-    //   ),
-    // ).toBeTruthy();
+    shared.ranking = await getRanking(environment);
+    expect(shared.ranking.length).toBeGreaterThanOrEqual(1);
+    expect(
+      shared.ranking.find(
+        ({ address, name }) =>
+          address.toLowerCase() === shared.vault.address.toLowerCase() &&
+          name === shared.vaultName,
+      ),
+    ).toBeTruthy();
 
     return true;
   },
