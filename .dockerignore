@@ -9,6 +9,20 @@
 !packages/manager-interface/package.json
 !packages/melon.js/package.json
 
+# Package files required for building production images.
+!packages/graphql-server/src/
+!packages/graphql-server/.env.defaults
+!packages/graphql-server/backpack.config.js
+!packages/graphql-server/tsconfig.build.json
+
+!packages/graphql-schema/src/
+
+!packages/exchange-aggregator/src/
+
+!packages/melon.js/lib/
+!packages/melon.js/.babelrc
+
 # White-list workspace root.
 !yarn.lock
 !package.json
+!tsconfig.json

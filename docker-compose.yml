@@ -170,6 +170,18 @@ services:
     networks:
       - melonproject
 
+  # These services are not meant to be spun up. They are just here to benefit from the
+  # layer caching of this docker-compose file since the layer cache is not shared between
+  # docker and docker-compose.
+  graphql-server-prod:
+    command: "/bin/sh -c 'trap : TERM INT; sleep 365d & wait'"
+    image: "melonproject/graphql-server:latest"
+    build:
+      context: .
+      dockerfile: ./packages/graphql-server/Dockerfile
+    depends_on:
+      - graphql-server
+
 networks:
   melonproject:
     external: true
