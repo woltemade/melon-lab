@@ -7,12 +7,12 @@ export default withApollo({
   link: {
     http: ({ headers }) =>
       new HttpLink({
-        uri: 'http://localhost:3030',
+        uri: 'https://graphql.melonport.com',
         headers,
       }),
     ws: () =>
       new WebSocketLink({
-        uri: 'ws://localhost:3030',
+        uri: 'wss://graphql.melonport.com',
         reconnect: true,
       }),
   },

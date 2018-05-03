@@ -101,7 +101,7 @@ services:
       - ./packages/graphql-server/tslint.json:/app/packages/graphql-server/tslint.json
       - ./packages/graphql-server/backpack.config.js:/app/packages/graphql-server/backpack.config.js
       - ./packages/graphql-server/.env.defaults:/app/packages/graphql-server/.env.defaults
-      # - ./packages/graphql-server/.env:/app/packages/graphql-server/.env
+      - ./packages/graphql-server/.env:/app/packages/graphql-server/.env
 
       # Mount the node modules of this package with the .cache directory mounted into a volume.
       - ./packages/graphql-server/node_modules:/app/packages/graphql-server/node_modules:delegated
@@ -133,7 +133,7 @@ services:
       - ./packages/manager-interface/tslint.json:/app/packages/manager-interface/tslint.json
       - ./packages/manager-interface/next.config.js:/app/packages/manager-interface/next.config.js
       - ./packages/manager-interface/.env.defaults:/app/packages/manager-interface/.env.defaults
-      # - ./packages/manager-interface/.env:/app/packages/manager-interface/.env
+      - ./packages/manager-interface/.env:/app/packages/manager-interface/.env
 
       # Mount the node modules of this package with the .cache directory mounted into a volume.
       - ./packages/manager-interface/node_modules:/app/packages/manager-interface/node_modules:delegated
