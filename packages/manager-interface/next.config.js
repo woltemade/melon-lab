@@ -1,6 +1,6 @@
 const path = require('path');
 const R = require('ramda');
-const withTypeScript = require('@zeit/next-typescript')
+const withTypeScript = require('@zeit/next-typescript');
 const withQueryFiles = require('./config/withQueryFiles');
 const withLinkedDependencies = require('./config/withLinkedDependencies');
 const withWebWorkers = require('./config/withWebWorkers');
@@ -13,7 +13,7 @@ const withComposedConfig = R.compose(
 );
 
 module.exports = withComposedConfig({
-  webWorkers: /\/graphql\/worker\.ts$/,
+  webWorkers: /\/graphql\/worker\.js$/,
   typescriptLoaderOptions: {
     // We have to specify this explicitly so the ts-loader does
     // not incorrectly use one of the linked package's tsconfig.json

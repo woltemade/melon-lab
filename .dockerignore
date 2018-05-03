@@ -5,7 +5,6 @@
 !packages/exchange-aggregator/package.json
 !packages/graphql-schema/package.json
 !packages/graphql-server/package.json
-!packages/ipfs-frontend/package.json
 !packages/manager-components/package.json
 !packages/manager-interface/package.json
 !packages/melon.js/package.json

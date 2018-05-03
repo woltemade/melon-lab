@@ -7,6 +7,8 @@
     "module": "esnext",
     "jsx": "preserve",
     "baseUrl": ".",
+    "allowJs": true,
+    "declaration": false,
     "paths": {
       "@melonproject/melon.js": ["../melon.js/lib"],
       "@melonproject/graphql-schema": ["../graphql-schema/src"],
