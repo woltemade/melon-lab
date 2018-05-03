@@ -21,7 +21,6 @@ import invest from '../../../../lib/participation/transactions/invest';
 import redeem from '../../../../lib/participation/transactions/redeem';
 import awaitDataFeedUpdates from '../../../../lib/pricefeeds/events/awaitDataFeedUpdates';
 import makeOrderFromAccount from '../../../../lib/exchange/transactions/makeOrderFromAccount';
-import make0xOffChainOrder from '../../../../lib/exchange/transactions/make0xOffChainOrder';
 import performCalculations from '../../../../lib/fund/calls/performCalculations';
 import makeOrder from '../../../../lib/fund/transactions/makeOrder';
 import cancelOrder from '../../../../lib/fund/transactions/cancelOrder';
