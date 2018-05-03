@@ -305,39 +305,39 @@ fit(
     });
     BigNumber.config({ ERRORS: false });
 
-    shared.taken0xOrder = await takeOrder(environment, {
-      fundAddress: shared.vault.address,
-      exchangeAddress: config.zeroExV1Address, // MATCHING MARKET,
-      maker: shared.offChainOrder.maker,
-      taker: shared.offChainOrder.taker,
-      makerAssetSymbol: 'WETH-T',
-      takerAssetSymbol: 'MLN-T',
-      feeRecipient: shared.offChainOrder.feeRecipient,
-      makerQuantity: shared.offChainOrder.makerTokenAmount,
-      takerQuantity: shared.offChainOrder.takerTokenAmount,
-      makerFee: shared.offChainOrder.makerFee,
-      takerFee: shared.offChainOrder.takerFee,
-      timestamp: shared.offChainOrder.expirationUnixTimestampSec,
-      salt: shared.offChainOrder.salt,
-      fillTakerTokenAmount: shared.offChainOrder.takerTokenAmount,
-      identifier: '0x0',
-      signature: shared.offChainOrder.ecSignature,
-    });
+    // shared.taken0xOrder = await takeOrder(environment, {
+    //   fundAddress: shared.vault.address,
+    //   exchangeAddress: config.zeroExV1Address, // MATCHING MARKET,
+    //   maker: shared.offChainOrder.maker,
+    //   taker: shared.offChainOrder.taker,
+    //   makerAssetSymbol: 'WETH-T',
+    //   takerAssetSymbol: 'MLN-T',
+    //   feeRecipient: shared.offChainOrder.feeRecipient,
+    //   makerQuantity: shared.offChainOrder.makerTokenAmount,
+    //   takerQuantity: shared.offChainOrder.takerTokenAmount,
+    //   makerFee: shared.offChainOrder.makerFee,
+    //   takerFee: shared.offChainOrder.takerFee,
+    //   timestamp: shared.offChainOrder.expirationUnixTimestampSec,
+    //   salt: shared.offChainOrder.salt,
+    //   fillTakerTokenAmount: shared.offChainOrder.takerTokenAmount,
+    //   identifier: '0x0',
+    //   signature: shared.offChainOrder.ecSignature,
+    // });
 
-    trace({
-      message: `Fund took order with id: ${shared.offChainOrder.orderHash}`,
-      data: shared,
-    });
+    // trace({
+    //   message: `Fund took order with id: ${shared.offChainOrder.orderHash}`,
+    //   data: shared,
+    // });
 
-    shared.fundEtherBalance = await getBalance(environment, {
-      tokenSymbol: 'WETH-T',
-      ofAddress: shared.vault.address,
-    });
+    // shared.fundEtherBalance = await getBalance(environment, {
+    //   tokenSymbol: 'WETH-T',
+    //   ofAddress: shared.vault.address,
+    // });
 
-    trace({ message: `Fund WETH balance: ${shared.fundEtherBalance}` });
-    shared.endCalculations = await performCalculations(environment, {
-      fundAddress: shared.vault.address,
-    });
+    // trace({ message: `Fund WETH balance: ${shared.fundEtherBalance}` });
+    // shared.endCalculations = await performCalculations(environment, {
+    //   fundAddress: shared.vault.address,
+    // });
 
     trace({
       message: `End calculations- GAV: ${shared.endCalculations.gav}\n NAV: ${
