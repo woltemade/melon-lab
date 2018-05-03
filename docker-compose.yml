@@ -170,35 +170,6 @@ services:
     networks:
       - melonproject
 
-  ipfs-frontend:
-    build:
-      context: .
-      dockerfile: ./packages/ipfs-frontend/Dockerfile
-    volumes:
-      - *workspace-prettier
-      - *workspace-tsconfig
-      - *workspace-node-modules
-      - *workspace-node-modules-cache
-      - *package-melon-js
-      - *package-graphql-schema
-      - *package-exchange-aggregator
-      - ./packages/ipfs-frontend/src:/app/packages/ipfs-frontend/src
-      - ./packages/ipfs-frontend/public:/app/packages/ipfs-frontend/public
-      - ./packages/ipfs-frontend/tests:/app/packages/ipfs-frontend/tests
-      - ./packages/ipfs-frontend/config-overrides.js:/app/packages/ipfs-frontend/config-overrides.js
-      - ./packages/ipfs-frontend/package.json:/app/packages/ipfs-frontend/package.json
-      - ./packages/ipfs-frontend/.eslintrc:/app/packages/ipfs-frontend/.eslintrc
-      - ./packages/ipfs-frontend/.eslintignore:/app/packages/ipfs-frontend/.eslintignore
-      - ./packages/ipfs-frontend/.snyk:/app/packages/ipfs-frontend/.snyk
-
-      # Mount the node modules of this package with the .cache directory mounted into a volume.
-      - ./packages/ipfs-frontend/node_modules:/app/packages/ipfs-frontend/node_modules:delegated
-      - node_modules_cache:/app/packages/ipfs-frontend/node_modules/.cache
-    ports:
-      - "3001:3000"
-    networks:
-      - melonproject
-
 networks:
   melonproject:
     external: true
