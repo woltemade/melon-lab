@@ -6,6 +6,7 @@
 #import "./schema/Orderbook.gql"
 #import "./schema/OrderbookEntry.gql"
 #import "./schema/Query.gql"
+#import "./schema/Price.gql"
 #import "./schema/Subscription.gql"
 
 schema {

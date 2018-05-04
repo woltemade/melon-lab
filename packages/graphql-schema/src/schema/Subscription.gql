@@ -1,5 +1,5 @@
 type Subscription {
-  price(symbol: Symbol!): String!
+  price(symbols: [Symbol]): [Price]
   orderbook(
     baseTokenSymbol: Symbol!
     quoteTokenSymbol: Symbol!

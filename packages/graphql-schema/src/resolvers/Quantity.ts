@@ -1,7 +1,7 @@
 import { GraphQLScalarType, Kind } from 'graphql';
 
 export default new GraphQLScalarType({
-  name: 'Quanity',
+  name: 'Quantity',
   parseValue: value => value,
   serialize: value => value.toString(),
   parseLiteral: ast => {
