@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.7.6",
+  "version": "0.8.0-alpha.8",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/index.js",
   "esnext": "lib/index.js",
@@ -71,18 +71,20 @@
     "flow-bin": "^0.66.0",
     "husky": "^0.14.3",
     "jasmine": "^2.7.0",
+    "jest": "^22.4.3",
     "lint-staged": "^6.0.0",
     "prettier": "^1.11.1",
     "walk": "^2.3.9"
   },
   "dependencies": {
-    "@melonproject/protocol": "0.7.2-alpha.1",
+    "0x.js": "^0.36.3",
+    "@melonproject/protocol": "0.8.0-alpha.13",
     "@parity/api": "^2.1.5",
     "bignumber.js": "4.1.0",
     "bip39": "^2.4.0",
     "debug": "2.6.9",
-    "ethers-utils": "^2.1.8",
-    "ethers-wallet": "^2.1.6",
+    "ethers-utils": "^2.1.11",
+    "ethers-wallet": "^2.1.8",
     "ramda": "^0.25.0",
     "web3": "^0.20.4"
   }

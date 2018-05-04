@@ -1,4 +1,5 @@
 // @flow
+import Utils from 'ethers-utils';
 import getFundContract from '../contracts/getFundContract';
 import toDate from '../../utils/generic/toDate';
 
@@ -23,7 +24,10 @@ const getFundInformations = async (
   { fundAddress },
 ): Promise<FundInformations> => {
   const fundContract = getFundContract(environment, fundAddress);
-  const name = await fundContract.instance.getName.call();
+  const nameInBytes = await fundContract.instance.getName.call();
+  const name = Utils.toUtf8String(
+    Utils.stripZeros(nameInBytes.reverse()).reverse(),
+  );
   const decimals = (await fundContract.instance.getDecimals.call()).toNumber();
   const inception = await fundContract.instance.getCreationTime.call();
   const owner = await fundContract.instance.owner.call();
