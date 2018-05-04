@@ -49,7 +49,6 @@ function* requestInfo({ address }) {
     });
     yield put(actions.progressiveUpdate(calculations));
 
-    /*
     const participationAuthorizations = yield call(
       getParticipationAuthorizations,
       environment,
@@ -57,12 +56,11 @@ function* requestInfo({ address }) {
     );
 
     yield put(actions.progressiveUpdate(participationAuthorizations));
-    */
 
     const info = {
       ...fundInfo,
       ...calculations,
-      // ...participationAuthorizations,
+      ...participationAuthorizations,
       address,
       loading: false,
     };
