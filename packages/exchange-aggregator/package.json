@@ -15,7 +15,7 @@
     "Jenna Zenk <jenna@melonport.com>"
   ],
   "dependencies": {
-    "@melonproject/melon.js": "^0.7.6",
+    "@melonproject/protocol": "0.8.0-alpha.13",
     "axios": "^0.18.0",
     "bignumber.js": "4.1.0",
     "debug": "2.6.9",
