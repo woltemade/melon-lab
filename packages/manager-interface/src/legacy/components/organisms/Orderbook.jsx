@@ -67,8 +67,8 @@ const tableSellHeadCellStyle = {
 };
 
 const tableBuyCellStyle = {
-  marginTop: 10,
-  marginBottom: 10,
+  marginTop: 2,
+  marginBottom: 2,
 };
 
 const tableSellCellStyle = {

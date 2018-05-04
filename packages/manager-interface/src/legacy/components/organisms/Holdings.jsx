@@ -1,7 +1,7 @@
-import React from "react";
-import { Table } from "semantic-ui-react";
-import MaybeLoading from "../molecules/MaybeLoading";
-import MaybeData from "../molecules/MaybeData";
+import React from 'react';
+import { Table } from 'semantic-ui-react';
+import MaybeLoading from '../molecules/MaybeLoading';
+import MaybeData from '../molecules/MaybeData';
 
 const Holdings = ({
   holdings,
@@ -39,10 +39,12 @@ const Holdings = ({
             </Table.Cell>
             <Table.Cell
               textAlign="right"
-              onClick={() => selectAsset(asset.name, isReadyToTrade)}
+              onClick={() =>
+                selectAsset(asset.name, isReadyToTrade, quoteAsset)
+              }
             >
               {asset.name === quoteAsset ? (
-                <div>❤</div>
+                <div />
               ) : asset.name !== quoteAsset && isReadyToTrade && dataValid ? (
                 <div className="interactive">Buy/Sell</div>
               ) : (
