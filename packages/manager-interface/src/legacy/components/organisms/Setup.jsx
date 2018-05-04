@@ -1,8 +1,9 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { List, Button, Card, Checkbox } from 'semantic-ui-react';
+import { List, Button, Card } from 'semantic-ui-react';
 
 import renderInput from '../utils/renderInput';
+import renderCheckbox from '../utils/renderCheckbox';
 
 // Explicitely decompose props here.
 const Setup = ({ loading, handleSubmit, networkId, config }) => (
@@ -46,9 +47,9 @@ const Setup = ({ loading, handleSubmit, networkId, config }) => (
             <List.Content>
               <strong>Exchange:</strong>
               <br />
-              <Checkbox label="OasisDex" />
+              <Field name="OasisDex" component={renderCheckbox} />
               <br />
-              <Checkbox label="ZeroEx" />
+              <Field name="ZeroEx" component={renderCheckbox} />
               <br />
               <br />
             </List.Content>
