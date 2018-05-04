@@ -19,7 +19,7 @@ const sendTransaction = async (
   const options = {
     from: environment.account.address,
     to: contract.address,
-    gasPrice: 30000000000,
+    gasPrice: 60000000000,
     ...opt,
   };
 
@@ -29,8 +29,17 @@ const sendTransaction = async (
   // Estimate and adjust gas with gasBoost
   const gasKeyName = environment.account.sign ? 'gasLimit' : 'gas';
 
-  if (['cancelOrder', 'offer'].includes(method)) {
-    options[gasKeyName] = 4700000;
+  if (
+    [
+      'cancelOrder',
+      'offer',
+      'depositStake',
+      'withdrawStake',
+      'collectAndUpdate',
+      'callOnExchange',
+    ].includes(method)
+  ) {
+    options[gasKeyName] = 6700000;
   } else {
     options[gasKeyName] = await gasBoost(
       contract.instance[method],
@@ -71,7 +80,6 @@ const sendTransaction = async (
   );
   const decodedLogs = contract.parseEventLogs(rawReceipt.logs);
   const transactionReceipt = { ...rawReceipt, logs: decodedLogs };
-
   return transactionReceipt;
 };
 

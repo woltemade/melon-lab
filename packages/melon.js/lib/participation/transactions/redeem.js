@@ -3,6 +3,7 @@ import BigNumber from 'bignumber.js';
 
 import ensure from '../../utils/generic/ensure';
 import findEventInLog from '../../utils/ethereum/findEventInLog';
+import getAddress from '../../assets/utils/getAddress';
 import getConfig from '../../version/calls/getConfig';
 import getFundContract from '../../fund/contracts/getFundContract';
 import sendTransaction from '../../utils/parity/sendTransaction';
@@ -29,9 +30,7 @@ const redeem = async (
   const config = await getConfig(environment);
   const fundContract = await getFundContract(environment, fundAddress);
 
-  const symbol = isNativeAsset
-    ? config.nativeAssetSymbol
-    : config.quoteAssetSymbol;
+  const symbol = isNativeAsset ? config.nativeAssetSymbol : 'MLN-T';
 
   const isShutDown = await fundContract.instance.isShutDown.call();
   ensure(isShutDown === false, 'Fund is shut down');
@@ -39,7 +38,7 @@ const redeem = async (
   const args = [
     toProcessable(config, numShares, symbol),
     toProcessable(config, requestedValue, symbol),
-    isNativeAsset,
+    getAddress(config, symbol),
   ];
 
   const receipt = await sendTransaction(

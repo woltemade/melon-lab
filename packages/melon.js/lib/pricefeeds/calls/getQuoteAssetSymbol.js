@@ -1,5 +1,5 @@
 // @flow
-import getPriceFeedContract from '../contracts/getPriceFeedContract';
+import getCanonicalPriceFeedContract from '../contracts/getCanonicalPriceFeedContract';
 import getSymbol from '../../assets/utils/getSymbol';
 import getConfig from '../../version/calls/getConfig';
 
@@ -13,8 +13,10 @@ const getQuoteAssetSymbol = async (
   environment: Environment,
 ): Promise<TokenSymbol> => {
   const config = await getConfig(environment);
-  const dataFeedContract = await getPriceFeedContract(environment);
-  const address = await dataFeedContract.instance.getQuoteAsset.call();
+  const canonicalPriceFeedContract = await getCanonicalPriceFeedContract(
+    environment,
+  );
+  const address = await canonicalPriceFeedContract.instance.getQuoteAsset.call();
 
   return getSymbol(config, address);
 };
