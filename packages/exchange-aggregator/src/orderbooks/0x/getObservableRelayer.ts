@@ -19,19 +19,25 @@ interface TokenInfo {
   ipfsHash: string;
 }
 
+// MLN-T-M => MLN
 const getStemmedSymbol: (symbol: string) => string = R.compose(
-  R.cond([[R.equals('ETH'), R.always('W-ETH')], [R.T, R.identity]]),
+  R.cond([[R.equals('ETH'), R.always('WETH')], [R.T, R.identity]]),
   R.nth(0) as (arg: string[]) => string,
   R.split('-'),
 );
 
 // @TODO Try to fix the type definitions.
+// @TODO: Change to actual environment
+/*
 const getTokenAddress: (symbol: string) => string = R.compose(
   R.toLower,
   R.propOr('', 'address') as (arg: TokenInfo | undefined) => string,
   R.flip(R.find)(R.prop('live', tokenInfo)) as any,
   R.propEq('symbol'),
 );
+*/
+
+const getTokenAddress = (symbol: string) => tokenInfo.live[symbol].address;
 
 const subscribeMessage = (baseTokenAddress, quoteTokenAddress) =>
   JSON.stringify({
