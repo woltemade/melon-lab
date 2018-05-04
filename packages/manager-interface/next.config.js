@@ -35,7 +35,6 @@ module.exports = withComposedConfig({
     const graphql = process.env.GRAPHQL || 'local';
 
     config.resolve.alias = Object.assign({}, config.resolve.alias || {}, {
-      '~/graphql': path.resolve(__dirname, 'src', 'shared', 'graphql', graphql),
       '~/shared': path.resolve(__dirname, 'src', 'shared'),
     });
 

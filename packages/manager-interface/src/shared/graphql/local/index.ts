@@ -7,11 +7,11 @@ import WebWorker from './worker';
 
 export default withApollo({
   link: {
-    http: ({ headers }) => new SchemaLink({ schema }),
+    http: () => new SchemaLink({ schema }),
     ws: () => createWebWorkerLink({ worker: new WebWorker() }),
   },
-  client: ({ link }) => ({
-    link,
+  client: options => ({
+    link: options.link,
     cache: new InMemoryCache(),
   }),
 });

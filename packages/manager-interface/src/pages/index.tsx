@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import withApollo from '~/graphql';
+import withApollo from '~/shared/graphql';
 
 const App = dynamic(import('../legacy/index'), {
   ssr: false,

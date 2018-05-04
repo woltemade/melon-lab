@@ -33,6 +33,18 @@ module.exports = {
       ['@melonproject/exchange-aggregator', 'src'],
     ]);
 
+    config.module.rules.map(rule => {
+      if (rule.loader && rule.loader.match('babel-loader')) {
+        // @TODO: Backpack uses their own version of babel-loader instead
+        // of correctly resolving our version as a peer dependency. Hence, we
+        // need to override this here so we can use Babel 7+.
+        // @see https://github.com/jaredpalmer/backpack/issues/106
+        rule.loader = 'babel-loader';
+      }
+
+      return rule;
+    });
+
     config.module.rules.push(
       {
         test: /\.ts$/,
