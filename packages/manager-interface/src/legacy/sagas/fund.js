@@ -7,31 +7,31 @@ import {
   getParticipationAuthorizations,
   performCalculations,
   requestStatus,
-} from "@melonproject/melon.js";
-import { takeLatest, put, call, take, select } from "redux-saga/effects";
-import { actions, types } from "../actions/fund";
-import { types as ethereumTypes } from "../actions/ethereum";
-import { actions as appActions, types as appTypes } from "../actions/app";
-import { types as routeTypes } from "../actions/routes";
+} from '@melonproject/melon.js';
+import { takeLatest, put, call, take, select } from 'redux-saga/effects';
+import { actions, types } from '../actions/fund';
+import { types as ethereumTypes } from '../actions/ethereum';
+import { actions as appActions, types as appTypes } from '../actions/app';
+import { types as routeTypes } from '../actions/routes';
 import {
   types as orderbookTypes,
   actions as orderbookActions,
-} from "../actions/orderbook";
-import { actions as holdingsActions } from "../actions/holdings";
-import { actions as recentTradesActions } from "../actions/recentTrades";
-import { actions as tradeHistoryActions } from "../actions/tradeHistory";
+} from '../actions/orderbook';
+import { actions as holdingsActions } from '../actions/holdings';
+import { actions as recentTradesActions } from '../actions/recentTrades';
+import { actions as tradeHistoryActions } from '../actions/tradeHistory';
 import {
   actions as openOrdersActions,
   types as openOrdersTypes,
-} from "../actions/openOrders";
-import { types as tradeTypes } from "../actions/trade";
+} from '../actions/openOrders';
+import { types as tradeTypes } from '../actions/trade';
 
 import {
   actions as rankingActions,
   types as rankingTypes,
-} from "../actions/ranking";
+} from '../actions/ranking';
 
-import { types as participationTypes } from "../actions/participation";
+import { types as participationTypes } from '../actions/participation';
 
 function* requestInfo({ address }) {
   const isConnected = yield select(state => state.ethereum.isConnected);
@@ -49,6 +49,7 @@ function* requestInfo({ address }) {
     });
     yield put(actions.progressiveUpdate(calculations));
 
+    /*
     const participationAuthorizations = yield call(
       getParticipationAuthorizations,
       environment,
@@ -56,11 +57,12 @@ function* requestInfo({ address }) {
     );
 
     yield put(actions.progressiveUpdate(participationAuthorizations));
+    */
 
     const info = {
       ...fundInfo,
       ...calculations,
-      ...participationAuthorizations,
+      // ...participationAuthorizations,
       address,
       loading: false,
     };
@@ -73,7 +75,7 @@ function* requestInfo({ address }) {
     }
 
     const lastRequest = yield call(getLastRequest, environment, fundInfo);
-    const existsRequest = lastRequest.id.toString() !== "1.157920892373162e+77";
+    const existsRequest = lastRequest.id.toString() !== '1.157920892373162e+77';
 
     if (lastRequest.status === requestStatus.ACTIVE && existsRequest) {
       yield put(actions.setPendingRequest(lastRequest));
@@ -122,7 +124,7 @@ function* addRanking() {
   const fundRanking = ranking.find(r => r.address === fundAddress);
 
   if (fundRanking) {
-    const numberOfFunds = ranking.length ? ranking.length : "N/A";
+    const numberOfFunds = ranking.length ? ranking.length : 'N/A';
     yield put(
       actions.updateRanking({
         rank: fundRanking.rank,

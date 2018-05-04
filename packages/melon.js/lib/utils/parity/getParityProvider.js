@@ -1,5 +1,8 @@
 import Api from '@parity/api';
+import protocolPackage from '@melonproject/protocol/package.json';
+import pkg from '../../../package.json';
 import providers from '../constants/providers';
+import ensure from '../generic/ensure';
 
 const checkHttpProvider = async (url, connectionTimeout) => {
   try {
@@ -41,6 +44,11 @@ const findHttpProvider = (rpcEndpointList, connectionTimeout) =>
  * }
  */
 const getParityProvider = async connectionTimeout => {
+  ensure(
+    protocolPackage.version === pkg.dependencies['@melonproject/protocol'],
+    'Fatal: Inconsistency: Protocol version mismatch',
+  );
+
   const injectedProvider =
     global.ethereum && global.ethereum.isParity
       ? global.ethereum
