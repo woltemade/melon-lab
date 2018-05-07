@@ -80,7 +80,7 @@ const updateAsksAndBids = (state: AsksAndBids, order: RelayOrder) => {
   return state;
 };
 
-const getObservableRelayer = (baseTokenSymbol, quoteTokenSymbol) => {
+const getObservableRadarRelay = (baseTokenSymbol, quoteTokenSymbol) => {
   const stemmedBaseTokenSymbol = getStemmedSymbol(baseTokenSymbol);
   const stemmedQuoteTokenSymbol = getStemmedSymbol(quoteTokenSymbol);
   const baseTokenAddress = getTokenAddress(stemmedBaseTokenSymbol);
@@ -107,6 +107,8 @@ const getObservableRelayer = (baseTokenSymbol, quoteTokenSymbol) => {
     socket$.next(message);
   });
 
+  const format = formatRelayerOrderbook('RADAR_RELAY');
+
   const messages$ = socket$
     // @TODO: In addition to restarting the connection when it's closed, also
     // send a ping signal if there is no activity to prevent closing the websocket
@@ -124,12 +126,10 @@ const getObservableRelayer = (baseTokenSymbol, quoteTokenSymbol) => {
     })
     .distinctUntilChanged()
     .do(value => debug('Extracting bids and asks.', value))
-    .map<AsksAndBids, Order[]>(value =>
-      formatRelayerOrderbook(value.bids, value.asks),
-    )
+    .map<AsksAndBids, Order[]>(value => format(value.bids, value.asks))
     .do(value => debug('Emitting order book.', value));
 
   return messages$;
 };
 
-export default getObservableRelayer;
+export default getObservableRadarRelay;

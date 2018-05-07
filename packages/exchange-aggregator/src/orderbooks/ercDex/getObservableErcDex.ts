@@ -81,10 +81,12 @@ const getObservableErcDex = (baseTokenSymbol, quoteTokenSymbol) => {
     getObservableErcDexNotifications(baseTokenAddress, quoteTokenAddress),
   );
 
+  const format = formatRelayerOrderbook('RADAR_RELAY');
+
   return response$
     .distinctUntilChanged()
     .do(value => debug('Extracting bids and asks.', value))
-    .map(value => formatRelayerOrderbook(value.bids, value.asks));
+    .map(value => format(value.bids, value.asks));
 };
 
 export default getObservableErcDex;
