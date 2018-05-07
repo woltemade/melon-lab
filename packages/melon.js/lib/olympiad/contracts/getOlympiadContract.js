@@ -1,4 +1,4 @@
-import OlympiadContract from '@melonproject/smart-contracts/out/Competition.abi.json';
+//import OlympiadContract from '@melonproject/smart-contracts/out/Competition.abi.json';
 import getConfig from '../../version/calls/getConfig';
 
 /**
@@ -6,7 +6,10 @@ import getConfig from '../../version/calls/getConfig';
  */
 const getOlympiadContract = async environment => {
   const config = await getConfig(environment);
-  return environment.api.newContract(OlympiadContract, config.olympiadAddress);
+  return environment.api.newContract(
+    'OlympiadContract',
+    config.olympiadAddress,
+  );
 };
 
 export default getOlympiadContract;
