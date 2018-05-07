@@ -817,9 +817,9 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@melonproject/protocol@0.8.0-alpha.13":
-  version "0.8.0-alpha.13"
-  resolved "https://registry.yarnpkg.com/@melonproject/protocol/-/protocol-0.8.0-alpha.13.tgz#c6a8c5ed9f52a64e90136fb64caca38739cc3274"
+"@melonproject/smart-contracts@0.8.0-alpha.14":
+  version "0.8.0-alpha.14"
+  resolved "https://registry.yarnpkg.com/@melonproject/smart-contracts/-/smart-contracts-0.8.0-alpha.14.tgz#64fc6845b07d476a652a31b64337ac909369949c"
   dependencies:
     "0x.js" "^0.35.0"
     "@parity/api" "^2.1.20"
