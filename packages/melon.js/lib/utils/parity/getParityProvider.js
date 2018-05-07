@@ -45,12 +45,8 @@ const findHttpProvider = (rpcEndpointList, connectionTimeout) =>
  */
 const getParityProvider = async connectionTimeout => {
   ensure(
-<<<<<<< HEAD
-    protocolPackage.version === pkg.dependencies['@melonproject/protocol'],
-=======
     protocolPackage.version ===
       pkg.dependencies['@melonproject/smart-contracts'],
->>>>>>> integrate-new-melonjs
     'Fatal: Inconsistency: Protocol version mismatch',
   );
 
