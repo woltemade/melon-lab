@@ -1,6 +1,6 @@
 // @flow
-import addressBook from '@melonproject/protocol/addressBook.json';
-import exchangeInfo from '@melonproject/protocol/utils/info/exchangeInfo';
+import addressBook from '@melonproject/smart-contracts/addressBook.json';
+import exchangeInfo from '@melonproject/smart-contracts/utils/info/exchangeInfo';
 
 import getNativeAssetSymbol from './getNativeAssetSymbol';
 import getNetwork from '../../utils/environment/getNetwork';

@@ -1,5 +1,5 @@
 import Utils from 'ethers-utils';
-import tokenInfo from '@melonproject/protocol/utils/info/tokenInfo';
+import tokenInfo from '@melonproject/smart-contracts/utils/info/tokenInfo';
 import getCanonicalPriceFeedContract from '../../pricefeeds/contracts/getCanonicalPriceFeedContract';
 
 /**

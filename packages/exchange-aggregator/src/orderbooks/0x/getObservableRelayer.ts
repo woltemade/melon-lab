@@ -1,4 +1,4 @@
-import * as tokenInfo from '@melonproject/protocol/utils/info/tokenInfo';
+import * as tokenInfo from '@melonproject/smart-contracts/utils/info/tokenInfo';
 import * as R from 'ramda';
 import * as Rx from 'rxjs';
 import { Order } from '../../index';

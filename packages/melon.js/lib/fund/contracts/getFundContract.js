@@ -1,5 +1,5 @@
 // @flow
-import FundAbi from '@melonproject/protocol/out/version/Fund.abi.json';
+import FundAbi from '@melonproject/smart-contracts/out/version/Fund.abi.json';
 
 import type { Address } from '../../assets/schemas/Address';
 

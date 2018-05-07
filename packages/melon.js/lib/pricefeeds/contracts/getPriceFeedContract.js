@@ -1,4 +1,4 @@
-import PriceFeedAbi from '@melonproject/protocol/out/pricefeeds/PriceFeed.abi.json';
+import PriceFeedAbi from '@melonproject/smart-contracts/out/pricefeeds/PriceFeed.abi.json';
 import getConfig from '../../version/calls/getConfig';
 
 /**

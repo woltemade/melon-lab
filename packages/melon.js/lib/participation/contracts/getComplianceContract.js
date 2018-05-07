@@ -1,5 +1,5 @@
 // @flow
-import ComplianceInterfaceAbi from '@melonproject/protocol/out/compliance/ComplianceInterface.abi.json';
+import ComplianceInterfaceAbi from '@melonproject/smart-contracts/out/compliance/ComplianceInterface.abi.json';
 
 /**
  * Get deployed participation contract instance

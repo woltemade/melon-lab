@@ -1,5 +1,5 @@
 // @flow
-import MatchingMarketAbi from '@melonproject/protocol/out/exchange/thirdparty/MatchingMarket.abi.json';
+import MatchingMarketAbi from '@melonproject/smart-contracts/out/exchange/thirdparty/MatchingMarket.abi.json';
 import getConfig from '../../version/calls/getConfig';
 
 import type { Environment } from '../../utils/environment/Environment';

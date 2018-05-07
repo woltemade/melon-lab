@@ -1,5 +1,5 @@
 // @flow
-import TokenAbi from '@melonproject/protocol/out/assets/PreminedAsset.abi.json';
+import TokenAbi from '@melonproject/smart-contracts/out/assets/PreminedAsset.abi.json';
 import getConfig from '../../version/calls/getConfig';
 import getAddress from '../utils/getAddress';
 

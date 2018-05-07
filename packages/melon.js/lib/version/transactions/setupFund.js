@@ -1,5 +1,5 @@
 // @flow
-import addressBook from '@melonproject/protocol/addressBook.json';
+import addressBook from '@melonproject/smart-contracts/addressBook.json';
 import ensure from '../../utils/generic/ensure';
 import findEventInLog from '../../utils/ethereum/findEventInLog';
 import getAddress from '../../assets/utils/getAddress';

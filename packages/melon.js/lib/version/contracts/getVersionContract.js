@@ -1,4 +1,4 @@
-import VersionAbi from '@melonproject/protocol/out/version/Version.abi.json';
+import VersionAbi from '@melonproject/smart-contracts/out/version/Version.abi.json';
 import getConfig from '../../version/calls/getConfig';
 
 /**

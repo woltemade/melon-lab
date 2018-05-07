@@ -1,4 +1,4 @@
-import addressBook from '@melonproject/protocol/addressBook.json';
+import addressBook from '@melonproject/smart-contracts/addressBook.json';
 import getNetwork from '../../utils/environment/getNetwork';
 
 const getExchangeName = async (environment, exchangeAddress) => {
