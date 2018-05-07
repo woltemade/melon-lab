@@ -1,7 +1,7 @@
 import * as R from 'ramda';
 import * as Rx from 'rxjs';
-import getExchangeEndpoint from '../getExchangeEndpoint';
 import getObservableRelayer from './0x/getObservableRelayer';
+import getObservableErcDex from './ercDex/getObservableErcDex';
 import getObservableOasisDex from './oasisDex/getObservableOasisDex';
 
 import { ExchangeEnum, Order } from '../index';
@@ -15,13 +15,11 @@ export type ExchangeCreator = (
 
 const exchangeToCreatorFunction: { [P in ExchangeEnum]: ExchangeCreator } = {
   RADAR_RELAY: (baseTokenSymbol, quoteTokenSymbol) =>
-    getObservableRelayer(
-      getExchangeEndpoint.live.radarRelay(),
-      baseTokenSymbol,
-      quoteTokenSymbol,
-    ),
+    getObservableRelayer(baseTokenSymbol, quoteTokenSymbol),
   OASIS_DEX: (baseTokenSymbol, quoteTokenSymbol) =>
     getObservableOasisDex(baseTokenSymbol, quoteTokenSymbol),
+  ERC_DEX: (baseTokenSymbol, quoteTokenSymbol) =>
+    getObservableErcDex(baseTokenSymbol, quoteTokenSymbol),
 };
 
 const concatOrderbooks = R.reduce<Order[], Order[]>(R.concat, []);

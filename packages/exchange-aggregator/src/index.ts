@@ -19,7 +19,7 @@ export interface OrderWithCumulativeVolume extends Order {
   cumulativeVolume: BigNumber;
 }
 
-export type ExchangeEnum = 'RADAR_RELAY' | 'OASIS_DEX';
+export type ExchangeEnum = 'RADAR_RELAY' | 'OASIS_DEX' | 'ERC_DEX';
 
 export {
   default as getAggregatedObservable,

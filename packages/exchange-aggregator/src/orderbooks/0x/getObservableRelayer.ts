@@ -1,43 +1,15 @@
-import * as tokenInfo from '@melonproject/smart-contracts/utils/info/tokenInfo';
 import * as R from 'ramda';
 import * as Rx from 'rxjs';
+import formatRelayerOrderbook from '../../formatRelayerOrderbook';
+import getStemmedSymbol from '../../getStemmedSymbol';
+import getTokenAddress from '../../getTokenAddress';
 import { Order } from '../../index';
-import formatRelayerOrderbook from './formatRelayerOrderbook';
 
 // Isomorphic websocket implementation. Falls back to the standard browser
 // protocol on the client.
 import WebSocket = require('isomorphic-ws');
 
 const debug = require('debug')('exchange-aggregator:0x');
-
-interface TokenInfo {
-  address: string;
-  name: string;
-  symbol: string;
-  decimals: number;
-  url: string;
-  ipfsHash: string;
-}
-
-// MLN-T-M => MLN
-const getStemmedSymbol: (symbol: string) => string = R.compose(
-  R.cond([[R.equals('ETH'), R.always('WETH')], [R.T, R.identity]]),
-  R.nth(0) as (arg: string[]) => string,
-  R.split('-'),
-);
-
-// @TODO Try to fix the type definitions.
-// @TODO: Change to actual environment
-/*
-const getTokenAddress: (symbol: string) => string = R.compose(
-  R.toLower,
-  R.propOr('', 'address') as (arg: TokenInfo | undefined) => string,
-  R.flip(R.find)(R.prop('live', tokenInfo)) as any,
-  R.propEq('symbol'),
-);
-*/
-
-const getTokenAddress = (symbol: string) => tokenInfo.live[symbol].address;
 
 const subscribeMessage = (baseTokenAddress, quoteTokenAddress) =>
   JSON.stringify({
@@ -108,14 +80,13 @@ const updateAsksAndBids = (state: AsksAndBids, order: RelayOrder) => {
   return state;
 };
 
-const getObservableRelayer = (endpoint, baseTokenSymbol, quoteTokenSymbol) => {
+const getObservableRelayer = (baseTokenSymbol, quoteTokenSymbol) => {
   const stemmedBaseTokenSymbol = getStemmedSymbol(baseTokenSymbol);
   const stemmedQuoteTokenSymbol = getStemmedSymbol(quoteTokenSymbol);
   const baseTokenAddress = getTokenAddress(stemmedBaseTokenSymbol);
   const quoteTokenAddress = getTokenAddress(stemmedQuoteTokenSymbol);
 
   debug('Connecting.', {
-    endpoint,
     baseTokenSymbol,
     quoteTokenSymbol,
     stemmedBaseTokenSymbol,
@@ -126,7 +97,7 @@ const getObservableRelayer = (endpoint, baseTokenSymbol, quoteTokenSymbol) => {
 
   const open$ = new Rx.Subject();
   const socket$ = Rx.Observable.webSocket({
-    url: endpoint,
+    url: 'wss://api.radarrelay.com/0x/v0/ws',
     WebSocketCtor: WebSocket,
     openObserver: open$,
   });
