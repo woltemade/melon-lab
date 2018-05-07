@@ -20,7 +20,7 @@ const getPrices = order => ({
   sell: new BigNumber(order.buy.howMuch).div(order.sell.howMuch),
 });
 
-const formatRelayerOrderbook = (bids, asks) => {
+const formatRelayerOrderbook = exchange => (bids, asks) => {
   const formattedBids = bids.map(order => ({
     id: order.salt,
     owner: order.maker,
@@ -46,7 +46,7 @@ const formatRelayerOrderbook = (bids, asks) => {
     expiration: order.expirationUnixTimestampSec,
     feeRecipient: order.feeRecipient,
     exchangeContractAddress: order.exchangeContractAddress,
-    exchange: 'RADAR_RELAY',
+    exchange,
   }));
   const formattedAsks = asks.map(order => ({
     id: order.salt,
@@ -73,7 +73,7 @@ const formatRelayerOrderbook = (bids, asks) => {
     expiration: order.expirationUnixTimestampSec,
     feeRecipient: order.feeRecipient,
     exchangeContractAddress: order.exchangeContractAddress,
-    exchange: 'RADAR_RELAY',
+    exchange,
   }));
 
   const orderbook = [...formattedBids, ...formattedAsks].map(order => ({
