@@ -81,7 +81,7 @@ const getObservableErcDex = (baseTokenSymbol, quoteTokenSymbol) => {
     getObservableErcDexNotifications(baseTokenAddress, quoteTokenAddress),
   );
 
-  const format = formatRelayerOrderbook('RADAR_RELAY');
+  const format = formatRelayerOrderbook('ERC_DEX');
 
   return response$
     .distinctUntilChanged()
