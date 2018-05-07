@@ -41,7 +41,7 @@ const sortOrderBooks = R.sort<Order>((a, b) => {
 const getAggregatedObservable = (
   baseTokenSymbol: string,
   quoteTokenSymbol: string,
-  exchanges: ExchangeEnum[] = ['RADAR_RELAY', 'OASIS_DEX'],
+  exchanges: ExchangeEnum[] = ['RADAR_RELAY', 'OASIS_DEX', 'ERC_DEX'],
 ) => {
   const exchanges$ = Rx.Observable.from<ExchangeEnum>(exchanges);
   const orderbooks$ = exchanges$
