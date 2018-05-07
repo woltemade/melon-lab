@@ -9,21 +9,29 @@ import * as Rx from 'rxjs';
 import { Context } from '../index';
 import withUnsubscribe from '../utils/withUnsubscribe';
 
+const getPricePromises = (environment, symbols) =>
+  symbols.map(symbol =>
+    getPrice(environment, symbol).then(price => ({
+      symbol,
+      price,
+    })),
+  );
+
 export const price = {
   resolve: (value: number): number => value,
   subscribe: (parent, args, context: Context) => {
     const { pubsub } = context;
-    const { symbol } = args;
+    const { symbols } = args;
 
-    const fetchPrice = environment =>
-      Rx.Observable.fromPromise(getPrice(environment, symbol));
+    const fetchPrices = environment =>
+      Rx.Observable.forkJoin(...getPricePromises(environment, symbols));
 
     const environment$ = Rx.Observable.fromPromise(getParityProvider());
     const price$ = environment$
-      .switchMap(fetchPrice)
+      .switchMap(fetchPrices)
       .repeatWhen(Rx.operators.delay(10000));
 
-    const channel = `price:${symbol}`;
+    const channel = `price:${symbols}`;
     const iterator = pubsub.asyncIterator(channel);
     const publish = value => pubsub.publish(channel, value);
     return withUnsubscribe(price$, iterator, publish);

@@ -1,15 +1,16 @@
-import React from "react";
-import { Field } from "redux-form";
-import { List, Button, Card } from "semantic-ui-react";
+import React from 'react';
+import { Field } from 'redux-form';
+import { List, Button, Card } from 'semantic-ui-react';
 
-import renderInput from "../utils/renderInput";
+import renderInput from '../utils/renderInput';
+import renderCheckbox from '../utils/renderCheckbox';
 
 // Explicitely decompose props here.
 const Setup = ({ loading, handleSubmit, networkId, config }) => (
   <form onSubmit={handleSubmit}>
     <Card centered>
       <Card.Content>
-        <div className={`ui ${loading ? "active" : ""} inverted dimmer`}>
+        <div className={`ui ${loading ? 'active' : ''} inverted dimmer`}>
           <div className="ui text loader">
             Deploying your fund to the Ethereum blockchain
           </div>
@@ -42,23 +43,23 @@ const Setup = ({ loading, handleSubmit, networkId, config }) => (
             <List.Content>Management fee: 0%</List.Content>
           </List.Item>
 
-          <List.Item
-            as="a"
-            href={`https://${networkId === "42"
-              ? "kovan."
-              : ""}etherscan.io/address/${config.exchangeAddress}`}
-            target="_blank"
-          >
+          <List.Item>
             <List.Content>
-              Exchange: <strong>OasisDex</strong>
+              <strong>Exchange:</strong>
+              <br />
+              <Field name="OasisDex" component={renderCheckbox} />
+              <br />
+              <Field name="ZeroEx" component={renderCheckbox} />
+              <br />
+              <br />
             </List.Content>
           </List.Item>
 
           <List.Item
             as="a"
-            href={`https://${networkId === "42"
-              ? "kovan."
-              : ""}etherscan.io/address/${config.priceFeedAddress}`}
+            href={`https://${
+              networkId === '42' ? 'kovan.' : ''
+            }etherscan.io/address/${config.priceFeedAddress}`}
             target="_blank"
           >
             <List.Content>
@@ -74,32 +75,30 @@ const Setup = ({ loading, handleSubmit, networkId, config }) => (
           </List.Item>
           <List.Item>
             <List.Content
-              href={`https://${networkId === "42"
-                ? "kovan."
-                : ""}etherscan.io/address/${config.complianceAddress}`}
+              href={`https://${
+                networkId === '42' ? 'kovan.' : ''
+              }etherscan.io/address/${config.complianceAddress}`}
               target="_blank"
             >
-              Compliance (invest/redeem):{" "}
+              Compliance (invest/redeem):{' '}
               <strong>Only manager can invest (in MLN)</strong>
             </List.Content>
           </List.Item>
           <List.Item>
             <List.Content
-              href={`https://${networkId === "42"
-                ? "kovan."
-                : ""}etherscan.io/address/${config.riskManagementAddress}`}
+              href={`https://${
+                networkId === '42' ? 'kovan.' : ''
+              }etherscan.io/address/${config.riskManagementAddress}`}
               target="_blank"
             >
-              Risk Management:{" "}
-              <strong>
-                Make/Take order permitted with 10% deviation{" "}
-              </strong>{" "}
+              Risk Management:{' '}
+              <strong>Make/Take order permitted with 10% deviation </strong>{' '}
               from the reference price provided by above pricefeed.
             </List.Content>
           </List.Item>
         </List>
 
-        <Button basic color="black" style={{ width: "100%" }}>
+        <Button basic color="black" style={{ width: '100%' }}>
           Create and deploy my fund!
         </Button>
       </Card.Content>

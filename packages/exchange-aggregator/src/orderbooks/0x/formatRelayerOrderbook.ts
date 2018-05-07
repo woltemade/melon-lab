@@ -1,19 +1,12 @@
 import * as tokenInfo from '@melonproject/protocol/utils/info/tokenInfo';
 import BigNumber from 'bignumber.js';
 
-const getTokenInfoByAddress = address =>
-  tokenInfo.live.find(t => t.address.toLowerCase() === address.toLowerCase()) ||
-  (() => {
-    throw new Error(`No token found with address ${address}`);
-  })();
+const getTokenInfo = tokenSymbol => tokenInfo.live[tokenSymbol];
 
-const getTokenInfo = tokenSymbol =>
-  tokenInfo.live.find(t => t.symbol === tokenSymbol.toUpperCase()) ||
-  (() => {
-    throw new Error(`No token found with symbol ${tokenSymbol}`);
-  })();
-
-const getSymbol = address => getTokenInfoByAddress(address).symbol;
+const getSymbol = address =>
+  Object.entries(tokenInfo.live).find(
+    ([symbol, info]) => info.address.toLowerCase() === address.toLowerCase(),
+  )[0];
 
 const getDecimals = tokenSymbol => getTokenInfo(tokenSymbol).decimals;
 
