@@ -1,4 +1,4 @@
-import StakingPriceFeedAbi from '@melonproject/protocol/out/pricefeeds/StakingPriceFeed.abi.json';
+import StakingPriceFeedAbi from '@melonproject/smart-contracts/out/pricefeeds/StakingPriceFeed.abi.json';
 
 /**
  * Gets contract instance of deployed canonical Pricefeed

@@ -1,5 +1,5 @@
 import Api from '@parity/api';
-import protocolPackage from '@melonproject/protocol/package.json';
+import protocolPackage from '@melonproject/smart-contracts/package.json';
 import pkg from '../../../package.json';
 import providers from '../constants/providers';
 import ensure from '../generic/ensure';
@@ -45,7 +45,8 @@ const findHttpProvider = (rpcEndpointList, connectionTimeout) =>
  */
 const getParityProvider = async connectionTimeout => {
   ensure(
-    protocolPackage.version === pkg.dependencies['@melonproject/protocol'],
+    protocolPackage.version ===
+      pkg.dependencies['@melonproject/smart-contracts'],
     'Fatal: Inconsistency: Protocol version mismatch',
   );
 

@@ -78,7 +78,7 @@
   },
   "dependencies": {
     "0x.js": "^0.36.3",
-    "@melonproject/protocol": "0.8.0-alpha.13",
+    "@melonproject/smart-contracts": "0.8.0-alpha.14",
     "@parity/api": "^2.1.5",
     "bignumber.js": "4.1.0",
     "bip39": "^2.4.0",

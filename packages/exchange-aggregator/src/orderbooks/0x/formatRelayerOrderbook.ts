@@ -1,4 +1,4 @@
-import * as tokenInfo from '@melonproject/protocol/utils/info/tokenInfo';
+import * as tokenInfo from '@melonproject/smart-contracts/utils/info/tokenInfo';
 import BigNumber from 'bignumber.js';
 
 const getTokenInfo = tokenSymbol => tokenInfo.live[tokenSymbol];

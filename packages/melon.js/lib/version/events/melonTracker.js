@@ -1,10 +1,10 @@
 // // @flow
 // import { allPass, flatten, propEq } from "ramda";
 
-// // import ExchangeInterfaceJson from "@melonproject/protocol/build/contracts/ExchangeInterface.json";
-// import SimpleMarketJson from "@melonproject/protocol/build/contracts/SimpleMarket.json";
-// import DataFeedInterfaceJson from "@melonproject/protocol/build/contracts/DataFeedInterface.json";
-// import VersionJson from "@melonproject/protocol/build/contracts/Version.json";
+// // import ExchangeInterfaceJson from "@melonproject/smart-contracts/build/contracts/ExchangeInterface.json";
+// import SimpleMarketJson from "@melonproject/smart-contracts/build/contracts/SimpleMarket.json";
+// import DataFeedInterfaceJson from "@melonproject/smart-contracts/build/contracts/DataFeedInterface.json";
+// import VersionJson from "@melonproject/smart-contracts/build/contracts/Version.json";
 
 // import getConfig from "../calls/getConfig";
 // import setup from "../../utils/setup";
