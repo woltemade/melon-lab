@@ -15,7 +15,7 @@ const makeOrder = async (
     fundAddress,
     exchangeAddress,
     maker,
-    taker,
+    taker = '0x0',
     makerAssetSymbol,
     takerAssetSymbol,
     feeRecipient = '0x0',

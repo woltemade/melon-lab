@@ -33,6 +33,11 @@ and this project adheres to
 * `withdrawStake` function
 * `setupPriceFeed` function
 * `updatePriceFeed` function
+* `getOlympiadContract` function
+* `registerForCompetition` function
+* `signOlympiadTermsAndConditions` function
+* `getRegistrandFund` function
+
 
 ### Changed
 * setupFund signature: `(

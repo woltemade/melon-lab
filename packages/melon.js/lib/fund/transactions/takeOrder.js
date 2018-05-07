@@ -48,6 +48,8 @@ const takeOrder = async (
     'Quantity asked too high compared to quantity for sale on the order.',
   );
 
+  //TODO: add ensure ZeroEx.isOrderValid
+
   const fundContract = await getFundContract(environment, fundAddress);
   const preflightCheck = await preflightTakeOrder(environment, {
     fundContract,
