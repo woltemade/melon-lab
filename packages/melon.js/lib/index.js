@@ -94,6 +94,17 @@ import takeOrder from './fund/transactions/takeOrder';
 import toggleInvestment from './fund/transactions/toggleInvestment';
 import toggleRedemption from './fund/transactions/toggleRedemption';
 
+// ./lib/olympiad/calls
+import getRegistrantFund from './olympiad/calls/getRegistrantFund';
+
+// ./lib/olympiad/contracts
+import getOlympiadContract from './olympiad/contracts/getOlympiadContract';
+
+// ./lib/olympiad/transactions
+import claimReward from './olympiad/transactions/claimReward';
+import registerForCompetition from './olympiad/transactions/registerForCompetition';
+import signOlympiadTermsAndConditions from './olympiad/transactions/signOlympiadTermsAndConditions';
+
 // ./lib/participation/calls
 import getLastRequest from './participation/calls/getLastRequest';
 import getParticipation from './participation/calls/getParticipation';
@@ -114,6 +125,7 @@ import redeem from './participation/transactions/redeem';
 import redeemAllOwnedAssets from './participation/transactions/redeemAllOwnedAssets';
 
 // ./lib/pricefeeds/calls
+import getNextEpochTime from './pricefeeds/calls/getNextEpochTime';
 import getOperators from './pricefeeds/calls/getOperators';
 import getPrice from './pricefeeds/calls/getPrice';
 import getPriceByPriceFeed from './pricefeeds/calls/getPriceByPriceFeed';
@@ -172,6 +184,7 @@ import gasBoost from './utils/ethereum/gasBoost';
 import getNetworkName from './utils/ethereum/getNetworkName';
 import onBlock from './utils/ethereum/onBlock';
 import parseEvent from './utils/ethereum/parseEvent';
+import sendEther from './utils/ethereum/sendEther';
 
 // ./lib/utils/generic
 import ensure from './utils/generic/ensure';
@@ -285,6 +298,11 @@ export {
   takeOrder,
   toggleInvestment,
   toggleRedemption,
+  getRegistrantFund,
+  getOlympiadContract,
+  claimReward,
+  registerForCompetition,
+  signOlympiadTermsAndConditions,
   getLastRequest,
   getParticipation,
   isInvestmentRequestPermittedAndAllowed,
@@ -296,6 +314,7 @@ export {
   list,
   redeem,
   redeemAllOwnedAssets,
+  getNextEpochTime,
   getOperators,
   getPrice,
   getPriceByPriceFeed,
@@ -336,6 +355,7 @@ export {
   getNetworkName,
   onBlock,
   parseEvent,
+  sendEther,
   ensure,
   getKeyByValue,
   isPromise,
