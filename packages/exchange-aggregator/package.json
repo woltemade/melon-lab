@@ -15,7 +15,7 @@
     "Jenna Zenk <jenna@melonport.com>"
   ],
   "dependencies": {
-    "@melonproject/smart-contracts": "0.8.0-alpha.14",
+    "@melonproject/smart-contracts": "0.8.0-alpha.17",
     "axios": "^0.18.0",
     "bignumber.js": "4.1.0",
     "debug": "2.6.9",
@@ -41,27 +41,14 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "setupFiles": [
-      "<rootDir>/tests/config/jest.setup"
-    ],
+    "setupFiles": ["<rootDir>/tests/config/jest.setup"],
     "transform": {
       "^.+\\.(jsx?|tsx?)$": "ts-jest"
     },
-    "transformIgnorePatterns": [
-      "node_modules/(?!@melonproject/)"
-    ],
+    "transformIgnorePatterns": ["node_modules/(?!@melonproject/)"],
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleDirectories": [
-      "node_modules/"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ],
+    "moduleDirectories": ["node_modules/"],
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
     "globals": {
       "ts-jest": {
         "tsConfigFile": "tsconfig.json"
