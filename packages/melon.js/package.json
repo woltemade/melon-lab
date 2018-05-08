@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.8.0-alpha.8",
+  "version": "0.8.1",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/index.js",
   "esnext": "lib/index.js",
@@ -21,11 +21,13 @@
     "babel:watch": "babel lib -w -d build",
     "babel": "babel lib -d build",
     "build": "yarn walklib && yarn babel",
-    "deploy:alpha": "npm version prerelease --git-tag-version false && npm publish --tag alpha ",
+    "deploy:alpha":
+      "yarn build && npm version prerelease --git-tag-version false && npm publish --tag alpha ",
     "deploy": "yarn build && npm version patch && npm publish",
     "docs": "documentation build lib/** -f html -o docs --sort-order alpha",
     "flow": "flow",
-    "format": "prettier --write \"lib/**/*.js\" && prettier --write \"tests/**/*.js\"",
+    "format":
+      "prettier --write \"lib/**/*.js\" && prettier --write \"tests/**/*.js\"",
     "postversion": "git push && git push --tags",
     "precommit": "lint-staged",
     "pretest": "yarn build",
@@ -35,22 +37,13 @@
     "walklib": "babel-node ./scripts/walkLib.js"
   },
   "lint-staged": {
-    "*.js": [
-      "yarn format",
-      "git add"
-    ]
+    "*.js": ["yarn format", "git add"]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/melonproject/melon.js.git"
   },
-  "keywords": [
-    "melon",
-    "melonproject",
-    "javascript",
-    "ethereum",
-    "api"
-  ],
+  "keywords": ["melon", "melonproject", "javascript", "ethereum", "api"],
   "author": "Simon Emanuel Schmid <simon@melonport.com>",
   "license": "GPL-3.0",
   "bugs": {
@@ -63,7 +56,6 @@
     "@babel/node": "7.0.0-beta.42",
     "@babel/plugin-proposal-class-properties": "7.0.0-beta.42",
     "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.42",
-    "@babel/plugin-transform-runtime": "7.0.0-beta.42",
     "@babel/preset-env": "7.0.0-beta.42",
     "@babel/preset-flow": "7.0.0-beta.42",
     "@babel/runtime": "7.0.0-beta.42",
@@ -77,7 +69,8 @@
     "walk": "^2.3.9"
   },
   "dependencies": {
-    "0x.js": "^0.36.3",
+    "0x.js": "^0.35.0",
+    "@babel/runtime": "7.0.0-beta.42",
     "@melonproject/smart-contracts": "0.8.0-alpha.17",
     "@parity/api": "^2.1.5",
     "bignumber.js": "4.1.0",

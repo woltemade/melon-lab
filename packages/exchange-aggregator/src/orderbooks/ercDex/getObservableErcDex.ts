@@ -77,9 +77,22 @@ const getObservableErcDex = (baseTokenSymbol, quoteTokenSymbol) => {
 
   const response$ = Rx.Observable.defer(() =>
     fetchOrderbook(baseTokenAddress, quoteTokenAddress),
-  ).repeatWhen(() =>
-    getObservableErcDexNotifications(baseTokenAddress, quoteTokenAddress),
-  );
+  )
+    .catch(error => {
+      debug('Failed to fetch orderbook.', {
+        baseTokenAddress,
+        quoteTokenAddress,
+        error,
+      });
+
+      return Rx.Observable.of({
+        bids: [],
+        asks: [],
+      });
+    })
+    .repeatWhen(() =>
+      getObservableErcDexNotifications(baseTokenAddress, quoteTokenAddress),
+    );
 
   const format = formatRelayerOrderbook('ERC_DEX');
 
