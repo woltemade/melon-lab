@@ -22,7 +22,7 @@
   "dependencies": {
     "@melonproject/graphql-schema": "^0.0.0",
     "@melonproject/manager-interface": "^0.0.0",
-    "@melonproject/melon.js": "^0.8.0-alpha.8",
+    "@melonproject/melon.js": "^0.8.1",
     "apollo-cache-inmemory": "^1.1.12",
     "apollo-client": "^2.2.8",
     "apollo-link": "^1.2.1",

@@ -6,6 +6,7 @@ import getSymbol from '../../assets/utils/getSymbol';
 import toReadable from '../../assets/utils/toReadable';
 import toDate from '../../utils/generic/toDate';
 import getExchangeName from '../../exchange/utils/getExchangeName';
+import isValidId from '../../utils/generic/isValidId';
 
 /**
  * Get all the orders the fund has made so far, regardless of their status (active, canceled etc.)
@@ -20,6 +21,10 @@ const getOrdersHistory = async (environment, { fundAddress }) => {
     {},
     [],
   );
+
+  if (!isValidId(lastOrderIndex)) {
+    return [];
+  }
 
   const getOrdersPromises = new Array(lastOrderIndex.toNumber() + 1)
     .fill(undefined)

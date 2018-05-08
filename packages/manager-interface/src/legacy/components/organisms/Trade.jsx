@@ -43,7 +43,7 @@ const orderTypeSelector = ({
       {input.value} <strong>{baseTokenSymbol}</strong>
     </Card.Meta>
     <Image
-      src="./switch.svg"
+      src="/static/switch.svg"
       width="18em"
       centered
       style={{ cursor: "pointer" }}

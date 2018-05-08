@@ -31,7 +31,7 @@ function* init() {
   yield put(fundActions.setConfig(config));
   yield put(
     appActions.updateAssetPair({
-      base: config.nativeAssetSymbol,
+      base: 'MLN-T',
       quote: config.quoteAssetSymbol,
     }),
   );
