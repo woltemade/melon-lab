@@ -1,9 +1,0 @@
-#import "./Vault.graphql"
-#import "./Asset.graphql"
-
-type Query {
-  getVaults(ids: [Int]!): [Vault]
-  getAssets: [Asset]
-  getBlockNumber: Int
-  getPrice(symbol: String, address: String, blockNumber: Int): String
-}

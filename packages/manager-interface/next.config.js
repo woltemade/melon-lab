@@ -1,5 +1,6 @@
 const path = require('path');
 const R = require('ramda');
+const webpack = require('webpack');
 const withTypeScript = require('@zeit/next-typescript');
 const withQueryFiles = require('./config/withQueryFiles');
 const withLinkedDependencies = require('./config/withLinkedDependencies');
@@ -37,6 +38,15 @@ module.exports = withComposedConfig({
     config.resolve.alias = Object.assign({}, config.resolve.alias || {}, {
       '~/shared': path.resolve(__dirname, 'src', 'shared'),
     });
+
+    // Code splitting doesn't make much sense in an electron app.
+    if (JSON.parse(process.env.ELECTRON_PACKAGE)) {
+      config.plugins.push(
+        new webpack.optimize.LimitChunkCountPlugin({
+          maxChunks: 1,
+        }),
+      );
+    }
 
     return config;
   },
