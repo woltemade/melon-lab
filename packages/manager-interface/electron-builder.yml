@@ -1,0 +1,21 @@
+appId: com.melonproject.app
+copyright: Melonport
+productName: Melon Project Manager Interface
+
+asar: true
+
+extends: null
+
+directories:
+  output: package/
+
+files:
+  - electron.main.js
+  - package.json
+  - export/**/*
+  - node_modules/**/*
+
+linux:
+  target:
+    - deb
+    - AppImage
