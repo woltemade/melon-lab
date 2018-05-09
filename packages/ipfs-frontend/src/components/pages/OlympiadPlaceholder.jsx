@@ -73,7 +73,7 @@ const OlympiadPlaceholder = ({
       in Melon tokens. The conversion rate of ether to Melon will be retrieved
       from the Pricefeed contract.
     </p>
-    <h2> Instructions on how to participate</h2>
+    <h2>Instructions on how to participate</h2>
     <p>
       Melonport AG is required to issue tokens via a regulated financial
       intermediary which is subject to KYC/AML procedures. To perform the
