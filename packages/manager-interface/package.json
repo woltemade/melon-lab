@@ -31,7 +31,7 @@
     "apollo-link": "^1.2.1",
     "apollo-link-http": "^1.5.3",
     "apollo-link-schema": "^1.0.6",
-    "apollo-link-webworker": "fubhy/apollo-link-webworker#hotfix",
+    "apollo-link-webworker": "^0.1.3",
     "apollo-link-ws": "^1.0.7",
     "babel-plugin-inline-dotenv": "^1.1.1",
     "babel-plugin-transform-inline-environment-variables": "^0.1.1",

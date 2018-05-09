@@ -3,12 +3,12 @@ import { createWebWorkerLink } from 'apollo-link-webworker';
 import withApollo from 'next-with-apollo';
 import WebWorker from './worker';
 
-const link = createWebWorkerLink({ worker: new WebWorker() });
+const worker = new WebWorker();
 
 export default withApollo({
   link: {
-    http: () => link,
-    ws: () => link,
+    http: () => createWebWorkerLink({ worker }),
+    ws: () => createWebWorkerLink({ worker }),
   },
   client: options => ({
     link: options.link,
