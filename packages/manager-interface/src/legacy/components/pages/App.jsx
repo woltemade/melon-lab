@@ -14,6 +14,7 @@ import RankingContainer from '../../containers/Ranking';
 import AccountContainer from '../../containers/account/Account';
 import AccountGenerate from '../../containers/account/Generate';
 import RestoreContainer from '../../containers/account/Restore';
+import ImportContainer from '../../containers/account/Import';
 import CompetitionRegistrationContainer from '../../containers/CompetitionRegistration';
 import OlympiadPlaceholderContainer from '../../containers/OlympiadPlaceholder';
 import Modal from '../../containers/Modal';
@@ -37,6 +38,7 @@ const routeContainerMap = {
   [types.ACCOUNT_GENERATE]: AccountGenerate,
   [types.ACCOUNT_RESTORE]: RestoreContainer,
   [types.ACCOUNT_CREATE]: AccountContainer,
+  [types.ACCOUNT_IMPORT]: ImportContainer,
   [types.FUND]: FundContainer,
   [types.ACCOUNT]: AccountContainer,
   [types.COMPETITION]: CompetitionRegistrationContainer,

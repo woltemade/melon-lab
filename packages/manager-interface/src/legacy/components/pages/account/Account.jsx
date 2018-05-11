@@ -8,6 +8,7 @@ const MyAccount = ({
   deleteWallet,
   gotoAccountGenerate,
   gotoAccountRestore,
+  gotoImportJSON,
   downloadJSON,
   networkId,
 }) => (
@@ -111,16 +112,16 @@ const MyAccount = ({
               Restore from mnemonic
             </Button>
           </p>
-          {/* <p>
+          <p>
             <Button
               basic
-              color="black"
+              color={currentAddress ? 'red' : 'black'}
               style={{ width: '100%' }}
-              onClick={gotoAccountGenerate}
+              onClick={gotoImportJSON}
             >
               Import wallet JSON
             </Button>
-          </p> */}
+          </p>
           {currentAddress ? (
             <p>
               <Button

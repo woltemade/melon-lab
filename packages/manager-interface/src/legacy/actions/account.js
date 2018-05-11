@@ -13,6 +13,10 @@ export const types = {
   DELETE_WALLET_REQUESTED: 'DELETE_WALLET_REQUESTED:newuser:melon.fund',
   DO_DELETE_WALLET: 'DO_DELETE_WALLET:newuser:melon.fund',
   DOWNLOAD_JSON: 'DOWNLOAD_JSON:newuser:melon.fund',
+  IMPORT_JSON: 'IMPORT_JSON:newuser:melon.fund',
+  IMPORT_WALLET_REQUESTED: 'IMPORT_WALLET_REQUESTED:newuser:melon.fund',
+  IMPORT_WALLET_SUCCEEDED: 'IMPORT_WALLET_SUCCEEDED:newuser:melon.fund',
+  IMPORT_WALLET_FAILED: 'IMPORT_WALLET_FAILED:newuser:melon.fund',
 };
 
 export const actions = {
@@ -28,6 +32,21 @@ export const actions = {
     type: types.GENERATE_WALLET_SUCCEEDED,
     hasGenerated: true,
     mnemonic,
+  }),
+  importWallet: encryptedWalletString => ({
+    type: types.IMPORT_WALLET_REQUESTED,
+    loading: false,
+    encryptedWalletString,
+  }),
+  importWalletFailed: reason => ({
+    type: types.IMPORT_WALLET_FAILED,
+    reason,
+  }),
+  importWalletSucceeded: wallet => ({
+    type: types.IMPORT_WALLET_SUCCEEDED,
+    hasGenerated: true,
+    newAddress: wallet.address,
+    privateKey: wallet.privateKey,
   }),
   encryptWallet: password => ({
     type: types.ENCRYPT_WALLET_REQUESTED,

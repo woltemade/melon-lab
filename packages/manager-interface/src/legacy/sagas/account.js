@@ -131,11 +131,38 @@ function* downloadJSON() {
   yield put(modalActions.close());
 }
 
+function* importWallet({ encryptedWalletString }) {
+  try {
+    yield put(
+      modalActions.password(
+        `Enter the password this wallet is encrypted with:`,
+      ),
+    );
+
+    const { password } = yield take(modalTypes.PASSWORD_ENTERED);
+    yield put(modalActions.loading('Decrypting ...'));
+    const decryptedWallet = yield call(
+      decryptWallet,
+      encryptedWalletString,
+      password,
+    );
+    yield put(actions.importWalletSucceeded(decryptedWallet));
+    yield put(ethereumActions.accountChanged(`${decryptedWallet.address}`));
+    yield put(routeActions.account());
+    yield put(modalActions.close());
+  } catch (e) {
+    console.error(e);
+    yield put(actions.importWalletFailed(e));
+    yield put(modalActions.error('Failed to decrypt wallet. Wrong password?'));
+  }
+}
+
 function* account() {
   yield takeLatest(types.RESTORE_FROM_MNEMONIC_REQUESTED, restoreWalletSaga);
   yield takeLatest(types.DELETE_WALLET_REQUESTED, deleteWallet);
-  yield takeLatest(routeTypes.ACCOUNT_GENERATE, generateMnemonic);
+  yield takeLatest(types.IMPORT_WALLET_REQUESTED, importWallet);
   yield takeLatest(types.DOWNLOAD_JSON, downloadJSON);
+  yield takeLatest(routeTypes.ACCOUNT_GENERATE, generateMnemonic);
 }
 
 export default account;
