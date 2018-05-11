@@ -1,4 +1,4 @@
-import OlympiadContract from '@melonproject/smart-contracts/out/competitions/Competition.abi.json';
+// import OlympiadContract from '@melonproject/smart-contracts/out/competitions/Competition.abi.json';
 import getConfig from '../../version/calls/getConfig';
 
 /**
