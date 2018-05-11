@@ -7,9 +7,9 @@ coverage/
 
 # Environment variables
 .env*
+!.env.example
 !.env.defaults
 !.env.schema
 
 # Log files
 *.log*
-

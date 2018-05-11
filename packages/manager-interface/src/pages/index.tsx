@@ -1,21 +1,12 @@
-import Example from '@melonproject/manager-components/Example';
-import React from 'react';
-import { Subscription } from 'react-apollo';
-import withApollo from '../withApollo';
-import query from './query.gql';
+import dynamic from 'next/dynamic';
+import withApollo from '~/shared/graphql';
 
-const Home = () => (
-  <Subscription subscription={query} variables={{ symbol: 'ETH-T-M' }}>
-    {props => (
-      <div>
-        {props.loading
-          ? 'Loading price'
-          : `Price: ${props.data && props.data.price}`}
+import legacy from '../legacy';
 
-        <Example>I am a component from the component library!</Example>
-      </div>
-    )}
-  </Subscription>
-);
+// console.log(legacy);
 
-export default withApollo(Home);
+const App = dynamic(import('../legacy/index'), {
+  ssr: false,
+});
+
+export default withApollo(App);

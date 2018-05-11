@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/melon.js",
-  "version": "0.7.6",
+  "version": "0.8.1",
   "description": "Reusable JS API to query/interact with the Melon protocol",
   "main": "build/index.js",
   "esnext": "lib/index.js",
@@ -21,12 +21,13 @@
     "babel:watch": "babel lib -w -d build",
     "babel": "babel lib -d build",
     "build": "yarn walklib && yarn babel",
-    "deploy:alpha": "npm version prerelease --git-tag-version false && npm publish --tag alpha ",
+    "deploy:alpha":
+      "yarn build && npm version prerelease --git-tag-version false && npm publish --tag alpha ",
     "deploy": "yarn build && npm version patch && npm publish",
     "docs": "documentation build lib/** -f html -o docs --sort-order alpha",
     "flow": "flow",
-    "format": "prettier-eslint --write \"lib/**/*.js\" && prettier-eslint --write \"tests/**/*.js\"",
-    "lint": "eslint .",
+    "format":
+      "prettier --write \"lib/**/*.js\" && prettier --write \"tests/**/*.js\"",
     "postversion": "git push && git push --tags",
     "precommit": "lint-staged",
     "pretest": "yarn build",
@@ -36,22 +37,13 @@
     "walklib": "babel-node ./scripts/walkLib.js"
   },
   "lint-staged": {
-    "*.js": [
-      "yarn format",
-      "git add"
-    ]
+    "*.js": ["yarn format", "git add"]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/melonproject/melon.js.git"
   },
-  "keywords": [
-    "melon",
-    "melonproject",
-    "javascript",
-    "ethereum",
-    "api"
-  ],
+  "keywords": ["melon", "melonproject", "javascript", "ethereum", "api"],
   "author": "Simon Emanuel Schmid <simon@melonport.com>",
   "license": "GPL-3.0",
   "bugs": {
@@ -59,29 +51,33 @@
   },
   "homepage": "https://github.com/melonproject/melon.js#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "7.2.3",
+    "@babel/cli": "7.0.0-beta.42",
+    "@babel/core": "7.0.0-beta.42",
+    "@babel/node": "7.0.0-beta.42",
+    "@babel/plugin-proposal-class-properties": "7.0.0-beta.42",
+    "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.42",
+    "@babel/preset-env": "7.0.0-beta.42",
+    "@babel/preset-flow": "7.0.0-beta.42",
+    "@babel/runtime": "7.0.0-beta.42",
     "documentation": "^5.3.3",
-    "eslint": "4.10.0",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-flowtype": "2.39.1",
-    "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-prettier": "^2.6.0",
     "flow-bin": "^0.66.0",
     "husky": "^0.14.3",
     "jasmine": "^2.7.0",
+    "jest": "^22.4.3",
     "lint-staged": "^6.0.0",
     "prettier": "^1.11.1",
     "walk": "^2.3.9"
   },
   "dependencies": {
-    "@melonproject/protocol": "0.7.2-alpha.1",
+    "0x.js": "^0.35.0",
+    "@babel/runtime": "7.0.0-beta.42",
+    "@melonproject/smart-contracts": "0.8.0-alpha.17",
     "@parity/api": "^2.1.5",
-    "bignumber.js": "^5.0.0",
+    "bignumber.js": "4.1.0",
     "bip39": "^2.4.0",
-    "ethers-utils": "^2.1.8",
-    "ethers-wallet": "^2.1.6",
+    "debug": "2.6.9",
+    "ethers-utils": "^2.1.11",
+    "ethers-wallet": "^2.1.8",
     "ramda": "^0.25.0",
     "web3": "^0.20.4"
   }

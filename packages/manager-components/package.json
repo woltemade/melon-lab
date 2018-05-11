@@ -16,6 +16,7 @@
     "Sebastian Siemssen <fubhy@fubhy.com>"
   ],
   "dependencies": {
+    "debug": "2.6.9",
     "react": "^16.3.1",
     "react-dom": "^16.3.1"
   },

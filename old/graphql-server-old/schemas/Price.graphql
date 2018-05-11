@@ -1,8 +1,0 @@
-#import "./Asset.graphql"
-
-type Price {
-  quote: Asset!
-  base: Asset!
-  price: Int!
-  timestamp: Int!
-}

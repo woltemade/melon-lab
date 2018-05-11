@@ -49,17 +49,22 @@ import Trade from './exchange/schemas/Trade';
 
 // ./lib/exchange/transactions
 import cancelOrderFromAccount from './exchange/transactions/cancelOrderFromAccount';
+import make0xOffChainOrder from './exchange/transactions/make0xOffChainOrder';
 import makeOrderFromAccount from './exchange/transactions/makeOrderFromAccount';
 import takeOrderFromAccount from './exchange/transactions/takeOrderFromAccount';
 
 // ./lib/exchange/utils
 import averagePrice from './exchange/utils/averagePrice';
 import deserializeOrder from './exchange/utils/deserializeOrder';
+import getExchangeList from './exchange/utils/getExchangeList';
+import getExchangeName from './exchange/utils/getExchangeName';
+import getMethodNameSignature from './exchange/utils/getMethodNameSignature';
 import getPrices from './exchange/utils/getPrices';
 import matchOrders from './exchange/utils/matchOrders';
 import serializeOrder from './exchange/utils/serializeOrder';
 
 // ./lib/fund/calls
+import getExchangeIndex from './fund/calls/getExchangeIndex';
 import getFundInformations from './fund/calls/getFundInformations';
 import getHoldingsAndPrices from './fund/calls/getHoldingsAndPrices';
 import getModules from './fund/calls/getModules';
@@ -74,8 +79,13 @@ import performCalculations from './fund/calls/performCalculations';
 // ./lib/fund/contracts
 import getFundContract from './fund/contracts/getFundContract';
 
+// ./lib/fund/preflights
+import preflightMakeOrder from './fund/preflights/preflightMakeOrder';
+import preflightTakeOrder from './fund/preflights/preflightTakeOrder';
+
 // ./lib/fund/transactions
 import calcSharePriceAndConvertFees from './fund/transactions/calcSharePriceAndConvertFees';
+import callOnExchange from './fund/transactions/callOnExchange';
 import cancelOrder from './fund/transactions/cancelOrder';
 import makeOrder from './fund/transactions/makeOrder';
 import shutDownFund from './fund/transactions/shutDownFund';
@@ -83,6 +93,17 @@ import takeMultipleOrders from './fund/transactions/takeMultipleOrders';
 import takeOrder from './fund/transactions/takeOrder';
 import toggleInvestment from './fund/transactions/toggleInvestment';
 import toggleRedemption from './fund/transactions/toggleRedemption';
+
+// ./lib/olympiad/calls
+import getRegistrantFund from './olympiad/calls/getRegistrantFund';
+
+// ./lib/olympiad/contracts
+import getOlympiadContract from './olympiad/contracts/getOlympiadContract';
+
+// ./lib/olympiad/transactions
+import claimReward from './olympiad/transactions/claimReward';
+import registerForCompetition from './olympiad/transactions/registerForCompetition';
+import signOlympiadTermsAndConditions from './olympiad/transactions/signOlympiadTermsAndConditions';
 
 // ./lib/participation/calls
 import getLastRequest from './participation/calls/getLastRequest';
@@ -104,15 +125,37 @@ import redeem from './participation/transactions/redeem';
 import redeemAllOwnedAssets from './participation/transactions/redeemAllOwnedAssets';
 
 // ./lib/pricefeeds/calls
+import getNextEpochTime from './pricefeeds/calls/getNextEpochTime';
+import getOperators from './pricefeeds/calls/getOperators';
 import getPrice from './pricefeeds/calls/getPrice';
+import getPriceByPriceFeed from './pricefeeds/calls/getPriceByPriceFeed';
+import getPriceFeedsByOwner from './pricefeeds/calls/getPriceFeedsByOwner';
 import getQuoteAssetSymbol from './pricefeeds/calls/getQuoteAssetSymbol';
+import getRegisteredAssets from './pricefeeds/calls/getRegisteredAssets';
+import getStakersAndAmounts from './pricefeeds/calls/getStakersAndAmounts';
+import getStakingPriceFeedOwner from './pricefeeds/calls/getStakingPriceFeedOwner';
+import getStakingToken from './pricefeeds/calls/getStakingToken';
+import getTotalStaked from './pricefeeds/calls/getTotalStaked';
+import getTotalStakedByAddr from './pricefeeds/calls/getTotalStakedByAddr';
+import getUpdateInterval from './pricefeeds/calls/getUpdateInterval';
 import hasRecentPrice from './pricefeeds/calls/hasRecentPrice';
 
 // ./lib/pricefeeds/contracts
+import getCanonicalPriceFeedContract from './pricefeeds/contracts/getCanonicalPriceFeedContract';
 import getPriceFeedContract from './pricefeeds/contracts/getPriceFeedContract';
+import getStakingPriceFeedContract from './pricefeeds/contracts/getStakingPriceFeedContract';
 
 // ./lib/pricefeeds/events
 import awaitDataFeedUpdates from './pricefeeds/events/awaitDataFeedUpdates';
+
+// ./lib/pricefeeds/transactions/multisig
+import collectAndUpdate from './pricefeeds/transactions/multisig/collectAndUpdate';
+
+// ./lib/pricefeeds/transactions/operator
+import depositStake from './pricefeeds/transactions/operator/depositStake';
+import setupPriceFeed from './pricefeeds/transactions/operator/setupPriceFeed';
+import updatePriceFeed from './pricefeeds/transactions/operator/updatePriceFeed';
+import withdrawStake from './pricefeeds/transactions/operator/withdrawStake';
 
 // ./lib/riskManagement/calls
 import isMakePermitted from './riskManagement/calls/isMakePermitted';
@@ -141,6 +184,7 @@ import gasBoost from './utils/ethereum/gasBoost';
 import getNetworkName from './utils/ethereum/getNetworkName';
 import onBlock from './utils/ethereum/onBlock';
 import parseEvent from './utils/ethereum/parseEvent';
+import sendEther from './utils/ethereum/sendEther';
 
 // ./lib/utils/generic
 import ensure from './utils/generic/ensure';
@@ -164,6 +208,7 @@ import sendTransaction from './utils/parity/sendTransaction';
 import createWallet from './utils/wallet/createWallet';
 import decryptWallet from './utils/wallet/decryptWallet';
 import encryptWallet from './utils/wallet/encryptWallet';
+import getWallet from './utils/wallet/getWallet';
 import importWalletFromMnemonic from './utils/wallet/importWalletFromMnemonic';
 
 // ./lib/version/calls
@@ -220,13 +265,18 @@ export {
   Order,
   Trade,
   cancelOrderFromAccount,
+  make0xOffChainOrder,
   makeOrderFromAccount,
   takeOrderFromAccount,
   averagePrice,
   deserializeOrder,
+  getExchangeList,
+  getExchangeName,
+  getMethodNameSignature,
   getPrices,
   matchOrders,
   serializeOrder,
+  getExchangeIndex,
   getFundInformations,
   getHoldingsAndPrices,
   getModules,
@@ -238,7 +288,10 @@ export {
   isShutDown,
   performCalculations,
   getFundContract,
+  preflightMakeOrder,
+  preflightTakeOrder,
   calcSharePriceAndConvertFees,
+  callOnExchange,
   cancelOrder,
   makeOrder,
   shutDownFund,
@@ -246,6 +299,11 @@ export {
   takeOrder,
   toggleInvestment,
   toggleRedemption,
+  getRegistrantFund,
+  getOlympiadContract,
+  claimReward,
+  registerForCompetition,
+  signOlympiadTermsAndConditions,
   getLastRequest,
   getParticipation,
   isInvestmentRequestPermittedAndAllowed,
@@ -257,11 +315,29 @@ export {
   list,
   redeem,
   redeemAllOwnedAssets,
+  getNextEpochTime,
+  getOperators,
   getPrice,
+  getPriceByPriceFeed,
+  getPriceFeedsByOwner,
   getQuoteAssetSymbol,
+  getRegisteredAssets,
+  getStakersAndAmounts,
+  getStakingPriceFeedOwner,
+  getStakingToken,
+  getTotalStaked,
+  getTotalStakedByAddr,
+  getUpdateInterval,
   hasRecentPrice,
+  getCanonicalPriceFeedContract,
   getPriceFeedContract,
+  getStakingPriceFeedContract,
   awaitDataFeedUpdates,
+  collectAndUpdate,
+  depositStake,
+  setupPriceFeed,
+  updatePriceFeed,
+  withdrawStake,
   isMakePermitted,
   isTakePermitted,
   getRiskManagementContract,
@@ -280,6 +356,7 @@ export {
   getNetworkName,
   onBlock,
   parseEvent,
+  sendEther,
   ensure,
   getKeyByValue,
   isPromise,
@@ -295,6 +372,7 @@ export {
   createWallet,
   decryptWallet,
   encryptWallet,
+  getWallet,
   importWalletFromMnemonic,
   getConfig,
   getFundForManager,

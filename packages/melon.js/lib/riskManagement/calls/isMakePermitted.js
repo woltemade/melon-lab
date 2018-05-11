@@ -1,6 +1,6 @@
 import getAddress from '../../assets/utils/getAddress';
 import getConfig from '../../version/calls/getConfig';
-import getPriceFeedContract from '../../pricefeeds/contracts/getPriceFeedContract';
+import getCanonicalPriceFeedContract from '../../pricefeeds/contracts/getCanonicalPriceFeedContract';
 import getRiskManagementContract from '../contracts/getRiskManagementContract';
 import toProcessable from '../../assets/utils/toProcessable';
 
@@ -11,22 +11,27 @@ const isMakePermitted = async (
   environment,
   {
     referencePrice,
-    sellWhichToken,
-    buyWhichToken,
-    sellHowMuch,
-    buyHowMuch,
+    makerAssetSymbol,
+    takerAssetSymbol,
+    makerQuantity,
+    takerQuantity,
     fundContract,
   },
 ) => {
   const config = await getConfig(environment);
-  const priceFeedContract = await getPriceFeedContract(environment);
+  const canonicalPriceFeedContract = await getCanonicalPriceFeedContract(
+    environment,
+  );
 
-  const orderPrice = await priceFeedContract.instance.getOrderPrice.call({}, [
-    getAddress(config, sellWhichToken),
-    getAddress(config, buyWhichToken),
-    toProcessable(config, sellHowMuch, sellWhichToken),
-    toProcessable(config, buyHowMuch, buyWhichToken),
-  ]);
+  const orderPrice = await canonicalPriceFeedContract.instance.getOrderPriceInfo.call(
+    {},
+    [
+      getAddress(config, makerAssetSymbol),
+      getAddress(config, takerAssetSymbol),
+      toProcessable(config, makerQuantity, makerAssetSymbol),
+      toProcessable(config, takerQuantity, takerAssetSymbol),
+    ],
+  );
 
   const riskManagementContract = await getRiskManagementContract(
     environment,
@@ -38,10 +43,10 @@ const isMakePermitted = async (
     [
       orderPrice,
       referencePrice,
-      getAddress(config, sellWhichToken),
-      getAddress(config, buyWhichToken),
-      toProcessable(config, sellHowMuch, sellWhichToken),
-      toProcessable(config, buyHowMuch, buyWhichToken),
+      getAddress(config, makerAssetSymbol),
+      getAddress(config, takerAssetSymbol),
+      toProcessable(config, makerQuantity, makerAssetSymbol),
+      toProcessable(config, takerQuantity, takerAssetSymbol),
     ],
   );
 

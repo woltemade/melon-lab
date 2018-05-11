@@ -1,129 +1,144 @@
+import * as R from 'ramda';
 import * as Rx from 'rxjs';
-import * as WebSocket from 'websocket';
+import formatRelayerOrderbook from '../../formatRelayerOrderbook';
+import getStemmedSymbol from '../../getStemmedSymbol';
+import getTokenAddress from '../../getTokenAddress';
+import { Order } from '../../index';
 
-import formatRelayerOrderbook from './formatRelayerOrderbook';
-import formatNewOrder from './formatNewOrder';
+// Isomorphic websocket implementation. Falls back to the standard browser
+// protocol on the client.
+import WebSocket = require('isomorphic-ws');
 
-const getObservableRelayer = (endpoint, baseTokenAddress, quoteTokenAddress) =>
-  Rx.Observable.create(observer => {
-    let state = [];
-    let interval;
-    let hoistedConnection;
-    const WebSocketClient = WebSocket.client;
-    const client = new WebSocketClient();
+const debug = require('debug')('exchange-aggregator:0x');
 
-    client.on('connectFailed', error => {
-      console.log(`Connect Error: ${error.toString()}`);
-    });
-    client.on('connect', connection => {
-      hoistedConnection = connection;
-      console.log('Connected to Server...');
-      console.log('Endpoint ', endpoint);
-
-      connection.on('error', error => {
-        console.log(`Connect Error: ${error.toString()}`);
-      });
-      connection.on('close', (reason, description) => {
-        console.log(`Connection closed `, reason, description);
-        if (interval) client.connect(endpoint);
-      });
-
-      const observable = Rx.Observable.fromEvent(connection, 'message');
-
-      // Within that observable we should put the logic for
-      // (i) defining if an update is new order/cancel order/update order? (might not be necessary)
-      // (ii) formatting the orders to our standardized order format
-      observable.subscribe(message => {
-        if (message.type === 'utf8') {
-          const jsonResponse = JSON.parse(message.utf8Data);
-          if (jsonResponse.channel === 'orderbook') {
-            if (jsonResponse.type === 'snapshot') {
-              if (!state.length) {
-                state = formatRelayerOrderbook(
-                  jsonResponse.payload.bids,
-                  jsonResponse.payload.asks,
-                );
-                console.log(
-                  'First call: Format orders and fill up state. Items:',
-                  state.length,
-                );
-                observer.next(state);
-              } else {
-                state = formatRelayerOrderbook(
-                  jsonResponse.payload.bids,
-                  jsonResponse.payload.asks,
-                );
-                console.log('New snapshot', state.length);
-                observer.next(state);
-              }
-            }
-            if (jsonResponse.type === 'update') {
-              const salt = jsonResponse.payload.salt;
-
-              const orderIndex = state.findIndex(s => s.salt === salt);
-
-              if (
-                orderIndex === -1 &&
-                jsonResponse.payload.expirationUnixTimestampSec >
-                  Math.floor(Date.now() / 1000)
-              ) {
-                console.log('Found new order', jsonResponse.payload);
-                const order = formatNewOrder(
-                  jsonResponse.payload,
-                  baseTokenAddress,
-                );
-                order.price = getPrices(order)[order.type];
-                state = [...state, order];
-              } else if (
-                state[orderIndex] &&
-                state[orderIndex].expirationUnixTimestampSec <
-                  Math.floor(Date.now() / 1000)
-              ) {
-                console.log('Order expired', orderIndex, jsonResponse.payload);
-                state.splice(orderIndex, 1);
-              } else {
-                state[orderIndex] = jsonResponse.payload;
-                console.log(
-                  'Updated order at index',
-                  orderIndex,
-                  jsonResponse.payload,
-                );
-              }
-
-              observer.next(state);
-            }
-          }
-        }
-      });
-
-      function send(message) {
-        if (connection.connected) {
-          connection.sendUTF(message);
-        }
-      }
-      // subscribe with snapshot
-      send(`{
-          "type": "subscribe",
-          "channel": "orderbook",
-          "requestId": 1,
-          "payload": {
-              "baseTokenAddress": "${baseTokenAddress}",
-              "quoteTokenAddress": "${quoteTokenAddress}",
-              "snapshot": true,
-              "limit": 1000
-          }
-      }`);
-
-      interval = setInterval(() => connection.ping(), 1000);
-    });
-
-    client.connect(endpoint);
-
-    return () => {
-      clearInterval(interval);
-      interval = undefined;
-      hoistedConnection.close();
-    };
+const subscribeMessage = (baseTokenAddress, quoteTokenAddress) =>
+  JSON.stringify({
+    type: 'subscribe',
+    channel: 'orderbook',
+    requestId: 1,
+    payload: {
+      baseTokenAddress,
+      quoteTokenAddress,
+      snapshot: true,
+      limit: 1000,
+    },
   });
 
-export default getObservableRelayer;
+// @TODO: Finish this type.
+interface RelayOrder {
+  salt: string;
+}
+
+interface AsksAndBids {
+  asks: RelayOrder[];
+  bids: RelayOrder[];
+}
+
+interface SnapshotMessage {
+  type: 'snapshot';
+  payload: AsksAndBids;
+}
+
+interface UpdateMessage {
+  type: 'update';
+  payload: RelayOrder;
+}
+
+const isSnapshotMessage = R.propEq('type', 'snapshot') as (
+  payload: any,
+) => payload is SnapshotMessage;
+
+const isUpdateMessage = R.propEq('type', 'update') as (
+  payload: any,
+) => payload is UpdateMessage;
+
+const scanMessages: (
+  carry: AsksAndBids,
+  current: SnapshotMessage | UpdateMessage,
+) => AsksAndBids = R.cond([
+  [
+    (carry: AsksAndBids, current: SnapshotMessage) => {
+      return isSnapshotMessage(current);
+    },
+    (carry: AsksAndBids, current: SnapshotMessage) => {
+      return current.payload;
+    },
+  ],
+  [
+    (carry: AsksAndBids, current: SnapshotMessage) => {
+      return isUpdateMessage(current);
+    },
+    (carry: AsksAndBids, current: UpdateMessage) => {
+      return updateAsksAndBids(carry, current.payload);
+    },
+  ],
+  [R.T, R.identity],
+]);
+
+const updateAsksAndBids = (state: AsksAndBids, order: RelayOrder) => {
+  // @TODO: Implement update logic.
+  return state;
+};
+
+const getObservableRadarRelay = (baseTokenSymbol, quoteTokenSymbol) => {
+  const stemmedBaseTokenSymbol = getStemmedSymbol(baseTokenSymbol);
+  const stemmedQuoteTokenSymbol = getStemmedSymbol(quoteTokenSymbol);
+  const baseTokenAddress = getTokenAddress(stemmedBaseTokenSymbol);
+  const quoteTokenAddress = getTokenAddress(stemmedQuoteTokenSymbol);
+
+  debug('Connecting.', {
+    baseTokenSymbol,
+    quoteTokenSymbol,
+    stemmedBaseTokenSymbol,
+    stemmedQuoteTokenSymbol,
+    baseTokenAddress,
+    quoteTokenAddress,
+  });
+
+  const open$ = new Rx.Subject();
+  const socket$ = Rx.Observable.webSocket({
+    url: 'wss://api.radarrelay.com/0x/v0/ws',
+    WebSocketCtor: WebSocket,
+    openObserver: open$,
+  });
+
+  open$.subscribe(event => {
+    const message = subscribeMessage(baseTokenAddress, quoteTokenAddress);
+    socket$.next(message);
+  });
+
+  const format = formatRelayerOrderbook('RADAR_RELAY');
+
+  const messages$ = socket$
+    // @TODO: In addition to restarting the connection when it's closed, also
+    // send a ping signal if there is no activity to prevent closing the websocket
+    // connection in the first place.
+    .retry()
+    .do(value => debug('Received message.', value))
+    .filter(R.propEq('channel', 'orderbook'))
+    .filter(R.anyPass([isSnapshotMessage, isUpdateMessage]) as (
+      value,
+    ) => value is SnapshotMessage | UpdateMessage)
+    .do(value => debug('Processing snapshot or update message.', value))
+    .scan<SnapshotMessage | UpdateMessage, AsksAndBids>(scanMessages, {
+      bids: [],
+      asks: [],
+    })
+    .distinctUntilChanged()
+    .do(value => debug('Extracting bids and asks.', value))
+    .map<AsksAndBids, Order[]>(value => format(value.bids, value.asks))
+    .do(value => debug('Emitting order book.', value))
+    .catch(error => {
+      debug('Failed to fetch orderbook.', {
+        baseTokenAddress,
+        quoteTokenAddress,
+        error,
+      });
+
+      return Rx.Observable.of([]);
+    });
+
+  return messages$;
+};
+
+export default getObservableRadarRelay;

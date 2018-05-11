@@ -1,12 +1,13 @@
 // @flow
+import addressBook from '@melonproject/smart-contracts/addressBook.json';
 import ensure from '../../utils/generic/ensure';
 import findEventInLog from '../../utils/ethereum/findEventInLog';
 import getAddress from '../../assets/utils/getAddress';
 import getConfig from '../../version/calls/getConfig';
 import getFundInformations from '../../fund/calls/getFundInformations';
+import getNetwork from '../../utils/environment/getNetwork';
 import getVersionContract from '../contracts/getVersionContract';
 import sendTransaction from '../../utils/parity/sendTransaction';
-
 import type { Address } from '../../assets/schemas/Address';
 import type { Environment } from '../../utils/environment/Environment';
 
@@ -21,23 +22,15 @@ type Fund = {
 };
 
 /**
- * Setup a new fund with `name`
- */
+ * Setup a new fund with `name` and an array of `exchangeNames`  */
 const setupFund = async (
   environment: Environment,
-  { name, signature },
+  { name, signature, exchangeNames = ['MatchingMarket', 'ZeroExExchange'] },
 ): Promise<Fund> => {
   const config = await getConfig(environment);
-  const {
-    quoteAssetSymbol,
-    complianceAddress,
-    riskManagementAddress,
-    priceFeedAddress,
-    exchangeAddress,
-    exchangeAdapterAddress,
-  } = config;
+  const { quoteAssetSymbol, complianceAddress, riskManagementAddress } = config;
 
-  const referenceAsset = getAddress(config, quoteAssetSymbol);
+  const quoteAsset = getAddress(config, quoteAssetSymbol);
 
   const managementReward = 0;
   const performanceReward = 0;
@@ -66,16 +59,20 @@ const setupFund = async (
     'Already have a fund',
   );
 
+  const network = await getNetwork(environment);
+  const exchanges = exchangeNames.map(
+    exchange => addressBook[network][exchange],
+  );
+
   const params = [
     name,
-    referenceAsset,
+    quoteAsset,
     managementReward,
     performanceReward,
     complianceAddress,
     riskManagementAddress,
-    priceFeedAddress,
-    [exchangeAddress],
-    [exchangeAdapterAddress],
+    exchanges,
+    [getAddress(config, 'MLN-T')],
     signature.v,
     signature.r,
     signature.s,

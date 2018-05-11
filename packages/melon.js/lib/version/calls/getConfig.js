@@ -1,6 +1,6 @@
 // @flow
-import addressBook from '@melonproject/protocol/addressBook.json';
-import exchangeInfo from '@melonproject/protocol/utils/info/exchangeInfo';
+import addressBook from '@melonproject/smart-contracts/addressBook.json';
+import exchangeInfo from '@melonproject/smart-contracts/utils/info/exchangeInfo';
 
 import getNativeAssetSymbol from './getNativeAssetSymbol';
 import getNetwork from '../../utils/environment/getNetwork';
@@ -27,14 +27,18 @@ export type AssetConfig = {
 export type Config = {
   assets: Array<AssetConfig>,
   complianceAddress: Address,
-  exchangeAdapterAddress: Address,
-  exchangeAddress: Address,
+  matchingMarketAddress: Address,
+  matchingMarketAdapter: Address,
+  zeroExV1Address: Address,
+  zeroExV1AdapterAddress: Address,
   nativeAssetSymbol: TokenSymbol,
-  priceFeedAddress: Address,
+  canonicalPriceFeedAddress: Address,
+  stakingPriceFeedAddress: Address,
   quoteAssetSymbol: TokenSymbol,
   rankingAddress: Address,
   riskManagementAddress: Address,
   versionAddress: Address,
+  governanceAddress: Address,
 };
 
 let config: Config;
@@ -53,10 +57,16 @@ const getConfig = async (environment): Promise<Config> => {
       network === 'kovan'
         ? addressBook[network].MatchingMarket
         : exchangeInfo[network][0].address,
-    priceFeedAddress: addressBook[network].PriceFeed,
+    matchingMarketAddress: addressBook[network].MatchingMarket,
+    matchingMarketAdapter: addressBook[network].matchingMarketAdapter,
+    zeroExV1Address: addressBook[network].ZeroExExchange,
+    zeroExV1AdapterAddress: addressBook[network].ZeroExV1Adapter,
+    canonicalPriceFeedAddress: addressBook[network].CanonicalPriceFeed,
+    stakingPriceFeedAddress: addressBook[network].StakingPriceFeed,
     rankingAddress: addressBook[network].FundRanking,
     riskManagementAddress: addressBook[network].RMMakeOrders,
     versionAddress: addressBook[network].Version,
+    governanceAddress: addressBook[network].Governance,
   };
 
   // HACK: Define config first so that inside these next async functions,

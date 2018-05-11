@@ -10,7 +10,7 @@ install:
 	@docker build -f Dockerfile.installer -t melonproject/installer:latest .
 
 .PHONY: bootstrap
-bootstrap: network
+bootstrap: network install
 
 # -----------------------------------------------------------------------------
 # BUILD
@@ -31,7 +31,6 @@ lint:
 	@docker-compose run --rm manager-components yarn lint
 	# TODO: Fix tests and linting in imported projects.
 	# @docker-compose run --rm melon-js yarn lint
-	# @docker-compose run --rm ipfs-frontend yarn lint
 
 .PHONY: test
 test:
@@ -42,7 +41,6 @@ test:
 	@docker-compose run --rm manager-components yarn test
 	# TODO: Fix tests and linting in imported projects.
 	# @docker-compose run --rm melon-js yarn test
-	# @docker-compose run --rm ipfs-frontend yarn test
 
 # -----------------------------------------------------------------------------
 # DEVELOPMENT

@@ -1,4 +1,4 @@
-import SimpleAdapterAbi from '@melonproject/protocol/out/exchange/adapter/SimpleAdapter.abi.json';
+import SimpleAdapterAbi from '@melonproject/smart-contracts/out/exchange/adapter/SimpleAdapter.abi.json';
 
 import getConfig from '../../version/calls/getConfig';
 

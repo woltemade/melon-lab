@@ -1,7 +1,0 @@
-type Order {
-  id: Int
-  buySymbol: String
-  buyHowMuch: String
-  sellSymbol: String
-  sellHowMuch: String
-}

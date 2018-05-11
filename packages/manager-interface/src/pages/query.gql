@@ -1,3 +1,0 @@
-subscription PriceQuery($symbol: Symbol!) {
-  price(symbol: $symbol)
-}

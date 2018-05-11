@@ -1,4 +1,4 @@
-import RankingAbi from '@melonproject/protocol/out/FundRanking.abi.json';
+import RankingAbi from '@melonproject/smart-contracts/out/FundRanking.abi.json';
 import getConfig from '../../version/calls/getConfig';
 
 /**
