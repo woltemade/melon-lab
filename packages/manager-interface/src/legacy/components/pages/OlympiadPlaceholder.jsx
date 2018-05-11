@@ -6,7 +6,7 @@ import Highlight from 'react-highlighter';
 import GetStarted from '../../containers/GetStarted';
 import renderInput from '../utils/renderInput';
 
-const OlympiadPlaceholder = ({ generateAccount }) => (
+const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
   <div style={{ maxWidth: '35em', margin: '0 auto' }}>
     <h1 id="history" className="App-intro">
       Welcome to the Melon Olympiad
@@ -143,28 +143,63 @@ const OlympiadPlaceholder = ({ generateAccount }) => (
       understanding and agreement.
     </p>
     <h2>Generate your wallet</h2>
-    <p>
-      The wallet you generate here will be the wallet you will use to create a
-      fund when the competition starts (referred to as manager address). It will
-      be the wallet you will use to contribute ether to the Olympiad contract.
-      It is also the wallet to which your compensation will be transferred to at
-      the end of the period. Please make sure you carefully read the warnings
-      below.
-    </p>
-    <p>
-      The first step to perform if you wish to participate is to generate your
-      wallet. Please click on the "Generate my wallet" button below:
-    </p>
-    <p>
-      <Button
-        basic
-        color="black"
-        style={{ width: '100%' }}
-        onClick={generateAccount}
-      >
-        Generate my wallet!
-      </Button>
-    </p>
+    {!address ? (
+      <div>
+        <p>
+          The wallet you generate here will be the wallet you will use to create
+          a fund when the competition starts (referred to as manager address).
+          It will be the wallet you will use to contribute ether to the Olympiad
+          contract. It is also the wallet to which your compensation will be
+          transferred to at the end of the period. Please make sure you
+          carefully read the warnings below.
+        </p>
+        <p>
+          The first step to perform if you wish to participate is to generate
+          your wallet. Please click on the "Generate my wallet" button below:
+        </p>
+        <p>
+          <Button
+            basic
+            color="black"
+            style={{ width: '100%' }}
+            onClick={goToGenerateAccount}
+          >
+            Generate my wallet!
+          </Button>
+          <br />
+          <br />
+          or
+          <br />
+          <br />
+          <Button
+            basic
+            color="grey"
+            style={{ width: '100%', padding: 5 }}
+            onClick={goToAccount}
+          >
+            Import existing wallet
+          </Button>
+        </p>
+      </div>
+    ) : (
+      <div>
+        <p>
+          You have already created a wallet with the address:{' '}
+          <strong>{address}</strong>. Use this for white listing on{' '}
+          <a href="https://ico.bitcoinsuisse.ch/" target="_blank">
+            ico.bitcoinsuisse.ch
+          </a>
+          <Button
+            basic
+            color="grey"
+            style={{ width: '100%', padding: 5 }}
+            onClick={goToAccount}
+          >
+            Manage your account
+          </Button>
+        </p>
+      </div>
+    )}
   </div>
 );
 

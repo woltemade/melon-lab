@@ -1,9 +1,9 @@
-import BigNumber from "bignumber.js";
-import { connect } from "react-redux";
-import { providers, getNetworkName } from "@melonproject/melon.js";
-import App from "../components/pages/App";
-import { statusTypes } from "../components/organisms/ConnectionInfo";
-import { actions as routeActions } from "../actions/routes";
+import BigNumber from 'bignumber.js';
+import { connect } from 'react-redux';
+import { providers, getNetworkName } from '@melonproject/melon.js';
+import App from '../components/pages/App';
+import { statusTypes } from '../components/organisms/ConnectionInfo';
+import { actions as routeActions } from '../actions/routes';
 
 const getStatus = ({
   syncing,
@@ -17,24 +17,24 @@ const getStatus = ({
   provider,
 }) => {
   if (!isConnected)
-    return { message: "Not connected to chain", type: statusTypes.ERROR };
-  if (syncing) return { message: "Node not synced", type: statusTypes.WARNING };
+    return { message: 'Not connected to chain', type: statusTypes.ERROR };
+  if (syncing) return { message: 'Node not synced', type: statusTypes.WARNING };
   if (blockNumber === 0)
-    return { message: "Loading ...", type: statusTypes.NEUTRAL };
+    return { message: 'Loading ...', type: statusTypes.NEUTRAL };
   if (!isUpToDate)
-    return { message: "Block overdue", type: statusTypes.WARNING };
+    return { message: 'Block overdue', type: statusTypes.WARNING };
   if (!isReadyToVisit)
-    return { message: "Not ready", type: statusTypes.WARNING };
+    return { message: 'Not ready', type: statusTypes.WARNING };
   if (!isDataValid)
-    return { message: "Price feed down", type: statusTypes.ERROR };
+    return { message: 'Price feed down', type: statusTypes.ERROR };
   if (!isReadyToInteract)
-    return { message: "Insufficent ETH", type: statusTypes.WARNING };
+    return { message: 'Insufficent ETH', type: statusTypes.WARNING };
   if (!isReadyToInvest)
-    return { message: "Insufficent MLN", type: statusTypes.WARNING };
+    return { message: 'Insufficent MLN', type: statusTypes.WARNING };
   if ([providers.PARITY, providers.INJECTED].includes(provider)) {
-    return { message: "Local node", type: statusTypes.GOOD };
+    return { message: 'Local node', type: statusTypes.GOOD };
   }
-  return { message: "Melon Node", type: statusTypes.NEUTRAL };
+  return { message: 'Melon Node', type: statusTypes.NEUTRAL };
 };
 
 const mapStateToProps = state => {
@@ -54,7 +54,7 @@ const mapStateToProps = state => {
     mlnBalance: new BigNumber(state.ethereum.mlnBalance || 0).toFixed(4),
     ethBalance: new BigNumber(state.ethereum.ethBalance || 0).toFixed(4),
     rootAction: routeActions.root(),
-    accountAction: routeActions.myAccount(),
+    accountAction: routeActions.account(),
     network: state.ethereum.network,
     networkName: getNetworkName(state.ethereum.network),
   };

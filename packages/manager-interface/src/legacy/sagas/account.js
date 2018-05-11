@@ -1,49 +1,45 @@
-import { takeLatest, call, put, take } from "redux-saga/effects";
+import { takeLatest, call, put, take } from 'redux-saga/effects';
 import {
   createWallet,
   encryptWallet,
   importWalletFromMnemonic,
   decryptWallet,
   setEnvironment,
-} from "@melonproject/melon.js";
-import { actions as modalActions, types as modalTypes } from "../actions/modal";
-import { types, actions } from "../actions/account";
+} from '@melonproject/melon.js';
+import { actions as modalActions, types as modalTypes } from '../actions/modal';
+import { types, actions } from '../actions/account';
 import {
   actions as ethereumActions,
   types as ethereumTypes,
-} from "../actions/ethereum";
-import { actions as routeActions } from "../actions/routes";
+} from '../actions/ethereum';
+import {
+  actions as routeActions,
+  types as routeTypes,
+} from '../actions/routes';
 
-function* encryptWalletSaga(wallet, password) {
-  const encryptedWallet = yield call(encryptWallet, wallet, password);
-  localStorage.setItem("wallet:melon.fund", encryptedWallet);
-  yield put(actions.encryptWalletSucceeded());
-  yield put(ethereumActions.accountChanged(`${wallet.address}`));
-  setEnvironment({ account: JSON.parse(encryptedWallet) });
-}
+// function* encryptWalletSaga(wallet, password) {
+//   const encryptedWallet = yield call(encryptWallet, wallet, password);
+//   localStorage.setItem('wallet:melon.fund', encryptedWallet);
+//   yield put(actions.encryptWalletSucceeded());
+//   yield put(ethereumActions.accountChanged(`${wallet.address}`));
+//   setEnvironment({ account: JSON.parse(encryptedWallet) });
+// }
 
-function* generateWalletSaga() {
+function* generateMnemonic() {
   try {
-    const wallet = yield call(createWallet);
-    yield put(actions.generateWalletSucceeded(wallet.address, wallet.mnemonic));
-    yield take(types.I_SAVED);
-    const { password } = yield take(types.ENCRYPT_WALLET_REQUESTED);
-    yield call(encryptWalletSaga, wallet, password);
-    yield put(routeActions.setup());
+    yield put(actions.generateWalletSucceeded(createWallet().mnemonic));
   } catch (err) {
     console.error(err);
     yield put(actions.generateWalletFailed(err));
   }
 }
-function* importWalletSaga({ mnemonic }) {
+
+function* restoreWalletSaga({ mnemonic }) {
   try {
     const wallet = yield importWalletFromMnemonic(mnemonic);
-    yield put(actions.restoreFromMnemonicSucceeded(wallet.address, wallet));
-    yield put(routeActions.encrypt());
-    const { password } = yield take(types.ENCRYPT_WALLET_REQUESTED);
-    yield call(encryptWalletSaga, wallet, password);
-    yield take(ethereumTypes.NEW_BLOCK);
-    yield put(routeActions.setup());
+    yield put(actions.restoreFromMnemonicSucceeded(wallet));
+    yield put(routeActions.account());
+    yield put(ethereumActions.accountChanged(`${wallet.address}`));
   } catch (err) {
     console.error(err);
     yield put(actions.restoreFromMnemonicFailed(err));
@@ -56,19 +52,16 @@ function* deleteWallet() {
       `Do you really want to erase your current wallet? If yes, please type your password below:`,
     ),
   );
-  const { password } = yield take(modalTypes.CONFIRMED);
-  yield put(modalActions.loading());
-  const wallet = localStorage.getItem("wallet:melon.fund");
-  yield call(decryptWallet, wallet, password);
-  localStorage.removeItem("wallet:melon.fund");
-  yield put(modalActions.close());
-  yield put(routeActions.ranking());
+  yield take(modalTypes.CONFIRMED);
+  yield put(actions.doDeleteWallet());
+  yield put(ethereumActions.accountChanged());
+  yield put(routeActions.root());
 }
 
 function* account() {
-  yield takeLatest(types.GENERATE_WALLET_REQUESTED, generateWalletSaga);
-  yield takeLatest(types.RESTORE_FROM_MNEMONIC_REQUESTED, importWalletSaga);
+  yield takeLatest(types.RESTORE_FROM_MNEMONIC_REQUESTED, restoreWalletSaga);
   yield takeLatest(types.DELETE_WALLET_REQUESTED, deleteWallet);
+  yield takeLatest(routeTypes.ACCOUNT_GENERATE, generateMnemonic);
 }
 
 export default account;

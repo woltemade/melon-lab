@@ -11,7 +11,6 @@ import ranking from './ranking';
 import recentTrades from './recentTrades';
 import tradeHistory from './tradeHistory';
 import openOrders from './openOrders';
-import olympiadPlaceholder from './olympiadPlaceholder';
 
 const reducerMap = {
   account,
@@ -26,7 +25,6 @@ const reducerMap = {
   recentTrades,
   tradeHistory,
   openOrders,
-  olympiadPlaceholder,
 };
 
 export default reducerMap;

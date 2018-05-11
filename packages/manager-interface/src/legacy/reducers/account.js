@@ -1,12 +1,13 @@
-import { types } from "../actions/account";
+import { types } from '../actions/account';
 
 export const initialState = {
   hasGenerated: false,
   hasSavedMnemonic: false,
   hasEncrypted: false,
-  newAddress: "",
-  mnemonic: "",
+  newAddress: '',
+  mnemonic: '',
   loading: false,
+  privateKey: '',
 };
 
 export const reducer = (state = initialState, action = {}) => {

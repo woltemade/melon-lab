@@ -18,8 +18,8 @@ import openOrders from './openOrders';
 
 function* rootSaga() {
   // yield fork(administration);
-  // yield fork(app);
-  // yield fork(ethereum);
+  yield fork(app);
+  yield fork(ethereum);
   // yield fork(fund);
   // yield fork(setup);
   // yield fork(ranking);
