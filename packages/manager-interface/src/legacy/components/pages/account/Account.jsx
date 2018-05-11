@@ -8,6 +8,7 @@ const MyAccount = ({
   deleteWallet,
   gotoAccountGenerate,
   gotoAccountRestore,
+  downloadJSON,
   networkId,
 }) => (
   <div>
@@ -48,6 +49,25 @@ const MyAccount = ({
                 </strong>
               </p>
             ) : null}
+
+            <p>
+              <strong>
+                It is highly recommended to download a backup of your wallet.
+                You can import this into{' '}
+                <a href="https://mycrypto.com/" target="_blank">
+                  MyCrypto.com
+                </a>{' '}
+                or Parity.
+              </strong>
+            </p>
+            <Button
+              basic
+              color="black"
+              style={{ width: '100%', marginBottom: '1em' }}
+              onClick={downloadJSON}
+            >
+              Download wallet backup JSON
+            </Button>
             <br />
             <p>
               <strong> [IMPORTANT] - Please read carefully</strong>{' '}
@@ -70,13 +90,11 @@ const MyAccount = ({
           </div>
         ) : null}
 
-        <br />
-
         <div>
           <p>
             <Button
               basic
-              color="black"
+              color={currentAddress ? 'red' : 'black'}
               style={{ width: '100%' }}
               onClick={gotoAccountGenerate}
             >
@@ -86,7 +104,7 @@ const MyAccount = ({
           <p>
             <Button
               basic
-              color="black"
+              color={currentAddress ? 'red' : 'black'}
               style={{ width: '100%' }}
               onClick={gotoAccountRestore}
             >
@@ -107,7 +125,7 @@ const MyAccount = ({
             <p>
               <Button
                 basic
-                color="black"
+                color={currentAddress ? 'red' : 'black'}
                 style={{ width: '100%' }}
                 onClick={deleteWallet}
               >

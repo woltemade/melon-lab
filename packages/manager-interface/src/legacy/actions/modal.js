@@ -17,6 +17,7 @@ export const interactions = {
   OK: 'Ok',
   CANCEL: 'Cancel',
   CONFIRM: 'Confirm',
+  PASSWORD: 'Password',
   RETRY: 'Retry',
 };
 
@@ -30,6 +31,7 @@ export const actions = {
     primaryInteraction,
     secondaryInteraction,
   }),
+
   close: () => ({
     type: types.CLOSE,
     isOpen: false,
@@ -57,7 +59,7 @@ export const actions = {
     modalType: modalTypes.PASSWORD,
     title: 'Enter password',
     body,
-    primaryInteraction: interactions.CONFIRM,
+    primaryInteraction: interactions.PASSWORD,
     secondaryInteraction: interactions.CANCEL,
   }),
   passwordEntered: password => ({
@@ -69,7 +71,7 @@ export const actions = {
     type: types.ERROR,
     isOpen: true,
     modalType: modalTypes.ERROR,
-    title: 'Transaction error',
+    title: 'Error',
     body,
     primaryInteraction: interactions.OK,
     secondaryInteraction: '',

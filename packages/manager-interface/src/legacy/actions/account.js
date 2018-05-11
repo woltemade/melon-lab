@@ -12,6 +12,7 @@ export const types = {
     'RESTORE_FROM_MNEMONIC_FAILED:newuser:melon.fund',
   DELETE_WALLET_REQUESTED: 'DELETE_WALLET_REQUESTED:newuser:melon.fund',
   DO_DELETE_WALLET: 'DO_DELETE_WALLET:newuser:melon.fund',
+  DOWNLOAD_JSON: 'DOWNLOAD_JSON:newuser:melon.fund',
 };
 
 export const actions = {
@@ -64,5 +65,8 @@ export const actions = {
     mnemonic: '',
     loading: false,
     privateKey: '',
+  }),
+  downloadJSON: () => ({
+    type: types.DOWNLOAD_JSON,
   }),
 };
