@@ -17,20 +17,20 @@ import tracker from './tracker';
 import openOrders from './openOrders';
 
 function* rootSaga() {
-  yield fork(administration);
-  yield fork(app);
-  yield fork(ethereum);
-  yield fork(fund);
-  yield fork(setup);
-  yield fork(ranking);
-  yield fork(holdings);
-  yield fork(orderbook);
-  yield fork(recentTrades);
-  yield fork(tradeHistory);
+  // yield fork(administration);
+  // yield fork(app);
+  // yield fork(ethereum);
+  // yield fork(fund);
+  // yield fork(setup);
+  // yield fork(ranking);
+  // yield fork(holdings);
+  // yield fork(orderbook);
+  // yield fork(recentTrades);
+  // yield fork(tradeHistory);
   yield fork(account);
-  yield fork(participation);
-  yield fork(trade);
-  yield fork(openOrders);
+  // yield fork(participation);
+  // yield fork(trade);
+  // yield fork(openOrders);
 
   if (global.analytics) yield fork(tracker);
 }

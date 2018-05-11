@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 
-import { actions } from '../actions/account';
+import { actions as routeActions } from '../actions/routes';
 import OlympiadPlaceholder from '../components/pages/OlympiadPlaceholder';
 
-const mapStateToProps = state => ({ ...state.account });
+const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
-  generateWallet: () => dispatch(actions.generateWallet()),
+  generateAccount: () => dispatch(routeActions.accountGenerate()),
 });
 
 const OlympiadPlaceholderRedux = connect(mapStateToProps, mapDispatchToProps)(

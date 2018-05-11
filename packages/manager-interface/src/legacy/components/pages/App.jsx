@@ -33,7 +33,7 @@ const mapOnboardingStateToMainContainer = {
 
 const routeContainerMap = {
   [types.RANKING]: RankingContainer,
-  [types.ACCOUNT_SETUP]: AccountContainer,
+  [types.ACCOUNT_GENERATE]: AccountContainer,
   [types.ACCOUNT_RESTORE]: RestoreContainer,
   [types.ACCOUNT_CREATE]: AccountContainer,
   [types.ACCOUNT_ENCRYPT]: AccountContainer,
