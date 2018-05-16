@@ -94,7 +94,7 @@ const Orderbook = ({
     </h3>
     {loading ? (
       <div>
-        <Image src="/static/melon-spinner.gif" size="small" centered />
+        <Image src="./static/melon-spinner.gif" size="small" centered />
       </div>
     ) : (
       <React.Fragment>

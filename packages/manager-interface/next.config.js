@@ -55,4 +55,5 @@ module.exports = withComposedConfig({
 
     return config;
   },
+  assetPrefix: './',
 });

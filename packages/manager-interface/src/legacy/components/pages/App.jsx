@@ -78,7 +78,7 @@ const App = props => (
     <Container>
       <div className="App-header" style={{ marginBottom: '2em' }}>
         <Link to={props.rootAction}>
-          <Image src="/static/melon-logo.png" size="small" centered />
+          <Image src="./static/melon-logo.png" size="small" centered />
         </Link>
       </div>
       {getMainComponent(props)}

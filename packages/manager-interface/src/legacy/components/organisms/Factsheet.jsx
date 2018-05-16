@@ -33,11 +33,11 @@ const Factsheet = ({
           rel="noopener noreferrer"
           style={{ float: 'right' }}
         >
-          <img src="/static/twitter.png" alt="Tweet" height="15" />
+          <img src="./static/twitter.png" alt="Tweet" height="15" />
         </a>
       </Card.Header>
       {loading ? (
-        <Image src="/static/melon-spinner.gif" size="tiny" centered />
+        <Image src="./static/melon-spinner.gif" size="tiny" centered />
       ) : (
         <List>
           <List.Item>

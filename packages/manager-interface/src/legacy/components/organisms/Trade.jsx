@@ -1,23 +1,23 @@
-import React from "react";
-import { Field } from "redux-form";
-import { List, Button, Card, Image, Menu } from "semantic-ui-react";
+import React from 'react';
+import { Field } from 'redux-form';
+import { List, Button, Card, Image, Menu } from 'semantic-ui-react';
 
-import NumberInput from "../molecules/NumberInput";
-import displayNumber from "../../utils/displayNumber";
+import NumberInput from '../molecules/NumberInput';
+import displayNumber from '../../utils/displayNumber';
 
 const orderStrategySelector = ({ input }) => (
   <div>
-    <Menu text style={{ display: "flex", justifyContent: "center" }}>
+    <Menu text style={{ display: 'flex', justifyContent: 'center' }}>
       <Menu.Item
         name="Market"
-        active={input.value === "Market"}
-        onClick={() => input.onChange("Market")}
+        active={input.value === 'Market'}
+        onClick={() => input.onChange('Market')}
       />
-      <div style={{ marginTop: "0.7em" }}>|</div>
+      <div style={{ marginTop: '0.7em' }}>|</div>
       <Menu.Item
         name="Limit"
-        active={input.value === "Limit"}
-        onClick={() => input.onChange("Limit")}
+        active={input.value === 'Limit'}
+        onClick={() => input.onChange('Limit')}
       />
     </Menu>
   </div>
@@ -33,7 +33,7 @@ const orderTypeSelector = ({
   <button
     id="switchButton"
     disabled={disabled}
-    style={{ textAlign: "center", cursor: "pointer" }}
+    style={{ textAlign: 'center', cursor: 'pointer' }}
     onClick={event => {
       event.preventDefault();
       input.onChange(theirOrderType);
@@ -43,10 +43,10 @@ const orderTypeSelector = ({
       {input.value} <strong>{baseTokenSymbol}</strong>
     </Card.Meta>
     <Image
-      src="/static/switch.svg"
+      src="./static/switch.svg"
       width="18em"
       centered
-      style={{ cursor: "pointer" }}
+      style={{ cursor: 'pointer' }}
     />
 
     <Card.Meta>
@@ -76,17 +76,17 @@ const Trade = ({
           baseTokenSymbol={baseTokenSymbol}
           quoteTokenSymbol={quoteTokenSymbol}
           theirOrderType={theirOrderType}
-          disabled={strategy === "Market"}
+          disabled={strategy === 'Market'}
         />
         <br />
         <Field name="strategy" component={orderStrategySelector} />
-        {strategy === "Market" ? <p>Select from the orderbook</p> : null}
+        {strategy === 'Market' ? <p>Select from the orderbook</p> : null}
         <List>
           <List.Item>
             <List.Content>
               <Field
                 id="trade-price"
-                disabled={strategy === "Market" || !dataValid}
+                disabled={strategy === 'Market' || !dataValid}
                 format={displayNumber}
                 name="price"
                 component={NumberInput}
@@ -99,7 +99,7 @@ const Trade = ({
               <Field
                 id="trade-quantity"
                 disabled={
-                  (strategy === "Market" && !selectedOrder) || !dataValid
+                  (strategy === 'Market' && !selectedOrder) || !dataValid
                 }
                 format={displayNumber}
                 name="quantity"
@@ -113,7 +113,7 @@ const Trade = ({
               <Field
                 id="trade-total"
                 disabled={
-                  (strategy === "Market" && !selectedOrder) || !dataValid
+                  (strategy === 'Market' && !selectedOrder) || !dataValid
                 }
                 format={displayNumber}
                 name="total"
@@ -125,7 +125,7 @@ const Trade = ({
         </List>
 
         {!dataValid ? (
-          <p style={{ color: "rgb(209, 102, 102)" }}>
+          <p style={{ color: 'rgb(209, 102, 102)' }}>
             Trading not possible when price feed down
           </p>
         ) : null}
@@ -134,14 +134,14 @@ const Trade = ({
           basic
           id="tradeButton"
           color="black"
-          style={{ width: "100%" }}
-          disabled={(strategy === "Market" && !selectedOrder) || !dataValid}
+          style={{ width: '100%' }}
+          disabled={(strategy === 'Market' && !selectedOrder) || !dataValid}
         >
           {orderType}
         </Button>
       </form>
     </Card.Content>
-    <div className={`ui ${loading ? "active" : ""} inverted dimmer`}>
+    <div className={`ui ${loading ? 'active' : ''} inverted dimmer`}>
       <div className="ui text loader">Executing your order ...</div>
     </div>
   </Card>
