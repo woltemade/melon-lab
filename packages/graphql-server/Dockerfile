@@ -30,6 +30,6 @@ COPY --from=installer /app/packages/graphql-server/node_modules /app/node_module
 COPY --from=builder /app/packages/graphql-server/dist /app/packages/graphql-server/dist
 COPY packages/graphql-server/package.json packages/graphql-server/.env.defaults /app/packages/graphql-server/
 
-VOLUME ["/etc/letsencrypt/live"]
+VOLUME ["/etc/letsencrypt"]
 
 CMD ["yarn", "start"]
