@@ -54,6 +54,7 @@ services:
       - ./packages/exchange-aggregator/src:/app/packages/exchange-aggregator/src
       - ./packages/exchange-aggregator/package.json:/app/packages/exchange-aggregator/package.json
       - ./packages/exchange-aggregator/tsconfig.json:/app/packages/exchange-aggregator/tsconfig.json
+      - ./packages/exchange-aggregator/.babelrc:/app/packages/exchange-aggregator/.babelrc
 
       # Mount the node modules of this package with the .cache directory mounted into a volume.
       - ./packages/exchange-aggregator/node_modules:/app/packages/exchange-aggregator/node_modules:delegated
@@ -75,6 +76,7 @@ services:
       - ./packages/graphql-schema/package.json:/app/packages/graphql-schema/package.json
       - ./packages/graphql-schema/tsconfig.json:/app/packages/graphql-schema/tsconfig.json
       - ./packages/graphql-schema/tslint.json:/app/packages/graphql-schema/tslint.json
+      - ./packages/graphql-schema/.babelrc:/app/packages/graphql-schema/.babelrc
 
       # Mount the node modules of this package with the .cache directory mounted into a volume.
       - ./packages/graphql-schema/node_modules:/app/packages/graphql-schema/node_modules:delegated
@@ -100,6 +102,7 @@ services:
       - ./packages/graphql-server/tsconfig.build.json:/app/packages/graphql-server/tsconfig.build.json
       - ./packages/graphql-server/tslint.json:/app/packages/graphql-server/tslint.json
       - ./packages/graphql-server/backpack.config.js:/app/packages/graphql-server/backpack.config.js
+      - ./packages/graphql-server/.babelrc:/app/packages/graphql-server/.babelrc
       - ./packages/graphql-server/.env.defaults:/app/packages/graphql-server/.env.defaults
       - ./packages/graphql-server/.env:/app/packages/graphql-server/.env
 
@@ -132,6 +135,7 @@ services:
       - ./packages/manager-interface/tsconfig.json:/app/packages/manager-interface/tsconfig.json
       - ./packages/manager-interface/tslint.json:/app/packages/manager-interface/tslint.json
       - ./packages/manager-interface/next.config.js:/app/packages/manager-interface/next.config.js
+      - ./packages/manager-interface/.babelrc:/app/packages/manager-interface/.babelrc
       - ./packages/manager-interface/.env.defaults:/app/packages/manager-interface/.env.defaults
       - ./packages/manager-interface/.env:/app/packages/manager-interface/.env
 
