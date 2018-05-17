@@ -10,9 +10,9 @@ WORKDIR /app
 COPY . /app
 
 # Install system and node dependencies and clean up afterwards.
-RUN \
-  apk add --update --no-cache --virtual .apk git && \
-  yarn install --ignore-engines --frozen-lockfile --pure-lockfile --production && \
+RUN apk add --update --no-cache --virtual .apk git python make g++
+
+RUN yarn install --ignore-engines --frozen-lockfile --pure-lockfile --production && \
   cp -R node_modules node_modules_production && \
   yarn install --ignore-engines --frozen-lockfile --pure-lockfile && \
   yarn cache clean && \
