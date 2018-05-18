@@ -12,8 +12,8 @@
     "lint": "lerna run --parallel lint",
     "format": "lerna run --parallel format",
     "test": "lerna run --parallel test",
-    "build": "lerna run --stream build",
-    "dev": "lerna run --stream dev"
+    "build": "lerna run --parallel build",
+    "dev": "lerna run --parallel dev"
   },
   "devDependencies": {
     "lerna": "^2.9.1"
