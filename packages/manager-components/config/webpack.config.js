@@ -5,9 +5,9 @@ module.exports = config => {
     test: /\.(ts|tsx)$/,
     use: [
       {
-        loader: 'babel-loader',
         // Inherit the default babel-loader config from storybook.
-        options: Object.assign({}, config.module.rules[0].query),
+        loader: config.module.rules[0].loader,
+        options: config.module.rules[0].query,
       },
       {
         loader: 'ts-loader',
