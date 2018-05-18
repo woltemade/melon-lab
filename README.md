@@ -17,18 +17,35 @@
 
 ## Quickstart
 
+First, you need to clone the repository.
+
 ```bash
-git checkout git@github.com:melonproject/frontend-lab.git
-cd frontend-lab
-yarn install
-yarn run bootstrap
-yarn run dev
+git clone git@github.com:melonproject/frontend-lab.git && cd frontend-lab
 ```
 
-## With Docker
+Then, you need to configure your local environment.
 
 ```bash
-make build
+cp packages/graphql-server/.env.example packages/graphql-server/.env
+cp packages/manager-interface/.env.example packages/manager-interface/.env
+```
+
+### Without Docker
+
+If you don't want to or can't use Docker, you can also run all of the
+individual services locally in parallel from the workspace root.
+
+```
+yarn install
+yarn dev
+```
+
+### With Docker
+
+If you want to use Docker for local development, you can use make to conveniently start the whole infrastructure.
+
+```bash
+make bootstrap
 make start
 ```
 
