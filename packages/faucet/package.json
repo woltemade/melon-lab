@@ -5,9 +5,11 @@
   "license": "AGPL-3.0",
   "scripts": {
     "clean": "rimraf coverage export dist",
-    "dev": "cross-env NODE_ENV=development server.js",
-    "build": "cross-env NODE_ENV=production next build src",
-    "start": "cross-env NODE_ENV=production server.js",
+    "dev": "cross-env NODE_ENV=development backpack dev",
+    "build": "yarn build:backpack && yarn build:next",
+    "build:backpack": "cross-env NODE_ENV=production backpack build",
+    "build:next": "cross-env NODE_ENV=production next build src",
+    "start": "cross-env NODE_ENV=production node dist/server",
     "lint": "tslint -p tsconfig.json",
     "format": "prettier --write \"{src,tests}/**/*.{ts,tsx}\"",
     "test": "jest"
@@ -36,7 +38,11 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
+    "@types/ramda": "^0.25.24",
     "@zeit/next-typescript": "^0.1.1",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-loader": "8.0.0-beta.2",
+    "backpack-core": "^0.7.0",
     "jest": "^22.4.3",
     "jest-cli": "^22.4.3",
     "jest-environment-jsdom": "^22.4.3",
