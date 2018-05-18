@@ -45,10 +45,10 @@
 
 !packages/faucet/src/
 !packages/faucet/config/
-!packages/faucet/server.js
 !packages/faucet/.babelrc
 !packages/faucet/.env.defaults
 !packages/faucet/next.config.js
+!packages/faucet/backpack.config.js
 !packages/faucet/tsconfig.json
 
 !packages/manager-components/src/

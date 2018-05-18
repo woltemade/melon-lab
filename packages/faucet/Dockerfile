@@ -1,4 +1,4 @@
-#FROM melonproject/installer:latest AS installer
+FROM melonproject/installer:latest AS installer
 
 # -----------------------------------------------------------------------------
 # development
@@ -6,8 +6,8 @@
 FROM node:9.7.0-alpine as development
 WORKDIR /app/packages/faucet
 
-#COPY --from=installer /app/node_modules /app/node_modules
-#COPY --from=installer /app/packages/faucet/node_modules /app/packages/faucet/node_modules
+COPY --from=installer /app/node_modules /app/node_modules
+COPY --from=installer /app/packages/faucet/node_modules /app/packages/faucet/node_modules
 
 CMD ["yarn", "dev"]
 
