@@ -6,17 +6,14 @@ const webpack = require('webpack');
 const withTypeScript = require('@zeit/next-typescript');
 const withQueryFiles = require('./config/withQueryFiles');
 const withLinkedDependencies = require('./config/withLinkedDependencies');
-const withWebWorkers = require('./config/withWebWorkers');
 
 const withComposedConfig = R.compose(
   withLinkedDependencies,
-  withWebWorkers,
   withQueryFiles,
   withTypeScript,
 );
 
 module.exports = withComposedConfig({
-  webWorkers: /\/graphql\/local\/worker\.ts$/,
   typescriptLoaderOptions: {
     // We have to specify this explicitly so the ts-loader does
     // not incorrectly use one of the linked package's tsconfig.json
@@ -35,8 +32,6 @@ module.exports = withComposedConfig({
     '/': { page: '/' },
   }),
   webpack: (config, options) => {
-    const graphql = process.env.GRAPHQL || 'local';
-
     config.resolve.alias = Object.assign({}, config.resolve.alias || {}, {
       '~/shared': path.resolve(__dirname, 'src', 'shared'),
     });
