@@ -1,15 +1,10 @@
-import { takeLatest, call, put, select, take } from "redux-saga/effects";
-import { actions, types } from "../actions/ranking";
-import { types as ethereumTypes } from "../actions/ethereum";
-import { types as routeTypes } from "../actions/routes";
-import { greaterThan, equals } from "../utils/functionalBigNumber";
+import { takeLatest, call, put, select, take } from 'redux-saga/effects';
+import { actions, types } from '../actions/ranking';
+import { types as ethereumTypes } from '../actions/ethereum';
+import { types as routeTypes } from '../actions/routes';
+import { greaterThan, equals } from '../utils/functionalBigNumber';
+import { getRanking, getEnvironment } from '@melonproject/melon.js';
 // import rankingMock from "../utils/mocks/ranking.json";
-
-function loadRanking() {
-  return fetch("https://ranking.melon.fund", { method: "GET" }).then(resp =>
-    resp.json().then(json => json),
-  );
-}
 
 function* getRankingSaga() {
   const isConnected = yield select(state => state.ethereum.isConnected);
@@ -17,7 +12,8 @@ function* getRankingSaga() {
 
   try {
     yield put(actions.setLoading({ loading: true }));
-    const rankingList = yield call(loadRanking);
+    const environment = yield call(getEnvironment);
+    const rankingList = yield call(getRanking, environment);
     const bigNumberifyRanking = rankingList.map(fund => ({
       ...fund,
       sharePrice: fund.sharePrice.toString(),
