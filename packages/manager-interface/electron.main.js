@@ -10,14 +10,14 @@ const prepareNext = require('electron-next');
 app.on('ready', async () => {
   // Since electron is hoisted to the workspace, this path is relative
   // to the workspace root.
-  await prepareNext('./packages/manager-interface/src', process.env.PORT);
+  await prepareNext('./packages/manager-interface/src', 3000);
 
   const mainWindow = new BrowserWindow({
     width: 1024,
     height: 800,
   });
 
-  const devPath = `http://localhost:${process.env.PORT}/`;
+  const devPath = `http://localhost:3000/`;
 
   const prodPath = format({
     pathname: path.resolve(process.cwd(), 'export', 'index.html'),

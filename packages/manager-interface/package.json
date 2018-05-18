@@ -6,11 +6,11 @@
   "main": "electron.main.js",
   "scripts": {
     "clean": "rimraf coverage export dist",
-    "dev": "cross-env NODE_ENV=development next src",
+    "dev": "cross-env NODE_ENV=development next src -p 3000",
     "dev:electron": "cross-env NODE_ENV=development electron .",
     "build": "cross-env NODE_ENV=production next build src",
     "export": "cross-env NODE_ENV=production next export src -o export",
-    "start": "cross-env NODE_ENV=production next start src",
+    "start": "cross-env NODE_ENV=production next start src -p 3000",
     "lint": "tslint -p tsconfig.json",
     "format": "prettier --write \"{src,tests}/**/*.{ts,tsx}\"",
     "test": "jest"
