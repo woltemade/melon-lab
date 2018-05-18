@@ -22,6 +22,7 @@ services:
     build:
       context: .
       dockerfile: ./packages/melon.js/Dockerfile
+    command: "/bin/sh -c 'trap : TERM INT; sleep 365d & wait'"
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
@@ -46,6 +47,7 @@ services:
     build:
       context: .
       dockerfile: ./packages/exchange-aggregator/Dockerfile
+    command: "/bin/sh -c 'trap : TERM INT; sleep 365d & wait'"
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
@@ -64,6 +66,7 @@ services:
     build:
       context: .
       dockerfile: ./packages/graphql-schema/Dockerfile
+    command: "/bin/sh -c 'trap : TERM INT; sleep 365d & wait'"
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
