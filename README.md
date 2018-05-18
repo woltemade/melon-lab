@@ -30,6 +30,8 @@ cp packages/graphql-server/.env.example packages/graphql-server/.env
 cp packages/manager-interface/.env.example packages/manager-interface/.env
 ```
 
+Take a look at the copied .env files and adjust them as needed.
+
 ### Without Docker
 
 If you don't want to or can't use Docker, you can also run all of the
