@@ -1,3 +1,5 @@
+require('dotenv-extended').config();
+
 const path = require('path');
 const R = require('ramda');
 const webpack = require('webpack');
@@ -45,7 +47,7 @@ module.exports = withComposedConfig({
     config.plugins.push(new webpack.EnvironmentPlugin(['DEBUG']));
 
     // Code splitting doesn't make much sense in an electron app.
-    if (JSON.parse(process.env.ELECTRON_PACKAGE)) {
+    if (JSON.parse(process.env.ELECTRON_PACKAGE || 'false')) {
       config.plugins.push(
         new webpack.optimize.LimitChunkCountPlugin({
           maxChunks: 1,

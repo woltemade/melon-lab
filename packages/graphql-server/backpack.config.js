@@ -78,6 +78,11 @@ module.exports = {
       whitelist: [/^@melonproject\//],
     });
 
+    if (process.platform === "win32") {
+      // TODO: The source-map support added with the banner plugin has the wrong paths in windows.
+      config.plugins = config.plugins.filter((plugin) => !(plugin instanceof webpack.BannerPlugin));
+    }
+
     return config;
   },
 };
