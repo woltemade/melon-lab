@@ -102,7 +102,6 @@ services:
       - ./packages/graphql-server/tests:/app/packages/graphql-server/tests
       - ./packages/graphql-server/package.json:/app/packages/graphql-server/package.json
       - ./packages/graphql-server/tsconfig.json:/app/packages/graphql-server/tsconfig.json
-      - ./packages/graphql-server/tsconfig.build.json:/app/packages/graphql-server/tsconfig.build.json
       - ./packages/graphql-server/tslint.json:/app/packages/graphql-server/tslint.json
       - ./packages/graphql-server/backpack.config.js:/app/packages/graphql-server/backpack.config.js
       - ./packages/graphql-server/.babelrc:/app/packages/graphql-server/.babelrc

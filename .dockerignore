@@ -23,7 +23,7 @@
 !packages/graphql-server/.babelrc
 !packages/graphql-server/.env.defaults
 !packages/graphql-server/backpack.config.js
-!packages/graphql-server/tsconfig.build.json
+!packages/graphql-server/tsconfig.json
 
 !packages/graphql-schema/src/
 !packages/graphql-schema/.babelrc

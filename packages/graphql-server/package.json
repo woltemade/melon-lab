@@ -8,7 +8,7 @@
     "dev": "backpack dev",
     "build": "backpack build",
     "start": "node --require dotenv-extended/config dist",
-    "lint": "tslint -p tsconfig.build.json",
+    "lint": "tslint -p tsconfig.json",
     "format": "prettier --write \"{src,tests}/**/*.ts\"",
     "test": "jest"
   },
