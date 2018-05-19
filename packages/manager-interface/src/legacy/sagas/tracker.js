@@ -52,7 +52,6 @@ const eventActionTypeMap = {
 function* track(action) {
   const { type, ...payload } = action;
   const name = findKeyByValue(eventActionTypeMap, action.type);
-  console.log(name);
   yield call(global.analytics.track, name, removeSensitiveData(payload));
 }
 

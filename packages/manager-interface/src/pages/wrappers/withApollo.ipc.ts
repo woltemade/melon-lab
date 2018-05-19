@@ -8,14 +8,13 @@ const client = new SubscriptionClient({
   channel: 'graphql',
 });
 
-export default () =>
-  withApollo({
-    link: {
-      http: options => new ApolloLink(operation => client.request(operation)),
-      ws: () => new ApolloLink(operation => client.request(operation)),
-    },
-    client: options => ({
-      link: options.link,
-      cache: new InMemoryCache(),
-    }),
-  });
+export default withApollo({
+  link: {
+    http: options => new ApolloLink(operation => client.request(operation)),
+    ws: () => new ApolloLink(operation => client.request(operation)),
+  },
+  client: options => ({
+    link: options.link,
+    cache: new InMemoryCache(),
+  }),
+});

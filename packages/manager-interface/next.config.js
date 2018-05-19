@@ -13,6 +13,10 @@ const withComposedConfig = R.compose(
   withTypeScript,
 );
 
+const ownPkg = require('./package.json');
+const melonJsPkg = require('@melonproject/melon.js/package.json');
+const smartContractsPkg = require('@melonproject/smart-contracts/package.json');
+
 module.exports = withComposedConfig({
   typescriptLoaderOptions: {
     // We have to specify this explicitly so the ts-loader does
@@ -32,8 +36,16 @@ module.exports = withComposedConfig({
     '/': { page: '/' },
   }),
   webpack: (config, options) => {
+    const src = path.resolve(__dirname, 'src');
+    const electron = JSON.parse(process.env.ELECTRON || 'false');
+    const transport = electron
+      ? './withApollo.ipc.ts'
+      : './withApollo.remote.ts';
+
     config.resolve.alias = Object.assign({}, config.resolve.alias || {}, {
-      '~/shared': path.resolve(__dirname, 'src', 'shared'),
+      '~/shared': path.join(src, 'shared'),
+      '~/legacy': path.join(src, 'legacy'),
+      '~/apollo': path.join(src, 'pages', 'wrappers', transport),
     });
 
     // Make process.env.DEBUG accessible so we can use the debug package
@@ -41,8 +53,16 @@ module.exports = withComposedConfig({
     // access to the default lookup strategy of the debug package (local storage).
     config.plugins.push(new webpack.EnvironmentPlugin(['DEBUG']));
 
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        __MANAGER_INTERFACE_VERSION__: JSON.stringify(ownPkg.version),
+        __MELON_JS_VERSION__: JSON.stringify(melonJsPkg.version),
+        __SMART_CONTRACTS_VERSION__: JSON.stringify(smartContractsPkg.version),
+      }),
+    );
+
     // Code splitting doesn't make much sense in an electron app.
-    if (JSON.parse(process.env.ELECTRON_PACKAGE || 'false')) {
+    if (electron) {
       config.plugins.push(
         new webpack.optimize.LimitChunkCountPlugin({
           maxChunks: 1,

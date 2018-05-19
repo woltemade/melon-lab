@@ -91,7 +91,6 @@ const takeOrder = async (
     identifier,
     signature,
   });
-  console.log(updateLog);
 
   return {
     id: Utils.toUtf8String(

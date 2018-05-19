@@ -1,8 +1,8 @@
-import dynamic from 'next/dynamic';
-import withApollo from '~/shared/graphql';
+import ReactModal from 'react-modal';
+import AppContainer from '~/legacy/containers/App';
 
-const App = dynamic(import('../legacy/index'), {
-  ssr: false,
-});
+if (typeof window !== 'undefined') {
+  ReactModal.setAppElement('#__next');
+}
 
-export default withApollo(App);
+export default AppContainer;

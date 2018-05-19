@@ -28,8 +28,6 @@ const getOrder = async (environment: Environment, { id }): Promise<Order> => {
     [config.exchangeAddress, id],
   );
 
-  // if (isActive) console.log(isActive, order);
-
   const [sellWhichToken, buyWhichToken, sellHowMuch, buyHowMuch] = order;
 
   const enhancedOrder = {
