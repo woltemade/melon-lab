@@ -5,9 +5,9 @@
   "license": "AGPL-3.0",
   "scripts": {
     "clean": "rimraf coverage dist",
-    "dev": "backpack dev",
-    "build": "backpack build",
-    "start": "node --require dotenv-extended/config dist",
+    "dev": "cross-env NODE_ENV=development backpack dev",
+    "build": "cross-env NODE_ENV=production backpack build",
+    "start": "cross-env NODE_ENV=production node --require dotenv-extended/config dist",
     "lint": "tslint -p tsconfig.json",
     "format": "prettier --write \"{src,tests}/**/*.ts\"",
     "test": "jest"
@@ -19,6 +19,7 @@
   ],
   "dependencies": {
     "@melonproject/graphql-schema": "^0.0.0",
+    "cross-env": "^5.1.5",
     "debug": "2.6.9",
     "dotenv-extended": "^2.0.1",
     "graphql": "^0.13.2",
