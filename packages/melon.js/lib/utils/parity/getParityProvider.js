@@ -4,9 +4,9 @@ import pkg from '../../../package.json';
 import providers from '../constants/providers';
 import ensure from '../generic/ensure';
 
-const checkHttpProvider = async (url, connectionTimeout) => {
+const checkHttpProvider = async url => {
   try {
-    const provider = new Api.Provider.Http(url, connectionTimeout);
+    const provider = new Api.Provider.Http(url);
     const api = new Api(provider);
     // HACK: Parity does not properly return api.isConnected. This is always true.
     // So we need to explicitly make a call that fails for a unreachable node. :(
@@ -43,12 +43,18 @@ const findHttpProvider = (rpcEndpointList, connectionTimeout) =>
  *  providerType: [f.e. providers.Parity],
  * }
  */
-const getParityProvider = async connectionTimeout => {
+const getParityProvider = async endpoint => {
   ensure(
     protocolPackage.version ===
       pkg.dependencies['@melonproject/smart-contracts'],
     'Fatal: Inconsistency: Protocol version mismatch',
   );
+
+  if (endpoint && endpoint.includes('://')) {
+    const environment = checkHttpProvider(endpoint);
+    environment.providerType = providers.CUSTOM;
+    return environment;
+  }
 
   const injectedProvider =
     global.ethereum && global.ethereum.isParity
@@ -75,7 +81,7 @@ const getParityProvider = async connectionTimeout => {
         api: new Api(injectedProvider),
         providerType: providers.INJECTED,
       }
-    : findHttpProvider(rpcEndpointList, connectionTimeout);
+    : findHttpProvider(rpcEndpointList);
 
   return provider || { providerType: providers.NONE };
 };

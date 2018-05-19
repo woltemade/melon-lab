@@ -14,20 +14,8 @@ function* getRankingSaga() {
     yield put(actions.setLoading({ loading: true }));
     const environment = yield call(getEnvironment);
     const rankingList = yield call(getRanking, environment);
-    const bigNumberifyRanking = rankingList.map(fund => ({
-      ...fund,
-      sharePrice: fund.sharePrice.toString(),
-    }));
-    const sortedRanking = bigNumberifyRanking.sort((a, b) => {
-      if (equals(a.sharePrice, 1) && equals(b.sharePrice, 1))
-        return a.inception < b.inception ? -1 : 1;
-      return greaterThan(a.sharePrice, b.sharePrice) ? -1 : 1;
-    });
-    const withRank = sortedRanking.map((fund, i) => ({
-      ...fund,
-      rank: i + 1,
-    }));
-    yield put(actions.getRankingSucceeded(withRank));
+
+    yield put(actions.getRankingSucceeded(rankingList));
     yield put(actions.setLoading({ loading: false }));
   } catch (err) {
     console.error(err);

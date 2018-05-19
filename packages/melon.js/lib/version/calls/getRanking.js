@@ -1,3 +1,4 @@
+import * as R from 'ramda';
 import getConfig from '../../version/calls/getConfig';
 import getFundContract from '../../fund/contracts/getFundContract';
 import getRankingContract from '../contracts/getRankingContract';
@@ -23,7 +24,7 @@ const getRanking = async environment => {
   const fundAddressesFinal = fundAddresses.map(fund => fund._value);
   const fundInceptionsFinal = fundInceptions.map(fund => toDate(fund._value));
   const fundSharePricesFinal = fundSharePrices.map(fund =>
-    toReadable(config, fund._value, config.quoteAssetSymbol).toNumber(),
+    toReadable(config, fund._value, config.quoteAssetSymbol),
   );
 
   const fundNamesFinal = fundNames.map(fund =>
@@ -37,7 +38,9 @@ const getRanking = async environment => {
     sharePrice: fundSharePricesFinal[index],
   }));
 
-  return unsortedFunds.sort((a, b) => (a.sharePrice > b.sharePrice ? -1 : 1));
+  return R.addIndex(R.map)((val, idx) => ({ ...val, rank: idx + 1 }))(
+    unsortedFunds.sort((a, b) => (a.sharePrice > b.sharePrice ? -1 : 1)),
+  );
 };
 
 export default getRanking;
