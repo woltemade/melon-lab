@@ -26,8 +26,8 @@ services:
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
-      - *workspace-node-modules
-      - *workspace-node-modules-cache
+      # - *workspace-node-modules
+      # - *workspace-node-modules-cache
       - ./packages/melon.js/lib:/app/packages/melon.js/lib
       - ./packages/melon.js/scripts:/app/packages/melon.js/scripts
       - ./packages/melon.js/tests:/app/packages/melon.js/tests
@@ -40,8 +40,8 @@ services:
       - ./packages/melon.js/package.json:/app/packages/melon.js/package.json
 
       # Mount the node modules of this package with the .cache directory mounted into a volume.
-      - ./packages/melon.js/node_modules:/app/packages/melon.js/node_modules:delegated
-      - node_modules_cache:/app/packages/melon.js/node_modules/.cache
+      # - ./packages/melon.js/node_modules:/app/packages/melon.js/node_modules:delegated
+      # - node_modules_cache:/app/packages/melon.js/node_modules/.cache
 
   exchange-aggregator:
     build:
@@ -51,16 +51,16 @@ services:
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
-      - *workspace-node-modules
-      - *workspace-node-modules-cache
+      # - *workspace-node-modules
+      # - *workspace-node-modules-cache
       - ./packages/exchange-aggregator/src:/app/packages/exchange-aggregator/src
       - ./packages/exchange-aggregator/package.json:/app/packages/exchange-aggregator/package.json
       - ./packages/exchange-aggregator/tsconfig.json:/app/packages/exchange-aggregator/tsconfig.json
       - ./packages/exchange-aggregator/.babelrc:/app/packages/exchange-aggregator/.babelrc
 
       # Mount the node modules of this package with the .cache directory mounted into a volume.
-      - ./packages/exchange-aggregator/node_modules:/app/packages/exchange-aggregator/node_modules:delegated
-      - node_modules_cache:/app/packages/exchange-aggregator/node_modules/.cache
+      # - ./packages/exchange-aggregator/node_modules:/app/packages/exchange-aggregator/node_modules:delegated
+      # - node_modules_cache:/app/packages/exchange-aggregator/node_modules/.cache
 
   graphql-schema:
     build:
@@ -70,8 +70,8 @@ services:
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
-      - *workspace-node-modules
-      - *workspace-node-modules-cache
+      # - *workspace-node-modules
+      # - *workspace-node-modules-cache
       - *package-melon-js
       - *package-exchange-aggregator
       - ./packages/graphql-schema/src:/app/packages/graphql-schema/src
@@ -82,8 +82,8 @@ services:
       - ./packages/graphql-schema/.babelrc:/app/packages/graphql-schema/.babelrc
 
       # Mount the node modules of this package with the .cache directory mounted into a volume.
-      - ./packages/graphql-schema/node_modules:/app/packages/graphql-schema/node_modules:delegated
-      - node_modules_cache:/app/packages/graphql-schema/node_modules/.cache
+      # - ./packages/graphql-schema/node_modules:/app/packages/graphql-schema/node_modules:delegated
+      # - node_modules_cache:/app/packages/graphql-schema/node_modules/.cache
 
   graphql-server:
     build:
@@ -93,8 +93,8 @@ services:
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
-      - *workspace-node-modules
-      - *workspace-node-modules-cache
+      # - *workspace-node-modules
+      # - *workspace-node-modules-cache
       - *package-melon-js
       - *package-graphql-schema
       - *package-exchange-aggregator
@@ -109,8 +109,8 @@ services:
       - ./packages/graphql-server/.env:/app/packages/graphql-server/.env
 
       # Mount the node modules of this package with the .cache directory mounted into a volume.
-      - ./packages/graphql-server/node_modules:/app/packages/graphql-server/node_modules:delegated
-      - node_modules_cache:/app/packages/graphql-server/node_modules/.cache
+      # - ./packages/graphql-server/node_modules:/app/packages/graphql-server/node_modules:delegated
+      # - node_modules_cache:/app/packages/graphql-server/node_modules/.cache
     ports:
       - "3030:3030"
     networks:
@@ -124,8 +124,8 @@ services:
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
-      - *workspace-node-modules
-      - *workspace-node-modules-cache
+      # - *workspace-node-modules
+      # - *workspace-node-modules-cache
       - *package-melon-js
       - *package-graphql-schema
       - *package-exchange-aggregator
@@ -142,8 +142,8 @@ services:
       - ./packages/manager-interface/.env:/app/packages/manager-interface/.env
 
       # Mount the node modules of this package with the .cache directory mounted into a volume.
-      - ./packages/manager-interface/node_modules:/app/packages/manager-interface/node_modules:delegated
-      - node_modules_cache:/app/packages/manager-interface/node_modules/.cache
+      # - ./packages/manager-interface/node_modules:/app/packages/manager-interface/node_modules:delegated
+      # - node_modules_cache:/app/packages/manager-interface/node_modules/.cache
     ports:
       - "3000:3000"
     networks:
@@ -157,8 +157,8 @@ services:
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
-      - *workspace-node-modules
-      - *workspace-node-modules-cache
+      # - *workspace-node-modules
+      # - *workspace-node-modules-cache
       - *package-melon-js
       - ./packages/faucet/src:/app/packages/faucet/src
       - ./packages/faucet/config:/app/packages/faucet/config
@@ -173,8 +173,8 @@ services:
       - ./packages/faucet/.env:/app/packages/faucet/.env
 
       # Mount the node modules of this package with the .cache directory mounted into a volume.
-      - ./packages/faucet/node_modules:/app/packages/faucet/node_modules:delegated
-      - node_modules_cache:/app/packages/faucet/node_modules/.cache
+      # - ./packages/faucet/node_modules:/app/packages/faucet/node_modules:delegated
+      # - node_modules_cache:/app/packages/faucet/node_modules/.cache
     ports:
       - "3001:3001"
     networks:
@@ -187,8 +187,8 @@ services:
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
-      - *workspace-node-modules
-      - *workspace-node-modules-cache
+      # - *workspace-node-modules
+      # - *workspace-node-modules-cache
       - *package-melon-js
       - *package-graphql-schema
       - *package-exchange-aggregator
@@ -200,8 +200,8 @@ services:
       - ./packages/manager-components/tslint.json:/app/packages/manager-components/tslint.json
 
       # Mount the node modules of this package with the .cache directory mounted into a volume.
-      - ./packages/manager-components/node_modules:/app/packages/manager-components/node_modules:delegated
-      - node_modules_cache:/app/packages/manager-components/node_modules/.cache
+      # - ./packages/manager-components/node_modules:/app/packages/manager-components/node_modules:delegated
+      # - node_modules_cache:/app/packages/manager-components/node_modules/.cache
     ports:
       - "3060:3060"
     networks:

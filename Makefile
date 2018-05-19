@@ -71,4 +71,4 @@ gql-publish:
 gql-deploy:
 	@ssh ubuntu@51.144.232.216 "docker ps -q --filter ancestor=melonproject/graphql-server:latest | docker stop 2>/dev/null || true"
 	@ssh ubuntu@51.144.232.216 "docker pull melonproject/graphql-server:latest"
-	@ssh ubuntu@51.144.232.216 "docker run -d -p443:3030 melonproject/graphql-server:latest"
+	@ssh ubuntu@51.144.232.216 "docker run -d -v /etc/letsencrypt:/etc/letsencrypt -p 443:3030 melonproject/graphql-server:latest"
