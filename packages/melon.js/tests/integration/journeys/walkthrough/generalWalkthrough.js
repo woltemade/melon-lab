@@ -48,7 +48,7 @@ fit(
   async () => {
     console.log('\n');
 
-    const { providerType, api } = await getParityProvider(-1);
+    const { providerType, api } = await getParityProvider();
 
     // // 1 - instantiate wallet
 
