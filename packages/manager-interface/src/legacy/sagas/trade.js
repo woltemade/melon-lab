@@ -1,17 +1,17 @@
-import { takeLatest, select, call, put } from "redux-saga/effects";
+import { takeLatest, select, call, put } from 'redux-saga/effects';
 import {
   makeOrder,
   takeMultipleOrders,
   getPrices,
   deserializeOrder,
   matchOrders,
-} from "@melonproject/melon.js";
-import { reset } from "redux-form";
-import { types, actions } from "../actions/trade";
-import { actions as fundActions } from "../actions/fund";
-import { actions as modalActions } from "../actions/modal";
-import displayNumber from "../utils/displayNumber";
-import signer from "./signer";
+} from '@melonproject/melon.js';
+import { reset } from 'redux-form';
+import { types, actions } from '../actions/trade';
+import { actions as fundActions } from '../actions/fund';
+import { actions as modalActions } from '../actions/modal';
+import displayNumber from '../utils/displayNumber';
+import signer from './signer';
 
 function* placeOrderSaga(action) {
   const fundAddress = yield select(state => state.fund.address);
@@ -20,12 +20,12 @@ function* placeOrderSaga(action) {
   let sellHowMuch;
   let sellWhichToken;
 
-  if (action.values.type === "Buy") {
+  if (action.values.type === 'Buy') {
     buyHowMuch = action.values.quantity;
     buyWhichToken = yield select(state => state.app.assetPair.base);
     sellHowMuch = action.values.total;
     sellWhichToken = yield select(state => state.app.assetPair.quote);
-  } else if (action.values.type === "Sell") {
+  } else if (action.values.type === 'Sell') {
     buyHowMuch = action.values.total;
     buyWhichToken = yield select(state => state.app.assetPair.quote);
     sellHowMuch = action.values.quantity;
@@ -34,14 +34,16 @@ function* placeOrderSaga(action) {
   function* transaction(environment) {
     yield call(makeOrder, environment, {
       fundAddress,
-      sellWhichToken,
-      buyWhichToken,
-      sellHowMuch,
-      buyHowMuch,
+      exchangeAddress: '0xe23E971aCCa1Ab30017C5ee01080C56b8335c394',
+      maker: fundAddress,
+      makerAssetSymbol: sellWhichToken,
+      takerAssetSymbol: buyWhichToken,
+      makerQuantity: sellHowMuch,
+      takerQuantity: buyHowMuch,
     });
     yield put(actions.placeOrderSucceeded());
     yield put(modalActions.close());
-    yield put(reset("trade"));
+    yield put(reset('trade'));
   }
 
   yield call(
@@ -55,23 +57,28 @@ function* placeOrderSaga(action) {
 function* takeOrderSaga(action) {
   const fundAddress = yield select(state => state.fund.address);
   const managerAddress = yield select(state => state.ethereum.account);
-  const selectedOrderId = yield select(state => state.orderbook.selectedOrder);
-  const selectedOrder = yield select(state =>
-    state.orderbook.orders.find(o => o.id === selectedOrderId),
+  const selectedOrders = yield select(state =>
+    state.orderbook.selectedOrders.map(element =>
+      deserializeOrder({
+        ...element['order'],
+        cumulativeVolume: element.volume,
+      }),
+    ),
   );
+  const selectedOrder = yield select(state => state.orderbook.selectedOrder);
   const ourOrderType = action.values.type;
-  const theirOrderType = ourOrderType.toLowerCase() === "buy" ? "sell" : "buy";
+  const theirOrderType = ourOrderType.toLowerCase() === 'buy' ? 'sell' : 'buy';
 
   let buyHowMuch;
   let buyWhichToken;
   let sellHowMuch;
   let sellWhichToken;
-  if (ourOrderType === "Buy") {
+  if (ourOrderType === 'Buy') {
     buyHowMuch = action.values.quantity;
     buyWhichToken = yield select(state => state.app.assetPair.base);
     sellHowMuch = action.values.total;
     sellWhichToken = yield select(state => state.app.assetPair.quote);
-  } else if (ourOrderType === "Sell") {
+  } else if (ourOrderType === 'Sell') {
     buyHowMuch = action.values.total;
     buyWhichToken = yield select(state => state.app.assetPair.quote);
     sellHowMuch = action.values.quantity;
@@ -80,26 +87,16 @@ function* takeOrderSaga(action) {
 
   const priceThreshold = getPrices(selectedOrder)[theirOrderType];
 
-  const buyOrders = yield select(state => state.orderbook.buyOrders);
-  const sellOrders = yield select(state => state.orderbook.sellOrders);
-  const orders =
-    theirOrderType === "buy"
-      ? buyOrders.map(order => deserializeOrder(order))
-      : sellOrders.map(order => deserializeOrder(order));
-
-  const matchedOrders = matchOrders(theirOrderType, priceThreshold, orders);
-  const quantityAsked = buyHowMuch;
-
+  const fillTakerTokenAmount = sellHowMuch;
   function* transaction(environment) {
     yield call(takeMultipleOrders, environment, {
-      orders: matchedOrders,
-      managerAddress,
+      orders: selectedOrders,
       fundAddress,
-      totalQuantityAsked: quantityAsked,
+      fillTakerTokenAmount,
     });
     yield put(actions.takeOrderSucceeded());
     yield put(modalActions.close());
-    yield put(reset("trade"));
+    yield put(reset('trade'));
     yield put(fundActions.infoRequested(fundAddress));
   }
 
