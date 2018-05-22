@@ -51,12 +51,12 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
     </p>
     <h2>Melon Olympiad, first round: Paros</h2>
     <p>
-      Participants who wishes to engage in testing and help us improve the
+      Participants who wish to engage in testing and help us improve the
       software will be rewarded for this effort. Participants will have to
       create a fund on this website and contribute ether to the Olympiad
       contract. In return, the Olympiad contract will invest the equivalent
       amount in MLN (+ a bonus) into the participant’s fund. The participant
-      will have to manage his fund for a defined period of time (1 month) with
+      will have to manage his fund for a defined period of time (2 weeks) with
       the goal being capital appreciation. At the end of the defined management
       period, the participant will be able to trigger the redemption of the
       fund’s assets, thus receiving the fund’s AUM as a reward for his effort.{' '}
@@ -75,12 +75,14 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
       willing to participate will have to register with Bitcoin Suisse.
     </p>
     <h4>Step 1</h4> <p>
-      Generate a wallet on this website (below instructions). Make sure you
+      Generate a wallet on this website (see instructins below).. Make sure your
       write down the mnemonic, and store it in a safe (and accessible) place.
       Make sure you remember the password you use to encrypt the wallet. If you
       forget your password and you loose access to the mnemonic phrase, you
-      won’t be able to participate in the challenge. Save the wallet address as
-      you will need to provide this address to Bitcoin Suisse in step 3.
+      won't be able to participate in the challenge. Make sure you download your
+      wallet as a JSON file and store it in a safe place. Save the wallet
+      address as you will need to provide this address to Bitcoin Suisse in step
+      3.
     </p>
     <h4>Step 2 </h4> <p>
       KYC with Bitcoin Suisse: create an account with Bitcoin Suisse. Follow the
@@ -124,8 +126,8 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
     </p>
     <h4>Step 8 </h4>{' '}
     <p>
-      Congratulations. You made it here. Now its time to proof your asset
-      management skill. You have 1 month to manage your fund and grow your
+      Congratulations. You made it here. Now its time to prove your asset
+      management skill. You have 2 weeks to manage your fund and grow your
       capital.
     </p>
     <h4>Step 9  </h4>{' '}
