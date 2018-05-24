@@ -60,10 +60,6 @@ export default class extends React.Component {
   };
 
   updateBalance = (address, update=true) => {
-
-    console.log("-- update --")
-    console.log(address)
-
     axios.get(`/balance?address=${address}`)
     .then((res) => {
       this.setState({
@@ -74,19 +70,21 @@ export default class extends React.Component {
     })
     .catch((err) => {
       this.setMessage(err.response.data.error, ERROR);
-      this.setState({valid: false});
+      this.setState({valid: false, balances: undefined});
     })
   }
-
+  
   onAddressChange = event => {
-    console.log("ADdress change")
-    console.log(event.target.value)
+    const address = event.target.value;
 
     this.setState({
-      address: event.target.value
+      address: address,
+      message: address == "" ? undefined : this.state.message,
     })
 
-    this.updateBalance(event.target.value);
+    if (address != "") {
+      this.updateBalance(address);
+    }
   }
   
   render() {

@@ -76,16 +76,16 @@ app.prepare().then(() => {
 
     const address = req.query.address || '';
     if (address != "") {
+      res.address  = address;
+
       if (!web3.utils.isAddress(address)) {
         res.error = `${address} is not a valid address`;
       } else {
         const balances = await getBalances(address);
-        
         res.balances = balances;
-        res.address  = address;
       }
     }
-
+    
     return handle(req, res);
   });
 
