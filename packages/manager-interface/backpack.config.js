@@ -30,7 +30,7 @@ module.exports = {
       preload: './src/electron/preload.ts',
     };
 
-    config.resolve.extensions.push('.ts');
+    config.resolve.extensions.push('.ts', '.node');
     config.resolve.alias = resolveWorkspaces([
       ['@melonproject/melon.js', 'lib'],
       ['@melonproject/graphql-schema', 'src'],
@@ -89,9 +89,10 @@ module.exports = {
       __filename: false,
     });
 
-    // TODO: Figure out how we can get production dependencies installed properly
-    // so we don't have to bundle the whole app in one file.
-    config.externals = {};
+    config.externals = externals({
+      modulesDir: path.resolve(process.cwd(), '..', '..', 'node_modules'),
+      whitelist: [/^@melonproject\//],
+    });
 
     return config;
   },

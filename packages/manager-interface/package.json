@@ -33,6 +33,7 @@
     "Jenna Zenk <jenna@melonport.com>"
   ],
   "dependencies": {
+    "@melonproject/graphql-schema": "^0.0.0",
     "apollo-cache-inmemory": "^1.1.12",
     "apollo-client": "^2.3.1",
     "apollo-link": "^1.2.1",
@@ -73,7 +74,8 @@
     "semantic-ui-react": "^0.77.1",
     "slugify": "^1.2.9",
     "subscriptions-transport-electron": "https://github.com/fubhy/subscriptions-transport-electron.git#dist",
-    "subscriptions-transport-ws": "^0.9.7"
+    "subscriptions-transport-ws": "^0.9.7",
+    "websocket": "^1.0.26"
   },
   "devDependencies": {
     "@zeit/next-typescript": "^0.1.1",
@@ -83,7 +85,7 @@
     "babel-plugin-transform-inline-environment-variables": "^0.1.1",
     "backpack-core": "^0.7.0",
     "electron": "^2.0.0",
-    "electron-builder": "^20.14.7",
+    "electron-builder": "^0.0.0-semantic-release",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.3",

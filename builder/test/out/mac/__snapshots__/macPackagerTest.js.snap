@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`electronDist 1`] = `"ENOENT"`;
+
+exports[`one-package 1`] = `
+Object {
+  "mac": Array [
+    Object {
+      "arch": "x64",
+      "file": "Test App ßW-1.1.0.dmg",
+      "safeArtifactName": "TestApp-1.1.0.dmg",
+      "updateInfo": Object {
+        "sha512": "@sha512",
+        "size": "@size",
+      },
+    },
+    Object {
+      "file": "Test App ßW-1.1.0.dmg.blockmap",
+      "safeArtifactName": "TestApp-1.1.0.dmg.blockmap",
+      "updateInfo": Object {
+        "sha512": "@sha512",
+        "size": "@size",
+      },
+    },
+    Object {
+      "file": "latest-mac.json",
+    },
+    Object {
+      "file": "latest-mac.yml",
+      "fileContent": Object {
+        "files": Array [
+          Object {
+            "sha512": "@sha512",
+            "url": "Test App ßW-1.1.0-mac.zip",
+          },
+          Object {
+            "sha512": "@sha512",
+            "size": "@size",
+            "url": "Test App ßW-1.1.0.dmg",
+          },
+        ],
+        "path": "Test App ßW-1.1.0-mac.zip",
+        "releaseDate": "@releaseDate",
+        "sha512": "@sha512",
+        "version": "1.1.0",
+      },
+    },
+    Object {
+      "arch": "x64",
+      "file": "Test App ßW-1.1.0-mac.zip",
+      "safeArtifactName": "TestApp-1.1.0-mac.zip",
+    },
+  ],
+}
+`;
+
+exports[`one-package 2`] = `
+Object {
+  "AsarIntegrity": "{\\"checksums\\":{\\"app.asar\\":\\"YYJnZcKYR79+/Un7xZ0fFqTRc7j3NvRfNDY1B1sLXGzBBvOPpir176RAxfQjNYXVwWGHSuXWpSrh5e1lEsamuA==\\",\\"electron.asar\\":\\"ksFqQ3X5rccdlVaj4tOiH6w3EuU2r0+74T+bQ+jo2tynH+7xSMMPv5tfF5ATKsBaDNOQPZtxMsFwjBuUI8XgSw==\\"}}",
+  "CFBundleDisplayName": "Test App ßW",
+  "CFBundleDocumentTypes": Array [
+    Object {
+      "CFBundleTypeExtensions": Array [
+        "foo",
+      ],
+      "CFBundleTypeIconFile": "foo.icns",
+      "CFBundleTypeName": "Foo",
+      "CFBundleTypeRole": "Viewer",
+    },
+    Object {
+      "CFBundleTypeExtensions": Array [
+        "boo",
+      ],
+      "CFBundleTypeIconFile": "Test App ßW.icns",
+      "CFBundleTypeName": "Boo",
+      "CFBundleTypeRole": "Shell",
+      "LSTypeIsPackage": true,
+    },
+    Object {
+      "CFBundleTypeExtensions": Array [
+        "bar",
+      ],
+      "CFBundleTypeIconFile": "someFoo.icns",
+      "CFBundleTypeName": "Bar",
+      "CFBundleTypeRole": "Shell",
+    },
+  ],
+  "CFBundleExecutable": "Test App ßW",
+  "CFBundleIconFile": "Test App ßW.icns",
+  "CFBundleIdentifier": "org.electron-builder.testApp",
+  "CFBundleInfoDictionaryVersion": "6.0",
+  "CFBundleName": "Test App ßW",
+  "CFBundlePackageType": "APPL",
+  "CFBundleShortVersionString": "1.1.0",
+  "DTSDKBuild": "14D125",
+  "DTSDKName": "macosx10.1010.10",
+  "LSApplicationCategoryType": "your.app.category.type",
+  "LSMinimumSystemVersion": "10.12.0",
+  "LSUIElement": true,
+  "NSHighResolutionCapable": true,
+  "NSMainNibFile": "MainMenu",
+  "NSPrincipalClass": "AtomApplication",
+  "NSSupportsAutomaticGraphicsSwitching": true,
+}
+`;
+
+exports[`one-package 3`] = `
+Object {
+  "releaseDate": "1970-01-01T00:00:00.000Z",
+  "url": "https://develar.s3.amazonaws.com/test/mac/x64/Test%20App%20%C3%9FW-1.1.0-mac.zip",
+  "version": "1.1.0",
+}
+`;
+
+exports[`two-package 1`] = `
+Object {
+  "mac": Array [
+    Object {
+      "arch": "x64",
+      "file": "TestApp-1.1.0-mac.dmg",
+      "updateInfo": Object {
+        "sha512": "@sha512",
+        "size": "@size",
+      },
+    },
+    Object {
+      "file": "TestApp-1.1.0-mac.dmg.blockmap",
+      "updateInfo": Object {
+        "sha512": "@sha512",
+        "size": "@size",
+      },
+    },
+    Object {
+      "file": "latest-mac.yml",
+      "fileContent": Object {
+        "files": Array [
+          Object {
+            "sha512": "@sha512",
+            "url": "TestApp-1.1.0-mac.zip",
+          },
+          Object {
+            "sha512": "@sha512",
+            "size": "@size",
+            "url": "TestApp-1.1.0-mac.dmg",
+          },
+        ],
+        "path": "TestApp-1.1.0-mac.zip",
+        "releaseDate": "@releaseDate",
+        "sha512": "@sha512",
+        "version": "1.1.0",
+      },
+    },
+    Object {
+      "arch": "x64",
+      "file": "TestApp-1.1.0-mac.zip",
+      "safeArtifactName": "TestApp-1.1.0-mac.zip",
+    },
+  ],
+}
+`;
+
+exports[`two-package 2`] = `
+Object {
+  "AsarIntegrity": "{\\"checksums\\":{\\"app.asar\\":\\"TZly3OaSZ47FFzvF1MU6u9txCWeO7bEZIfELA+Ws8BGFw/R00ba7cWVVa2pOejh9zJ39NuNfcOybv2qq5QTCjA==\\",\\"electron.asar\\":\\"ksFqQ3X5rccdlVaj4tOiH6w3EuU2r0+74T+bQ+jo2tynH+7xSMMPv5tfF5ATKsBaDNOQPZtxMsFwjBuUI8XgSw==\\"}}",
+  "CFBundleDisplayName": "TestApp",
+  "CFBundleExecutable": "TestApp",
+  "CFBundleIconFile": "TestApp.icns",
+  "CFBundleIdentifier": "org.electron-builder.testApp",
+  "CFBundleInfoDictionaryVersion": "6.0",
+  "CFBundleName": "TestApp",
+  "CFBundlePackageType": "APPL",
+  "CFBundleShortVersionString": "1.1.0",
+  "DTSDKBuild": "14D125",
+  "DTSDKName": "macosx10.1010.10",
+  "LSApplicationCategoryType": "your.app.category.type",
+  "LSMinimumSystemVersion": "10.9.0",
+  "NSHighResolutionCapable": true,
+  "NSMainNibFile": "MainMenu",
+  "NSPrincipalClass": "AtomApplication",
+  "NSSupportsAutomaticGraphicsSwitching": true,
+}
+`;
+
+exports[`two-package 3`] = `
+Array [
+  "TestApp.icns",
+  "app-update.yml",
+  "app.asar",
+  "bn.lproj",
+  "electron.asar",
+  "en.lproj",
+]
+`;

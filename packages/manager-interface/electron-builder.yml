@@ -9,11 +9,11 @@ directories:
   output: build/app/package/
 
 files:
+  - package.json
   - from: build/app/main
     to: .
   - from: build/app/export
     to: .
-  - package.json
 
 linux:
   category: Finance
