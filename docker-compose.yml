@@ -3,6 +3,7 @@ version: "3.4"
 # Volume definitions for common workspace root dependencies.
 x-workspace-prettier: &workspace-prettier ./.prettierrc:/app/.prettierrc:delegated
 x-workspace-tsconfig: &workspace-tsconfig ./tsconfig.json:/app/tsconfig.json:delegated
+x-workspace-tslint: &workspace-tslint ./tslint.json:/app/tslint.json:delegated
 x-workspace-node-modules: &workspace-node-modules ./node_modules:/app/node_modules:delegated
 x-workspace-node-modules-cache: &workspace-node-modules-cache node_modules_cache:/app/node_modules/.cache
 
@@ -26,6 +27,7 @@ services:
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
+      - *workspace-tslint
       # - *workspace-node-modules
       # - *workspace-node-modules-cache
       - ./packages/melon.js/lib:/app/packages/melon.js/lib
@@ -51,6 +53,7 @@ services:
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
+      - *workspace-tslint
       # - *workspace-node-modules
       # - *workspace-node-modules-cache
       - ./packages/exchange-aggregator/src:/app/packages/exchange-aggregator/src
@@ -70,6 +73,7 @@ services:
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
+      - *workspace-tslint
       # - *workspace-node-modules
       # - *workspace-node-modules-cache
       - *package-melon-js
@@ -93,6 +97,7 @@ services:
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
+      - *workspace-tslint
       # - *workspace-node-modules
       # - *workspace-node-modules-cache
       - *package-melon-js
@@ -124,6 +129,7 @@ services:
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
+      - *workspace-tslint
       # - *workspace-node-modules
       # - *workspace-node-modules-cache
       - *package-melon-js
@@ -157,6 +163,7 @@ services:
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
+      - *workspace-tslint
       # - *workspace-node-modules
       # - *workspace-node-modules-cache
       - *package-melon-js
@@ -187,6 +194,7 @@ services:
     volumes:
       - *workspace-prettier
       - *workspace-tsconfig
+      - *workspace-tslint
       # - *workspace-node-modules
       # - *workspace-node-modules-cache
       - *package-melon-js
