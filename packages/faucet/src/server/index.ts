@@ -15,6 +15,8 @@ const BigNumber = require('bignumber.js');
 
 const {setup, getBalances, send, MLN} = require('./melon');
 
+const {Storage} = require('./storage.ts');
+
 const recaptcha = new Recaptcha(
   process.env.RECAPTCHA_SITE_KEY,
   process.env.RECAPTCHA_SECRET_KEY,
@@ -32,6 +34,8 @@ const err = (res, msg) => {
 const ok = (res, msg) => {
   res.status(200).json({'msg': msg})
 }
+
+const storage = new Storage();
 
 app.prepare().then(() => {
   const server = express();
@@ -85,9 +89,17 @@ app.prepare().then(() => {
     return handle(req, res);
   });
 
-  server.post('/', (req, res) => {
+  server.post('/', async (req, res) => {
     const address = req.body.address || '';
     
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    console.log(ip)
+    const valid = await storage.isValid(ip);
+    if (!valid) {
+      err(res, `You have already requested more than 3 times in the last 24 hours.`)
+      return
+    }
+
     if (!web3.utils.isAddress(address)) {
       err(res, `${address} is not a valid address`)
       return

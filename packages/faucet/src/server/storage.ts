@@ -15,7 +15,7 @@ const sha256 = x =>
     .digest('hex');
 const now = () => new Date().getTime();
 
-class Storage {
+export class Storage {
   _db: any;
 
   constructor(filename = './storage.db') {
