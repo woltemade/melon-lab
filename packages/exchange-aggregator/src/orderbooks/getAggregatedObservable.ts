@@ -4,22 +4,23 @@ import getObservableRelayer from './0x/getObservableRelayer';
 import getObservableErcDex from './ercDex/getObservableErcDex';
 import getObservableOasisDex from './oasisDex/getObservableOasisDex';
 
-import { ExchangeEnum, Order } from '../index';
+import { ExchangeEnum, Order, NetworkEnum } from '../index';
 
 const debug = require('debug')('exchange-aggregator');
 
 export type ExchangeCreator = (
   baseTokenAddress: string,
   quoteTokenSymbol: string,
+  network: NetworkEnum,
 ) => Rx.Observable<Order[]>;
 
 const exchangeToCreatorFunction: { [P in ExchangeEnum]: ExchangeCreator } = {
-  RADAR_RELAY: (baseTokenSymbol, quoteTokenSymbol) =>
-    getObservableRelayer(baseTokenSymbol, quoteTokenSymbol),
+  RADAR_RELAY: (baseTokenSymbol, quoteTokenSymbol, network) =>
+    getObservableRelayer(baseTokenSymbol, quoteTokenSymbol, network),
   OASIS_DEX: (baseTokenSymbol, quoteTokenSymbol) =>
     getObservableOasisDex(baseTokenSymbol, quoteTokenSymbol),
-  ERC_DEX: (baseTokenSymbol, quoteTokenSymbol) =>
-    getObservableErcDex(baseTokenSymbol, quoteTokenSymbol),
+  ERC_DEX: (baseTokenSymbol, quoteTokenSymbol, network) =>
+    getObservableErcDex(baseTokenSymbol, quoteTokenSymbol, network),
 };
 
 const concatOrderbooks = R.reduce<Order[], Order[]>(R.concat, []);
@@ -42,11 +43,12 @@ const getAggregatedObservable = (
   baseTokenSymbol: string,
   quoteTokenSymbol: string,
   exchanges: ExchangeEnum[] = ['RADAR_RELAY', 'OASIS_DEX', 'ERC_DEX'],
+  network: NetworkEnum = 'KOVAN',
 ) => {
   const exchanges$ = Rx.Observable.from<ExchangeEnum>(exchanges);
   const orderbooks$ = exchanges$
     .map(name => exchangeToCreatorFunction[name])
-    .map(create => create(baseTokenSymbol, quoteTokenSymbol))
+    .map(create => create(baseTokenSymbol, quoteTokenSymbol, network))
     .combineAll<Rx.Observable<Order[]>, Order[][]>()
     .do(value => debug('Emitting combined order book.', value))
     .distinctUntilChanged();

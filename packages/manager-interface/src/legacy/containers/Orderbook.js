@@ -5,10 +5,19 @@ import React from 'react';
 import { Subscription } from 'react-apollo';
 import gql from 'graphql-tag';
 import { actions } from '../actions/orderbook';
+import { getAddress, getConfig } from '@melonproject/melon.js';
 
 const subscription = gql`
-  subscription OrderbookQuery($baseToken: Symbol!, $quoteToken: Symbol!) {
-    orderbook(baseTokenSymbol: $baseToken, quoteTokenSymbol: $quoteToken) {
+  subscription OrderbookQuery(
+    $baseToken: Symbol!
+    $quoteToken: Symbol!
+    $network: NetworkEnum
+  ) {
+    orderbook(
+      baseTokenSymbol: $baseToken
+      quoteTokenSymbol: $quoteToken
+      network: $network
+    ) {
       totalBuyVolume
       totalSellVolume
       buyEntries {
@@ -102,6 +111,7 @@ const mapStateToProps = state => ({
   baseToken: state.app.assetPair.base,
   quoteToken: state.app.assetPair.quote,
   isReadyToTrade: state.app.isReadyToTrade,
+  network: state.ethereum.network,
 });
 
 const withState = connect(mapStateToProps, mapDispatchToProps);
@@ -110,9 +120,10 @@ const withSubscription = BaseComponent => baseProps => (
   <Subscription
     subscription={subscription}
     variables={{
-      // @TODO: Why is the "empty" value for this "..."?
+      // @TODO: Move "..." to the rendering part
       baseToken: baseProps.baseToken !== '...' && baseProps.baseToken,
       quoteToken: baseProps.quoteToken !== '...' && baseProps.quoteToken,
+      network: baseProps.network === '42' ? 'KOVAN' : 'LIVE',
     }}
   >
     {props => (

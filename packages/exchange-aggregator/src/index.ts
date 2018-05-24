@@ -21,6 +21,8 @@ export interface OrderWithCumulativeVolume extends Order {
 
 export type ExchangeEnum = 'RADAR_RELAY' | 'OASIS_DEX' | 'ERC_DEX';
 
+export type NetworkEnum = 'KOVAN' | 'LIVE';
+
 export {
   default as getAggregatedObservable,
 } from './orderbooks/getAggregatedObservable';
