@@ -1,7 +1,6 @@
 import * as R from 'ramda';
 import * as Rx from 'rxjs';
 import formatRelayerOrderbook from '../../formatRelayerOrderbook';
-import getStemmedSymbol from '../../getStemmedSymbol';
 import getTokenAddress from '../../getTokenAddress';
 import { Order } from '../../index';
 
@@ -80,24 +79,28 @@ const updateAsksAndBids = (state: AsksAndBids, order: RelayOrder) => {
   return state;
 };
 
-const getObservableRadarRelay = (baseTokenSymbol, quoteTokenSymbol) => {
-  const stemmedBaseTokenSymbol = getStemmedSymbol(baseTokenSymbol);
-  const stemmedQuoteTokenSymbol = getStemmedSymbol(quoteTokenSymbol);
-  const baseTokenAddress = getTokenAddress(stemmedBaseTokenSymbol);
-  const quoteTokenAddress = getTokenAddress(stemmedQuoteTokenSymbol);
+const getObservableRadarRelay = (
+  baseTokenSymbol,
+  quoteTokenSymbol,
+  network,
+) => {
+  const baseTokenAddress = getTokenAddress(baseTokenSymbol);
+  const quoteTokenAddress = getTokenAddress(quoteTokenSymbol);
 
   debug('Connecting.', {
     baseTokenSymbol,
     quoteTokenSymbol,
-    stemmedBaseTokenSymbol,
-    stemmedQuoteTokenSymbol,
     baseTokenAddress,
     quoteTokenAddress,
   });
 
   const open$ = new Rx.Subject();
+  const url =
+    network === 'KOVAN'
+      ? 'https://api.kovan.radarrelay.com/0x/v0'
+      : 'wss://api.radarrelay.com/0x/v0/ws';
   const socket$ = Rx.Observable.webSocket({
-    url: 'wss://api.radarrelay.com/0x/v0/ws',
+    url,
     WebSocketCtor: WebSocket,
     openObserver: open$,
   });

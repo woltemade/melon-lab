@@ -73,12 +73,13 @@ export const orderbook = {
   },
   subscribe: (parent, args, context: Context) => {
     const { pubsub } = context;
-    const { baseTokenSymbol, quoteTokenSymbol, exchanges } = args;
+    const { baseTokenSymbol, quoteTokenSymbol, exchanges, network } = args;
 
     const orderbook$ = getAggregatedObservable(
       baseTokenSymbol,
       quoteTokenSymbol,
       exchanges,
+      network,
     );
 
     const channel = `orderbook:${baseTokenSymbol}/${quoteTokenSymbol}`;
