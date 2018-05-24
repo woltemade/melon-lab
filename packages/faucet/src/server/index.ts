@@ -93,7 +93,7 @@ app.prepare().then(() => {
     const address = req.body.address || '';
     
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    console.log(ip)
+    
     const valid = await storage.isValid(ip);
     if (!valid) {
       err(res, `You have already requested more than 3 times in the last 24 hours.`)
