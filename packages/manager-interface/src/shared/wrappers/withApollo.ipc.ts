@@ -3,10 +3,16 @@ import { ApolloLink } from 'apollo-link';
 import withApollo from 'next-with-apollo';
 import { SubscriptionClient } from 'subscriptions-transport-electron';
 
-const client = new SubscriptionClient({
-  messager: global.ipcRenderer,
-  channel: 'graphql',
-});
+const isElectron =
+  global.navigator &&
+  global.navigator.userAgent.toLowerCase().indexOf(' electron/') !== -1;
+
+const client =
+  isElectron &&
+  new SubscriptionClient({
+    messager: global.ipcRenderer,
+    channel: 'graphql',
+  });
 
 export default withApollo({
   link: {
