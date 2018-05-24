@@ -43,13 +43,8 @@ async function _sendToken(to, amount, token) {
     );
 }
 
-export async function send(to, eth, mln) {
-    try {
-        await _sendEther(to, eth)
-        await _sendToken(to, mln, MLN)
-    } catch(err) {
-        return err
-    }
+export async function send(to, amount, token = ETH) {
+    return token == ETH ? _sendEther(to, amount) : _sendToken(to, amount, token);
 }
 
 // balance

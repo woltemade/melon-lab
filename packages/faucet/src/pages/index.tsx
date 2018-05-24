@@ -1,65 +1,103 @@
 import React from 'react';
 import axios from 'axios';
 
+const SUCCESS   = "green";
+const ERROR     = "red";
+const INFO      = "blue";
+const WARNING   = "orange";
+
 export default class extends React.Component {
   constructor(props, context) {
     super(props)
     
-    const {balances, address, error} = props;
+    const {balances, address, message} = props;
 
     this.state = {
+      valid: address != undefined,
       balances,
       address,
-      error
+      message
     }
   }
 
   public static getInitialProps(context) {
     const {recaptcha, address, balances, error} = context.res;
 
+    let message: any = undefined;
+    if (error != undefined) {
+      message = {data: error, status: ERROR}
+    }
+
     return {
       recaptcha,
       balances, 
       address,
-      error
+      message
     }
+  }
+  
+  setMessage = (data, status) => {
+    this.setState({message: {data, status}})
   }
 
   handleSubmit = event => {
+    this.setMessage('Transfering assets', INFO);
+    
     const captcha = document.getElementById('g-recaptcha-response').value;
     axios.post('/', {
       'g-recaptcha-response': captcha,
       address: this.state.address,
-    });
+    })
+    .then((res) => {
+      this.setMessage('Done', SUCCESS);
+      this.updateBalance(this.state.address, false);
+    })
+    .catch((err) => {
+      this.setMessage(err.response.data.error, ERROR);
+    })
 
     event.preventDefault();
   };
 
+  updateBalance = (address, update=true) => {
+
+    console.log("-- update --")
+    console.log(address)
+
+    axios.get(`/balance?address=${address}`)
+    .then((res) => {
+      this.setState({
+        balances: res.data,
+        message: update ? undefined : this.state.message,
+        valid: true,
+      });
+    })
+    .catch((err) => {
+      this.setMessage(err.response.data.error, ERROR);
+      this.setState({valid: false});
+    })
+  }
+
   onAddressChange = event => {
+    console.log("ADdress change")
+    console.log(event.target.value)
+
     this.setState({
       address: event.target.value
     })
 
-    axios.get(`/balance?address=${event.target.value}`)
-    .then((res) => {
-      this.setState({
-        balances: res.data,
-      });
-    })
-    .catch((err) => {
-      this.setState({
-        error: err.response.data.error,
-      })
-    })
+    this.updateBalance(event.target.value);
   }
   
   render() {
     const { recaptcha } = this.props;
 
-    const address   = this.state.address || '';
-    const error     = this.state.error || '';
+    const address   = this.state.address  || '';
     const balances  = this.state.balances || {ETH: '', MLN: ''};
-    
+    const message   = this.state.message;
+
+    const valid = this.state.valid === true;
+
     return (
       <div className="ribbon">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
@@ -67,11 +105,13 @@ export default class extends React.Component {
           <h2 className="title">Melon Faucet</h2>
           <div className="card" style={{"maxWidth": "600px"}}>
             <div className="card-block">
-              <div style={{"backgroundColor": "red"}}>
-                {error}
-              </div>
               <form className="form-register" onSubmit={this.handleSubmit}>
                 <input type="text" name="address" value={address} onChange={this.onAddressChange} />
+                {message &&
+                  <div style={{"backgroundColor": message.status}}>
+                    {message.data}
+                  </div>
+                }
                 <div className="row">
                   <div className="col-5 offset-1">
                     <p>Ether</p>
@@ -85,7 +125,7 @@ export default class extends React.Component {
                   </div>
                 </div>
                 <div dangerouslySetInnerHTML={{ __html: recaptcha }} />
-                <button type="submit">Request</button>
+                <button type="submit" disabled={!valid}>Request</button>
               </form>
             </div>
           </div>

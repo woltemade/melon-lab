@@ -11,7 +11,9 @@ const Recaptcha = require('express-recaptcha').Recaptcha;
 const web3 = require('web3');
 const path = require('path');
 
-const {setup, getBalances, send} = require('./melon');
+const BigNumber = require('bignumber.js');
+
+const {setup, getBalances, send, MLN} = require('./melon');
 
 const recaptcha = new Recaptcha(
   process.env.RECAPTCHA_SITE_KEY,
@@ -40,6 +42,10 @@ app.prepare().then(() => {
     server.use(compression());
   }
 
+  // Amounts to send from env variables
+  const eth = web3.utils.toWei(process.env.ETH, "ether");
+  const mln = new BigNumber(process.env.MLN);
+  
   // static content
   server.use('/static', express.static(path.join(__dirname, 'public')))
 
@@ -80,15 +86,26 @@ app.prepare().then(() => {
   });
 
   server.post('/', (req, res) => {
+    const address = req.body.address || '';
+    
+    if (!web3.utils.isAddress(address)) {
+      err(res, `${address} is not a valid address`)
+      return
+    }
+    
     recaptcha.verify(req, async (error, data) => {
       if (error) {
         err(res, 'Captcha not valid')
       } else {
         try {
-          await send(req.body.address, process.env.ETH, process.env.MLN);
+          // send 'mln' melon to the token symbol 'MLN'
+          await send(address, mln, MLN); 
+          // send ether
+          await send(address, eth);
+
           ok(res, 'Done')
-        } catch(err) {
-          err(res, 'Failed to send')
+        } catch(error) {
+          err(res, 'Failed to send the transactions. Please try later.')
         }
       }
     });
