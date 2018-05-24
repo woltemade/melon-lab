@@ -1,8 +1,8 @@
 import App, { Container } from 'next/app';
 import Raven from 'raven-js';
 import React from 'react';
-import withApollo from './wrappers/withApollo';
-import withReduxStore from './wrappers/withReduxStore';
+import withApollo from '~/shared/wrappers/withApollo';
+import withReduxStore from '~/shared/wrappers/withReduxStore';
 
 const environment = process.env.NODE_ENV;
 const release = `manager-interface@${__MANAGER_INTERFACE_VERSION__} melon.js@${__MELON_JS_VERSION__} smart-contracts@${__SMART_CONTRACTS_VERSION__}`;

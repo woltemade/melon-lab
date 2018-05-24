@@ -17,6 +17,8 @@ const ownPkg = require('./package.json');
 const melonJsPkg = require('@melonproject/melon.js/package.json');
 const smartContractsPkg = require('@melonproject/smart-contracts/package.json');
 
+const isElectron = JSON.parse(process.env.ELECTRON || 'false');
+
 module.exports = withComposedConfig({
   typescriptLoaderOptions: {
     // We have to specify this explicitly so the ts-loader does
@@ -31,21 +33,20 @@ module.exports = withComposedConfig({
     ['@melonproject/manager-components', 'src'],
     ['@melonproject/exchange-aggregator', 'src'],
   ],
-  distDir: '../dist',
+  distDir: path.join('..', 'build', isElectron ? 'app' : 'web', 'bundle'),
   exportPathMap: () => ({
     '/': { page: '/' },
   }),
   webpack: (config, options) => {
     const src = path.resolve(__dirname, 'src');
-    const electron = JSON.parse(process.env.ELECTRON || 'false');
-    const transport = electron
+    const transport = isElectron
       ? './withApollo.ipc.ts'
       : './withApollo.remote.ts';
 
     config.resolve.alias = Object.assign({}, config.resolve.alias || {}, {
       '~/shared': path.join(src, 'shared'),
       '~/legacy': path.join(src, 'legacy'),
-      '~/apollo': path.join(src, 'pages', 'wrappers', transport),
+      '~/apollo': path.join(src, 'shared', 'wrappers', transport),
     });
 
     // Make process.env.DEBUG accessible so we can use the debug package
@@ -61,13 +62,18 @@ module.exports = withComposedConfig({
       }),
     );
 
-    // Code splitting doesn't make much sense in an electron app.
-    if (electron) {
+    if (isElectron) {
+      config.target = 'electron-renderer';
+
+      // Code splitting doesn't make much sense in an electron app.
       config.plugins.push(
         new webpack.optimize.LimitChunkCountPlugin({
           maxChunks: 1,
         }),
       );
+
+      // Use the 'browser' field in the renderer.
+      config.resolve.mainFields = ['browser', 'module', 'main'];
     }
 
     return config;

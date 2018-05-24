@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig-base.json",
+  "compilerOptions": {
+    "outDir": "out"
+  },
+  "include": [
+    "../../typings/is-ci.d.ts",
+    "src/**/*.ts"
+  ],
+  "jsdoc": {
+    "out": "../../scripts/jsdoc/out/util",
+    "access": "public"
+  }
+}

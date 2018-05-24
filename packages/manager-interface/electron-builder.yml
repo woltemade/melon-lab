@@ -1,21 +1,28 @@
-appId: com.melonproject.app
+
 copyright: Melonport
-productName: Melon Project Manager Interface
-
+appId: com.melonproject.app
+productName: Melon interface
 asar: true
-
 extends: null
 
 directories:
-  output: package/
+  output: build/app/package/
 
 files:
-  - electron.main.js
   - package.json
-  - export/**/*
-  - node_modules/**/*
+  - from: build/app/main
+    to: .
+  - from: build/app/export
+    to: .
 
 linux:
+  category: Finance
   target:
     - deb
     - AppImage
+
+mac:
+  category: public.app-category.finance
+  target:
+    - dmg
+    - zip
