@@ -33,7 +33,7 @@ const mapOnboardingStateToMainContainer = {
 };
 
 const routeContainerMap = {
-  [types.ROOT]: OlympiadPlaceholderContainer,
+  [types.ROOT]: RankingContainer,
   [types.RANKING]: RankingContainer,
   [types.ACCOUNT_GENERATE]: AccountGenerate,
   [types.ACCOUNT_RESTORE]: RestoreContainer,
@@ -54,27 +54,37 @@ const getMainComponent = ({
   network,
   networkName,
 }) => {
-  // if (route === types.SETUP) {
-  //   const Main = mapOnboardingStateToMainContainer[onboardingState];
-  //   return Main ? (
-  //     <Main
-  //       mlnBalance={mlnBalance}
-  //       ethBalance={ethBalance}
-  //       setup
-  //       usersFund={usersFund}
-  //       walletAddress={walletAddress}
-  //       network={network}
-  //     />
-  //   ) : null;
-  // } else if (route === types.COMPETITION) {
-  //   return <CompetitionRegistrationContainer />;
-  // }
-  const Main = routeContainerMap[route];
-  return <Main />;
+  const Main =
+    route === types.SETUP
+      ? mapOnboardingStateToMainContainer[onboardingState]
+      : routeContainerMap[route];
+
+  return Main ? (
+    <Main
+      mlnBalance={mlnBalance}
+      ethBalance={ethBalance}
+      setup
+      usersFund={usersFund}
+      walletAddress={walletAddress}
+      network={network}
+    />
+  ) : (
+    <div />
+  );
 };
 
 const App = props => (
   <div className="App">
+    <ConnectionInfo
+      account={props.walletAddress}
+      mlnBalance={props.mlnBalance}
+      ethBalance={props.ethBalance}
+      statusType={props.statusType}
+      statusMessage={props.statusMessage}
+      accountAction={props.accountAction}
+      networkName={props.networkName}
+    />
+
     <Container>
       <div className="App-header" style={{ marginBottom: '2em' }}>
         <Link to={props.rootAction}>
