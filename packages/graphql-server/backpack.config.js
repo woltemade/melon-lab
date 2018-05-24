@@ -60,7 +60,7 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
-              configFile: 'tsconfig.build.json',
+              configFile: path.resolve(__dirname, 'tsconfig.json'),
               transpileOnly: true,
             },
           },
@@ -77,6 +77,13 @@ module.exports = {
       modulesDir: path.resolve(process.cwd(), '..', '..', 'node_modules'),
       whitelist: [/^@melonproject\//],
     });
+
+    if (process.platform === 'win32' || process.env.NODE_ENV === 'production') {
+      // TODO: The source-map support added with the banner plugin has the wrong paths in windows.
+      config.plugins = config.plugins.filter(
+        plugin => !(plugin instanceof webpack.BannerPlugin),
+      );
+    }
 
     return config;
   },

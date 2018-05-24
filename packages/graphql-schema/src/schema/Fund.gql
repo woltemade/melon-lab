@@ -1,0 +1,19 @@
+type Fund {
+  rank: Int
+  address: String!
+  name: String!
+  sharePrice: Float!
+  inception: String!
+  gav: Float!
+  nav: Float!
+  owner: String
+  totalSupply: Float
+  modules: [String]
+  managementReward: Float
+  performanceReward: Float
+  unclaimedRewards: Float
+  rewardsShareQuantity: Float
+  subscriptionAllowed: Boolean
+  redemptionAllowed: Boolean
+  holdings: [Holding]
+}

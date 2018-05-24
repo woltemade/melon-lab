@@ -1,0 +1,17 @@
+type ZeroExOrder implements Order {
+  maker: String!
+  taker: String
+  isActive: Boolean!
+  type: String!
+  buy: HowMuchOfAsset!
+  sell: HowMuchOfAsset!
+  price: String!
+  exchangeContractAddress: String
+  exchange: String
+  expiration: String
+  salt: String!
+  makerFee: String!
+  takerFee: String!
+  signature: Signature
+  feeRecipient: String
+}

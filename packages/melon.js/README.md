@@ -39,21 +39,20 @@ import {
   providers,
   setEnvironment,
   getEnvironment,
-} from "@melonproject/melon.js";
-
+} from '@melonproject/melon.js';
 
 function* yourSaga() {
-  const { providerType, api } = yield call(getParityProvider, -1);
+  const { providerType, api } = yield call(getParityProvider);
 
   setEnvironment({ api, providerType });
 
   if (providerType !== providers.INJECTED) {
-   // you are using the ethers-wallet signer (in-browser strategy)
+    // you are using the ethers-wallet signer (in-browser strategy)
   } else {
     // you are using an external signer, such as the Parity signer or an unlocked node
   }
   // you then need to add your wallet address on the account key of the environment object
-  setEnvironment({ account: { address: "YOUR_WALLET_ADDRESS" } });
+  setEnvironment({ account: { address: 'YOUR_WALLET_ADDRESS' } });
 }
 ```
 

@@ -1,0 +1,3 @@
+main:
+  sourceDirectory: src/electron
+  webpackConfig: electron-webpack.js

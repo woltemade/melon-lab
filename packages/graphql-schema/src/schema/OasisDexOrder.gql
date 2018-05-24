@@ -1,0 +1,12 @@
+type OasisDexOrder implements Order {
+  maker: String!
+  taker: String
+  isActive: Boolean!
+  type: String!
+  buy: HowMuchOfAsset!
+  sell: HowMuchOfAsset!
+  price: String!
+  exchangeContractAddress: String
+  exchange: String
+  id: String!
+}

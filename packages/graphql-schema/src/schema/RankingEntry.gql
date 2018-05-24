@@ -1,0 +1,7 @@
+type RankingEntry {
+  rank: Int!
+  address: String!
+  name: String!
+  sharePrice: Float!
+  inception: String!
+}

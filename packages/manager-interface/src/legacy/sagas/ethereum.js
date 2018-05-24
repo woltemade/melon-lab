@@ -20,7 +20,7 @@ const BLOCK_POLLING_INTERVAL = 4 * 1000;
 const MAX_INTERVAL_BETWEEN_BLOCKS = 5;
 
 function* init() {
-  const { providerType, api } = yield call(getParityProvider, -1);
+  const { providerType, api } = yield call(getParityProvider);
 
   // TODO: add tracer
   setEnvironment({ api, providerType });

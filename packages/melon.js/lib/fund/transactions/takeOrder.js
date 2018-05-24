@@ -91,7 +91,6 @@ const takeOrder = async (
     identifier,
     signature,
   });
-  console.log(updateLog);
 
   return {
     id: Utils.toUtf8String(
@@ -99,6 +98,7 @@ const takeOrder = async (
     ),
     exchange: getExchangeName(environment, updateLog.params.exchange.value),
     updateType: updateLog.params.updateType.value === 0 ? 'make' : 'take',
+    executedQuantity: fillTakerQuantity,
   };
 };
 
