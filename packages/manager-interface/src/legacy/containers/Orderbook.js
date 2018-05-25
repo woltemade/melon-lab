@@ -5,7 +5,6 @@ import React from 'react';
 import { Subscription } from 'react-apollo';
 import gql from 'graphql-tag';
 import { actions } from '../actions/orderbook';
-import { getAddress, getConfig } from '@melonproject/melon.js';
 
 const subscription = gql`
   subscription OrderbookQuery(
@@ -112,6 +111,7 @@ const mapStateToProps = state => ({
   quoteToken: state.app.assetPair.quote,
   isReadyToTrade: state.app.isReadyToTrade,
   network: state.ethereum.network,
+  config: state.fund.config,
 });
 
 const withState = connect(mapStateToProps, mapDispatchToProps);

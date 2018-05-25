@@ -62,13 +62,8 @@ const getObservableErcDexNotifications = (
   return messages$;
 };
 
-const getObservableErcDex = (baseTokenSymbol, quoteTokenSymbol, network) => {
-  const baseTokenAddress = getTokenAddress(baseTokenSymbol);
-  const quoteTokenAddress = getTokenAddress(quoteTokenSymbol);
-
+const getObservableErcDex = (baseTokenAddress, quoteTokenAddress, network) => {
   debug('Processed symbols.', {
-    baseTokenSymbol,
-    quoteTokenSymbol,
     baseTokenAddress,
     quoteTokenAddress,
   });

@@ -57,12 +57,15 @@ function* requestInfo({ address }) {
 
     yield put(actions.progressiveUpdate(participationAuthorizations));
 
+    const config = yield call(getConfig);
+
     const info = {
       ...fundInfo,
       ...calculations,
       ...participationAuthorizations,
       address,
       loading: false,
+      config,
     };
     if (account) {
       const participation = yield call(getParticipation, environment, {
