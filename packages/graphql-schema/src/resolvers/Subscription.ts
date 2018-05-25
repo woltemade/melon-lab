@@ -2,7 +2,12 @@ import {
   getAggregatedObservable,
   Order,
 } from '@melonproject/exchange-aggregator';
-import { getParityProvider, getPrice } from '@melonproject/melon.js';
+import {
+  getParityProvider,
+  getPrice,
+  getAddress,
+  getConfig,
+} from '@melonproject/melon.js';
 import BigNumber from 'bignumber.js';
 import * as R from 'ramda';
 import * as Rx from 'rxjs';
@@ -71,13 +76,16 @@ export const orderbook = {
       totalBuyVolume,
     };
   },
-  subscribe: (parent, args, context: Context) => {
+  subscribe: async (parent, args, context: Context) => {
     const { pubsub } = context;
     const { baseTokenSymbol, quoteTokenSymbol, exchanges, network } = args;
-
+    const environment = await getParityProvider();
+    const config = await getConfig(environment);
+    const baseTokenAddress = getAddress(config, baseTokenSymbol);
+    const quoteTokenAddress = getAddress(config, quoteTokenSymbol);
     const orderbook$ = getAggregatedObservable(
-      baseTokenSymbol,
-      quoteTokenSymbol,
+      baseTokenAddress,
+      quoteTokenAddress,
       exchanges,
       network,
     );

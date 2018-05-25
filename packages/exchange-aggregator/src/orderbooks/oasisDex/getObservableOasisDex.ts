@@ -1,4 +1,9 @@
-import { getOrderbook, getParityProvider } from '@melonproject/melon.js';
+import {
+  getOrderbook,
+  getParityProvider,
+  getConfig,
+  getSymbol,
+} from '@melonproject/melon.js';
 import * as Rx from 'rxjs';
 
 const debug = require('debug')('exchange-aggregator:oasis-dex');
@@ -9,7 +14,12 @@ const labelOrders = orders => orders.map(labelOrder);
 const fetchOrderbook = options => environment =>
   Rx.Observable.fromPromise(getOrderbook(environment, options));
 
-const getObservableOasisDex = (baseTokenSymbol, quoteTokenSymbol) => {
+const getObservableOasisDex = async (baseTokenAddress, quoteTokenAddress) => {
+  const environment = await getParityProvider();
+  const config = await getConfig(environment);
+  const baseTokenSymbol = await getSymbol(config, baseTokenAddress);
+  const quoteTokenSymbol = await getSymbol(config, quoteTokenAddress);
+
   const environment$ = Rx.Observable.fromPromise(getParityProvider());
   const orderbook$ = environment$
     .do(value => debug('Fetching.', value))

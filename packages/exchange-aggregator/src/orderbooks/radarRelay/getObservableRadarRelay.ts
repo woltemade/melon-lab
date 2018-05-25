@@ -8,7 +8,7 @@ import { Order } from '../../index';
 // protocol on the client.
 import WebSocket = require('isomorphic-ws');
 
-const debug = require('debug')('exchange-aggregator:0x');
+const debug = require('debug')('exchange-aggregator:radar-relay');
 
 const subscribeMessage = (baseTokenAddress, quoteTokenAddress) =>
   JSON.stringify({
@@ -80,16 +80,11 @@ const updateAsksAndBids = (state: AsksAndBids, order: RelayOrder) => {
 };
 
 const getObservableRadarRelay = (
-  baseTokenSymbol,
-  quoteTokenSymbol,
+  baseTokenAddress,
+  quoteTokenAddress,
   network,
 ) => {
-  const baseTokenAddress = getTokenAddress(baseTokenSymbol);
-  const quoteTokenAddress = getTokenAddress(quoteTokenSymbol);
-
   debug('Connecting.', {
-    baseTokenSymbol,
-    quoteTokenSymbol,
     baseTokenAddress,
     quoteTokenAddress,
   });
@@ -97,7 +92,7 @@ const getObservableRadarRelay = (
   const open$ = new Rx.Subject();
   const url =
     network === 'KOVAN'
-      ? 'https://api.kovan.radarrelay.com/0x/v0'
+      ? 'wss://ws.kovan.radarrelay.com/0x/v0/ws'
       : 'wss://api.radarrelay.com/0x/v0/ws';
   const socket$ = Rx.Observable.webSocket({
     url,
