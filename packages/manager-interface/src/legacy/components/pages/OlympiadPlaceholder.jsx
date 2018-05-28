@@ -122,15 +122,15 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
       contribute with. After this point, you need to wait until the official
       beginning of the challenge which will be announced shortly.
     </p>
-    <h4>Step 5 </h4> <p> Official start of the Melon Olympiad, PAROS.</p>
+    <h4>Step 5 </h4>{' '}
+    <p>
+       Official start of the Melon Olympiad, PAROS. Date will be announced in
+      June.
+    </p>
     <h4>Step 6  </h4>{' '}
     <p>
       Come back to this website olympiad.melon.fund. You will be guided to
-      create your fund. After creating your fund, you will be asked to enter the
-      amount you wish to contribute with. Once you confirm that transaction, the
-      amount of Ether will be transferred from you wallet to the Olympiad
-      contract. In return, the Olympiad contract will invest the equivalent
-      amount in MLN into your fund.
+      create your fund.
     </p>
     <h4>Step 7  </h4>{' '}
     <p>
