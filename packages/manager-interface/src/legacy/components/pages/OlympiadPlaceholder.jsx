@@ -11,14 +11,14 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
     <h1 id="history" className="App-intro">
       Welcome to the Melon Olympiad
     </h1>
-    <h5>
+    {/*<h5>
       <a
         href="https://medium.com/@zenkjenna/introducing-melon-olympiad-861687d0703b"
         target="_blank"
       >
         [Click here to read blog post introducing the Melon Olympiad]
       </a>
-    </h5>
+    </h5>*/}
     <p>
       <i>([méllō], μέλλω; Greek for “destined to be”)</i> is blockchain software
       that seeks to enable participants to set up, manage and invest in
@@ -38,32 +38,48 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
         competitions composed of several rounds. Each of the rounds will set a
         clear goal for participants, and will issue a defined number of Melon
         tokens.
-      </strong>{' '}
-      At the end of the Melon Olympiad, all remaining Melon tokens shall have
-      been issued to the public. {' '}
+      </strong>
     </p>
     <p>
-      <i>
-        {' '}
-        Each round of the Melon Olympiad will be named after Greek islands. The
-        first round of the Melon Olympiad is referred to as Paros.
-      </i>
+      Following a successful token sale in 2017, Melonport AG is left with
+      500,600 Melon (MLN) tokens to distribute. Rather than distribute these in
+      a traditional manner, Melonport has created a series of sub-contribution
+      periods called Melon Olympiad. This will ensure that tokens are allocated
+      to active community members who engage and use the Melon asset management
+      ecosystem. The distribution of up to half a million Melon tokens will
+      largely occur via a public contribution period is in keeping with
+      Melonport’s commitment to creating a diverse and decentralized ecosystem
+      in which there are as many participants as possible. By awarding tokens to
+      testers who have put their time and energy into scrutinizing the Melon
+      software, it will also ensure adoption and help to further improve the
+      codebase. The contribution period will be split into rounds referred to as
+      Melon Olympiad capsules, with a portion of tokens allocated for each
+      stage. Upon completion of the Melon Olympiad, all 500,600 tokens will have
+      been issued. In keeping with the mythology and provenance of the Olympic
+      Games, each round will be named after a Greek island, commencing with
+      Paros. Participants will be obliged to create a fund and send Ether to the
+      relevant Olympiad smart-contract, which will then be matched with an
+      equivalent amount of MLN tokens plus an additional incentive amount. It is
+      then up to the participant to manage the fund for a period of one month
+      with a view to maximizing capital appreciation. The Melon Protocol intends
+      to present a decentralized, public, permissionless, robust infrastructure
+      for the secure management of digital assets on the Ethereum blockchain. It
+      aims to be a viable, low-cost alternative to the current fund management
+      ecosystem which has evolved similarly across most legal jurisdictions. The
+      protocol itself is a collection of smart-contracts written in the Solidity
+      programming language. Supporting functionality that allows browsers to
+      freely interact with the protocol is provided by the javascript library
+      Melon.js. For more information visit: https://docs.melonport.com and our
+      github https://github.com/melonproject/. Participants interested in taking
+      part in the Melon Olympiad Paros can register by following the
+      instructions provided below.
     </p>
     <h2>Melon Olympiad, first round: Paros</h2>
     <p>
-      Participants who wish to engage in testing and help us improve the
-      software will be rewarded for this effort. Participants will have to
-      create a fund on this website and contribute ether to the Olympiad
-      contract. In return, the Olympiad contract will invest the equivalent
-      amount in MLN (+ a bonus) into the participant’s fund. The participant
-      will have to manage his fund for a defined period of time (2 weeks) with
-      the goal being capital appreciation. At the end of the defined management
-      period, the participant will be able to trigger the redemption of the
-      fund’s assets, thus receiving the fund’s AUM as a reward for his effort.{' '}
-    </p>
-    <p>
       For the Paros round, the participant compensation is as follows: for each
-      ether contributed, the participant will receive 20 MLN (subject to change prior to the start of the Paros Olympiad in the event of price volatility).
+      ether contributed, the participant will receive 20 MLN (subject to change
+      prior to the start of the Paros Olympiad in the event of price
+      volatility).
     </p>
     <h2>Instructions on how to participate</h2>
     <p>
@@ -73,22 +89,23 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
       willing to participate will have to register with Bitcoin Suisse.
     </p>
     <h4>Step 1</h4> <p>
-      Generate a wallet on this website (see instructions below).. Make sure your
-      write down the mnemonic, and store it in a safe (and accessible) place.
-      Make sure you remember the password you use to encrypt the wallet. If you
-      forget your password and you loose access to the mnemonic phrase, you
-      won't be able to participate in the challenge. Make sure you download your
-      wallet as a JSON file and store it in a safe place. Save the wallet
+      Generate a wallet on this website (see instructions below).. Make sure
+      your write down the mnemonic, and store it in a safe (and accessible)
+      place. Make sure you remember the password you use to encrypt the wallet.
+      If you forget your password and you loose access to the mnemonic phrase,
+      you won't be able to participate in the challenge. Make sure you download
+      your wallet as a JSON file and store it in a safe place. Save the wallet
       address as you will need to provide this address to Bitcoin Suisse in step
       3.
     </p>
     <h4>Step 2 </h4> <p>
-      The registration with Bitcoin Suisse opens today 28/05/2018 and will last until 18/06/2018.
-      KYC with Bitcoin Suisse: go to https://ico.bitcoinsuisse.ch/ and create an account with Bitcoin Suisse. Follow the
-      steps on the Bitcoin Suisse platform to get the KYC clearance. Make sure
-      you upload all required documents. Bitcoin Suisse will inform you with an
-      email once your KYC is approved. Once it is approved, you can move on to
-      Step 3.{' '}
+      The registration with Bitcoin Suisse opens today 28/05/2018 and will last
+      until 18/06/2018. KYC with Bitcoin Suisse: go to
+      https://ico.bitcoinsuisse.ch/ and create an account with Bitcoin Suisse.
+      Follow the steps on the Bitcoin Suisse platform to get the KYC clearance.
+      Make sure you upload all required documents. Bitcoin Suisse will inform
+      you with an email once your KYC is approved. Once it is approved, you can
+      move on to Step 3.{' '}
     </p>
     <h4>Step 3 </h4> <p>
        Apply for the Melon Olympiad Whitelist on the Bitcoin Suisse platform.
@@ -137,15 +154,25 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
       generated in step 1.
     </p>
     <p>
-      The terms and conditions must be read by all participants. <a
-        href="https://ipfs.io/ipfs/QmR1JHL6ziiwoWKgWkq2JV1Qd6amXaAP55nxrgDkQJw8kk"
+      The terms and conditions must be read by all participants.{' '}
+      <a
+        href="https://ipfs.io/ipfs/QmbTsKQgACY9DzaW3SVSnLuCTo6f4H24SiXXfAyAGrTYTz"
         target="_blank"
-      >Click here to read the terms and conditions for the second contribution period </a>. <a
-        href="https://ipfs.io/ipfs/QmZZxSHrSmHdQLk8zrrB9TLUe6SktUt9hT59XnHybwHVSj"
+      >
+        Click here to read the terms and conditions for the second contribution
+        period{' '}
+      </a>.{' '}
+      <a
+        href="https://ipfs.io/ipfs/Qme4yLq3vFD2hiSyyJR3oukQYWMR9vBsducrNipWXLFnug"
         target="_blank"
-      > Click here to read the terms and conditions for the Paros Olympiad (first capsule).  Please make sure you read carefully both documents. When you will create a fund, you will be prompted to
-      cryptographically sign those terms and conditions to show your
-      understanding and agreement.
+      >
+        {' '}
+        Click here to read the terms and conditions for the Paros Olympiad
+        (first capsule). Please make sure you read carefully both documents.
+        When you will create a fund, you will be prompted to cryptographically
+        sign those terms and conditions to show your understanding and
+        agreement.
+      </a>
     </p>
     <h2>Generate your wallet</h2>
     {!address ? (
