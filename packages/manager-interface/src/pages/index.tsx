@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import withApollo from '~/shared/graphql';
+import withApollo from '~/shared/withApollo';
 
 import legacy from '../legacy';
 
