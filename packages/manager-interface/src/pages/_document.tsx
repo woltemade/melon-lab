@@ -16,14 +16,14 @@ export default class MyDocument extends Document {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           <meta name="theme-color" content="#000000" />
-          <link rel="manifest" href="/static/manifest.json" />
-          <link rel="shortcut icon" href="/static/favicon.png?v=2" />
-          <link rel="stylesheet" href="/static/css/semantic.min.css" />
-          <link rel="stylesheet" href="/static/css/overwrites.css" />
-          <script src="/static/tracking.js" />
-          <title>Melon on IPFS</title>
+          <link rel="manifest" href="./static/manifest.json" />
+          <link rel="shortcut icon" href="./static/favicon.png?v=2" />
+          <link rel="stylesheet" href="./static/css/semantic.min.css" />
+          <link rel="stylesheet" href="./static/css/overwrites.css" />
+          <script src="./static/tracking.js" />
+          <title>Melon Olympiad</title>
         </Head>
-        <body>
+        <body style={{ padding: '2em 1em' }}>
           <Main />
           <NextScript />
 
@@ -39,10 +39,12 @@ export default class MyDocument extends Document {
               href="https://github.com/melonproject/ipfs-frontend/issues"
               target="_blank"
             >
+              {' '}
               Report an issue
             </a>{' '}
             |
             <a href="https://www.melonport.com" target="_blank">
+              {' '}
               Melonport
             </a>
           </div>

@@ -1,17 +1,22 @@
 export const types = {
-  GENERATE_WALLET_REQUESTED: "GENERATE_WALLET_REQUESTED:newuser:melon.fund",
-  GENERATE_WALLET_SUCCEEDED: "GENERATE_WALLET_SUCCEEDED:newuser:melon.fund",
-  GENERATE_WALLET_FAILED: "GENERATE_WALLET_FAILED:newuser:melon.fund",
-  ENCRYPT_WALLET_REQUESTED: "ENCRYPT_WALLET_REQUESTED:newuser:melon.fund",
-  ENCRYPT_WALLET_SUCCEEDED: "ENCRYPT_WALLET_SUCCEEDED:newuser:melon.fund",
+  GENERATE_WALLET_REQUESTED: 'GENERATE_WALLET_REQUESTED:newuser:melon.fund',
+  GENERATE_WALLET_SUCCEEDED: 'GENERATE_WALLET_SUCCEEDED:newuser:melon.fund',
+  GENERATE_WALLET_FAILED: 'GENERATE_WALLET_FAILED:newuser:melon.fund',
+  ENCRYPT_WALLET_REQUESTED: 'ENCRYPT_WALLET_REQUESTED:newuser:melon.fund',
+  ENCRYPT_WALLET_SUCCEEDED: 'ENCRYPT_WALLET_SUCCEEDED:newuser:melon.fund',
   RESTORE_FROM_MNEMONIC_REQUESTED:
-    "RESTORE_FROM_MNEMONIC_REQUESTED:newuser:melon.fund",
+    'RESTORE_FROM_MNEMONIC_REQUESTED:newuser:melon.fund',
   RESTORE_FROM_MNEMONIC_SUCCEEDED:
-    "RESTORE_FROM_MNEMONIC_SUCCEEDED:newuser:melon.fund",
+    'RESTORE_FROM_MNEMONIC_SUCCEEDED:newuser:melon.fund',
   RESTORE_FROM_MNEMONIC_FAILED:
-    "RESTORE_FROM_MNEMONIC_FAILED:newuser:melon.fund",
-  I_SAVED: "I_SAVED:newuser:melon.fund",
-  DELETE_WALLET_REQUESTED: "DELETE_WALLET_REQUESTED:newuser:melon.fund",
+    'RESTORE_FROM_MNEMONIC_FAILED:newuser:melon.fund',
+  DELETE_WALLET_REQUESTED: 'DELETE_WALLET_REQUESTED:newuser:melon.fund',
+  DO_DELETE_WALLET: 'DO_DELETE_WALLET:newuser:melon.fund',
+  DOWNLOAD_JSON: 'DOWNLOAD_JSON:newuser:melon.fund',
+  IMPORT_JSON: 'IMPORT_JSON:newuser:melon.fund',
+  IMPORT_WALLET_REQUESTED: 'IMPORT_WALLET_REQUESTED:newuser:melon.fund',
+  IMPORT_WALLET_SUCCEEDED: 'IMPORT_WALLET_SUCCEEDED:newuser:melon.fund',
+  IMPORT_WALLET_FAILED: 'IMPORT_WALLET_FAILED:newuser:melon.fund',
 };
 
 export const actions = {
@@ -23,11 +28,25 @@ export const actions = {
     type: types.GENERATE_WALLET_FAILED,
     reason,
   }),
-  generateWalletSucceeded: (newAddress, mnemonic) => ({
+  generateWalletSucceeded: mnemonic => ({
     type: types.GENERATE_WALLET_SUCCEEDED,
     hasGenerated: true,
-    newAddress,
     mnemonic,
+  }),
+  importWallet: encryptedWalletString => ({
+    type: types.IMPORT_WALLET_REQUESTED,
+    loading: false,
+    encryptedWalletString,
+  }),
+  importWalletFailed: reason => ({
+    type: types.IMPORT_WALLET_FAILED,
+    reason,
+  }),
+  importWalletSucceeded: wallet => ({
+    type: types.IMPORT_WALLET_SUCCEEDED,
+    hasGenerated: true,
+    newAddress: wallet.address,
+    privateKey: wallet.privateKey,
   }),
   encryptWallet: password => ({
     type: types.ENCRYPT_WALLET_REQUESTED,
@@ -38,21 +57,16 @@ export const actions = {
     type: types.ENCRYPT_WALLET_SUCCEEDED,
     hasEncrypted: true,
   }),
-  iSaved: () => ({
-    type: types.I_SAVED,
-    hasSavedMnemonic: true,
-    mnemonic: "",
-  }),
   restoreFromMnemonic: mnemonic => ({
     type: types.RESTORE_FROM_MNEMONIC_REQUESTED,
     mnemonic,
   }),
-  restoreFromMnemonicSucceeded: (newAddress, wallet) => ({
+  restoreFromMnemonicSucceeded: wallet => ({
     type: types.RESTORE_FROM_MNEMONIC_SUCCEEDED,
     hasGenerated: true,
     hasSavedMnemonic: true,
-    newAddress,
-    wallet,
+    newAddress: wallet.address,
+    privateKey: wallet.privateKey,
   }),
   restoreFromMnemonicFailed: reason => ({
     type: types.RESTORE_FROM_MNEMONIC_FAILED,
@@ -60,5 +74,18 @@ export const actions = {
   }),
   deleteWallet: () => ({
     type: types.DELETE_WALLET_REQUESTED,
+  }),
+  doDeleteWallet: () => ({
+    type: types.DO_DELETE_WALLET,
+    hasGenerated: false,
+    hasSavedMnemonic: false,
+    hasEncrypted: false,
+    newAddress: '',
+    mnemonic: '',
+    loading: false,
+    privateKey: '',
+  }),
+  downloadJSON: () => ({
+    type: types.DOWNLOAD_JSON,
   }),
 };

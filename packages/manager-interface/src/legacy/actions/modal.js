@@ -1,21 +1,24 @@
-import { types as modalTypes } from "../components/pages/Modal";
+import { types as modalTypes } from '../components/pages/Modal';
 
 export const types = {
-  OPEN: "OPEN:modal:melon.fund",
-  CLOSE: "CLOSE:modal:melon.fund",
-  CANCEL: "CANCEL:modal:melon.fund",
-  CONFIRM: "CONFIRM:modal:melon.fund",
-  CONFIRMED: "CONFIRMED:modal:melon.fund",
-  ERROR: "ERROR:modal:melon.fund",
-  LOADING: "LOADING:modal.melon.fund",
+  OPEN: 'OPEN:modal:melon.fund',
+  CLOSE: 'CLOSE:modal:melon.fund',
+  CANCEL: 'CANCEL:modal:melon.fund',
+  CONFIRM: 'CONFIRM:modal:melon.fund',
+  CONFIRMED: 'CONFIRMED:modal:melon.fund',
+  ERROR: 'ERROR:modal:melon.fund',
+  LOADING: 'LOADING:modal.melon.fund',
+  PASSWORD: 'PASSWORD:modal.melon.fund',
+  PASSWORD_ENTERED: 'PASSWORD_ENTERED:modal:melon.fund',
 };
 
 // Actions bound to the buttons
 export const interactions = {
-  OK: "Ok",
-  CANCEL: "Cancel",
-  CONFIRM: "Confirm",
-  RETRY: "Retry",
+  OK: 'Ok',
+  CANCEL: 'Cancel',
+  CONFIRM: 'Confirm',
+  PASSWORD: 'Password',
+  RETRY: 'Retry',
 };
 
 export const actions = {
@@ -28,6 +31,7 @@ export const actions = {
     primaryInteraction,
     secondaryInteraction,
   }),
+
   close: () => ({
     type: types.CLOSE,
     isOpen: false,
@@ -40,13 +44,26 @@ export const actions = {
     type: types.CONFIRM,
     isOpen: true,
     modalType: modalTypes.CONFIRM,
-    title: "Confirm transaction",
+    title: 'Confirm transaction',
     body,
     primaryInteraction: interactions.CONFIRM,
     secondaryInteraction: interactions.CANCEL,
   }),
-  confirmed: password => ({
+  confirmed: () => ({
     type: types.CONFIRMED,
+    isOpen: false,
+  }),
+  password: body => ({
+    type: types.PASSWORD,
+    isOpen: true,
+    modalType: modalTypes.PASSWORD,
+    title: 'Enter password',
+    body,
+    primaryInteraction: interactions.PASSWORD,
+    secondaryInteraction: interactions.CANCEL,
+  }),
+  passwordEntered: password => ({
+    type: types.PASSWORD_ENTERED,
     isOpen: false,
     password,
   }),
@@ -54,16 +71,16 @@ export const actions = {
     type: types.ERROR,
     isOpen: true,
     modalType: modalTypes.ERROR,
-    title: "Transaction error",
+    title: 'Error',
     body,
     primaryInteraction: interactions.OK,
-    secondaryInteraction: "",
+    secondaryInteraction: '',
   }),
-  loading: (body = "Sending transaction ...") => ({
+  loading: (body = 'Sending transaction ...') => ({
     type: types.LOADING,
     isOpen: true,
     modalType: modalTypes.LOADING,
-    title: "Please wait",
+    title: 'Please wait',
     body,
   }),
 };

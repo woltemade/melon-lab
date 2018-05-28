@@ -1,7 +1,7 @@
-import { connect } from "react-redux";
-import { reduxForm } from "redux-form";
-import Modal from "../components/pages/Modal";
-import { actions, interactions } from "../actions/modal";
+import { connect } from 'react-redux';
+import { reduxForm, reset } from 'redux-form';
+import Modal from '../components/pages/Modal';
+import { actions, interactions } from '../actions/modal';
 
 const mapStateToProps = state => ({
   ...state.modal,
@@ -10,6 +10,7 @@ const mapStateToProps = state => ({
 
 const interactionDispatchMap = {
   [interactions.CANCEL]: () => actions.close(),
+  [interactions.CONFIRM]: () => actions.confirmed(),
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -28,13 +29,14 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 const onSubmit = (values, dispatch) => {
-  dispatch(actions.confirmed(values.password));
+  dispatch(actions.passwordEntered(values.password));
+  dispatch(reset('modal'));
 };
 
 const ModalRedux = connect(mapStateToProps, mapDispatchToProps)(Modal);
 
 const ModalForm = reduxForm({
-  form: "modal",
+  form: 'modal',
   onSubmit,
 })(ModalRedux);
 

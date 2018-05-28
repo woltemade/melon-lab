@@ -208,6 +208,7 @@ import sendTransaction from './utils/parity/sendTransaction';
 import createWallet from './utils/wallet/createWallet';
 import decryptWallet from './utils/wallet/decryptWallet';
 import encryptWallet from './utils/wallet/encryptWallet';
+import getWallet from './utils/wallet/getWallet';
 import importWalletFromMnemonic from './utils/wallet/importWalletFromMnemonic';
 
 // ./lib/version/calls
@@ -371,6 +372,7 @@ export {
   createWallet,
   decryptWallet,
   encryptWallet,
+  getWallet,
   importWalletFromMnemonic,
   getConfig,
   getFundForManager,

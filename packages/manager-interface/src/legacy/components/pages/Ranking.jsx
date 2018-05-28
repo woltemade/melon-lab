@@ -104,7 +104,7 @@ const Ranking = ({
     </Table>
     {loading ? (
       <div>
-        <Image src="/static/melon-spinner.gif" size="small" centered />
+        <Image src="./static/melon-spinner.gif" size="small" centered />
       </div>
     ) : (
       <div />
