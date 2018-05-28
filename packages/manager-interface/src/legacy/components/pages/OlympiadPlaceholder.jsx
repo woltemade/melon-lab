@@ -63,9 +63,7 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
     </p>
     <p>
       For the Paros round, the participant compensation is as follows: for each
-      ether contributed, the participant will receive the equivalent of 2 ethers
-      in Melon tokens. The conversion rate of ether to Melon will be retrieved
-      from the Pricefeed contract.
+      ether contributed, the participant will receive 20 MLN (subject to change prior to the start of the Paros Olympiad in the event of price volatility).
     </p>
     <h2>Instructions on how to participate</h2>
     <p>
@@ -75,7 +73,7 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
       willing to participate will have to register with Bitcoin Suisse.
     </p>
     <h4>Step 1</h4> <p>
-      Generate a wallet on this website (see instructins below).. Make sure your
+      Generate a wallet on this website (see instructions below).. Make sure your
       write down the mnemonic, and store it in a safe (and accessible) place.
       Make sure you remember the password you use to encrypt the wallet. If you
       forget your password and you loose access to the mnemonic phrase, you
@@ -85,7 +83,8 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
       3.
     </p>
     <h4>Step 2 </h4> <p>
-      KYC with Bitcoin Suisse: create an account with Bitcoin Suisse. Follow the
+      The registration with Bitcoin Suisse opens today 28/05/2018 and will last until 18/06/2018.
+      KYC with Bitcoin Suisse: go to https://ico.bitcoinsuisse.ch/ and create an account with Bitcoin Suisse. Follow the
       steps on the Bitcoin Suisse platform to get the KYC clearance. Make sure
       you upload all required documents. Bitcoin Suisse will inform you with an
       email once your KYC is approved. Once it is approved, you can move on to
@@ -138,9 +137,13 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
       generated in step 1.
     </p>
     <p>
-      The terms and conditions are being finalized and will be published on this
-      page as soon as ready. Please make sure you read carefully the terms and
-      conditions. When you will create a fund, you will be prompted to
+      The terms and conditions must be read by all participants. <a
+        href="https://ipfs.io/ipfs/QmR1JHL6ziiwoWKgWkq2JV1Qd6amXaAP55nxrgDkQJw8kk"
+        target="_blank"
+      >Click here to read the terms and conditions for the second contribution period </a>. <a
+        href="https://ipfs.io/ipfs/QmZZxSHrSmHdQLk8zrrB9TLUe6SktUt9hT59XnHybwHVSj"
+        target="_blank"
+      > Click here to read the terms and conditions for the Paros Olympiad (first capsule).  Please make sure you read carefully both documents. When you will create a fund, you will be prompted to
       cryptographically sign those terms and conditions to show your
       understanding and agreement.
     </p>
