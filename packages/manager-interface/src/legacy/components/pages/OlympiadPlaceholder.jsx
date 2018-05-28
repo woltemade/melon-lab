@@ -137,13 +137,13 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
       After creating your fund, you will be asked to enter the amount you wish
       to contribute with. Once you confirm that transaction, the amount of Ether
       will be transferred from your wallet to the Olympiad contract. In return,
-      the Olympiad contract will invest the equivalent amount in MLN into your
-      fund.
+      the Olympiad contract will transfer (via the requestInvestment function)
+      the equivalent amount in MLN into your fund.
     </p>
     <h4>Step 8 </h4>{' '}
     <p>
       Congratulations. You made it here. Now its time to prove your asset
-      management skill. You have 2 weeks to manage your fund and grow your
+      management skills. You have 2 weeks to manage your fund and grow your
       capital.
     </p>
     <h4>Step 9  </h4>{' '}
@@ -168,11 +168,10 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
       >
         {' '}
         Click here to read the terms and conditions for the Paros Olympiad
-        (first capsule). Please make sure you read carefully both documents.
-        When you will create a fund, you will be prompted to cryptographically
-        sign those terms and conditions to show your understanding and
-        agreement.
-      </a>
+        (first capsule).{' '}
+      </a>Please make sure you read carefully both documents. When you will
+      create a fund, you will be prompted to cryptographically sign those terms
+      and conditions to show your understanding and agreement.
     </p>
     <h2>Generate your wallet</h2>
     {!address ? (
