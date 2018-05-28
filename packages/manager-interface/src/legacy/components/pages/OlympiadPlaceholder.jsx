@@ -7,7 +7,7 @@ import GetStarted from '../../containers/GetStarted';
 import renderInput from '../utils/renderInput';
 
 const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
-  <div style={{ maxWidth: '35em', margin: '0 auto' }}>
+  <div style={{ maxWidth: '70em', margin: '0 auto' }}>
     <h1 id="history" className="App-intro">
       Welcome to the Melon Olympiad
     </h1>
@@ -46,33 +46,43 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
       a traditional manner, Melonport has created a series of sub-contribution
       periods called Melon Olympiad. This will ensure that tokens are allocated
       to active community members who engage and use the Melon asset management
-      ecosystem. The distribution of up to half a million Melon tokens will
-      largely occur via a public contribution period is in keeping with
-      Melonport’s commitment to creating a diverse and decentralized ecosystem
-      in which there are as many participants as possible. By awarding tokens to
-      testers who have put their time and energy into scrutinizing the Melon
-      software, it will also ensure adoption and help to further improve the
-      codebase. The contribution period will be split into rounds referred to as
-      Melon Olympiad capsules, with a portion of tokens allocated for each
-      stage. Upon completion of the Melon Olympiad, all 500,600 tokens will have
-      been issued. In keeping with the mythology and provenance of the Olympic
-      Games, each round will be named after a Greek island, commencing with
-      Paros. Participants will be obliged to create a fund and send Ether to the
+      ecosystem.{' '}
+    </p>{' '}
+    <p>
+      The distribution of up to half a million Melon tokens will largely occur
+      via a public contribution period is in keeping with Melonport’s commitment
+      to creating a diverse and decentralized ecosystem in which there are as
+      many participants as possible. By awarding tokens to testers who have put
+      their time and energy into scrutinizing the Melon software, it will also
+      ensure adoption and help to further improve the codebase.{' '}
+    </p>{' '}
+    <p>
+      The contribution period will be split into rounds referred to as Melon
+      Olympiad capsules, with a portion of tokens allocated for each stage. Upon
+      completion of the Melon Olympiad, all 500,600 tokens will have been
+      issued. In keeping with the mythology and provenance of the Olympic Games,
+      each round will be named after a Greek island, commencing with Paros.
+      Participants will be obliged to create a fund and send Ether to the
       relevant Olympiad smart-contract, which will then be matched with an
       equivalent amount of MLN tokens plus an additional incentive amount. It is
       then up to the participant to manage the fund for a period of one month
-      with a view to maximizing capital appreciation. The Melon Protocol intends
-      to present a decentralized, public, permissionless, robust infrastructure
-      for the secure management of digital assets on the Ethereum blockchain. It
-      aims to be a viable, low-cost alternative to the current fund management
-      ecosystem which has evolved similarly across most legal jurisdictions. The
-      protocol itself is a collection of smart-contracts written in the Solidity
-      programming language. Supporting functionality that allows browsers to
-      freely interact with the protocol is provided by the javascript library
-      Melon.js. For more information visit: https://docs.melonport.com and our
-      github https://github.com/melonproject/. Participants interested in taking
-      part in the Melon Olympiad Paros can register by following the
-      instructions provided below.
+      with a view to maximizing capital appreciation.{' '}
+    </p>{' '}
+    <p>
+      The Melon Protocol intends to present a decentralized, public,
+      permissionless, robust infrastructure for the secure management of digital
+      assets on the Ethereum blockchain. It aims to be a viable, low-cost
+      alternative to the current fund management ecosystem which has evolved
+      similarly across most legal jurisdictions. The protocol itself is a
+      collection of smart-contracts written in the Solidity programming
+      language. Supporting functionality that allows browsers to freely interact
+      with the protocol is provided by the javascript library Melon.js. For more
+      information visit: https://docs.melonport.com and our github
+      https://github.com/melonproject/.{' '}
+    </p>{' '}
+    <p>
+      Participants interested in taking part in the Melon Olympiad Paros can
+      register by following the instructions provided below.
     </p>
     <h2>Melon Olympiad, first round: Paros</h2>
     <p>
@@ -92,11 +102,13 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
       Generate a wallet on this website (see instructions below).. Make sure
       your write down the mnemonic, and store it in a safe (and accessible)
       place. Make sure you remember the password you use to encrypt the wallet.
-      If you forget your password and you loose access to the mnemonic phrase,
-      you won't be able to participate in the challenge. Make sure you download
-      your wallet as a JSON file and store it in a safe place. Save the wallet
-      address as you will need to provide this address to Bitcoin Suisse in step
-      3.
+      <strong>
+        {' '}
+        If you forget your password and you loose access to the mnemonic phrase,
+        you won't be able to participate in the challenge. Make sure you
+        download your wallet as a JSON file and store it in a safe place.{' '}
+      </strong>Save the wallet address as you will need to provide this address
+      to Bitcoin Suisse in step 3.
     </p>
     <h4>Step 2 </h4> <p>
       The registration with Bitcoin Suisse opens today 28/05/2018 and will last
@@ -129,8 +141,8 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
     </p>
     <h4>Step 6  </h4>{' '}
     <p>
-      Come back to this website olympiad.melon.fund. You will be guided to
-      create your fund.
+      Come back to this website olympiad.melon.fund. Once Paros is live, you
+      will be guided to create your fund.
     </p>
     <h4>Step 7  </h4>{' '}
     <p>
