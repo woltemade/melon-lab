@@ -65,8 +65,8 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
       Participants will be obliged to create a fund and send Ether to the
       relevant Olympiad smart-contract, which will then be matched with an
       equivalent amount of MLN tokens plus an additional incentive amount. It is
-      then up to the participant to manage the fund for a period of one month
-      with a view to maximizing capital appreciation.{' '}
+      then up to the participant to manage the fund for a period of 2 weeks with
+      a view to maximizing capital appreciation.{' '}
     </p>{' '}
     <p>
       The Melon Protocol intends to present a decentralized, public,
