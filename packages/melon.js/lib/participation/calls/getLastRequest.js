@@ -2,7 +2,7 @@
 import BigNumber from 'bignumber.js';
 
 import getFundContract from '../../fund/contracts/getFundContract';
-import getPriceFeedContract from '../../pricefeeds/contracts/getPriceFeedContract';
+import getCanonicalPriceFeedContract from '../../pricefeeds/contracts/getCanonicalPriceFeedContract';
 import toDate from '../../utils/generic/toDate';
 
 import type { Address } from '../../assets/schemas/Address';
@@ -31,8 +31,8 @@ const getLastRequest = async (
   { fundAddress },
 ): Promise<Request> => {
   const fundContract = await getFundContract(environment, fundAddress);
-  const priceFeedContract = await getPriceFeedContract(environment);
-
+  const priceFeedContract = await getCanonicalPriceFeedContract(environment);
+  
   const interval = (await priceFeedContract.instance.getInterval.call()).toNumber();
 
   const totalSupply = await fundContract.instance.totalSupply.call();
