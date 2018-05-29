@@ -20,7 +20,7 @@ const fetchOrderbook = async (baseTokenAddress, quoteTokenAddress, network) => {
     quoteTokenAddress,
   };
 
-  debug('Fetching orderbook', params);
+  debug('Fetching orderbook', params, endpoint);
 
   const data = await axios.get(endpoint, {
     params,
