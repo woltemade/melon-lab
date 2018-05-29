@@ -54,9 +54,7 @@ const getAggregatedObservable = (
     .distinctUntilChanged();
 
   // Concat and sort orders across all order books.
-  return orderbooks$.map(
-    R.compose(sortOrderBooks, R.compose(R.identity, R.tap(console.log))),
-  );
+  return orderbooks$.map(R.compose(sortOrderBooks, concatOrderbooks));
 };
 
 export default getAggregatedObservable;
