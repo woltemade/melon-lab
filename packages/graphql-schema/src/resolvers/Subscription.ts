@@ -13,6 +13,7 @@ import * as R from 'ramda';
 import * as Rx from 'rxjs';
 import { Context } from '../index';
 import withUnsubscribe from '../utils/withUnsubscribe';
+const debug = require('debug')('graphql-schema:subscription');
 
 const getPricePromises = (environment, symbols) =>
   symbols.map(symbol =>
@@ -83,6 +84,10 @@ export const orderbook = {
     const config = await getConfig(environment);
     const baseTokenAddress = getAddress(config, baseTokenSymbol);
     const quoteTokenAddress = getAddress(config, quoteTokenSymbol);
+    debug('Processed symbols.', {
+      baseTokenSymbol,
+      quoteTokenSymbol,
+    });
     const orderbook$ = getAggregatedObservable(
       baseTokenAddress,
       quoteTokenAddress,

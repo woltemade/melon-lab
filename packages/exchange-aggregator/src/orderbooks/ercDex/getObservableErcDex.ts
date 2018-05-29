@@ -63,11 +63,6 @@ const getObservableErcDexNotifications = (
 };
 
 const getObservableErcDex = (baseTokenAddress, quoteTokenAddress, network) => {
-  debug('Processed symbols.', {
-    baseTokenAddress,
-    quoteTokenAddress,
-  });
-
   const format = formatRelayerOrderbook('ERC_DEX');
 
   const fetch$ = Rx.Observable.defer(() =>

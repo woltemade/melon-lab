@@ -84,11 +84,6 @@ const getObservableRadarRelay = (
   quoteTokenAddress,
   network,
 ) => {
-  debug('Connecting.', {
-    baseTokenAddress,
-    quoteTokenAddress,
-  });
-
   const open$ = new Rx.Subject();
   const url =
     network === 'KOVAN'
