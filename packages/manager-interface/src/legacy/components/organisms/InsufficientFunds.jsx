@@ -1,6 +1,6 @@
-import React from "react";
-import { Card, Button } from "semantic-ui-react";
-import { networks } from "@melonproject/melon.js";
+import React from 'react';
+import { Card, Button } from 'semantic-ui-react';
+import { networks } from '@melonproject/melon.js';
 
 const InsufficientFunds = ({
   mlnBalance,
@@ -17,14 +17,14 @@ const InsufficientFunds = ({
         {network === networks.KOVAN ? (
           <div>
             <p>
-              {" "}
+              {' '}
               You don&#39;t have enough Kovan test melon tokens (MLN-T) or Kovan
               test ether tokens (ETH-T). Current balances: {
                 mlnBalance
               } MLN-T, {ethBalance} ETH-T
             </p>
             <p className="App-intro">
-              To get started, head to our{" "}
+              To get started, head to our{' '}
               <strong>
                 <a
                   href={`https://faucet.melon.network/${walletAddress}`}
@@ -33,7 +33,7 @@ const InsufficientFunds = ({
                 >
                   faucet
                 </a>
-              </strong>{" "}
+              </strong>{' '}
               to receive Kovan Ether and Kovan Melon
             </p>
             <p className="App-intro">
@@ -43,7 +43,7 @@ const InsufficientFunds = ({
             <Button
               basic
               color="black"
-              style={{ width: "100%" }}
+              style={{ width: '100%' }}
               href={`https://faucet.melon.network/${walletAddress}`}
               rel="noopener noreferrer"
               target="_blank"
@@ -53,13 +53,13 @@ const InsufficientFunds = ({
           </div>
         ) : (
           <div>
-            {" "}
+            {' '}
             <p>
               You don&#39;t have enough melon tokens (MLN) or ether tokens
               (ETH). Current balances: {mlnBalance} MLN, {ethBalance} ETH
-            </p>{" "}
+            </p>{' '}
             <p>
-              Fund your account with the amount of Melons you wish to invest in
+              Fund your wallet with the amount of Melons you wish to invest in
               your fund and some ether to pay for transaction gas on the
               Ethereum network.
             </p>

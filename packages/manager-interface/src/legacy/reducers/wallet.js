@@ -1,5 +1,5 @@
 import { pick, keys } from 'ramda';
-import { types } from '../actions/account';
+import { types } from '../actions/wallet';
 
 export const initialState = {
   hasGenerated: false,

@@ -196,7 +196,7 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
             style={{ width: '100%', padding: 5 }}
             onClick={goToAccount}
           >
-            Manage your account
+            Manage your wallet
           </Button>
         </p>
       </div>

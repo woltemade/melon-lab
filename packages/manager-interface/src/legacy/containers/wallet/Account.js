@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 
-import { actions } from '../../actions/account';
+import { actions } from '../../actions/wallet';
 import { actions as routeActions } from '../../actions/routes';
-import Account from '../../components/pages/account/Account';
+import Account from '../../components/pages/wallet/Account';
 
 const mapStateToProps = state => ({
   currentAddress: state.ethereum.account,

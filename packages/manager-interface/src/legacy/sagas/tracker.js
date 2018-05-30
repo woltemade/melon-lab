@@ -5,7 +5,7 @@ import flatten from 'flat';
 import { types as appTypes } from '../actions/app';
 import { types as routeTypes } from '../actions/routes';
 import { types as fundTypes } from '../actions/fund';
-import { types as accountTypes } from '../actions/account';
+import { types as walletTypes } from '../actions/wallet';
 import { types as administrationTypes } from '../actions/administration';
 import { types as participationTypes } from '../actions/participation';
 import { types as tradeTypes } from '../actions/trade';
@@ -34,9 +34,9 @@ function* route(action) {
 
 const eventActionTypeMap = {
   FundCreated: fundTypes.SETUP_SUCCEEDED,
-  AccountCreated: accountTypes.GENERATE_WALLET_SUCCEEDED,
-  AccountRestored: accountTypes.RESTORE_FROM_MNEMONIC_SUCCEEDED,
-  AccountDeleted: accountTypes.DELETE_WALLET_REQUESTED,
+  WalletCreated: walletTypes.GENERATE_WALLET_SUCCEEDED,
+  WalletRestored: walletTypes.RESTORE_FROM_MNEMONIC_SUCCEEDED,
+  WalletDeleted: walletTypes.DELETE_WALLET_REQUESTED,
   SubscriptionToggled: administrationTypes.TOGGLE_REDEMPTION_SUCCEEDED,
   RedemptionToggled: administrationTypes.TOGGLE_REDEMPTION_SUCCEEDED,
   UnclaimedRewardsConverted:

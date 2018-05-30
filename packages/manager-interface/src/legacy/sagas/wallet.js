@@ -8,7 +8,7 @@ import {
   setEnvironment,
 } from '@melonproject/melon.js';
 import { actions as modalActions, types as modalTypes } from '../actions/modal';
-import { types, actions } from '../actions/account';
+import { types, actions } from '../actions/wallet';
 import {
   actions as ethereumActions,
   types as ethereumTypes,
@@ -117,7 +117,7 @@ function* downloadJSON() {
   }
 
   yield put(modalActions.loading());
-  const privateKey = yield select(state => state.account.privateKey);
+  const privateKey = yield select(state => state.wallet.privateKey);
   const address = yield select(state => state.ethereum.account);
   const wallet = getWallet(privateKey);
   const encryptedWallet = yield call(encryptWallet, wallet, password);
@@ -157,7 +157,7 @@ function* importWallet({ encryptedWalletString }) {
   }
 }
 
-function* account() {
+function* wallet() {
   yield takeLatest(types.RESTORE_FROM_MNEMONIC_REQUESTED, restoreWalletSaga);
   yield takeLatest(types.DELETE_WALLET_REQUESTED, deleteWallet);
   yield takeLatest(types.IMPORT_WALLET_REQUESTED, importWallet);
@@ -165,4 +165,4 @@ function* account() {
   yield takeLatest(routeTypes.WALLET_GENERATE, generateMnemonic);
 }
 
-export default account;
+export default wallet;

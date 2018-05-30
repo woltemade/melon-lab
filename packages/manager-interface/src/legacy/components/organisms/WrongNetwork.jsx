@@ -1,5 +1,5 @@
-import React from "react";
-import { Card } from "semantic-ui-react";
+import React from 'react';
+import { Card } from 'semantic-ui-react';
 
 const WrongNetwork = () => (
   <div>
@@ -9,15 +9,15 @@ const WrongNetwork = () => (
         <br />
         <br />
         <p>
-          {" "}
+          {' '}
           <strong>
-            {" "}
+            {' '}
             In order to interact with the Melon protocol, please switch to Kovan
-            Network in Metamask. The page should load within few seconds.{" "}
+            Network in Metamask. The page should load within few seconds.{' '}
           </strong>
         </p>
         <p className="App-intro">
-          Also make sure to unlock your account by entering your password.
+          Also make sure to unlock your wallet by entering your password.
         </p>
         <br />
       </Card.Content>

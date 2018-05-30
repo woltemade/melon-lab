@@ -13,7 +13,7 @@ const Generate = ({ restore, mnemonic }) => (
         Please write down the following mnemonic and store it in a safe place!
         If you loose your mnemonic you will not be able to access your fund
         again. If someone else gets a copy of this, they can take over your
-        account &amp; fund and steal your price!
+        wallet &amp; fund and steal your price!
       </p>
       <p
         style={{

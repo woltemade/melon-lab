@@ -15,7 +15,7 @@ const MyAccount = ({
   <div>
     <Card centered>
       <Card.Content>
-        <Header as="h2">Your account</Header>
+        <Header as="h2">Your Wallet</Header>
         {currentAddress ? (
           <div>
             <p>
@@ -75,7 +75,7 @@ const MyAccount = ({
               generated your current address,
               <strong>
                 {' '}
-                you will never be able to access your current account again{' '}
+                you will never be able to access your current wallet again{' '}
               </strong>{' '}
               after performing one of the below actions.
             </p>
@@ -126,7 +126,7 @@ const MyAccount = ({
                 style={{ width: '100%' }}
                 onClick={deleteWallet}
               >
-                Delete account
+                Delete wallet
               </Button>
             </p>
           ) : null}
