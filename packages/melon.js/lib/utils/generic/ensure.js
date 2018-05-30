@@ -16,6 +16,7 @@ EnsureError.prototype.constructor = EnsureError;
  */
 const ensure = (condition: boolean, message: string, data: any): void => {
   if (condition !== true) {
+    console.warn('EnsureError', { message, condition, data });
     throw new EnsureError(message, { condition, data });
   }
 };
