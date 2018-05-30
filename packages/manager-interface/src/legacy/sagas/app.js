@@ -11,6 +11,7 @@ import isSameAddress from '../utils/isSameAddress';
 import { isZero } from '../utils/functionalBigNumber';
 
 import { types as browserTypes } from '../actions/browser';
+
 const getOnboardingState = ({ ethereum, app, fund }) => {
   if (!ethereum.isConnected) return onboardingPath.NO_CONNECTION;
   if (ethereum.network !== networks.KOVAN && ethereum.network !== networks.LIVE)

@@ -13,6 +13,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   downloadJSON: () => dispatch(actions.downloadJSON()),
   deleteWallet: () => dispatch(actions.deleteWallet()),
+  gotoSetup: () => dispatch(routeActions.setup()),
   gotoImportJSON: () => dispatch(routeActions.walletImport()),
   gotoAccountGenerate: () => dispatch(routeActions.walletGenerate()),
   gotoAccountRestore: () => dispatch(routeActions.walletRestore()),

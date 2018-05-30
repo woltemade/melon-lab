@@ -9,6 +9,7 @@ const MyAccount = ({
   gotoAccountGenerate,
   gotoAccountRestore,
   gotoImportJSON,
+  gotoSetup,
   downloadJSON,
   networkId,
 }) => (
@@ -66,6 +67,19 @@ const MyAccount = ({
               Download wallet backup JSON
             </Button>
             <br />
+            {!associatedFund ? (
+              <p>
+                <Button
+                  basic
+                  color="green"
+                  style={{ width: '100%', marginBottom: '1em' }}
+                  onClick={gotoSetup}
+                >
+                  Setup your fund
+                </Button>
+              </p>
+            ) : null}
+            <br />
             <p>
               <strong> [IMPORTANT] - Please read carefully</strong>{' '}
             </p>
@@ -85,7 +99,15 @@ const MyAccount = ({
             </p>
             <br />
           </div>
-        ) : null}
+        ) : (
+          <div>
+            <p>
+              Before you can setup your fund, you need to import, restore or
+              create a wallet:
+            </p>
+            <br />
+          </div>
+        )}
 
         <div>
           <p>
@@ -95,7 +117,7 @@ const MyAccount = ({
               style={{ width: '100%' }}
               onClick={gotoAccountGenerate}
             >
-              Create new wallet
+              Create a new wallet
             </Button>
           </p>
           <p>

@@ -45,7 +45,7 @@ export const actions = {
   importWalletSucceeded: wallet => ({
     type: types.IMPORT_WALLET_SUCCEEDED,
     hasGenerated: true,
-    newAddress: wallet.address,
+    address: wallet.address,
     privateKey: wallet.privateKey,
   }),
   encryptWallet: password => ({
@@ -65,7 +65,7 @@ export const actions = {
     type: types.RESTORE_FROM_MNEMONIC_SUCCEEDED,
     hasGenerated: true,
     hasSavedMnemonic: true,
-    newAddress: wallet.address,
+    address: wallet.address,
     privateKey: wallet.privateKey,
   }),
   restoreFromMnemonicFailed: reason => ({
@@ -80,7 +80,7 @@ export const actions = {
     hasGenerated: false,
     hasSavedMnemonic: false,
     hasEncrypted: false,
-    newAddress: '',
+    address: '',
     mnemonic: '',
     loading: false,
     privateKey: '',

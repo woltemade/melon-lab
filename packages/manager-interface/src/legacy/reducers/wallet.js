@@ -5,7 +5,7 @@ export const initialState = {
   hasGenerated: false,
   hasSavedMnemonic: false,
   hasEncrypted: false,
-  newAddress: '',
+  address: '',
   mnemonic: '',
   loading: false,
   privateKey: '',

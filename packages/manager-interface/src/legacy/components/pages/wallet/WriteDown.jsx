@@ -1,14 +1,14 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
 
-const WriteDown = ({ mnemonic, newAddress, iSaved }) => (
+const WriteDown = ({ mnemonic, address, iSaved }) => (
   <div>
     <p>Generated Mnemonic:</p>
     <p>
       <strong id="mnemonic">{mnemonic}</strong>
     </p>
     <p>
-      Associated Public Address: <strong>{newAddress}</strong>
+      Associated Public Address: <strong>{address}</strong>
     </p>
     <h5>
       It is of utmost importance that you write down your mnemonic phrase

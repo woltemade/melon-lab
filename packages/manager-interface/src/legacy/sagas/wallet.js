@@ -70,6 +70,7 @@ function* generateMnemonic() {
 function* restoreWalletSaga({ mnemonic }) {
   try {
     const wallet = yield importWalletFromMnemonic(mnemonic);
+    setEnvironment({ account: wallet });
     yield put(actions.restoreFromMnemonicSucceeded(wallet));
     yield put(routeActions.wallet());
     yield put(ethereumActions.accountChanged(`${wallet.address}`));
@@ -146,6 +147,7 @@ function* importWallet({ encryptedWalletString }) {
       encryptedWalletString,
       password,
     );
+    setEnvironment({ account: decryptedWallet });
     yield put(actions.importWalletSucceeded(decryptedWallet));
     yield put(ethereumActions.accountChanged(`${decryptedWallet.address}`));
     yield put(routeActions.wallet());
