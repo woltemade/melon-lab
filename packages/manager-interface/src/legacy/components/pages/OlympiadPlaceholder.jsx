@@ -126,8 +126,8 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
     </p>
     <h4>Step 8 </h4>{' '}
     <p>
-      Congratulations. You made it here. Now its time to prove your asset
-      management skill. You have 2 weeks to manage your fund and grow your
+      Congratulations. You made it here. Now it is time to prove your asset
+      management skills. You have 2 weeks to manage your fund and grow your
       capital.
     </p>
     <h4>Step 9  </h4>{' '}
@@ -152,8 +152,7 @@ const OlympiadPlaceholder = ({ goToGenerateAccount, goToAccount, address }) => (
           a fund when the competition starts (referred to as manager address).
           It will be the wallet you will use to contribute ether to the Olympiad
           contract. It is also the wallet to which your compensation will be
-          transferred to at the end of the period. Please make sure you
-          carefully read the warnings below.
+          transferred to at the end of the period.
         </p>
         <p>
           The first step to perform if you wish to participate is to generate

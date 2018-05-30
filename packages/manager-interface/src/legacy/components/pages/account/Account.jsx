@@ -25,9 +25,7 @@ const MyAccount = ({
               </a>:
               <strong>
                 <a
-                  href={`https://${
-                    networkId === '42' ? 'kovan.' : ''
-                  }etherscan.io/address/${currentAddress}`}
+                  href={`https://etherscan.io/address/${currentAddress}`}
                   target="_blank"
                 >
                   {' '}
@@ -40,9 +38,7 @@ const MyAccount = ({
                 Associated fund address:{' '}
                 <strong>
                   <a
-                    href={`https://${
-                      networkId === '42' ? 'kovan.' : ''
-                    }etherscan.io/address/${associatedFund}`}
+                    href={`https://etherscan.io/address/${associatedFund}`}
                     target="_blank"
                   >
                     {associatedFund}
