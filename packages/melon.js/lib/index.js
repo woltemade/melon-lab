@@ -142,7 +142,6 @@ import hasRecentPrice from './pricefeeds/calls/hasRecentPrice';
 
 // ./lib/pricefeeds/contracts
 import getCanonicalPriceFeedContract from './pricefeeds/contracts/getCanonicalPriceFeedContract';
-import getPriceFeedContract from './pricefeeds/contracts/getPriceFeedContract';
 import getStakingPriceFeedContract from './pricefeeds/contracts/getStakingPriceFeedContract';
 
 // ./lib/pricefeeds/events
@@ -330,7 +329,6 @@ export {
   getUpdateInterval,
   hasRecentPrice,
   getCanonicalPriceFeedContract,
-  getPriceFeedContract,
   getStakingPriceFeedContract,
   awaitDataFeedUpdates,
   collectAndUpdate,
