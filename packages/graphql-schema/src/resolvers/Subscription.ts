@@ -81,7 +81,7 @@ export const orderbook = {
     const { pubsub } = context;
     const { baseTokenSymbol, quoteTokenSymbol, exchanges, network } = args;
     const environment = await getParityProvider();
-    const config = await getConfig(environment);
+    const config = await getConfig(environment, network);
     const baseTokenAddress = getAddress(config, baseTokenSymbol);
     const quoteTokenAddress = getAddress(config, quoteTokenSymbol);
     debug('Processed symbols.', {
