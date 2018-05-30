@@ -54,17 +54,11 @@ const getConfig = async (environment, optionalNetwork): Promise<Config> => {
     : await getNetwork(environment);
   config = {
     complianceAddress: addressBook[network].OnlyManager,
-    exchangeAdapterAddress: addressBook[network].SimpleAdapter,
-    exchangeAddress:
-      network === 'kovan'
-        ? addressBook[network].MatchingMarket
-        : exchangeInfo[network][0].address,
     matchingMarketAddress: addressBook[network].MatchingMarket,
-    matchingMarketAdapter: addressBook[network].matchingMarketAdapter,
+    matchingMarketAdapter: addressBook[network].MatchingMarketAdapter,
     zeroExV1Address: addressBook[network].ZeroExExchange,
     zeroExV1AdapterAddress: addressBook[network].ZeroExV1Adapter,
     canonicalPriceFeedAddress: addressBook[network].CanonicalPriceFeed,
-    stakingPriceFeedAddress: addressBook[network].StakingPriceFeed,
     rankingAddress: addressBook[network].FundRanking,
     riskManagementAddress: addressBook[network].RMMakeOrders,
     versionAddress: addressBook[network].Version,
