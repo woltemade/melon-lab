@@ -46,10 +46,12 @@ let config: Config;
 /**
  * Get config from deployed version contract
  */
-const getConfig = async (environment): Promise<Config> => {
+const getConfig = async (environment, optionalNetwork): Promise<Config> => {
   if (config) return config;
 
-  const network = await getNetwork(environment);
+  const network = optionalNetwork
+    ? optionalNetwork.toLowerCase()
+    : await getNetwork(environment);
   config = {
     complianceAddress: addressBook[network].OnlyManager,
     exchangeAdapterAddress: addressBook[network].SimpleAdapter,
@@ -74,7 +76,7 @@ const getConfig = async (environment): Promise<Config> => {
   config.assets = await getWhiteListedAssets(environment, network);
   config.nativeAssetSymbol = await getNativeAssetSymbol(environment);
   config.quoteAssetSymbol = await getQuoteAssetSymbol(environment);
-
+  console.log(config);
   return config;
 };
 

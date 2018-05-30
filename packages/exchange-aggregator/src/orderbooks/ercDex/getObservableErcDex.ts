@@ -2,7 +2,6 @@ import axios from 'axios';
 import * as R from 'ramda';
 import * as Rx from 'rxjs';
 import formatRelayerOrderbook from '../../formatRelayerOrderbook';
-import getTokenAddress from '../../getTokenAddress';
 
 // Isomorphic websocket implementation. Falls back to the standard browser
 // protocol on the client.
