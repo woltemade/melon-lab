@@ -1,16 +1,11 @@
-import React from "react";
-import Link from "redux-first-router-link";
-import { Card } from "semantic-ui-react";
+import React from 'react';
+import Link from 'redux-first-router-link';
+import { Card } from 'semantic-ui-react';
 
-const GetStarted = ({
-  usersFund,
-  getFundLinkAction,
-  setupLinkAction,
-  networkId,
-}) => (
+const GetStarted = ({ linkAction, linkCaption, networkId }) => (
   <Card centered>
     <Card.Content>
-      {networkId === "1" ? (
+      {networkId === '1' ? (
         <div>
           <h2> You are accessing Melon on the Ethereum main network.</h2>
           <p>
@@ -28,7 +23,7 @@ const GetStarted = ({
             <b>Melon</b>, [méllō], μέλλω; Greek for <b>"destined to be"</b>:
           </p>
           <p>
-            {" "}
+            {' '}
             Blockchain software that seeks to enable participants to set up,
             manage and invest in technology regulated digital investment funds.
           </p>
@@ -39,13 +34,9 @@ const GetStarted = ({
           </p>
         </div>
       )}
-      <div style={{ textAlign: "left", marginTop: 15 }}>
+      <div style={{ textAlign: 'left', marginTop: 15 }}>
         <h3>
-          {usersFund ? (
-            <Link to={getFundLinkAction(usersFund)}>Go to your fund</Link>
-          ) : (
-            <Link to={setupLinkAction}>Get Started</Link>
-          )}
+          <Link to={linkAction}>{linkCaption}</Link>
         </h3>
       </div>
     </Card.Content>

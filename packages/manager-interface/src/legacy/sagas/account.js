@@ -71,7 +71,7 @@ function* restoreWalletSaga({ mnemonic }) {
   try {
     const wallet = yield importWalletFromMnemonic(mnemonic);
     yield put(actions.restoreFromMnemonicSucceeded(wallet));
-    yield put(routeActions.account());
+    yield put(routeActions.wallet());
     yield put(ethereumActions.accountChanged(`${wallet.address}`));
   } catch (err) {
     console.error(err);
@@ -148,7 +148,7 @@ function* importWallet({ encryptedWalletString }) {
     );
     yield put(actions.importWalletSucceeded(decryptedWallet));
     yield put(ethereumActions.accountChanged(`${decryptedWallet.address}`));
-    yield put(routeActions.account());
+    yield put(routeActions.wallet());
     yield put(modalActions.close());
   } catch (e) {
     console.error(e);
@@ -162,7 +162,7 @@ function* account() {
   yield takeLatest(types.DELETE_WALLET_REQUESTED, deleteWallet);
   yield takeLatest(types.IMPORT_WALLET_REQUESTED, importWallet);
   yield takeLatest(types.DOWNLOAD_JSON, downloadJSON);
-  yield takeLatest(routeTypes.ACCOUNT_GENERATE, generateMnemonic);
+  yield takeLatest(routeTypes.WALLET_GENERATE, generateMnemonic);
 }
 
 export default account;

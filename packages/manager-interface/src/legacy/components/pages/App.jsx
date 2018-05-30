@@ -35,12 +35,12 @@ const mapOnboardingStateToMainContainer = {
 const routeContainerMap = {
   [types.ROOT]: RankingContainer,
   [types.RANKING]: RankingContainer,
-  [types.ACCOUNT_GENERATE]: AccountGenerate,
-  [types.ACCOUNT_RESTORE]: RestoreContainer,
-  [types.ACCOUNT_CREATE]: AccountContainer,
-  [types.ACCOUNT_IMPORT]: ImportContainer,
+  [types.WALLET_GENERATE]: AccountGenerate,
+  [types.WALLET_RESTORE]: RestoreContainer,
+  [types.WALLET_CREATE]: AccountContainer,
+  [types.WALLET_IMPORT]: ImportContainer,
   [types.FUND]: FundContainer,
-  [types.ACCOUNT]: AccountContainer,
+  [types.WALLET]: AccountContainer,
   [types.COMPETITION]: CompetitionRegistrationContainer,
 };
 

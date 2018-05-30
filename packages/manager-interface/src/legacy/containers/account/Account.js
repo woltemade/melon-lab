@@ -13,9 +13,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   downloadJSON: () => dispatch(actions.downloadJSON()),
   deleteWallet: () => dispatch(actions.deleteWallet()),
-  gotoImportJSON: () => dispatch(routeActions.accountImport()),
-  gotoAccountGenerate: () => dispatch(routeActions.accountGenerate()),
-  gotoAccountRestore: () => dispatch(routeActions.accountRestore()),
+  gotoImportJSON: () => dispatch(routeActions.walletImport()),
+  gotoAccountGenerate: () => dispatch(routeActions.walletGenerate()),
+  gotoAccountRestore: () => dispatch(routeActions.walletRestore()),
 });
 
 const AccountRedux = connect(mapStateToProps, mapDispatchToProps)(Account);

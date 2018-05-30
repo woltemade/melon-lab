@@ -110,7 +110,6 @@ const onlyMelonActions = action =>
   action.type !== types.SET_READY_STATE && action.type.includes('melon');
 
 function* appSaga() {
-  yield call(redirectSaga);
   yield takeLatest(routeTypes.ROOT, redirectSaga);
   yield takeLatest(onlyMelonActions, deriveReadyState);
   yield takeLatest(types.SCROLL_TO, scrollTo);

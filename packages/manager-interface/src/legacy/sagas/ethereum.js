@@ -74,7 +74,7 @@ function* init() {
     };
 
     pollBlock();
-    // const blockInterval = setInterval(pollBlock, BLOCK_POLLING_INTERVAL);
+    const blockInterval = setInterval(pollBlock, BLOCK_POLLING_INTERVAL);
 
     return () => {
       clearInterval(blockInterval);

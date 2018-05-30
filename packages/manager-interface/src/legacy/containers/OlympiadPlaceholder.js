@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  goToGenerateAccount: () => dispatch(routeActions.accountGenerate()),
+  goToGenerateAccount: () => dispatch(routeActions.walletGenerate()),
   goToAccount: () => dispatch(routeActions.account()),
 });
 

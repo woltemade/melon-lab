@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  restore: () => dispatch(routeActions.accountRestore({ onboarding: true })),
+  restore: () => dispatch(routeActions.walletRestore({ onboarding: true })),
 });
 
 const GenerateRedux = connect(mapStateToProps, mapDispatchToProps)(Generate);
