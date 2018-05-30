@@ -5,6 +5,7 @@ import getVersionContract from '../../version/contracts/getVersionContract';
 import findEventInLog from '../../utils/ethereum/findEventInLog';
 import sendTransaction from '../../utils/parity/sendTransaction';
 import toReadable from '../../assets/utils/toReadable';
+import ensure from '../../utils/generic/ensure';
 
 /**
  * Calling this function will register the sender on the competition contract and will allocate to his fund an amount of MLN in proportion of his buyInValue in ETH.
@@ -14,8 +15,10 @@ const registerForCompetition = async (
   { fundAddress, signature, buyInValue },
 ): Promise<any> => {
   const olympiadContract = await getOlympiadContract(environment);
-
-  const isCompetitionActive = await olympiadContract.instance.isCompetitionActive.call();
+  const isCompetitionActive = await olympiadContract.instance.isCompetitionActive.call(
+    {},
+    [],
+  );
   ensure(isCompetitionActive, 'Olympiad is inactive.');
 
   const termsAndConditionsAreSigned = await olympiadContract.instance.termsAndConditionsAreSigned.call(
