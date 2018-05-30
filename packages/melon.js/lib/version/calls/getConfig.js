@@ -63,6 +63,7 @@ const getConfig = async (environment, optionalNetwork): Promise<Config> => {
     riskManagementAddress: addressBook[network].RMMakeOrders,
     versionAddress: addressBook[network].Version,
     governanceAddress: addressBook[network].Governance,
+    olympiadAddress: addressBook[network].Competition,
   };
 
   // HACK: Define config first so that inside these next async functions,
