@@ -74,6 +74,7 @@ const getConfig = async (environment): Promise<Config> => {
   config.assets = await getWhiteListedAssets(environment, network);
   config.nativeAssetSymbol = await getNativeAssetSymbol(environment);
   config.quoteAssetSymbol = await getQuoteAssetSymbol(environment);
+  config.melonAssetSymbol = network === 'kovan' ? 'MLN-T' : 'MLN';
 
   return config;
 };

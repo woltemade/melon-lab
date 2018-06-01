@@ -9,13 +9,14 @@ const MyAccount = ({
   gotoAccountGenerate,
   gotoAccountRestore,
   gotoImportJSON,
+  gotoSetup,
   downloadJSON,
   networkId,
 }) => (
   <div>
     <Card centered>
       <Card.Content>
-        <Header as="h2">Your account</Header>
+        <Header as="h2">Your Wallet</Header>
         {currentAddress ? (
           <div>
             <p>
@@ -70,6 +71,19 @@ const MyAccount = ({
               Download wallet backup JSON
             </Button>
             <br />
+            {!associatedFund ? (
+              <p>
+                <Button
+                  basic
+                  color="green"
+                  style={{ width: '100%', marginBottom: '1em' }}
+                  onClick={gotoSetup}
+                >
+                  Setup your fund
+                </Button>
+              </p>
+            ) : null}
+            <br />
             <p>
               <strong> [IMPORTANT] - Please read carefully</strong>{' '}
             </p>
@@ -79,7 +93,7 @@ const MyAccount = ({
               generated your current address,
               <strong>
                 {' '}
-                you will never be able to access your current account again{' '}
+                you will never be able to access your current wallet again{' '}
               </strong>{' '}
               after performing one of the below actions.
             </p>
@@ -89,7 +103,15 @@ const MyAccount = ({
             </p>
             <br />
           </div>
-        ) : null}
+        ) : (
+          <div>
+            <p>
+              Before you can setup your fund, you need to import, restore or
+              create a wallet:
+            </p>
+            <br />
+          </div>
+        )}
 
         <div>
           <p>
@@ -99,7 +121,7 @@ const MyAccount = ({
               style={{ width: '100%' }}
               onClick={gotoAccountGenerate}
             >
-              Create new wallet
+              Create a new wallet
             </Button>
           </p>
           <p>
@@ -130,7 +152,7 @@ const MyAccount = ({
                 style={{ width: '100%' }}
                 onClick={deleteWallet}
               >
-                Delete account
+                Delete wallet
               </Button>
             </p>
           ) : null}

@@ -1,7 +1,7 @@
-import React from "react";
-import { Card } from "semantic-ui-react";
+import React from 'react';
+import { Card } from 'semantic-ui-react';
 
-const LockedAccount = () => (
+const LockedWallet = () => (
   <div>
     <Card centered>
       <Card.Content>
@@ -10,12 +10,12 @@ const LockedAccount = () => (
         <br />
         <p>
           You are almost ready to use Melon! It seems like you have Metamask set
-          on the Kovan Network: that&#39;s wonderful!{" "}
+          on the Kovan Network: that&#39;s wonderful!{' '}
         </p>
         <p>
           <strong>
-            Last thing you need to do is unlock your account by entering your
-            password.{" "}
+            Last thing you need to do is unlock your wallet by entering your
+            password.{' '}
           </strong>
         </p>
 
@@ -25,4 +25,4 @@ const LockedAccount = () => (
   </div>
 );
 
-export default LockedAccount;
+export default LockedWallet;

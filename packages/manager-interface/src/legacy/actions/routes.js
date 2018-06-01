@@ -3,11 +3,11 @@ export const types = {
   ROOT: 'ROOT:routes:melon.fund',
   FUND: 'FUND:routes:melon.fund',
   RANKING: 'RANKING:routes:melon.fund',
-  ACCOUNT_GENERATE: 'ACCOUNT_GENERATE:routes:melon.fund',
-  ACCOUNT_RESTORE: 'ACCOUNT_RESTORE:routes:melon.fund',
-  ACCOUNT_CREATE: 'ACCOUNT_CREATE:routes:melon.fund',
-  ACCOUNT_IMPORT: 'ACCOUNT_IMPORT:routes:melon.fund',
-  ACCOUNT: 'ACCOUNT:routes:melon.fund',
+  WALLET_GENERATE: 'WALLET_GENERATE:routes:melon.fund',
+  WALLET_RESTORE: 'WALLET_RESTORE:routes:melon.fund',
+  WALLET_CREATE: 'WALLET_CREATE:routes:melon.fund',
+  WALLET_IMPORT: 'WALLET_IMPORT:routes:melon.fund',
+  WALLET: 'WALLET:routes:melon.fund',
   DONE: 'DONE:routes:melon.fund',
   RESTORE: 'RESTORE:routes:melon.fund',
   COMPETITION: 'COMPETITION:routes:melon.fund',
@@ -17,12 +17,11 @@ export const routeMap = {
   [types.SETUP]: '/setup',
   [types.ROOT]: '/',
   [types.RANKING]: '/ranking',
-  [types.ACCOUNT_GENERATE]: '/account/generate',
-  [types.ACCOUNT_RESTORE]: '/account/restore',
-  [types.ACCOUNT_CREATE]: '/account/create',
-  [types.ACCOUNT_IMPORT]: '/account/import',
-  [types.ACCOUNT]: '/account',
-  [types.DONE]: '/account/done',
+  [types.WALLET_GENERATE]: '/wallet/generate',
+  [types.WALLET_RESTORE]: '/wallet/restore',
+  [types.WALLET_CREATE]: '/wallet/create',
+  [types.WALLET_IMPORT]: '/wallet/import',
+  [types.WALLET]: '/wallet',
   [types.FUND]: '/:address',
   [types.COMPETITION]: '/:address/competition',
 };
@@ -41,17 +40,18 @@ export const actions = {
   setup: () => ({
     type: types.SETUP,
   }),
-  accountGenerate: () => ({
-    type: types.ACCOUNT_GENERATE,
+  walletGenerate: () => ({
+    type: types.WALLET_GENERATE,
   }),
-  accountRestore: () => ({
-    type: types.ACCOUNT_RESTORE,
+  walletRestore: () => ({
+    type: types.WALLET_RESTORE,
   }),
-  accountImport: () => ({
-    type: types.ACCOUNT_IMPORT,
+  walletImport: () => ({
+    type: types.WALLET_IMPORT,
   }),
-  account: () => ({
-    type: types.ACCOUNT,
+  wallet: onboarding => ({
+    type: types.WALLET,
+    query: onboarding ? { onboarding: true } : null,
   }),
   competition: address => ({
     type: types.COMPETITION,

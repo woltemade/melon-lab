@@ -16,7 +16,8 @@
   ],
   "dependencies": {
     "@melonproject/exchange-aggregator": "^0.0.0",
-    "@melonproject/melon.js": "^0.8.1",
+    "@melonproject/melon.js": "^0.8.5",
+
     "debug": "2.6.9",
     "graphql": "^0.13.2",
     "graphql-iso-date": "^3.5.0",

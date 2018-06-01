@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { reduxForm, SubmissionError } from 'redux-form';
 import { importWalletFromMnemonic } from '@melonproject/melon.js';
-import { actions } from '../../actions/account';
-import Restore from '../../components/pages/account/Restore';
+import { actions } from '../../actions/wallet';
+import Restore from '../../components/pages/wallet/Restore';
 
 const mapStateToProps = () => ({});
 

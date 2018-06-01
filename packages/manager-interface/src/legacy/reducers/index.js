@@ -1,30 +1,30 @@
 import { reducer as form } from 'redux-form';
 
-import account from './account';
 import app from './app';
 import ethereum from './ethereum';
 import fund from './fund';
 import holdings from './holdings';
 import modal from './modal';
+import openOrders from './openOrders';
 import orderbook from './orderbook';
 import ranking from './ranking';
 import recentTrades from './recentTrades';
 import tradeHistory from './tradeHistory';
-import openOrders from './openOrders';
+import wallet from './wallet';
 
 const reducerMap = {
-  account,
   app,
   ethereum,
   form,
   fund,
   holdings,
   modal,
+  openOrders,
   orderbook,
   ranking,
   recentTrades,
   tradeHistory,
-  openOrders,
+  wallet,
 };
 
 export default reducerMap;

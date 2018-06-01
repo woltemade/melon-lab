@@ -103,7 +103,7 @@ function* loadFundOnSetup() {
   const usersFund = yield select(state => state.app.usersFund);
 
   if (!hasAccount) {
-    yield put(routeActions.account());
+    yield put(routeActions.wallet());
   } else if (usersFund) {
     yield put(actions.infoRequested(usersFund));
   }

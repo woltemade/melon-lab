@@ -1,24 +1,24 @@
 import { connect } from 'react-redux';
 
 import { actions as routeActions } from '../../actions/routes';
-import { actions as accountActions } from '../../actions/account';
-import Import from '../../components/pages/account/Import';
+import { actions as walletActions } from '../../actions/wallet';
+import Import from '../../components/pages/wallet/Import';
 
 const mapStateToProps = state => ({
-  mnemonic: state.account.mnemonic,
+  mnemonic: state.wallet.mnemonic,
 });
 
 const mapDispatchToProps = dispatch => ({
-  goToAccount: () => dispatch(routeActions.account()),
+  goToAccount: () => dispatch(routeActions.wallet()),
   parseWallet: files => {
     var reader = new FileReader();
 
     reader.onloadend = function() {
-      dispatch(accountActions.importWallet(reader.result));
+      dispatch(walletActions.importWallet(reader.result));
     };
 
     reader.onerror = function(error) {
-      dispatch(accountActions.importWalletFailed(error));
+      dispatch(walletActions.importWalletFailed(error));
     };
 
     reader.readAsBinaryString(files[0]);

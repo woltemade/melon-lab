@@ -3,7 +3,7 @@ import { Image, Container } from 'semantic-ui-react';
 import Link from 'redux-first-router-link';
 import WrongNetwork from '../organisms/WrongNetwork';
 import NoConnection from '../organisms/NoConnection';
-import LockedAccount from '../organisms/LockedAccount';
+import LockedWallet from '../organisms/LockedWallet';
 import InsufficientFunds from '../organisms/InsufficientFunds';
 import TermsAndConditionsContainer from '../../containers/TermsAndConditions';
 import SetupContainer from '../../containers/Setup';
@@ -11,10 +11,10 @@ import ParticipationContainer from '../../containers/Participation';
 import { onboardingPath } from '../../reducers/app';
 import FundContainer from '../../containers/Fund';
 import RankingContainer from '../../containers/Ranking';
-import AccountContainer from '../../containers/account/Account';
-import AccountGenerate from '../../containers/account/Generate';
-import RestoreContainer from '../../containers/account/Restore';
-import ImportContainer from '../../containers/account/Import';
+import WalletContainer from '../../containers/wallet/Account';
+import WalletGenerate from '../../containers/wallet/Generate';
+import RestoreContainer from '../../containers/wallet/Restore';
+import ImportContainer from '../../containers/wallet/Import';
 import CompetitionRegistrationContainer from '../../containers/CompetitionRegistration';
 import OlympiadPlaceholderContainer from '../../containers/OlympiadPlaceholder';
 import Modal from '../../containers/Modal';
@@ -25,7 +25,7 @@ const mapOnboardingStateToMainContainer = {
   [onboardingPath.NO_PROVIDER]: NoConnection,
   [onboardingPath.NO_CONNECTION]: NoConnection,
   [onboardingPath.WRONG_NETWORK]: WrongNetwork,
-  [onboardingPath.LOCKED_ACCOUNT]: LockedAccount,
+  [onboardingPath.LOCKED_ACCOUNT]: LockedWallet,
   [onboardingPath.INSUFFICIENT_FUNDS]: InsufficientFunds,
   [onboardingPath.NOT_SIGNED]: TermsAndConditionsContainer,
   [onboardingPath.NO_FUND_CREATED]: SetupContainer,
@@ -35,12 +35,12 @@ const mapOnboardingStateToMainContainer = {
 const routeContainerMap = {
   [types.ROOT]: RankingContainer,
   [types.RANKING]: RankingContainer,
-  [types.ACCOUNT_GENERATE]: AccountGenerate,
-  [types.ACCOUNT_RESTORE]: RestoreContainer,
-  [types.ACCOUNT_CREATE]: AccountContainer,
-  [types.ACCOUNT_IMPORT]: ImportContainer,
+  [types.WALLET_GENERATE]: WalletGenerate,
+  [types.WALLET_RESTORE]: RestoreContainer,
+  [types.WALLET_CREATE]: WalletContainer,
+  [types.WALLET_IMPORT]: ImportContainer,
   [types.FUND]: FundContainer,
-  [types.ACCOUNT]: AccountContainer,
+  [types.WALLET]: WalletContainer,
   [types.COMPETITION]: CompetitionRegistrationContainer,
 };
 

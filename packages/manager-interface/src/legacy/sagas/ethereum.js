@@ -90,7 +90,7 @@ function* init() {
     };
 
     pollBlock();
-    // const blockInterval = setInterval(pollBlock, BLOCK_POLLING_INTERVAL);
+    const blockInterval = setInterval(pollBlock, BLOCK_POLLING_INTERVAL);
 
     return () => {
       clearInterval(blockInterval);
@@ -99,13 +99,12 @@ function* init() {
 
   while (true) {
     const data = yield take(blockChannel);
-
     if (data.onBlock) {
       yield put(
         ethereumActions.newBlock({
           ...data.onBlock,
-          mlnBalance: data.onBlock.quoteBalance,
-          ethBalance: data.onBlock.nativeBalance,
+          mlnBalance: data.onBlock.melonBalance,
+          ethBalance: data.onBlock.etherBalance,
         }),
       );
     } else if (data.blockOverdue) {

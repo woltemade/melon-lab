@@ -11,6 +11,7 @@ import isSameAddress from '../utils/isSameAddress';
 import { isZero } from '../utils/functionalBigNumber';
 
 import { types as browserTypes } from '../actions/browser';
+
 const getOnboardingState = ({ ethereum, app, fund }) => {
   if (!ethereum.isConnected) return onboardingPath.NO_CONNECTION;
   if (ethereum.network !== networks.KOVAN && ethereum.network !== networks.LIVE)
@@ -110,7 +111,6 @@ const onlyMelonActions = action =>
   action.type !== types.SET_READY_STATE && action.type.includes('melon');
 
 function* appSaga() {
-  yield call(redirectSaga);
   yield takeLatest(routeTypes.ROOT, redirectSaga);
   yield takeLatest(onlyMelonActions, deriveReadyState);
   yield takeLatest(types.SCROLL_TO, scrollTo);

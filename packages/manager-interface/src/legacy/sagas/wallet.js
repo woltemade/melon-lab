@@ -8,7 +8,7 @@ import {
   setEnvironment,
 } from '@melonproject/melon.js';
 import { actions as modalActions, types as modalTypes } from '../actions/modal';
-import { types, actions } from '../actions/account';
+import { types, actions } from '../actions/wallet';
 import {
   actions as ethereumActions,
   types as ethereumTypes,
@@ -70,8 +70,9 @@ function* generateMnemonic() {
 function* restoreWalletSaga({ mnemonic }) {
   try {
     const wallet = yield importWalletFromMnemonic(mnemonic);
+    setEnvironment({ account: wallet });
     yield put(actions.restoreFromMnemonicSucceeded(wallet));
-    yield put(routeActions.account());
+    yield put(routeActions.wallet());
     yield put(ethereumActions.accountChanged(`${wallet.address}`));
   } catch (err) {
     console.error(err);
@@ -117,7 +118,7 @@ function* downloadJSON() {
   }
 
   yield put(modalActions.loading());
-  const privateKey = yield select(state => state.account.privateKey);
+  const privateKey = yield select(state => state.wallet.privateKey);
   const address = yield select(state => state.ethereum.account);
   const wallet = getWallet(privateKey);
   const encryptedWallet = yield call(encryptWallet, wallet, password);
@@ -146,9 +147,10 @@ function* importWallet({ encryptedWalletString }) {
       encryptedWalletString,
       password,
     );
+    setEnvironment({ account: decryptedWallet });
     yield put(actions.importWalletSucceeded(decryptedWallet));
     yield put(ethereumActions.accountChanged(`${decryptedWallet.address}`));
-    yield put(routeActions.account());
+    yield put(routeActions.wallet());
     yield put(modalActions.close());
   } catch (e) {
     console.error(e);
@@ -157,12 +159,12 @@ function* importWallet({ encryptedWalletString }) {
   }
 }
 
-function* account() {
+function* wallet() {
   yield takeLatest(types.RESTORE_FROM_MNEMONIC_REQUESTED, restoreWalletSaga);
   yield takeLatest(types.DELETE_WALLET_REQUESTED, deleteWallet);
   yield takeLatest(types.IMPORT_WALLET_REQUESTED, importWallet);
   yield takeLatest(types.DOWNLOAD_JSON, downloadJSON);
-  yield takeLatest(routeTypes.ACCOUNT_GENERATE, generateMnemonic);
+  yield takeLatest(routeTypes.WALLET_GENERATE, generateMnemonic);
 }
 
-export default account;
+export default wallet;

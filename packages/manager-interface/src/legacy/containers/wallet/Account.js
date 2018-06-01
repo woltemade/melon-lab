@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 
-import { actions } from '../../actions/account';
+import { actions } from '../../actions/wallet';
 import { actions as routeActions } from '../../actions/routes';
-import Account from '../../components/pages/account/Account';
+import Account from '../../components/pages/wallet/Account';
 
 const mapStateToProps = state => ({
   currentAddress: state.ethereum.account,
@@ -13,9 +13,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   downloadJSON: () => dispatch(actions.downloadJSON()),
   deleteWallet: () => dispatch(actions.deleteWallet()),
-  gotoImportJSON: () => dispatch(routeActions.accountImport()),
-  gotoAccountGenerate: () => dispatch(routeActions.accountGenerate()),
-  gotoAccountRestore: () => dispatch(routeActions.accountRestore()),
+  gotoSetup: () => dispatch(routeActions.setup()),
+  gotoImportJSON: () => dispatch(routeActions.walletImport()),
+  gotoAccountGenerate: () => dispatch(routeActions.walletGenerate()),
+  gotoAccountRestore: () => dispatch(routeActions.walletRestore()),
 });
 
 const AccountRedux = connect(mapStateToProps, mapDispatchToProps)(Account);
