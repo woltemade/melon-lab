@@ -41,22 +41,6 @@ function* init() {
   const networkId = yield apply(api, api.net.version);
 
   yield put(ethereumActions.hasConnected(networkId));
-  if (providerType !== providers.INJECTED) {
-    const wallet = localStorage.getItem('wallet:melon.fund');
-
-    if (wallet) {
-      const account = JSON.parse(wallet);
-      const address = utils.getAddress(account.address);
-      setEnvironment({ account: { address } });
-      yield put(ethereumActions.accountChanged(address));
-    } else {
-      yield put(ethereumActions.accountChanged(''));
-    }
-  } else {
-    const address = yield apply(api, api.parity.defaultAccount);
-    setEnvironment({ account: { address } });
-    yield put(ethereumActions.accountChanged(address));
-  }
 
   if (fund.address !== '' && fund.name === '-') {
     yield put(fundActions.infoRequested(fund.address));

@@ -12,7 +12,7 @@
     "build:app": "yarn build:app:main && yarn build:app:renderer",
     "build:base": "next build src",
     "build:web": "cross-env NODE_ENV=production yarn build:base",
-    "clean": "rimraf coverage export dist",
+    "clean": "rimraf coverage export dist node_modules/.cache",
     "dev": "cross-env NODE_ENV=development next src -p 3000",
     "export:app": "cross-env NODE_ENV=production ELECTRON=true yarn export:base -o build/app/export",
     "export:base": "next export src",
