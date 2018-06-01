@@ -77,12 +77,14 @@ const setupFund = async (
     signature.r,
     signature.s,
   ];
+
   const receipt = await sendTransaction(
     versionContract,
     'setupFund',
     params,
     environment,
   );
+
   const fundAddedMessage = findEventInLog(
     'FundUpdated',
     receipt,

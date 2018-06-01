@@ -12,6 +12,11 @@ const findEventInLog = (
   receipt: Object,
   message: string = 'No transaction logs found in receipt',
 ): any => {
+  ensure(!receipt.error, receipt.error, {
+    nameOrIndex,
+    receipt,
+  });
+
   ensure(
     !!(receipt && receipt.logs && receipt.logs.length),
     'Transaction has no logs at all.',

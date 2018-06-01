@@ -2,11 +2,13 @@ import { takeLatest, call, put, take, select } from 'redux-saga/effects';
 import slugify from 'slugify';
 
 import {
+  getEnvironment,
+  getWallet,
   setupFund,
   signTermsAndConditions,
   signCompetitionTermsAndConditions,
 } from '@melonproject/melon.js';
-import { actions as modalActions } from '../actions/modal';
+import { actions as modalActions, types as modalTypes } from '../actions/modal';
 
 import { types, actions } from '../actions/fund';
 import { actions as appActions, types as appTypes } from '../actions/app';
@@ -21,35 +23,56 @@ import {
 import signer from './signer';
 
 function* sign() {
-  function* transaction(environment) {
+  try {
+    yield put(modalActions.loading());
+    yield put(
+      modalActions.confirm(
+        `Please confirm that you read and understood the terms and conditions.`,
+      ),
+    );
+    const action = yield take([modalTypes.CONFIRMED, modalTypes.CANCEL]);
+    if (action.type === modalTypes.CANCEL) return false;
+    yield put(modalActions.loading());
+    const privateKey = yield select(state => state.wallet.privateKey);
+    const environment = getEnvironment();
+    environment.account = getWallet(privateKey);
     const signature = yield call(signTermsAndConditions, environment);
     yield put(actions.signSucceeded(signature));
     yield put(modalActions.close());
+  } catch (err) {
+    yield put(modalActions.error(err.message));
+    yield put(actions.signFailed(signature));
+    console.error(err);
+    console.log(JSON.stringify(err, null, 4));
   }
-  yield call(
-    signer,
-    `Please confirm that you read and understood the terms and conditions.`,
-    transaction,
-    actions.signFailed,
-  );
 }
 
 function* signCompetition() {
-  function* transaction(environment) {
+  try {
+    yield put(modalActions.loading());
+    yield put(
+      modalActions.confirm(
+        `Please confirm that you read and understood the terms and conditions.`,
+      ),
+    );
+    const action = yield take([modalTypes.CONFIRMED, modalTypes.CANCEL]);
+    if (action.type === modalTypes.CANCEL) return false;
+    yield put(modalActions.loading());
+    const privateKey = yield select(state => state.wallet.privateKey);
+    const environment = getEnvironment();
+    environment.account = getWallet(privateKey);
     const competitionSignature = yield call(
       signCompetitionTermsAndConditions,
       environment,
     );
     yield put(actions.signCompetitionSucceeded(competitionSignature));
     yield put(modalActions.close());
+  } catch (err) {
+    yield put(modalActions.error(err.message));
+    yield put(actions.signCompetitionFailed(signature));
+    console.error(err);
+    console.log(JSON.stringify(err, null, 4));
   }
-
-  yield call(
-    signer,
-    `Please confirm that you read and understood the competition terms and conditions:`,
-    transaction,
-    actions.signCompetitionFailed,
-  );
 }
 
 function* createFund({ name, OasisDex, ZeroEx }) {
@@ -71,6 +94,7 @@ function* createFund({ name, OasisDex, ZeroEx }) {
   let exchangeNames = [];
   if (OasisDex) exchangeNames.push('MatchingMarket');
   if (ZeroEx) exchangeNames.push('ZeroExExchange');
+
   function* transaction(environment) {
     const signature = yield select(state => state.fund.signature);
     const fund = yield call(setupFund, environment, {

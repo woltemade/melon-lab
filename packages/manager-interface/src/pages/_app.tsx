@@ -7,10 +7,10 @@ import withReduxStore from '~/shared/wrappers/withReduxStore';
 const environment = process.env.NODE_ENV;
 const release = `manager-interface@${__MANAGER_INTERFACE_VERSION__} melon.js@${__MELON_JS_VERSION__} smart-contracts@${__SMART_CONTRACTS_VERSION__}`;
 
-Raven.config('https://14d859a5b75f4d4fbd79defb6d53129a@sentry.io/278024', {
-  release,
-  environment,
-}).install();
+// Raven.config('https://14d859a5b75f4d4fbd79defb6d53129a@sentry.io/278024', {
+//   release,
+//   environment,
+// }).install();
 
 if (typeof window !== 'undefined') {
   console.log(

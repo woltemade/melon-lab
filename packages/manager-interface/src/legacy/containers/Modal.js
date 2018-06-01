@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const interactionDispatchMap = {
-  [interactions.CANCEL]: () => actions.close(),
+  [interactions.CANCEL]: () => actions.cancel(),
   [interactions.CONFIRM]: () => actions.confirmed(),
 };
 
