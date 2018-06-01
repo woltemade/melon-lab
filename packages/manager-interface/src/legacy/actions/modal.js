@@ -44,7 +44,7 @@ export const actions = {
     type: types.CONFIRM,
     isOpen: true,
     modalType: modalTypes.CONFIRM,
-    title: 'Confirm',
+    title: 'Confirm transaction',
     body,
     primaryInteraction: interactions.CONFIRM,
     secondaryInteraction: interactions.CANCEL,
@@ -76,7 +76,7 @@ export const actions = {
     primaryInteraction: interactions.OK,
     secondaryInteraction: '',
   }),
-  loading: (body = 'Processing ...') => ({
+  loading: (body = 'Sending transaction ...') => ({
     type: types.LOADING,
     isOpen: true,
     modalType: modalTypes.LOADING,
