@@ -44,7 +44,7 @@ export const actions = {
     type: types.CONFIRM,
     isOpen: true,
     modalType: modalTypes.CONFIRM,
-    title: 'Confirm transaction',
+    title: 'Confirm',
     body,
     primaryInteraction: interactions.CONFIRM,
     secondaryInteraction: interactions.CANCEL,

@@ -1,7 +1,7 @@
-import { call, put, take } from 'redux-saga/effects';
+import { call, put, take, select } from 'redux-saga/effects';
 import {
-  decryptWallet,
   getEnvironment,
+  getWallet,
   isExternalSigner,
 } from '@melonproject/melon.js';
 import { actions as modalActions, types as modalTypes } from '../actions/modal';
@@ -10,19 +10,21 @@ function* signer(modalSentence, transaction, failureAction) {
   try {
     const environment = getEnvironment();
     yield put(modalActions.loading());
+
     if (!isExternalSigner(environment)) {
       yield put(modalActions.confirm(modalSentence));
-      const { password } = yield take(modalTypes.PASSWORD_ENTERED);
+      yield take(modalTypes.CONFIRMED);
       yield put(modalActions.loading());
-      const wallet = localStorage.getItem('wallet:melon.fund');
-      const decryptedWallet = yield call(decryptWallet, wallet, password);
-      environment.account = decryptedWallet;
+      const privateKey = yield select(state => state.wallet.privateKey);
+      const wallet = getWallet(privateKey);
+
+      // The wallet gets attached to the environment only this transaction
+      // For security reasons
+      environment.account = wallet;
     }
     yield call(transaction, environment);
   } catch (err) {
-    if (err.name === 'password') {
-      yield put(modalActions.error('Wrong password'));
-    } else if (err.name === 'EnsureError') {
+    if (err.name === 'EnsureError') {
       yield put(modalActions.error(err.message));
     } else {
       yield put(modalActions.error(err.message));

@@ -1,16 +1,16 @@
-import { takeLatest, call, put, select } from "redux-saga/effects";
+import { takeLatest, call, put, select } from 'redux-saga/effects';
 
 import {
   toggleInvestment,
   toggleRedemption,
   calcSharePriceAndConvertFees,
   shutDownFund,
-} from "@melonproject/melon.js";
+} from '@melonproject/melon.js';
 
-import { types, actions } from "../actions/administration";
-import { actions as modalActions } from "../actions/modal";
-import { actions as routeActions } from "../actions/routes";
-import signer from "./signer";
+import { types, actions } from '../actions/administration';
+import { actions as modalActions } from '../actions/modal';
+import { actions as routeActions } from '../actions/routes';
+import signer from './signer';
 
 function* toggleSubscriptionSaga() {
   const subscriptionAllowed = yield select(
@@ -26,9 +26,9 @@ function* toggleSubscriptionSaga() {
 
   yield call(
     signer,
-    `Do you really want to ${subscriptionAllowed
-      ? "disable"
-      : "enable"} subscriptions? If yes, please type your password below:`,
+    `Do you really want to ${
+      subscriptionAllowed ? 'disable' : 'enable'
+    } subscriptions?`,
     transaction,
     actions.toggleSubscriptionFailed,
   );
@@ -48,9 +48,9 @@ function* toggleRedemptionSaga() {
 
   yield call(
     signer,
-    `Do you really want to ${redemptionAllowed
-      ? "disable"
-      : "enable"} redemptions? If yes, please type your password below:`,
+    `Do you really want to ${
+      redemptionAllowed ? 'disable' : 'enable'
+    } redemptions?`,
     transaction,
     actions.toggleRedemptionFailed,
   );
@@ -66,7 +66,7 @@ function* convertUnclaimedRewardsSaga() {
 
   yield call(
     signer,
-    `Do you really want to convert your unclaimed rewards? If yes, please type your password below:`,
+    `Do you really want to convert your unclaimed rewards?`,
     transaction,
     actions.convertUnclaimedRewardsFailed,
   );
@@ -83,7 +83,7 @@ function* shutDownFundSaga() {
 
   yield call(
     signer,
-    `Do you really want to shut down your fund? If yes, please type your password below:`,
+    `Do you really want to shut down your fund?`,
     transaction,
     actions.shutdownFailed,
   );

@@ -42,7 +42,7 @@ function* investSaga(action) {
     signer,
     `Do you really want to buy ${action.amount} shares for ${
       action.total
-    } MLN? If yes, please type your password below:`,
+    } MLN?`,
     transaction,
     actions.investFailed,
   );
@@ -68,7 +68,7 @@ function* redeemSaga(action) {
     signer,
     `Do you really want to sell ${action.amount} shares for ${
       action.total
-    } MLN? If yes, please type your password below:`,
+    } MLN?`,
     transaction,
     actions.redeemFailed,
   );
@@ -89,7 +89,7 @@ function* redeemAllOwnedAssetsSaga(action) {
     signer,
     `Do you really want to immediately redeem ${
       action.amount
-    } shares? You will receive a subset of the current fund holdings, proportionally to your requested number of shares. If yes, please type your password below:`,
+    } shares? You will receive a subset of the current fund holdings, proportionally to your requested number of shares.`,
     transaction,
     actions.redeemAllOwnedAssetsFailed,
   );
@@ -106,7 +106,7 @@ function* executeSaga({ id }) {
 
   yield call(
     signer,
-    `Type your password to execute your participation request:`,
+    `Please confirm the execution of your participation request:`,
     transaction,
     actions.executeFailed,
   );

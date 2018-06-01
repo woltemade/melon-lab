@@ -28,7 +28,7 @@ function* sign() {
   }
   yield call(
     signer,
-    `Please enter your password below to sign the terms and conditions:`,
+    `Please confirm that you read and understood the terms and conditions.`,
     transaction,
     actions.signFailed,
   );
@@ -46,7 +46,7 @@ function* signCompetition() {
 
   yield call(
     signer,
-    `Please enter your password below to sign the competition terms and conditions:`,
+    `Please confirm that you read and understood the competition terms and conditions:`,
     transaction,
     actions.signCompetitionFailed,
   );
@@ -89,7 +89,7 @@ function* createFund({ name, OasisDex, ZeroEx }) {
 
   yield call(
     signer,
-    `Please enter your password below to setup your fund with the name ${name} and to sign our terms and conditions:`,
+    `Please confirm to setup your fund with the name ${name} and to sign our terms and conditions:`,
     transaction,
     actions.setupFailed,
   );
