@@ -1,9 +1,9 @@
 .spacings__row {
   display: flex;
-  margin-bottom: 12px;
+  margin-bottom: var(--spacingSmall);
 }
 
 .spacings__col {
   flex: 1 0 50%;
-  padding: 12px;
+  padding: var(--spacingSmall);
 }
