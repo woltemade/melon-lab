@@ -39,7 +39,26 @@ const StatusColors = ({ children }) => (
   </div>
 );
 
+const OtherColors = ({ children }) => (
+  <div className={styles.colors}>
+    {
+      Object.keys(colors.otherColors).map((key, index) =>
+        <div key={index} className={styles.colors__row}>
+          <div className={styles.colors__col}>
+            <div className={styles.colors__wrapper}>
+              <div className={styles.colors__color} style={{ backgroundColor: colors.otherColors[key] }}></div>
+              <div className={styles.colors__colorName}>{key}</div>
+              <div className={styles.colors__colorCode}>{colors.otherColors[key]}</div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  </div>
+);
+
 export {
   MainColors,
-  StatusColors
+  StatusColors,
+  OtherColors
 }
