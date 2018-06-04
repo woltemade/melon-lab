@@ -13,3 +13,4 @@ coverage/
 
 # Log files
 *.log*
+.vscode
