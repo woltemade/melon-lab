@@ -11,5 +11,6 @@
     flex: 0 1 var(--spacingDefault);
     height: var(--spacingDefault);
     border-radius: 50%;
+    border: 1px solid var(--colorGrey);
   }
 }
