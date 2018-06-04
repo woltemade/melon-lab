@@ -5,6 +5,7 @@
 
 .colors__row {
   flex: 0 0 100%;
+  overflow: hidden;
 
   @media (--baseSmallScreens) {
     flex: 0 0 50%;
@@ -22,16 +23,19 @@
 .colors__wrapper {
   border: 1px solid var(--colorPrimaryDark);
   margin: var(--spacing);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .colors__color {
   min-height: 50px;
 }
 
-.colors__colorName {
-  margin: var(--spacingSmall);
-}
-
+.colors__colorName,
 .colors__colorCode {
   margin: var(--spacingSmall);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
