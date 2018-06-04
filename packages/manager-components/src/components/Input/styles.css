@@ -2,8 +2,13 @@
   border: 1px solid var(--colorSecondary);
   padding: var(--spacingSmall);
   line-height: 1;
+  width: 100%;
 
   &::placeholder {
     color: var(--colorGrey);
+  }
+
+  &:disabled {
+    background-color: var(--colorSecondary);
   }
 }
