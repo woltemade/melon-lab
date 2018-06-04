@@ -2,4 +2,4 @@ import { storiesOf } from '@storybook/react';
 import React from 'react';
 import Spacings from './index';
 
-storiesOf('Styles|Spacings', module).add('Default', () => <Spacings />);
+storiesOf('Design|Spacings', module).add('Default', () => <Spacings />);
