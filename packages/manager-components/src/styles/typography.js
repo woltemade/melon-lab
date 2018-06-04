@@ -1,8 +1,8 @@
 module.exports = {
-  families: {
+  fontFamilies: {
     fontFamilyPrimary: '"Source Serif Pro", serif',
   },
-  sizes: {
+  fontSizes: {
     fontSizeLargest: '28px',
     fontSizeLarger: '26px',
     fontSizeLarge: '24px',
@@ -11,7 +11,7 @@ module.exports = {
     fontSizeSmaller: '18px',
     fontSizeSmallest: '16px',
   },
-  weights: {
+  fontWeights: {
     light: '300',
     regular: '400',
     semiBold: '600',
