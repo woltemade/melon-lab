@@ -1,7 +1,7 @@
 .checkbox {
   display: block;
   position: relative;
-  padding-left: 24px;
+  padding-left: var(--spacingLarge);
   cursor: pointer;
   line-height: 1;
   color: var(--colorGold);
@@ -25,6 +25,7 @@
 
   & input:disabled ~ .checkbox__checkmark {
     border-color: var(--colorGrey);
+    cursor: not-allowed;
   }
 }
 
