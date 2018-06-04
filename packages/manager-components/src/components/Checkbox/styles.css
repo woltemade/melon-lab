@@ -17,6 +17,10 @@
   & input:checked ~ .checkbox__checkmark:after {
     display: block;
   }
+
+  & input:disabled ~ .checkbox__text {
+    text-decoration: line-through;
+  }
 }
 
 .checkbox__input {

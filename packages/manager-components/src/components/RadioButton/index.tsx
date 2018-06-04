@@ -20,7 +20,6 @@ const RadioButton: StatelessComponent<ICheckboxProps> = ({
   onInputChange,
 }) => (
   <label className={styles.radioButton}>
-    {text}
     <input
       className={styles.radioButton__input}
       type="radio"
@@ -31,6 +30,7 @@ const RadioButton: StatelessComponent<ICheckboxProps> = ({
       onChange={onInputChange}
     />
     <span className={styles.radioButton__checkmark} />
+    <span className={styles.radioButton__text}>{text}</span>
   </label>
 );
 

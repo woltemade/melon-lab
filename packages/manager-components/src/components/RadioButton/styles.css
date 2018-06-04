@@ -17,6 +17,10 @@
   & input:checked ~ .radioButton__checkmark:after {
     display: block;
   }
+
+  & input:disabled ~ .radioButton__text {
+    text-decoration: line-through;
+  }
 }
 
 .radioButton__input {

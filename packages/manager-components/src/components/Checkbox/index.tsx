@@ -20,7 +20,6 @@ const Checkbox: StatelessComponent<ICheckboxProps> = ({
   onInputChange,
 }) => (
   <label className={styles.checkbox}>
-    {text}
     <input
       className={styles.checkbox__input}
       type="checkbox"
@@ -31,6 +30,7 @@ const Checkbox: StatelessComponent<ICheckboxProps> = ({
       onChange={onInputChange}
     />
     <span className={styles.checkbox__checkmark} />
+    <span className={styles.checkbox__text}>{text}</span>
   </label>
 );
 
