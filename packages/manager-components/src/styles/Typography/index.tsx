@@ -5,45 +5,65 @@ import styles from './styles.css';
 
 const FontSizes = () => (
   <div className={styles.fonts}>
-    {
-      Object.keys(typography.fontSizes).map((key, index) =>
-        <div key={index} className={styles.fonts__row}>
-          <div className={styles.fonts__col} style={{ fontSize: typography.fontSizes[key] }}>{key}</div>
-          <div className={styles.fonts__col} style={{ fontSize: typography.fontSizes[key] }}>{typography.fontSizes[key]}</div>
+    {Object.keys(typography.fontSizes).map((key, index) => (
+      <div key={index} className={styles.fonts__row}>
+        <div
+          className={styles.fonts__col}
+          style={{ fontSize: typography.fontSizes[key] }}
+        >
+          {key}
         </div>
-      )
-    }
+        <div
+          className={styles.fonts__col}
+          style={{ fontSize: typography.fontSizes[key] }}
+        >
+          {typography.fontSizes[key]}
+        </div>
+      </div>
+    ))}
   </div>
 );
 
 const FontFamilies = () => (
   <div className={styles.fonts}>
-    {
-      Object.keys(typography.fontFamilies).map((key, index) =>
-        <div key={index} className={styles.fonts__row}>
-          <div className={styles.fonts__col} style={{ fontFamily: typography.fontFamilies[key] }}>{key}</div>
-          <div className={styles.fonts__col} style={{ fontFamily: typography.fontFamilies[key] }}>{typography.fontFamilies[key]}</div>
+    {Object.keys(typography.fontFamilies).map((key, index) => (
+      <div key={index} className={styles.fonts__row}>
+        <div
+          className={styles.fonts__col}
+          style={{ fontFamily: typography.fontFamilies[key] }}
+        >
+          {key}
         </div>
-      )
-    }
+        <div
+          className={styles.fonts__col}
+          style={{ fontFamily: typography.fontFamilies[key] }}
+        >
+          {typography.fontFamilies[key]}
+        </div>
+      </div>
+    ))}
   </div>
 );
 
 const FontWeights = () => (
   <div className={styles.fonts}>
-    {
-      Object.keys(typography.fontWeights).map((key, index) =>
-        <div key={index} className={styles.fonts__row}>
-          <div className={styles.fonts__col} style={{ fontWeight: typography.fontWeights[key] }}>{key}</div>
-          <div className={styles.fonts__col} style={{ fontWeight: typography.fontWeights[key] }}>{typography.fontWeights[key]}</div>
+    {Object.keys(typography.fontWeights).map((key, index) => (
+      <div key={index} className={styles.fonts__row}>
+        <div
+          className={styles.fonts__col}
+          style={{ fontWeight: typography.fontWeights[key] }}
+        >
+          {key}
         </div>
-      )
-    }
+        <div
+          className={styles.fonts__col}
+          style={{ fontWeight: typography.fontWeights[key] }}
+        >
+          {typography.fontWeights[key]}
+        </div>
+      </div>
+    ))}
   </div>
 );
 
-export {
-  FontWeights,
-  FontFamilies,
-  FontSizes
-}
+export { FontWeights, FontFamilies, FontSizes };

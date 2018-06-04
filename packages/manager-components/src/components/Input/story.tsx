@@ -2,19 +2,21 @@ import { storiesOf } from '@storybook/react';
 import React from 'react';
 import Input from './index';
 
-storiesOf('Components|Input', module).add('Default', () => {
+const stories = storiesOf('Components|Input', module);
+
+stories.add('Default', () => {
   return (
     <Input />
   )
 });
 
-storiesOf('Components|Input', module).add('With placeholder', () => {
+stories.add('With placeholder', () => {
   return (
     <Input placeholder={'Placeholder...'} />
   )
 });
 
-storiesOf('Components|Input', module).add('Disabled', () => {
+stories.add('Disabled', () => {
   return (
     <Input disabled />
   )

@@ -2,7 +2,9 @@ import { storiesOf } from '@storybook/react';
 import React from 'react';
 import Button from './index';
 
-storiesOf('Components|Button', module).add('Default', () => {
+const stories = storiesOf('Components|Button', module);
+
+stories.add('Default', () => {
   return (
     <Button>
       Default button
@@ -10,7 +12,7 @@ storiesOf('Components|Button', module).add('Default', () => {
   )
 });
 
-storiesOf('Components|Button', module).add('Disabled', () => {
+stories.add('Disabled', () => {
   return (
     <Button disabled>
       Disabled button

@@ -17,5 +17,5 @@ module.exports = {
   otherColors: {
     colorBlack: 'rgb(0, 0, 0)',
     colorWhite: 'rgb(255, 255, 255)',
-  }
-}
+  },
+};
