@@ -33,6 +33,7 @@
   width: 16px;
   border: 1px solid var(--colorGold);
   border-radius: 50%;
+  transition-duration: .3s;
 
   &::after {
     content: '';

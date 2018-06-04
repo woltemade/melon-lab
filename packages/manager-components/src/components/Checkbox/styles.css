@@ -32,9 +32,10 @@
   height: 16px;
   width: 16px;
   border: 1px solid var(--colorGold);
+  transition-duration: var(--transitionDuration);
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     display: none;
     left: 5px;

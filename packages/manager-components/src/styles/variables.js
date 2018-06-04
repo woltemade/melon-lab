@@ -6,4 +6,5 @@ module.exports = {
   ...require('./typography.js').fontFamilies,
   ...require('./typography.js').fontSizes,
   ...require('./typography.js').fontWeights,
+  ...require('./transitions.js').transitionDuration,
 }
