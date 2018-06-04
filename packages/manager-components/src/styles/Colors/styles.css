@@ -1,0 +1,15 @@
+.colors__row {
+  display: flex;
+  margin-bottom: var(--spacingDefault);
+}
+
+.colors__col {
+  flex: 1 0 33%;
+  padding: var(--spacingDefault);
+
+  &:last-child {
+    flex: 0 1 var(--spacingDefault);
+    height: var(--spacingDefault);
+    border-radius: 50%;
+  }
+}
