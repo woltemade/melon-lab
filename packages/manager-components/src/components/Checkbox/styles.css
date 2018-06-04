@@ -20,6 +20,11 @@
 
   & input:disabled ~ .checkbox__text {
     text-decoration: line-through;
+    color: var(--colorGrey);
+  }
+
+  & input:disabled ~ .checkbox__checkmark {
+    border-color: var(--colorGrey);
   }
 }
 

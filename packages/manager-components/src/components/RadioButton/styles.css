@@ -20,6 +20,11 @@
 
   & input:disabled ~ .radioButton__text {
     text-decoration: line-through;
+    color: var(--colorGrey);
+  }
+
+  & input:disabled ~ .radioButton__checkmark {
+    border-color: var(--colorGrey);
   }
 }
 

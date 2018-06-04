@@ -1,6 +1,6 @@
 .input {
   border: 1px solid var(--colorSecondary);
-  padding: var(--spacingSmall);
+  padding: var(--spacingSmaller);
   line-height: 1;
 
   &::placeholder {
