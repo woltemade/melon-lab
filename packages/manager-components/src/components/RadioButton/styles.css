@@ -1,0 +1,48 @@
+.radioButton {
+  display: block;
+  position: relative;
+  padding-left: 24px;
+  cursor: pointer;
+  line-height: 1;
+  color: var(--colorGold);
+
+  &:hover input:enabled ~ .radioButton__checkmark {
+    background-color: var(--colorGold);
+  }
+
+  & input:checked ~ .radioButton__checkmark {
+    background-color: var(--colorGold);
+  }
+
+  & input:checked ~ .radioButton__checkmark:after {
+    display: block;
+  }
+}
+
+.radioButton__input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radioButton__checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  border: 1px solid var(--colorGold);
+  border-radius: 50%;
+
+  &::after {
+    content: '';
+    position: absolute;
+    display: none;
+    top: 4px;
+    left: 4px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+  }
+}
