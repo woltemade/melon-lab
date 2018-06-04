@@ -1,23 +1,15 @@
+import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import React from 'react';
 import Input from './index';
 
-const stories = storiesOf('Components|Input', module);
-
-stories.add('Default', () => {
-  return (
-    <Input />
-  )
-});
-
-stories.add('With placeholder', () => {
-  return (
-    <Input placeholder={'Placeholder...'} />
-  )
-});
-
-stories.add('Disabled', () => {
-  return (
-    <Input disabled={true} />
-  )
-});
+storiesOf('Components|Input', module)
+  .add('Default', () => {
+    return <Input onInputChange={action('changed')} />;
+  })
+  .add('Disabled', () => {
+    return <Input disabled={true} />;
+  })
+  .add('With placeholder', () => {
+    return <Input placeholder={'Placeholder...'} />;
+  });
