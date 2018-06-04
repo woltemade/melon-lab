@@ -3,7 +3,7 @@ import spacings from '../spacings.js';
 
 import styles from './styles.css';
 
-const Spacings = ({ children }) => (
+const Spacings = () => (
   <div className={styles.spacings}>
     {
       Object.keys(spacings).map((key, index) =>

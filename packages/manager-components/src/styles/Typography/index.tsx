@@ -3,7 +3,7 @@ import typography from '../typography.js';
 
 import styles from './styles.css';
 
-const FontSizes = ({ children }) => (
+const FontSizes = () => (
   <div className={styles.fonts}>
     {
       Object.keys(typography.fontSizes).map((key, index) =>
@@ -16,12 +16,12 @@ const FontSizes = ({ children }) => (
   </div>
 );
 
-const FontFamilies = ({ children }) => (
+const FontFamilies = () => (
   <div className={styles.fonts}>
     {
       Object.keys(typography.fontFamilies).map((key, index) =>
         <div key={index} className={styles.fonts__row}>
-          <div className={styles.fonts__col}>{key}</div>
+          <div className={styles.fonts__col} style={{ fontFamily: typography.fontFamilies[key] }}>{key}</div>
           <div className={styles.fonts__col} style={{ fontFamily: typography.fontFamilies[key] }}>{typography.fontFamilies[key]}</div>
         </div>
       )
@@ -29,7 +29,7 @@ const FontFamilies = ({ children }) => (
   </div>
 );
 
-const FontWeights = ({ children }) => (
+const FontWeights = () => (
   <div className={styles.fonts}>
     {
       Object.keys(typography.fontWeights).map((key, index) =>
