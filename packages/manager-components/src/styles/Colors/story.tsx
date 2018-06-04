@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import { MainColors, StatusColors, OtherColors } from './index';
+import { MainColors, OtherColors, StatusColors } from './index';
 
 const stories = storiesOf('Styles|Colors', module);
 

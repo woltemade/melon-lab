@@ -14,7 +14,7 @@ stories.add('Default', () => {
 
 stories.add('Disabled', () => {
   return (
-    <Button disabled>
+    <Button disabled={true}>
       Disabled button
     </Button>
   )

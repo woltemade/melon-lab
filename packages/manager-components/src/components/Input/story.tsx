@@ -18,6 +18,6 @@ stories.add('With placeholder', () => {
 
 stories.add('Disabled', () => {
   return (
-    <Input disabled />
+    <Input disabled={true} />
   )
 });

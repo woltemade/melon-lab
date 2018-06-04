@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import { FontFamilies, FontWeights, FontSizes } from './index';
+import { FontFamilies, FontSizes, FontWeights } from './index';
 
 const stories = storiesOf('Styles|Typography', module);
 
