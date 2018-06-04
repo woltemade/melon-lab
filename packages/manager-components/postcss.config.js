@@ -1,6 +1,6 @@
 const postcssCssNext = require('postcss-cssnext');
-const variables = require('./src/styles/variables');
-const mediaQueries = require('./src/styles/mediaQueries');
+const variables = require('./src/design/variables');
+const mediaQueries = require('./src/design/mediaQueries');
 
 module.exports = {
   plugins: [

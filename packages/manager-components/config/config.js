@@ -4,7 +4,7 @@ import { setOptions } from '@storybook/addon-options';
 const stories = require.context('../src', true, /\/story\.(tsx?)$/);
 
 configure(() => {
-  require('../src/styles/base.css');
+  require('../src/design/base.css');
   return stories.keys().forEach(stories);
 }, module);
 

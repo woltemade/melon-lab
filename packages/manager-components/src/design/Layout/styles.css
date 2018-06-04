@@ -1,0 +1,4 @@
+.layouts {
+  display: flex;
+  margin-bottom: var(--spacingSmall);
+}
