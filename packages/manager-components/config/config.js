@@ -11,4 +11,6 @@ configure(() => {
 setOptions({
   hierarchySeparator: /\/|\./, // matches a . or /
   hierarchyRootSeparator: /\|/, //matches a |
+  name: 'Melonport',
+  url: '#',
 });
