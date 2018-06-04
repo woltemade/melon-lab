@@ -1,16 +1,37 @@
-.colors__row {
+.colors {
   display: flex;
-  margin-bottom: var(--spacingDefault);
+  flex-wrap: wrap;
 }
 
-.colors__col {
-  flex: 1 0 33%;
-  padding: var(--spacingDefault);
+.colors__row {
+  flex: 0 0 100%;
 
-  &:last-child {
-    flex: 0 1 var(--spacingDefault);
-    height: var(--spacingDefault);
-    border-radius: 50%;
-    border: 1px solid var(--colorGrey);
+  @media (--baseSmallScreens) {
+    flex: 0 0 50%;
   }
+
+  @media (--baseMediumScreens) {
+    flex: 0 0 33%;
+  }
+
+  @media (--baseLargeScreens) {
+    flex: 0 0 20%;
+  }
+}
+
+.colors__wrapper {
+  border: 1px solid var(--colorPrimaryDark);
+  margin: var(--spacing);
+}
+
+.colors__color {
+  min-height: 50px;
+}
+
+.colors__colorName {
+  margin: var(--spacingSmall);
+}
+
+.colors__colorCode {
+  margin: var(--spacingSmall);
 }

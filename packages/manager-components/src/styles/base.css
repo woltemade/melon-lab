@@ -1,4 +1,5 @@
 * {
+  box-sizing: border-box;
   font-family: var(--fontFamilyPrimary);
   font-size: var(--fontSizeSmallest);
 }

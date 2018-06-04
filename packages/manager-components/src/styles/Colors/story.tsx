@@ -1,5 +1,6 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import Colors from './index';
+import { MainColors, StatusColors } from './index';
 
-storiesOf('Styles|Colors', module).add('Default', () => <Colors />);
+storiesOf('Styles|Colors', module).add('Main Colors', () => <MainColors />);
+storiesOf('Styles|Colors', module).add('Status Colors', () => <StatusColors />);

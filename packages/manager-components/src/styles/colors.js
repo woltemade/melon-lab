@@ -1,13 +1,18 @@
 module.exports = {
-  colorPrimary: 'rgb(255, 253, 244)',
-  colorSecondary: 'rgb(241, 238, 222)',
-  colorPrimaryDark: 'rgb(234, 229, 212)',
-  colorGrey: 'rgb(155, 155, 155)',
-  colorBlack: 'rgb(0, 0, 0)',
-  colorWhite: 'rgb(255, 255, 255)',
-  colorGold: 'rgb(161, 147, 94)',
-  colorProfit: 'rgb(141, 197, 103)',
-  colorLost: 'rgb(206, 88, 102)',
-  colorSecondaryProfit: 'rgb(243, 249, 241)',
-  colorSecondaryLost: 'rgb(252, 240, 242)',
+  mainColors: {
+    colorPrimary: 'rgb(255, 253, 244)',
+    colorSecondary: 'rgb(241, 238, 222)',
+    colorPrimaryDark: 'rgb(234, 229, 212)',
+    colorGrey: 'rgb(155, 155, 155)',
+    colorBlack: 'rgb(0, 0, 0)',
+    colorWhite: 'rgb(255, 255, 255)',
+    colorGold: 'rgb(161, 147, 94)',
+  },
+
+  statusColors: {
+    colorProfit: 'rgb(141, 197, 103)',
+    colorLost: 'rgb(206, 88, 102)',
+    colorSecondaryProfit: 'rgb(243, 249, 241)',
+    colorSecondaryLost: 'rgb(252, 240, 242)',
+  }
 }
