@@ -27,7 +27,7 @@ const Checkbox: React.StatelessComponent<ICheckboxProps> = ({
       checked={checked}
       disabled={disabled}
     />
-    <span className={styles.checkbox__checkmark}></span>
+    <span className={styles.checkbox__checkmark} />
   </label>
 );
 
