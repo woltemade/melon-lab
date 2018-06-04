@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEventHandler, StatelessComponent } from 'react';
 
 import styles from './styles.css';
 
@@ -7,15 +7,17 @@ export interface ICheckboxProps {
   name?: string;
   value?: string;
   text?: string;
-  checked?: boolean;
+  defaultChecked?: boolean;
+  onInputChange?: ChangeEventHandler<Element>;
 }
 
-const Checkbox: React.StatelessComponent<ICheckboxProps> = ({
+const Checkbox: StatelessComponent<ICheckboxProps> = ({
   disabled,
   name,
   value,
   text,
-  checked,
+  defaultChecked,
+  onInputChange,
 }) => (
   <label className={styles.checkbox}>
     {text}
@@ -24,8 +26,9 @@ const Checkbox: React.StatelessComponent<ICheckboxProps> = ({
       type="checkbox"
       name={name}
       value={value}
-      checked={checked}
+      defaultChecked={defaultChecked}
       disabled={disabled}
+      onChange={onInputChange}
     />
     <span className={styles.checkbox__checkmark} />
   </label>

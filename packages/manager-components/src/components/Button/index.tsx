@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { ChangeEventHandler, StatelessComponent } from 'react';
 
 import styles from './styles.css';
 
 export interface IButtonProps {
   disabled?: boolean;
+  onClick?: ChangeEventHandler<Element>;
 }
 
-const Button: React.StatelessComponent<IButtonProps> = ({
+const Button: StatelessComponent<IButtonProps> = ({
   children,
   disabled,
+  onClick,
 }) => (
-  <button className={styles.button} disabled={disabled}>
+  <button onClick={onClick} className={styles.button} disabled={disabled}>
     {children}
   </button>
 );

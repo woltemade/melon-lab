@@ -1,21 +1,12 @@
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 import React from 'react';
 import Button from './index';
 
-const stories = storiesOf('Components|Button', module);
-
-stories.add('Default', () => {
-  return (
-    <Button>
-      Default button
-    </Button>
-  )
-});
-
-stories.add('Disabled', () => {
-  return (
-    <Button disabled={true}>
-      Disabled button
-    </Button>
-  )
-});
+storiesOf('Components|Button', module)
+  .add('Default', () => {
+    return <Button onClick={action('clicked')}>Default button</Button>;
+  })
+  .add('Disabled', () => {
+    return <Button disabled={true}>Disabled button</Button>;
+  });

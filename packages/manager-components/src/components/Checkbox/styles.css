@@ -33,7 +33,7 @@
   width: 16px;
   border: 1px solid var(--colorGold);
 
-  &:after {
+  &::after {
     content: "";
     position: absolute;
     display: none;

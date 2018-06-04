@@ -31,7 +31,7 @@ stories.add('Checked', () => {
       name={'Default text'}
       value={'Default text'}
       text={'Default text'}
-      checked={true}
+      defaultChecked={true}
     />
   );
 });
