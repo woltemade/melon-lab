@@ -2,7 +2,15 @@ import React from 'react';
 
 import styles from './styles.css';
 
-const Input = ({ disabled, placeholder }) => (
+export interface ICheckboxProps {
+  disabled?: boolean;
+  placeholder?: string;
+}
+
+const Input: React.StatelessComponent<ICheckboxProps> = ({
+  disabled,
+  placeholder,
+}) => (
   <input
     className={styles.input}
     disabled={disabled}
