@@ -9,10 +9,7 @@ export interface IIconProps {
 }
 
 const Icon: StatelessComponent<IIconProps> = ({ name, height, width }) => (
-  <svg
-    height={height ? height : '100%'}
-    width={width ? width : '100%'}
-  >
+  <svg height={height ? height : '100%'} width={width ? width : '100%'}>
     <use xlinkHref={`#${name}`} />
   </svg>
 );
