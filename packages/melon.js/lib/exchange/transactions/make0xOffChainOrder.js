@@ -19,9 +19,8 @@ import TokenAbi from '@melonproject/smart-contracts/out/assets/PreminedAsset.abi
  */
 
 const networkToExchangeContract = {
-  //KOVAN: '0x12459c951127e0c374ff9105dda097662a027093',
   KOVAN: '0x90fe2af704b34e0224bf2299c838e04d4dcf1364',
-  LIVE: '0x90fe2af704b34e0224bf2299c838e04d4dcf1364',
+  LIVE: '0x12459c951127e0c374ff9105dda097662a027093',
 };
 
 const networkToTokenTransferProxy = {
@@ -51,32 +50,22 @@ const make0xOffChainOrder = async (
     `Insufficient balance of ${sellSymbol}`,
   );
 
-  //console.log("- maker fee -")
-  //console.log(makerFee.toNumber())
-
   // taker fee
   takerFee = toProcessable(config, takerFee, 'ZRX-T');
 
   // Approve the ZRX for the fees if applicable. Only working on kovan.
   if (makerFee.toNumber() != 0) {
-    //console.log("There are some fees to pay now")
-
     // The new maker fee with the new format
     makerFee = toProcessable(config, makerFee, 'ZRX-T');
-
-    console.log('-- maker in melon.js fee --');
-    console.log(makerFee.toString());
+    let approveMakerFee = toProcessable(config, new BigNumber(10), 'ZRX-T');
 
     // Approve the ZRX token
     const tokenContract = environment.api.newContract(
       TokenAbi,
       '0x6Ff6C0Ff1d68b964901F986d4C9FA3ac68346570',
     );
-    const args = [networkToExchangeContract[network], makerFee];
 
-    console.log('-- args --');
-    console.log(args);
-
+    const args = [feeRecipient, approveMakerFee];
     const receipt = await sendTransaction(
       tokenContract,
       'approve',
@@ -88,8 +77,6 @@ const make0xOffChainOrder = async (
     if (!approvalLogEntry) {
       throw Error('Failed to approved ZRX');
     }
-
-    //console.log("_ token has been approbed __")
   }
 
   // Approve the sell token
