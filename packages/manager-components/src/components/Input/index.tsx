@@ -2,13 +2,13 @@ import React, { ChangeEventHandler, StatelessComponent } from 'react';
 
 import styles from './styles.css';
 
-export interface ICheckboxProps {
+export interface InputProps {
   disabled?: boolean;
   placeholder?: string;
   onInputChange?: ChangeEventHandler<Element>;
 }
 
-const Input: StatelessComponent<ICheckboxProps> = ({
+const Input: StatelessComponent<InputProps> = ({
   disabled,
   placeholder,
   onInputChange,

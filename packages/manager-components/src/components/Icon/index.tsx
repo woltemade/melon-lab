@@ -2,13 +2,13 @@ import React, { ChangeEventHandler, StatelessComponent } from 'react';
 
 import styles from './styles.css';
 
-export interface IIconProps {
+export interface IconProps {
   name?: string;
   height?: string;
   width?: string;
 }
 
-const Icon: StatelessComponent<IIconProps> = ({ name, height, width }) => (
+const Icon: StatelessComponent<IconProps> = ({ name, height, width }) => (
   <div>
     <style jsx>{styles}</style>
     <svg height={height ? height : '100%'} width={width ? width : '100%'}>

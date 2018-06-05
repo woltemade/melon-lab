@@ -2,7 +2,7 @@ import React, { ChangeEventHandler, StatelessComponent } from 'react';
 
 import styles from './styles.css';
 
-export interface ICheckboxProps {
+export interface RadioButtonProps {
   disabled?: boolean;
   name?: string;
   value?: string;
@@ -11,7 +11,7 @@ export interface ICheckboxProps {
   onInputChange?: ChangeEventHandler<Element>;
 }
 
-const RadioButton: StatelessComponent<ICheckboxProps> = ({
+const RadioButton: StatelessComponent<RadioButtonProps> = ({
   disabled,
   name,
   value,
