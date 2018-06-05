@@ -35,6 +35,10 @@ module.exports = config => {
         'postcss-loader'
       ],
       include: path.resolve(__dirname, "../src")
+    },
+    {
+      test: /\.svg$/,
+      loader: 'svg-sprite-loader'
     }
   );
 

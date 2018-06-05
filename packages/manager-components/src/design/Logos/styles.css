@@ -1,0 +1,9 @@
+.logos__el {
+  text-align: center;
+  display: block;
+  padding: var(--spacing);
+}
+
+.logos__name {
+  display: block;
+}

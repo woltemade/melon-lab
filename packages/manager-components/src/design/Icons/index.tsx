@@ -2,9 +2,9 @@ import React from 'react';
 
 import styles from './styles.css';
 
-const Layouts = () => (
+const Icons = () => (
   <div>
   </div>
 );
 
-export default Layouts;
+export default Icons;
