@@ -97,8 +97,12 @@ const registerForCompetition = async (
   );
 
   const registerLog = findEventInLog('Register', receipt);
-  console.log(registerLog)
-  return registerLog;
+
+  return {
+    registrandId: registerLog.withId.value.toNumber(),
+    fundAddress: registerLog.fund.value,
+    managerAddress: registerLog.manager.value
+  }
 };
 
 export default registerForCompetition;

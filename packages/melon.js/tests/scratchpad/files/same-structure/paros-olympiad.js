@@ -42,15 +42,14 @@ fit(
 
     const { providerType, api } = await getParityProvider();
 
-    // // 1 - instantiate wallet
-
-    const wallet = importWalletFromMnemonic(
-      'matter fiber acquire village swim ribbon floor original delay clutch thumb setup',
-    );
-
-    //  const wallet = importWalletFromMnemonic(
+    // const wallet = importWalletFromMnemonic(
     //   'dinosaur pulse rice lumber machine entry tackle off require draw edge almost',
     // );
+    const wallet = importWalletFromMnemonic(
+      'betray police afford faith crowd fit pipe half arch entire symptom index',
+    );
+
+
 
     setEnvironment({ api, account: wallet, providerType });
 
@@ -58,13 +57,13 @@ fit(
     const config = await getConfig(environment);
 
     const quoteAssetSymbol = await getQuoteAssetSymbol(environment);
-    const nativeAssetSymbol = await getNativeAssetSymbol(environment);
+    const melonAssetSymbol = config.melonAssetSymbol;
     const CONTRIBUTION_QUANTITY = 10;
     const expectedMelonReceived = CONTRIBUTION_QUANTITY * 20
     trace(
       `ProviderType: ${
       environment.providerType
-      }, quoteAssetSymbol: ${quoteAssetSymbol}, nativeAssetSymbol: ${nativeAssetSymbol}`,
+      }, quoteAssetSymbol: ${quoteAssetSymbol}, melonAssetSymbol: ${melonAssetSymbol}`,
     );
 
     trace({
@@ -75,11 +74,11 @@ fit(
 
     shared.etherBalance.initial = await environment.api.eth
       .getBalance(environment.account.address)
-      .then(balance => toReadable(config, balance, config.nativeAssetSymbol));
+      .then(balance => toReadable(config, balance, config.quoteAssetSymbol));
     trace({ message: `Etherbalance: Ξ${shared.etherBalance.initial} ` });
 
     shared.melonBalance.initial = await getBalance(environment, {
-      tokenSymbol: quoteAssetSymbol,
+      tokenSymbol: "MLN-T",
       ofAddress: environment.account.address,
     });
     trace({ message: `Melon Balance: Ⓜ  ${shared.melonBalance.initial} ` });
@@ -100,11 +99,15 @@ fit(
       [wallet.address],
     );
 
-    // // // If wallet already has a fund, need to shut it down before creating a new one -Only for integration purposes
+    // If wallet already has a fund, need to shut it down before creating a new one -Only for integration purposes
     if (managerToFunds !== '0x0000000000000000000000000000000000000000') {
-      console.log('Existing fund needs to be shut down: ', managerToFunds);
+      trace({
+        message: `Existing fund needs to be shut down:: ${managerToFunds}`,
+      });
       await shutDownFund(environment, { fundAddress: managerToFunds });
-      console.log('Shutting down existing fund');
+      trace({
+        message: 'Shutting down existing fund',
+      });
       managerToFunds = await versionContract.instance.managerToFunds.call({}, [
         environment.account.address,
       ]);
@@ -145,7 +148,7 @@ fit(
     });
 
     trace({
-      message: `Initial calculations- GAV: ${
+      message: `Pre contribution calculations- GAV: ${
       shared.initialCalculations.gav
       }, NAV: ${shared.initialCalculations.nav}, Share Price: ${
       shared.initialCalculations.sharePrice
@@ -159,13 +162,12 @@ fit(
 
     shared.registration = await registerForCompetition(environment, {
       fundAddress: shared.vault.address,
-      // fundAddress: '0x0DB58d06aeBdf9463f7215f82c7e85477e9255aA',
       signature: shared.signature,
       buyInValue: CONTRIBUTION_QUANTITY,
     });
 
     trace({
-      message: `Registered for competition: ${shared.registration}`,
+      message: `Registered for competition with registrand id ${shared.registration.registrantId}, fund address ${shared.registration.fundAddress} and manager address ${shared.registration.managerAddress}`,
       data: shared,
     });
 
@@ -174,7 +176,7 @@ fit(
     });
 
     trace({
-      message: `Mid calculations- GAV: ${shared.midCalculations.gav}, NAV: ${
+      message: `Post contribution calculations- GAV: ${shared.midCalculations.gav}, NAV: ${
       shared.midCalculations.nav
       }, Share Price: ${shared.midCalculations.sharePrice}, totalSupply: ${
       shared.midCalculations.totalSupply
