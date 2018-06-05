@@ -1,6 +1,7 @@
 import React from 'react';
+import Icons from '../../components/Icon';
 
-import './logos.svg';
+import '../logos.svg';
 import styles from './styles.css';
 
 const Logos = props => {
@@ -8,13 +9,7 @@ const Logos = props => {
     <div className={styles.logos}>
       <div className={styles.logos__el}>
         <span className={styles.logos__name}>{props.name}</span>
-        <svg
-          className={`logo-${props.name}`}
-          height={props.height ? props.height : '100%'}
-          width={props.width ? props.width : '100%'}
-        >
-          <use xlinkHref={`#logos_${props.name}`} />
-        </svg>
+        <Icons name={`logos_${props.name}`} height={props.height} width={props.width} />
       </div>
     </div>
   );

@@ -1,0 +1,23 @@
+.button {
+  border: 1px solid var(--colorBlack);
+  padding: var(--spacingSmall) var(--spacingLarger);
+  font-size: var(--fontSizeSmallest);
+  color: var(--colorBlack);
+  background-color: var(--colorWhite);
+  cursor: pointer;
+  text-transform: uppercase;
+  line-height: 1;
+  transition-duration: var(--transitionDuration);
+
+  &:hover:enabled {
+    color: var(--colorWhite);
+    background-color: var(--colorBlack);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    color: var(--colorGrey);
+    background-color: var(--colorSecondary);
+    border: 1px solid var(--colorSecondary);
+  }
+}
