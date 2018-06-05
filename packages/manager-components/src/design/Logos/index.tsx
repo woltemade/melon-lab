@@ -21,5 +21,8 @@ const Logos = props => {
 
 const LogoDefault = () => <Logos name="default" width="50" />;
 const LogoWithText = () => <Logos name="with-text" width="200" />;
+const LogoWithTextHorizontal = () => (
+  <Logos name="with-text-horizontal" width="200" />
+);
 
-export { LogoDefault, LogoWithText };
+export { LogoDefault, LogoWithText, LogoWithTextHorizontal };
