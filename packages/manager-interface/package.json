@@ -21,7 +21,6 @@
     "lint": "tslint -p tsconfig.json",
     "package:dir": "yarn package --dir",
     "package": "electron-builder",
-
     "release:app": "yarn build:app && yarn export:app && yarn package",
     "release:web": "yarn build:web && yarn export:web",
     "start": "cross-env NODE_ENV=production next start src -p 3000",
@@ -36,7 +35,6 @@
   "dependencies": {
     "@melonproject/graphql-schema": "^0.0.0",
     "@melonproject/melon.js": "^0.8.5",
-
     "apollo-cache-inmemory": "^1.1.12",
     "apollo-client": "^2.3.1",
     "apollo-link": "^1.2.1",
@@ -89,7 +87,7 @@
     "babel-plugin-transform-inline-environment-variables": "^0.1.1",
     "backpack-core": "^0.7.0",
     "electron": "^2.0.0",
-    "electron-builder": "^0.0.0-semantic-release",
+    "electron-builder": "^20.15.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.3",
