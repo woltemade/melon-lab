@@ -12,97 +12,97 @@ import ensure from '../../utils/generic/ensure';
  * Calling this function will register the sender on the competition contract and will allocate to his fund an amount of MLN in proportion of his buyInValue in ETH.
  */
 const registerForCompetition = async (
-  environment,
-  { fundAddress, signature, buyInValue },
+    environment,
+    { fundAddress, signature, buyInValue },
 ): Promise<any> => {
-  const config = await getConfig(environment);
-  const olympiadContract = await getOlympiadContract(environment);
-  const isCompetitionActive = await olympiadContract.instance.isCompetitionActive.call(
-    {},
-    [],
-  );
-  ensure(isCompetitionActive, 'Olympiad is inactive.');
+    const config = await getConfig(environment);
+    const olympiadContract = await getOlympiadContract(environment);
+    const isCompetitionActive = await olympiadContract.instance.isCompetitionActive.call(
+        {},
+        [],
+    );
+    ensure(isCompetitionActive, 'Olympiad is inactive.');
 
-  const termsAndConditionsAreSigned = await olympiadContract.instance.termsAndConditionsAreSigned.call(
-    {},
-    [environment.account.address, signature.v, signature.r, signature.s],
-  );
-  ensure(termsAndConditionsAreSigned, 'Invalid signature of T&Cs');
+    const termsAndConditionsAreSigned = await olympiadContract.instance.termsAndConditionsAreSigned.call(
+        {},
+        [environment.account.address, signature.v, signature.r, signature.s],
+    );
+    ensure(termsAndConditionsAreSigned, 'Invalid signature of T&Cs');
 
-  const isWhitelisted = await olympiadContract.instance.isWhitelisted.call({}, [
-    environment.account.address,
-  ]);
+    const isWhitelisted = await olympiadContract.instance.isWhitelisted.call({}, [
+        environment.account.address,
+    ]);
 
-  ensure(
-    isWhitelisted,
-    'Sender is not whitelisted. Please perform KYC/AML checks with Bitcoin Suisse',
-  );
+    ensure(
+        isWhitelisted,
+        'Sender is not whitelisted. Please perform KYC/AML checks with Bitcoin Suisse',
+    );
 
-  const currentTotalBuyin = await olympiadContract.instance.currentTotalBuyin.call();
-  const totalMaxBuyin = await olympiadContract.instance.totalMaxBuyin.call();
-  ensure(
-    currentTotalBuyin.add(buyInValue).lte(totalMaxBuyin),
-    'Max total buy in has been reached.',
-  );
+    const currentTotalBuyin = await olympiadContract.instance.currentTotalBuyin.call();
+    const totalMaxBuyin = await olympiadContract.instance.totalMaxBuyin.call();
+    ensure(
+        currentTotalBuyin.add(buyInValue).lte(totalMaxBuyin),
+        'Max total buy in has been reached.',
+    );
 
-  const CHFValue = await olympiadContract.instance.getCHFValue.call({}, [
-    toProcessable(config, buyInValue, 'WETH-T'),
-  ]);
+    const CHFValue = await olympiadContract.instance.getCHFValue.call({}, [
+        toProcessable(config, buyInValue, 'WETH-T'),
+    ]);
 
-  const whitelistantToMaxBuyin = await olympiadContract.instance.whitelistantToMaxBuyin.call(
-    {},
-    [environment.account.address],
-  );
+    const whitelistantToMaxBuyin = await olympiadContract.instance.whitelistantToMaxBuyin.call(
+        {},
+        [environment.account.address],
+    );
 
-  ensure(
-    CHFValue.lte(whitelistantToMaxBuyin),
-    'The buy in amount exceed your max buy in amount (determined by Bitcoin Suisse).',
-  );
+    ensure(
+        CHFValue.lte(whitelistantToMaxBuyin),
+        'The buy in amount exceed your max buy in amount (determined by Bitcoin Suisse).',
+    );
 
-  const versionContract = await getVersionContract(environment);
-  const managerToFund = await versionContract.instance.getFundByManager.call(
-    {},
-    [environment.account.address],
-  );
-  ensure(
-    fundAddress.toLowerCase() === managerToFund.toLowerCase(),
-    'Sender must register with a fund he owns.',
-  );
-  const etherBalance = await environment.api.eth
-    .getBalance(environment.account.address)
-    .then(balance => toReadable(config, balance, config.nativeAssetSymbol));
-  ensure(etherBalance.gt(buyInValue), 'Insufficient balance of ether');
+    const versionContract = await getVersionContract(environment);
+    const managerToFund = await versionContract.instance.getFundByManager.call(
+        {},
+        [environment.account.address],
+    );
+    ensure(
+        fundAddress.toLowerCase() === managerToFund.toLowerCase(),
+        'Sender must register with a fund he owns.',
+    );
+    const etherBalance = await environment.api.eth
+        .getBalance(environment.account.address)
+        .then(balance => toReadable(config, balance, config.nativeAssetSymbol));
+    ensure(etherBalance.gt(buyInValue), 'Insufficient balance of ether');
 
-  const registeredFundToRegistrant = await olympiadContract.instance.registeredFundToRegistrants.call(
-    {},
-    [fundAddress],
-  );
-  const registrantToRegistrantId = await olympiadContract.instance.registrantToRegistrantIds.call(
-    {},
-    [environment.account.address],
-  );
-  ensure(
+    const registeredFundToRegistrant = await olympiadContract.instance.registeredFundToRegistrants.call(
+        {},
+        [fundAddress],
+    );
+    const registrantToRegistrantId = await olympiadContract.instance.registrantToRegistrantIds.call(
+        {},
+        [environment.account.address],
+    );
+    {/*ensure(
     registeredFundToRegistrant ===
     '0x0000000000000000000000000000000000000000' &&
     registrantToRegistrantId[1] === false,
     'Sender already registered.',
-  );
+  );*/}
 
-  const receipt = await sendTransaction(
-    olympiadContract,
-    'registerForCompetition',
-    [fundAddress, signature.v, signature.r, signature.s],
-    environment,
-    { value: toProcessable(config, buyInValue, 'WETH-T') },
-  );
+    const receipt = await sendTransaction(
+        olympiadContract,
+        'registerForCompetition',
+        [fundAddress, signature.v, signature.r, signature.s],
+        environment,
+        { value: toProcessable(config, buyInValue, 'WETH-T') },
+    );
 
-  const registerLog = findEventInLog('Register', receipt);
+    const registerLog = findEventInLog('Register', receipt);
 
-  return {
-    registrandId: registerLog.withId.value.toNumber(),
-    fundAddress: registerLog.fund.value,
-    managerAddress: registerLog.manager.value
-  }
+    return {
+        registrandId: registerLog.params.withId.value.toNumber(),
+        fundAddress: registerLog.params.fund.value,
+        managerAddress: registerLog.params.manager.value
+    }
 };
 
 export default registerForCompetition;
