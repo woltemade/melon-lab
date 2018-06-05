@@ -6,4 +6,5 @@
 
 .logos__name {
   display: block;
+  margin-bottom: var(--spacing);
 }
