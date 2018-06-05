@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import Icon from './index';
 import '../../design/logos.svg'
+import Icon from './index';
 
 storiesOf('Components|Icon', module)
   .add('Default', () => {
