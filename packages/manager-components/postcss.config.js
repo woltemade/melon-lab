@@ -1,13 +1,20 @@
-const postcssCssNext = require('postcss-cssnext');
+const postcssPresetEnv = require('postcss-preset-env');
 const variables = require('./src/design/variables');
-const mediaQueries = require('./src/design/mediaQueries');
+const medias = require('./src/design/medias');
 
 module.exports = {
   plugins: [
-    postcssCssNext({
+    postcssPresetEnv({
+      stage: 3,
       features: {
-        customProperties: { variables: variables },
-        customMedia: { extensions: mediaQueries },
+        'nesting-rules': true,
+        'custom-properties': {
+          preserve: false,
+          variables: variables
+        },
+        'custom-media-queries': {
+          extensions: medias
+        }
       },
     }),
   ],
