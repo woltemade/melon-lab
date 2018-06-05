@@ -1,5 +1,5 @@
 module.exports = {
-  baseLargeScreens: '(min-width: 1024px)',
-  baseMediumScreens: '(min-width: 768px)',
-  baseSmallScreens: '(min-width: 320px)',
+  viewportLarge: '(min-width: 1024px)',
+  viewportMedium: '(min-width: 768px)',
+  viewportSmall: '(min-width: 320px)',
 }

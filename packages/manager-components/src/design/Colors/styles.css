@@ -7,15 +7,15 @@
   flex: 0 0 100%;
   overflow: hidden;
 
-  @media (--baseSmallScreens) {
+  @media (--viewportSmall) {
     flex: 0 0 50%;
   }
 
-  @media (--baseMediumScreens) {
+  @media (--viewportMedium) {
     flex: 0 0 33%;
   }
 
-  @media (--baseLargeScreens) {
+  @media (--viewportLarge) {
     flex: 0 0 20%;
   }
 }
