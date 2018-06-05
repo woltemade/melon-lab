@@ -45,8 +45,12 @@ fit(
     // // 1 - instantiate wallet
 
     const wallet = importWalletFromMnemonic(
-      'dinosaur pulse rice lumber machine entry tackle off require draw edge almost',
+      'matter fiber acquire village swim ribbon floor original delay clutch thumb setup',
     );
+
+    //  const wallet = importWalletFromMnemonic(
+    //   'dinosaur pulse rice lumber machine entry tackle off require draw edge almost',
+    // );
 
     setEnvironment({ api, account: wallet, providerType });
 
@@ -55,16 +59,17 @@ fit(
 
     const quoteAssetSymbol = await getQuoteAssetSymbol(environment);
     const nativeAssetSymbol = await getNativeAssetSymbol(environment);
-
+    const CONTRIBUTION_QUANTITY = 10;
+    const expectedMelonReceived = CONTRIBUTION_QUANTITY * 20
     trace(
       `ProviderType: ${
-        environment.providerType
+      environment.providerType
       }, quoteAssetSymbol: ${quoteAssetSymbol}, nativeAssetSymbol: ${nativeAssetSymbol}`,
     );
 
     trace({
       message: `Start walkthrough with defaultAccount: ${
-        environment.account.address
+      environment.account.address
       }`,
     });
 
@@ -78,16 +83,13 @@ fit(
       ofAddress: environment.account.address,
     });
     trace({ message: `Melon Balance: Ⓜ  ${shared.melonBalance.initial} ` });
-    expect(shared.melonBalance.initial.toFixed()).toBeGreaterThan(
-      INITIAL_SUBSCRIBE_QUANTITY,
-    );
 
     shared.config = await getConfig(environment);
     trace({
       message: `Got config w OasisDex exchange at ${
-        shared.config.matchingMarketAddress
+      shared.config.matchingMarketAddress
       }, 0x exchange at ${shared.config.zeroExV1Address} and priceFeed at ${
-        shared.config.canonicalPriceFeedAddress
+      shared.config.canonicalPriceFeedAddress
       }`,
       data: shared.config,
     });
@@ -99,67 +101,67 @@ fit(
     );
 
     // // // If wallet already has a fund, need to shut it down before creating a new one -Only for integration purposes
-    // if (managerToFunds !== '0x0000000000000000000000000000000000000000') {
-    //   console.log('Existing fund needs to be shut down: ', managerToFunds);
-    //   await shutDownFund(environment, { fundAddress: managerToFunds });
-    //   console.log('Shutting down existing fund');
-    //   managerToFunds = await versionContract.instance.managerToFunds.call({}, [
-    //     environment.account.address,
-    //   ]);
-    // }
+    if (managerToFunds !== '0x0000000000000000000000000000000000000000') {
+      console.log('Existing fund needs to be shut down: ', managerToFunds);
+      await shutDownFund(environment, { fundAddress: managerToFunds });
+      console.log('Shutting down existing fund');
+      managerToFunds = await versionContract.instance.managerToFunds.call({}, [
+        environment.account.address,
+      ]);
+    }
 
-    // const signature = await signTermsAndConditions(environment);
-    // shared.vaultName = randomString();
-    // shared.vault = await setupFund(environment, {
-    //   name: shared.vaultName,
-    //   signature,
-    //   exchangeNames: ['MatchingMarket', 'ZeroExExchange'],
-    // });
+    const signature = await signTermsAndConditions(environment);
+    shared.vaultName = randomString();
+    shared.vault = await setupFund(environment, {
+      name: shared.vaultName,
+      signature,
+      exchangeNames: ['MatchingMarket', 'ZeroExExchange'],
+    });
 
-    // expect(shared.vault.name).toBe(shared.vaultName);
-    // expect(shared.vault.address).toBeTruthy();
-    // expect(shared.vault.inception instanceof Date).toBeTruthy();
-    // trace({
-    //   message: `vaultCreated: ${shared.vault.name} (${shared.vault.id}) at ${
-    //     shared.vault.address
-    //   }`,
-    //   data: shared,
-    // });
+    expect(shared.vault.name).toBe(shared.vaultName);
+    expect(shared.vault.address).toBeTruthy();
+    expect(shared.vault.inception instanceof Date).toBeTruthy();
+    trace({
+      message: `vaultCreated: ${shared.vault.name} (${shared.vault.id}) at ${
+      shared.vault.address
+      }`,
+      data: shared,
+    });
 
-    // const fundCreatedByManager = await getFundForManager(environment, {
-    //   managerAddress: environment.account.address,
-    // });
-    // expect(fundCreatedByManager).toBe(shared.vault.address);
+    const fundCreatedByManager = await getFundForManager(environment, {
+      managerAddress: environment.account.address,
+    });
+    expect(fundCreatedByManager).toBe(shared.vault.address);
 
-    // shared.participation.initial = await getParticipation(environment, {
-    //   fundAddress: shared.vault.address,
-    //   investorAddress: environment.account.address,
-    // });
-    // expect(shared.participation.initial.personalStake.toNumber()).toBe(0);
-    // expect(shared.participation.initial.totalSupply.toNumber()).toBe(0);
+    shared.participation.initial = await getParticipation(environment, {
+      fundAddress: shared.vault.address,
+      investorAddress: environment.account.address,
+    });
+    expect(shared.participation.initial.personalStake.toNumber()).toBe(0);
+    expect(shared.participation.initial.totalSupply.toNumber()).toBe(0);
 
-    // shared.initialCalculations = await performCalculations(environment, {
-    //   fundAddress: shared.vault.address,
-    // });
+    shared.initialCalculations = await performCalculations(environment, {
+      fundAddress: shared.vault.address,
+    });
 
-    // trace({
-    //   message: `Initial calculations- GAV: ${
-    //     shared.initialCalculations.gav
-    //   }, NAV: ${shared.initialCalculations.nav}, Share Price: ${
-    //     shared.initialCalculations.sharePrice
-    //   }, totalSupply: ${shared.initialCalculations.totalSupply}`,
-    //   data: shared,
-    // });
-    // expect(shared.initialCalculations.sharePrice.toNumber()).toBe(1);
-    // expect(shared.initialCalculations.gav.toNumber()).toBe(0);
+    trace({
+      message: `Initial calculations- GAV: ${
+      shared.initialCalculations.gav
+      }, NAV: ${shared.initialCalculations.nav}, Share Price: ${
+      shared.initialCalculations.sharePrice
+      }, totalSupply: ${shared.initialCalculations.totalSupply}`,
+      data: shared,
+    });
+    expect(shared.initialCalculations.sharePrice.toNumber()).toBe(1);
+    expect(shared.initialCalculations.gav.toNumber()).toBe(0);
 
     shared.signature = await signOlympiadTermsAndConditions(environment);
 
     shared.registration = await registerForCompetition(environment, {
-      //   fundAddress: shared.vault.address,
-      fundAddress: '0x0DB58d06aeBdf9463f7215f82c7e85477e9255aA',
+      fundAddress: shared.vault.address,
+      // fundAddress: '0x0DB58d06aeBdf9463f7215f82c7e85477e9255aA',
       signature: shared.signature,
-      buyInValue: 1,
+      buyInValue: CONTRIBUTION_QUANTITY,
     });
 
     trace({
@@ -173,12 +175,19 @@ fit(
 
     trace({
       message: `Mid calculations- GAV: ${shared.midCalculations.gav}, NAV: ${
-        shared.midCalculations.nav
+      shared.midCalculations.nav
       }, Share Price: ${shared.midCalculations.sharePrice}, totalSupply: ${
-        shared.midCalculations.totalSupply
+      shared.midCalculations.totalSupply
       }`,
       data: shared,
     });
+
+    shared.fundMelonBalance = await getBalance(environment, { tokenSymbol: "MLN-T", ofAddress: shared.vault.address })
+    trace({
+      message: `Your Melon fund now has: ${shared.fundMelonBalance.toNumber()}`,
+      data: shared,
+    });
+    expect(shared.fundMelonBalance.toNumber()).toBe(expectedMelonReceived);
 
     return true;
   },

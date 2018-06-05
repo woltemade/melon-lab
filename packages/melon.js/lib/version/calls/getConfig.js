@@ -26,7 +26,9 @@ export type AssetConfig = {
  */
 export type Config = {
   assets: Array<AssetConfig>,
-  complianceAddress: Address,
+  OnlyManagerAddress: Address,
+  NoComplianceCompetitionAddress: Address,
+  CompetitionComplianceAddress: Address,
   matchingMarketAddress: Address,
   matchingMarketAdapter: Address,
   zeroExV1Address: Address,
