@@ -19,10 +19,7 @@ const Logos = props => {
   );
 };
 
-const LogoDefault = () => <Logos name="default" width="50" />;
-const LogoWithText = () => <Logos name="with-text" width="200" />;
-const LogoWithTextHorizontal = () => (
-  <Logos name="with-text-horizontal" width="200" />
-);
+const LogoDefault = () => <Logos name="default" width="400" height="400"/>;
+const LogoWithText = () => <Logos name="with-text" width="400" height="400"/>;
 
-export { LogoDefault, LogoWithText, LogoWithTextHorizontal };
+export { LogoDefault, LogoWithText };
