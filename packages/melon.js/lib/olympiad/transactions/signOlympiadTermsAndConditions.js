@@ -9,7 +9,7 @@ import getOlympiadContract from '../contracts/getOlympiadContract';
 
 const signOlympiadTermsAndConditions = async environment => {
   const olympiadContract = await getOlympiadContract(environment);
-  const competitionHash = await olympiadContract.instance.TERMS_AND_CONDITIONS.call();
+  const arrayifiedHash = await olympiadContract.instance.TERMS_AND_CONDITIONS.call();
   // const arrayifiedHash = [
   //   26,
   //   70,

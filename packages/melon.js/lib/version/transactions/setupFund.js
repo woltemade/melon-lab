@@ -28,8 +28,8 @@ const setupFund = async (
   { name, signature, exchangeNames = ['MatchingMarket', 'ZeroExExchange'] },
 ): Promise<Fund> => {
   const config = await getConfig(environment);
-  const { quoteAssetSymbol, complianceAddress, riskManagementAddress } = config;
-
+  const { quoteAssetSymbol, OnlyManagerAddress, NoComplianceCompetitionAddress, CompetitionComplianceAddress, riskManagementAddress } = config;
+  const complianceAddress = NoComplianceCompetitionAddress
   const quoteAsset = getAddress(config, quoteAssetSymbol);
 
   const managementReward = 0;

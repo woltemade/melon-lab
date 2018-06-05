@@ -56,10 +56,6 @@
 !packages/manager-components/tsconfig.json
 !packages/manager-components/tslint.json
 
-# TODO: Remove this once https://github.com/electron-userland/electron-builder/issues/2944 is resolved.
-!builder/packages/
-builder/packages/*/node_modules/
-
 # White-list workspace root.
 !yarn.lock
 !package.json

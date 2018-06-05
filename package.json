@@ -2,8 +2,7 @@
   "private": true,
   "workspaces": {
     "packages": [
-      "packages/*",
-      "builder/packages/*"
+      "packages/*"
     ]
   },
   "license": "AGPL-3.0",

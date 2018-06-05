@@ -1,4 +1,9 @@
-import { getOrderbook, getParityProvider } from '@melonproject/melon.js';
+import {
+  getOrderbook,
+  getParityProvider,
+  getConfig,
+  getSymbol,
+} from '@melonproject/melon.js';
 import * as Rx from 'rxjs';
 
 const debug = require('debug')('exchange-aggregator:oasis-dex');
@@ -6,17 +11,25 @@ const debug = require('debug')('exchange-aggregator:oasis-dex');
 const labelOrder = order => ({ ...order, exchange: 'OASIS_DEX' });
 const labelOrders = orders => orders.map(labelOrder);
 
-const fetchOrderbook = options => environment =>
-  Rx.Observable.fromPromise(getOrderbook(environment, options));
+const fetchOrderbook = options => environment => {
+  const config$ = Rx.Observable.fromPromise(getConfig(environment));
+  return config$.switchMap(config => {
+    const baseTokenSymbol = getSymbol(config, options.baseTokenAddress);
+    const quoteTokenSymbol = getSymbol(config, options.quoteTokenAddress);
+    return Rx.Observable.fromPromise(
+      getOrderbook(environment, { baseTokenSymbol, quoteTokenSymbol }),
+    );
+  });
+};
 
-const getObservableOasisDex = (baseTokenSymbol, quoteTokenSymbol) => {
+const getObservableOasisDex = (baseTokenAddress, quoteTokenAddress) => {
   const environment$ = Rx.Observable.fromPromise(getParityProvider());
   const orderbook$ = environment$
     .do(value => debug('Fetching.', value))
     .switchMap(
       fetchOrderbook({
-        baseTokenSymbol,
-        quoteTokenSymbol,
+        baseTokenAddress,
+        quoteTokenAddress,
       }),
     )
     .do(value => debug('Receiving values.', value))

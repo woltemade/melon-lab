@@ -26,7 +26,9 @@ export type AssetConfig = {
  */
 export type Config = {
   assets: Array<AssetConfig>,
-  complianceAddress: Address,
+  OnlyManagerAddress: Address,
+  NoComplianceCompetitionAddress: Address,
+  CompetitionComplianceAddress: Address,
   matchingMarketAddress: Address,
   matchingMarketAdapter: Address,
   zeroExV1Address: Address,
@@ -46,27 +48,26 @@ let config: Config;
 /**
  * Get config from deployed version contract
  */
-const getConfig = async (environment): Promise<Config> => {
+const getConfig = async (environment, optionalNetwork): Promise<Config> => {
   if (config) return config;
 
-  const network = await getNetwork(environment);
+  const network = optionalNetwork
+    ? optionalNetwork.toLowerCase()
+    : await getNetwork(environment);
   config = {
-    complianceAddress: addressBook[network].OnlyManager,
-    exchangeAdapterAddress: addressBook[network].SimpleAdapter,
-    exchangeAddress:
-      network === 'kovan'
-        ? addressBook[network].MatchingMarket
-        : exchangeInfo[network][0].address,
+    OnlyManagerAddress: addressBook[network].OnlyManager,
+    NoComplianceCompetitionAddress: addressBook[network].NoComplianceCompetition,
+    CompetitionComplianceAddress: addressBook[network].CompetitionCompliance,
     matchingMarketAddress: addressBook[network].MatchingMarket,
-    matchingMarketAdapter: addressBook[network].matchingMarketAdapter,
+    matchingMarketAdapter: addressBook[network].MatchingMarketAdapter,
     zeroExV1Address: addressBook[network].ZeroExExchange,
     zeroExV1AdapterAddress: addressBook[network].ZeroExV1Adapter,
     canonicalPriceFeedAddress: addressBook[network].CanonicalPriceFeed,
-    stakingPriceFeedAddress: addressBook[network].StakingPriceFeed,
     rankingAddress: addressBook[network].FundRanking,
     riskManagementAddress: addressBook[network].RMMakeOrders,
     versionAddress: addressBook[network].Version,
     governanceAddress: addressBook[network].Governance,
+    olympiadAddress: addressBook[network].Competition,
   };
 
   // HACK: Define config first so that inside these next async functions,

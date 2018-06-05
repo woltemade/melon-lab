@@ -2,12 +2,18 @@ import {
   getAggregatedObservable,
   Order,
 } from '@melonproject/exchange-aggregator';
-import { getParityProvider, getPrice } from '@melonproject/melon.js';
+import {
+  getParityProvider,
+  getPrice,
+  getAddress,
+  getConfig,
+} from '@melonproject/melon.js';
 import BigNumber from 'bignumber.js';
 import * as R from 'ramda';
 import * as Rx from 'rxjs';
 import { Context } from '../index';
 import withUnsubscribe from '../utils/withUnsubscribe';
+const debug = require('debug')('graphql-schema:subscription');
 
 const getPricePromises = (environment, symbols) =>
   symbols.map(symbol =>
@@ -71,14 +77,22 @@ export const orderbook = {
       totalBuyVolume,
     };
   },
-  subscribe: (parent, args, context: Context) => {
+  subscribe: async (parent, args, context: Context) => {
     const { pubsub } = context;
-    const { baseTokenSymbol, quoteTokenSymbol, exchanges } = args;
-
-    const orderbook$ = getAggregatedObservable(
+    const { baseTokenSymbol, quoteTokenSymbol, exchanges, network } = args;
+    const environment = await getParityProvider();
+    const config = await getConfig(environment, network);
+    const baseTokenAddress = getAddress(config, baseTokenSymbol);
+    const quoteTokenAddress = getAddress(config, quoteTokenSymbol);
+    debug('Processed symbols.', {
       baseTokenSymbol,
       quoteTokenSymbol,
+    });
+    const orderbook$ = getAggregatedObservable(
+      baseTokenAddress,
+      quoteTokenAddress,
       exchanges,
+      network,
     );
 
     const channel = `orderbook:${baseTokenSymbol}/${quoteTokenSymbol}`;

@@ -20,7 +20,7 @@
     "Ferran Borreguero <ferran@melonport.com>"
   ],
   "dependencies": {
-    "@melonproject/melon.js": "^0.8.1",
+    "@melonproject/melon.js": "^0.8.5",
     "@parity/api": "^2.1.22",
     "axios": "^0.18.0",
     "babel-plugin-inline-dotenv": "^1.1.1",
