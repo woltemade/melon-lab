@@ -9,9 +9,9 @@ module.exports = {
 
   statusColors: {
     colorProfit: 'rgb(141, 197, 103)',
-    colorLost: 'rgb(206, 88, 102)',
+    colorLoss: 'rgb(206, 88, 102)',
     colorSecondaryProfit: 'rgb(243, 249, 241)',
-    colorSecondaryLost: 'rgb(252, 240, 242)',
+    colorSecondaryLoss: 'rgb(252, 240, 242)',
   },
 
   otherColors: {
