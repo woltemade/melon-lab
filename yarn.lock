@@ -804,7 +804,6 @@
     esutils "^2.0.2"
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
-
 "@melonproject/smart-contracts@0.8.0-alpha.22":
   version "0.8.0-alpha.22"
   resolved "https://registry.yarnpkg.com/@melonproject/smart-contracts/-/smart-contracts-0.8.0-alpha.22.tgz#feca352c6e05baafa39596a88e7d3863b15c60a5"

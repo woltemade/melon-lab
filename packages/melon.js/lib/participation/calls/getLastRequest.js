@@ -32,7 +32,7 @@ const getLastRequest = async (
 ): Promise<Request> => {
   const fundContract = await getFundContract(environment, fundAddress);
   const priceFeedContract = await getCanonicalPriceFeedContract(environment);
-  
+
   const interval = (await priceFeedContract.instance.getInterval.call()).toNumber();
 
   const totalSupply = await fundContract.instance.totalSupply.call();
