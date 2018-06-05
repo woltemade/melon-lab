@@ -19,22 +19,20 @@ const Checkbox: StatelessComponent<CheckboxProps> = ({
   defaultChecked,
   onInputChange,
 }) => (
-  <div>
+  <label className="checkbox">
     <style jsx>{styles}</style>
-    <label className='checkbox'>
-      <input
-        className='checkbox__input'
-        type="checkbox"
-        name={name}
-        value={value}
-        defaultChecked={defaultChecked}
-        disabled={disabled}
-        onChange={onInputChange}
-      />
-      <span className='checkbox__checkmark' />
-      <span className='checkbox__text'>{text}</span>
-    </label>
-  </div>
+    <input
+      className="checkbox__input"
+      type="checkbox"
+      name={name}
+      value={value}
+      defaultChecked={defaultChecked}
+      disabled={disabled}
+      onChange={onInputChange}
+    />
+    <span className="checkbox__checkmark" />
+    <span className="checkbox__text">{text}</span>
+  </label>
 );
 
 export default Checkbox;
