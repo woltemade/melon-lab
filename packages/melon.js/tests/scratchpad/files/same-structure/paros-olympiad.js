@@ -39,7 +39,7 @@ const randomString = (length = 4) =>
         .substr(2, length);
 
 fit(
-    'Create fund, invest, take order, redeem',
+    'Create fund, contribute to Paros contract, and claimReward',
     async () => {
         console.log('\n');
 
@@ -48,11 +48,6 @@ fit(
         const wallet = importWalletFromMnemonic(
             'dinosaur pulse rice lumber machine entry tackle off require draw edge almost',
         );
-        // const wallet = importWalletFromMnemonic(
-        //   'betray police afford faith crowd fit pipe half arch entire symptom index',
-        // );
-
-
 
         setEnvironment({ api, account: wallet, providerType });
 
