@@ -4,11 +4,12 @@ import spacings from '../spacings.js';
 import styles from './styles.css';
 
 const Spacings = () => (
-  <div className={styles.spacings}>
+  <div className='spacings'>
+    <style jsx>{styles}</style>
     {Object.keys(spacings).map((key, index) => (
-      <div key={index} className={styles.spacings__row}>
-        <div className={styles.spacings__col}>{key}</div>
-        <div className={styles.spacings__col}>{spacings[key]}</div>
+      <div key={index} className='spacings__row'>
+        <div className='spacings__col'>{key}</div>
+        <div className='spacings__col'>{spacings[key]}</div>
       </div>
     ))}
   </div>

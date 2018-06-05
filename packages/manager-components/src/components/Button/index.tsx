@@ -12,9 +12,12 @@ const Button: StatelessComponent<IButtonProps> = ({
   disabled,
   onClick,
 }) => (
-  <button onClick={onClick} className={styles.button} disabled={disabled}>
-    {children}
-  </button>
+  <div>
+    <style jsx>{styles}</style>
+    <button onClick={onClick} className='button' disabled={disabled}>
+      {children}
+    </button>
+  </div>
 );
 
 export default Button;

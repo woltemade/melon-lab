@@ -13,12 +13,15 @@ const Input: StatelessComponent<ICheckboxProps> = ({
   placeholder,
   onInputChange,
 }) => (
-  <input
-    className={styles.input}
-    disabled={disabled}
-    placeholder={placeholder}
-    onChange={onInputChange}
-  />
+  <div>
+    <style jsx>{styles}</style>
+    <input
+      className="input"
+      disabled={disabled}
+      placeholder={placeholder}
+      onChange={onInputChange}
+    />
+  </div>
 );
 
 export default Input;

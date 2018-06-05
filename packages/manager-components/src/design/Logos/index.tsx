@@ -6,9 +6,10 @@ import styles from './styles.css';
 
 const Logos = props => {
   return (
-    <div className={styles.logos}>
-      <div className={styles.logos__el}>
-        <span className={styles.logos__name}>{props.name}</span>
+    <div className='logos'>
+      <style jsx>{styles}</style>
+      <div className='logos__el'>
+        <span className='logos__name'>{props.name}</span>
         <Icons
           name={`logos_${props.name}`}
           height={props.height}

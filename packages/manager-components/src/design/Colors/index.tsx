@@ -4,17 +4,18 @@ import colors from '../colors.js';
 import styles from './styles.css';
 
 const ColorWrapper = props => (
-  <div className={styles.colors}>
+  <div className='colors'>
+    <style jsx>{styles}</style>
     {Object.keys(props.colors).map((key, index) => (
-      <div key={index} className={styles.colors__row}>
-        <div className={styles.colors__col}>
-          <div className={styles.colors__wrapper}>
+      <div key={index} className='colors__row'>
+        <div className='colors__col'>
+          <div className='colors__wrapper'>
             <div
-              className={styles.colors__color}
+              className='colors__color'
               style={{ backgroundColor: props.colors[key] }}
             />
-            <div className={styles.colors__colorName}>{key}</div>
-            <div className={styles.colors__colorCode}>{props.colors[key]}</div>
+            <div className='colors__colorName'>{key}</div>
+            <div className='colors__colorCode'>{props.colors[key]}</div>
           </div>
         </div>
       </div>

@@ -23,23 +23,24 @@ module.exports = config => {
     {
       test: /\.css$/,
       use: [
-        'style-loader',
         {
-          loader: 'css-loader',
+          loader: 'babel-loader',
           options: {
-            modules: true,
-            importLoaders: 1,
-            localIdentName: "[local]-[hash:base64:5]"
-          }
+            babelrc: false,
+            plugins: [
+              'babel-plugin-transform-es2015-modules-commonjs',
+              ['styled-jsx/babel', { plugins: ['styled-jsx-plugin-postcss'] }],
+            ],
+          },
         },
-        'postcss-loader'
+        'styled-jsx-css-loader',
       ],
-      include: path.resolve(__dirname, "../src")
+      include: path.resolve(__dirname, '../src'),
     },
     {
       test: /\.svg$/,
-      loader: 'svg-sprite-loader'
-    }
+      loader: 'svg-sprite-loader',
+    },
   );
 
   return config;
