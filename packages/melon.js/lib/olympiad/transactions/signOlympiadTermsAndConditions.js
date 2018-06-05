@@ -10,40 +10,6 @@ import getOlympiadContract from '../contracts/getOlympiadContract';
 const signOlympiadTermsAndConditions = async environment => {
   const olympiadContract = await getOlympiadContract(environment);
   const arrayifiedHash = await olympiadContract.instance.TERMS_AND_CONDITIONS.call();
-  // const arrayifiedHash = [
-  //   26,
-  //   70,
-  //   180,
-  //   92,
-  //   200,
-  //   73,
-  //   226,
-  //   107,
-  //   179,
-  //   21,
-  //   146,
-  //   152,
-  //   195,
-  //   194,
-  //   24,
-  //   239,
-  //   48,
-  //   13,
-  //   1,
-  //   94,
-  //   211,
-  //   226,
-  //   52,
-  //   149,
-  //   231,
-  //   127,
-  //   14,
-  //   82,
-  //   156,
-  //   233,
-  //   246,
-  //   158,
-  // ];
 
   let rawSignature;
 
