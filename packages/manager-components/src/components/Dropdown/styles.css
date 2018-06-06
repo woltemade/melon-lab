@@ -1,0 +1,32 @@
+.dropdown {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    right: 4px;
+    top: 8px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--colorGold);
+  }
+}
+
+.dropdown__select {
+  appearance: none;
+  border: none;
+  width: 100%;
+  background: transparent;
+  font-size: var(--fontSizeSmallest);
+  border-radius: 0;
+
+  &::-ms-expand {
+    display: none;
+  }
+
+  &:focus::-ms-value {
+    background-color: transparent;
+  }
+}
