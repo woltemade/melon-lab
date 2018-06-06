@@ -27,6 +27,10 @@
     border-color: var(--colorGrey);
     cursor: not-allowed;
   }
+
+  & input:focus ~ .checkbox__checkmark {
+    outline: auto;
+  }
 }
 
 .checkbox__input {
@@ -42,6 +46,7 @@
   height: 16px;
   width: 16px;
   border: 1px solid var(--colorGold);
+  transition-property: background-color;
   transition-duration: var(--transitionDuration);
 
   &::after {
