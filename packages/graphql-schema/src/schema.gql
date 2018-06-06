@@ -15,6 +15,7 @@
 #import "./schema/Signature.gql"
 #import "./schema/ZeroExOrder.gql"
 #import "./schema/OasisDexOrder.gql"
+#import "./schema/NetworkEnum.gql"
 
 
 schema {

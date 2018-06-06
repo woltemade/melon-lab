@@ -1,0 +1,4 @@
+enum NetworkEnum {
+  KOVAN
+  LIVE
+}

@@ -805,19 +805,9 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@melonproject/smart-contracts@0.8.0-alpha.20":
-  version "0.8.0-alpha.20"
-  resolved "https://registry.yarnpkg.com/@melonproject/smart-contracts/-/smart-contracts-0.8.0-alpha.20.tgz#c641c8b92af1e018be8c01caf216cfc366368868"
-  dependencies:
-    "0x.js" "^0.35.0"
-    "@parity/api" "^2.1.20"
-    bignumber.js "^4.1.0"
-    ethereumjs-testrpc "^4.1.3"
-    request-promise "^4.2.2"
-
-"@melonproject/smart-contracts@0.8.0-alpha.21":
-  version "0.8.0-alpha.21"
-  resolved "https://registry.yarnpkg.com/@melonproject/smart-contracts/-/smart-contracts-0.8.0-alpha.21.tgz#0270f9e4d83767835946dc487fddbb75ddfbdf03"
+"@melonproject/smart-contracts@0.8.0-alpha.23":
+  version "0.8.0-alpha.23"
+  resolved "https://registry.yarnpkg.com/@melonproject/smart-contracts/-/smart-contracts-0.8.0-alpha.23.tgz#bee055888d59937fb86306003eaaf4f61cfc2319"
   dependencies:
     "0x.js" "^0.35.0"
     "@parity/api" "^2.1.20"

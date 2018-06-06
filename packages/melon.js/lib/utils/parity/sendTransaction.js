@@ -11,8 +11,8 @@ const sendTransaction = async (
 ) => {
   const nonce = environment.account.sign
     ? (await environment.api.eth.getTransactionCount(
-        environment.account.address,
-      )).toNumber()
+      environment.account.address,
+    )).toNumber()
     : undefined;
 
   // Prepare raw transaction
@@ -49,6 +49,9 @@ const sendTransaction = async (
     );
   }
 
+  if (options.value) {
+    options.value = `0x${options.value.toString(16)}`
+  }
   // Construct raw transaction object
   const rawTransaction = constructTransactionObject(
     contract,
@@ -58,11 +61,9 @@ const sendTransaction = async (
   );
 
   let transactionHash;
-
   if (environment.account.sign) {
     // Sign transaction object with Wallet instance
     const signedTransaction = environment.account.sign(rawTransaction);
-
     // Send raw signed transaction and wait for receipt
     transactionHash = await environment.api.eth.sendRawTransaction(
       signedTransaction,

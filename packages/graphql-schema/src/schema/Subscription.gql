@@ -3,6 +3,7 @@ type Subscription {
   orderbook(
     baseTokenSymbol: Symbol!
     quoteTokenSymbol: Symbol!
-    exchanges: [ExchangeEnum]
+    exchanges: [ExchangeEnum] = ["RADAR_RELAY", "OASIS_DEX", "ERC_DEX"]
+    network: NetworkEnum = "KOVAN"
   ): Orderbook
 }

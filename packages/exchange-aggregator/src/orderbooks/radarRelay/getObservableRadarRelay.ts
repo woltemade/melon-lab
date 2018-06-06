@@ -1,7 +1,6 @@
 import * as R from 'ramda';
 import * as Rx from 'rxjs';
 import formatRelayerOrderbook from '../../formatRelayerOrderbook';
-import getStemmedSymbol from '../../getStemmedSymbol';
 import getTokenAddress from '../../getTokenAddress';
 import { Order } from '../../index';
 
@@ -9,7 +8,7 @@ import { Order } from '../../index';
 // protocol on the client.
 import WebSocket = require('isomorphic-ws');
 
-const debug = require('debug')('exchange-aggregator:0x');
+const debug = require('debug')('exchange-aggregator:radar-relay');
 
 const subscribeMessage = (baseTokenAddress, quoteTokenAddress) =>
   JSON.stringify({
@@ -80,24 +79,18 @@ const updateAsksAndBids = (state: AsksAndBids, order: RelayOrder) => {
   return state;
 };
 
-const getObservableRadarRelay = (baseTokenSymbol, quoteTokenSymbol) => {
-  const stemmedBaseTokenSymbol = getStemmedSymbol(baseTokenSymbol);
-  const stemmedQuoteTokenSymbol = getStemmedSymbol(quoteTokenSymbol);
-  const baseTokenAddress = getTokenAddress(stemmedBaseTokenSymbol);
-  const quoteTokenAddress = getTokenAddress(stemmedQuoteTokenSymbol);
-
-  debug('Connecting.', {
-    baseTokenSymbol,
-    quoteTokenSymbol,
-    stemmedBaseTokenSymbol,
-    stemmedQuoteTokenSymbol,
-    baseTokenAddress,
-    quoteTokenAddress,
-  });
-
+const getObservableRadarRelay = (
+  baseTokenAddress,
+  quoteTokenAddress,
+  network,
+) => {
   const open$ = new Rx.Subject();
+  const url =
+    network === 'KOVAN'
+      ? 'wss://ws.kovan.radarrelay.com/0x/v0/ws'
+      : 'wss://api.radarrelay.com/0x/v0/ws';
   const socket$ = Rx.Observable.webSocket({
-    url: 'wss://api.radarrelay.com/0x/v0/ws',
+    url,
     WebSocketCtor: WebSocket,
     openObserver: open$,
   });
